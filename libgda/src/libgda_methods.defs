@@ -408,7 +408,7 @@
 )
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-blob.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-blob.h
 
 (define-method open
   (of-object "GdaBlob")
@@ -471,7 +471,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-client.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-client.h
 
 (define-function gda_client_get_type
   (c-name "gda_client_get_type")
@@ -628,7 +628,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-command.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-command.h
 
 (define-function gda_command_get_type
   (c-name "gda_command_get_type")
@@ -720,7 +720,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-config.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-config.h
 
 (define-function gda_config_get_string
   (c-name "gda_config_get_string")
@@ -980,7 +980,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-connection.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-connection.h
 
 (define-function gda_connection_get_type
   (c-name "gda_connection_get_type")
@@ -1141,6 +1141,15 @@
   )
 )
 
+(define-method get_last_insert_id
+  (of-object "GdaConnection")
+  (c-name "gda_connection_get_last_insert_id")
+  (return-type "gchar*")
+  (parameters
+    '("GdaDataModel*" "recset")
+  )
+)
+
 (define-method execute_single_command
   (of-object "GdaConnection")
   (c-name "gda_connection_execute_single_command")
@@ -1224,7 +1233,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-data-model-array.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-data-model-array.h
 
 (define-function gda_data_model_array_get_type
   (c-name "gda_data_model_array_get_type")
@@ -1257,7 +1266,101 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-data-model.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-data-model-hash.h
+
+(define-function gda_data_model_hash_get_type
+  (c-name "gda_data_model_hash_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_model_hash_new
+  (c-name "gda_data_model_hash_new")
+  (is-constructor-of "GdaDataModelHash")
+  (return-type "GdaDataModel*")
+  (parameters
+    '("gint" "cols")
+  )
+)
+
+(define-method hash_get_value_at
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_hash_get_value_at")
+  (return-type "const-GdaValue*")
+  (parameters
+    '("gint" "col")
+    '("gint" "row")
+  )
+)
+
+(define-method clear
+  (of-object "GdaDataModelHash")
+  (c-name "gda_data_model_hash_clear")
+  (return-type "none")
+)
+
+(define-method set_n_columns
+  (of-object "GdaDataModelHash")
+  (c-name "gda_data_model_hash_set_n_columns")
+  (return-type "none")
+  (parameters
+    '("gint" "cols")
+  )
+)
+
+(define-method insert_row
+  (of-object "GdaDataModelHash")
+  (c-name "gda_data_model_hash_insert_row")
+  (return-type "none")
+  (parameters
+    '("gint" "rownum")
+    '("GdaRow*" "row")
+  )
+)
+
+(define-method hash_get_row
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_hash_get_row")
+  (return-type "const-GdaRow*")
+  (parameters
+    '("gint" "row")
+  )
+)
+
+
+
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-data-model-list.h
+
+(define-function gda_data_model_list_get_type
+  (c-name "gda_data_model_list_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_model_list_new
+  (c-name "gda_data_model_list_new")
+  (is-constructor-of "GdaDataModelList")
+  (return-type "GdaDataModel*")
+)
+
+(define-function gda_data_model_list_new_from_string_list
+  (c-name "gda_data_model_list_new_from_string_list")
+  (return-type "GdaDataModel*")
+  (parameters
+    '("const-GList*" "list")
+  )
+)
+
+(define-method append_value
+  (of-object "GdaDataModelList")
+  (c-name "gda_data_model_list_append_value")
+  (return-type "const-GdaRow*")
+  (parameters
+    '("const-GdaValue*" "value")
+  )
+)
+
+
+
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-data-model.h
 
 (define-function gda_data_model_get_type
   (c-name "gda_data_model_get_type")
@@ -1569,101 +1672,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-data-model-hash.h
-
-(define-function gda_data_model_hash_get_type
-  (c-name "gda_data_model_hash_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_data_model_hash_new
-  (c-name "gda_data_model_hash_new")
-  (is-constructor-of "GdaDataModelHash")
-  (return-type "GdaDataModel*")
-  (parameters
-    '("gint" "cols")
-  )
-)
-
-(define-method hash_get_value_at
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_hash_get_value_at")
-  (return-type "const-GdaValue*")
-  (parameters
-    '("gint" "col")
-    '("gint" "row")
-  )
-)
-
-(define-method clear
-  (of-object "GdaDataModelHash")
-  (c-name "gda_data_model_hash_clear")
-  (return-type "none")
-)
-
-(define-method set_n_columns
-  (of-object "GdaDataModelHash")
-  (c-name "gda_data_model_hash_set_n_columns")
-  (return-type "none")
-  (parameters
-    '("gint" "cols")
-  )
-)
-
-(define-method insert_row
-  (of-object "GdaDataModelHash")
-  (c-name "gda_data_model_hash_insert_row")
-  (return-type "none")
-  (parameters
-    '("gint" "rownum")
-    '("GdaRow*" "row")
-  )
-)
-
-(define-method hash_get_row
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_hash_get_row")
-  (return-type "const-GdaRow*")
-  (parameters
-    '("gint" "row")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-data-model-list.h
-
-(define-function gda_data_model_list_get_type
-  (c-name "gda_data_model_list_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_data_model_list_new
-  (c-name "gda_data_model_list_new")
-  (is-constructor-of "GdaDataModelList")
-  (return-type "GdaDataModel*")
-)
-
-(define-function gda_data_model_list_new_from_string_list
-  (c-name "gda_data_model_list_new_from_string_list")
-  (return-type "GdaDataModel*")
-  (parameters
-    '("const-GList*" "list")
-  )
-)
-
-(define-method append_value
-  (of-object "GdaDataModelList")
-  (c-name "gda_data_model_list_append_value")
-  (return-type "const-GdaRow*")
-  (parameters
-    '("const-GdaValue*" "value")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-enum-types.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-enum-types.h
 
 (define-function gda_blob_mode_get_type
   (c-name "gda_blob_mode_get_type")
@@ -1712,7 +1721,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-error.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-error.h
 
 (define-function gda_error_get_type
   (c-name "gda_error_get_type")
@@ -1809,7 +1818,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-export.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-export.h
 
 (define-function gda_export_get_type
   (c-name "gda_export_get_type")
@@ -1896,7 +1905,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-field.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-field.h
 
 (define-function gda_field_attributes_get_type
   (c-name "gda_field_attributes_get_type")
@@ -1919,6 +1928,15 @@
   (of-object "GdaFieldAttributes")
   (c-name "gda_field_attributes_free")
   (return-type "none")
+)
+
+(define-method equal
+  (of-object "GdaFieldAttributes")
+  (c-name "gda_field_attributes_equal")
+  (return-type "gboolean")
+  (parameters
+    '("const-GdaFieldAttributes*" "rhs")
+  )
 )
 
 (define-method get_defined_size
@@ -2118,11 +2136,11 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-intl.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-intl.h
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-log.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-log.h
 
 (define-function gda_log_enable
   (c-name "gda_log_enable")
@@ -2159,11 +2177,11 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-marshal.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-marshal.h
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-parameter.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-parameter.h
 
 (define-function gda_parameter_get_type
   (c-name "gda_parameter_get_type")
@@ -2318,7 +2336,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-quark-list.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-quark-list.h
 
 (define-function gda_quark_list_get_type
   (c-name "gda_quark_list_get_type")
@@ -2387,7 +2405,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-row.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-row.h
 
 (define-function gda_row_get_type
   (c-name "gda_row_get_type")
@@ -2478,7 +2496,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-select.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-select.h
 
 (define-function gda_select_get_type
   (c-name "gda_select_get_type")
@@ -2518,7 +2536,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-server-provider.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-server-provider.h
 
 (define-function gda_server_provider_get_type
   (c-name "gda_server_provider_get_type")
@@ -2600,6 +2618,27 @@
   )
 )
 
+(define-method create_table
+  (of-object "GdaServerProvider")
+  (c-name "gda_server_provider_create_table")
+  (return-type "gboolean")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "table_name")
+    '("const-GdaFieldAttributes*[]" "attributes")
+  )
+)
+
+(define-method drop_table
+  (of-object "GdaServerProvider")
+  (c-name "gda_server_provider_drop_table")
+  (return-type "gboolean")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "table_name")
+  )
+)
+
 (define-method execute_command
   (of-object "GdaServerProvider")
   (c-name "gda_server_provider_execute_command")
@@ -2608,6 +2647,16 @@
     '("GdaConnection*" "cnc")
     '("GdaCommand*" "cmd")
     '("GdaParameterList*" "params")
+  )
+)
+
+(define-method get_last_insert_id
+  (of-object "GdaServerProvider")
+  (c-name "gda_server_provider_get_last_insert_id")
+  (return-type "gchar*")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("GdaDataModel*" "recset")
   )
 )
 
@@ -2674,7 +2723,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-table.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-table.h
 
 (define-function gda_table_get_type
   (c-name "gda_table_get_type")
@@ -2735,7 +2784,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-transaction.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-transaction.h
 
 (define-function gda_transaction_get_type
   (c-name "gda_transaction_get_type")
@@ -2783,7 +2832,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-util.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-util.h
 
 (define-function gda_type_to_string
   (c-name "gda_type_to_string")
@@ -2838,7 +2887,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-value.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-value.h
 
 (define-function gda_value_get_gtype
   (c-name "gda_value_get_gtype")
@@ -3487,7 +3536,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xml-connection.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xml-connection.h
 
 (define-function gda_xml_connection_get_type
   (c-name "gda_xml_connection_get_type")
@@ -3581,7 +3630,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xml-database.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xml-database.h
 
 (define-function gda_xml_database_get_type
   (c-name "gda_xml_database_get_type")
@@ -3734,7 +3783,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xml-document.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xml-document.h
 
 (define-function gda_xml_document_get_type
   (c-name "gda_xml_document_get_type")
@@ -3791,7 +3840,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-atom.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-atom.h
 
 (define-function gda_xql_atom_get_type
   (c-name "gda_xql_atom_get_type")
@@ -3809,7 +3858,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-bin.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-bin.h
 
 (define-function gda_xql_bin_get_type
   (c-name "gda_xql_bin_get_type")
@@ -3937,7 +3986,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-column.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-column.h
 
 (define-function gda_xql_column_get_type
   (c-name "gda_xql_column_get_type")
@@ -3961,7 +4010,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-const.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-const.h
 
 (define-function gda_xql_const_get_type
   (c-name "gda_xql_const_get_type")
@@ -3987,7 +4036,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-delete.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-delete.h
 
 (define-function gda_xql_delete_get_type
   (c-name "gda_xql_delete_get_type")
@@ -4002,7 +4051,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-dml.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-dml.h
 
 (define-function gda_xql_dml_get_type
   (c-name "gda_xql_dml_get_type")
@@ -4101,7 +4150,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-dual.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-dual.h
 
 (define-function gda_xql_dual_get_type
   (c-name "gda_xql_dual_get_type")
@@ -4271,7 +4320,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-field.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-field.h
 
 (define-function gda_xql_field_get_type
   (c-name "gda_xql_field_get_type")
@@ -4296,7 +4345,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-func.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-func.h
 
 (define-function gda_xql_func_get_type
   (c-name "gda_xql_func_get_type")
@@ -4343,7 +4392,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-insert.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-insert.h
 
 (define-function gda_xql_insert_get_type
   (c-name "gda_xql_insert_get_type")
@@ -4358,7 +4407,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-item.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-item.h
 
 (define-function gda_xql_item_get_type
   (c-name "gda_xql_item_get_type")
@@ -4485,7 +4534,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-join.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-join.h
 
 (define-function gda_xql_join_get_type
   (c-name "gda_xql_join_get_type")
@@ -4510,7 +4559,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-list.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-list.h
 
 (define-function gda_xql_list_get_type
   (c-name "gda_xql_list_get_type")
@@ -4591,7 +4640,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-query.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-query.h
 
 (define-function gda_xql_query_get_type
   (c-name "gda_xql_query_get_type")
@@ -4614,7 +4663,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-select.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-select.h
 
 (define-function gda_xql_select_get_type
   (c-name "gda_xql_select_get_type")
@@ -4629,7 +4678,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-stack.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-stack.h
 
 (define-function gda_xql_stack_get_type
   (c-name "gda_xql_stack_get_type")
@@ -4665,7 +4714,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-target.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-target.h
 
 (define-function gda_xql_target_get_type
   (c-name "gda_xql_target_get_type")
@@ -4690,7 +4739,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-update.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-update.h
 
 (define-function gda_xql_update_get_type
   (c-name "gda_xql_update_get_type")
@@ -4705,7 +4754,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-utils.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-utils.h
 
 (define-function gda_xql_gensym
   (c-name "gda_xql_gensym")
@@ -4764,7 +4813,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-value.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-value.h
 
 (define-function gda_xql_value_get_type
   (c-name "gda_xql_value_get_type")
@@ -4787,7 +4836,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-xql-valueref.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-xql-valueref.h
 
 (define-function gda_xql_valueref_get_type
   (c-name "gda_xql_valueref_get_type")
@@ -4802,7 +4851,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/libgda.h
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/libgda.h
 
 (define-function gda_init
   (c-name "gda_init")

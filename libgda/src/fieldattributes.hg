@@ -46,6 +46,7 @@ class FieldAttributes
 public:
 
   _WRAP_EQUAL(gda_field_attributes_equal)
+  _IGNORE(gda_field_attributes_equal)
   
   _WRAP_METHOD(glong get_defined_size() const, gda_field_attributes_get_defined_size)
   _WRAP_METHOD(void set_defined_size(glong size), gda_field_attributes_set_defined_size);

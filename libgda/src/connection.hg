@@ -118,6 +118,7 @@ public:
   Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema);
   Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema) const;
 
+  _WRAP_METHOD(Glib::ustring get_last_insert_id(const Glib::RefPtr<DataModel>& recset) const, gda_connection_get_last_insert_id) 
   
   _WRAP_SIGNAL(void error(GList* error_list), "error")
 };

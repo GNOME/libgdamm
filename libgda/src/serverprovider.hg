@@ -71,7 +71,9 @@ class ServerProvider : public Glib::Object
   
   _WRAP_METHOD(bool create_blob(const Glib::RefPtr<Connection>& cnc, GdaBlob *blob), gda_server_provider_create_blob)
 
-            
+  _WRAP_METHOD(Glib::ustring get_last_insert_id(const Glib::RefPtr<Connection>&, const Glib::RefPtr<DataModel>& recset) const, gda_server_provider_get_last_insert_id)            
+
+ //TODO: vfuncs.
 };
 
 } // namespace Gda
