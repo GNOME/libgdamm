@@ -1,3 +1,8 @@
+2005-01-04  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/value.hg: Remove the time_t constructor, because it 
+	is ambiguous on 64-bit systems. Bug #162253 from Daniel Holbach.
+
 2004-11-30  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/introspection/main.cc: Reverted some useless changes that I 
