@@ -1,3 +1,5 @@
+This is the HEAD branch. The libgda-1-2 branch builds against libgda 1.2.
+
 2005-01-06  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/value.ccg: Remove the implementation of the time_t 
