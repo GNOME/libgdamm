@@ -65,7 +65,7 @@ public:
   _WRAP_METHOD(ConnectionOptions get_options() const, gda_connection_get_options)
   _WRAP_METHOD(Glib::ustring get_server_version() const, gda_connection_get_server_version)
 
-  _WRAP_METHOD(Glib::ustring get_database() const, gda_connection_get_database);
+  _WRAP_METHOD(Glib::ustring get_database() const, gda_connection_get_database)
   _WRAP_METHOD(Glib::ustring get_dsn() const, gda_connection_get_dsn)
   _WRAP_METHOD(Glib::ustring get_cnc_string() const, gda_connection_get_cnc_string)
   _WRAP_METHOD(Glib::ustring get_provider() const, gda_connection_get_provider)
@@ -104,8 +104,8 @@ public:
    #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<Error> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
    #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const Error> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
 
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<Error> > get_errors(), gda_connection_get_errors);
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const Error> > get_errors() const, gda_connection_get_errors);
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<Error> > get_errors(), gda_connection_get_errors)
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const Error> > get_errors() const, gda_connection_get_errors)
 
   //TODO: Use C++ type:
   _WRAP_METHOD(bool create_blob(GdaBlob* blob), gda_connection_create_blob)

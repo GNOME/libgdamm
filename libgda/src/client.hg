@@ -52,8 +52,8 @@ public:
  #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<Connection> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
  #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const Connection> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
  
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<Connection> > get_connection_list(), gda_client_get_connection_list);
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const Connection> > get_connection_list() const, gda_client_get_connection_list);
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<Connection> > get_connection_list(), gda_client_get_connection_list)
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const Connection> > get_connection_list() const, gda_client_get_connection_list)
    
   _WRAP_METHOD(Glib::RefPtr<Connection> find_connection(const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password), gda_client_find_connection)
   _WRAP_METHOD(void close_all_connections(), gda_client_close_all_connections)
@@ -72,7 +72,7 @@ public:
   _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_rollback_transaction)
 
   //TODO: Use C++ types:
-  _WRAP_SIGNAL(void event_notification(const Glib::RefPtr<Connection> cnc, GdaClientEvent event, const ParameterList& params), "event_notification");
+  _WRAP_SIGNAL(void event_notification(const Glib::RefPtr<Connection> cnc, GdaClientEvent event, const ParameterList& params), "event_notification")
 
 };
 
