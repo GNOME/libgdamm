@@ -1,3 +1,10 @@
+2005-02-03  Murray Cumming  <murrayc@murrayc.com>
+ 
+ 	* libgda/src/value.[hg|ccg]: Replace the Value(gint64) and 
+ 	Value(guint64) constructors with static create_as_* methods, to 
+ 	avoid conflicts on 64-bit systems. Bug #162253 from Daniel Holbach,
+	who wrote part of the patch.
+
 2005-01-11  Murray Cumming  <murrayc@murrayc.com>
 
 	* Changes to fix the build against the new libgda API.

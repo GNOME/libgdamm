@@ -29,7 +29,11 @@ namespace Gnome
   
 namespace Gda
 {
-  
+
+
+// gint64 and guint64 are the same as gint and guint on 64-bit systems, 
+// so these would cause conflicts/ambiguity.
+/*
 Value::Value(gint64 val)
 {
   gobject_ = gda_value_new_integer(val);
@@ -39,11 +43,28 @@ Value::Value(guint64 val)
 {
   gobject_ = gda_value_new_biguint(val);
 }
+*/
+
+
+//static:
+Value Value::create_as_bigint(gint64 val)
+{
+  return Value( gda_value_new_bigint(val) );
+}
+
+
+//static:
+Value Value::create_as_biguint(guint64 val)
+{
+  return Value( gda_value_new_biguint(val) );
+}
+
 
 Value::Value(const void* val, glong size)
 {
   gobject_ = gda_value_new_binary(val, size);
 }
+
 
 /* gda_value_new_blob() is not implemented
 Value::Value(const GdaBlob *val)
@@ -133,6 +154,13 @@ Value::Value(time_t val)
   gobject_ = gda_value_new_timestamp_from_timet(val);
 }
 */
+
+//static:
+Value Value::create_as_time_t(time_t val)
+{
+  return Value( gda_value_new_timestamp_from_timet(val) );
+}
+
 
 Value::Value(gchar val)
 {

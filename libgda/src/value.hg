@@ -59,14 +59,24 @@ class Value
   _IGNORE(gda_value_new_null, gda_value_copy, gda_value_free)
 public:
 
-  explicit Value(gint64 val);
+//We can't have this constructor because gint64 and int are the same on 64-bit systems:
+//explicit Value(gint64 val);
+  static Value create_as_bigint(gint64 val);
   _IGNORE(gda_value_new_bigint)
-  explicit Value(guint64 val);
+
+//We can't have this constructor because guint64 and unsigned int are the same on 64-bit systems:
+//explicit Value(gint64 val);
+// explicit Value(guint64 val);
+   static Value create_as_biguint(guint64 val);
   _IGNORE(gda_value_new_biguint)
-  explicit Value(const void* val, glong size);
+
+  explicit Value(const void* val, glong size); 
+  _IGNORE(gda_value_new_long);
+
   _IGNORE(gda_value_new_binary)
   //gda_value_new_blob() is not implemented. explicit Value(const GdaBlob *val);
   //_IGNORE(gda_value_new_blob)
+
   explicit Value(bool val);
   _IGNORE(gda_value_new_boolean)
   explicit Value(const Date& val);
@@ -101,7 +111,7 @@ public:
   //This causes ambiguity with another constructor on 64-bit systems:
   //explicit Value(time_t val);
   _IGNORE(gda_value_new_timestamp_from_timet)
-  
+ static Value create_as_time_t(time_t val);
   explicit Value(gchar val);
   _IGNORE(gda_value_new_tinyint)
   explicit Value(guchar val);
