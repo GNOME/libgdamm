@@ -22,11 +22,18 @@ _CONVERSION(`const Row&', `const GdaRow*', `($3).gobj()')
 _CONVERSION(`GdaValue*',`Value',`Glib::wrap($3)')
 _CONVERSION(`const GdaValue*',`Value',`Glib::wrap(const_cast<GdaValue*>($3))')
 _CONVERSION(`const Value&', `GdaValue*', `const_cast<GdaValue*>(($3).gobj())')
+_CONVERSION(`const Value&', `const GdaValue*', `($3).gobj()')
 
 _CONVERSION(`GdaParameter*',`Parameter',`Glib::wrap($3)')
 _CONVERSION(`const Parameter&', `GdaParameter*', `const_cast<GdaParameter*>(($3).gobj())')
 
 _CONVERSION(`const ParameterList&', `GdaParameterList*', `const_cast<GdaParameterList*>(($3).gobj())')
+
+_CONVERSION(`const GObject*',`Glib::RefPtr<const Glib::Object>',`Glib::wrap(const_cast<GObject*>($3))')
+_CONVERSION(`const Glib::RefPtr<Glib::Object>&', `const GObject*', `($3)->gobj()')
+
+
+_CONVERSION(`const Glib::RefPtr<Client>&', `GdaClient*', `Glib::unwrap($3)')
 
 _CONV_ENUM(Gda,CommandType)
 _CONV_ENUM(Gda,CommandOptions)
@@ -34,3 +41,4 @@ _CONV_ENUM(Gda,ConnectionFeature)
 _CONV_ENUM(Gda,ConnectionSchema)
 _CONV_ENUM(Gda,ClientEvent)
 _CONV_ENUM(Gda,ConnectionOptions)
+_CONV_ENUM(Gda,ValueType)

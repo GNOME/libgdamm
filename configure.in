@@ -145,6 +145,7 @@ AC_OUTPUT([
 
   examples/Makefile
     examples/list_data_sources/Makefile
+    examples/introspection/Makefile
     examples/simple/Makefile
 ])
 

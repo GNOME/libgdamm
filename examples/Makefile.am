@@ -1,4 +1,5 @@
-SUBDIRS =  list_data_sources simple
+SUBDIRS =  list_data_sources introspection simple
 
-EXTRA_DIST	=  Makefile.am_fragment
+EXTRA_DIST	=  Makefile.am_fragment README.txt
+
 

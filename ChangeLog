@@ -1,3 +1,13 @@
+2004-04-05  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/: Added README.txt. Moved simple example to
+	introspection. Added more appropriate simple example.
+	* libgda/src/command.hg: Add default parameter values.
+	* libgda/src/connection.hg: Added overloads of execute methods that
+	take no ParameterList.
+	* libgda/src/parameterlist.hg: Hand-code add_parameter() to give the 
+	C function a copy, because it takes ownership.
+
 2004-04-04  Murray Cumming  <murrayc@murrayc.com>
 
 	* Use Value and ParameterList in API.

@@ -58,7 +58,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<Client> get_client(), gda_connection_get_client, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Client> get_client() const, gda_connection_get_client, refreturn)
     
-  _WRAP_METHOD(void set_client(GdaClient *client), gda_connection_set_client)
+  _WRAP_METHOD(void set_client(const Glib::RefPtr<Client>& client), gda_connection_set_client)
 
   _WRAP_METHOD(ConnectionOptions get_options() const, gda_connection_get_options)
   _WRAP_METHOD(Glib::ustring get_server_version() const, gda_connection_get_server_version)
@@ -85,10 +85,12 @@ public:
   #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
  
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd, const ParameterList& params), gda_connection_execute_command)
-
+  Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd);
   _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(const Command& cmd, const ParameterList& params), gda_connection_execute_single_command)
+  Glib::RefPtr<DataModel> execute_single_command(const Command& cmd);
   _WRAP_METHOD(int execute_non_query(const Command& cmd, const ParameterList& params), gda_connection_execute_non_query)
-
+  int execute_non_query(const Command& cmd);
+  
   _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_begin_transaction)
   _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_commit_transaction)
   _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_rollback_transaction)

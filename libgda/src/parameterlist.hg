@@ -39,7 +39,8 @@ public:
   
   operator bool() const;
 
-  _WRAP_METHOD(void add_parameter(const Parameter& param), gda_parameter_list_add_parameter)
+  void add_parameter(const Parameter& param);
+  _IGNORE(gda_parameter_list_add_parameter)
 
   //TODO: Use ListHandle:
   _WRAP_METHOD(GList* get_names(), gda_parameter_list_get_names)

@@ -52,7 +52,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<DataModel> get_model(), gda_row_get_model)
   _WRAP_METHOD(Glib::RefPtr<const DataModel> get_model() const, gda_row_get_model)
 
-  _WRAP_METHOD(int get_number () const, gda_row_get_number)
+  _WRAP_METHOD(int get_number() const, gda_row_get_number)
   _WRAP_METHOD(void set_number(int number), gda_row_set_number)
   _WRAP_METHOD(Glib::ustring get_id() const, gda_row_get_id)
   _WRAP_METHOD(void set_id(const Glib::ustring& id), gda_row_set_id)

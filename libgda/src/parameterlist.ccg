@@ -26,6 +26,13 @@ namespace Gnome
 namespace Gda
 {
 
+void ParameterList::add_parameter(const Parameter& param)
+{
+  //gda_parameter_list_add_parameter() takes ownership. That is strange.
+  GdaParameter* param_to_give = gda_parameter_copy(const_cast<GdaParameter*>(param.gobj()));
+  gda_parameter_list_add_parameter(gobj(), param_to_give);
+}
+
 } //namespace Gda
 
 } // namespace Gnome

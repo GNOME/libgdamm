@@ -36,6 +36,7 @@ namespace Gda
 class Parameter
 {
   _CLASS_OPAQUE_COPYABLE(Parameter, GdaParameter, NONE, gda_parameter_copy, gda_parameter_free)
+  _IGNORE(gda_parameter_copy, gda_parameter_free)
 public:
 
   //Parameter();
