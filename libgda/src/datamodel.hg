@@ -21,6 +21,7 @@
  */
 
 #include <glibmm/object.h>
+#include <libgdamm/command.h>
 #include <libgda/gda-data-model.h>
 
 _DEFS(libgdamm,libgda)
@@ -38,21 +39,33 @@ class DataModel : public Glib::Object
 public:
 
   _WRAP_METHOD(void changed(), gda_data_model_changed)
-  _WRAP_METHOD(void freeze(), gda_data_model_freeze)
+  _WRAP_METHOD(void row_inserted(int row), gda_data_model_row_inserted)
+  _WRAP_METHOD(void row_updated(int row), gda_data_model_row_updated)
+  _WRAP_METHOD(void row_removed(int row), gda_data_model_row_removed)
+  _WRAP_METHOD(void column_inserted(int col), gda_data_model_column_inserted)
+  _WRAP_METHOD(void column_updated(int col), gda_data_model_column_updated)
+  _WRAP_METHOD(void column_removed(int col), gda_data_model_column_removed)  
+  _WRAP_METHOD(void freeze(), gda_data_model_freeze)  
   _WRAP_METHOD(void thaw(), gda_data_model_thaw)
 
-  _WRAP_METHOD(int get_n_rows(), gda_data_model_get_n_rows)
-  _WRAP_METHOD(int get_n_columns(), gda_data_model_get_n_columns)
+
+  _WRAP_METHOD(int get_n_rows() const, gda_data_model_get_n_rows)
+  _WRAP_METHOD(int get_n_columns() const, gda_data_model_get_n_columns)
+
+  //TODO: Use C++ type:
   _WRAP_METHOD(GdaFieldAttributes* describe_column(int col), gda_data_model_describe_column)
-  _WRAP_METHOD(Glib::ustring get_column_title(int col), gda_data_model_get_column_title)
+  _WRAP_METHOD(Glib::ustring get_column_title(int col) const, gda_data_model_get_column_title)
   _WRAP_METHOD(void set_column_title(int col, const Glib::ustring& title), gda_data_model_set_column_title)
-  _WRAP_METHOD(int get_column_position (const Glib::ustring& title), gda_data_model_get_column_position)
-  _WRAP_METHOD(const GdaRow* get_row (int row), gda_data_model_get_row)
+  _WRAP_METHOD(int get_column_position(const Glib::ustring& title) const, gda_data_model_get_column_position)
+
+  //TODO: Use C++ types:
+  _WRAP_METHOD(const GdaRow* get_row(int row), gda_data_model_get_row)
   _WRAP_METHOD(const GdaValue* get_value_at(int col, int row), gda_data_model_get_value_at)
 
 
-
   _WRAP_METHOD(bool is_updatable() const, gda_data_model_is_updatable)
+
+  //TODO: Use C++ types:
   _WRAP_METHOD(const GdaRow* append_row(const GList *values), gda_data_model_append_row)
   _WRAP_METHOD(bool remove_row(const GdaRow *row), gda_data_model_remove_row)
   _WRAP_METHOD(bool update_row(const GdaRow *row), gda_data_model_update_row)
@@ -63,14 +76,20 @@ public:
   _WRAP_METHOD(bool end_update(), gda_data_model_end_update)
 
 
-  _WRAP_METHOD(Glib::ustring to_comma_separated(), gda_data_model_to_comma_separated)
-  _WRAP_METHOD(Glib::ustring to_tab_separated(), gda_data_model_to_tab_separated)
-  _WRAP_METHOD(Glib::ustring to_xml(bool standalone), gda_data_model_to_xml)
+  _WRAP_METHOD(Glib::ustring to_comma_separated() const, gda_data_model_to_comma_separated)
+  _WRAP_METHOD(Glib::ustring to_tab_separated() const, gda_data_model_to_tab_separated)
+  _WRAP_METHOD(Glib::ustring to_xml(bool standalone) const, gda_data_model_to_xml)
 
-  _WRAP_METHOD(Glib::ustring get_command_text(), gda_data_model_get_command_text)
+
+  //TODO: Wrap these if we want to depend on libxml++
+  //_WRAP_METHOD(xmlNodePtr to_xml(const GLib::ustring& name), gda_data_model_to_xml_node)
+  //_WRAP_METHOD(bool add_data(xmlNodePtr node), gda_data_model_add_data_from_xml_node)
+
+
+  _WRAP_METHOD(Glib::ustring get_command_text() const, gda_data_model_get_command_text)
   _WRAP_METHOD(void set_command_text(const Glib::ustring& txt), gda_data_model_set_command_text)
-  _WRAP_METHOD(GdaCommandType get_command_type(), gda_data_model_get_command_type)
-  _WRAP_METHOD(void set_command_type (GdaCommandType type), gda_data_model_set_command_type)
+  _WRAP_METHOD(CommandType get_command_type() const, gda_data_model_get_command_type)
+  _WRAP_METHOD(void set_command_type(CommandType type), gda_data_model_set_command_type)
 
   _WRAP_SIGNAL(void changed(), "changed")
 

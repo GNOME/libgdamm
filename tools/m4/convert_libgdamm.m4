@@ -12,6 +12,9 @@ _CONVERSION(`const Glib::RefPtr<ServerProvider>&', `GdaServerProvider*', `Glib::
 _CONVERSION(`const Glib::RefPtr<Transaction>&', `GdaTransaction*', `Glib::unwrap($3)')
 _CONVERSION(`const Glib::RefPtr<Connection>&', `GdaConnection*', `Glib::unwrap($3)')
 
+_CONVERSION(`const Command&', `GdaCommand*', `const_cast<GdaCommand*>(($3).gobj())')
+
+
 _CONV_ENUM(Gda,CommandType)
 _CONV_ENUM(Gda,CommandOptions)
 _CONV_ENUM(Gda,ConnectionFeature)

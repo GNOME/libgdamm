@@ -20,9 +20,9 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/serverprovider.h>
 #include <libgdamm/transaction.h>
 #include <libgdamm/error.h>
+#include <libgdamm/command.h>
 #include <libgdamm/datamodel.h>
 #include <libgda/gda-connection.h>
 
@@ -39,6 +39,7 @@ class Client;
 
 _WRAP_ENUM(ConnectionFeature, GdaConnectionFeature)
 _WRAP_ENUM(ConnectionSchema, GdaConnectionSchema)
+_WRAP_ENUM(ConnectionOptions, GdaConnectionOptions)
 
 class Connection : public Glib::Object
 {
@@ -46,7 +47,7 @@ class Connection : public Glib::Object
 protected:
 
   _CTOR_DEFAULT
-
+  
 public:
   _WRAP_CREATE()
 
@@ -58,6 +59,9 @@ public:
     
   _WRAP_METHOD(void set_client(GdaClient *client), gda_connection_set_client)
 
+  _WRAP_METHOD(ConnectionOptions get_options() const, gda_connection_get_options)
+  _WRAP_METHOD(Glib::ustring get_server_version() const, gda_connection_get_server_version)
+
   _WRAP_METHOD(Glib::ustring get_database() const, gda_connection_get_database);
   _WRAP_METHOD(Glib::ustring get_dsn() const, gda_connection_get_dsn)
   _WRAP_METHOD(Glib::ustring get_cnc_string() const, gda_connection_get_cnc_string)
@@ -66,6 +70,8 @@ public:
   _WRAP_METHOD(Glib::ustring get_password() const, gda_connection_get_password)
 
   _WRAP_METHOD(void add_error(const Glib::RefPtr<Error>& error), gda_connection_add_error)
+  _WRAP_METHOD(void add_error(const Glib::ustring& error), gda_connection_add_error_string)
+  //TODO: Use ListHandle:
   _WRAP_METHOD(void add_error_list(GList *error_list), gda_connection_add_error_list)
 
   _WRAP_METHOD(bool change_database(const Glib::ustring& name), gda_connection_change_database)
@@ -73,18 +79,25 @@ public:
   _WRAP_METHOD(bool drop_database(const Glib::ustring& name), gda_connection_drop_database)
 
   //TODO:
-  _WRAP_METHOD(GList* execute_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_command)
-  _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_single_command)
-  _WRAP_METHOD(int execute_non_query(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_non_query)
+  _WRAP_METHOD(GList* execute_command(const Command& cmd, GdaParameterList *params), gda_connection_execute_command)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(const Command& cmd, GdaParameterList *params), gda_connection_execute_single_command)
+  _WRAP_METHOD(int execute_non_query(const Command& cmd, GdaParameterList *params), gda_connection_execute_non_query)
 
   _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_begin_transaction)
   _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_commit_transaction)
   _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_rollback_transaction)
 
-  //const GList   *gda_connection_get_errors();
+   //Use a special conversion here, because we should not own any part of the returned GList, and because we need to unconst the GList.:
+   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<Error> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
+   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const Error> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
+
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<Error> > get_errors(), gda_connection_get_errors);
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const Error> > get_errors() const, gda_connection_get_errors);
+
+  //TODO: Use C++ type:
+  _WRAP_METHOD(bool create_blob(GdaBlob* blob), gda_connection_create_blob)
 
   _WRAP_METHOD(bool supports(ConnectionFeature feature) const, gda_connection_supports)
-
 
   _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, GdaParameterList *params), gda_connection_get_schema)
   _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema, GdaParameterList *params) const, gda_connection_get_schema)

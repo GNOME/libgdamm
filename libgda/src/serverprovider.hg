@@ -20,7 +20,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/error.h>
+#include <libgdamm/connection.h>
+#include <libgdamm/command.h>
 #include <libgda/gda-server-provider.h>
 
 _DEFS(libgdamm,libgda)
@@ -32,11 +33,36 @@ namespace Gnome
 namespace Gda
 {
 
+class Connection;
+
 class ServerProvider : public Glib::Object
 {
   _CLASS_GOBJECT(ServerProvider, GdaServerProvider, GDA_SERVER_PROVIDER, Glib::Object, GObject)
 
+  _WRAP_METHOD(Glib::ustring get_version() const, gda_server_provider_get_version)
+  _WRAP_METHOD(bool open_connection(const Glib::RefPtr<Connection>& cnc, GdaQuarkList *params, const Glib::ustring& username, const Glib::ustring& password), gda_server_provider_open_connection)
+  _WRAP_METHOD(bool close_connection(const Glib::RefPtr<Connection>& cnc), gda_server_provider_close_connection)
 
+  _WRAP_METHOD(Glib::ustring get_server_version(const Glib::RefPtr<Connection>& cnc) const, gda_server_provider_get_server_version)
+  _WRAP_METHOD(Glib::ustring get_database(const Glib::RefPtr<Connection>& cnc) const, gda_server_provider_get_database)
+  _WRAP_METHOD(bool change_database(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_change_database)
+  _WRAP_METHOD(bool create_database(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_create_database)
+  _WRAP_METHOD(bool drop_database(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_drop_database)
+
+  _WRAP_METHOD(GList* execute_command(const Glib::RefPtr<Connection>& cnc, const Command& cmd, GdaParameterList *params), gda_server_provider_execute_command)
+
+  _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_begin_transaction)
+  _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_commit_transaction)
+  _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_rollback_transaction)
+
+  _WRAP_METHOD(bool supports(const Glib::RefPtr<Connection>& cnc, ConnectionFeature feature) const, gda_server_provider_supports)
+
+  //TODO: Use C++ parameters, and add const version:
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, GdaConnectionSchema schema, GdaParameterList *params), gda_server_provider_get_schema)
+
+  _WRAP_METHOD(bool create_blob(const Glib::RefPtr<Connection>& cnc, GdaBlob *blob), gda_server_provider_create_blob)
+
+            
 };
 
 } // namespace Gda

@@ -1,5 +1,9 @@
 2004-03-30  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/serverprovider.hg, datamodel.hg: Wrapped new methods.
+
+2004-03-30  Murray Cumming  <murrayc@murrayc.com>
+
 	* tools/extra_defs_gen/generate_defs.gda.cc: Include glibmm_extra_defs
 	rather than the old gtkmm one, to really fix the build.
 

@@ -40,7 +40,7 @@ public:
   _MEMBER_GET(id, id, Glib::ustring, const char*)
   _MEMBER_GET(location, location, Glib::ustring, const char*)
   _MEMBER_GET(description, description, Glib::ustring, const char*)
-
+  
   Glib::ListHandle<Glib::ustring> get_gda_params() const;
 };
 

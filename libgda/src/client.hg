@@ -34,7 +34,6 @@ namespace Gda
 {
 
 _WRAP_ENUM(ClientEvent, GdaClientEvent)
-_WRAP_ENUM(ConnectionOptions, GdaConnectionOptions)
 
 class Client : public Glib::Object
 {
@@ -44,10 +43,18 @@ protected:
 
 public:
   _WRAP_CREATE()
-
+  
   _WRAP_METHOD(Glib::RefPtr<Connection> open_connection(const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password, ConnectionOptions options = (ConnectionOptions)0), gda_client_open_connection)
   _WRAP_METHOD(Glib::RefPtr<Connection> open_connection_from_string(const Glib::ustring& provider_id, const Glib::ustring& cnc_string, ConnectionOptions options = (ConnectionOptions)0), gda_client_open_connection_from_string)
 //TODO:  _WRAP_METHOD(const GList   *get_connection_list(), gda_client_get_connection_list)
+
+ //Use a special conversion here, because we should not own any part of the returned GList, and because we need to unconst the GList.:
+ #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<Connection> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
+ #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const Connection> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
+ 
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<Connection> > get_connection_list(), gda_client_get_connection_list);
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const Connection> > get_connection_list() const, gda_client_get_connection_list);
+   
   _WRAP_METHOD(Glib::RefPtr<Connection> find_connection(const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password), gda_client_find_connection)
   _WRAP_METHOD(void close_all_connections(), gda_client_close_all_connections)
 
@@ -63,6 +70,9 @@ public:
   _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_begin_transaction)
   _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_commit_transaction)
   _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_rollback_transaction)
+
+  //TODO: Use C++ types:
+  _WRAP_SIGNAL(void event_notification(const Glib::RefPtr<Connection> cnc, GdaClientEvent event, GdaParameterList* params), "event_notification");
 
 };
 
