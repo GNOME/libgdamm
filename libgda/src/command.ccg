@@ -35,12 +35,6 @@ Command::Command(const Glib::ustring& text, CommandType type, CommandOptions opt
   
 }
 
-Command::~Command()
-{
-  if(gobject_)
-    gda_command_free(gobject_);
-}
-
 } // namespace Gda
 
 } // namespace Gnome

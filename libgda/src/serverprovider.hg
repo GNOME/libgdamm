@@ -49,7 +49,9 @@ class ServerProvider : public Glib::Object
   _WRAP_METHOD(bool create_database(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_create_database)
   _WRAP_METHOD(bool drop_database(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_drop_database)
 
-  _WRAP_METHOD(GList* execute_command(const Glib::RefPtr<Connection>& cnc, const Command& cmd, GdaParameterList *params), gda_server_provider_execute_command)
+  #m4 //Use deep ownership because we own both the list and its elements;
+  #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Glib::RefPtr<Connection>& cnc, const Command& cmd, GdaParameterList *params), gda_server_provider_execute_command)
 
   _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_begin_transaction)
   _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_commit_transaction)

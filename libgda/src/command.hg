@@ -43,12 +43,11 @@ _WRAP_ENUM(CommandOptions, GdaCommandOptions)
 
 class Command
 {
-  _CLASS_GENERIC(Command, GdaCommand)
+  _CLASS_OPAQUE_COPYABLE(Command, GdaCommand, NONE, gda_command_copy, gda_command_free)
+  _IGNORE(gda_command_copy, gda_command_free)
 public:
   explicit Command(const Glib::ustring& text, CommandType type, CommandOptions options); //TODO: Good defaults.
-  virtual ~Command();
-  _IGNORE(gda_command_free)
-
+ 
   _WRAP_METHOD(Glib::ustring get_text() const, gda_command_get_text)
   _WRAP_METHOD(void set_text(const Glib::ustring& text), gda_command_set_text)
   _WRAP_METHOD(CommandType get_command_type() const, gda_command_get_command_type)
@@ -59,11 +58,6 @@ public:
   _WRAP_METHOD(Glib::RefPtr<const Transaction> get_transaction() const, gda_command_get_transaction)
   _WRAP_METHOD(void set_transaction(const Glib::RefPtr<Transaction>& xaction), gda_command_set_transaction)
 
-  GdaCommand*       gobj()       { return gobject_; }
-  const GdaCommand* gobj() const { return gobject_; }
-
-protected:
-  GdaCommand* gobject_;
 };
 
 } // namespace Gda

@@ -1,5 +1,9 @@
 2004-03-30  Murray Cumming  <murrayc@murrayc.com>
 
+	* Wrapped some GList* return types as ListHandles.
+
+2004-03-30  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/row.[hg|ccg]: Added these files, wrapping GdaRow.
 	* libgda/src/datamodel.[hg.ccg]: Added foreach().
 

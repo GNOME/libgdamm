@@ -39,6 +39,7 @@ class DataModel;
 class Row
 {
   _CLASS_OPAQUE_COPYABLE(Row, GdaRow, NONE, gda_row_copy, gda_row_free)
+  _IGNORE(gda_row_copy, gda_row_free)
 public:
 
   Row(const Glib::RefPtr<DataModel>& model, int count);

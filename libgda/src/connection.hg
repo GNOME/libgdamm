@@ -79,7 +79,12 @@ public:
   _WRAP_METHOD(bool drop_database(const Glib::ustring& name), gda_connection_drop_database)
 
   //TODO:
-  _WRAP_METHOD(GList* execute_command(const Command& cmd, GdaParameterList *params), gda_connection_execute_command)
+
+  #m4 //Use deep ownership because we own both the list and its elements;
+  #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
+ 
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd, GdaParameterList *params), gda_connection_execute_command)
+
   _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(const Command& cmd, GdaParameterList *params), gda_connection_execute_single_command)
   _WRAP_METHOD(int execute_non_query(const Command& cmd, GdaParameterList *params), gda_connection_execute_non_query)
 
