@@ -1,7 +1,7 @@
 #ifndef _LIBGDAMM_CONFIG_H
 #define _LIBGDAMM_CONFIG_H 1
 
-#include "gtkmmconfig.h"
+#include "glibmmconfig.h"
 
 /* version numbers */
 #undef LIBGDAMM_MAJOR_VERSION

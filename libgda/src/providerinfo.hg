@@ -34,7 +34,7 @@ namespace Gda
 
 class ProviderInfo
 {
-  _CLASS_OPAQUE_COPYABLE(ProviderInfo, GdaProviderInfo, NONE, gda_provider_info_copy, gda_config_free_provider_info)
+  _CLASS_OPAQUE_COPYABLE(ProviderInfo, GdaProviderInfo, NONE, gda_provider_info_copy, gda_provider_info_free)
 public:
 
   _MEMBER_GET(id, id, Glib::ustring, const char*)

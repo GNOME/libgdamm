@@ -82,15 +82,15 @@ AC_CHECK_PROGS(PERL, perl5 perl)
 #########################################################################
 #  Dependancy checks
 #########################################################################
-PKG_CHECK_MODULES(LIBGDAMM, gtkmm-2.0 >= 2.0.0 libgda >= 1.0.0)
+PKG_CHECK_MODULES(LIBGDAMM, glibmm-2.4 >= 2.3.8 libgda >= 1.0.0)
 AC_SUBST(LIBGDAMM_CFLAGS)
 AC_SUBST(LIBGDAMM_LIBS)
 
-GTKMM_PREFIX=`pkg-config --variable=prefix gtkmm-2.0`
-GTKMM_PROCDIR=$GTKMM_PREFIX/lib/gtkmm-2.0/proc
-AC_SUBST(GTKMM_PROCDIR)
-GTKMM_PROC=$GTKMM_PROCDIR/gtkmmproc
-AC_SUBST(GTKMM_PROC)
+GLIBMM_PREFIX=`pkg-config --variable=prefix glibmm-2.4`
+GMM_PROCDIR=$GLIBMM_PREFIX/lib/glibmm-2.3/proc
+AC_SUBST(GMM_PROCDIR)
+GMM_PROC=$GMM_PROCDIR/gmmproc
+AC_SUBST(GMM_PROC)
 
 #########################################################################
 #  C++ checks

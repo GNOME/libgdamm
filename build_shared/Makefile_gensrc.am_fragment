@@ -29,16 +29,16 @@ files_h		= $(files_hg:%.hg=$(gensrc_destdir)/%.h)
 files_cc	= $(files_hg:%.hg=$(gensrc_destdir)/%.cc)
 files_stamp	= $(files_hg:%.hg=$(stamp_dir)/stamp-%)
 
-#Installed gtkmmproc stuff, from gtkmm:
-gtkmmproc_path	= $(GTKMM_PROC)
-gtkmmproc_dir	= $(GTKMM_PROCDIR)
+#Installed gmmproc stuff, from gtkmm:
+gmmproc_path	= $(GMM_PROC)
+gmmproc_dir	= $(GMM_PROCDIR)
 
 # We use our own m4 and pm files as well as the ones installed by gtkmm:
 # Our override m4 include seems to need to be before the default one.
-gtkmmproc_args	= -I $(tools_dir_m4) --defs $(srcdir)
-run_gtkmmproc	= $(gtkmmproc_path) $(gtkmmproc_args)
+gmmproc_args	= -I $(tools_dir_m4) --defs $(srcdir)
+run_gmmproc	= $(gmmproc_path) $(gmmproc_args)
 
-gen_wrap_init_path = $(gtkmmproc_dir)/generate_wrap_init.pl
+gen_wrap_init_path = $(gmmproc_dir)/generate_wrap_init.pl
 gen_wrap_init_args = --namespace=Gnome --namespace=$(sublib_namespace) --parent_dir=$(sublib_parentdir)
 run_gen_wrap_init  = $(gen_wrap_init_path) $(gen_wrap_init_args)
 
@@ -47,7 +47,7 @@ EXTRA_DIST	= Makefile_list_of_hg.am_fragment \
 
 
 $(stamp_dir)/stamp-%: %.hg %.ccg $(tools_m4) $(files_defs)
-	$(run_gtkmmproc) $(notdir $*) $(srcdir) $(gensrc_destdir)
+	$(run_gmmproc) $(notdir $*) $(srcdir) $(gensrc_destdir)
 	@echo 'timestamp' > $@
 
 sublib_srcdir		= $(srcdir)/../src
