@@ -22,12 +22,16 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <glibmm.h>
+
 
 namespace Gnome
 {
 
 namespace Gda
 {
+
+void init(const Glib::ustring& app_id, const Glib::ustring& version, int nargs, gchar *args[]);
 
 } //namespace Gda
 } //namespace Gnome

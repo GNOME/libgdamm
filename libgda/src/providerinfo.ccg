@@ -1,7 +1,7 @@
 /* $Id$ */
-// -*- C++ -*- // 
+// -*- C++ -*- //
 
-/* connection.cc
+/* datasourceinfo.cc
  * 
  * Copyright 2003 libgdamm Development Team
  *
@@ -20,11 +20,20 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgda/gda-enum-types.h>
 
 namespace Gnome
 {
 
+namespace Gda
+{
 
-} /* namespace Gnome */
+Glib::ListHandle<Glib::ustring> ProviderInfo::get_gda_params() const
+{
+  return Glib::ListHandle<Glib::ustring>(gobj()->gda_params, Glib::OWNERSHIP_SHALLOW);
+}
+
+} // namespace Gda
+
+
+} // namespace Gnome
 

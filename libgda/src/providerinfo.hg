@@ -1,8 +1,8 @@
 /* $Id$ */
-// -*- C++ -*- // 
+// -*- C++ -*- //
 
-/* connection.cc
- * 
+/* providerinfo.h
+ *
  * Copyright 2003 libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
@@ -20,11 +20,30 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgda/gda-enum-types.h>
+#include <glibmm/object.h>
+#include <libgda/gda-config.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
 
 namespace Gnome
 {
 
+namespace Gda
+{
 
-} /* namespace Gnome */
+class ProviderInfo
+{
+  _CLASS_OPAQUE_COPYABLE(ProviderInfo, GdaProviderInfo, NONE, gda_provider_info_copy, gda_config_free_provider_info)
+public:
+
+  _MEMBER_GET(id, id, Glib::ustring, const char*)
+  _MEMBER_GET(location, location, Glib::ustring, const char*)
+  _MEMBER_GET(description, description, Glib::ustring, const char*)
+
+  Glib::ListHandle<Glib::ustring> get_gda_params() const;
+};
+
+} // namespace Gda
+} // namespace Gnome
 

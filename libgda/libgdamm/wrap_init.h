@@ -28,7 +28,6 @@ namespace Gnome
 namespace Gda
 {
 
-
 void wrap_init();
 
 } //namespace Gda

@@ -82,7 +82,7 @@ AC_CHECK_PROGS(PERL, perl5 perl)
 #########################################################################
 #  Dependancy checks
 #########################################################################
-PKG_CHECK_MODULES(LIBGDAMM, glibmm-2.0 >= 1.3.10 libgda >= 0.8.106)
+PKG_CHECK_MODULES(LIBGDAMM, gtkmm-2.0 >= 2.0.0 libgda >= 1.0.0)
 AC_SUBST(LIBGDAMM_CFLAGS)
 AC_SUBST(LIBGDAMM_LIBS)
 
@@ -125,22 +125,25 @@ AUTOHEADER=':'
 
 
 AC_OUTPUT([
-	Makefile
+  Makefile
 
-	libgda/Makefile
-	libgda/libgdamm-2.0.pc
-	libgda/src/Makefile
-	libgda/libgdamm/Makefile
-	libgda/libgdamm/private/Makefile
-	
-	tools/Makefile
-		tools/extra_defs_gen/Makefile
-		tools/m4/Makefile
+  libgda/Makefile
+  libgda/libgdamm-2.0.pc
+  libgda/src/Makefile
+  libgda/libgdamm/Makefile
+  libgda/libgdamm/private/Makefile
+  
+  tools/Makefile
+    tools/extra_defs_gen/Makefile
+    tools/m4/Makefile
 
-	scripts/Makefile
+  scripts/Makefile
 
-	docs/Makefile
-	docs/reference/Makefile
+  docs/Makefile
+  docs/reference/Makefile
     docs/reference/Doxyfile
+
+  examples/Makefile
+    examples/list_data_sources/Makefile
 ])
 

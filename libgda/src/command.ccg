@@ -1,7 +1,7 @@
 /* $Id$ */
-// -*- C++ -*- // 
+// -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* connection.cc
+/* datamodel.cc
  * 
  * Copyright 2003 libgdamm Development Team
  *
@@ -20,11 +20,28 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgda/gda-data-model.h>
 #include <libgda/gda-enum-types.h>
 
 namespace Gnome
 {
 
+namespace Gda
+{
 
-} /* namespace Gnome */
+Command::Command(const Glib::ustring& text, CommandType type, CommandOptions options)
+: gobject_( gda_command_new(text.c_str(), (GdaCommandType)type, (GdaCommandOptions)options) )
+{
+  
+}
+
+Command::~Command()
+{
+  if(gobject_)
+    gda_command_free(gobject_);
+}
+
+} // namespace Gda
+
+} // namespace Gnome
 

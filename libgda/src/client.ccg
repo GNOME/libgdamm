@@ -1,7 +1,7 @@
 /* $Id$ */
-// -*- C++ -*- // 
+// -*- C++ -*- //
 
-/* connection.cc
+/* client.cc
  * 
  * Copyright 2003 libgdamm Development Team
  *
@@ -20,6 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgda/gda-client.h>
 #include <libgda/gda-enum-types.h>
 
 namespace Gnome

@@ -30,9 +30,11 @@ extern const int libgdamm_major_version;
 extern const int libgdamm_minor_version;
 extern const int libgdamm_micro_version;
 
-#include <gtkmm.h>
+#include <glibmm.h>
 
 #include <libgdamm/init.h>
+#include <libgdamm/client.h>
+#include <libgdamm/config.h>
 #include <libgdamm/connection.h>
 #include <libgdamm/datamodel.h>
 #include <libgdamm/error.h>

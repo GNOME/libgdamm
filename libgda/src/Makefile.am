@@ -4,7 +4,7 @@
 sublib_name	= libgdamm
 sublib_namespace = Gda
 sublib_parentdir = libgdamm
-files_defs	= libgda.defs libgda_methods.defs libgda_signals.defs
+files_defs	= libgda.defs libgda_methods.defs libgda_signals.defs libgda_enums.defs
 
 include $(top_srcdir)/build_shared/Makefile_gensrc.am_fragment
 

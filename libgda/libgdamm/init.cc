@@ -22,15 +22,25 @@
 
 #include <libgdamm/init.h>
 #include <gtkmm/wrap_init.h>
+#include <gtkmm/main.h>
 #include <libgdammconfig.h> //For LIBGDAMM_VERSION
 #include <libgdamm/wrap_init.h>
 #include <libgda/libgda.h>
+
 
 namespace Gnome
 {
 
 namespace Gda
 {
+
+void init(const Glib::ustring& app_id, const Glib::ustring& version, int nargs, gchar *args[])
+{
+  //TODO: Depend on the stand-alone glibmm, not gtkmm:
+  Gtk::Main::init_gtkmm_internals(); //Sets up the g type system and the Glib::wrap() table.
+  wrap_init(); //Tells the Glib::wrap() table about the C++ classes.
+  gda_init(app_id.c_str(), version.c_str(), nargs, args);
+}
 
 
 } //namespace Gda

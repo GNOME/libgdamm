@@ -1,9 +1,9 @@
 /* $Id$ */
-// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+// -*- C++ -*- // 
 
 /* connection.h
  * 
- * Copyright 2001      Free Software Foundation
+ * Copyright 2003 libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -35,6 +35,9 @@ namespace Gnome
 namespace Gda
 {
 
+_WRAP_ENUM(ConnectionFeature, GdaConnectionFeature)
+_WRAP_ENUM(ConnectionSchema, GdaConnectionSchema)
+
 class Connection : public Glib::Object
 {
   _CLASS_GOBJECT(Connection, GdaConnection, GDA_CONNECTION, Glib::Object, GObject)
@@ -62,7 +65,7 @@ public:
 
   _WRAP_METHOD(bool change_database(const Glib::ustring& name), gda_connection_change_database)
   _WRAP_METHOD(bool create_database(const Glib::ustring& name), gda_connection_create_database)
-  _WRAP_METHOD(bool drop_database (const Glib::ustring& name), gda_connection_drop_database)
+  _WRAP_METHOD(bool drop_database(const Glib::ustring& name), gda_connection_drop_database)
 
   _WRAP_METHOD(GList* execute_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_command)
   _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_single_command)
@@ -72,13 +75,15 @@ public:
   _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_commit_transaction)
   _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_rollback_transaction)
 
-  //const GList   *gda_connection_get_errors (GdaConnection *cnc);
+  //const GList   *gda_connection_get_errors();
 
-  _WRAP_METHOD(bool supports(GdaConnectionFeature feature), gda_connection_supports)
+  _WRAP_METHOD(bool supports(ConnectionFeature feature) const, gda_connection_supports)
 
 
-  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(GdaConnectionSchema schema, GdaParameterList *params), gda_connection_get_schema)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, GdaParameterList *params), gda_connection_get_schema)
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema, GdaParameterList *params) const, gda_connection_get_schema)
 
+  
   _WRAP_SIGNAL(void error(GList* error_list), "error")
 };
 

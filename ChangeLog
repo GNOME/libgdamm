@@ -1,3 +1,10 @@
+2003-10-05  Murray Cumming  <murrayc@usa.net>
+
+	* Added wrappers for Client, Config, DataSourceInfo, ProviderInfo,
+	and used the C++ types in the rest of the API.
+	* libgda/libgdamm/init.[h|cc]: Added Gnome::Gda::init() function.
+	* Added examples/list_data_sources.
+
 1.3.0:
 	
 2003-10-01  Murray Cumming  <murrayc@usa.net>
