@@ -52,7 +52,7 @@ public:
   _IGNORE(gda_value_new_boolean)
   explicit Value(const GdaDate *val);
   _IGNORE(gda_value_new_date)
-  explicit Value(gdouble val);
+  explicit Value(double val);
   _IGNORE(gda_value_new_double)
   explicit Value(const GdaGeometricPoint *val);
   _IGNORE(gda_value_new_geometric_point)
@@ -66,7 +66,7 @@ public:
   _IGNORE(gda_value_new_money)
   explicit Value(const GdaNumeric *val);
   _IGNORE(gda_value_new_numeric)
-  explicit Value(gfloat val);
+  explicit Value(float val);
   _IGNORE(gda_value_new_single)
   explicit Value(gshort val);
   _IGNORE(gda_value_new_smallint)
@@ -110,12 +110,12 @@ public:
   //TODO: The const here is quite meaningless:
   _WRAP_METHOD(const GdaBlob* get_blob() const, gda_value_get_blob)
   _WRAP_METHOD(void set(const GdaBlob* val), gda_value_set_blob)
-  _WRAP_METHOD(bool get_boolean() const, gda_value_get_boolean)
+  _WRAP_METHOD(bool get_bool() const, gda_value_get_boolean)
   _WRAP_METHOD(void set(bool val), gda_value_set_boolean)
   _WRAP_METHOD(const GdaDate* get_date() const, gda_value_get_date)
   _WRAP_METHOD(void set(const GdaDate* val), gda_value_set_date)
-  _WRAP_METHOD(gdouble get_double() const, gda_value_get_double)
-  _WRAP_METHOD(void set(gdouble val), gda_value_set_double)
+  _WRAP_METHOD(double get_double() const, gda_value_get_double)
+  _WRAP_METHOD(void set(double val), gda_value_set_double)
   _WRAP_METHOD(const GdaGeometricPoint* get_geometric_point() const, gda_value_get_geometric_point)
   _WRAP_METHOD(void set(const GdaGeometricPoint* val), gda_value_set_geometric_point)
   _WRAP_METHOD(Glib::RefPtr<const Glib::Object> get_gobject(), gda_value_get_gobject, refreturn)
@@ -129,8 +129,8 @@ public:
   _WRAP_METHOD(void set(const GdaMoney *val), gda_value_set_money)
   _WRAP_METHOD(const GdaNumeric* get_numeric() const, gda_value_get_numeric)
   _WRAP_METHOD(void set(const GdaNumeric *val), gda_value_set_numeric)
-  _WRAP_METHOD(gfloat get_single() const, gda_value_get_single)
-  _WRAP_METHOD(void set(gfloat val), gda_value_set_single)
+  _WRAP_METHOD(float get_single() const, gda_value_get_single)
+  _WRAP_METHOD(void set(float val), gda_value_set_single)
   _WRAP_METHOD(gshort get_smallint() const, gda_value_get_smallint)
   _WRAP_METHOD(void set(gshort val), gda_value_set_smallint)
   _WRAP_METHOD(gushort get_smalluint() const, gda_value_get_smalluint)
@@ -160,6 +160,10 @@ public:
   _WRAP_METHOD(Glib::ustring to_string() const, gda_value_stringify)
 
   //TODO: _WRAP_METHOD(xmlNodePtr gda_value_to_xml(), gda_value_to_xml)
+
+
+  _WRAP_METHOD(static Glib::ustring type_to_string(ValueType type), gda_type_to_string)
+  _WRAP_METHOD(static ValueType type_from_string(const Glib::ustring& type), gda_type_from_string)
 
 };
 

@@ -1,3 +1,9 @@
+2004-04-21  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/value.hg: Added type_to_string() and type_from_string()
+	static methods.
+	
+
 2004-04-20  Murray Cumming  <murrayc@murrayc.com>
 
 	* configure.in, tools/extra_defs/Makefile.am: Update to use glibmm

@@ -90,6 +90,8 @@ int main (int argc, char** argv)
              param_list.add_parameter(param_table_name);
 
              Glib::RefPtr<Gnome::Gda::DataModel> data_model_fields = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_FIELDS, param_list);
+             //Alternatively, execute a query and call DataModel::describe_column() for each column.
+             
              if(data_model_fields && (data_model_fields->get_n_columns() == 0))
              {
                std::cout << " libgda reported 0 fields for the table." << std::endl;
