@@ -1,3 +1,10 @@
+2004-04-08  Murray Cumming  <murrayc@murrayc.com>
+
+	Working bits of a patch from Alberto Paro.
+	* libgda/libgdamm-2.0.p.in: Depend on glibmm 2.4 instead of gtkmm 2.0.
+	* tools/extra_defs/Makefile.am: Link to the glibmm-2.3 library instead
+	of the gtkmm 2.0 one.
+
 1.3.2:
 
 2004-04-05  Murray Cumming  <murrayc@murrayc.com>
