@@ -9,7 +9,7 @@
 
 (define-object Client
   (in-module "Gda")
-  (parent "BonoboObject")
+  (parent "GObject")
   (c-name "GdaClient")
   (gtype-id "GDA_TYPE_CLIENT")
 )
@@ -63,39 +63,11 @@
   (gtype-id "GDA_TYPE_RECORDSET")
 )
 
-(define-object Server
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaServer")
-  (gtype-id "GDA_TYPE_SERVER")
-)
-
-(define-object ServerConnection
-  (in-module "Gda")
-  (parent "BonoboObject")
-  (c-name "GdaServerConnection")
-  (gtype-id "GDA_TYPE_SERVER_CONNECTION")
-)
-
 (define-object ServerProvider
   (in-module "Gda")
-  (parent "BonoboObject")
+  (parent "GObject")
   (c-name "GdaServerProvider")
   (gtype-id "GDA_TYPE_SERVER_PROVIDER")
-)
-
-(define-object ServerRecordset
-  (in-module "Gda")
-  (parent "BonoboObject")
-  (c-name "GdaServerRecordset")
-  (gtype-id "GDA_TYPE_SERVER_RECORDSET")
-)
-
-(define-object ServerRecordsetModel
-  (in-module "Gda")
-  (parent "GdaServerRecordset")
-  (c-name "GdaServerRecordsetModel")
-  (gtype-id "GDA_TYPE_SERVER_RECORDSET_MODEL")
 )
 
 (define-object Table
@@ -261,6 +233,17 @@
 
 ;; Enumerations and flags ...
 
+(define-flags CommandOptions
+  (in-module "Gda")
+  (c-name "GdaCommandOptions")
+  (gtype-id "GDA_TYPE_COMMAND_OPTIONS")
+  (values
+    '("ignore-errors" "GDA_COMMAND_OPTION_IGNORE_ERRORS")
+    '("stop-on-errors" "GDA_COMMAND_OPTION_STOP_ON_ERRORS")
+    '("bad-option" "GDA_COMMAND_OPTION_BAD_OPTION")
+  )
+)
+
 (define-enum CommandType
   (in-module "Gda")
   (c-name "GdaCommandType")
@@ -274,24 +257,14 @@
   )
 )
 
-(define-enum ComponentType
-  (in-module "Gda")
-  (c-name "GdaComponentType")
-  (gtype-id "GDA_TYPE_COMPONENT_TYPE")
-  (values
-    '("invalid" "GDA_COMPONENT_TYPE_INVALID")
-    '("exe" "GDA_COMPONENT_TYPE_EXE")
-    '("shlib" "GDA_COMPONENT_TYPE_SHLIB")
-    '("factory" "GDA_COMPONENT_TYPE_FACTORY")
-  )
-)
-
 (define-enum ConnectionFeature
   (in-module "Gda")
   (c-name "GdaConnectionFeature")
   (gtype-id "GDA_TYPE_CONNECTION_FEATURE")
   (values
-    '("s" "GDA_CONNECTION_FEATURE_TRANSACTIONS")
+    '("transactions" "GDA_CONNECTION_FEATURE_TRANSACTIONS")
+    '("sql" "GDA_CONNECTION_FEATURE_SQL")
+    '("xml-queries" "GDA_CONNECTION_FEATURE_XML_QUERIES")
   )
 )
 
@@ -323,33 +296,33 @@
   )
 )
 
-(define-enum Type
+(define-enum ValueType
   (in-module "Gda")
-  (c-name "GdaType")
-  (gtype-id "GDA_TYPE_TYPE")
+  (c-name "GdaValueType")
+  (gtype-id "GDA_TYPE_VALUE_TYPE")
   (values
-    '("null" "GDA_TYPE_NULL")
-    '("bigint" "GDA_TYPE_BIGINT")
-    '("binary" "GDA_TYPE_BINARY")
-    '("boolean" "GDA_TYPE_BOOLEAN")
-    '("date" "GDA_TYPE_DATE")
-    '("double" "GDA_TYPE_DOUBLE")
-    '("geometric-point" "GDA_TYPE_GEOMETRIC_POINT")
-    '("integer" "GDA_TYPE_INTEGER")
-    '("list" "GDA_TYPE_LIST")
-    '("numeric" "GDA_TYPE_NUMERIC")
-    '("single" "GDA_TYPE_SINGLE")
-    '("smallint" "GDA_TYPE_SMALLINT")
-    '("string" "GDA_TYPE_STRING")
-    '("time" "GDA_TYPE_TIME")
-    '("timestamp" "GDA_TYPE_TIMESTAMP")
-    '("tinyint" "GDA_TYPE_TINYINT")
-    '("unknown" "GDA_TYPE_UNKNOWN")
+    '("null" "GDA_VALUE_TYPE_NULL")
+    '("bigint" "GDA_VALUE_TYPE_BIGINT")
+    '("binary" "GDA_VALUE_TYPE_BINARY")
+    '("boolean" "GDA_VALUE_TYPE_BOOLEAN")
+    '("date" "GDA_VALUE_TYPE_DATE")
+    '("double" "GDA_VALUE_TYPE_DOUBLE")
+    '("geometric-point" "GDA_VALUE_TYPE_GEOMETRIC_POINT")
+    '("integer" "GDA_VALUE_TYPE_INTEGER")
+    '("list" "GDA_VALUE_TYPE_LIST")
+    '("numeric" "GDA_VALUE_TYPE_NUMERIC")
+    '("single" "GDA_VALUE_TYPE_SINGLE")
+    '("smallint" "GDA_VALUE_TYPE_SMALLINT")
+    '("string" "GDA_VALUE_TYPE_STRING")
+    '("time" "GDA_VALUE_TYPE_TIME")
+    '("timestamp" "GDA_VALUE_TYPE_TIMESTAMP")
+    '("tinyint" "GDA_VALUE_TYPE_TINYINT")
+    '("unknown" "GDA_VALUE_TYPE_UNKNOWN")
   )
 )
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-batch.h
+;; From ../../../libgda/libgda/gda-batch.h
 
 (define-function gda_batch_get_type
   (c-name "gda_batch_get_type")
@@ -442,7 +415,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-client.h
+;; From ../../../libgda/libgda/gda-client.h
 
 (define-function gda_client_get_type
   (c-name "gda_client_get_type")
@@ -490,7 +463,17 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-command.h
+;; From ../../../libgda/libgda/gda-command.h
+
+(define-function gda_command_new
+  (c-name "gda_command_new")
+  (return-type "GdaCommand*")
+  (parameters
+    '("const-gchar*" "text")
+    '("GdaCommandType" "type")
+    '("GdaCommandOptions" "options")
+  )
+)
 
 (define-method free
   (of-object "GdaCommand")
@@ -545,7 +528,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-config.h
+;; From ../../../libgda/libgda/gda-config.h
 
 (define-function gda_config_get_int
   (c-name "gda_config_get_int")
@@ -681,30 +664,6 @@
   )
 )
 
-(define-function gda_config_get_component_list
-  (c-name "gda_config_get_component_list")
-  (return-type "GList*")
-  (parameters
-    '("const-gchar*" "query")
-  )
-)
-
-(define-function gda_config_free_component_list
-  (c-name "gda_config_free_component_list")
-  (return-type "none")
-  (parameters
-    '("GList*" "list")
-  )
-)
-
-(define-function gda_config_get_component_data_model
-  (c-name "gda_config_get_component_data_model")
-  (return-type "GdaDataModel*")
-  (parameters
-    '("const-gchar*" "query")
-  )
-)
-
 (define-function gda_config_get_provider_list
   (c-name "gda_config_get_provider_list")
   (return-type "GList*")
@@ -798,7 +757,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-connection.h
+;; From ../../../libgda/libgda/gda-connection.h
 
 (define-function gda_connection_get_type
   (c-name "gda_connection_get_type")
@@ -810,7 +769,7 @@
   (return-type "GdaConnection*")
   (parameters
     '("GdaClient*" "client")
-    '("GNOME_Database_Connection" "corba_cnc")
+    '("GdaServerProvider*" "provider")
     '("const-gchar*" "dsn")
     '("const-gchar*" "username")
     '("const-gchar*" "password")
@@ -881,6 +840,16 @@
   (parameters
     '("GdaError*" "error")
   )
+)
+
+(define-method add_error_string
+  (of-object "GdaConnection")
+  (c-name "gda_connection_add_error_string")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "str")
+  )
+  (varargs #t)
 )
 
 (define-method add_error_list
@@ -960,7 +929,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-data-model-array.h
+;; From ../../../libgda/libgda/gda-data-model-array.h
 
 (define-function gda_data_model_array_get_type
   (c-name "gda_data_model_array_get_type")
@@ -1001,7 +970,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-data-model.h
+;; From ../../../libgda/libgda/gda-data-model.h
 
 (define-function gda_data_model_get_type
   (c-name "gda_data_model_get_type")
@@ -1099,7 +1068,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-data-model-list.h
+;; From ../../../libgda/libgda/gda-data-model-list.h
 
 (define-function gda_data_model_list_get_type
   (c-name "gda_data_model_list_get_type")
@@ -1149,7 +1118,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-error.h
+;; From ../../../libgda/libgda/gda-error.h
 
 (define-function gda_error_get_type
   (c-name "gda_error_get_type")
@@ -1159,40 +1128,6 @@
 (define-function gda_error_new
   (c-name "gda_error_new")
   (return-type "GdaError*")
-)
-
-(define-function gda_error_list_from_exception
-  (c-name "gda_error_list_from_exception")
-  (return-type "GList*")
-  (parameters
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-method to_exception
-  (of-object "GdaError")
-  (c-name "gda_error_to_exception")
-  (return-type "none")
-  (parameters
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function gda_error_list_to_exception
-  (c-name "gda_error_list_to_exception")
-  (return-type "none")
-  (parameters
-    '("GList*" "error_list")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function gda_error_list_to_corba_seq
-  (c-name "gda_error_list_to_corba_seq")
-  (return-type "GNOME_Database_ErrorSeq*")
-  (parameters
-    '("GList*" "error_list")
-  )
 )
 
 (define-method free
@@ -1271,7 +1206,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-export.h
+;; From ../../../libgda/libgda/gda-export.h
 
 (define-function gda_export_get_type
   (c-name "gda_export_get_type")
@@ -1357,7 +1292,11 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-log.h
+;; From ../../../libgda/libgda/gda-intl.h
+
+
+
+;; From ../../../libgda/libgda/gda-log.h
 
 (define-function gda_log_disable
   (c-name "gda_log_disable")
@@ -1416,11 +1355,20 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-marshal.h
+;; From ../../../libgda/libgda/gda-marshal.h
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-parameter.h
+;; From ../../../libgda/libgda/gda-parameter.h
+
+(define-function gda_parameter_new
+  (c-name "gda_parameter_new")
+  (return-type "GdaParameter*")
+  (parameters
+    '("const-gchar*" "name")
+    '("GdaValueType" "type")
+  )
+)
 
 (define-function gda_parameter_new_string
   (c-name "gda_parameter_new_string")
@@ -1455,7 +1403,7 @@
 (define-method get_value
   (of-object "GdaParameter")
   (c-name "gda_parameter_get_value")
-  (return-type "GdaValue*")
+  (return-type "const-GdaValue*")
 )
 
 (define-method set_value
@@ -1470,14 +1418,6 @@
 (define-function gda_parameter_list_new
   (c-name "gda_parameter_list_new")
   (return-type "GdaParameterList*")
-)
-
-(define-function gda_parameter_list_new_from_corba
-  (c-name "gda_parameter_list_new_from_corba")
-  (return-type "GdaParameterList*")
-  (parameters
-    '("Bonobo_PropertySet*" "corba_list")
-  )
 )
 
 (define-method free
@@ -1516,15 +1456,9 @@
   (return-type "guint")
 )
 
-(define-method to_corba
-  (of-object "GdaParameterList")
-  (c-name "gda_parameter_list_to_corba")
-  (return-type "Bonobo_PropertySet*")
-)
 
 
-
-;; From /gnome/head/cvs/libgda/libgda/gda-quark-list.h
+;; From ../../../libgda/libgda/gda-quark-list.h
 
 (define-function gda_quark_list_new_from_string
   (c-name "gda_quark_list_new_from_string")
@@ -1561,7 +1495,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-recordset.h
+;; From ../../../libgda/libgda/gda-recordset.h
 
 (define-function gda_recordset_get_type
   (c-name "gda_recordset_get_type")
@@ -1573,8 +1507,16 @@
   (return-type "GdaRecordset*")
   (parameters
     '("GdaConnection*" "cnc")
-    '("GNOME_Database_Recordset" "corba_recset")
+    '("GdaRecordsetFetchFunc" "fetch_func")
+    '("GdaRecordsetDescribeFunc" "desc_func")
+    '("gpointer" "user_data")
   )
+)
+
+(define-method get_connection
+  (of-object "GdaRecordset")
+  (c-name "gda_recordset_get_connection")
+  (return-type "GdaConnection*")
 )
 
 (define-method get_command_text
@@ -1583,15 +1525,41 @@
   (return-type "const-gchar*")
 )
 
+(define-method set_command_text
+  (of-object "GdaRecordset")
+  (c-name "gda_recordset_set_command_text")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "txt")
+  )
+)
+
 (define-method get_command_type
   (of-object "GdaRecordset")
   (c-name "gda_recordset_get_command_type")
   (return-type "GdaCommandType")
 )
 
+(define-method set_command_type
+  (of-object "GdaRecordset")
+  (c-name "gda_recordset_set_command_type")
+  (return-type "none")
+  (parameters
+    '("GdaCommandType" "type")
+  )
+)
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-row.h
+
+;; From ../../../libgda/libgda/gda-row.h
+
+(define-function gda_row_new
+  (c-name "gda_row_new")
+  (return-type "GdaRow*")
+  (parameters
+    '("gint" "count")
+  )
+)
 
 (define-method free
   (of-object "GdaRow")
@@ -1620,6 +1588,12 @@
   (of-object "GdaRowAttributes")
   (c-name "gda_row_attributes_free")
   (return-type "none")
+)
+
+(define-method get_length
+  (of-object "GdaRowAttributes")
+  (c-name "gda_row_attributes_get_length")
+  (return-type "gint")
 )
 
 (define-method get_field
@@ -1690,7 +1664,7 @@
 (define-method get_gdatype
   (of-object "GdaFieldAttributes")
   (c-name "gda_field_attributes_get_gdatype")
-  (return-type "GdaType")
+  (return-type "GdaValueType")
 )
 
 (define-method set_gdatype
@@ -1698,7 +1672,7 @@
   (c-name "gda_field_attributes_set_gdatype")
   (return-type "none")
   (parameters
-    '("GdaType" "type")
+    '("GdaValueType" "type")
   )
 )
 
@@ -1760,6 +1734,17 @@
   (parameters
     '("const-gchar*" "ref")
   )
+)
+
+(define-function gda_field_new
+  (c-name "gda_field_new")
+  (return-type "GdaField*")
+)
+
+(define-method free
+  (of-object "GdaField")
+  (c-name "gda_field_free")
+  (return-type "none")
 )
 
 (define-method get_actual_size
@@ -1825,7 +1810,7 @@
 (define-method get_gdatype
   (of-object "GdaField")
   (c-name "gda_field_get_gdatype")
-  (return-type "GdaType")
+  (return-type "GdaValueType")
 )
 
 (define-method set_gdatype
@@ -1833,7 +1818,7 @@
   (c-name "gda_field_set_gdatype")
   (return-type "none")
   (parameters
-    '("GdaType" "type")
+    '("GdaValueType" "type")
   )
 )
 
@@ -2158,113 +2143,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-server-connection.h
-
-(define-function gda_server_connection_get_type
-  (c-name "gda_server_connection_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_server_connection_new
-  (c-name "gda_server_connection_new")
-  (return-type "GdaServerConnection*")
-  (parameters
-    '("GdaServerProvider*" "provider")
-  )
-)
-
-(define-method get_string
-  (of-object "GdaServerConnection")
-  (c-name "gda_server_connection_get_string")
-  (return-type "const-gchar*")
-)
-
-(define-method get_username
-  (of-object "GdaServerConnection")
-  (c-name "gda_server_connection_get_username")
-  (return-type "const-gchar*")
-)
-
-(define-method get_password
-  (of-object "GdaServerConnection")
-  (c-name "gda_server_connection_get_password")
-  (return-type "const-gchar*")
-)
-
-(define-method notify_action
-  (of-object "GdaServerConnection")
-  (c-name "gda_server_connection_notify_action")
-  (return-type "none")
-  (parameters
-    '("GNOME_Database_ActionId" "action")
-    '("GdaParameterList*" "params")
-  )
-)
-
-(define-method add_error
-  (of-object "GdaServerConnection")
-  (c-name "gda_server_connection_add_error")
-  (return-type "none")
-  (parameters
-    '("GdaError*" "error")
-  )
-)
-
-(define-method add_error_string
-  (of-object "GdaServerConnection")
-  (c-name "gda_server_connection_add_error_string")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "msg")
-  )
-  (varargs #t)
-)
-
-(define-method free_error_list
-  (of-object "GdaServerConnection")
-  (c-name "gda_server_connection_free_error_list")
-  (return-type "none")
-)
-
-
-
-;; From /gnome/head/cvs/libgda/libgda/gda-server.h
-
-(define-function gda_server_get_type
-  (c-name "gda_server_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_server_new
-  (c-name "gda_server_new")
-  (return-type "GdaServer*")
-  (parameters
-    '("const-gchar*" "factory_iid")
-  )
-)
-
-(define-method register_component
-  (of-object "GdaServer")
-  (c-name "gda_server_register_component")
-  (return-type "none")
-  (parameters
-    '("const-char*" "iid")
-    '("GType" "type")
-  )
-)
-
-(define-method unregister_component
-  (of-object "GdaServer")
-  (c-name "gda_server_unregister_component")
-  (return-type "none")
-  (parameters
-    '("const-char*" "iid")
-  )
-)
-
-
-
-;; From /gnome/head/cvs/libgda/libgda/gda-server-provider.h
+;; From ../../../libgda/libgda/gda-server-provider.h
 
 (define-function gda_server_provider_get_type
   (c-name "gda_server_provider_get_type")
@@ -2276,7 +2155,7 @@
   (c-name "gda_server_provider_open_connection")
   (return-type "gboolean")
   (parameters
-    '("GdaServerConnection*" "cnc")
+    '("GdaConnection*" "cnc")
     '("GdaQuarkList*" "params")
     '("const-gchar*" "username")
     '("const-gchar*" "password")
@@ -2288,7 +2167,7 @@
   (c-name "gda_server_provider_close_connection")
   (return-type "gboolean")
   (parameters
-    '("GdaServerConnection*" "cnc")
+    '("GdaConnection*" "cnc")
   )
 )
 
@@ -2297,7 +2176,7 @@
   (c-name "gda_server_provider_execute_command")
   (return-type "GList*")
   (parameters
-    '("GdaServerConnection*" "cnc")
+    '("GdaConnection*" "cnc")
     '("GdaCommand*" "cmd")
     '("GdaParameterList*" "params")
   )
@@ -2308,7 +2187,7 @@
   (c-name "gda_server_provider_begin_transaction")
   (return-type "gboolean")
   (parameters
-    '("GdaServerConnection*" "cnc")
+    '("GdaConnection*" "cnc")
     '("const-gchar*" "trans_id")
   )
 )
@@ -2318,7 +2197,7 @@
   (c-name "gda_server_provider_commit_transaction")
   (return-type "gboolean")
   (parameters
-    '("GdaServerConnection*" "cnc")
+    '("GdaConnection*" "cnc")
     '("const-gchar*" "trans_id")
   )
 )
@@ -2328,7 +2207,7 @@
   (c-name "gda_server_provider_rollback_transaction")
   (return-type "gboolean")
   (parameters
-    '("GdaServerConnection*" "cnc")
+    '("GdaConnection*" "cnc")
     '("const-gchar*" "trans_id")
   )
 )
@@ -2338,174 +2217,25 @@
   (c-name "gda_server_provider_supports")
   (return-type "gboolean")
   (parameters
-    '("GdaServerConnection*" "cnc")
-    '("GNOME_Database_Feature" "feature")
+    '("GdaConnection*" "cnc")
+    '("GdaConnectionFeature" "feature")
   )
 )
 
 (define-method get_schema
   (of-object "GdaServerProvider")
   (c-name "gda_server_provider_get_schema")
-  (return-type "GdaServerRecordset*")
+  (return-type "GdaDataModel*")
   (parameters
-    '("GdaServerConnection*" "cnc")
-    '("GNOME_Database_Connection_Schema" "schema")
+    '("GdaConnection*" "cnc")
+    '("GdaConnectionSchema" "schema")
     '("GdaParameterList*" "params")
   )
 )
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-server-recordset.h
-
-(define-function gda_server_recordset_get_type
-  (c-name "gda_server_recordset_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_server_recordset_new
-  (c-name "gda_server_recordset_new")
-  (return-type "GdaServerRecordset*")
-  (parameters
-    '("GdaServerConnection*" "cnc")
-    '("GdaServerRecordsetFetchFunc" "fetch_func")
-    '("GdaServerRecordsetDescribeFunc" "desc_func")
-  )
-)
-
-(define-method get_connection
-  (of-object "GdaServerRecordset")
-  (c-name "gda_server_recordset_get_connection")
-  (return-type "GdaServerConnection*")
-)
-
-(define-method set_connection
-  (of-object "GdaServerRecordset")
-  (c-name "gda_server_recordset_set_connection")
-  (return-type "none")
-  (parameters
-    '("GdaServerConnection*" "cnc")
-  )
-)
-
-(define-method set_fetch_func
-  (of-object "GdaServerRecordset")
-  (c-name "gda_server_recordset_set_fetch_func")
-  (return-type "none")
-  (parameters
-    '("GdaServerRecordsetFetchFunc" "func")
-  )
-)
-
-(define-method set_describe_func
-  (of-object "GdaServerRecordset")
-  (c-name "gda_server_recordset_set_describe_func")
-  (return-type "none")
-  (parameters
-    '("GdaServerRecordsetDescribeFunc" "func")
-  )
-)
-
-(define-method get_command_text
-  (of-object "GdaServerRecordset")
-  (c-name "gda_server_recordset_get_command_text")
-  (return-type "const-gchar*")
-)
-
-(define-method set_command_text
-  (of-object "GdaServerRecordset")
-  (c-name "gda_server_recordset_set_command_text")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "cmd_text")
-  )
-)
-
-(define-method get_command_type
-  (of-object "GdaServerRecordset")
-  (c-name "gda_server_recordset_get_command_type")
-  (return-type "GdaCommandType")
-)
-
-(define-method set_command_type
-  (of-object "GdaServerRecordset")
-  (c-name "gda_server_recordset_set_command_type")
-  (return-type "none")
-  (parameters
-    '("GdaCommandType" "cmd_type")
-  )
-)
-
-
-
-;; From /gnome/head/cvs/libgda/libgda/gda-server-recordset-model.h
-
-(define-function gda_server_recordset_model_get_type
-  (c-name "gda_server_recordset_model_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_server_recordset_model_new
-  (c-name "gda_server_recordset_model_new")
-  (return-type "GdaServerRecordset*")
-  (parameters
-    '("GdaServerConnection*" "cnc")
-    '("gint" "n_cols")
-  )
-)
-
-(define-method set_field_defined_size
-  (of-object "GdaServerRecordsetModel")
-  (c-name "gda_server_recordset_model_set_field_defined_size")
-  (return-type "none")
-  (parameters
-    '("gint" "col")
-    '("glong" "size")
-  )
-)
-
-(define-method set_field_name
-  (of-object "GdaServerRecordsetModel")
-  (c-name "gda_server_recordset_model_set_field_name")
-  (return-type "none")
-  (parameters
-    '("gint" "col")
-    '("const-gchar*" "name")
-  )
-)
-
-(define-method set_field_scale
-  (of-object "GdaServerRecordsetModel")
-  (c-name "gda_server_recordset_model_set_field_scale")
-  (return-type "none")
-  (parameters
-    '("gint" "col")
-    '("glong" "scale")
-  )
-)
-
-(define-method set_field_gdatype
-  (of-object "GdaServerRecordsetModel")
-  (c-name "gda_server_recordset_model_set_field_gdatype")
-  (return-type "none")
-  (parameters
-    '("gint" "col")
-    '("GdaType" "type")
-  )
-)
-
-(define-method append_row
-  (of-object "GdaServerRecordsetModel")
-  (c-name "gda_server_recordset_model_append_row")
-  (return-type "none")
-  (parameters
-    '("const-GList*" "values")
-  )
-)
-
-
-
-;; From /gnome/head/cvs/libgda/libgda/gda-table.h
+;; From ../../../libgda/libgda/gda-table.h
 
 (define-function gda_table_get_type
   (c-name "gda_table_get_type")
@@ -2550,11 +2280,11 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-util.h
+;; From ../../../libgda/libgda/gda-util.h
 
 (define-function gda_type_from_string
   (c-name "gda_type_from_string")
-  (return-type "GdaType")
+  (return-type "GdaValueType")
   (parameters
     '("const-gchar*" "str")
   )
@@ -2572,7 +2302,7 @@
   (c-name "gda_file_load")
   (return-type "gchar*")
   (parameters
-    '("const-gchar*" "uri")
+    '("const-gchar*" "filename")
   )
 )
 
@@ -2580,7 +2310,7 @@
   (c-name "gda_file_save")
   (return-type "gboolean")
   (parameters
-    '("const-gchar*" "uri")
+    '("const-gchar*" "filename")
     '("const-gchar*" "buffer")
     '("gint" "len")
   )
@@ -2588,7 +2318,12 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-value.h
+;; From ../../../libgda/libgda/gda-value.h
+
+(define-function gda_value_new_null
+  (c-name "gda_value_new_null")
+  (return-type "GdaValue*")
+)
 
 (define-function gda_value_new_bigint
   (c-name "gda_value_new_bigint")
@@ -2794,7 +2529,7 @@
   (c-name "gda_value_set_date")
   (return-type "none")
   (parameters
-    '("GdaDate*" "val")
+    '("const-GdaDate*" "val")
   )
 )
 
@@ -2824,7 +2559,7 @@
   (c-name "gda_value_set_geometric_point")
   (return-type "none")
   (parameters
-    '("GdaGeometricPoint*" "val")
+    '("const-GdaGeometricPoint*" "val")
   )
 )
 
@@ -2854,7 +2589,7 @@
   (c-name "gda_value_set_list")
   (return-type "none")
   (parameters
-    '("GdaValueList*" "val")
+    '("const-GdaValueList*" "val")
   )
 )
 
@@ -2875,7 +2610,7 @@
   (c-name "gda_value_set_numeric")
   (return-type "none")
   (parameters
-    '("GdaNumeric*" "val")
+    '("const-GdaNumeric*" "val")
   )
 )
 
@@ -2935,7 +2670,7 @@
   (c-name "gda_value_set_time")
   (return-type "none")
   (parameters
-    '("GdaTime*" "val")
+    '("const-GdaTime*" "val")
   )
 )
 
@@ -2950,7 +2685,7 @@
   (c-name "gda_value_set_timestamp")
   (return-type "none")
   (parameters
-    '("GdaTimestamp*" "val")
+    '("const-GdaTimestamp*" "val")
   )
 )
 
@@ -2977,7 +2712,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xml-database.h
+;; From ../../../libgda/libgda/gda-xml-database.h
 
 (define-function gda_xml_database_get_type
   (c-name "gda_xml_database_get_type")
@@ -3102,7 +2837,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xml-document.h
+;; From ../../../libgda/libgda/gda-xml-document.h
 
 (define-function gda_xml_document_get_type
   (c-name "gda_xml_document_get_type")
@@ -3158,7 +2893,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-atom.h
+;; From ../../../libgda/libgda/gda-xql-atom.h
 
 (define-function gda_xql_atom_get_type
   (c-name "gda_xql_atom_get_type")
@@ -3175,7 +2910,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-bin.h
+;; From ../../../libgda/libgda/gda-xql-bin.h
 
 (define-function gda_xql_bin_get_type
   (c-name "gda_xql_bin_get_type")
@@ -3302,7 +3037,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-column.h
+;; From ../../../libgda/libgda/gda-xql-column.h
 
 (define-function gda_xql_column_get_type
   (c-name "gda_xql_column_get_type")
@@ -3325,7 +3060,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-const.h
+;; From ../../../libgda/libgda/gda-xql-const.h
 
 (define-function gda_xql_const_get_type
   (c-name "gda_xql_const_get_type")
@@ -3350,7 +3085,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-delete.h
+;; From ../../../libgda/libgda/gda-xql-delete.h
 
 (define-function gda_xql_delete_get_type
   (c-name "gda_xql_delete_get_type")
@@ -3364,7 +3099,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-dml.h
+;; From ../../../libgda/libgda/gda-xql-dml.h
 
 (define-function gda_xql_dml_get_type
   (c-name "gda_xql_dml_get_type")
@@ -3463,7 +3198,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-dual.h
+;; From ../../../libgda/libgda/gda-xql-dual.h
 
 (define-function gda_xql_dual_get_type
   (c-name "gda_xql_dual_get_type")
@@ -3632,7 +3367,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-field.h
+;; From ../../../libgda/libgda/gda-xql-field.h
 
 (define-function gda_xql_field_get_type
   (c-name "gda_xql_field_get_type")
@@ -3656,7 +3391,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-func.h
+;; From ../../../libgda/libgda/gda-xql-func.h
 
 (define-function gda_xql_func_get_type
   (c-name "gda_xql_func_get_type")
@@ -3702,7 +3437,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-insert.h
+;; From ../../../libgda/libgda/gda-xql-insert.h
 
 (define-function gda_xql_insert_get_type
   (c-name "gda_xql_insert_get_type")
@@ -3716,7 +3451,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-item.h
+;; From ../../../libgda/libgda/gda-xql-item.h
 
 (define-function gda_xql_item_get_type
   (c-name "gda_xql_item_get_type")
@@ -3843,7 +3578,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-join.h
+;; From ../../../libgda/libgda/gda-xql-join.h
 
 (define-function gda_xql_join_get_type
   (c-name "gda_xql_join_get_type")
@@ -3867,7 +3602,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-list.h
+;; From ../../../libgda/libgda/gda-xql-list.h
 
 (define-function gda_xql_list_get_type
   (c-name "gda_xql_list_get_type")
@@ -3947,7 +3682,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-query.h
+;; From ../../../libgda/libgda/gda-xql-query.h
 
 (define-function gda_xql_query_get_type
   (c-name "gda_xql_query_get_type")
@@ -3969,7 +3704,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-select.h
+;; From ../../../libgda/libgda/gda-xql-select.h
 
 (define-function gda_xql_select_get_type
   (c-name "gda_xql_select_get_type")
@@ -3983,7 +3718,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-stack.h
+;; From ../../../libgda/libgda/gda-xql-stack.h
 
 (define-function gda_xql_stack_get_type
   (c-name "gda_xql_stack_get_type")
@@ -4018,7 +3753,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-target.h
+;; From ../../../libgda/libgda/gda-xql-target.h
 
 (define-function gda_xql_target_get_type
   (c-name "gda_xql_target_get_type")
@@ -4042,7 +3777,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-update.h
+;; From ../../../libgda/libgda/gda-xql-update.h
 
 (define-function gda_xql_update_get_type
   (c-name "gda_xql_update_get_type")
@@ -4056,7 +3791,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-utils.h
+;; From ../../../libgda/libgda/gda-xql-utils.h
 
 (define-function gda_xql_destroy_hash_pair
   (c-name "gda_xql_destroy_hash_pair")
@@ -4107,7 +3842,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-value.h
+;; From ../../../libgda/libgda/gda-xql-value.h
 
 (define-function gda_xql_value_get_type
   (c-name "gda_xql_value_get_type")
@@ -4129,7 +3864,7 @@
 
 
 
-;; From /gnome/head/cvs/libgda/libgda/gda-xql-valueref.h
+;; From ../../../libgda/libgda/gda-xql-valueref.h
 
 (define-function gda_xql_valueref_get_type
   (c-name "gda_xql_valueref_get_type")
@@ -4143,204 +3878,7 @@
 
 
 
-(define-function GNOME_Database_Recordset_describe
-  (c-name "GNOME_Database_Recordset_describe")
-  (return-type "GNOME_Database_RowAttributes*")
-  (parameters
-    '("GNOME_Database_Recordset" "_obj")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Recordset_getRowCount
-  (c-name "GNOME_Database_Recordset_getRowCount")
-  (return-type "CORBA_long")
-  (parameters
-    '("GNOME_Database_Recordset" "_obj")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Recordset_getCommandText
-  (c-name "GNOME_Database_Recordset_getCommandText")
-  (return-type "CORBA_string")
-  (parameters
-    '("GNOME_Database_Recordset" "_obj")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Recordset_getCommandType
-  (c-name "GNOME_Database_Recordset_getCommandType")
-  (return-type "GNOME_Database_CommandType")
-  (parameters
-    '("GNOME_Database_Recordset" "_obj")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Recordset_moveFirst
-  (c-name "GNOME_Database_Recordset_moveFirst")
-  (return-type "CORBA_boolean")
-  (parameters
-    '("GNOME_Database_Recordset" "_obj")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Recordset_moveNext
-  (c-name "GNOME_Database_Recordset_moveNext")
-  (return-type "CORBA_boolean")
-  (parameters
-    '("GNOME_Database_Recordset" "_obj")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Recordset_movePrevious
-  (c-name "GNOME_Database_Recordset_movePrevious")
-  (return-type "CORBA_boolean")
-  (parameters
-    '("GNOME_Database_Recordset" "_obj")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Recordset_moveLast
-  (c-name "GNOME_Database_Recordset_moveLast")
-  (return-type "CORBA_boolean")
-  (parameters
-    '("GNOME_Database_Recordset" "_obj")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Recordset_fetch
-  (c-name "GNOME_Database_Recordset_fetch")
-  (return-type "GNOME_Database_Row*")
-  (parameters
-    '("GNOME_Database_Recordset" "_obj")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Client_notifyAction
-  (c-name "GNOME_Database_Client_notifyAction")
-  (return-type "none")
-  (parameters
-    '("GNOME_Database_Client" "_obj")
-    '("const-GNOME_Database_ActionId" "action")
-    '("const-Bonobo_PropertySet*" "params")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Connection_open
-  (c-name "GNOME_Database_Connection_open")
-  (return-type "CORBA_boolean")
-  (parameters
-    '("GNOME_Database_Connection" "_obj")
-    '("const-GNOME_Database_Client" "client")
-    '("const-CORBA_char*" "cnc_string")
-    '("const-CORBA_char*" "username")
-    '("const-CORBA_char*" "password")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Connection_close
-  (c-name "GNOME_Database_Connection_close")
-  (return-type "CORBA_boolean")
-  (parameters
-    '("GNOME_Database_Connection" "_obj")
-    '("const-GNOME_Database_Client" "client")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Connection_executeCommand
-  (c-name "GNOME_Database_Connection_executeCommand")
-  (return-type "GNOME_Database_RecordsetList*")
-  (parameters
-    '("GNOME_Database_Connection" "_obj")
-    '("const-GNOME_Database_Command*" "cmd")
-    '("const-Bonobo_PropertySet*" "params")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Connection_beginTransaction
-  (c-name "GNOME_Database_Connection_beginTransaction")
-  (return-type "CORBA_boolean")
-  (parameters
-    '("GNOME_Database_Connection" "_obj")
-    '("const-CORBA_char*" "id")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Connection_commitTransaction
-  (c-name "GNOME_Database_Connection_commitTransaction")
-  (return-type "CORBA_boolean")
-  (parameters
-    '("GNOME_Database_Connection" "_obj")
-    '("const-CORBA_char*" "id")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Connection_rollbackTransaction
-  (c-name "GNOME_Database_Connection_rollbackTransaction")
-  (return-type "CORBA_boolean")
-  (parameters
-    '("GNOME_Database_Connection" "_obj")
-    '("const-CORBA_char*" "id")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Connection_supports
-  (c-name "GNOME_Database_Connection_supports")
-  (return-type "CORBA_boolean")
-  (parameters
-    '("GNOME_Database_Connection" "_obj")
-    '("const-GNOME_Database_Feature" "feature")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Connection_getSchema
-  (c-name "GNOME_Database_Connection_getSchema")
-  (return-type "GNOME_Database_Recordset")
-  (parameters
-    '("GNOME_Database_Connection" "_obj")
-    '("const-GNOME_Database_Connection_Schema" "schema")
-    '("const-Bonobo_PropertySet*" "params")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Provider_getVersion
-  (c-name "GNOME_Database_Provider_getVersion")
-  (return-type "CORBA_string")
-  (parameters
-    '("GNOME_Database_Provider" "_obj")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-(define-function GNOME_Database_Provider_createConnection
-  (c-name "GNOME_Database_Provider_createConnection")
-  (return-type "GNOME_Database_Connection")
-  (parameters
-    '("GNOME_Database_Provider" "_obj")
-    '("CORBA_Environment*" "ev")
-  )
-)
-
-
-
-;; From /gnome/head/cvs/libgda/libgda/libgda.h
+;; From ../../../libgda/libgda/libgda.h
 
 (define-function gda_main_run
   (c-name "gda_main_run")

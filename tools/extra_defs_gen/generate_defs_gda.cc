@@ -40,7 +40,7 @@
 #include <libgda/gda-xql-update.h>
 #include <libgda/gda-xql-value.h>
 #include <libgda/gda-xql-valueref.h>
-#include <libgda/gda-server-recordset-model.h>
+//#include <libgda/gda-server-recordset-model.h>
 
 int main (int argc, char *argv[])
 {
@@ -54,11 +54,11 @@ int main (int argc, char *argv[])
                  << get_defs(GDA_TYPE_ERROR)
 //                 << get_defs(GDA_TYPE_EXPORT)
                  << get_defs(GDA_TYPE_RECORDSET)
-                 << get_defs(GDA_TYPE_SERVER_CONNECTION)
-                 << get_defs(GDA_TYPE_SERVER_PROVIDER)
-                 << get_defs(GDA_TYPE_SERVER_RECORDSET_MODEL)
-                 << get_defs(GDA_TYPE_SERVER_RECORDSET)
-                 << get_defs(GDA_TYPE_SERVER)
+//                 << get_defs(GDA_TYPE_SERVER_CONNECTION)
+//                 << get_defs(GDA_TYPE_SERVER_PROVIDER)
+//                 << get_defs(GDA_TYPE_SERVER_RECORDSET_MODEL)
+//                 << get_defs(GDA_TYPE_SERVER_RECORDSET)
+//                 << get_defs(GDA_TYPE_SERVER)
                  << get_defs(GDA_TYPE_TABLE)
                  << get_defs(GDA_TYPE_XML_DATABASE)
                  << get_defs(GDA_TYPE_XQL_ATOM)

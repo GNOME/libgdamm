@@ -2,12 +2,11 @@
 ## The gtkmm development team.
 ##
 ## **** Common rules for inclusion in Makefile.am ****
-##
+## ## Included from something/somethingmm/Makefile.am
 ##
 ## Used variable:		Example content:
 ##
 ## sublib_name			= gtkmm
-## sublib_namespace		= Gtk
 ## sublib_cflags		= $(GTKMM_CFLAGS)
 ## files_extra_cc		= stock_id.cc
 ## files_extra_h		= base.h stock_id.h
@@ -24,18 +23,4 @@ files_built_cc		= $(files_hg:.hg=.cc) wrap_init.cc
 files_built_h		= $(files_hg:.hg=.h)
 files_extra_h		+= wrap_init.h
 
-sublib_srcdir		= $(srcdir)/../src
-files_hg_with_path	= $(patsubst %.hg,$(sublib_srcdir)/%.hg,$(files_hg))
-
-#Installed gtkmmproc stuff, from gtkmm:
-gtkmmproc_dir	= $(GTKMM_PROCDIR)
-
-gen_wrap_init_path = $(gtkmmproc_dir)/generate_wrap_init.pl
-gen_wrap_init_args = --namespace=Gnome --namespace=$(sublib_namespace)  --parent_dir=libgdamm
-run_gen_wrap_init  = $(PERL_PATH) $(gen_wrap_init_path) $(gen_wrap_init_args)
-
 include $(top_srcdir)/build_shared/Makefile_build.am_fragment
-
-wrap_init.cc: $(gen_wrap_init_path) $(files_hg_with_path)
-	$(run_gen_wrap_init) $(files_hg_with_path) > $@
-

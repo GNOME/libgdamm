@@ -1,3 +1,10 @@
+2002-05-03  Murray Cumming  <murrayc@usa.net>
+
+	* Revised build files so that they are like the other gnomemm
+	projects - this means that generated source is now distributed.
+	* Updated libgda_methods.defs and libgda_enums.defs for the libgda
+	HEAD branch refactoring. It now builds against libgda HEAD.
+
 2002-04-19  Muray Cumming  <murrayc@usa.net>
 
 	* Removed traces of libgnomemm, from which this project was copied

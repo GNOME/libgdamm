@@ -1,31 +1,36 @@
-;; From /gnome/head/cvs/libgda/libgda/gda-command.h
+;; From ../../../libgda/libgda/gda-command.h
+
+(define-flags-extended CommandOptions
+  (in-module "Gda")
+  (c-name "GdaCommandOptions")
+  (values
+    '("ignore-errors" "GDA_COMMAND_OPTION_IGNORE_ERRORS" "1")
+    '("stop-on-errors" "GDA_COMMAND_OPTION_STOP_ON_ERRORS" "1 << 1")
+    '("bad-option" "GDA_COMMAND_OPTION_BAD_OPTION" "1 << 2")
+  )
+)
 
 (define-enum-extended CommandType
   (in-module "Gda")
   (c-name "GdaCommandType")
   (values
+    '("sql" "GDA_COMMAND_TYPE_SQL" "0")
+    '("xml" "GDA_COMMAND_TYPE_XML" "1")
+    '("procedure" "GDA_COMMAND_TYPE_PROCEDURE" "2")
+    '("table" "GDA_COMMAND_TYPE_TABLE" "3")
+    '("invalid" "GDA_COMMAND_TYPE_INVALID" "4")
   )
 )
 
-;; From /gnome/head/cvs/libgda/libgda/gda-config.h
-
-(define-enum-extended ComponentType
-  (in-module "Gda")
-  (c-name "GdaComponentType")
-  (values
-    '("invalid" "GDA_COMPONENT_TYPE_INVALID" "-1")
-    '("exe" "GDA_COMPONENT_TYPE_EXE" "0")
-    '("shlib" "GDA_COMPONENT_TYPE_SHLIB" "1")
-    '("factory" "GDA_COMPONENT_TYPE_FACTORY" "2")
-  )
-)
-
-;; From /gnome/head/cvs/libgda/libgda/gda-connection.h
+;; From ../../../libgda/libgda/gda-connection.h
 
 (define-enum-extended ConnectionFeature
   (in-module "Gda")
   (c-name "GdaConnectionFeature")
   (values
+    '("transactions" "GDA_CONNECTION_FEATURE_TRANSACTIONS" "0")
+    '("sql" "GDA_CONNECTION_FEATURE_SQL" "1")
+    '("xml-queries" "GDA_CONNECTION_FEATURE_XML_QUERIES" "2")
   )
 )
 
@@ -33,10 +38,21 @@
   (in-module "Gda")
   (c-name "GdaConnectionSchema")
   (values
+    '("aggregates" "GDA_CONNECTION_SCHEMA_AGGREGATES" "0")
+    '("databases" "GDA_CONNECTION_SCHEMA_DATABASES" "1")
+    '("fields" "GDA_CONNECTION_SCHEMA_FIELDS" "2")
+    '("indexes" "GDA_CONNECTION_SCHEMA_INDEXES" "3")
+    '("procedures" "GDA_CONNECTION_SCHEMA_PROCEDURES" "4")
+    '("sequences" "GDA_CONNECTION_SCHEMA_SEQUENCES" "5")
+    '("tables" "GDA_CONNECTION_SCHEMA_TABLES" "6")
+    '("triggers" "GDA_CONNECTION_SCHEMA_TRIGGERS" "7")
+    '("types" "GDA_CONNECTION_SCHEMA_TYPES" "8")
+    '("users" "GDA_CONNECTION_SCHEMA_USERS" "9")
+    '("views" "GDA_CONNECTION_SCHEMA_VIEWS" "10")
   )
 )
 
-;; From /gnome/head/cvs/libgda/libgda/gda-export.h
+;; From ../../../libgda/libgda/gda-export.h
 
 (define-enum-extended ExportFlags
   (in-module "Gda")
@@ -46,12 +62,29 @@
   )
 )
 
-;; From /gnome/head/cvs/libgda/libgda/gda-row.h
+;; From ../../../libgda/libgda/gda-value.h
 
-(define-enum-extended
-  (in-module "")
-  (c-name "")
+(define-enum-extended ValueType
+  (in-module "Gda")
+  (c-name "GdaValueType")
   (values
+    '("null" "GDA_VALUE_TYPE_NULL" "0")
+    '("bigint" "GDA_VALUE_TYPE_BIGINT" "1")
+    '("binary" "GDA_VALUE_TYPE_BINARY" "2")
+    '("boolean" "GDA_VALUE_TYPE_BOOLEAN" "3")
+    '("date" "GDA_VALUE_TYPE_DATE" "4")
+    '("double" "GDA_VALUE_TYPE_DOUBLE" "5")
+    '("geometric-point" "GDA_VALUE_TYPE_GEOMETRIC_POINT" "6")
+    '("integer" "GDA_VALUE_TYPE_INTEGER" "7")
+    '("list" "GDA_VALUE_TYPE_LIST" "8")
+    '("numeric" "GDA_VALUE_TYPE_NUMERIC" "9")
+    '("single" "GDA_VALUE_TYPE_SINGLE" "10")
+    '("smallint" "GDA_VALUE_TYPE_SMALLINT" "11")
+    '("string" "GDA_VALUE_TYPE_STRING" "12")
+    '("time" "GDA_VALUE_TYPE_TIME" "13")
+    '("timestamp" "GDA_VALUE_TYPE_TIMESTAMP" "14")
+    '("tinyint" "GDA_VALUE_TYPE_TINYINT" "15")
+    '("unknown" "GDA_VALUE_TYPE_UNKNOWN" "16")
   )
 )
 

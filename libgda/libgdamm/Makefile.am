@@ -4,8 +4,12 @@
 SUBDIRS			= private
 
 sublib_name		= libgdamm
+sublib_libname = libgdamm-2.0
+sublib_libversion = $(LIBGDAMM_SO_VERSION)
 sublib_namespace	= Gda
 sublib_cflags		= $(LIBGDAMM_CFLAGS)
+sublib_topdir = libgda
+
 
 files_extra_h	= init.h wrap_init.h
 files_extra_cc = init.cc
