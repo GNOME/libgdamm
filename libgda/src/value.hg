@@ -93,6 +93,8 @@ public:
   //TODO: explicit Value(const xmlNodePtr node);
   //_IGNORE(gda_value_new_from_xml)
 
+  bool operator==(const Value& src) const;
+  bool operator!=(const Value& src) const;
 
   _WRAP_METHOD(ValueType get_value_type() const, gda_value_get_type)
   _WRAP_METHOD(bool is_null() const, gda_value_is_null)

@@ -157,6 +157,29 @@ Value::Value(const Glib::ustring& as_string, ValueType type)
   gobject_ = gda_value_new_from_string(as_string.c_str(), (GdaValueType)type);
 }
 
+bool Value::operator==(const Value& src) const
+{
+  if( !gobject_ && !src.gobject_) //If both are null.
+    return true;
+
+  if( !gobject_ && src.gobject_) //If one is null.
+    return false;
+
+  if( gobject_ && !src.gobject_) //If one is null.
+    return false;
+
+  if(get_value_type() != src.get_value_type()) //gda_value_compare() can only compare GdaValues of the same type.
+    return false;
+    
+  gint test = gda_value_compare(const_cast<GdaValue*>(gobj()), const_cast<GdaValue*>(src.gobj()));   //returns 0 if both contain
+  return test == 0;
+}
+
+bool Value::operator!=(const Value& src) const
+{
+  return !operator==(src);
+}
+
 
 } //namespace Gda
 
