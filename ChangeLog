@@ -1,3 +1,7 @@
+2002-07-06  Murray Cumming  <murrayc@usa.net>
+
+	* Added Transaction wrapper, used in Connection methods.
+
 2002-05-03  Murray Cumming  <murrayc@usa.net>
 
 	* Revised build files so that they are like the other gnomemm

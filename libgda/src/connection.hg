@@ -21,6 +21,7 @@
  */
 
 #include <libgdamm/serverprovider.h>
+#include <libgdamm/transaction.h>
 #include <libgdamm/error.h>
 #include <libgdamm/datamodel.h>
 #include <libgda/gda-connection.h>
@@ -61,9 +62,9 @@ public:
   _WRAP_METHOD(GList* execute_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_command)
   _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_single_command)
 
-  _WRAP_METHOD(bool begin_transaction(const Glib::ustring& id), gda_connection_begin_transaction)
-  _WRAP_METHOD(bool commit_transaction(const Glib::ustring& id), gda_connection_commit_transaction)
-  _WRAP_METHOD(bool rollback_transaction(const Glib::ustring& id), gda_connection_rollback_transaction)
+  _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_begin_transaction)
+  _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_commit_transaction)
+  _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_rollback_transaction)
 
   _WRAP_METHOD(bool supports(GdaConnectionFeature feature), gda_connection_supports)
 
