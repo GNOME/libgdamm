@@ -25,8 +25,13 @@
 namespace Gnome
 {
 
+namespace Gda
+{
+
+
 void wrap_init();
 
-} /* namespace Gnome */
+} //namespace Gda
+} //namespace Gnome
 
 #endif // _LIBGNOMEMM_WRAP_INIT_H

@@ -29,5 +29,9 @@
 namespace Gnome
 {
 
+namespace Gda
+{
 
+
+} //namespace Gda
 } //namespace Gnome

@@ -26,7 +26,10 @@
 namespace Gnome
 {
 
+namespace Gda
+{
 
+} //namespace Gda
 } //namespace Gnome
 
 #endif //_LIBGNOMEMM_INIT_H

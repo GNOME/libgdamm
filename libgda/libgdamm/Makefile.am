@@ -4,7 +4,7 @@
 SUBDIRS			= private
 
 sublib_name		= libgdamm
-sublib_namespace	= Gnome
+sublib_namespace	= Gda
 sublib_cflags		= $(LIBGDAMM_CFLAGS)
 
 files_extra_h	= init.h wrap_init.h

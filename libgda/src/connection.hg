@@ -29,6 +29,9 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace Gnome
 {
 
+namespace Gda
+{
+
 class Connection : public Glib::Object
 {
   _CLASS_GOBJECT(Connection, GdaConnection, GDA_CONNECTION, Glib::Object, GObject)
@@ -64,5 +67,6 @@ public:
 
 };
 
-} /* namespace Gnome */
+} // namespace Gda
+} // namespace Gnome
 

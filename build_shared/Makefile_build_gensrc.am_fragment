@@ -31,7 +31,7 @@ files_hg_with_path	= $(patsubst %.hg,$(sublib_srcdir)/%.hg,$(files_hg))
 gtkmmproc_dir	= $(GTKMM_PROCDIR)
 
 gen_wrap_init_path = $(gtkmmproc_dir)/generate_wrap_init.pl
-gen_wrap_init_args = --namespace=$(sublib_namespace) --parent_dir=libgdamm
+gen_wrap_init_args = --namespace=Gnome --namespace=$(sublib_namespace)  --parent_dir=libgdamm
 run_gen_wrap_init  = $(PERL_PATH) $(gen_wrap_init_path) $(gen_wrap_init_args)
 
 include $(top_srcdir)/build_shared/Makefile_build.am_fragment
