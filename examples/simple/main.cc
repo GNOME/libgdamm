@@ -26,55 +26,56 @@
 int main (int argc, char** argv)
 {
   //Initialize libgdamm:
-  Gnome::Gda::init();
+  Gnome::Gda::init("libgdamm example", "0.1", argc, argv);
 
   Glib::RefPtr<Gnome::Gda::Client> gda_client = Gnome::Gda::Client::create();
-
-  //Get the list of data sources:
-  typedef std::list<Glib::ustring> type_list_of_strings;
-  type_list_of_strings data_sources = Gnome::Gda::Config::get_data_sources()
-
-  //Print the information about each data source:
-  for(type_list_of_strings::iterator iter = data_sources.begin(); iter != data_sources.end(); ++iter)
+  if(gda_client)
   {
-    Gnome::Gda::DataSourceInfo info = *iter;
+    //Get the list of data sources:
+    typedef std::list<Gnome::Gda::DataSourceInfo> type_list_of_data_sources;
+    type_list_of_data_sources data_sources = Gnome::Gda::Config::get_data_sources();
 
-    std::cout << " Data source = %s, User = %s\n" << info.get_name(), info.get_username() << std::endl;
-
-    Glib::RefPtr<Gnome::Gda::Connection> gda_connection = Gnome::Gda::Connection::open( gda_client, client, info.get_name(), nfo.get_username(), nfo.get_password() );
-    if(!gda_connection)
-      std::cerr << "Error: Could not open connection to " << info.get_user_name();
-    else
+    //Print the information about each data source:
+    for(type_list_of_data_sources::iterator iter = data_sources.begin(); iter != data_sources.end(); ++iter)
     {
-      // show provider features
-      std::cout << "\tProvider capabilities..." << std::endl;
-      std::cout << "\t\tAggregates: %s" << std::endl <<
-        gda_connection.supports(GDA_CONNECTION_FEATURE_AGGREGATES) ? "Supported" : "Not supported";
-      std::cout << "\t\tIndexes: %s" << std::endl <<
-        gda_connection.supports(GDA_CONNECTION_FEATURE_INDEXES) ? "Supported" : "Not supported";
-      std::cout << "\t\tNamespaces: %s" << std::endl <<
-        gda_connection.supports(GDA_CONNECTION_FEATURE_NAMESPACES) ? "Supported" : "Not supported";
-      std::cout << "\t\tProcedures: %s" << std::endl <<
-        gda_connection.supports(GDA_CONNECTION_FEATURE_PROCEDURES) ? "Supported" : "Not supported";
-      std::cout << "\t\tSequences: %s" << std::endl <<
-        gda_connection.supports(GDA_CONNECTION_FEATURE_SEQUENCES) ? "Supported" : "Not supported";
-      std::cout << "\t\tSQL: %s" << std::endl <<
-        gda_connection.supports(GDA_CONNECTION_FEATURE_SQL) ? "Supported" : "Not supported";
-      std::cout << "\t\tTransactions: %s" << std::endl <<
-        gda_connection.supports(GDA_CONNECTION_FEATURE_TRANSACTIONS) ? "Supported" : "Not supported";
-      std::cout << "\t\tTriggers: %s" << std::endl <<
-        gda_connection.supports(GDA_CONNECTION_FEATURE_TRIGGERS) ? "Supported" : "Not supported";
-      std::cout << "\t\tUsers: %s" << std::endl <<
-        gda_connection.supports(GDA_CONNECTION_FEATURE_USERS) ? "Supported" : "Not supported";
-      std::cout << "\t\tViews: %s" << std::endl <<
-        gda_connection.supports(GDA_CONNECTION_FEATURE_VIEWS) ? "Supported" : "Not supported";
-      std::cout << "\t\tXML queries: %s" << std::endl <<
-        gda_connection.supports(GDA_CONNECTION_FEATURE_XML_QUERIES) ? "Supported" : "Not supported";
-      std::cout << "\t\tBLOBs: %s" << std::endl <<
-        gda_connection.supports(GDA_CONNECTION_FEATURE_BLOBS) ? "Supported" : "Not supported";
+      Gnome::Gda::DataSourceInfo info = *iter;
+
+      std::cout << " Data source = " << info.get_name() << ", User = " << info.get_username() << std::endl;
+
+      Glib::RefPtr<Gnome::Gda::Connection> gda_connection = gda_client->open_connection(info.get_name(), info.get_username(), info.get_password() );
+      if(!gda_connection)
+        std::cerr << "Error: Could not open connection to " << info.get_name();
+      else
+      {
+        // show provider features
+        std::cout << "\tProvider capabilities..." << std::endl;
+        std::cout << "\t\tAggregates: " << 
+          (gda_connection->supports(Gnome::Gda::CONNECTION_FEATURE_AGGREGATES) ? "Supported" : "Not supported") << std::endl;
+        std::cout << "\t\tIndexes: " << 
+          (gda_connection->supports(Gnome::Gda::CONNECTION_FEATURE_INDEXES) ? "Supported" : "Not supported") << std::endl;
+        std::cout << "\t\tNamespaces: " << 
+          (gda_connection->supports(Gnome::Gda::CONNECTION_FEATURE_NAMESPACES) ? "Supported" : "Not supported") << std::endl;
+        std::cout << "\t\tProcedures: " << 
+          (gda_connection->supports(Gnome::Gda::CONNECTION_FEATURE_PROCEDURES) ? "Supported" : "Not supported") << std::endl;
+        std::cout << "\t\tSequences: " << 
+          (gda_connection->supports(Gnome::Gda::CONNECTION_FEATURE_SEQUENCES) ? "Supported" : "Not supported") << std::endl;
+        std::cout << "\t\tSQL: " << 
+          (gda_connection->supports(Gnome::Gda::CONNECTION_FEATURE_SQL) ? "Supported" : "Not supported") << std::endl;
+        std::cout << "\t\tTransactions: " << 
+          (gda_connection->supports(Gnome::Gda::CONNECTION_FEATURE_TRANSACTIONS) ? "Supported" : "Not supported") << std::endl;
+        std::cout << "\t\tTriggers: " << 
+          (gda_connection->supports(Gnome::Gda::CONNECTION_FEATURE_TRIGGERS) ? "Supported" : "Not supported") << std::endl;
+        std::cout << "\t\tUsers: " << 
+          (gda_connection->supports(Gnome::Gda::CONNECTION_FEATURE_USERS) ? "Supported" : "Not supported") << std::endl;
+        std::cout << "\t\tViews: " << 
+          (gda_connection->supports(Gnome::Gda::CONNECTION_FEATURE_VIEWS) ? "Supported" : "Not supported") << std::endl;
+        std::cout << "\t\tXML queries: " << 
+          (gda_connection->supports(Gnome::Gda::CONNECTION_FEATURE_XML_QUERIES) ? "Supported" : "Not supported") << std::endl;
+        std::cout << "\t\tBLOBs: " << 
+          (gda_connection->supports(Gnome::Gda::CONNECTION_FEATURE_BLOBS) ? "Supported" : "Not supported") << std::endl;
+      }
     }
-  }
-  
+  }  
 
   
   return 0;

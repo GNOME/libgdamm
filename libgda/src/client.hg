@@ -34,6 +34,7 @@ namespace Gda
 {
 
 _WRAP_ENUM(ClientEvent, GdaClientEvent)
+_WRAP_ENUM(ConnectionOptions, GdaConnectionOptions)
 
 class Client : public Glib::Object
 {
@@ -44,8 +45,8 @@ protected:
 public:
   _WRAP_CREATE()
 
-  _WRAP_METHOD(Glib::RefPtr<Connection> open_connection(const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password, GdaConnectionOptions options), gda_client_open_connection)
-  _WRAP_METHOD(Glib::RefPtr<Connection> open_connection_from_string(const Glib::ustring& provider_id, const Glib::ustring& cnc_string, GdaConnectionOptions options), gda_client_open_connection_from_string)
+  _WRAP_METHOD(Glib::RefPtr<Connection> open_connection(const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password, ConnectionOptions options = (ConnectionOptions)0), gda_client_open_connection)
+  _WRAP_METHOD(Glib::RefPtr<Connection> open_connection_from_string(const Glib::ustring& provider_id, const Glib::ustring& cnc_string, ConnectionOptions options = (ConnectionOptions)0), gda_client_open_connection_from_string)
 //TODO:  _WRAP_METHOD(const GList   *get_connection_list(), gda_client_get_connection_list)
   _WRAP_METHOD(Glib::RefPtr<Connection> find_connection(const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password), gda_client_find_connection)
   _WRAP_METHOD(void close_all_connections(), gda_client_close_all_connections)

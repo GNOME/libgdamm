@@ -35,6 +35,8 @@ namespace Gnome
 namespace Gda
 {
 
+class Client;
+
 _WRAP_ENUM(ConnectionFeature, GdaConnectionFeature)
 _WRAP_ENUM(ConnectionSchema, GdaConnectionSchema)
 
@@ -42,15 +44,18 @@ class Connection : public Glib::Object
 {
   _CLASS_GOBJECT(Connection, GdaConnection, GDA_CONNECTION, Glib::Object, GObject)
 protected:
-  _WRAP_CTOR(Connection(GdaClient* client, const Glib::RefPtr<ServerProvider>& provider, const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password), gda_connection_new)
+
+  _CTOR_DEFAULT
 
 public:
-  _WRAP_CREATE(GdaClient* client, const Glib::RefPtr<ServerProvider>& provider, const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password)
+  _WRAP_CREATE()
 
   _WRAP_METHOD(bool close(), gda_connection_close)
-  _WRAP_METHOD(bool is_open(), gda_connection_is_open)
+  _WRAP_METHOD(bool is_open() const, gda_connection_is_open)
 
-  _WRAP_METHOD(GdaClient* get_client(), gda_connection_get_client)
+  _WRAP_METHOD(Glib::RefPtr<Client> get_client(), gda_connection_get_client, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Client> get_client() const, gda_connection_get_client, refreturn)
+    
   _WRAP_METHOD(void set_client(GdaClient *client), gda_connection_set_client)
 
   _WRAP_METHOD(Glib::ustring get_database() const, gda_connection_get_database);
@@ -67,6 +72,7 @@ public:
   _WRAP_METHOD(bool create_database(const Glib::ustring& name), gda_connection_create_database)
   _WRAP_METHOD(bool drop_database(const Glib::ustring& name), gda_connection_drop_database)
 
+  //TODO:
   _WRAP_METHOD(GList* execute_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_command)
   _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_single_command)
   _WRAP_METHOD(int execute_non_query(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_non_query)

@@ -1,5 +1,10 @@
 2004-03-30  Murray Cumming  <murrayc@murrayc.com>
 
+	* examples/simple now also builds and works, though it is not yet 
+	a real example.
+
+2004-03-30  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/libgdamm/config.cc: get_gda_params(): Use OWNERSHIP_NONE so 
 	that we do not delete parts of the struct field that we do not own.
 	examples/list_data_sources now runs without crashing.
