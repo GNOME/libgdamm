@@ -62,7 +62,7 @@ int main (int argc, char** argv)
       {
         std::cout << " libgda reported 0 databases for the provider." << std::endl;
       }
-      else if( data_model_databases)
+      else if(data_model_databases)
       {
         //List the tables:
         int rows = data_model_databases->get_n_rows();
@@ -84,9 +84,12 @@ int main (int argc, char** argv)
       std::cout << std::endl;
        
       //Open one of the databases:
-      //gda_connection->change_database("tblTest1");
+      gda_connection->change_database("example_contacts");
 
-      Glib::RefPtr<Gnome::Gda::DataModel> data_model_tables = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_TABLES);
+      Gnome::Gda::ParameterList parameter_list;
+      parameter_list.add_parameter( Gnome::Gda::Parameter("name", "example_contacts") ); 
+
+      Glib::RefPtr<Gnome::Gda::DataModel> data_model_tables = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_TABLES, parameter_list);
       if(data_model_tables && (data_model_tables->get_n_columns() == 0)) 
       {
         std::cout << " libgda reported 0 tables for the database." << std::endl;
@@ -108,6 +111,7 @@ int main (int argc, char** argv)
           
           std::cout << "  Table name: " <<  table_name << std::endl;
            
+/*
           if(!table_name.empty())
           {
              //List the fields:
@@ -164,7 +168,8 @@ int main (int argc, char** argv)
 
                }
              }   
-          }    
+          }
+*/    
         }
       }
     }
