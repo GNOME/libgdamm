@@ -1,3 +1,7 @@
+2004-04-22  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/value.ccg: Implemented the constructors.
+
 2004-04-21  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/value.hg: Added type_to_string() and type_from_string()

@@ -24,3 +24,140 @@
 #include <libgda/gda-enum-types.h>
 #include <libgda/gda-util.h>
 
+namespace Gnome
+{
+  
+namespace Gda
+{
+  
+Value::Value(gint64 val)
+{
+  gobject_ = gda_value_new_integer(val);
+}
+
+Value::Value(guint64 val)
+{
+  gobject_ = gda_value_new_biguint(val);
+}
+
+Value::Value(const void* val, glong size)
+{
+  gobject_ = gda_value_new_binary(val, size);
+}
+
+/* gda_value_new_blob() is not implemented
+Value::Value(const GdaBlob *val)
+{
+  gobject_ = gda_value_new_blob(val);
+}
+*/
+
+Value::Value(bool val)
+{
+  gobject_ = gda_value_new_boolean(val);
+}
+
+Value::Value(const GdaDate *val)
+{
+  gobject_ = gda_value_new_date(val);
+}
+
+Value::Value(double val)
+{
+  gobject_ = gda_value_new_double(val);
+}
+
+Value::Value(const GdaGeometricPoint *val)
+{
+  gobject_ = gda_value_new_geometric_point(val);
+}
+
+Value::Value(const GObject *val)
+{
+  gobject_ = gda_value_new_gobject(val);
+}
+
+Value::Value(int val)
+{
+  gobject_ = gda_value_new_integer(val);
+}
+
+Value::Value(const GdaValueList *val)
+{
+  gobject_ = gda_value_new_list(val);
+}
+
+Value::Value(const GdaMoney *val)
+{
+  gobject_ = gda_value_new_money(val);
+}
+
+Value::Value(const GdaNumeric *val)
+{
+  gobject_ = gda_value_new_numeric(val);
+}
+
+Value::Value(float val)
+{
+  gobject_ = gda_value_new_single(val);
+}
+
+Value::Value(gshort val)
+{
+  gobject_ = gda_value_new_smallint(val);
+}
+
+Value::Value(gushort val)
+{
+  gobject_ = gda_value_new_smalluint(val);
+}
+
+Value::Value(const Glib::ustring& val)
+{
+  gobject_ = gda_value_new_string(val.c_str());
+}
+
+Value::Value(const GdaTime *val)
+{
+  gobject_ = gda_value_new_time(val);
+}
+
+Value::Value(const GdaTimestamp *val)
+{
+  gobject_ = gda_value_new_timestamp(val);
+}
+
+Value::Value(time_t val)
+{
+  gobject_ = gda_value_new_timestamp_from_timet(val);
+}
+
+Value::Value(gchar val)
+{
+  gobject_ = gda_value_new_tinyint(val);
+}
+
+Value::Value(guchar val)
+{
+  gobject_ = gda_value_new_tinyuint(val);
+}
+
+Value::Value(ValueType val)
+{
+  gobject_ = gda_value_new_type((GdaValueType)val);
+}
+
+Value::Value(guint val)
+{
+  gobject_ = gda_value_new_uinteger(val);
+}
+
+Value::Value(const Glib::ustring& as_string, ValueType type)
+{
+  gobject_ = gda_value_new_from_string(as_string.c_str(), (GdaValueType)type);
+}
+
+
+} //namespace Gda
+
+} //namespace Gnome

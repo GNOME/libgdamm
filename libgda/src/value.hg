@@ -44,10 +44,10 @@ public:
   _IGNORE(gda_value_new_bigint)
   explicit Value(guint64 val);
   _IGNORE(gda_value_new_biguint)
-  explicit Value(gconstpointer val, glong size);
+  explicit Value(const void* val, glong size);
   _IGNORE(gda_value_new_binary)
-  explicit Value(const GdaBlob *val);
-  _IGNORE(gda_value_new_blob)
+  //gda_value_new_blob() is not implemented. explicit Value(const GdaBlob *val);
+  //_IGNORE(gda_value_new_blob)
   explicit Value(bool val);
   _IGNORE(gda_value_new_boolean)
   explicit Value(const GdaDate *val);
