@@ -38,7 +38,8 @@ class Transaction : public Glib::Object
 {
   _CLASS_GOBJECT(Transaction, GdaTransaction, GDA_TRANSACTION, Glib::Object, GObject)
 protected:
-  _WRAP_CTOR(Transaction(const Glib::ustring& name), gda_transaction_new)
+  explicit Transaction(const Glib::ustring& name = Glib::ustring());
+  _IGNORE(gda_transaction_new);
 
 public:
   _WRAP_CREATE(const Glib::ustring& name)

@@ -1,6 +1,11 @@
+2004-05-04  Murray Cumming  <murrayc@murrayc@murrayc.com>
+
+	* libgda/src/transaction.[hg|cc]: Hand-code the constructor because
+	it does not just use properties.
+
 2004-05-04  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgad/src/connection.hg: Added get_last_insert_id(), as wrapper for
+	* libgda/src/connection.hg: Added get_last_insert_id(), as wrapper for
 	the new gda_connection_get_last_insert_id() function.
 
 2004-04-30  Murray Cumming  <murrayc@murrayc.com>

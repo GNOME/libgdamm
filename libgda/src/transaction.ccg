@@ -25,6 +25,21 @@
 namespace Gnome
 {
 
+namespace Gda
+{
+
+//We custom-implement this, copying stuff from the gda_transaction_new() implemenation:
+Transaction::Transaction(const Glib::ustring& name)
+:
+  Glib::ObjectBase(0), //Mark this class as gtkmmproc-generated, rather than a custom class, to allow vfunc optimisations.
+  Glib::Object(Glib::ConstructParams(transaction_class_.init(), (char*) 0))
+{
+  if(!name.empty())
+    set_name(name);
+}
+
+} //namespace Gda
+
 
 } /* namespace Gnome */
 
