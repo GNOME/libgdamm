@@ -58,7 +58,7 @@ Glib::ustring get_type(const Glib::ustring& path);
 
 
 /// For instance, void on_listen(const Glib::ustring& path);
-typedef SigC::Slot1<void, const Glib::ustring&> SlotListener;
+typedef sigc::slot<void, const Glib::ustring&> SlotListener;
 
 guint add_listener(const Glib::ustring& path, const SlotListener& slot);
 void remove_listener(guint id);
