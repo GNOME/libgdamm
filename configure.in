@@ -1,0 +1,146 @@
+# Configure.in
+#
+#  This file tests for various compiler features needed to configure 
+#  the gtkmm package.  Original skeleton was provided by Stephan Kulow.
+#  All tests were written by Tero Pulkkinen, Mirko Streckenbach, and 
+#  Karl Nelson.
+#
+#
+#  Copyright 2001 Free Software Foundation
+#  Copyright 1999 gtkmm Development Team
+#  Copyright 1998 Stephan Kulow 
+#
+AC_INIT(libgda/libgdammconfig.h.in)
+
+#########################################################################
+#  Version and initialization
+#########################################################################
+LIBGDAMM_MAJOR_VERSION=1
+LIBGDAMM_MINOR_VERSION=3
+LIBGDAMM_MICRO_VERSION=2
+
+#
+# +1 : ? : +1  == new interface that does not break old one
+# +1 : ? : 0   == new interface that breaks old one
+#  ? : ? : 0   == no new interfaces, but breaks apps
+#  ? :+1 : ?   == just some internal changes, nothing breaks but might work 
+#                 better
+# CURRENT : REVISION : AGE
+LIBGDAMM_SO_VERSION=2:1:0
+
+LIBGDAMM_VERSION=$LIBGDAMM_MAJOR_VERSION.$LIBGDAMM_MINOR_VERSION.$LIBGDAMM_MICRO_VERSION
+LIBGDAMM_RELEASE=$LIBGDAMM_MAJOR_VERSION.$LIBGDAMM_MINOR_VERSION
+AC_DEFINE_UNQUOTED(LIBGDAMM_MAJOR_VERSION, $LIBGDAMM_MAJOR_VERSION)
+AC_DEFINE_UNQUOTED(LIBGDAMM_MINOR_VERSION, $LIBGDAMM_MINOR_VERSION)
+AC_DEFINE_UNQUOTED(LIBGDAMM_MICRO_VERSION, $LIBGDAMM_MICRO_VERSION)
+AC_DEFINE_UNQUOTED(LIBGDAMM_VERSION, "$LIBGDAMM_VERSION")
+AC_SUBST(LIBGDAMM_VERSION)
+AC_SUBST(LIBGDAMM_RELEASE)
+AC_SUBST(LIBGDAMM_SO_VERSION)
+
+AC_CONFIG_AUX_DIR(scripts)
+
+dnl For automake.
+VERSION=$LIBGDAMM_VERSION
+PACKAGE=libgdamm
+
+dnl Initialize automake stuff
+AM_INIT_AUTOMAKE($PACKAGE, $VERSION)
+
+dnl Specify a configuration file (no autoheader)
+AM_CONFIG_HEADER(libgda/libgdammconfig.h)
+AM_MAINTAINER_MODE
+AL_ACLOCAL_INCLUDE(scripts)
+
+
+#########################################################################
+#  Configure arguments 
+#########################################################################
+
+#########################################################################
+#  Environment Checks
+#########################################################################
+AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_MAKE_SET
+AC_CANONICAL_HOST
+AM_DISABLE_STATIC
+AM_PROG_LIBTOOL
+
+AL_PROG_GNU_M4(AC_MSG_ERROR([dnl
+SUN m4 does not work for building gtkmm. 
+Please install GNU m4.]))
+
+AL_PROG_GNU_MAKE(AC_MSG_ERROR([dnl
+SUN make does not work for building gtkmm.
+Please install GNU make.]))
+
+AL_PROG_PERL(AC_MSG_ERROR([Perl is required to build gtkmm.]))
+
+AC_CHECK_PROGS(PERL, perl5 perl)
+
+#########################################################################
+#  Dependancy checks
+#########################################################################
+PKG_CHECK_MODULES(LIBGDAMM, gtkmm-2.0 >= 1.3.10 libgda >= 0.8.106)
+AC_SUBST(LIBGDAMM_CFLAGS)
+AC_SUBST(LIBGDAMM_LIBS)
+
+GTKMM_PREFIX=`pkg-config --variable=prefix gtkmm-2.0`
+GTKMM_PROCDIR=$GTKMM_PREFIX/lib/gtkmm-2.0/proc
+AC_SUBST(GTKMM_PROCDIR)
+GTKMM_PROC=$GTKMM_PROCDIR/gtkmmproc
+AC_SUBST(GTKMM_PROC)
+
+#########################################################################
+#  C++ checks
+#########################################################################
+AC_PROG_CXX
+AC_LANG_CPLUSPLUS
+
+
+# Create a list of input directories for Doxygen.  We have to check wether
+# we are building in the source directory, because Doxygen doesn't like
+# duplicated directories in the input list.
+LIBGDAMM_DOXYGEN_INPUT=''
+gtkmm_srcdir=`cd "$srcdir" && pwd`
+gtkmm_builddir=`pwd`
+for sublib in libgda
+do
+  LIBGDAMM_DOXYGEN_INPUT="$LIBGDAMM_DOXYGEN_INPUT $gtkmm_builddir/$sublib/$sublib""mm/"
+  test "x$gtkmm_builddir" = "x$gtkmm_srcdir" || \
+    LIBGDAMM_DOXYGEN_INPUT="$LIBGDAMM_DOXYGEN_INPUT $gtkmm_srcdir/$sublib/$sublib""mm/"
+done
+AC_SUBST(LIBGDAMM_DOXYGEN_INPUT)
+
+
+
+# Dummy conditional just to make automake-1.4 happy.
+# We need an always-false condition in docs/Makefile.am.
+AM_CONDITIONAL(LIBGDAMM_FALSE,[false])
+
+# HACK:  Assign a dummy in order to prevent execution of autoheader by the
+# maintainer-mode rules.  That would fail since we aren't using autoheader.
+AUTOHEADER=':'
+
+
+AC_OUTPUT([
+	Makefile
+
+	libgda/Makefile
+	libgda/libgdamm-2.0.pc
+	libgda/src/Makefile
+	libgda/libgdamm/Makefile
+	libgda/libgdamm/private/Makefile
+	
+	tools/Makefile
+		tools/extra_defs_gen/Makefile
+		tools/m4/Makefile
+
+	scripts/Makefile
+
+	docs/Makefile
+	docs/reference/Makefile
+    docs/reference/Doxyfile
+])
+

@@ -1,0 +1,19 @@
+## Copyright (c) 2001
+## The libgdamm development team.
+
+SUBDIRS			= private
+
+sublib_name		= libgdamm
+sublib_namespace	= Gnome
+sublib_cflags		= $(LIBGDAMM_CFLAGS)
+
+files_extra_h	= init.h wrap_init.h
+files_extra_cc = init.cc
+
+include $(top_srcdir)/build_shared/Makefile_build_gensrc.am_fragment
+
+lib_LTLIBRARIES			= libgdamm-1.3.la
+libgdamm_1_3_la_SOURCES	= $(files_all_cc)
+libgdamm_1_3_la_LDFLAGS	= $(common_ldflags)
+libgdamm_1_3_la_LIBADD	= $(LIBGDAMM_LIBS)
+

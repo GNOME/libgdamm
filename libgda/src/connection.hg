@@ -1,0 +1,68 @@
+/* $Id$ */
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* connection.h
+ * 
+ * Copyright 2001      Free Software Foundation
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <libgda/gda-connection.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gnome
+{
+
+class Connection : public Glib::Object
+{
+  _CLASS_GOBJECT(Connection, GdaConnection, GDA_CONNECTION, Glib::Object, GObject)
+public:
+
+  _WRAP_CTOR(Connection(GdaClient* client, GNOME_Database_Connection corba_cnc, const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password), gda_connection_new)
+  _WRAP_METHOD(bool close(), gda_connection_close)
+  _WRAP_METHOD(bool is_open(), gda_connection_is_open)
+
+  _WRAP_METHOD(GdaClient* get_client(), gda_connection_get_client)
+  _WRAP_METHOD(void set_client(GdaClient *client), gda_connection_set_client)
+
+  _WRAP_METHOD(Glib::ustring get_dsn(), gda_connection_get_dsn)
+  _WRAP_METHOD(Glib::ustring get_cnc_string(), gda_connection_get_cnc_string)
+  _WRAP_METHOD(Glib::ustring get_provider(), gda_connection_get_provider)
+  _WRAP_METHOD(Glib::ustring get_username(), gda_connection_get_username)
+  _WRAP_METHOD(Glib::ustring get_password(), gda_connection_get_password)
+
+  _WRAP_METHOD(void add_error(GdaError *error), gda_connection_add_error)
+  _WRAP_METHOD(void add_error_list(GList *error_list), gda_connection_add_error_list)
+
+  _WRAP_METHOD(GList* execute_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_command)
+  _WRAP_METHOD(GdaDataModel* execute_single_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_single_command)
+
+  _WRAP_METHOD(bool begin_transaction(const Glib::ustring& id), gda_connection_begin_transaction)
+  _WRAP_METHOD(bool commit_transaction(const Glib::ustring& id), gda_connection_commit_transaction)
+  _WRAP_METHOD(bool rollback_transaction(const Glib::ustring& id), gda_connection_rollback_transaction)
+
+  _WRAP_METHOD(bool supports(GdaConnectionFeature feature), gda_connection_supports)
+
+
+  _WRAP_METHOD(GdaDataModel* get_schema(GdaConnectionSchema schema, GdaParameterList *params), gda_connection_get_schema)
+
+};
+
+} /* namespace Gnome */
+

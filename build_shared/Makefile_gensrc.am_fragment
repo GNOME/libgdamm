@@ -1,0 +1,57 @@
+## Copyright (c) 2001
+## The gtkmm development team.
+##
+## **** Common rules for inclusion in Makefile.am ****
+##
+##
+## Used variable:	Example content:
+##
+## sublib_name		= gdkmm
+## files_defs		= gdk.defs gdk_pixbuf.defs
+
+
+tools_dir	= $(top_srcdir)/tools
+tools_dir_m4= $(top_srcdir)/tools/m4
+tools_dir_pm= $(top_srcdir)/tools/pm
+
+gensrc_destdir	= ../$(sublib_name)
+stamp_dir	= .stamps
+
+include $(top_srcdir)/tools/Makefile_list_of_sources.am_fragment
+tools_m4	= $(files_tools_m4:%.m4=$(tools_dir_m4)/%.m4)
+# tools_pm	= $(files_tools_pm:%.pm=$(tools_dir_pm)/%.pm)
+
+include $(srcdir)/Makefile_list_of_hg.am_fragment
+files_ccg	= $(files_hg:%.hg=%.ccg)
+files_h		= $(files_hg:%.hg=$(gensrc_destdir)/%.h)
+files_cc	= $(files_hg:%.hg=$(gensrc_destdir)/%.cc)
+files_stamp	= $(files_hg:%.hg=$(stamp_dir)/stamp-%)
+
+#Installed gtkmmproc stuff, from gtkmm:
+gtkmmproc_path	= $(GTKMM_PROC)
+gtkmmproc_dir	= $(GTKMM_PROCDIR)
+
+# We use our own m4 and pm files as well as the ones installed by gtkmm:
+# Our override m4 include seems to need to be before the default one.
+gtkmmproc_args	= -I $(tools_dir_m4) --defs $(srcdir)
+run_gtkmmproc	= $(gtkmmproc_path) $(gtkmmproc_args)
+
+EXTRA_DIST	= Makefile_list_of_hg.am_fragment \
+		  $(files_defs) $(files_hg) $(files_ccg)
+
+
+$(stamp_dir)/stamp-%: %.hg %.ccg $(tools_m4) $(files_defs)
+	$(run_gtkmmproc) $(notdir $*) $(srcdir) $(gensrc_destdir)
+	@echo 'timestamp' > $@
+
+create-stamp-dir:
+	@(test -d $(stamp_dir) || mkdir $(stamp_dir))
+
+all-local: create-stamp-dir $(files_stamp)
+
+distclean-local:
+	rm -rf $(stamp_dir)
+
+debug_gtkmmproc:
+	@echo $(tools_m4) $(files_defs)
+

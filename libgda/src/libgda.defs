@@ -1,0 +1,2 @@
+(include libgda_methods.defs)
+(include libgda_signals.defs)
