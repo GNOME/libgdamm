@@ -1131,6 +1131,25 @@
   )
 )
 
+(define-method create_table
+  (of-object "GdaConnection")
+  (c-name "gda_connection_create_table")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "table_name")
+    '("const-GdaFieldAttributes*[]" "attributes")
+  )
+)
+
+(define-method drop_table
+  (of-object "GdaConnection")
+  (c-name "gda_connection_drop_table")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "table_name")
+  )
+)
+
 (define-method execute_command
   (of-object "GdaConnection")
   (c-name "gda_connection_execute_command")
@@ -1262,100 +1281,6 @@
   (of-object "GdaDataModelArray")
   (c-name "gda_data_model_array_clear")
   (return-type "none")
-)
-
-
-
-;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-data-model-hash.h
-
-(define-function gda_data_model_hash_get_type
-  (c-name "gda_data_model_hash_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_data_model_hash_new
-  (c-name "gda_data_model_hash_new")
-  (is-constructor-of "GdaDataModelHash")
-  (return-type "GdaDataModel*")
-  (parameters
-    '("gint" "cols")
-  )
-)
-
-(define-method hash_get_value_at
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_hash_get_value_at")
-  (return-type "const-GdaValue*")
-  (parameters
-    '("gint" "col")
-    '("gint" "row")
-  )
-)
-
-(define-method clear
-  (of-object "GdaDataModelHash")
-  (c-name "gda_data_model_hash_clear")
-  (return-type "none")
-)
-
-(define-method set_n_columns
-  (of-object "GdaDataModelHash")
-  (c-name "gda_data_model_hash_set_n_columns")
-  (return-type "none")
-  (parameters
-    '("gint" "cols")
-  )
-)
-
-(define-method insert_row
-  (of-object "GdaDataModelHash")
-  (c-name "gda_data_model_hash_insert_row")
-  (return-type "none")
-  (parameters
-    '("gint" "rownum")
-    '("GdaRow*" "row")
-  )
-)
-
-(define-method hash_get_row
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_hash_get_row")
-  (return-type "const-GdaRow*")
-  (parameters
-    '("gint" "row")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-data-model-list.h
-
-(define-function gda_data_model_list_get_type
-  (c-name "gda_data_model_list_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_data_model_list_new
-  (c-name "gda_data_model_list_new")
-  (is-constructor-of "GdaDataModelList")
-  (return-type "GdaDataModel*")
-)
-
-(define-function gda_data_model_list_new_from_string_list
-  (c-name "gda_data_model_list_new_from_string_list")
-  (return-type "GdaDataModel*")
-  (parameters
-    '("const-GList*" "list")
-  )
-)
-
-(define-method append_value
-  (of-object "GdaDataModelList")
-  (c-name "gda_data_model_list_append_value")
-  (return-type "const-GdaRow*")
-  (parameters
-    '("const-GdaValue*" "value")
-  )
 )
 
 
@@ -1545,7 +1470,7 @@
   (c-name "gda_data_model_append_column")
   (return-type "gboolean")
   (parameters
-    '("GdaFieldAttributes*" "col")
+    '("const-GdaFieldAttributes*" "attrs")
   )
 )
 
@@ -1554,7 +1479,8 @@
   (c-name "gda_data_model_update_column")
   (return-type "gboolean")
   (parameters
-    '("const-GdaFieldAttributes*" "col")
+    '("gint" "col")
+    '("const-GdaFieldAttributes*" "attrs")
   )
 )
 
@@ -1563,7 +1489,7 @@
   (c-name "gda_data_model_remove_column")
   (return-type "gboolean")
   (parameters
-    '("const-GdaFieldAttributes*" "col")
+    '("gint" "col")
   )
 )
 
@@ -1667,6 +1593,100 @@
   (return-type "none")
   (parameters
     '("GdaCommandType" "type")
+  )
+)
+
+
+
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-data-model-hash.h
+
+(define-function gda_data_model_hash_get_type
+  (c-name "gda_data_model_hash_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_model_hash_new
+  (c-name "gda_data_model_hash_new")
+  (is-constructor-of "GdaDataModelHash")
+  (return-type "GdaDataModel*")
+  (parameters
+    '("gint" "cols")
+  )
+)
+
+(define-method hash_get_value_at
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_hash_get_value_at")
+  (return-type "const-GdaValue*")
+  (parameters
+    '("gint" "col")
+    '("gint" "row")
+  )
+)
+
+(define-method clear
+  (of-object "GdaDataModelHash")
+  (c-name "gda_data_model_hash_clear")
+  (return-type "none")
+)
+
+(define-method set_n_columns
+  (of-object "GdaDataModelHash")
+  (c-name "gda_data_model_hash_set_n_columns")
+  (return-type "none")
+  (parameters
+    '("gint" "cols")
+  )
+)
+
+(define-method insert_row
+  (of-object "GdaDataModelHash")
+  (c-name "gda_data_model_hash_insert_row")
+  (return-type "none")
+  (parameters
+    '("gint" "rownum")
+    '("GdaRow*" "row")
+  )
+)
+
+(define-method hash_get_row
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_hash_get_row")
+  (return-type "const-GdaRow*")
+  (parameters
+    '("gint" "row")
+  )
+)
+
+
+
+;; From /home/murrayc/cvs/gnome28/libgda/libgda/gda-data-model-list.h
+
+(define-function gda_data_model_list_get_type
+  (c-name "gda_data_model_list_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_model_list_new
+  (c-name "gda_data_model_list_new")
+  (is-constructor-of "GdaDataModelList")
+  (return-type "GdaDataModel*")
+)
+
+(define-function gda_data_model_list_new_from_string_list
+  (c-name "gda_data_model_list_new_from_string_list")
+  (return-type "GdaDataModel*")
+  (parameters
+    '("const-GList*" "list")
+  )
+)
+
+(define-method append_value
+  (of-object "GdaDataModelList")
+  (c-name "gda_data_model_list_append_value")
+  (return-type "const-GdaRow*")
+  (parameters
+    '("const-GdaValue*" "value")
   )
 )
 

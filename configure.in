@@ -17,7 +17,7 @@ AC_INIT(libgda/libgdammconfig.h.in)
 #########################################################################
 LIBGDAMM_MAJOR_VERSION=1
 LIBGDAMM_MINOR_VERSION=3
-LIBGDAMM_MICRO_VERSION=3
+LIBGDAMM_MICRO_VERSION=4
 
 #
 # +1 : ? : +1  == new interface that does not break old one
@@ -26,7 +26,7 @@ LIBGDAMM_MICRO_VERSION=3
 #  ? :+1 : ?   == just some internal changes, nothing breaks but might work 
 #                 better
 # CURRENT : REVISION : AGE
-LIBGDAMM_SO_VERSION=4:0:0
+LIBGDAMM_SO_VERSION=5:0:0
 
 LIBGDAMM_VERSION=$LIBGDAMM_MAJOR_VERSION.$LIBGDAMM_MINOR_VERSION.$LIBGDAMM_MICRO_VERSION
 LIBGDAMM_RELEASE=$LIBGDAMM_MAJOR_VERSION.$LIBGDAMM_MINOR_VERSION
@@ -82,7 +82,7 @@ AC_CHECK_PROGS(PERL, perl5 perl)
 #########################################################################
 #  Dependancy checks
 #########################################################################
-PKG_CHECK_MODULES(LIBGDAMM, glibmm-2.4 >= 2.4.0 libgda >= 1.0.0)
+PKG_CHECK_MODULES(LIBGDAMM, glibmm-2.4 >= 2.4.0 libgda >= 1.1.3)
 AC_SUBST(LIBGDAMM_CFLAGS)
 AC_SUBST(LIBGDAMM_LIBS)
 

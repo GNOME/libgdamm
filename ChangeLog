@@ -1,3 +1,11 @@
+1.3.4:
+	
+2004-06-06  Murray Cumming  <murrayc@murrayc_debian>
+
+	* libgda/src/libgda_methods.defs: Updated with h2defs.py.
+	* libgda/src/datamodel.hg: Changed the update_column() and 
+	remove_column() arguments to match changes in libgda.
+
 2004-06-06  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/value.[hg|ccg]: Added typedefs for Date, Time, Timestamp,
