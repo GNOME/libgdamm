@@ -1,6 +1,6 @@
 // -*- c++ -*-
-#ifndef _LIBGNOMEMM_INIT_H
-#define _LIBGNOMEMM_INIT_H
+#ifndef _LIBGDAMM_INIT_H
+#define _LIBGDAMM_INIT_H
 /* $Id$ */
 
 /* init.h
@@ -32,5 +32,5 @@ namespace Gda
 } //namespace Gda
 } //namespace Gnome
 
-#endif //_LIBGNOMEMM_INIT_H
+#endif //_LIBGDAMM_INIT_H
 

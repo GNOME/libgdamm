@@ -1,3 +1,8 @@
+2002-11-02  Murray Cumming  <murrayc@usa.net>
+
+	* libgdammconfig.h and init.h: Replaced "libgnomemm" with
+	"libgdamm".
+
 2002-07-20  Murray Cumming  <murrayc@usa.net>
 
 	* Connection, DataModel: wrapped a few more functions.
