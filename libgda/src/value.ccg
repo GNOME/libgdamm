@@ -127,10 +127,12 @@ Value::Value(const Timestamp& val)
   gobject_ = gda_value_new_timestamp(&val);
 }
 
+/*
 Value::Value(time_t val)
 {
   gobject_ = gda_value_new_timestamp_from_timet(val);
 }
+*/
 
 Value::Value(gchar val)
 {
