@@ -86,8 +86,11 @@ public:
  
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd, const ParameterList& params), gda_connection_execute_command)
   Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd);
+  
   _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(const Command& cmd, const ParameterList& params), gda_connection_execute_single_command)
   Glib::RefPtr<DataModel> execute_single_command(const Command& cmd);
+  Glib::RefPtr<DataModel> execute_single_command(const Glib::ustring& cmd);
+    
   _WRAP_METHOD(int execute_non_query(const Command& cmd, const ParameterList& params), gda_connection_execute_non_query)
   int execute_non_query(const Command& cmd);
   

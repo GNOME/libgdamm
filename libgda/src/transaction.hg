@@ -32,6 +32,8 @@ namespace Gnome
 namespace Gda
 {
 
+_WRAP_ENUM(TransactionIsolation, GdaTransactionIsolation)
+
 class Transaction : public Glib::Object
 {
   _CLASS_GOBJECT(Transaction, GdaTransaction, GDA_TRANSACTION, Glib::Object, GObject)
@@ -41,6 +43,9 @@ protected:
 public:
   _WRAP_CREATE(const Glib::ustring& name)
 
+  _WRAP_METHOD(TransactionIsolation get_isolation_level() const, gda_transaction_get_isolation_level)
+  _WRAP_METHOD(void set_isolation_level(GdaTransactionIsolation level), gda_transaction_set_isolation_level)
+                   
   _WRAP_METHOD(Glib::ustring get_name() const, gda_transaction_get_name)
   _WRAP_METHOD(void set_name(const Glib::ustring& name), gda_transaction_set_name)
 };

@@ -1,3 +1,14 @@
+2004-04-20  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in, tools/extra_defs/Makefile.am: Update to use glibmm
+	2.4 gmmproc and extra_defs lib.
+	* libgda/src/connection.hg: Add an execute_single_command() override 
+	that takes a string.
+	* libgda/src/: Added FieldAttribute.
+	* libgda/src/datamodel.hg: Added append_column(), update_column(), 
+	and remove_column().
+	* libgda/src/transaction.hg: Added set/get_isolation_level();
+
 2004-04-08  Murray Cumming  <murrayc@murrayc.com>
 
 	Working bits of a patch from Alberto Paro.

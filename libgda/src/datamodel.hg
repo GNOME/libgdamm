@@ -23,6 +23,7 @@
 #include <glibmm/object.h>
 #include <libgdamm/command.h>
 #include <libgdamm/row.h>
+#include <libgdamm/fieldattributes.h>
 #include <libgda/gda-data-model.h>
 
 _DEFS(libgdamm,libgda)
@@ -56,7 +57,7 @@ public:
   _WRAP_METHOD(int get_n_columns() const, gda_data_model_get_n_columns)
 
   //TODO: Use C++ type:
-  _WRAP_METHOD(GdaFieldAttributes* describe_column(int col), gda_data_model_describe_column)
+  _WRAP_METHOD(FieldAttributes describe_column(int col), gda_data_model_describe_column)
   _WRAP_METHOD(Glib::ustring get_column_title(int col) const, gda_data_model_get_column_title)
   _WRAP_METHOD(void set_column_title(int col, const Glib::ustring& title), gda_data_model_set_column_title)
   _WRAP_METHOD(int get_column_position(const Glib::ustring& title) const, gda_data_model_get_column_position)
@@ -72,6 +73,10 @@ public:
   _WRAP_METHOD(bool remove_row(const Row& row), gda_data_model_remove_row)
   _WRAP_METHOD(bool update_row(const Row& row), gda_data_model_update_row)
 
+  _WRAP_METHOD(bool append_column(const FieldAttributes& col), gda_data_model_append_column)
+  _WRAP_METHOD(bool	update_column(const FieldAttributes& col), gda_data_model_update_column)
+  _WRAP_METHOD(bool remove_column(const FieldAttributes& col), gda_data_model_remove_column)
+              
   /** For example,
    * void on_foreach(const Row& row);
    */

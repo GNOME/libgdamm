@@ -51,6 +51,12 @@ Glib::RefPtr<DataModel> Connection::execute_single_command(const Command& cmd)
   return Glib::wrap(gda_connection_execute_single_command(gobj(), const_cast<GdaCommand*>((cmd).gobj()), 0));
 }
 
+Glib::RefPtr<DataModel> Connection::execute_single_command(const Glib::ustring& cmd)
+{
+  Command command(cmd);
+  return Glib::wrap(gda_connection_execute_single_command(gobj(), const_cast<GdaCommand*>((command).gobj()), 0));
+}
+
 int Connection::execute_non_query(const Command& cmd)
 {
   return gda_connection_execute_non_query(gobj(), const_cast<GdaCommand*>((cmd).gobj()), 0);

@@ -147,7 +147,7 @@ public:
   _WRAP_METHOD(void set(guchar val), gda_value_set_tinyuint)
   _WRAP_METHOD(guint get_uinteger() const, gda_value_get_uinteger)
   _WRAP_METHOD(void set(guint val), gda_value_set_uinteger)
-  _WRAP_METHOD(GdaValueType get_vtype() const, gda_value_get_vtype)
+  _WRAP_METHOD(ValueType get_vtype() const, gda_value_get_vtype)
   _WRAP_METHOD(void set(GdaValueType type), gda_value_set_vtype)
   _WRAP_METHOD(bool set_from_string(const Glib::ustring& as_string, ValueType type), gda_value_set_from_string)
 
