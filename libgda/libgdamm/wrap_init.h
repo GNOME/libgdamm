@@ -1,9 +1,9 @@
-#ifndef _LIBGNOMEMM_WRAP_INIT_H
-#define _LIBGNOMEMM_WRAP_INIT_H
+#ifndef _LIBGDAMM_WRAP_INIT_H
+#define _LIBGDAMM_WRAP_INIT_H
 
 /* wrap_init.h
  *
- * Copyright (C) 1998-2001 The libgnomeuimm Development Team
+ * Copyright (C) 2002-2003 The libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -34,4 +34,4 @@ void wrap_init();
 } //namespace Gda
 } //namespace Gnome
 
-#endif // _LIBGNOMEMM_WRAP_INIT_H
+#endif // _LIBGDAMM_WRAP_INIT_H
