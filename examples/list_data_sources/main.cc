@@ -58,6 +58,7 @@ int main (int argc, char** argv)
 
       std::cout << std::endl << std::endl;
     }
+
     
     //Get the list of data sources:
     typedef std::list<Gnome::Gda::DataSourceInfo> type_list_of_data_sources;
@@ -77,7 +78,9 @@ int main (int argc, char** argv)
                     "  username = " << info.get_username() << std::endl << std::endl;
 
     }
+  
   }
+
   
   return 0;
 }

@@ -30,7 +30,7 @@ namespace Gda
 
 Glib::ListHandle<Glib::ustring> ProviderInfo::get_gda_params() const
 {
-  return Glib::ListHandle<Glib::ustring>(gobj()->gda_params, Glib::OWNERSHIP_SHALLOW);
+  return Glib::ListHandle<Glib::ustring>(gobj()->gda_params, Glib::OWNERSHIP_NONE); //Glib::OWNERSHIP_NONE because we should not delete the list or its elements.
 }
 
 } // namespace Gda

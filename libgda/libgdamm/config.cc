@@ -130,7 +130,7 @@ ProviderInfo get_provider_by_name(const Glib::ustring& name)
 
 ListHandle_DataSourceInfo get_data_sources()
 {
-  return ListHandle_DataSourceInfo( gda_config_get_data_source_list(), Glib::OWNERSHIP_DEEP);
+  return ListHandle_DataSourceInfo( gda_config_get_data_source_list(), Glib::OWNERSHIP_DEEP); //Deep because we must delete both the list and the elements.
 }
 
 DataSourceInfo find_data_source(const Glib::ustring& name)
