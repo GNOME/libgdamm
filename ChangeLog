@@ -1,3 +1,6 @@
+2002-12-10  Bradley Bell  <btb@debian.org>
+	* scripts/Makefile.am: distribute macros.m4
+
 2002-11-02  Murray Cumming  <murrayc@usa.net>
 
 	* libgdammconfig.h and init.h: Replaced "libgnomemm" with
