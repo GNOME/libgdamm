@@ -1,6 +1,7 @@
 include $(top_srcdir)/tools/m4/Makefile_list_of_sources.am_fragment
 
-EXTRA_DIST = $(files_tools_m4)
+EXTRA_DIST = $(files_tools_m4) \
+	     Makefile_list_of_sources.am_fragment
 
 # Install the .m4, files:
 
