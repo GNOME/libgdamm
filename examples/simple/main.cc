@@ -59,7 +59,12 @@ int main (int argc, char** argv)
       //Open database:
       gda_connection->change_database("tblTest1");
 
-      
+      Glib::RefPtr<Gnome::Gda::DataModel> data_model = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_TABLES);
+      if(data_model)
+      {
+        int rows = data_model->get_n_rows();
+        std::cout << "Number of tables: " << rows << std::endl;
+      }
 
       /*
       // show provider features

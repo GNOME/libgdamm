@@ -27,6 +27,22 @@
 namespace Gnome
 {
 
+namespace Gda
+{
 
-} /* namespace Gnome */
+
+Glib::RefPtr<DataModel> Connection::get_schema(ConnectionSchema schema)
+{
+  return Glib::wrap(gda_connection_get_schema(gobj(), ((GdaConnectionSchema)(schema)), 0));
+}
+
+Glib::RefPtr<const DataModel> Connection::get_schema(ConnectionSchema schema) const
+{
+  return Glib::wrap(gda_connection_get_schema(const_cast<GdaConnection*>(gobj()), ((GdaConnectionSchema)(schema)), 0));
+}
+
+} //namespace Gda
+
+} //namespace Gnome
+
 

@@ -51,7 +51,7 @@ class ServerProvider : public Glib::Object
 
   #m4 //Use deep ownership because we own both the list and its elements;
   #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Glib::RefPtr<Connection>& cnc, const Command& cmd, GdaParameterList *params), gda_server_provider_execute_command)
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Glib::RefPtr<Connection>& cnc, const Command& cmd, const ParameterList& params), gda_server_provider_execute_command)
 
   _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_begin_transaction)
   _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_commit_transaction)
@@ -60,8 +60,15 @@ class ServerProvider : public Glib::Object
   _WRAP_METHOD(bool supports(const Glib::RefPtr<Connection>& cnc, ConnectionFeature feature) const, gda_server_provider_supports)
 
   //TODO: Use C++ parameters, and add const version:
-  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, GdaConnectionSchema schema, GdaParameterList *params), gda_server_provider_get_schema)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const ParameterList& params), gda_server_provider_get_schema)
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const ParameterList& params) const, gda_server_provider_get_schema)
 
+  Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema);
+  Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema) const;
+
+
+  
+  
   _WRAP_METHOD(bool create_blob(const Glib::RefPtr<Connection>& cnc, GdaBlob *blob), gda_server_provider_create_blob)
 
             

@@ -1,5 +1,9 @@
 2004-04-04  Murray Cumming  <murrayc@murrayc.com>
 
+	* Use Value and ParameterList in API.
+
+2004-04-04  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/: Added wrappers for Value, Parameter, ParameterList.
 
 1.3.1:

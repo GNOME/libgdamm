@@ -24,6 +24,7 @@
 #include <libgdamm/error.h>
 #include <libgdamm/command.h>
 #include <libgdamm/datamodel.h>
+#include <libgdamm/parameterlist.h>
 #include <libgda/gda-connection.h>
 
 _DEFS(libgdamm,libgda)
@@ -83,10 +84,10 @@ public:
   #m4 //Use deep ownership because we own both the list and its elements;
   #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
  
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd, GdaParameterList *params), gda_connection_execute_command)
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd, const ParameterList& params), gda_connection_execute_command)
 
-  _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(const Command& cmd, GdaParameterList *params), gda_connection_execute_single_command)
-  _WRAP_METHOD(int execute_non_query(const Command& cmd, GdaParameterList *params), gda_connection_execute_non_query)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(const Command& cmd, const ParameterList& params), gda_connection_execute_single_command)
+  _WRAP_METHOD(int execute_non_query(const Command& cmd, const ParameterList& params), gda_connection_execute_non_query)
 
   _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_begin_transaction)
   _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_commit_transaction)
@@ -104,8 +105,11 @@ public:
 
   _WRAP_METHOD(bool supports(ConnectionFeature feature) const, gda_connection_supports)
 
-  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, GdaParameterList *params), gda_connection_get_schema)
-  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema, GdaParameterList *params) const, gda_connection_get_schema)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, const ParameterList& params), gda_connection_get_schema)
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema, const ParameterList& params) const, gda_connection_get_schema)
+
+  Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema);
+  Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema) const;
 
   
   _WRAP_SIGNAL(void error(GList* error_list), "error")
