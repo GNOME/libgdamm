@@ -22,6 +22,7 @@
 
 #include <glibmm/object.h>
 #include <libgdamm/command.h>
+#include <libgdamm/row.h>
 #include <libgda/gda-data-model.h>
 
 _DEFS(libgdamm,libgda)
@@ -32,6 +33,8 @@ namespace Gnome
 
 namespace Gda
 {
+
+class Row;
 
 class DataModel : public Glib::Object
 {
@@ -70,6 +73,13 @@ public:
   _WRAP_METHOD(bool remove_row(const GdaRow *row), gda_data_model_remove_row)
   _WRAP_METHOD(bool update_row(const GdaRow *row), gda_data_model_update_row)
 
+  /** For example,
+   * void on_foreach(const Row& row);
+   */
+  typedef sigc::slot<bool, const Row&> SlotForEach;
+  
+  void foreach(const SlotForEach& slot);
+  
   _WRAP_METHOD(bool has_changed() const, gda_data_model_has_changed)
   _WRAP_METHOD(bool begin_update(), gda_data_model_begin_update)
   _WRAP_METHOD(bool cancel_update(), gda_data_model_cancel_update)

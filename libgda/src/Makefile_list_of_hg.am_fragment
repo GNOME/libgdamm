@@ -3,7 +3,7 @@
 # so it's like copy-and-pasting this into each of those Makefile.am files.
 
 files_hg = client.hg command.hg connection.hg datamodel.hg datasourceinfo.hg error.hg \
-           serverprovider.hg providerinfo.hg transaction.hg
+           serverprovider.hg providerinfo.hg row.hg transaction.hg
 
 
 

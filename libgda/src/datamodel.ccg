@@ -22,9 +22,62 @@
 
 #include <libgda/gda-data-model.h>
 
+namespace //anonymous
+{
+
+// This Signal Proxy allows the C++ coder to specify
+// a sigc::slot instead of a static function.
+class SignalProxy_ForEach
+{
+public:
+  typedef Gnome::Gda::DataModel::SlotForEach SlotType;
+
+  SignalProxy_ForEach(const SlotType& slot)
+  : slot_(slot)
+  {}
+  
+  ~SignalProxy_ForEach();
+
+  static gboolean gtk_callback(GdaDataModel* model, GdaRow* row, gpointer user_data);
+
+private:
+  SlotType slot_;
+};
+
+SignalProxy_ForEach::~SignalProxy_ForEach()
+{}
+
+gboolean SignalProxy_ForEach::gtk_callback(GdaDataModel* model, GdaRow* row, gpointer user_data)
+{
+  SignalProxy_ForEach *const self = static_cast<SignalProxy_ForEach*>(user_data);
+
+  try
+  {
+    return (self->slot_)(Glib::wrap(row));
+  }
+  catch(...)
+  {
+    Glib::exception_handlers_invoke();
+  }
+
+  return 0;
+}
+
+} // anonymous namespace
+
 namespace Gnome
 {
 
+namespace Gda
+{
+  
+void DataModel::foreach(const SlotForEach& slot)
+{
+  SignalProxy_ForEach proxy(slot);
+  gda_data_model_foreach(gobj(), &SignalProxy_ForEach::gtk_callback, &proxy);
+}         
+
+} /* namespace Gda */
 
 } /* namespace Gnome */
 

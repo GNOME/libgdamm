@@ -1,5 +1,10 @@
 2004-03-30  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/row.[hg|ccg]: Added these files, wrapping GdaRow.
+	* libgda/src/datamodel.[hg.ccg]: Added foreach().
+
+2004-03-30  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/serverprovider.hg, datamodel.hg: Wrapped new methods.
 
 2004-03-30  Murray Cumming  <murrayc@murrayc.com>
