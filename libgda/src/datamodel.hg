@@ -54,10 +54,10 @@ public:
 
   _WRAP_SIGNAL(void changed(), "changed")
 
-  _WRAP_VFUNC(int get_n_rows_vfunc(), get_n_rows)
-  _WRAP_VFUNC(int get_n_columns_vfunc(), get_n_columns)
-  _WRAP_VFUNC(GdaFieldAttributes* describe_column_vfunc(int col), describe_column)
-  _WRAP_VFUNC(const GdaValue* get_value_at_vfunc(int col, int row), get_value_at)
+  _WRAP_VFUNC(int get_n_rows(), get_n_rows)
+  _WRAP_VFUNC(int get_n_columns(), get_n_columns)
+  _WRAP_VFUNC(GdaFieldAttributes* describe_column(int col), describe_column)
+  _WRAP_VFUNC(const GdaValue* get_value_at(int col, int row), get_value_at)
 };
 
 } // namespace Gda
