@@ -1,3 +1,8 @@
+2002-04-17  Murray Cumming  <murrayc@usa.net>
+
+	* Build: Make it depend on glibmm rather than gtkmm, although they
+	are both in the same package at the moment.
+
 2002-04-15  Murray Cumming  <murrayc@usa.net>
 
 	* Added basic wrappers for GdaError and GdaDataModel, and used
