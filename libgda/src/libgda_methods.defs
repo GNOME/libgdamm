@@ -1360,7 +1360,7 @@
 
 (define-method is_editable
   (of-object "GdaDataModel")
-  (c-name "gda_data_model_is_editable")
+  (c-name "gda_data_model_is_updatable")
   (return-type "gboolean")
 )
 
@@ -1403,25 +1403,25 @@
 
 (define-method is_editing
   (of-object "GdaDataModel")
-  (c-name "gda_data_model_is_editing")
+  (c-name "gda_data_model_has_changed")
   (return-type "gboolean")
 )
 
 (define-method begin_edit
   (of-object "GdaDataModel")
-  (c-name "gda_data_model_begin_edit")
+  (c-name "gda_data_model_begin_update")
   (return-type "gboolean")
 )
 
 (define-method cancel_edit
   (of-object "GdaDataModel")
-  (c-name "gda_data_model_cancel_edit")
+  (c-name "gda_data_model_cancel_update")
   (return-type "gboolean")
 )
 
 (define-method end_edit
   (of-object "GdaDataModel")
-  (c-name "gda_data_model_end_edit")
+  (c-name "gda_data_model_end_update")
   (return-type "gboolean")
 )
 

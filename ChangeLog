@@ -1,3 +1,9 @@
+2003-12-17  Billy O'Connor <billyoc@gnuyork.org>
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/datamodel.hg: Changes to is_editable(), is_editing(),
+	begin_edit(), cancel_edit() and end_edit() wrappers to reflect 
+	libgda function renames.
+
 2003-11-05  Alexander Nedotsukov <bland@mail.ru>
 
 	* libgda/libgda-2.0.pc.in: Fixed pkgconfig package dependency and
