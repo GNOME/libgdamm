@@ -1,3 +1,8 @@
+2004-04-23  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/datamodel.hg: get_value_at(): Take a copy of the value
+	so it is not freed twice.
+
 2004-04-22  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/value.ccg: Implemented the constructors.

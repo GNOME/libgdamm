@@ -15,12 +15,9 @@ _CONVERSION(`const Glib::RefPtr<Connection>&', `GdaConnection*', `Glib::unwrap($
 # The const_cast here is silly and should not be necessary - we should fix the wrap() methods some time:
 _CONVERSION(`const Command&', `GdaCommand*', `const_cast<GdaCommand*>(($3).gobj())')
 
-_CONVERSION(`const GdaRow*',`Row',`Glib::wrap(const_cast<GdaRow*>($3), true)')
 _CONVERSION(`const Row&', `const GdaRow*', `($3).gobj()')
 
 
-_CONVERSION(`GdaValue*',`Value',`Glib::wrap($3)')
-_CONVERSION(`const GdaValue*',`Value',`Glib::wrap(const_cast<GdaValue*>($3))')
 _CONVERSION(`const Value&', `GdaValue*', `const_cast<GdaValue*>(($3).gobj())')
 _CONVERSION(`const Value&', `const GdaValue*', `($3).gobj()')
 

@@ -52,7 +52,8 @@ protected:
 public:
   _WRAP_CREATE()
 
-  _WRAP_METHOD(bool close(), gda_connection_close)
+  bool close();
+  _IGNORE(gda_connection_close)
   _WRAP_METHOD(bool is_open() const, gda_connection_is_open)
 
   _WRAP_METHOD(Glib::RefPtr<Client> get_client(), gda_connection_get_client, refreturn)

@@ -56,7 +56,34 @@ int main (int argc, char** argv)
       std::cerr << "Error: Could not open connection to " << data_source.get_name();
     else
     {
-      //Open database:
+      //List the databases:
+      Glib::RefPtr<Gnome::Gda::DataModel> data_model_databases = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_DATABASES);
+      if(data_model_databases && (data_model_databases->get_n_columns() == 0))
+      {
+        std::cout << " libgda reported 0 databases for the provider." << std::endl;
+      }
+      else if( data_model_databases)
+      {
+        //List the tables:
+        int rows = data_model_databases->get_n_rows();
+        std::cout << "Number of databases: " << rows << std::endl;
+
+        for(int i = 0; i < rows; ++i)
+        {
+          Gnome::Gda::Value value = data_model_databases->get_value_at(0, i);
+
+          //Get the table name:
+          Glib::ustring database_name;
+          if(value.get_value_type() ==  Gnome::Gda::VALUE_TYPE_STRING)
+            database_name = value.get_string();
+
+          std::cout << "  Database name: " <<  database_name << std::endl;
+        }
+      }
+
+      std::cout << std::endl;
+       
+      //Open one of the databases:
       //gda_connection->change_database("tblTest1");
 
       Glib::RefPtr<Gnome::Gda::DataModel> data_model_tables = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_TABLES);

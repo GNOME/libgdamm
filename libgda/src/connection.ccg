@@ -62,6 +62,13 @@ int Connection::execute_non_query(const Command& cmd)
   return gda_connection_execute_non_query(gobj(), const_cast<GdaCommand*>((cmd).gobj()), 0);
 }
 
+bool Connection::close()
+{
+  //gda_connection_close() does an unref, but we don't want that:
+  reference();
+  return gda_connection_close(gobj());
+}
+
 } //namespace Gda
 
 } //namespace Gnome

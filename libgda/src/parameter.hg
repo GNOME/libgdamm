@@ -53,7 +53,10 @@ public:
 
   _WRAP_METHOD(Glib::ustring get_name() const, gda_parameter_get_name)
   _WRAP_METHOD(void set_name(const Glib::ustring& name), gda_parameter_set_name)
+
+  #m4 _CONVERSION(`const GdaValue*',`Value',`Glib::wrap(const_cast<GdaValue*>($3), true /* take_copy */)')
   _WRAP_METHOD(Value get_value() const, gda_parameter_get_value)
+  
   _WRAP_METHOD(void set_value(const Value& value), gda_parameter_set_value)
 
 };

@@ -3,7 +3,7 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
 
-Name: GTKmm
+Name: libgdamm
 Description: C++ wrapper for libgda
 Requires: glibmm-2.4 libgda
 Version: @VERSION@
