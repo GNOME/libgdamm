@@ -1,4 +1,13 @@
+1.3.0:
+	
+2003-10-01  Murray Cumming  <murrayc@usa.net>
+
+	* libgda/libgdamm/private/Makefile.am: Use _HEADERS instead of
+	_DATA (I looked at gnome-vfsmm) to fix the dist. distcheck now
+	works.
+
 2002-12-10  Bradley Bell  <btb@debian.org>
+	
 	* scripts/Makefile.am: distribute macros.m4
 
 2002-11-02  Murray Cumming  <murrayc@usa.net>
