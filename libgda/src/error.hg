@@ -39,7 +39,7 @@ protected:
 
  _CTOR_DEFAULT
 
-public
+public:
   _WRAP_CREATE()
 
   //_WRAP_METHOD(GList* gda_error_list_from_exception (CORBA_Environment * ev);
