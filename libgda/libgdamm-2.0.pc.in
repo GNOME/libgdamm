@@ -4,8 +4,8 @@ libdir=@libdir@
 includedir=@includedir@
 
 Name: GTKmm
-Description: C++ wrapper for libgnome
-Requires: gtkmm-2.0 >= 1.3.1 libgnome-2.0 >= 1.105.0
+Description: C++ wrapper for libgda
+Requires: gtkmm-2.0 >= 1.3.1 libgda-2.0 >= 0.8.106
 Version: @VERSION@
-Libs: -L${libdir} -lgnomemm-1.3
-Cflags: -I${includedir}/libgnomemm-2.0 -I${libdir}/libgnomemm-2.0/include
+Libs: -L${libdir} -ldamm-1.3
+Cflags: -I${includedir}/libgdamm-2.0 -I${libdir}/libgdamm-2.0/include

@@ -1,3 +1,8 @@
+2002-04-19  Muray Cumming  <murrayc@usa.net>
+
+	* Removed traces of libgnomemm, from which this project was copied
+	when it was first created.
+
 2002-04-17  Murray Cumming  <murrayc@usa.net>
 
 	* Build: Make it depend on glibmm rather than gtkmm, although they

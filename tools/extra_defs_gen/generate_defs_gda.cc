@@ -1,6 +1,6 @@
 /* $Id$ */
 
-/* generate_defs_libgnomecanvas.h
+/* generate_defs_gda.h
  *
  * Copyright (C) 2001 The Free Software Foundation
  *

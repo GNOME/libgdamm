@@ -1,5 +1,5 @@
 /* $Id$ */
-/* libgnomemm - a C++ wrapper for libgnome
+/* libgdamm - a C++ wrapper for libgda
  *
  * Copyright 1999-2001 Free Software Foundation
  *
@@ -18,22 +18,23 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef LIBGNOMEMM_H
-#define LIBGNOMEMM_H
+#ifndef LIBGDAMM_H
+#define LIBGDAMM_H
 
 //extern "C" {
 //#include <gtk/gtk.h>
 //}
 
-/* libgnomemm version.  */
-extern const int libgnomemm_major_version;
-extern const int libgnomemm_minor_version;
-extern const int libgnomemm_micro_version;
+/* libgdamm version.  */
+extern const int libgdamm_major_version;
+extern const int libgdamm_minor_version;
+extern const int libgdamm_micro_version;
 
 #include <gtkmm.h>
 
-#include <libgnomemm/init.h>
-#include <libgnomemm/main.h>
+#include <libgdamm/init.h>
+#include <libgdamm/connection.h>
+#include <libgdamm/datamodel.h>
+#include <libgdamm/error.h>
 
-
-#endif /* #ifndef LIBGNOMEMM_H */
+#endif /* #ifndef LIBGDAMM_H */
