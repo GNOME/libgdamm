@@ -36,9 +36,12 @@ namespace Gda
 class Connection : public Glib::Object
 {
   _CLASS_GOBJECT(Connection, GdaConnection, GDA_CONNECTION, Glib::Object, GObject)
-public:
-
+protected:
   _WRAP_CTOR(Connection(GdaClient* client, GNOME_Database_Connection corba_cnc, const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password), gda_connection_new)
+
+public:
+  _WRAP_CREATE(GdaClient* client, GNOME_Database_Connection corba_cnc, const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password)
+
   _WRAP_METHOD(bool close(), gda_connection_close)
   _WRAP_METHOD(bool is_open(), gda_connection_is_open)
 
