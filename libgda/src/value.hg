@@ -97,8 +97,11 @@ public:
   _IGNORE(gda_value_new_time)
   explicit Value(const Timestamp& val);
   _IGNORE(gda_value_new_timestamp)
-  explicit Value(time_t val);
+  
+  //This causes ambiguity with another constructor on 64-bit systems:
+  //explicit Value(time_t val);
   _IGNORE(gda_value_new_timestamp_from_timet)
+  
   explicit Value(gchar val);
   _IGNORE(gda_value_new_tinyint)
   explicit Value(guchar val);
