@@ -20,7 +20,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <glibmm/object.h>
+#include <libgdamm/error.h>
+#include <libgdamm/datamodel.h>
 #include <libgda/gda-connection.h>
 
 _DEFS(libgdamm,libgda)
@@ -50,11 +51,11 @@ public:
   _WRAP_METHOD(Glib::ustring get_username(), gda_connection_get_username)
   _WRAP_METHOD(Glib::ustring get_password(), gda_connection_get_password)
 
-  _WRAP_METHOD(void add_error(GdaError *error), gda_connection_add_error)
+  _WRAP_METHOD(void add_error(const Glib::RefPtr<Error>& error), gda_connection_add_error)
   _WRAP_METHOD(void add_error_list(GList *error_list), gda_connection_add_error_list)
 
   _WRAP_METHOD(GList* execute_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_command)
-  _WRAP_METHOD(GdaDataModel* execute_single_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_single_command)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(GdaCommand *cmd, GdaParameterList *params), gda_connection_execute_single_command)
 
   _WRAP_METHOD(bool begin_transaction(const Glib::ustring& id), gda_connection_begin_transaction)
   _WRAP_METHOD(bool commit_transaction(const Glib::ustring& id), gda_connection_commit_transaction)
@@ -63,8 +64,9 @@ public:
   _WRAP_METHOD(bool supports(GdaConnectionFeature feature), gda_connection_supports)
 
 
-  _WRAP_METHOD(GdaDataModel* get_schema(GdaConnectionSchema schema, GdaParameterList *params), gda_connection_get_schema)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(GdaConnectionSchema schema, GdaParameterList *params), gda_connection_get_schema)
 
+  _WRAP_SIGNAL(void error(GList* error_list), "error")
 };
 
 } // namespace Gda

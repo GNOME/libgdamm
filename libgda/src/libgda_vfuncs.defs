@@ -1,0 +1,32 @@
+;; -*- scheme -*-
+; virtual function definitions
+; define-vfunc is gtkmm-specific
+
+; GdaDataModel
+
+(define-vfunc get_n_columns
+  (of-object "GdaDataModel")
+  (return-type "int")
+)
+
+(define-vfunc get_n_rows
+  (of-object "GdaDataModel")
+  (return-type "int")
+)
+
+(define-vfunc describe_column
+  (of-object "GdaDataModel")
+  (return-type "GdaFieldAttributes*")
+  (parameters
+    '("int" "col")
+  )
+)
+
+(define-vfunc get_value_at
+  (of-object "GdaDataModel")
+  (return-type "const-GdaValue*")
+  (parameters
+    '("int" "col")
+    '("int" "row")
+  )
+)

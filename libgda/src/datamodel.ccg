@@ -1,7 +1,7 @@
 /* $Id$ */
 // -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* connection.cc
+/* datamodel.cc
  * 
  * Copyright 2001      Free Software Foundation
  *

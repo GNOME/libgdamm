@@ -1,0 +1,57 @@
+;; From /gnome/head/cvs/libgda/libgda/gda-command.h
+
+(define-enum-extended CommandType
+  (in-module "Gda")
+  (c-name "GdaCommandType")
+  (values
+  )
+)
+
+;; From /gnome/head/cvs/libgda/libgda/gda-config.h
+
+(define-enum-extended ComponentType
+  (in-module "Gda")
+  (c-name "GdaComponentType")
+  (values
+    '("invalid" "GDA_COMPONENT_TYPE_INVALID" "-1")
+    '("exe" "GDA_COMPONENT_TYPE_EXE" "0")
+    '("shlib" "GDA_COMPONENT_TYPE_SHLIB" "1")
+    '("factory" "GDA_COMPONENT_TYPE_FACTORY" "2")
+  )
+)
+
+;; From /gnome/head/cvs/libgda/libgda/gda-connection.h
+
+(define-enum-extended ConnectionFeature
+  (in-module "Gda")
+  (c-name "GdaConnectionFeature")
+  (values
+  )
+)
+
+(define-enum-extended ConnectionSchema
+  (in-module "Gda")
+  (c-name "GdaConnectionSchema")
+  (values
+  )
+)
+
+;; From /gnome/head/cvs/libgda/libgda/gda-export.h
+
+(define-enum-extended ExportFlags
+  (in-module "Gda")
+  (c-name "GdaExportFlags")
+  (values
+    '("a" "GDA_EXPORT_FLAGS_TABLE_DATA" "1")
+  )
+)
+
+;; From /gnome/head/cvs/libgda/libgda/gda-row.h
+
+(define-enum-extended
+  (in-module "")
+  (c-name "")
+  (values
+  )
+)
+
