@@ -72,7 +72,7 @@ public:
   _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_rollback_transaction)
 
   //TODO: Use C++ types:
-  _WRAP_SIGNAL(void event_notification(const Glib::RefPtr<Connection> cnc, GdaClientEvent event, const ParameterList& params), "event_notification")
+  //_WRAP_SIGNAL(void event_notification(const Glib::RefPtr<Connection>& cnc, GdaClientEvent event, const ParameterList& params), "event_notification")
 
 };
 

@@ -23,7 +23,7 @@
 #include <glibmm/object.h>
 #include <libgdamm/command.h>
 #include <libgdamm/row.h>
-#include <libgdamm/fieldattributes.h>
+#include <libgdamm/datamodelcolumnattributes.h>
 #include <libgda/gda-data-model.h>
 
 _DEFS(libgdamm,libgda)
@@ -37,9 +37,9 @@ namespace Gda
 
 class Row;
 
-class DataModel : public Glib::Object
+class DataModel : public Glib::Interface
 {
-  _CLASS_GOBJECT(DataModel, GdaDataModel, GDA_DATA_MODEL, Glib::Object, GObject)
+  _CLASS_INTERFACE(DataModel, GdaDataModel, GDA_DATA_MODEL, GdaDataModelIface)
 public:
 
   _WRAP_METHOD(void changed(), gda_data_model_changed)
@@ -57,7 +57,7 @@ public:
   _WRAP_METHOD(int get_n_columns() const, gda_data_model_get_n_columns)
 
   //TODO: Use C++ type:
-  _WRAP_METHOD(FieldAttributes describe_column(int col), gda_data_model_describe_column)
+  _WRAP_METHOD(DataModelColumnAttributes describe_column(int col), gda_data_model_describe_column)
   _WRAP_METHOD(Glib::ustring get_column_title(int col) const, gda_data_model_get_column_title)
   _WRAP_METHOD(void set_column_title(int col, const Glib::ustring& title), gda_data_model_set_column_title)
   _WRAP_METHOD(int get_column_position(const Glib::ustring& title) const, gda_data_model_get_column_position)
@@ -79,8 +79,8 @@ public:
   _WRAP_METHOD(bool remove_row(const Row& row), gda_data_model_remove_row)
   _WRAP_METHOD(bool update_row(const Row& row), gda_data_model_update_row)
 
-  _WRAP_METHOD(bool append_column(const FieldAttributes& col), gda_data_model_append_column)
-  _WRAP_METHOD(bool update_column(int col, const FieldAttributes& attrs), gda_data_model_update_column)
+  _WRAP_METHOD(bool append_column(const DataModelColumnAttributes& col), gda_data_model_append_column)
+  _WRAP_METHOD(bool update_column(int col, const DataModelColumnAttributes& attrs), gda_data_model_update_column)
   _WRAP_METHOD(bool remove_column(int col), gda_data_model_remove_column)
               
   /** For example,
@@ -108,16 +108,16 @@ public:
 
 
   _WRAP_METHOD(Glib::ustring get_command_text() const, gda_data_model_get_command_text)
-  _WRAP_METHOD(void set_command_text(const Glib::ustring& txt), gda_data_model_set_command_text)
+  _WRAP_METHOD(bool set_command_text(const Glib::ustring& txt), gda_data_model_set_command_text)
   _WRAP_METHOD(CommandType get_command_type() const, gda_data_model_get_command_type)
-  _WRAP_METHOD(void set_command_type(CommandType type), gda_data_model_set_command_type)
+  _WRAP_METHOD(bool set_command_type(CommandType type), gda_data_model_set_command_type)
 
   _WRAP_SIGNAL(void changed(), "changed")
 
-  _WRAP_VFUNC(int get_n_rows(), get_n_rows)
-  _WRAP_VFUNC(int get_n_columns(), get_n_columns)
-  _WRAP_VFUNC(GdaFieldAttributes* describe_column(int col), describe_column)
-  _WRAP_VFUNC(const GdaValue* get_value_at(int col, int row), get_value_at)
+  _WRAP_VFUNC(int get_n_rows(), i_get_n_rows)
+  _WRAP_VFUNC(int get_n_columns(), i_get_n_columns)
+  _WRAP_VFUNC(GdaDataModelColumnAttributes* describe_column(int col), i_describe_column)
+  _WRAP_VFUNC(const GdaValue* get_value_at(int col, int row), i_get_value_at)
 };
 
 } // namespace Gda

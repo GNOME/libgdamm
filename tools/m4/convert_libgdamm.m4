@@ -26,10 +26,10 @@ _CONVERSION(`const Parameter&', `GdaParameter*', `const_cast<GdaParameter*>(($3)
 
 _CONVERSION(`const ParameterList&', `GdaParameterList*', `const_cast<GdaParameterList*>(($3).gobj())')
 
-_CONVERSION(`GdaFieldAttributes*',`FieldAttributes',`Glib::wrap($3)')
-_CONVERSION(`const FieldAttributes&', `GdaFieldAttributes*', `const_cast<GdaFieldAttributes*>(($3).gobj())')
-_CONVERSION(`const FieldAttributes&', `const GdaFieldAttributes*', `($3).gobj()')
-_CONVERSION(`FieldAttributes&', `GdaFieldAttributes*', `($3).gobj()')
+_CONVERSION(`GdaDataModelColumnAttributes*',`DataModelColumnAttributes',`Glib::wrap($3)')
+_CONVERSION(`const DataModelColumnAttributes&', `GdaDataModelColumnAttributes*', `const_cast<GdaDataModelColumnAttributes*>(($3).gobj())')
+_CONVERSION(`const DataModelColumnAttributes&', `const GdaDataModelColumnAttributes*', `($3).gobj()')
+_CONVERSION(`DataModelColumnAttributes&', `GdaDataModelColumnAttributes*', `($3).gobj()')
 
 _CONVERSION(`const GObject*',`Glib::RefPtr<const Glib::Object>',`Glib::wrap(const_cast<GObject*>($3))')
 _CONVERSION(`const Glib::RefPtr<Glib::Object>&', `const GObject*', `($3)->gobj()')
@@ -50,6 +50,7 @@ _CONVERSION(`const GdaTimestamp*', `Timestamp', `*($3)')
 _CONVERSION(`const GeometricPoint&', `const GdaGeometricPoint*', `&($3)')
 _CONVERSION(`const GdaGeometricPoint*', `GeometricPoint', `*($3)')
 
+
 _CONV_ENUM(Gda,CommandType)
 _CONV_ENUM(Gda,CommandOptions)
 _CONV_ENUM(Gda,ConnectionFeature)
@@ -58,3 +59,7 @@ _CONV_ENUM(Gda,ClientEvent)
 _CONV_ENUM(Gda,ConnectionOptions)
 _CONV_ENUM(Gda,ValueType)
 _CONV_ENUM(Gda,TransactionIsolation)
+
+# For signals:
+_CONVERSION(`GdaConnection*',`const Glib::RefPtr<Connection>&',`Glib::wrap($3)')
+_CONVERSION(`GdaParameterList*',`const ParameterList&',`Glib::wrap($3)')

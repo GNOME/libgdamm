@@ -1,3 +1,17 @@
+2005-01-11  Murray Cumming  <murrayc@murrayc.com>
+
+	* Changes to fix the build against the new libgda API.
+	* libgda/src/libgda_methods.defs: Rebuilt with h2defs.py
+	* libgda/src/libgda_signals.defs: Rebuilt with extra_defs.
+	* tools/m4/convert_libgda.m4: Renamed types.
+	* libgda/src/: Renamed fieldattributes.[hg|ccg] to 
+	datamodelcolumnattributes.[hg|ccg]
+	* libgda/src/datamodel.hg: This is now an interface.
+	* libgda/src/: Aded datamodelbase.[hg|ccg].
+	* libgda/src/client.[hg|ccg], datamodel.[hg|ccg]: Renamed types.
+        * examples/list_data_sources/main.cc: Added try/catch block around 
+        the example.
+
 This is the HEAD branch. The libgda-1-2 branch builds against libgda 1.2.
 
 2005-01-06  Murray Cumming  <murrayc@murrayc.com>

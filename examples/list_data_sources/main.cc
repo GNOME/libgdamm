@@ -25,63 +25,72 @@
 
 int main (int argc, char** argv)
 {
-  //Initialize libgdamm:
-  Gnome::Gda::init("libgdamm example", "0.1", argc, argv);
-
-  Glib::RefPtr<Gnome::Gda::Client> gda_client = Gnome::Gda::Client::create();
-  if(gda_client)
+  try
   {
-    //Get the list of providers:
-    typedef std::list<Gnome::Gda::ProviderInfo> type_list_of_provider_info;
-    type_list_of_provider_info providers = Gnome::Gda::Config::get_providers();
+    //Initialize libgdamm:
+    Gnome::Gda::init("libgdamm example", "0.1", argc, argv);
 
-    std::cout << "Number of providers = " << providers.size() << std::endl << std::endl;
+    Glib::RefPtr<Gnome::Gda::Client> gda_client = Gnome::Gda::Client::create();
+    if(gda_client)
+    {
+      //Get the list of providers:
+      typedef std::list<Gnome::Gda::ProviderInfo> type_list_of_provider_info;
+      type_list_of_provider_info providers = Gnome::Gda::Config::get_providers();
 
-    //Print the information about each Provider:
-    for(type_list_of_provider_info::const_iterator iter = providers.begin(); iter != providers.end(); ++iter)
-    { 
-      const Gnome::Gda::ProviderInfo& info = *iter; //TODO: If we get a copy instead of a const& then it segfaults on the 2nd one.
+      std::cout << "Number of providers = " << providers.size() << std::endl << std::endl;
 
-      std::cout << "Provider: ID = " << info.get_id() << std::endl <<
+      //Print the information about each Provider:
+      for(type_list_of_provider_info::const_iterator iter = providers.begin(); iter != providers.end(); ++iter)
+      { 
+        const Gnome::Gda::ProviderInfo& info = *iter; //TODO: If we get a copy instead of a const& then it segfaults on the 2nd one.
+
+        std::cout << "Provider: ID = " << info.get_id() << std::endl <<
                    "  location = " << info.get_location() << std::endl <<
                    "  description = " << info.get_description() << std::endl;
 
-      //The params:
-      std::cout << "  GDA Params: ";
+        //The params:
+        std::cout << "  GDA Params: ";
 
-      typedef std::list<Glib::ustring> type_list_of_strings;
-      type_list_of_strings params = info.get_gda_params();
-      for(type_list_of_strings::iterator iter = params.begin(); iter != params.end(); ++iter)
-      {
-        std::cout << *iter << ", ";
+        typedef std::list<Glib::ustring> type_list_of_strings;
+        type_list_of_strings params = info.get_gda_params();
+        for(type_list_of_strings::iterator iter = params.begin(); iter != params.end(); ++iter)
+        {
+          std::cout << *iter << ", ";
+        }
+
+        std::cout << std::endl << std::endl;
       }
 
-      std::cout << std::endl << std::endl;
-    }
-
     
-    //Get the list of data sources:
-    typedef std::list<Gnome::Gda::DataSourceInfo> type_list_of_data_sources;
-    type_list_of_data_sources data_sources = Gnome::Gda::Config::get_data_sources();
+      //Get the list of data sources:
+      typedef std::list<Gnome::Gda::DataSourceInfo> type_list_of_data_sources;
+      type_list_of_data_sources data_sources = Gnome::Gda::Config::get_data_sources();
 
-    std::cout << "Number of data sources = " << data_sources.size() << std::endl << std::endl;
+      std::cout << "Number of data sources = " << data_sources.size() << std::endl << std::endl;
 
-    //Print the information about each data source:
-    for(type_list_of_data_sources::const_iterator iter = data_sources.begin(); iter != data_sources.end(); ++iter)
-    {
-      const Gnome::Gda::DataSourceInfo& info = *iter;
+      //Print the information about each data source:
+      for(type_list_of_data_sources::const_iterator iter = data_sources.begin(); iter != data_sources.end(); ++iter)
+      {
+        const Gnome::Gda::DataSourceInfo& info = *iter;
 
-      std::cout << "Data source: name = " << info.get_name() << std::endl <<
+        std::cout << "Data source: name = " << info.get_name() << std::endl <<
                     "  provider = " << info.get_provider() << std::endl <<
                     "  connection string = " << info.get_cnc_string() << std::endl <<
                     "  description = " << info.get_description() << std::endl <<
                     "  username = " << info.get_username() << std::endl << std::endl;
 
+      }
     }
-  
+  }
+  catch(const Glib::Error& ex)
+  {
+    std::cerr << "Glib::Error exception caught: " << ex.what() << std::endl;
+  }
+  catch(const std::exception& ex)
+  {
+    std::cerr << "Exception caught: " << ex.what() << std::endl;
   }
 
-  
   return 0;
 }
 
