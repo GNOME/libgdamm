@@ -1,3 +1,13 @@
+2004-04-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/connection.[hg|ccg]: Override the destructor so that it
+	closes the connection.
+
+2004-04-23  Murray Cumming  <murrayc@murayc.com>
+
+	* libgda/src/fieldattributes.hg: Tell it to use the _new() function in
+	the default constructor so that we don't get invalid null instances.
+
 2004-04-23  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/datamodel.hg: get_value_at(): Take a copy of the value

@@ -71,9 +71,18 @@ int main (int argc, char** argv)
       {
         int columns =  data_model->get_n_columns();
         std::cout << "    Number of columns: " << columns << std::endl;
+        
         for(int i = 0; i < columns; ++i)
         {
-          std::cout << "      column " << i << ": " <<  data_model->get_column_title(i) << std::endl;;
+          std::cout << "      column " << i << ": " <<  data_model->get_column_title(i);
+
+          //Find out whether it's the primary key:
+          Gnome::Gda::FieldAttributes field = data_model->describe_column(i);
+          bool is_primary_key = field.get_primary_key();
+          if(is_primary_key)
+            std:: cout << "  (primary key)";
+
+          std::cout << std::endl;
         }
 
         int rows = data_model->get_n_rows();

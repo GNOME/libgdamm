@@ -29,6 +29,7 @@ _CONVERSION(`const ParameterList&', `GdaParameterList*', `const_cast<GdaParamete
 _CONVERSION(`GdaFieldAttributes*',`FieldAttributes',`Glib::wrap($3)')
 _CONVERSION(`const FieldAttributes&', `GdaFieldAttributes*', `const_cast<GdaFieldAttributes*>(($3).gobj())')
 _CONVERSION(`const FieldAttributes&', `const GdaFieldAttributes*', `($3).gobj()')
+_CONVERSION(`FieldAttributes&', `GdaFieldAttributes*', `($3).gobj()')
 
 _CONVERSION(`const GObject*',`Glib::RefPtr<const Glib::Object>',`Glib::wrap(const_cast<GObject*>($3))')
 _CONVERSION(`const Glib::RefPtr<Glib::Object>&', `const GObject*', `($3)->gobj()')

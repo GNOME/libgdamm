@@ -79,8 +79,8 @@ public:
   _WRAP_METHOD(bool remove_row(const Row& row), gda_data_model_remove_row)
   _WRAP_METHOD(bool update_row(const Row& row), gda_data_model_update_row)
 
-  _WRAP_METHOD(bool append_column(const FieldAttributes& col), gda_data_model_append_column)
-  _WRAP_METHOD(bool	update_column(const FieldAttributes& col), gda_data_model_update_column)
+  _WRAP_METHOD(bool append_column(FieldAttributes& col), gda_data_model_append_column)
+  _WRAP_METHOD(bool update_column(const FieldAttributes& col), gda_data_model_update_column)
   _WRAP_METHOD(bool remove_column(const FieldAttributes& col), gda_data_model_remove_column)
               
   /** For example,

@@ -30,7 +30,17 @@ namespace Gnome
 namespace Gda
 {
 
-
+Connection::~Connection()
+{
+  //Make sure the connection is closed.
+  //An open connection with no associated connection object could never be closed.
+  if(gobj())
+  {
+    if(is_open())
+      close();
+  }
+}
+ 
 Glib::RefPtr<DataModel> Connection::get_schema(ConnectionSchema schema)
 {
   return Glib::wrap(gda_connection_get_schema(gobj(), ((GdaConnectionSchema)(schema)), 0));

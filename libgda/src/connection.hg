@@ -48,7 +48,8 @@ class Connection : public Glib::Object
 protected:
 
   _CTOR_DEFAULT
-  
+  _CUSTOM_DTOR()
+
 public:
   _WRAP_CREATE()
 

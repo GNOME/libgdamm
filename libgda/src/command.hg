@@ -26,10 +26,9 @@
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
 
-#include <libgda/gda-data-model.h>
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
-//TODO: extern "C" { typedef struct _GdaCommand GdaCommand; }  //TODO: Patch libgdamm to use the _ technique.
+extern "C" { typedef struct _GdaCommand GdaCommand; } 
 #endif
 
 namespace Gnome
