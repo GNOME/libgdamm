@@ -1,3 +1,17 @@
+1.3.3:
+
+* Now depends on glibmm 2.4.
+* Addef and used FieldAttributes.
+* Connection:
+  - The destructor closes the connection.
+  - Added get_last_insert_id().
+* DataModel: get_value_at() memory management fixed.
+* Transaction: constructor fixed.
+* Value:
+  - Implemented the constuctors. 
+  - Added type_to_string() and type_from_string().
+(Murray Cumming)
+
 1.3.2:
 
 * Command, Connection: Added default parameter values, so you don't have to specify so much.
