@@ -57,9 +57,9 @@ Value::Value(bool val)
   gobject_ = gda_value_new_boolean(val);
 }
 
-Value::Value(const GdaDate *val)
+Value::Value(const Date& val)
 {
-  gobject_ = gda_value_new_date(val);
+  gobject_ = gda_value_new_date(&val);
 }
 
 Value::Value(double val)
@@ -67,9 +67,9 @@ Value::Value(double val)
   gobject_ = gda_value_new_double(val);
 }
 
-Value::Value(const GdaGeometricPoint *val)
+Value::Value(const GeometricPoint& val)
 {
-  gobject_ = gda_value_new_geometric_point(val);
+  gobject_ = gda_value_new_geometric_point(&val);
 }
 
 Value::Value(const GObject *val)
@@ -117,14 +117,14 @@ Value::Value(const Glib::ustring& val)
   gobject_ = gda_value_new_string(val.c_str());
 }
 
-Value::Value(const GdaTime *val)
+Value::Value(const Time& val)
 {
-  gobject_ = gda_value_new_time(val);
+  gobject_ = gda_value_new_time(&val);
 }
 
-Value::Value(const GdaTimestamp *val)
+Value::Value(const Timestamp& val)
 {
-  gobject_ = gda_value_new_timestamp(val);
+  gobject_ = gda_value_new_timestamp(&val);
 }
 
 Value::Value(time_t val)

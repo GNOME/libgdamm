@@ -34,6 +34,25 @@ namespace Gda
 
 _WRAP_ENUM(ValueType, GdaValueType)
 
+typedef GdaDate Date;
+typedef GdaGeometricPoint GeometricPoint;
+
+/*  TODO:
+typedef struct {
+	gchar *currency;
+	gdouble amount;
+} GdaMoney;
+
+typedef struct {
+	gchar *number;
+	glong precision;
+	glong width;
+} GdaNumeric;
+*/
+
+typedef GdaTime Time;
+typedef GdaTimestamp Timestamp;
+
 class Value
 {
   _CLASS_OPAQUE_COPYABLE(Value, GdaValue, gda_value_new_null, gda_value_copy, gda_value_free)
@@ -50,11 +69,11 @@ public:
   //_IGNORE(gda_value_new_blob)
   explicit Value(bool val);
   _IGNORE(gda_value_new_boolean)
-  explicit Value(const GdaDate *val);
+  explicit Value(const Date& val);
   _IGNORE(gda_value_new_date)
   explicit Value(double val);
   _IGNORE(gda_value_new_double)
-  explicit Value(const GdaGeometricPoint *val);
+  explicit Value(const GeometricPoint& val);
   _IGNORE(gda_value_new_geometric_point)
   explicit Value(const GObject *val);
   _IGNORE(gda_value_new_gobject)
@@ -74,9 +93,9 @@ public:
   _IGNORE(gda_value_new_smalluint)
   explicit Value(const Glib::ustring& val);
   _IGNORE(gda_value_new_string)
-  explicit Value(const GdaTime *val);
+  explicit Value(const Time& val);
   _IGNORE(gda_value_new_time)
-  explicit Value(const GdaTimestamp *val);
+  explicit Value(const Timestamp& val);
   _IGNORE(gda_value_new_timestamp)
   explicit Value(time_t val);
   _IGNORE(gda_value_new_timestamp_from_timet)
@@ -114,12 +133,12 @@ public:
   _WRAP_METHOD(void set(const GdaBlob* val), gda_value_set_blob)
   _WRAP_METHOD(bool get_bool() const, gda_value_get_boolean)
   _WRAP_METHOD(void set(bool val), gda_value_set_boolean)
-  _WRAP_METHOD(const GdaDate* get_date() const, gda_value_get_date)
-  _WRAP_METHOD(void set(const GdaDate* val), gda_value_set_date)
+  _WRAP_METHOD(Date get_date() const, gda_value_get_date)
+  _WRAP_METHOD(void set(const Date& val), gda_value_set_date)
   _WRAP_METHOD(double get_double() const, gda_value_get_double)
   _WRAP_METHOD(void set(double val), gda_value_set_double)
-  _WRAP_METHOD(const GdaGeometricPoint* get_geometric_point() const, gda_value_get_geometric_point)
-  _WRAP_METHOD(void set(const GdaGeometricPoint* val), gda_value_set_geometric_point)
+  _WRAP_METHOD(GeometricPoint get_geometric_point() const, gda_value_get_geometric_point)
+  _WRAP_METHOD(void set(const GeometricPoint& val), gda_value_set_geometric_point)
   _WRAP_METHOD(Glib::RefPtr<const Glib::Object> get_gobject(), gda_value_get_gobject, refreturn)
   _WRAP_METHOD(void set(const Glib::RefPtr<Glib::Object>& val), gda_value_set_gobject)
   _WRAP_METHOD(int get_integer() const, gda_value_get_integer)
@@ -139,10 +158,10 @@ public:
   _WRAP_METHOD(void set(gushort val), gda_value_set_smalluint)
   _WRAP_METHOD(Glib::ustring get_string() const, gda_value_get_string)
   _WRAP_METHOD(void set(const Glib::ustring& val), gda_value_set_string)
-  _WRAP_METHOD(const GdaTime* get_time() const, gda_value_get_time)
-  _WRAP_METHOD(void set(const GdaTime* val), gda_value_set_time)
-  _WRAP_METHOD(const GdaTimestamp* get_timestamp() const, gda_value_get_timestamp)
-  _WRAP_METHOD(void set(const GdaTimestamp *val), gda_value_set_timestamp)
+  _WRAP_METHOD(Time get_time() const, gda_value_get_time)
+  _WRAP_METHOD(void set(const Time& val), gda_value_set_time)
+  _WRAP_METHOD(Timestamp get_timestamp() const, gda_value_get_timestamp)
+  _WRAP_METHOD(void set(const Timestamp& val), gda_value_set_timestamp)
   _WRAP_METHOD(gchar get_tinyint() const, gda_value_get_tinyint)
   _WRAP_METHOD(void set(gchar val), gda_value_set_tinyint)
   _WRAP_METHOD(guchar get_tinyuint(), gda_value_get_tinyuint)

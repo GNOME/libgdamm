@@ -38,6 +38,18 @@ _CONVERSION(`const Glib::RefPtr<Glib::Object>&', `const GObject*', `($3)->gobj()
 _CONVERSION(`const Glib::RefPtr<Client>&', `GdaClient*', `Glib::unwrap($3)')
 
 
+_CONVERSION(`const Date&', `const GdaDate*', `&($3)')
+_CONVERSION(`const GdaDate*', `Date', `*($3)')
+
+_CONVERSION(`const Time&', `const GdaTime*', `&($3)')
+_CONVERSION(`const GdaTime*', `Time', `*($3)')
+
+_CONVERSION(`const Timestamp&', `const GdaTimestamp*', `&($3)')
+_CONVERSION(`const GdaTimestamp*', `Timestamp', `*($3)')
+
+_CONVERSION(`const GeometricPoint&', `const GdaGeometricPoint*', `&($3)')
+_CONVERSION(`const GdaGeometricPoint*', `GeometricPoint', `*($3)')
+
 _CONV_ENUM(Gda,CommandType)
 _CONV_ENUM(Gda,CommandOptions)
 _CONV_ENUM(Gda,ConnectionFeature)

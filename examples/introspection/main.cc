@@ -154,6 +154,14 @@ int main (int argc, char** argv)
 
                  std::cout << "      Data Type: " << field_type << std::endl;
 
+                 //Get the default value (though this can have strange values):
+                 Gnome::Gda::Value value_default = data_model_fields->get_value_at(8, i);
+                 Glib::ustring value_default_string;
+                 //if(value_fieldtype.get_value_type() ==  Gnome::Gda::VALUE_TYPE_STRING)
+                   value_default_string = value_default.to_string();
+
+                 std::cout << "      Default Value: " << value_default_string << std::endl;
+
                }
              }   
           }    
