@@ -1,0 +1,101 @@
+/* $Id$ */
+// -*- C++ -*- //
+
+/* value.h
+ *
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <libgda/gda-value.h> //TODO: Patch libgda to use the struct _ technique.
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+_WRAP_ENUM(ValueType, GdaValueType)
+
+class Value
+{
+  _CLASS_OPAQUE_COPYABLE(Value, GdaValue, gda_value_new_null, gda_value_copy, gda_value_free)
+public:
+
+  explicit Value(gint64 val);
+  _IGNORE(gda_value_new_bigint)
+  explicit Value(guint64 val);
+  _IGNORE(gda_value_new_biguint)
+  explicit Value(gconstpointer val, glong size);
+  _IGNORE(gda_value_new_binary)
+  explicit Value(const GdaBlob *val);
+  _IGNORE(gda_value_new_blob)
+  explicit Value(bool val);
+  _IGNORE(gda_value_new_boolean)
+  explicit Value(const GdaDate *val);
+  _IGNORE(gda_value_new_date)
+  explicit Value(gdouble val);
+  _IGNORE(gda_value_new_double)
+  explicit Value(const GdaGeometricPoint *val);
+  _IGNORE(gda_value_new_geometric_point)
+  explicit Value(const GObject *val);
+  _IGNORE(gda_value_new_gobject)
+  explicit Value(gint val);
+  _IGNORE(gda_value_new_integer)
+  explicit Value(const GdaValueList *val);
+  _IGNORE(gda_value_new_list)
+  explicit Value(const GdaMoney *val);
+  _IGNORE(gda_value_new_money)
+  explicit Value(const GdaNumeric *val);
+  _IGNORE(gda_value_new_numeric)
+  explicit Value(gfloat val);
+  _IGNORE(gda_value_new_single)
+  explicit Value(gshort val);
+  _IGNORE(gda_value_new_smallint)
+  explicit Value(gushort val);
+  _IGNORE(gda_value_new_smalluint)
+  explicit Value(const Glib::ustring& val);
+  _IGNORE(gda_value_new_string)
+  explicit Value(const GdaTime *val);
+  _IGNORE(gda_value_new_time)
+  explicit Value(const GdaTimestamp *val);
+  _IGNORE(gda_value_new_timestamp)
+  explicit Value(time_t val);
+  _IGNORE(gda_value_new_timestamp_from_timet)
+  explicit Value(gchar val);
+  _IGNORE(gda_value_new_tinyint)
+  explicit Value(guchar val);
+  _IGNORE(gda_value_new_tinyuint)
+  explicit Value(ValueType val);
+  _IGNORE(gda_value_new_type)
+  explicit Value(guint val);
+  _IGNORE(gda_value_new_uinteger)
+  explicit Value(const Glib::ustring& as_string, ValueType type);
+  _IGNORE(gda_value_new_from_string)
+  //TODO: explicit Value(const xmlNodePtr node);
+  //_IGNORE(gda_value_new_from_xml)
+
+  //TODO: Lots.
+
+};
+
+} // namespace Gda
+} // namespace Gnome
+

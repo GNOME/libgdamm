@@ -102,7 +102,7 @@ Glib::RefPtr<DataModel> get_data_source_model();
 void save_data_source(const Glib::ustring& name, const Glib::ustring& provider,
                       const Glib::ustring& cnc_string, const Glib::ustring& description,
                       const Glib::ustring& username, const Glib::ustring& password);
-void save_data_source_info(const DataSourceInfo& dsn_info);
+void save_data_source(const DataSourceInfo& dsn_info);
 void remove_data_source(const Glib::ustring& name);
 
 

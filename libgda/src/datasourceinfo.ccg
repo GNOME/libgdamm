@@ -23,6 +23,92 @@
 namespace Gnome
 {
 
+namespace Gda
+{
 
-} /* namespace Gnome */
+DataSourceInfo::DataSourceInfo()
+{
+  gobject_ = g_new0 (GdaDataSourceInfo, 1);
+
+  set_cnc_string(""); //libgda prints a warning if this is NULL.
+}
+ 
+DataSourceInfo::operator bool() const
+{
+  return gobj() != 0;
+}
+
+void DataSourceInfo::set_name(const Glib::ustring& value)
+{
+  if(gobj()->name)
+  {
+    g_free(gobj()->name);
+    gobj()->name = 0;
+  }
+    
+  gobj()->name = g_strdup( (value).c_str() );
+}
+
+void DataSourceInfo::set_provider(const Glib::ustring& value)
+{
+  if(gobj()->provider)
+  {
+    g_free(gobj()->provider);
+    gobj()->provider = 0;
+  }
+  
+  gobj()->provider = g_strdup( (value).c_str() );
+}
+
+void DataSourceInfo::set_cnc_string(const Glib::ustring& value)
+{
+  if(gobj()->cnc_string)
+  {
+    g_free(gobj()->cnc_string);
+    gobj()->cnc_string = 0;
+  }
+  
+  gobj()->cnc_string = g_strdup( (value).c_str() );
+}
+
+void DataSourceInfo::set_description(const Glib::ustring& value)
+{
+  if(gobj()->description)
+  {
+    g_free(gobj()->description);
+    gobj()->description = 0;
+  }
+  
+  gobj()->description = g_strdup( (value).c_str() );
+}
+
+
+void DataSourceInfo::set_username(const Glib::ustring& value)
+{
+  if(gobj()->username)
+  {
+    g_free(gobj()->username);
+    gobj()->username = 0;
+  }
+  
+  gobj()->username = g_strdup( (value).c_str() );
+}
+
+
+void DataSourceInfo::set_password(const Glib::ustring& value)
+{
+  if(gobj()->password)
+  {
+    g_free(gobj()->password);
+    gobj()->password = 0;
+  }
+  
+  gobj()->password = g_strdup( (value).c_str() );
+}
+
+
+} //namespace Gda
+
+} // namespace Gnome
+
 

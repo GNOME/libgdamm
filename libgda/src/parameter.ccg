@@ -1,7 +1,7 @@
 /* $Id$ */
 // -*- C++ -*- //
 
-/* providerinfo.cc
+/* parameter.cc
  * 
  * Copyright 2003 libgdamm Development Team
  *
@@ -20,21 +20,44 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgda/gda-parameter.h>
-
 namespace Gnome
 {
 
 namespace Gda
 {
 
-Glib::ListHandle<Glib::ustring> ProviderInfo::get_gda_params() const
+/* TODO:
+Parameter::Parameter(const Glib::ustring& name, const Value& value)
 {
-  return Glib::ListHandle<Glib::ustring>(gobj()->gda_params, Glib::OWNERSHIP_NONE); //Glib::OWNERSHIP_NONE because we should not delete the list or its elements.
+  gobject_ = gda_parameter_new_from_value(name.c_str(), value.gobj());
+}
+*/
+
+Parameter::Parameter(const Glib::ustring& name, bool value)
+{
+  gobject_ = gda_parameter_new_boolean(name.c_str(), value);
 }
 
-} // namespace Gda
+Parameter::Parameter(const Glib::ustring& name, gdouble value)
+{
+  gobject_ = gda_parameter_new_double(name.c_str(), value);
+}
 
+Parameter::Parameter(const Glib::ustring& name, const Glib::RefPtr<Glib::Object>& value)
+{
+  gobject_ = gda_parameter_new_gobject(name.c_str(), value->gobj());
+}
+
+Parameter::Parameter(const Glib::ustring& name, const Glib::ustring& value)
+{
+  gobject_ = gda_parameter_new_string(name.c_str(), value.c_str());
+}
+
+ 
+
+
+} //namespace Gda
 
 } // namespace Gnome
+
 

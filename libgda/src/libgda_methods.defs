@@ -314,6 +314,7 @@
   (gtype-id "GDA_TYPE_CONNECTION_FEATURE")
   (values
     '("aggregates" "GDA_CONNECTION_FEATURE_AGGREGATES")
+    '("blobs" "GDA_CONNECTION_FEATURE_BLOBS")
     '("indexes" "GDA_CONNECTION_FEATURE_INDEXES")
     '("inheritance" "GDA_CONNECTION_FEATURE_INHERITANCE")
     '("namespaces" "GDA_CONNECTION_FEATURE_NAMESPACES")
@@ -322,10 +323,10 @@
     '("sql" "GDA_CONNECTION_FEATURE_SQL")
     '("transactions" "GDA_CONNECTION_FEATURE_TRANSACTIONS")
     '("triggers" "GDA_CONNECTION_FEATURE_TRIGGERS")
+    '("updatable-cursor" "GDA_CONNECTION_FEATURE_UPDATABLE_CURSOR")
     '("users" "GDA_CONNECTION_FEATURE_USERS")
     '("views" "GDA_CONNECTION_FEATURE_VIEWS")
     '("xml-queries" "GDA_CONNECTION_FEATURE_XML_QUERIES")
-    '("blobs" "GDA_CONNECTION_FEATURE_BLOBS")
   )
 )
 
@@ -408,14 +409,6 @@
 
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-blob.h
-
-(define-function gint
-  (c-name "gint")
-  (return-type "G_BEGIN_DECLS")
-  (parameters
-    '("*" "read")
-  )
-)
 
 (define-method open
   (of-object "GdaBlob")
@@ -567,7 +560,8 @@
   )
 )
 
-(define-function gda_client_notify_connection_closed_event
+(define-method notify_connection_closed_event
+  (of-object "GdaClient")
   (c-name "gda_client_notify_connection_closed_event")
   (return-type "none")
   (parameters
@@ -636,6 +630,11 @@
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-command.h
 
+(define-function gda_command_get_type
+  (c-name "gda_command_get_type")
+  (return-type "GType")
+)
+
 (define-function gda_command_new
   (c-name "gda_command_new")
   (is-constructor-of "GdaCommand")
@@ -651,6 +650,12 @@
   (of-object "GdaCommand")
   (c-name "gda_command_free")
   (return-type "none")
+)
+
+(define-method copy
+  (of-object "GdaCommand")
+  (c-name "gda_command_copy")
+  (return-type "GdaCommand*")
 )
 
 (define-method get_text
@@ -716,6 +721,14 @@
 
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-config.h
+
+(define-function gda_config_get_string
+  (c-name "gda_config_get_string")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "path")
+  )
+)
 
 (define-function gda_config_get_int
   (c-name "gda_config_get_int")
@@ -859,6 +872,23 @@
   )
 )
 
+(define-function gda_provider_info_get_type
+  (c-name "gda_provider_info_get_type")
+  (return-type "GType")
+)
+
+(define-method copy
+  (of-object "GdaProviderInfo")
+  (c-name "gda_provider_info_copy")
+  (return-type "GdaProviderInfo*")
+)
+
+(define-method free
+  (of-object "GdaProviderInfo")
+  (c-name "gda_provider_info_free")
+  (return-type "none")
+)
+
 (define-function gda_config_get_provider_list
   (c-name "gda_config_get_provider_list")
   (return-type "GList*")
@@ -880,17 +910,22 @@
   )
 )
 
-(define-function gda_config_free_provider_info
-  (c-name "gda_config_free_provider_info")
-  (return-type "none")
-  (parameters
-    '("GdaProviderInfo*" "provider_info")
-  )
+(define-function gda_config_get_provider_model
+  (c-name "gda_config_get_provider_model")
+  (return-type "GdaDataModel*")
 )
 
-(define-function gda_config_get_data_source_list
-  (c-name "gda_config_get_data_source_list")
-  (return-type "GList*")
+(define-function gda_data_source_info_get_type
+  (c-name "gda_data_source_info_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_config_copy_data_source_info
+  (c-name "gda_config_copy_data_source_info")
+  (return-type "GdaDataSourceInfo*")
+  (parameters
+    '("GdaDataSourceInfo*" "src")
+  )
 )
 
 (define-function gda_config_find_data_source
@@ -898,22 +933,6 @@
   (return-type "GdaDataSourceInfo*")
   (parameters
     '("const-gchar*" "name")
-  )
-)
-
-(define-function gda_config_copy_data_source_info
-  (c-name "gda_config_copy_data_source_info")
-  (return-type "GdaDataSourceInfo*")
-  (parameters
-    '("GdaDataSourceInfo*" "info")
-  )
-)
-
-(define-function gda_config_free_data_source_info
-  (c-name "gda_config_free_data_source_info")
-  (return-type "none")
-  (parameters
-    '("GdaDataSourceInfo*" "info")
   )
 )
 
@@ -1278,6 +1297,33 @@
   )
 )
 
+(define-method column_inserted
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_column_inserted")
+  (return-type "none")
+  (parameters
+    '("gint" "col")
+  )
+)
+
+(define-method column_updated
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_column_updated")
+  (return-type "none")
+  (parameters
+    '("gint" "col")
+  )
+)
+
+(define-method column_removed
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_column_removed")
+  (return-type "none")
+  (parameters
+    '("gint" "col")
+  )
+)
+
 (define-method freeze
   (of-object "GdaDataModel")
   (c-name "gda_data_model_freeze")
@@ -1358,7 +1404,7 @@
   )
 )
 
-(define-method is_editable
+(define-method is_updatable
   (of-object "GdaDataModel")
   (c-name "gda_data_model_is_updatable")
   (return-type "gboolean")
@@ -1391,6 +1437,33 @@
   )
 )
 
+(define-method append_column
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_append_column")
+  (return-type "gboolean")
+  (parameters
+    '("GdaFieldAttributes*" "col")
+  )
+)
+
+(define-method update_column
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_update_column")
+  (return-type "gboolean")
+  (parameters
+    '("const-GdaFieldAttributes*" "col")
+  )
+)
+
+(define-method remove_column
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_remove_column")
+  (return-type "gboolean")
+  (parameters
+    '("const-GdaFieldAttributes*" "col")
+  )
+)
+
 (define-method foreach
   (of-object "GdaDataModel")
   (c-name "gda_data_model_foreach")
@@ -1401,25 +1474,25 @@
   )
 )
 
-(define-method is_editing
+(define-method has_changed
   (of-object "GdaDataModel")
   (c-name "gda_data_model_has_changed")
   (return-type "gboolean")
 )
 
-(define-method begin_edit
+(define-method begin_update
   (of-object "GdaDataModel")
   (c-name "gda_data_model_begin_update")
   (return-type "gboolean")
 )
 
-(define-method cancel_edit
+(define-method cancel_update
   (of-object "GdaDataModel")
   (c-name "gda_data_model_cancel_update")
   (return-type "gboolean")
 )
 
-(define-method end_edit
+(define-method end_update
   (of-object "GdaDataModel")
   (c-name "gda_data_model_end_update")
   (return-type "gboolean")
@@ -1592,6 +1665,11 @@
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-enum-types.h
 
+(define-function gda_blob_mode_get_type
+  (c-name "gda_blob_mode_get_type")
+  (return-type "GType")
+)
+
 (define-function gda_client_event_get_type
   (c-name "gda_client_event_get_type")
   (return-type "GType")
@@ -1619,11 +1697,6 @@
 
 (define-function gda_connection_schema_get_type
   (c-name "gda_connection_schema_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_export_flags_get_type
-  (c-name "gda_export_flags_get_type")
   (return-type "GType")
 )
 
@@ -1692,7 +1765,7 @@
 (define-method get_number
   (of-object "GdaError")
   (c-name "gda_error_get_number")
-  (return-type "const-glong")
+  (return-type "glong")
 )
 
 (define-method set_number
@@ -1778,7 +1851,7 @@
   (c-name "gda_export_select_table_list")
   (return-type "none")
   (parameters
-    '("GList*" "tables")
+    '("GList*" "list")
   )
 )
 
@@ -1824,6 +1897,11 @@
 
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-field.h
+
+(define-function gda_field_attributes_get_type
+  (c-name "gda_field_attributes_get_type")
+  (return-type "GType")
+)
 
 (define-function gda_field_attributes_new
   (c-name "gda_field_attributes_new")
@@ -2023,6 +2101,21 @@
   )
 )
 
+(define-method get_default_value
+  (of-object "GdaFieldAttributes")
+  (c-name "gda_field_attributes_get_default_value")
+  (return-type "const-GdaValue*")
+)
+
+(define-method set_default_value
+  (of-object "GdaFieldAttributes")
+  (c-name "gda_field_attributes_set_default_value")
+  (return-type "none")
+  (parameters
+    '("const-GdaValue*" "default_value")
+  )
+)
+
 
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-intl.h
@@ -2030,6 +2123,11 @@
 
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-log.h
+
+(define-function gda_log_enable
+  (c-name "gda_log_enable")
+  (return-type "none")
+)
 
 (define-function gda_log_disable
   (c-name "gda_log_disable")
@@ -2059,33 +2157,6 @@
   (varargs #t)
 )
 
-(define-function gda_log_clean_all
-  (c-name "gda_log_clean_all")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "prgname")
-  )
-)
-
-(define-function gda_log_clean_between
-  (c-name "gda_log_clean_between")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "prgname")
-    '("time_t" "from")
-    '("time_t" "to")
-  )
-)
-
-(define-function gda_log_clean_entry
-  (c-name "gda_log_clean_entry")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "prgname")
-    '("const-gchar*" "entry")
-  )
-)
-
 
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-marshal.h
@@ -2093,6 +2164,11 @@
 
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-parameter.h
+
+(define-function gda_parameter_get_type
+  (c-name "gda_parameter_get_type")
+  (return-type "GType")
+)
 
 (define-function gda_parameter_new_from_value
   (c-name "gda_parameter_new_from_value")
@@ -2139,6 +2215,12 @@
   )
 )
 
+(define-method copy
+  (of-object "GdaParameter")
+  (c-name "gda_parameter_copy")
+  (return-type "GdaParameter*")
+)
+
 (define-method free
   (of-object "GdaParameter")
   (c-name "gda_parameter_free")
@@ -2175,6 +2257,11 @@
   )
 )
 
+(define-function gda_parameter_list_get_type
+  (c-name "gda_parameter_list_get_type")
+  (return-type "GType")
+)
+
 (define-function gda_parameter_list_new
   (c-name "gda_parameter_list_new")
   (is-constructor-of "GdaParameterList")
@@ -2185,6 +2272,12 @@
   (of-object "GdaParameterList")
   (c-name "gda_parameter_list_free")
   (return-type "none")
+)
+
+(define-method copy
+  (of-object "GdaParameterList")
+  (c-name "gda_parameter_list_copy")
+  (return-type "GdaParameterList*")
 )
 
 (define-method add_parameter
@@ -2227,12 +2320,29 @@
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-quark-list.h
 
+(define-function gda_quark_list_get_type
+  (c-name "gda_quark_list_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_quark_list_new
+  (c-name "gda_quark_list_new")
+  (is-constructor-of "GdaQuarkList")
+  (return-type "GdaQuarkList*")
+)
+
 (define-function gda_quark_list_new_from_string
   (c-name "gda_quark_list_new_from_string")
   (return-type "GdaQuarkList*")
   (parameters
     '("const-gchar*" "string")
   )
+)
+
+(define-method copy
+  (of-object "GdaQuarkList")
+  (c-name "gda_quark_list_copy")
+  (return-type "GdaQuarkList*")
 )
 
 (define-method free
@@ -2269,9 +2379,30 @@
   )
 )
 
+(define-method clear
+  (of-object "GdaQuarkList")
+  (c-name "gda_quark_list_clear")
+  (return-type "none")
+)
+
 
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-row.h
+
+(define-function gda_row_get_type
+  (c-name "gda_row_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_row_new
+  (c-name "gda_row_new")
+  (is-constructor-of "GdaRow")
+  (return-type "GdaRow*")
+  (parameters
+    '("GdaDataModel*" "model")
+    '("gint" "count")
+  )
+)
 
 (define-function gda_row_new_from_list
   (c-name "gda_row_new_from_list")
@@ -2280,6 +2411,12 @@
     '("GdaDataModel*" "model")
     '("const-GList*" "values")
   )
+)
+
+(define-method copy
+  (of-object "GdaRow")
+  (c-name "gda_row_copy")
+  (return-type "GdaRow*")
 )
 
 (define-method free
@@ -2327,7 +2464,7 @@
 (define-method get_value
   (of-object "GdaRow")
   (c-name "gda_row_get_value")
-  (return-type "const-GdaValue*")
+  (return-type "GdaValue*")
   (parameters
     '("gint" "num")
   )
@@ -2360,7 +2497,7 @@
   (return-type "none")
   (parameters
     '("const-gchar*" "name")
-    '("const-GdaDataModel*" "source")
+    '("GdaDataModel*" "source")
   )
 )
 
@@ -2648,6 +2785,14 @@
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-util.h
 
+(define-function gda_type_to_string
+  (c-name "gda_type_to_string")
+  (return-type "const-gchar*")
+  (parameters
+    '("GdaValueType" "type")
+  )
+)
+
 (define-function gda_type_from_string
   (c-name "gda_type_from_string")
   (return-type "GdaValueType")
@@ -2694,6 +2839,11 @@
 
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-value.h
+
+(define-function gda_value_get_gtype
+  (c-name "gda_value_get_gtype")
+  (return-type "GType")
+)
 
 (define-function gda_value_new_null
   (c-name "gda_value_new_null")
@@ -3319,7 +3469,7 @@
   (c-name "gda_value_compare")
   (return-type "gint")
   (parameters
-    '("const-GdaValue*" "value2")
+    '("GdaValue*" "value2")
   )
 )
 
@@ -3578,7 +3728,7 @@
   (c-name "gda_xml_database_new_table_from_node")
   (return-type "GdaTable*")
   (parameters
-    '("xmlNodePtr" "xmlnode")
+    '("xmlNodePtr" "node")
   )
 )
 
@@ -4653,6 +4803,17 @@
 
 
 ;; From /home/murrayc/cvs/gnome26/libgda/libgda/libgda.h
+
+(define-function gda_init
+  (c-name "gda_init")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "app_id")
+    '("const-gchar*" "version")
+    '("gint" "nargs")
+    '("gchar*[]" "args")
+  )
+)
 
 (define-function gda_main_run
   (c-name "gda_main_run")

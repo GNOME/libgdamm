@@ -151,7 +151,7 @@ void save_data_source(const Glib::ustring& name, const Glib::ustring& provider,
 }
 
 
-void save_data_source_info(const DataSourceInfo& dsn_info)
+void save_data_source(const DataSourceInfo& dsn_info)
 {
   gda_config_save_data_source_info(const_cast<GdaDataSourceInfo*>(dsn_info.gobj())); //TODO: Patch libgda to use const.
 }

@@ -1,7 +1,7 @@
 /* $Id$ */
 // -*- C++ -*- //
 
-/* providerinfo.cc
+/* parameter.cc
  * 
  * Copyright 2003 libgdamm Development Team
  *
@@ -20,21 +20,14 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgda/gda-parameter.h>
-
 namespace Gnome
 {
 
 namespace Gda
 {
 
-Glib::ListHandle<Glib::ustring> ProviderInfo::get_gda_params() const
-{
-  return Glib::ListHandle<Glib::ustring>(gobj()->gda_params, Glib::OWNERSHIP_NONE); //Glib::OWNERSHIP_NONE because we should not delete the list or its elements.
-}
-
-} // namespace Gda
-
+} //namespace Gda
 
 } // namespace Gnome
+
 

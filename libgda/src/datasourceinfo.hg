@@ -35,13 +35,27 @@ namespace Gda
 class DataSourceInfo
 {
   _CLASS_OPAQUE_COPYABLE(DataSourceInfo, GdaDataSourceInfo, NONE, gda_config_copy_data_source_info, gda_config_free_data_source_info)
+  _CUSTOM_DEFAULT_CTOR
 public:
+
+  DataSourceInfo();
+  
+  operator bool() const;
+
+  _CONVERSION(`Glib::ustring', `const char*', `($3).c_str()')
   _MEMBER_GET(name, name, Glib::ustring, const char*)
   _MEMBER_GET(provider, provider, Glib::ustring, const char*)
   _MEMBER_GET(cnc_string, cnc_string, Glib::ustring, const char*)
   _MEMBER_GET(description, description, Glib::ustring, const char*)
   _MEMBER_GET(username, username, Glib::ustring, const char*)
   _MEMBER_GET(password, password, Glib::ustring, const char*)
+
+  void set_name(const Glib::ustring& value);
+  void set_provider(const Glib::ustring& value);
+  void set_cnc_string(const Glib::ustring& value);
+  void set_description(const Glib::ustring& value);
+  void set_username(const Glib::ustring& value);
+  void set_password(const Glib::ustring& value);
 };
 
 } // namespace Gda

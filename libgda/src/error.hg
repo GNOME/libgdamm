@@ -45,7 +45,7 @@ public:
 
   _WRAP_METHOD(Glib::ustring get_description() const, gda_error_get_description)
   _WRAP_METHOD(void set_description(const Glib::ustring& description), gda_error_set_description)
-  _WRAP_METHOD(const glong get_number() const, gda_error_get_number)
+  _WRAP_METHOD(glong get_number() const, gda_error_get_number)
   _WRAP_METHOD(void set_number(glong number), gda_error_set_number)
   _WRAP_METHOD(Glib::ustring get_source() const, gda_error_get_source)
   _WRAP_METHOD(void set_source(const Glib::ustring& source), gda_error_set_source)

@@ -20,8 +20,9 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/datamodel.h>
-#include <glibmm/object.h>
+
+#include <libgdamm/value.h>
+//#include <glibmm/object.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -35,6 +36,7 @@ namespace Gda
 {
 
 class DataModel;
+class Value;
 
 class Row
 {
@@ -54,8 +56,8 @@ public:
   _WRAP_METHOD(void set_number(int number), gda_row_set_number)
   _WRAP_METHOD(Glib::ustring get_id() const, gda_row_get_id)
   _WRAP_METHOD(void set_id(const Glib::ustring& id), gda_row_set_id)
-  _WRAP_METHOD(const GdaValue* get_value(int num), gda_row_get_value)
-  _WRAP_METHOD(int get_length() const, gda_row_get_length )
+  _WRAP_METHOD(Value get_value(int num) const, gda_row_get_value)
+  _WRAP_METHOD(int get_length() const, gda_row_get_length)
 
 };
 
