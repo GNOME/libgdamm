@@ -1,5 +1,10 @@
 2004-03-30  Murray Cumming  <murrayc@murrayc.com>
 
+	* tools/extra_defs_gen/generate_defs.gda.cc: Include glibmm_extra_defs
+	rather than the old gtkmm one, to really fix the build.
+
+2004-03-30  Murray Cumming  <murrayc@murrayc.com>
+
 	* examples/simple now also builds and works, though it is not yet 
 	a real example.
 
