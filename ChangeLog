@@ -1,3 +1,5 @@
+1.3.1:
+
 2004-03-30  Murray Cumming  <murrayc@murrayc.com>
 
 	* Wrapped some GList* return types as ListHandles.

@@ -17,7 +17,7 @@ AC_INIT(libgda/libgdammconfig.h.in)
 #########################################################################
 LIBGDAMM_MAJOR_VERSION=1
 LIBGDAMM_MINOR_VERSION=3
-LIBGDAMM_MICRO_VERSION=0
+LIBGDAMM_MICRO_VERSION=1
 
 #
 # +1 : ? : +1  == new interface that does not break old one
@@ -26,7 +26,7 @@ LIBGDAMM_MICRO_VERSION=0
 #  ? :+1 : ?   == just some internal changes, nothing breaks but might work 
 #                 better
 # CURRENT : REVISION : AGE
-LIBGDAMM_SO_VERSION=1:0:0
+LIBGDAMM_SO_VERSION=2:0:0
 
 LIBGDAMM_VERSION=$LIBGDAMM_MAJOR_VERSION.$LIBGDAMM_MINOR_VERSION.$LIBGDAMM_MICRO_VERSION
 LIBGDAMM_RELEASE=$LIBGDAMM_MAJOR_VERSION.$LIBGDAMM_MINOR_VERSION
