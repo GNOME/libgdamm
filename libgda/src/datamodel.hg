@@ -52,15 +52,15 @@ public:
 
 
 
-  _WRAP_METHOD(bool  is_editable() const, gda_data_model_is_updatable)
+  _WRAP_METHOD(bool is_updatable() const, gda_data_model_is_updatable)
   _WRAP_METHOD(const GdaRow* append_row(const GList *values), gda_data_model_append_row)
   _WRAP_METHOD(bool remove_row(const GdaRow *row), gda_data_model_remove_row)
   _WRAP_METHOD(bool update_row(const GdaRow *row), gda_data_model_update_row)
 
-  _WRAP_METHOD(bool is_editing() const, gda_data_model_has_changed)
-  _WRAP_METHOD(bool begin_edit(), gda_data_model_begin_update)
-  _WRAP_METHOD(bool cancel_edit(), gda_data_model_cancel_update)
-  _WRAP_METHOD(bool end_edit(), gda_data_model_end_update)
+  _WRAP_METHOD(bool has_changed() const, gda_data_model_has_changed)
+  _WRAP_METHOD(bool begin_update(), gda_data_model_begin_update)
+  _WRAP_METHOD(bool cancel_update(), gda_data_model_cancel_update)
+  _WRAP_METHOD(bool end_update(), gda_data_model_end_update)
 
 
   _WRAP_METHOD(Glib::ustring to_comma_separated(), gda_data_model_to_comma_separated)

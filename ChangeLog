@@ -1,4 +1,11 @@
+2004-02-15  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/datamodel.hg: Renamed the C++ methods to match the
+	C function names, correcting the previous change. The API is not 
+	stable so we are free to change them to match changes in libgda.
+
 2003-12-17  Billy O'Connor <billyoc@gnuyork.org>
+
 	* libgda/src/libgda_methods.defs:
 	* libgda/src/datamodel.hg: Changes to is_editable(), is_editing(),
 	begin_edit(), cancel_edit() and end_edit() wrappers to reflect 

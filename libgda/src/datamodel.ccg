@@ -20,6 +20,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgda/gda-data-model.h>
+
 namespace Gnome
 {
 
