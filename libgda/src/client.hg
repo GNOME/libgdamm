@@ -68,13 +68,19 @@ public:
   _WRAP_METHOD(void notify_transaction_cancelled_event(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_client_notify_transaction_cancelled_event)
 
 
+  _WRAP_METHOD(Glib::ustring get_dsn_specs(const Glib::ustring& provider) const, gda_client_get_dsn_specs)
+
+  //TODO: _WRAP_METHOD(Glib::ustring get_provider_specs(const Glib::ustring& provider, GdaClientSpecsType type), gda_client_get_provider_specs)
+  _WRAP_METHOD(bool create_database(const Glib::ustring& provider, GdaParameterList *params), gda_client_create_database, errthrow)
+  _WRAP_METHOD(bool drop_database(const Glib::ustring& provider, GdaParameterList *params), gda_client_drop_database, errthrow)
+
+
   _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_begin_transaction)
   _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_commit_transaction)
   _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_rollback_transaction)
 
   //TODO: Use C++ types:
   //_WRAP_SIGNAL(void event_notification(const Glib::RefPtr<Connection>& cnc, GdaClientEvent event, const ParameterList& params), "event_notification")
-
 };
 
 } // namespace Gda

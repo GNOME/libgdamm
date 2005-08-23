@@ -1,5 +1,14 @@
 2005-08-23  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/client.hg: Added get_dsn_specs(), create_database(), 
+	drop_database().
+	* libgda/src/connection.hg: Added reset(). Renamed add_error*() to 
+	add_event*(). Added create_table(), drop_table(), create_index(), 
+	drop_index().
+	* tools/m4/convert_libgdamm.m4: Use ConnectionEvent instead of Error.
+
+2005-08-23  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/libgdamm.h:
 	* libgda/src/Makefile_list_of_hg.am_fragment:
 	* libgda/src/column.ccg:

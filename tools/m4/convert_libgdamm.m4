@@ -1,5 +1,5 @@
-_CONVERSION(`GdaError*',`Glib::RefPtr<Error>',`Glib::wrap($3)')
-_CONVERSION(`const Glib::RefPtr<Error>&', `GdaError*', `Glib::unwrap($3)')
+_CONVERSION(`GdaConnectionEvent*',`Glib::RefPtr<ConnectionEvent>',`Glib::wrap($3)')
+_CONVERSION(`const Glib::RefPtr<ConnectionEvent>&', `GdaConnectionEvent*', `Glib::unwrap($3)')
 _CONVERSION(`GdaDataModel*',`Glib::RefPtr<DataModel>',`Glib::wrap($3)')
 _CONVERSION(`GdaDataModel*',`Glib::RefPtr<const DataModel>',`Glib::wrap($3)')
 _CONVERSION(`GdaConnection*',`Glib::RefPtr<Connection>',`Glib::wrap($3)')
