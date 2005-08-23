@@ -21,7 +21,7 @@
  */
 
 #include <glibmm/object.h>
-#include <libgda/gda-error.h>
+#include <libgda/gda-connection-event.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -32,10 +32,10 @@ namespace Gnome
 namespace Gda
 {
 
-class Error : public Glib::Object
+class ConnectionEvent : public Glib::Object
 {
-  _CLASS_GOBJECT(Error, GdaError, GDA_ERROR, Glib::Object, GObject)
-  _IGNORE(gda_error_free)
+  _CLASS_GOBJECT(ConnectionEvent, GdaConnectionEvent, GDA_CONNECTION_EVENT, Glib::Object, GObject)
+  _IGNORE(gda_connection_event_free)
 protected:
 
  _CTOR_DEFAULT
@@ -43,14 +43,14 @@ protected:
 public:
   _WRAP_CREATE()
 
-  _WRAP_METHOD(Glib::ustring get_description() const, gda_error_get_description)
-  _WRAP_METHOD(void set_description(const Glib::ustring& description), gda_error_set_description)
-  _WRAP_METHOD(glong get_number() const, gda_error_get_number)
-  _WRAP_METHOD(void set_number(glong number), gda_error_set_number)
-  _WRAP_METHOD(Glib::ustring get_source() const, gda_error_get_source)
-  _WRAP_METHOD(void set_source(const Glib::ustring& source), gda_error_set_source)
-  _WRAP_METHOD(Glib::ustring get_sqlstate() const, gda_error_get_sqlstate)
-  _WRAP_METHOD(void set_sqlstate(const Glib::ustring& sqlstate), gda_error_set_sqlstate)
+  _WRAP_METHOD(Glib::ustring get_description() const, gda_connection_event_get_description)
+  _WRAP_METHOD(void set_description(const Glib::ustring& description), gda_connection_event_set_description)
+  _WRAP_METHOD(glong get_number() const, gda_connection_event_get_number)
+  _WRAP_METHOD(void set_number(glong number), gda_connection_event_set_number)
+  _WRAP_METHOD(Glib::ustring get_source() const, gda_connection_event_get_source)
+  _WRAP_METHOD(void set_source(const Glib::ustring& source), gda_connection_event_set_source)
+  _WRAP_METHOD(Glib::ustring get_sqlstate() const, gda_connection_event_get_sqlstate)
+  _WRAP_METHOD(void set_sqlstate(const Glib::ustring& sqlstate), gda_connection_event_set_sqlstate)
 
 };
 

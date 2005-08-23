@@ -44,8 +44,8 @@ protected:
 public:
   _WRAP_CREATE()
   
-  _WRAP_METHOD(Glib::RefPtr<Connection> open_connection(const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password, ConnectionOptions options = (ConnectionOptions)0), gda_client_open_connection)
-  _WRAP_METHOD(Glib::RefPtr<Connection> open_connection_from_string(const Glib::ustring& provider_id, const Glib::ustring& cnc_string, ConnectionOptions options = (ConnectionOptions)0), gda_client_open_connection_from_string)
+  _WRAP_METHOD(Glib::RefPtr<Connection> open_connection(const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password, ConnectionOptions options = (ConnectionOptions)0), gda_client_open_connection, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<Connection> open_connection_from_string(const Glib::ustring& provider_id, const Glib::ustring& cnc_string, ConnectionOptions options = (ConnectionOptions)0), gda_client_open_connection_from_string, errthrow)
 //TODO:  _WRAP_METHOD(const GList   *get_connection_list(), gda_client_get_connection_list)
 
  //Use a special conversion here, because we should not own any part of the returned GList, and because we need to unconst the GList.:
@@ -59,7 +59,8 @@ public:
   _WRAP_METHOD(void close_all_connections(), gda_client_close_all_connections)
 
   _WRAP_METHOD(void notify_event(const Glib::RefPtr<Connection>& cnc, ClientEvent event, const ParameterList& params), gda_client_notify_event)
-  _WRAP_METHOD(void notify_error_event(const Glib::RefPtr<Connection>& cnc, GdaError *error), gda_client_notify_error_event)
+  //TODO: Wrap GdaConnectionEvent as exception.
+  _WRAP_METHOD(void notify_error_event(const Glib::RefPtr<Connection>& cnc, GdaConnectionEvent *error), gda_client_notify_error_event)
   _WRAP_METHOD(void notify_connection_opened_event(const Glib::RefPtr<Connection>& cnc), gda_client_notify_connection_opened_event)
 //  _WRAP_METHOD(void notify_connection_closed_event(const Glib::RefPtr<Connection>& cnc), gda_client_notify_connection_closed_event)
   _WRAP_METHOD(void notify_transaction_started_event(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_client_notify_transaction_started_event)

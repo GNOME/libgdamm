@@ -30,7 +30,7 @@ _PINCLUDE(glibmm/private/object_p.h)
 
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
-extern "C" { typedef struct _GdaDataModelColumnAttributes GdaDataModelColumnAttributes; }
+extern "C" { typedef struct _GdaColumn GdaColumn; }
 #endif
 
 namespace Gnome
@@ -39,48 +39,48 @@ namespace Gnome
 namespace Gda
 {
 
-class DataModelColumnAttributes
+class Column
 {
-  _CLASS_OPAQUE_COPYABLE(DataModelColumnAttributes, GdaDataModelColumnAttributes, gda_data_model_column_attributes_new, gda_data_model_column_attributes_copy, gda_data_model_column_attributes_free)
-  _IGNORE(gda_data_model_column_attributes_copy, gda_data_model_column_attributes_free)
+  _CLASS_OPAQUE_COPYABLE(Column, GdaColumn, gda_column_new, gda_column_copy, gda_column_free)
+  _IGNORE(gda_column_copy, gda_column_free)
 public:
 
-  _WRAP_EQUAL(gda_data_model_column_attributes_equal)
-  _IGNORE(gda_data_model_column_attributes_equal)
+  _WRAP_EQUAL(gda_column_equal)
+  _IGNORE(gda_column_equal)
   
-  _WRAP_METHOD(glong get_defined_size() const, gda_data_model_column_attributes_get_defined_size)
-  _WRAP_METHOD(void set_defined_size(glong size), gda_data_model_column_attributes_set_defined_size)
-  _WRAP_METHOD(Glib::ustring get_name() const, gda_data_model_column_attributes_get_name)
-  _WRAP_METHOD(void set_name(const Glib::ustring& name), gda_data_model_column_attributes_set_name)
-  _WRAP_METHOD(Glib::ustring get_table() const, gda_data_model_column_attributes_get_table)
-  _WRAP_METHOD(void set_table(const Glib::ustring& table), gda_data_model_column_attributes_set_table)
-  _WRAP_METHOD(Glib::ustring get_caption() const, gda_data_model_column_attributes_get_caption)
-  _WRAP_METHOD(void set_caption(const Glib::ustring& caption), gda_data_model_column_attributes_set_caption)
-  _WRAP_METHOD(glong get_scale() const, gda_data_model_column_attributes_get_scale)
-  _WRAP_METHOD(void set_scale(glong scale), gda_data_model_column_attributes_set_scale)
-  _WRAP_METHOD(ValueType get_gdatype() const, gda_data_model_column_attributes_get_gdatype)
-  _WRAP_METHOD(void set_gdatype(ValueType type), gda_data_model_column_attributes_set_gdatype)
-  _WRAP_METHOD(bool get_allow_null() const, gda_data_model_column_attributes_get_allow_null)
-  _WRAP_METHOD(void set_allow_null(bool allow = true), gda_data_model_column_attributes_set_allow_null)
-  _WRAP_METHOD(bool get_primary_key() const, gda_data_model_column_attributes_get_primary_key)
-  _WRAP_METHOD(void set_primary_key(bool pk = true), gda_data_model_column_attributes_set_primary_key)
-  _WRAP_METHOD(bool get_unique_key() const, gda_data_model_column_attributes_get_unique_key)
-  _WRAP_METHOD(void set_unique_key(bool uk = true), gda_data_model_column_attributes_set_unique_key)
-  _WRAP_METHOD(Glib::ustring get_references(), gda_data_model_column_attributes_get_references)
-  _WRAP_METHOD(void set_references(const Glib::ustring& ref), gda_data_model_column_attributes_set_references)
-  _WRAP_METHOD(bool get_auto_increment() const, gda_data_model_column_attributes_get_auto_increment)
-  _WRAP_METHOD(void set_auto_increment(bool is_auto = true), gda_data_model_column_attributes_set_auto_increment)
-  _WRAP_METHOD(gint get_position() const, gda_data_model_column_attributes_get_position)
-  _WRAP_METHOD(void set_position(gint position), gda_data_model_column_attributes_set_position)
+  _WRAP_METHOD(glong get_defined_size() const, gda_column_get_defined_size)
+  _WRAP_METHOD(void set_defined_size(glong size), gda_column_set_defined_size)
+  _WRAP_METHOD(Glib::ustring get_name() const, gda_column_get_name)
+  _WRAP_METHOD(void set_name(const Glib::ustring& name), gda_column_set_name)
+  _WRAP_METHOD(Glib::ustring get_table() const, gda_column_get_table)
+  _WRAP_METHOD(void set_table(const Glib::ustring& table), gda_column_set_table)
+  _WRAP_METHOD(Glib::ustring get_caption() const, gda_column_get_caption)
+  _WRAP_METHOD(void set_caption(const Glib::ustring& caption), gda_column_set_caption)
+  _WRAP_METHOD(glong get_scale() const, gda_column_get_scale)
+  _WRAP_METHOD(void set_scale(glong scale), gda_column_set_scale)
+  _WRAP_METHOD(ValueType get_gdatype() const, gda_column_get_gdatype)
+  _WRAP_METHOD(void set_gdatype(ValueType type), gda_column_set_gdatype)
+  _WRAP_METHOD(bool get_allow_null() const, gda_column_get_allow_null)
+  _WRAP_METHOD(void set_allow_null(bool allow = true), gda_column_set_allow_null)
+  _WRAP_METHOD(bool get_primary_key() const, gda_column_get_primary_key)
+  _WRAP_METHOD(void set_primary_key(bool pk = true), gda_column_set_primary_key)
+  _WRAP_METHOD(bool get_unique_key() const, gda_column_get_unique_key)
+  _WRAP_METHOD(void set_unique_key(bool uk = true), gda_column_set_unique_key)
+  _WRAP_METHOD(Glib::ustring get_references(), gda_column_get_references)
+  _WRAP_METHOD(void set_references(const Glib::ustring& ref), gda_column_set_references)
+  _WRAP_METHOD(bool get_auto_increment() const, gda_column_get_auto_increment)
+  _WRAP_METHOD(void set_auto_increment(bool is_auto = true), gda_column_set_auto_increment)
+  _WRAP_METHOD(gint get_position() const, gda_column_get_position)
+  _WRAP_METHOD(void set_position(gint position), gda_column_set_position)
 
   //We use a custom conversion here because
   //- we need to copy the value.
-  //- gda_data_model_column_attributes_get_default_value sometimes returns 0, but we want to return a gda_value_new_null() instead,
+  //- gda_column_get_default_value sometimes returns 0, but we want to return a gda_value_new_null() instead,
   //  so that we don't need the concept of an invalid value.
   #m4 _CONVERSION(`const GdaValue*',`Value',`(($3) ? Glib::wrap(const_cast<GdaValue*>($3), true /* take_copy */) : Value() )')
-  _WRAP_METHOD(Value get_default_value() const, gda_data_model_column_attributes_get_default_value)
+  _WRAP_METHOD(Value get_default_value() const, gda_column_get_default_value)
   
-  _WRAP_METHOD(void set_default_value(const Value& default_value), gda_data_model_column_attributes_set_default_value)
+  _WRAP_METHOD(void set_default_value(const Value& default_value), gda_column_set_default_value)
 
 };
 

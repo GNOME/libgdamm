@@ -174,7 +174,7 @@ Value::Value(guchar val)
 
 Value::Value(ValueType val)
 {
-  gobject_ = gda_value_new_type((GdaValueType)val);
+  gobject_ = gda_value_new_gdatype((GdaValueType)val);
 }
 
 Value::Value(guint val)

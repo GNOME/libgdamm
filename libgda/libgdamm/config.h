@@ -89,7 +89,7 @@ struct DataSourceInfoTraits
   static CType   to_c_type      (const CppType& obj) { return obj.gobj(); }
   static CType   to_c_type      (CType ptr) { return ptr; }
   static CppType to_cpp_type    (CType ptr) { return CppType(const_cast<CTypeNonConst>(ptr), true); }
-  static void    release_c_type (CType ptr) { gda_config_free_data_source_info(const_cast<CTypeNonConst>(ptr)); }
+  static void    release_c_type (CType ptr) { gda_data_source_info_free(const_cast<CTypeNonConst>(ptr)); }
 };
 
 
@@ -101,7 +101,8 @@ DataSourceInfo find_data_source(const Glib::ustring& name);
 Glib::RefPtr<DataModel> get_data_source_model();
 void save_data_source(const Glib::ustring& name, const Glib::ustring& provider,
                       const Glib::ustring& cnc_string, const Glib::ustring& description,
-                      const Glib::ustring& username, const Glib::ustring& password);
+                      const Glib::ustring& username, const Glib::ustring& password,
+                      bool is_global = false);
 void save_data_source(const DataSourceInfo& dsn_info);
 void remove_data_source(const Glib::ustring& name);
 

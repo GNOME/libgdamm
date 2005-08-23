@@ -20,7 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgda/gda-data-model-column-attributes.h>
+#include <libgda/gda-column.h>
 #include <libgda/gda-enum-types.h>
 
 namespace Gnome

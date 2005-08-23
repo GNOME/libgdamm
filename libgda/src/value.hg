@@ -117,7 +117,7 @@ public:
   explicit Value(guchar val);
   _IGNORE(gda_value_new_tinyuint)
   explicit Value(ValueType val);
-  _IGNORE(gda_value_new_type)
+  _IGNORE(gda_value_new_gdatype)
   explicit Value(guint val);
   _IGNORE(gda_value_new_uinteger)
   explicit Value(const Glib::ustring& as_string, ValueType type);
@@ -138,7 +138,7 @@ public:
   _WRAP_METHOD(void set(guint64 val), gda_value_set_biguint)
 
   //TODO: The const here is quite meaningless:
-  _WRAP_METHOD(const gpointer get_binary(glong* size) const, gda_value_get_binary)
+  _WRAP_METHOD(const GdaBinary* get_binary(glong* size) const, gda_value_get_binary)
   _WRAP_METHOD(void set(gconstpointer val, glong size), gda_value_set_binary)
 
   //TODO: The const here is quite meaningless:

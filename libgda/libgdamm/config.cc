@@ -145,9 +145,9 @@ Glib::RefPtr<DataModel> get_data_source_model()
 
 void save_data_source(const Glib::ustring& name, const Glib::ustring& provider,
                       const Glib::ustring& cnc_string, const Glib::ustring& description,
-                      const Glib::ustring& username, const Glib::ustring& password)
+                      const Glib::ustring& username, const Glib::ustring& password, bool is_global)
 {
-  gda_config_save_data_source(name.c_str(), provider.c_str(), cnc_string.c_str(), description.c_str(), username.c_str(), password.c_str());
+  gda_config_save_data_source(name.c_str(), provider.c_str(), cnc_string.c_str(), description.c_str(), username.c_str(), password.c_str(), is_global);
 }
 
 

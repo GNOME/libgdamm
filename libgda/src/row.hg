@@ -60,8 +60,11 @@ public:
   //We use a custom conversion here, because we need to copy the value:
   #m4 _CONVERSION(`GdaValue*',`Value',`Glib::wrap($3, true /* take_copy=true */)')
   _WRAP_METHOD(Value get_value(int num) const, gda_row_get_value)
-  
+
   _WRAP_METHOD(int get_length() const, gda_row_get_length)
+
+  _WRAP_METHOD(void set_is_default(int num, bool is_default = true), gda_row_set_is_default)
+  _WRAP_METHOD(bool get_is_default(int num) const, gda_row_get_is_default)
 
 };
 

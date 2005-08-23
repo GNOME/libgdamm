@@ -72,7 +72,7 @@ public:
   _WRAP_METHOD(Glib::ustring get_username() const, gda_connection_get_username)
   _WRAP_METHOD(Glib::ustring get_password() const, gda_connection_get_password)
 
-  _WRAP_METHOD(void add_error(const Glib::RefPtr<Error>& error), gda_connection_add_error)
+  _WRAP_METHOD(void add_error(const Glib::RefPtr<ConnectionEvent>& error), gda_connection_add_error)
   _WRAP_METHOD(void add_error(const Glib::ustring& error), gda_connection_add_error_string)
   //TODO: Use ListHandle:
   _WRAP_METHOD(void add_error_list(GList *error_list), gda_connection_add_error_list)
@@ -85,27 +85,30 @@ public:
 
   #m4 //Use deep ownership because we own both the list and its elements;
   #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
- 
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd, const ParameterList& params), gda_connection_execute_command)
+
+//TODO: Document that execute* throw exceptions.
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd, const ParameterList& params), gda_connection_execute_command, errthrow)
   Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd);
-  
-  _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(const Command& cmd, const ParameterList& params), gda_connection_execute_single_command)
+ 
+  _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(const Command& cmd, const ParameterList& params), gda_connection_execute_single_command, errthrow)
+
   Glib::RefPtr<DataModel> execute_single_command(const Command& cmd);
   Glib::RefPtr<DataModel> execute_single_command(const Glib::ustring& cmd);
-    
-  _WRAP_METHOD(int execute_non_query(const Command& cmd, const ParameterList& params), gda_connection_execute_non_query)
+
+//Document that this throws:
+  _WRAP_METHOD(int execute_non_query(const Command& cmd, const ParameterList& params), gda_connection_execute_non_query, errthrow)
   int execute_non_query(const Command& cmd);
-  
+
   _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_begin_transaction)
   _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_commit_transaction)
   _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_rollback_transaction)
 
    //Use a special conversion here, because we should not own any part of the returned GList, and because we need to unconst the GList.:
-   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<Error> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
-   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const Error> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
+   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
+   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const ConnectionEvent> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
 
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<Error> > get_errors(), gda_connection_get_errors)
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const Error> > get_errors() const, gda_connection_get_errors)
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<ConnectionEvent> > get_errors(), gda_connection_get_errors)
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const ConnectionEvent> > get_errors() const, gda_connection_get_errors)
 
   //TODO: Use C++ type:
   _WRAP_METHOD(bool create_blob(GdaBlob* blob), gda_connection_create_blob)

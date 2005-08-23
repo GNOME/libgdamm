@@ -34,12 +34,12 @@ namespace Gda
 
 class DataSourceInfo
 {
-  _CLASS_OPAQUE_COPYABLE(DataSourceInfo, GdaDataSourceInfo, NONE, gda_config_copy_data_source_info, gda_config_free_data_source_info)
+  _CLASS_OPAQUE_COPYABLE(DataSourceInfo, GdaDataSourceInfo, NONE, gda_data_source_info_copy, gda_data_source_info_free)
   _CUSTOM_DEFAULT_CTOR
 public:
 
   DataSourceInfo();
-  
+
   operator bool() const;
 
   _CONVERSION(`Glib::ustring', `const char*', `($3).c_str()')

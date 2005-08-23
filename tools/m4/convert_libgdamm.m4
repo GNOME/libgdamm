@@ -16,7 +16,7 @@ _CONVERSION(`const Glib::RefPtr<Connection>&', `GdaConnection*', `Glib::unwrap($
 _CONVERSION(`const Command&', `GdaCommand*', `const_cast<GdaCommand*>(($3).gobj())')
 
 _CONVERSION(`const Row&', `const GdaRow*', `($3).gobj()')
-
+_CONVERSION(`Row&', `GdaRow*', `($3).gobj()')
 
 _CONVERSION(`const Value&', `GdaValue*', `const_cast<GdaValue*>(($3).gobj())')
 _CONVERSION(`const Value&', `const GdaValue*', `($3).gobj()')
@@ -26,10 +26,10 @@ _CONVERSION(`const Parameter&', `GdaParameter*', `const_cast<GdaParameter*>(($3)
 
 _CONVERSION(`const ParameterList&', `GdaParameterList*', `const_cast<GdaParameterList*>(($3).gobj())')
 
-_CONVERSION(`GdaDataModelColumnAttributes*',`DataModelColumnAttributes',`Glib::wrap($3)')
-_CONVERSION(`const DataModelColumnAttributes&', `GdaDataModelColumnAttributes*', `const_cast<GdaDataModelColumnAttributes*>(($3).gobj())')
-_CONVERSION(`const DataModelColumnAttributes&', `const GdaDataModelColumnAttributes*', `($3).gobj()')
-_CONVERSION(`DataModelColumnAttributes&', `GdaDataModelColumnAttributes*', `($3).gobj()')
+_CONVERSION(`GdaColumn*',`Column',`Glib::wrap($3)')
+_CONVERSION(`const Column&', `GdaColumn*', `const_cast<GdaColumn*>(($3).gobj())')
+_CONVERSION(`const Column&', `const GdaColumn*', `($3).gobj()')
+_CONVERSION(`Column&', `GdaColumn*', `($3).gobj()')
 
 _CONVERSION(`const GObject*',`Glib::RefPtr<const Glib::Object>',`Glib::wrap(const_cast<GObject*>($3))')
 _CONVERSION(`const Glib::RefPtr<Glib::Object>&', `const GObject*', `($3)->gobj()')

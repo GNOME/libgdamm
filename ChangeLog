@@ -1,3 +1,25 @@
+2005-08-23  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in: Use libgda-2.0
+	* examples/simple/main.cc: Update for new API.
+	* libgda/libgdamm/config.cc:
+	* libgda/libgdamm/config.h: Use renamed _free and _copy functions.
+	* libgda/src/client.hg:
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg: execute_*() methods now throw.
+	* libgda/src/datamodel.hg:
+	* libgda/src/datamodelcolumnattributes.ccg:
+	* libgda/src/datamodelcolumnattributes.hg: Renamed to Column.
+	* libgda/src/datasourceinfo.hg: Use renamed _free and _copy functions.
+	* libgda/src/error.hg: Renamed to ConnectionEvent.
+	* libgda/src/libgda_methods.defs: Regenerate with h2defs.py
+	* libgda/src/row.hg: Added get/set_is_default().
+	* libgda/src/value.ccg:
+	* libgda/src/value.hg: get_binary() now returns a GdaBinary instead of 
+	gpointer.
+	* tools/extra_defs_gen/generate_defs_gda.cc:
+	* tools/m4/convert_libgdamm.m4: Updated for renamed types.
+
 2005-02-03  Murray Cumming  <murrayc@murrayc.com>
  
  	* libgda/src/value.[hg|ccg]: Replace the Value(gint64) and 
