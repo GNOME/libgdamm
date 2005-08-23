@@ -23,7 +23,7 @@
 #include <glibmm/object.h>
 #include <libgdamm/command.h>
 #include <libgdamm/row.h>
-#include <libgdamm/datamodelcolumnattributes.h>
+#include <libgdamm/column.h>
 #include <libgda/gda-data-model.h>
 
 _DEFS(libgdamm,libgda)

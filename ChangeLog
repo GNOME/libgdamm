@@ -1,5 +1,21 @@
 2005-08-23  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/libgdamm.h:
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/column.ccg:
+	* libgda/src/column.hg: Rename from 
+	datamodelcolumnattributes.
+	* libgda/src/connection.hg:
+	* libgda/src/connectionevent.ccg:
+	* libgda/src/connectionevent.hg: Rename from error.*
+	* libgda/src/datamodel.hg:
+	* libgda/src/datamodelcolumnattributes.ccg:
+	* libgda/src/datamodelcolumnattributes.hg: Removed.
+	* libgda/src/error.ccg:
+	* libgda/src/error.hg: Removed.
+
+2005-08-23  Murray Cumming  <murrayc@murrayc.com>
+
 	* configure.in: Use libgda-2.0
 	* examples/simple/main.cc: Update for new API.
 	* libgda/libgdamm/config.cc:

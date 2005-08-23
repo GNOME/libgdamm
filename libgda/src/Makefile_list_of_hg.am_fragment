@@ -2,8 +2,8 @@
 # The include happens in Makefile.am, not Makefile.in or Makefile,
 # so it's like copy-and-pasting this into each of those Makefile.am files.
 
-files_hg = client.hg command.hg connection.hg datamodel.hg datamodelbase.hg datasourceinfo.hg error.hg \
-           datamodelcolumnattributes.hg  serverprovider.hg parameter.hg parameterlist.hg providerinfo.hg row.hg transaction.hg value.hg
+files_hg = client.hg command.hg connection.hg datamodel.hg datamodelbase.hg datasourceinfo.hg connectionevent.hg \
+           column.hg  serverprovider.hg parameter.hg parameterlist.hg providerinfo.hg row.hg transaction.hg value.hg
 
 
 

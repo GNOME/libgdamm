@@ -21,7 +21,7 @@
  */
 
 #include <libgdamm/transaction.h>
-#include <libgdamm/error.h>
+#include <libgdamm/connectionevent.h>
 #include <libgdamm/command.h>
 #include <libgdamm/datamodel.h>
 #include <libgdamm/parameterlist.h>
