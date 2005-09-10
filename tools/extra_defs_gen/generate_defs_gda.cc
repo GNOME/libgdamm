@@ -47,8 +47,11 @@ int main (int argc, char *argv[])
     gda_init("generate_extra_defs", "0.1", argc, argv);
 
     std::cout << get_defs(GDA_TYPE_CLIENT)
+                 << get_defs(GDA_TYPE_COLUMN)
+                 << get_defs(GDA_TYPE_COLUMN_INDEX)
                  << get_defs(GDA_TYPE_CONNECTION)
                  << get_defs(GDA_TYPE_DATA_MODEL_ARRAY)
+                 << get_defs(GDA_TYPE_DATA_MODEL_INDEX)
                  << get_defs(GDA_TYPE_DATA_MODEL_LIST)
                  << get_defs(GDA_TYPE_DATA_MODEL_BASE)
                  << get_defs(GDA_TYPE_DATA_MODEL)

@@ -13,12 +13,13 @@
 
 ;; From GdaConnection
 
+;; We must change the gpointer by hand to the specific type:
 (define-signal error
   (of-object "GdaConnection")
   (return-type "void")
   (when "last")
   (parameters
-    '("gpointer" "p0")
+    '("GdaConnectionEvent*" "error")
   )
 )
 

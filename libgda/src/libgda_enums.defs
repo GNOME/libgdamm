@@ -1,4 +1,4 @@
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-blob.h
+;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-blob.h
 
 (define-flags-extended BlobMode
   (in-module "Gda")
@@ -10,7 +10,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-client.h
+;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-client.h
 
 (define-enum-extended ClientEvent
   (in-module "Gda")
@@ -26,7 +26,27 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-command.h
+(define-enum-extended ClientSpecsType
+  (in-module "Gda")
+  (c-name "GdaClientSpecsType")
+  (values
+    '("create-database" "GDA_CLIENT_SPECS_CREATE_DATABASE" "0")
+    '("drop-database" "GDA_CLIENT_SPECS_DROP_DATABASE" "1")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-column-index.h
+
+(define-enum-extended Sorting
+  (in-module "Gda")
+  (c-name "GdaSorting")
+  (values
+    '("ascending" "GDA_SORTING_ASCENDING" "0")
+    '("descending" "GDA_SORTING_DESCENDING" "1")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-command.h
 
 (define-flags-extended CommandOptions
   (in-module "Gda")
@@ -51,7 +71,45 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-connection.h
+;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-connection-event.h
+
+(define-enum-extended ConnectionEventType
+  (in-module "Gda")
+  (c-name "GdaConnectionEventType")
+  (values
+    '("notice" "GDA_CONNECTION_EVENT_NOTICE" "0")
+    '("warning" "GDA_CONNECTION_EVENT_WARNING" "1")
+    '("error" "GDA_CONNECTION_EVENT_ERROR" "2")
+  )
+)
+
+(define-enum-extended ConnectionEventCode
+  (in-module "Gda")
+  (c-name "GdaConnectionEventCode")
+  (values
+    '("constraint-violation" "GDA_CONNECTION_EVENT_CODE_CONSTRAINT_VIOLATION" "0")
+    '("restrict-violation" "GDA_CONNECTION_EVENT_CODE_RESTRICT_VIOLATION" "1")
+    '("not-null-violation" "GDA_CONNECTION_EVENT_CODE_NOT_NULL_VIOLATION" "2")
+    '("foreign-key-violation" "GDA_CONNECTION_EVENT_CODE_FOREIGN_KEY_VIOLATION" "3")
+    '("unique-violation" "GDA_CONNECTION_EVENT_CODE_UNIQUE_VIOLATION" "4")
+    '("check-violation" "GDA_CONNECTION_EVENT_CODE_CHECK_VIOLATION" "5")
+    '("insufficient-privileges" "GDA_CONNECTION_EVENT_CODE_INSUFFICIENT_PRIVILEGES" "6")
+    '("undefined-column" "GDA_CONNECTION_EVENT_CODE_UNDEFINED_COLUMN" "7")
+    '("undefined-function" "GDA_CONNECTION_EVENT_CODE_UNDEFINED_FUNCTION" "8")
+    '("undefined-table" "GDA_CONNECTION_EVENT_CODE_UNDEFINED_TABLE" "9")
+    '("duplicate-column" "GDA_CONNECTION_EVENT_CODE_DUPLICATE_COLUMN" "10")
+    '("duplicate-database" "GDA_CONNECTION_EVENT_CODE_DUPLICATE_DATABASE" "11")
+    '("duplicate-function" "GDA_CONNECTION_EVENT_CODE_DUPLICATE_FUNCTION" "12")
+    '("duplicate-schema" "GDA_CONNECTION_EVENT_CODE_DUPLICATE_SCHEMA" "13")
+    '("duplicate-table" "GDA_CONNECTION_EVENT_CODE_DUPLICATE_TABLE" "14")
+    '("duplicate-alias" "GDA_CONNECTION_EVENT_CODE_DUPLICATE_ALIAS" "15")
+    '("duplicate-object" "GDA_CONNECTION_EVENT_CODE_DUPLICATE_OBJECT" "16")
+    '("syntax-error" "GDA_CONNECTION_EVENT_CODE_SYNTAX_ERROR" "17")
+    '("unknown" "GDA_CONNECTION_EVENT_CODE_UNKNOWN" "18")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-connection.h
 
 (define-flags-extended ConnectionOptions
   (in-module "Gda")
@@ -66,18 +124,19 @@
   (c-name "GdaConnectionFeature")
   (values
     '("aggregates" "GDA_CONNECTION_FEATURE_AGGREGATES" "0")
-    '("indexes" "GDA_CONNECTION_FEATURE_INDEXES" "1")
-    '("inheritance" "GDA_CONNECTION_FEATURE_INHERITANCE" "2")
-    '("namespaces" "GDA_CONNECTION_FEATURE_NAMESPACES" "3")
-    '("procedures" "GDA_CONNECTION_FEATURE_PROCEDURES" "4")
-    '("sequences" "GDA_CONNECTION_FEATURE_SEQUENCES" "5")
-    '("sql" "GDA_CONNECTION_FEATURE_SQL" "6")
-    '("transactions" "GDA_CONNECTION_FEATURE_TRANSACTIONS" "7")
-    '("triggers" "GDA_CONNECTION_FEATURE_TRIGGERS" "8")
-    '("users" "GDA_CONNECTION_FEATURE_USERS" "9")
-    '("views" "GDA_CONNECTION_FEATURE_VIEWS" "10")
-    '("xml-queries" "GDA_CONNECTION_FEATURE_XML_QUERIES" "11")
-    '("blobs" "GDA_CONNECTION_FEATURE_BLOBS" "12")
+    '("blobs" "GDA_CONNECTION_FEATURE_BLOBS" "1")
+    '("indexes" "GDA_CONNECTION_FEATURE_INDEXES" "2")
+    '("inheritance" "GDA_CONNECTION_FEATURE_INHERITANCE" "3")
+    '("namespaces" "GDA_CONNECTION_FEATURE_NAMESPACES" "4")
+    '("procedures" "GDA_CONNECTION_FEATURE_PROCEDURES" "5")
+    '("sequences" "GDA_CONNECTION_FEATURE_SEQUENCES" "6")
+    '("sql" "GDA_CONNECTION_FEATURE_SQL" "7")
+    '("transactions" "GDA_CONNECTION_FEATURE_TRANSACTIONS" "8")
+    '("triggers" "GDA_CONNECTION_FEATURE_TRIGGERS" "9")
+    '("updatable-cursor" "GDA_CONNECTION_FEATURE_UPDATABLE_CURSOR" "10")
+    '("users" "GDA_CONNECTION_FEATURE_USERS" "11")
+    '("views" "GDA_CONNECTION_FEATURE_VIEWS" "12")
+    '("xml-queries" "GDA_CONNECTION_FEATURE_XML_QUERIES" "13")
   )
 )
 
@@ -102,7 +161,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-export.h
+;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-export.h
 
 (define-enum-extended ExportFlags
   (in-module "Gda")
@@ -112,7 +171,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-transaction.h
+;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-transaction.h
 
 (define-enum-extended TransactionIsolation
   (in-module "Gda")
@@ -126,7 +185,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-value.h
+;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-value.h
 
 (define-enum-extended ValueType
   (in-module "Gda")

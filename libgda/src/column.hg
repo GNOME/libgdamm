@@ -58,6 +58,8 @@ public:
   _WRAP_METHOD(void set_caption(const Glib::ustring& caption), gda_column_set_caption)
   _WRAP_METHOD(glong get_scale() const, gda_column_get_scale)
   _WRAP_METHOD(void set_scale(glong scale), gda_column_set_scale)
+  _WRAP_METHOD(Glib::ustring get_dbms_type() const, gda_column_get_dbms_type)
+  _WRAP_METHOD(void set_dbms_type(const Glib::ustring& dbms_type), gda_column_set_dbms_type)
   _WRAP_METHOD(ValueType get_gdatype() const, gda_column_get_gdatype)
   _WRAP_METHOD(void set_gdatype(ValueType type), gda_column_set_gdatype)
   _WRAP_METHOD(bool get_allow_null() const, gda_column_get_allow_null)

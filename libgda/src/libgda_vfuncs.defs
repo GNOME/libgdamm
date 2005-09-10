@@ -4,29 +4,87 @@
 
 ; GdaDataModel
 
-(define-vfunc get_n_columns
+(define-vfunc i_get_n_columns
   (of-object "GdaDataModel")
   (return-type "int")
 )
 
-(define-vfunc get_n_rows
+(define-vfunc i_get_n_rows
   (of-object "GdaDataModel")
   (return-type "int")
 )
 
-(define-vfunc describe_column
+(define-vfunc i_describe_column
   (of-object "GdaDataModel")
-  (return-type "GdaFieldAttributes*")
+  (return-type "GdaColumn*")
   (parameters
     '("int" "col")
   )
 )
 
-(define-vfunc get_value_at
+(define-vfunc i_get_column_title
+  (of-object "GdaDataModel")
+  (return-type "const-gchar*")
+  (parameters
+    '("int" "col")
+  )
+)
+
+(define-vfunc i_set_column_title
+  (of-object "GdaDataModel")
+  (return-type "none")
+  (parameters
+    '("int" "col")
+    '("const-gchar*" "title")
+  )
+)
+
+(define-vfunc i_get_column_pos
+  (of-object "GdaDataModel")
+  (return-type "int")
+  (parameters
+    '("const-char*" "title")
+  )
+)
+
+(define-vfunc i_get_row
+  (of-object "GdaDataModel")
+  (return-type "const-GdaRow*")
+  (parameters
+    '("int" "row")
+  )
+)
+
+(define-vfunc i_get_value_at
   (of-object "GdaDataModel")
   (return-type "const-GdaValue*")
   (parameters
     '("int" "col")
     '("int" "row")
   )
+)
+
+(define-vfunc i_is_updatable
+  (of-object "GdaDataModel")
+  (return-type "gboolean')
+)
+
+(define-vfunc i_has_changed
+  (of-object "GdaDataModel")
+  (return-type "gboolean')
+)
+
+(define-vfunc i_begin_changes
+  (of-object "GdaDataModel")
+  (return-type "none")
+)
+
+(define-vfunc i_commit_changes
+  (of-object "GdaDataModel")
+  (return-type "gboolean')
+)
+
+(define-vfunc i_cancel_changes
+  (of-object "GdaDataModel")
+  (return-type "gboolean')
 )

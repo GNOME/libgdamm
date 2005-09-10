@@ -60,7 +60,7 @@ public:
 
   _WRAP_METHOD(Glib::RefPtr<Client> get_client(), gda_connection_get_client, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Client> get_client() const, gda_connection_get_client, refreturn)
-    
+
   _WRAP_METHOD(void set_client(const Glib::RefPtr<Client>& client), gda_connection_set_client)
 
   _WRAP_METHOD(ConnectionOptions get_options() const, gda_connection_get_options)
@@ -77,6 +77,7 @@ public:
   _WRAP_METHOD(void add_event(const Glib::ustring& error), gda_connection_add_event_string)
   //TODO: Use ListHandle:
   _WRAP_METHOD(void add_events_list(GList *error_list), gda_connection_add_events_list)
+  _WRAP_METHOD(void clear_events_list(), gda_connection_clear_events_list)
 
   _WRAP_METHOD(bool change_database(const Glib::ustring& name), gda_connection_change_database)
 
@@ -120,6 +121,8 @@ public:
   //TODO: Use C++ type:
   _WRAP_METHOD(bool create_blob(GdaBlob* blob), gda_connection_create_blob)
 
+  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Value& from) const, gda_connection_value_to_sql_string);
+
   _WRAP_METHOD(bool supports(ConnectionFeature feature) const, gda_connection_supports)
 
   _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, const ParameterList& params), gda_connection_get_schema)
@@ -129,8 +132,9 @@ public:
   Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema) const;
 
   _WRAP_METHOD(Glib::ustring get_last_insert_id(const Glib::RefPtr<DataModel>& recset) const, gda_connection_get_last_insert_id) 
-  
-  //TODO: _WRAP_SIGNAL(void error(GList* error_list), "error")
+
+_CONVERSION(`GdaConnectionEvent*',`const Glib::RefPtr<ConnectionEvent>&',Glib::wrap($3, true))
+  _WRAP_SIGNAL(void error(const Glib::RefPtr<ConnectionEvent>& error), "error")
 };
 
 } // namespace Gda

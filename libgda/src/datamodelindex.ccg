@@ -1,9 +1,9 @@
 /* $Id$ */
 // -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* connection.cc
+/* datamodelindex.cc
  * 
- * Copyright 2001      Free Software Foundation
+ * Copyright 2003 libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,29 +20,4 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/connection.h>
-#include <libgda/gda-enum-types.h>
-
-namespace Gnome
-{
-
-namespace Gda
-{
-
-
-Glib::RefPtr<DataModel> ServerProvider::get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema)
-{
-  return Glib::wrap(gda_server_provider_get_schema(gobj(), Glib::unwrap(cnc), ((GdaConnectionSchema)(schema)), 0));
-}
-
-Glib::RefPtr<const DataModel> ServerProvider::get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema) const
-{
-  return Glib::wrap(gda_server_provider_get_schema(const_cast<GdaServerProvider*>(gobj()), Glib::unwrap(cnc), ((GdaConnectionSchema)(schema)), 0));
-}
-
-
-} // namespace Gda
-
-} // namespace Gnome
-
-
+#include <libgda/gda-data-model-index.h>

@@ -74,7 +74,11 @@ public:
 
   _WRAP_METHOD(bool is_updatable() const, gda_data_model_is_updatable)
 
-  //TODO: Use C++ types:
+  //TODO: Is Row meant to be just a reference, like a TreeModel::Row?
+  #m4 //Use deep ownership because we own both the list and its elements;
+  #m4 _CONVERSION(`const Glib::ListHandle<Value>&',`const GList*',`$3.data()')
+  _WRAP_METHOD(Row append_values(const Glib::ListHandle<Value>& values), gda_data_model_append_values)
+
   _WRAP_METHOD(bool append_row(Row& row), gda_data_model_append_row)
   _WRAP_METHOD(bool remove_row(const Row& row), gda_data_model_remove_row)
   _WRAP_METHOD(bool update_row(const Row& row), gda_data_model_update_row)
@@ -94,17 +98,17 @@ public:
   _WRAP_METHOD(bool has_changed() const, gda_data_model_has_changed)
   _WRAP_METHOD(bool begin_update(), gda_data_model_begin_update)
   _WRAP_METHOD(bool cancel_update(), gda_data_model_cancel_update)
-  _WRAP_METHOD(bool end_update(), gda_data_model_end_update)
+  _WRAP_METHOD(bool commit_update(), gda_data_model_commit_update)
 
-
-  _WRAP_METHOD(Glib::ustring to_comma_separated() const, gda_data_model_to_comma_separated)
-  _WRAP_METHOD(Glib::ustring to_tab_separated() const, gda_data_model_to_tab_separated)
+//TODO: Why doesn't the const int* to const gint* conversion work?
+  _WRAP_METHOD(Glib::ustring to_text_separated(const gint* cols, int nb_cols, gchar sep) const, gda_data_model_to_text_separated)
 
 //TODO: Implement.
   Glib::ustring to_xml(const Glib::ArrayHandle<int>& cols, const Glib::StringArrayHandle& names) const;
   _IGNORE(gda_data_model_to_xml);
 
-  //TODO: Wrap these if we want to depend on libxml++
+  //TODO: Wrap these if we want to depend on libxml++, though they seem silly. murrayc.
+  _IGNORE(gda_data_model_to_xml_node, gda_data_model_add_data_from_xml_node)
   //_WRAP_METHOD(xmlNodePtr to_xml(const GLib::ustring& name), gda_data_model_to_xml_node)
   //_WRAP_METHOD(bool add_data(xmlNodePtr node), gda_data_model_add_data_from_xml_node)
 
@@ -114,12 +118,38 @@ public:
   _WRAP_METHOD(CommandType get_command_type() const, gda_data_model_get_command_type)
   _WRAP_METHOD(bool set_command_type(CommandType type), gda_data_model_set_command_type)
 
-  _WRAP_SIGNAL(void changed(), "changed")
+  _WRAP_METHOD(void dump(FILE* to_stream) const, gda_data_model_dump)
+  _WRAP_METHOD(Glib::ustring dump_as_string() const, gda_data_model_dump_as_string)
 
-  _WRAP_VFUNC(int get_n_rows(), i_get_n_rows)
-  _WRAP_VFUNC(int get_n_columns(), i_get_n_columns)
-  _WRAP_VFUNC(GdaColumn* describe_column(int col), i_describe_column)
-  _WRAP_VFUNC(const GdaValue* get_value_at(int col, int row), i_get_value_at)
+  _WRAP_SIGNAL(void changed(), changed)
+  _WRAP_SIGNAL(void row_inserted(int row), row_inserted)
+  _WRAP_SIGNAL(void row_updated(int row), row_updated)
+  _WRAP_SIGNAL(void row_removed(int row), row_removed)
+  _WRAP_SIGNAL(void column_inserted(int col), column_inserted)
+  _WRAP_SIGNAL(void column_updated(int col), column_updated)
+  _WRAP_SIGNAL(void column_removed(int col), column_removed)
+
+  _WRAP_SIGNAL(void begin_update(), begin_update)
+  _WRAP_SIGNAL(void cancel_update(), cancel_update)
+  _WRAP_SIGNAL(void commit_update(), commit_update)
+
+protected:
+  _WRAP_VFUNC(int get_n_rows() const, i_get_n_rows)
+  _WRAP_VFUNC(int get_n_columns() const, i_get_n_columns)
+
+  //TODO: _CONVERSION(`Column', `GdaColumn*', `($3).gobj_copy()')
+  //_WRAP_VFUNC(Column describe_column(int col) const, i_describe_column)
+
+  //TODO: _WRAP_VFUNC(Glib::ustring get_column_title(int col) const, i_get_column_title)
+  _WRAP_VFUNC(void set_column_title(int col, const Glib::ustring& title), i_set_column_title)
+  _WRAP_VFUNC(int get_column_pos(const Glib::ustring& title) const, i_get_column_pos)
+  //TODO: _WRAP_VFUNC(Row get_row(int row), i_get_row)
+  //TODO: _WRAP_VFUNC(Value get_value_at(int col, int row), i_get_value_at)
+  //TODO: _WRAP_VFUNC(bool is_updatable() const, i_is_updatable)
+  //TODO: _WRAP_VFUNC(bool has_changed() const, i_has_changed)
+  //TODO: _WRAP_VFUNC(void begin_changes() const, i_begin_changes)
+  //TODO: _WRAP_VFUNC(bool commit_changes() const, i_begin_changes)
+  //TODO: _WRAP_VFUNC(bool cancel_changes() const, i_cancel_changes)
 };
 
 } // namespace Gda

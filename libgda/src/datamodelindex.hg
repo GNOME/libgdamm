@@ -1,0 +1,63 @@
+/* $Id$ */
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* datamodel.h
+ *
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <libgdamm/columnindex.h>
+#include <libgda/gda-data-model-index.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+class Row;
+
+class DataModelIndex
+{
+  _CLASS_BOXEDTYPE(DataModelIndex, GdaDataModelIndex, gda_data_model_index_new, gda_data_model_index_copy, gda_data_model_index_free)
+  _IGNORE(gda_data_model_index_new, gda_data_model_index_copy, gda_data_model_index_free)
+public:
+
+  _WRAP_EQUAL(gda_data_model_index_equal)
+
+  _WRAP_METHOD(Glib::ustring get_name() const, gda_data_model_index_get_name)
+  _WRAP_METHOD(void gda_data_set_name(const Glib::ustring& name), gda_data_model_index_set_name)
+  _WRAP_METHOD(Glib::ustring get_table_name() const, gda_data_model_index_get_table_name)
+  _WRAP_METHOD(void set_table_name(const Glib::ustring& name), gda_data_model_index_set_table_name)
+  _WRAP_METHOD(bool get_primary_key() const, gda_data_model_index_get_primary_key)
+  _WRAP_METHOD(void set_primary_key(bool pk = true), gda_data_model_index_set_primary_key)
+  _WRAP_METHOD(bool get_unique_key() const, gda_data_model_index_get_unique_key)
+  _WRAP_METHOD(void set_unique_key(bool uk = true), gda_data_model_index_set_unique_key)
+  _WRAP_METHOD(Glib::ustring get_references() const, gda_data_model_index_get_references)
+  _WRAP_METHOD(void set_references(const Glib::ustring& ref), gda_data_model_index_set_references)
+  //TODO: _WRAP_METHOD(GList* get_column_index_list() const, gda_data_model_index_get_column_index_list)
+  //_WRAP_METHOD(void set_column_index_list(GList *col_idx_list), gda_data_model_index_set_column_index_list)
+
+};
+
+} // namespace Gda
+} // namespace Gnome
+

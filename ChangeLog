@@ -1,3 +1,32 @@
+2005-09-10  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	Added columnindex.hg, datamodelindex.hg
+	* libgda/src/client.hg: Added ClientSpecsType.
+	Changed get_connection_list() to get_connections().
+	Added notify_connection_closed_event(),
+	get_provider_specs()
+	* libgda/src/column.hg: Added get_dbms_type(), 
+	commit_update(), 
+	* libgda/src/columnindex.ccg:
+	* libgda/src/columnindex.hg: New class.
+	* libgda/src/connection.hg: Added clear_events_list(),
+	value_to_sql_string(), and error signal.
+	* libgda/src/datamodel.hg: Added append_values(), 
+	to_text_separated(), dump(), dump_as_string(), and 
+	various vfuncs and signals.
+	* libgda/src/datamodelindex.ccg:
+	* libgda/src/datamodelindex.hg: New class.
+	* libgda/src/libgda_enums.defs: Regenerated with enums.pl.
+	* libgda/src/libgda_signals.defs: Regenerated with extra_defs.
+	* libgda/src/libgda_vfuncs.defs: Edited by hand.
+	* libgda/src/serverprovider.ccg:
+	* libgda/src/serverprovider.hg: Added reset_connection(), 
+	create_database(), drop_database(), get_specs(), 
+	perform_action_params(), create_database_cnc(), drop_database_cnc(), 
+	create_table(), drop_table(), create_index(), drop_index(), 
+	value_to_sql_string(), get_last_insert_id().
+
 2005-08-23  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/client.hg: Added get_dsn_specs(), create_database(), 
