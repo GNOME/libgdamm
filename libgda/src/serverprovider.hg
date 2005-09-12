@@ -55,7 +55,6 @@ class ServerProvider : public Glib::Object
   _WRAP_METHOD(Glib::ustring get_specs(ClientSpecsType action_type) const, gda_server_provider_get_specs)
   _WRAP_METHOD(bool perform_action_params(const ParameterList& params, ClientSpecsType action_type), gda_server_provider_perform_action_params, errthrow)
 
-  //TODO: The libgda ChangeLog says these were renamed and then deprecated (which would be silly)
   _WRAP_METHOD(bool create_database_cnc(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_create_database_cnc)
   _WRAP_METHOD(bool drop_database_cnc(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_drop_database_cnc)
 

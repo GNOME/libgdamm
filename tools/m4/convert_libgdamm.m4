@@ -58,6 +58,8 @@ _CONVERSION(`const GdaGeometricPoint*', `GeometricPoint', `*($3)')
 
 _CONVERSION(`const int*','const-gint*',`$3')
 
+_CONVERSION(`long&',`glong*',`&($3)')
+
 _CONV_ENUM(Gda,CommandType)
 _CONV_ENUM(Gda,CommandOptions)
 _CONV_ENUM(Gda,ConnectionFeature)

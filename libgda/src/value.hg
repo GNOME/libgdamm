@@ -125,8 +125,13 @@ public:
   //TODO: explicit Value(const xmlNodePtr node);
   //_IGNORE(gda_value_new_from_xml)
 
+  //TODO: This is very strange, and not implemented anyway:
+  //_WRAP_METHOD(void set_type(GType type), gda_value_set_type())
+
   bool operator==(const Value& src) const;
   bool operator!=(const Value& src) const;
+
+  _WRAP_METHOD(void reset_with_type(ValueType type), gda_value_reset_with_type)
 
   _WRAP_METHOD(ValueType get_value_type() const, gda_value_get_type)
   _WRAP_METHOD(bool is_null() const, gda_value_is_null)
@@ -138,8 +143,9 @@ public:
   _WRAP_METHOD(void set(guint64 val), gda_value_set_biguint)
 
   //TODO: The const here is quite meaningless:
-  _WRAP_METHOD(const GdaBinary* get_binary(glong* size) const, gda_value_get_binary)
-  _WRAP_METHOD(void set(gconstpointer val, glong size), gda_value_set_binary)
+  //TODO: Whey doesn't set() take a GdaBinary as well, and what's the point of having the size twice?
+  _WRAP_METHOD(const GdaBinary* get_binary(long& size) const, gda_value_get_binary)
+  _WRAP_METHOD(void set(gconstpointer val, long size), gda_value_set_binary)
 
   //TODO: The const here is quite meaningless:
   _WRAP_METHOD(const GdaBlob* get_blob() const, gda_value_get_blob)
@@ -181,19 +187,22 @@ public:
   _WRAP_METHOD(void set(guchar val), gda_value_set_tinyuint)
   _WRAP_METHOD(guint get_uinteger() const, gda_value_get_uinteger)
   _WRAP_METHOD(void set(guint val), gda_value_set_uinteger)
-  _WRAP_METHOD(ValueType get_vtype() const, gda_value_get_vtype)
-  _WRAP_METHOD(void set(GdaValueType type), gda_value_set_vtype)
+  _WRAP_METHOD(ValueType get_gdatype() const, gda_value_get_gdatype)
+  _WRAP_METHOD(void set(ValueType type), gda_value_set_gdatype)
   _WRAP_METHOD(bool set_from_string(const Glib::ustring& as_string, ValueType type), gda_value_set_from_string)
 
   //Use the copy constructor instead: _WRAP_METHOD(bool set_from_value(const Value& from), gda_value_set_from_value)
   _IGNORE(gda_value_set_from_value)
 
-  _EQUAL(gda_value_compare)
+  _WRAP_METHOD(int compare(const Value& value), gda_value_compare)
+  _WRAP_METHOD(int compare_ext(const Value& value), gda_value_compare_ext)
 
   //TODO: Wrap this as some stream operator thing?
   _WRAP_METHOD(Glib::ustring to_string() const, gda_value_stringify)
 
-  //TODO: _WRAP_METHOD(xmlNodePtr gda_value_to_xml(), gda_value_to_xml)
+  //Let's not depend on libxml++ just to wrap this method.
+  //It seems quite useless anyway:
+  _IGNORE(gda_value_to_xml)
 
 
   _WRAP_METHOD(static Glib::ustring type_to_string(ValueType type), gda_type_to_string)
