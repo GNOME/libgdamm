@@ -1034,12 +1034,6 @@
   (return-type "GdaColumnIndex*")
 )
 
-(define-method free
-  (of-object "GdaColumnIndex")
-  (c-name "gda_column_index_free")
-  (return-type "none")
-)
-
 (define-method equal
   (of-object "GdaColumnIndex")
   (c-name "gda_column_index_equal")
@@ -3587,6 +3581,22 @@
   (return-type "GdaValueType")
 )
 
+(define-function gda_value_convert_gdatype_to_gtype
+  (c-name "gda_value_convert_gdatype_to_gtype")
+  (return-type "GType")
+  (parameters
+    '("GdaValueType" "type")
+  )
+)
+
+(define-function gda_value_convert_gtype_to_gdatype
+  (c-name "gda_value_convert_gtype_to_gdatype")
+  (return-type "GdaValueType")
+  (parameters
+    '("GType" "type")
+  )
+)
+
 (define-function gda_value_new_null
   (c-name "gda_value_new_null")
   (return-type "GdaValue*")
@@ -3612,7 +3622,7 @@
   (c-name "gda_value_new_binary")
   (return-type "GdaValue*")
   (parameters
-    '("gconstpointer" "val")
+    '("guchar*" "val")
     '("glong" "size")
   )
 )
@@ -3869,9 +3879,6 @@
   (of-object "GdaValue")
   (c-name "gda_value_get_binary")
   (return-type "const-GdaBinary*")
-  (parameters
-    '("glong*" "size")
-  )
 )
 
 (define-method set_binary
@@ -3879,8 +3886,7 @@
   (c-name "gda_value_set_binary")
   (return-type "none")
   (parameters
-    '("gconstpointer" "val")
-    '("glong" "size")
+    '("const-GdaBinary*" "binary")
   )
 )
 
@@ -4189,15 +4195,6 @@
   (return-type "GdaValueType")
   (parameters
     '("GValue*" "value")
-  )
-)
-
-(define-method set_type
-  (of-object "GdaValue")
-  (c-name "gda_value_set_type")
-  (return-type "none")
-  (parameters
-    '("GType" "type")
   )
 )
 

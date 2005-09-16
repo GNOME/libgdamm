@@ -70,7 +70,7 @@ public:
    static Value create_as_biguint(guint64 val);
   _IGNORE(gda_value_new_biguint)
 
-  explicit Value(const void* val, glong size); 
+  explicit Value(const guchar* val, glong size); 
   _IGNORE(gda_value_new_long);
 
   _IGNORE(gda_value_new_binary)
@@ -125,9 +125,6 @@ public:
   //TODO: explicit Value(const xmlNodePtr node);
   //_IGNORE(gda_value_new_from_xml)
 
-  //TODO: This is very strange, and not implemented anyway:
-  //_WRAP_METHOD(void set_type(GType type), gda_value_set_type())
-
   bool operator==(const Value& src) const;
   bool operator!=(const Value& src) const;
 
@@ -142,10 +139,8 @@ public:
   _WRAP_METHOD(guint64 get_biguint() const, gda_value_get_biguint)
   _WRAP_METHOD(void set(guint64 val), gda_value_set_biguint)
 
-  //TODO: The const here is quite meaningless:
-  //TODO: Whey doesn't set() take a GdaBinary as well, and what's the point of having the size twice?
-  _WRAP_METHOD(const GdaBinary* get_binary(long& size) const, gda_value_get_binary)
-  _WRAP_METHOD(void set(gconstpointer val, long size), gda_value_set_binary)
+  _WRAP_METHOD(const GdaBinary* get_binary() const, gda_value_get_binary)
+  _WRAP_METHOD(void set(const GdaBinary* binary), gda_value_set_binary)
 
   //TODO: The const here is quite meaningless:
   _WRAP_METHOD(const GdaBlob* get_blob() const, gda_value_get_blob)
@@ -207,7 +202,6 @@ public:
 
   _WRAP_METHOD(static Glib::ustring type_to_string(ValueType type), gda_type_to_string)
   _WRAP_METHOD(static ValueType type_from_string(const Glib::ustring& type), gda_type_from_string)
-
 };
 
 } // namespace Gda

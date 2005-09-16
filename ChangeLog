@@ -1,3 +1,10 @@
+2005-09-16  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/libgda_methods.defs: Updated with h2defs.py.
+	* libgda/src/value.ccg:
+	* libgda/src/value.hg: Updated set_binary() and a 
+	constuctor for the changed libgda API.
+
 2005-09-12  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/libgdamm-2.0.pc.in: Update to show that it now 

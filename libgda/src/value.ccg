@@ -60,9 +60,9 @@ Value Value::create_as_biguint(guint64 val)
 }
 
 
-Value::Value(const void* val, glong size)
+Value::Value(const guchar* val, glong size)
 {
-  gobject_ = gda_value_new_binary(val, size);
+  gobject_ = gda_value_new_binary(const_cast<guchar*>(val), size);
 }
 
 
