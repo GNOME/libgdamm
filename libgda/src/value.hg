@@ -140,7 +140,7 @@ public:
   _WRAP_METHOD(void set(guint64 val), gda_value_set_biguint)
 
   _WRAP_METHOD(const GdaBinary* get_binary() const, gda_value_get_binary)
-  _WRAP_METHOD(void set(const GdaBinary* binary), gda_value_set_binary)
+  _WRAP_METHOD(void set(const GdaBinary& binary), gda_value_set_binary)
 
   //TODO: The const here is quite meaningless:
   _WRAP_METHOD(const GdaBlob* get_blob() const, gda_value_get_blob)

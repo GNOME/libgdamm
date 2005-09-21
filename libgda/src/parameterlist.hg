@@ -42,6 +42,12 @@ public:
   void add_parameter(const Parameter& param);
   _IGNORE(gda_parameter_list_add_parameter)
 
+  template<typename T>
+  void add_parameter(const Glib::ustring& name, const T& value)
+  {
+    add_parameter(Parameter(name, value));
+  }
+
   //TODO: Use ListHandle:
   _WRAP_METHOD(GList* get_names(), gda_parameter_list_get_names)
   

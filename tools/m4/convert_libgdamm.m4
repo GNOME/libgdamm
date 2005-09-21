@@ -56,6 +56,8 @@ _CONVERSION(`const GdaTimestamp*', `Timestamp', `*($3)')
 _CONVERSION(`const GeometricPoint&', `const GdaGeometricPoint*', `&($3)')
 _CONVERSION(`const GdaGeometricPoint*', `GeometricPoint', `*($3)')
 
+_CONVERSION(`const GdaBinary&', `const GdaBinary*', `&($3)')
+
 _CONVERSION(`const int*','const-gint*',`$3')
 
 _CONVERSION(`long&',`glong*',`&($3)')

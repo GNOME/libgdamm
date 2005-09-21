@@ -44,7 +44,7 @@ public:
   _IGNORE(gda_parameter_new_from_value)
   Parameter(const Glib::ustring& name, bool value);
   _IGNORE(gda_parameter_new_boolean)
-  Parameter(const Glib::ustring& name, gdouble value);
+  Parameter(const Glib::ustring& name, double value);
   _IGNORE(gda_parameter_new_double)
   Parameter(const Glib::ustring& name, const Glib::RefPtr<Glib::Object>& value);
   _IGNORE(gda_parameter_new_gobject)

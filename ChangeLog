@@ -1,3 +1,17 @@
+2005-09-21  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/client.hg: create_database(), 
+	drop_database(): Change parameter to 
+	const ParameterList& instead of GdaParameterList*. 
+	* libgda/src/parameter.hg: Change a gdouble to double.
+	* libgda/src/parameterlist.hg: Added templated add()
+	method, so you do not need to explicitly create a 
+	Parameter object.
+	* libgda/src/value.hg: set(binary): Change from 
+	GdaBinary* to const GdaBinary&.
+	* tools/m4/convert_libgdamm.m4: Changed necessary 
+	conversions.
+
 2005-09-16  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/libgda_methods.defs: Updated with h2defs.py.
