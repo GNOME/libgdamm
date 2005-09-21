@@ -1,5 +1,12 @@
 2005-09-21  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/value.ccg:
+	* libgda/src/value.hg: set_binary(), get_binary():
+	Hide the GdaBinary type completely, using guchar* and 
+	size instead. It is silly.
+
+2005-09-21  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/client.hg: create_database(), 
 	drop_database(): Change parameter to 
 	const ParameterList& instead of GdaParameterList*. 

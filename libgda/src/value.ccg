@@ -200,7 +200,7 @@ bool Value::operator==(const Value& src) const
 
   if(get_value_type() != src.get_value_type()) //gda_value_compare() can only compare GdaValues of the same type.
     return false;
-    
+
   gint test = gda_value_compare(const_cast<GdaValue*>(gobj()), const_cast<GdaValue*>(src.gobj()));   //returns 0 if both contain
   return test == 0;
 }
@@ -210,6 +210,20 @@ bool Value::operator!=(const Value& src) const
   return !operator==(src);
 }
 
+const guchar* Value::get_binary(long& size) const
+{
+  const GdaBinary* gdaBinary = gda_value_get_binary(const_cast<GdaValue*>(gobj()));
+  size = gdaBinary->binary_length;
+  return gdaBinary->data;
+}
+
+void Value::set(const guchar* val, long size)
+{
+  GdaBinary gdaBinary;
+  gdaBinary.data = const_cast<guchar*>(val); //It does not take ownership.
+  gdaBinary.binary_length = size;
+  gda_value_set_binary(gobj(), &(gdaBinary));
+}
 
 } //namespace Gda
 

@@ -70,7 +70,7 @@ public:
    static Value create_as_biguint(guint64 val);
   _IGNORE(gda_value_new_biguint)
 
-  explicit Value(const guchar* val, glong size); 
+  explicit Value(const guchar* val, long size); 
   _IGNORE(gda_value_new_long);
 
   _IGNORE(gda_value_new_binary)
@@ -138,9 +138,13 @@ public:
   _WRAP_METHOD(void set(gint64 val), gda_value_set_bigint)
   _WRAP_METHOD(guint64 get_biguint() const, gda_value_get_biguint)
   _WRAP_METHOD(void set(guint64 val), gda_value_set_biguint)
+\
 
-  _WRAP_METHOD(const GdaBinary* get_binary() const, gda_value_get_binary)
-  _WRAP_METHOD(void set(const GdaBinary& binary), gda_value_set_binary)
+  const guchar* get_binary(long& size) const;
+  _IGNORE(gda_value_get_binary)
+
+  void set(const guchar* val, long size);
+  _IGNORE(gda_value_set_binary)
 
   //TODO: The const here is quite meaningless:
   _WRAP_METHOD(const GdaBlob* get_blob() const, gda_value_get_blob)
