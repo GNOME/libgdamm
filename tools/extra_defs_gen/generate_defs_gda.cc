@@ -21,25 +21,6 @@
 
 #include "glibmm_generate_extra_defs/generate_extra_defs.h"
 #include <libgda/libgda.h>
-#include <libgda/gda-xql-atom.h>
-#include <libgda/gda-xql-bin.h>
-#include <libgda/gda-xql-column.h>
-#include <libgda/gda-xql-const.h>
-#include <libgda/gda-xql-delete.h>
-//#include <libgda/gda-xql-dml.h>
-#include <libgda/gda-xql-dual.h>
-//#include <libgda/gda-xql-field.h>
-#include <libgda/gda-xql-func.h>
-#include <libgda/gda-xql-insert.h>
-#include <libgda/gda-xql-join.h>
-//#include <libgda/gda-xql-list.h>
-//#include <libgda/gda-xql-query.h>
-#include <libgda/gda-xql-select.h>
-//#include <libgda/gda-xql-stack.h>
-#include <libgda/gda-xql-target.h>
-#include <libgda/gda-xql-update.h>
-#include <libgda/gda-xql-value.h>
-#include <libgda/gda-xql-valueref.h>
 //#include <libgda/gda-server-recordset-model.h>
 
 int main (int argc, char *argv[])
@@ -56,7 +37,7 @@ int main (int argc, char *argv[])
                  << get_defs(GDA_TYPE_DATA_MODEL_BASE)
                  << get_defs(GDA_TYPE_DATA_MODEL)
 //                 << get_defs(GDA_TYPE_DATA_MODEL_COLUMN_ATTRIBUTES)
-                 << get_defs(GDA_TYPE_CONNECTION_EVENT)
+                 << get_defs(GDA_TYPE_CONNECTION_EVENT);
 //                 << get_defs(GDA_TYPE_EXPORT)
 //                 << get_defs(GDA_TYPE_RECORDSET)
 //                 << get_defs(GDA_TYPE_SERVER_CONNECTION)
@@ -64,26 +45,5 @@ int main (int argc, char *argv[])
 //                 << get_defs(GDA_TYPE_SERVER_RECORDSET_MODEL)
 //                 << get_defs(GDA_TYPE_SERVER_RECORDSET)
 //                 << get_defs(GDA_TYPE_SERVER)
-                 << get_defs(GDA_TYPE_TABLE)
-                 << get_defs(GDA_TYPE_XML_DATABASE)
-                 << get_defs(GDA_TYPE_XQL_ATOM)
-                 << get_defs(GDA_TYPE_XQL_BIN)
-                 << get_defs(GDA_TYPE_XQL_COLUMN)
-                 << get_defs(GDA_TYPE_XQL_CONST)
-                 << get_defs(GDA_TYPE_XQL_DELETE)
-                 << get_defs(GDA_TYPE_XQL_DML)
-                 << get_defs(GDA_TYPE_XQL_DUAL)
-//                 << get_defs(GDA_TYPE_XQL_FIELD)
-                 << get_defs(GDA_TYPE_XQL_FUNC)
-                 << get_defs(GDA_TYPE_XQL_INSERT)
-                 << get_defs(GDA_TYPE_XQL_JOIN)
-//                 << get_defs(GDA_TYPE_XQL_LIST)
-//                 << get_defs(GDA_TYPE_XQL_QUERY)
-                 << get_defs(GDA_TYPE_XQL_SELECT)
-//                 << get_defs(GDA_TYPE_XQL_STACK)
-                 << get_defs(GDA_TYPE_XQL_TARGET)
-//                 << get_defs(GDA_TYPE_XQL_UPDATE)
-                 << get_defs(GDA_TYPE_XQL_VALUE)
-                 << get_defs(GDA_TYPE_XQL_VALUEREF);
     return 0;
 }

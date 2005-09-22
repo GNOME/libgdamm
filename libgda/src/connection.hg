@@ -119,7 +119,7 @@ public:
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const ConnectionEvent> > get_events() const, gda_connection_get_events)
 
   //TODO: Use C++ type:
-  _WRAP_METHOD(bool create_blob(GdaBlob* blob), gda_connection_create_blob)
+  _WRAP_METHOD(GdaBlob* create_blob(), gda_connection_create_blob)
 
   _WRAP_METHOD(Glib::ustring value_to_sql_string(const Value& from) const, gda_connection_value_to_sql_string);
 

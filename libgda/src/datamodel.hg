@@ -42,13 +42,6 @@ class DataModel : public Glib::Interface
   _CLASS_INTERFACE(DataModel, GdaDataModel, GDA_DATA_MODEL, GdaDataModelIface)
 public:
 
-  _WRAP_METHOD(void changed(), gda_data_model_changed)
-  _WRAP_METHOD(void row_inserted(int row), gda_data_model_row_inserted)
-  _WRAP_METHOD(void row_updated(int row), gda_data_model_row_updated)
-  _WRAP_METHOD(void row_removed(int row), gda_data_model_row_removed)
-  _WRAP_METHOD(void column_inserted(int col), gda_data_model_column_inserted)
-  _WRAP_METHOD(void column_updated(int col), gda_data_model_column_updated)
-  _WRAP_METHOD(void column_removed(int col), gda_data_model_column_removed)  
   _WRAP_METHOD(void freeze(), gda_data_model_freeze)  
   _WRAP_METHOD(void thaw(), gda_data_model_thaw)
 
@@ -57,7 +50,8 @@ public:
   _WRAP_METHOD(int get_n_columns() const, gda_data_model_get_n_columns)
 
   //TODO: Use C++ type:
-  _WRAP_METHOD(Column describe_column(int col), gda_data_model_describe_column)
+  _WRAP_METHOD(Glib::RefPtr<Column> describe_column(int col), gda_data_model_describe_column)
+  _WRAP_METHOD(Glib::RefPtr<const Column> describe_column(int col) const, gda_data_model_describe_column)
   _WRAP_METHOD(Glib::ustring get_column_title(int col) const, gda_data_model_get_column_title)
   _WRAP_METHOD(void set_column_title(int col, const Glib::ustring& title), gda_data_model_set_column_title)
   _WRAP_METHOD(int get_column_position(const Glib::ustring& title) const, gda_data_model_get_column_position)
@@ -83,8 +77,8 @@ public:
   _WRAP_METHOD(bool remove_row(const Row& row), gda_data_model_remove_row)
   _WRAP_METHOD(bool update_row(const Row& row), gda_data_model_update_row)
 
-  _WRAP_METHOD(bool append_column(const Column& col), gda_data_model_append_column)
-  _WRAP_METHOD(bool update_column(int col, const Column& attrs), gda_data_model_update_column)
+  _WRAP_METHOD(bool append_column(const Glib::RefPtr<Column>& col), gda_data_model_append_column)
+  _WRAP_METHOD(bool update_column(int col, const Glib::RefPtr<Column>& attrs), gda_data_model_update_column)
   _WRAP_METHOD(bool remove_column(int col), gda_data_model_remove_column)
 
   /** For example,
@@ -112,12 +106,6 @@ public:
   //_WRAP_METHOD(xmlNodePtr to_xml(const GLib::ustring& name), gda_data_model_to_xml_node)
   //_WRAP_METHOD(bool add_data(xmlNodePtr node), gda_data_model_add_data_from_xml_node)
 
-
-  _WRAP_METHOD(Glib::ustring get_command_text() const, gda_data_model_get_command_text)
-  _WRAP_METHOD(bool set_command_text(const Glib::ustring& txt), gda_data_model_set_command_text)
-  _WRAP_METHOD(CommandType get_command_type() const, gda_data_model_get_command_type)
-  _WRAP_METHOD(bool set_command_type(CommandType type), gda_data_model_set_command_type)
-
   _WRAP_METHOD(void dump(FILE* to_stream) const, gda_data_model_dump)
   _WRAP_METHOD(Glib::ustring dump_as_string() const, gda_data_model_dump_as_string)
 
@@ -137,12 +125,9 @@ protected:
   _WRAP_VFUNC(int get_n_rows() const, i_get_n_rows)
   _WRAP_VFUNC(int get_n_columns() const, i_get_n_columns)
 
-  //TODO: _CONVERSION(`Column', `GdaColumn*', `($3).gobj_copy()')
+  //TODO: _CONVERSION(`Glib::RefPtr<Column>', `GdaColumn*', `($3)->gobj_copy()')
   //_WRAP_VFUNC(Column describe_column(int col) const, i_describe_column)
 
-  //TODO: _WRAP_VFUNC(Glib::ustring get_column_title(int col) const, i_get_column_title)
-  _WRAP_VFUNC(void set_column_title(int col, const Glib::ustring& title), i_set_column_title)
-  _WRAP_VFUNC(int get_column_pos(const Glib::ustring& title) const, i_get_column_pos)
   //TODO: _WRAP_VFUNC(Row get_row(int row), i_get_row)
   //TODO: _WRAP_VFUNC(Value get_value_at(int col, int row), i_get_value_at)
   //TODO: _WRAP_VFUNC(bool is_updatable() const, i_is_updatable)

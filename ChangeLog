@@ -1,3 +1,23 @@
+2005-09-22  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/column.hg: This is now a GObject, 
+	so wrap it like one. It is therefore now used 
+	via RefPtr.
+	* libgda/src/connection.hg:
+	create_blob(): Changed signature.
+	* libgda/src/datamodel.hg: Removed several 
+	methods and vfuncs that have been removed from 
+	libgda's API.
+	* libgda/src/libgda_methods.defs: Regenerate
+	* libgda/src/libgda_vfuncs.defs: Update.
+	* libgda/src/serverprovider.hg:
+	create_blob(): Changed signature.
+	* tools/extra_defs_gen/generate_defs_gda.cc: 
+	Remove XQL stuff, removed from libgda.
+	* tools/m4/convert_libgdamm.m4: Use Column as 
+	a RefPtr.
+	* examples/simple/main.cc: Update for changed API.
+
 2005-09-21  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/value.ccg:

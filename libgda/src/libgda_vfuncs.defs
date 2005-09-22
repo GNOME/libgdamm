@@ -22,30 +22,6 @@
   )
 )
 
-(define-vfunc i_get_column_title
-  (of-object "GdaDataModel")
-  (return-type "const-gchar*")
-  (parameters
-    '("int" "col")
-  )
-)
-
-(define-vfunc i_set_column_title
-  (of-object "GdaDataModel")
-  (return-type "none")
-  (parameters
-    '("int" "col")
-    '("const-gchar*" "title")
-  )
-)
-
-(define-vfunc i_get_column_pos
-  (of-object "GdaDataModel")
-  (return-type "int")
-  (parameters
-    '("const-char*" "title")
-  )
-)
 
 (define-vfunc i_get_row
   (of-object "GdaDataModel")

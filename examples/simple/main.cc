@@ -77,8 +77,8 @@ int main (int argc, char** argv)
           std::cout << "      column " << i << ": " <<  data_model->get_column_title(i);
 
           //Find out whether it's the primary key:
-          Gnome::Gda::Column field = data_model->describe_column(i);
-          bool is_primary_key = field.get_primary_key();
+          const Glib::RefPtr<Gnome::Gda::Column> field = data_model->describe_column(i);
+          bool is_primary_key = field->get_primary_key();
           if(is_primary_key)
             std:: cout << "  (primary key)";
 

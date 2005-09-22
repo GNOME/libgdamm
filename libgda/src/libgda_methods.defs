@@ -76,13 +76,6 @@
   (gtype-id "GDA_TYPE_DATA_MODEL_LIST")
 )
 
-(define-object Export
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaExport")
-  (gtype-id "GDA_TYPE_EXPORT")
-)
-
 (define-object Select
   (in-module "Gda")
   (parent "GdaDataModelArray")
@@ -97,13 +90,6 @@
   (gtype-id "GDA_TYPE_SERVER_PROVIDER")
 )
 
-(define-object Table
-  (in-module "Gda")
-  (parent "GdaDataModelArray")
-  (c-name "GdaTable")
-  (gtype-id "GDA_TYPE_TABLE")
-)
-
 (define-object Threader
   (in-module "Gda")
   (parent "GObject")
@@ -116,167 +102,6 @@
   (parent "GObject")
   (c-name "GdaTransaction")
   (gtype-id "GDA_TYPE_TRANSACTION")
-)
-
-(define-object XmlConnection
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaXmlConnection")
-  (gtype-id "GDA_TYPE_XML_CONNECTION")
-)
-
-(define-object XmlDatabase
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaXmlDatabase")
-  (gtype-id "GDA_TYPE_XML_DATABASE")
-)
-
-(define-object XmlDocument
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaXmlDocument")
-  (gtype-id "GDA_TYPE_XML_DOCUMENT")
-)
-
-(define-object XqlItem
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaXqlItem")
-  (gtype-id "GDA_TYPE_XQL_ITEM")
-)
-
-(define-object XqlDual
-  (in-module "Gda")
-  (parent "GdaXqlItem")
-  (c-name "GdaXqlDual")
-  (gtype-id "GDA_TYPE_XQL_DUAL")
-)
-
-(define-object XqlDml
-  (in-module "Gda")
-  (parent "GdaXqlItem")
-  (c-name "GdaXqlDml")
-  (gtype-id "GDA_TYPE_XQL_DML")
-)
-
-(define-object XqlInsert
-  (in-module "Gda")
-  (parent "GdaXqlDml")
-  (c-name "GdaXqlInsert")
-  (gtype-id "GDA_TYPE_XQL_INSERT")
-)
-
-(define-object XqlDelete
-  (in-module "Gda")
-  (parent "GdaXqlDml")
-  (c-name "GdaXqlDelete")
-  (gtype-id "GDA_TYPE_XQL_DELETE")
-)
-
-(define-object XqlBin
-  (in-module "Gda")
-  (parent "GdaXqlItem")
-  (c-name "GdaXqlBin")
-  (gtype-id "GDA_TYPE_XQL_BIN")
-)
-
-(define-object XqlFunc
-  (in-module "Gda")
-  (parent "GdaXqlBin")
-  (c-name "GdaXqlFunc")
-  (gtype-id "GDA_TYPE_XQL_FUNC")
-)
-
-(define-object XqlAtom
-  (in-module "Gda")
-  (parent "GdaXqlItem")
-  (c-name "GdaXqlAtom")
-  (gtype-id "GDA_TYPE_XQL_ATOM")
-)
-
-(define-object XqlField
-  (in-module "Gda")
-  (parent "GdaXqlAtom")
-  (c-name "GdaXqlField")
-  (gtype-id "GDA_TYPE_XQL_FIELD")
-)
-
-(define-object XqlConst
-  (in-module "Gda")
-  (parent "GdaXqlAtom")
-  (c-name "GdaXqlConst")
-  (gtype-id "GDA_TYPE_XQL_CONST")
-)
-
-(define-object XqlColumn
-  (in-module "Gda")
-  (parent "GdaXqlAtom")
-  (c-name "GdaXqlColumn")
-  (gtype-id "GDA_TYPE_XQL_COLUMN")
-)
-
-(define-object XqlJoin
-  (in-module "Gda")
-  (parent "GdaXqlDual")
-  (c-name "GdaXqlJoin")
-  (gtype-id "GDA_TYPE_XQL_JOIN")
-)
-
-(define-object XqlList
-  (in-module "Gda")
-  (parent "GdaXqlItem")
-  (c-name "GdaXqlList")
-  (gtype-id "GDA_TYPE_XQL_LIST")
-)
-
-(define-object XqlQuery
-  (in-module "Gda")
-  (parent "GdaXqlBin")
-  (c-name "GdaXqlQuery")
-  (gtype-id "GDA_TYPE_XQL_QUERY")
-)
-
-(define-object XqlSelect
-  (in-module "Gda")
-  (parent "GdaXqlDml")
-  (c-name "GdaXqlSelect")
-  (gtype-id "GDA_TYPE_XQL_SELECT")
-)
-
-(define-object XqlStack
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaXqlStack")
-  (gtype-id "GDA_TYPE_XQL_STACK")
-)
-
-(define-object XqlTarget
-  (in-module "Gda")
-  (parent "GdaXqlBin")
-  (c-name "GdaXqlTarget")
-  (gtype-id "GDA_TYPE_XQL_TARGET")
-)
-
-(define-object XqlUpdate
-  (in-module "Gda")
-  (parent "GdaXqlDml")
-  (c-name "GdaXqlUpdate")
-  (gtype-id "GDA_TYPE_XQL_UPDATE")
-)
-
-(define-object XqlValue
-  (in-module "Gda")
-  (parent "GdaXqlBin")
-  (c-name "GdaXqlValue")
-  (gtype-id "GDA_TYPE_XQL_VALUE")
-)
-
-(define-object XqlValueRef
-  (in-module "Gda")
-  (parent "GdaXqlAtom")
-  (c-name "GdaXqlValueRef")
-  (gtype-id "GDA_TYPE_XQL_VALUE_REF")
 )
 
 ;; Enumerations and flags ...
@@ -444,15 +269,6 @@
   )
 )
 
-(define-enum ExportFlags
-  (in-module "Gda")
-  (c-name "GdaExportFlags")
-  (gtype-id "GDA_TYPE_EXPORT_FLAGS")
-  (values
-    '("a" "GDA_EXPORT_FLAGS_TABLE_DATA")
-  )
-)
-
 (define-enum TransactionIsolation
   (in-module "Gda")
   (c-name "GdaTransactionIsolation")
@@ -501,6 +317,11 @@
 
 
 ;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-blob.h
+
+(define-function gda_blob_get_type
+  (c-name "gda_blob_get_type")
+  (return-type "GType")
+)
 
 (define-method open
   (of-object "GdaBlob")
@@ -553,12 +374,6 @@
   (of-object "GdaBlob")
   (c-name "gda_blob_remove")
   (return-type "gint")
-)
-
-(define-method free_data
-  (of-object "GdaBlob")
-  (c-name "gda_blob_free_data")
-  (return-type "none")
 )
 
 (define-method stringify
@@ -782,24 +597,18 @@
   (return-type "GdaColumn*")
 )
 
-(define-method copy
+(define-method get_title
   (of-object "GdaColumn")
-  (c-name "gda_column_copy")
-  (return-type "GdaColumn*")
+  (c-name "gda_column_get_title")
+  (return-type "const-gchar*")
 )
 
-(define-method free
+(define-method set_title
   (of-object "GdaColumn")
-  (c-name "gda_column_free")
+  (c-name "gda_column_set_title")
   (return-type "none")
-)
-
-(define-method equal
-  (of-object "GdaColumn")
-  (c-name "gda_column_equal")
-  (return-type "gboolean")
   (parameters
-    '("const-GdaColumn*" "rhs")
+    '("const-gchar*" "title")
   )
 )
 
@@ -1904,10 +1713,7 @@
 (define-method create_blob
   (of-object "GdaConnection")
   (c-name "gda_connection_create_blob")
-  (return-type "gboolean")
-  (parameters
-    '("GdaBlob*" "blob")
-  )
+  (return-type "GdaBlob*")
 )
 
 (define-method value_to_sql_string
@@ -1998,66 +1804,6 @@
   (return-type "GType")
 )
 
-(define-method changed
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_changed")
-  (return-type "none")
-)
-
-(define-method row_inserted
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_row_inserted")
-  (return-type "none")
-  (parameters
-    '("gint" "row")
-  )
-)
-
-(define-method row_updated
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_row_updated")
-  (return-type "none")
-  (parameters
-    '("gint" "row")
-  )
-)
-
-(define-method row_removed
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_row_removed")
-  (return-type "none")
-  (parameters
-    '("gint" "row")
-  )
-)
-
-(define-method column_inserted
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_column_inserted")
-  (return-type "none")
-  (parameters
-    '("gint" "col")
-  )
-)
-
-(define-method column_updated
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_column_updated")
-  (return-type "none")
-  (parameters
-    '("gint" "col")
-  )
-)
-
-(define-method column_removed
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_column_removed")
-  (return-type "none")
-  (parameters
-    '("gint" "col")
-  )
-)
-
 (define-method freeze
   (of-object "GdaDataModel")
   (c-name "gda_data_model_freeze")
@@ -2106,15 +1852,6 @@
   (return-type "none")
   (parameters
     '("gint" "col")
-    '("const-gchar*" "title")
-  )
-)
-
-(define-method get_column_position
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_get_column_position")
-  (return-type "gint")
-  (parameters
     '("const-gchar*" "title")
   )
 )
@@ -2281,36 +2018,6 @@
   (return-type "gboolean")
   (parameters
     '("xmlNodePtr" "node")
-  )
-)
-
-(define-method get_command_text
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_get_command_text")
-  (return-type "const-gchar*")
-)
-
-(define-method set_command_text
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_set_command_text")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "txt")
-  )
-)
-
-(define-method get_command_type
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_get_command_type")
-  (return-type "GdaCommandType")
-)
-
-(define-method set_command_type
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_set_command_type")
-  (return-type "gboolean")
-  (parameters
-    '("GdaCommandType" "type")
   )
 )
 
@@ -2532,6 +2239,73 @@
 
 
 
+;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-data-model-private.h
+
+(define-method changed
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_changed")
+  (return-type "none")
+)
+
+(define-method row_inserted
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_row_inserted")
+  (return-type "none")
+  (parameters
+    '("gint" "row")
+  )
+)
+
+(define-method row_updated
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_row_updated")
+  (return-type "none")
+  (parameters
+    '("gint" "row")
+  )
+)
+
+(define-method row_removed
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_row_removed")
+  (return-type "none")
+  (parameters
+    '("gint" "row")
+  )
+)
+
+(define-method get_command_text
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_get_command_text")
+  (return-type "const-gchar*")
+)
+
+(define-method set_command_text
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_set_command_text")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "txt")
+  )
+)
+
+(define-method get_command_type
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_get_command_type")
+  (return-type "GdaCommandType")
+)
+
+(define-method set_command_type
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_set_command_type")
+  (return-type "gboolean")
+  (parameters
+    '("GdaCommandType" "type")
+  )
+)
+
+
+
 ;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-enum-types.h
 
 (define-function gda_blob_mode_get_type
@@ -2597,93 +2371,6 @@
 (define-function gda_value_type_get_type
   (c-name "gda_value_type_get_type")
   (return-type "GType")
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-export.h
-
-(define-function gda_export_get_type
-  (c-name "gda_export_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_export_new
-  (c-name "gda_export_new")
-  (is-constructor-of "GdaExport")
-  (return-type "GdaExport*")
-  (parameters
-    '("GdaConnection*" "cnc")
-  )
-)
-
-(define-method get_tables
-  (of-object "GdaExport")
-  (c-name "gda_export_get_tables")
-  (return-type "GList*")
-)
-
-(define-method get_selected_tables
-  (of-object "GdaExport")
-  (c-name "gda_export_get_selected_tables")
-  (return-type "GList*")
-)
-
-(define-method select_table
-  (of-object "GdaExport")
-  (c-name "gda_export_select_table")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "table")
-  )
-)
-
-(define-method select_table_list
-  (of-object "GdaExport")
-  (c-name "gda_export_select_table_list")
-  (return-type "none")
-  (parameters
-    '("GList*" "list")
-  )
-)
-
-(define-method unselect_table
-  (of-object "GdaExport")
-  (c-name "gda_export_unselect_table")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "table")
-  )
-)
-
-(define-method run
-  (of-object "GdaExport")
-  (c-name "gda_export_run")
-  (return-type "none")
-  (parameters
-    '("GdaExportFlags" "flags")
-  )
-)
-
-(define-method stop
-  (of-object "GdaExport")
-  (c-name "gda_export_stop")
-  (return-type "none")
-)
-
-(define-method get_connection
-  (of-object "GdaExport")
-  (c-name "gda_export_get_connection")
-  (return-type "GdaConnection*")
-)
-
-(define-method set_connection
-  (of-object "GdaExport")
-  (c-name "gda_export_set_connection")
-  (return-type "none")
-  (parameters
-    '("GdaConnection*" "cnc")
-  )
 )
 
 
@@ -3338,10 +3025,9 @@
 (define-method create_blob
   (of-object "GdaServerProvider")
   (c-name "gda_server_provider_create_blob")
-  (return-type "gboolean")
+  (return-type "GdaBlob*")
   (parameters
     '("GdaConnection*" "cnc")
-    '("GdaBlob*" "blob")
   )
 )
 
@@ -3352,82 +3038,6 @@
   (parameters
     '("GdaConnection*" "cnc")
     '("GdaValue*" "from")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-table.h
-
-(define-function gda_table_get_type
-  (c-name "gda_table_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_table_new
-  (c-name "gda_table_new")
-  (is-constructor-of "GdaTable")
-  (return-type "GdaTable*")
-  (parameters
-    '("const-gchar*" "name")
-  )
-)
-
-(define-function gda_table_new_from_model
-  (c-name "gda_table_new_from_model")
-  (return-type "GdaTable*")
-  (parameters
-    '("const-gchar*" "name")
-    '("const-GdaDataModel*" "model")
-    '("gboolean" "add_data")
-  )
-)
-
-(define-method get_name
-  (of-object "GdaTable")
-  (c-name "gda_table_get_name")
-  (return-type "const-gchar*")
-)
-
-(define-method set_name
-  (of-object "GdaTable")
-  (c-name "gda_table_set_name")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "name")
-  )
-)
-
-(define-method add_field
-  (of-object "GdaTable")
-  (c-name "gda_table_add_field")
-  (return-type "none")
-  (parameters
-    '("const-GdaColumn*" "column")
-  )
-)
-
-(define-method add_data_from_model
-  (of-object "GdaTable")
-  (c-name "gda_table_add_data_from_model")
-  (return-type "none")
-  (parameters
-    '("const-GdaDataModel*" "model")
-  )
-)
-
-(define-method get_columns
-  (of-object "GdaTable")
-  (c-name "gda_table_get_columns")
-  (return-type "GList*")
-)
-
-(define-method find_column
-  (of-object "GdaTable")
-  (c-name "gda_table_find_column")
-  (return-type "GdaColumn*")
-  (parameters
-    '("const-gchar*" "name")
   )
 )
 
@@ -4412,1330 +4022,6 @@
 (define-function gda_gdatype_get_type
   (c-name "gda_gdatype_get_type")
   (return-type "GType")
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xml-connection.h
-
-(define-function gda_xml_connection_get_type
-  (c-name "gda_xml_connection_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xml_connection_new
-  (c-name "gda_xml_connection_new")
-  (is-constructor-of "GdaXmlConnection")
-  (return-type "GdaXmlConnection*")
-)
-
-(define-function gda_xml_connection_new_from_file
-  (c-name "gda_xml_connection_new_from_file")
-  (return-type "GdaXmlConnection*")
-  (parameters
-    '("const-gchar*" "filename")
-  )
-)
-
-(define-function gda_xml_connection_new_from_string
-  (c-name "gda_xml_connection_new_from_string")
-  (return-type "GdaXmlConnection*")
-  (parameters
-    '("const-gchar*" "string")
-  )
-)
-
-(define-method set_from_file
-  (of-object "GdaXmlConnection")
-  (c-name "gda_xml_connection_set_from_file")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "filename")
-  )
-)
-
-(define-method set_from_string
-  (of-object "GdaXmlConnection")
-  (c-name "gda_xml_connection_set_from_string")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "string")
-  )
-)
-
-(define-method get_dsn
-  (of-object "GdaXmlConnection")
-  (c-name "gda_xml_connection_get_dsn")
-  (return-type "const-gchar*")
-)
-
-(define-method set_dsn
-  (of-object "GdaXmlConnection")
-  (c-name "gda_xml_connection_set_dsn")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "dsn")
-  )
-)
-
-(define-method get_username
-  (of-object "GdaXmlConnection")
-  (c-name "gda_xml_connection_get_username")
-  (return-type "const-gchar*")
-)
-
-(define-method set_username
-  (of-object "GdaXmlConnection")
-  (c-name "gda_xml_connection_set_username")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "username")
-  )
-)
-
-(define-method get_password
-  (of-object "GdaXmlConnection")
-  (c-name "gda_xml_connection_get_password")
-  (return-type "const-gchar*")
-)
-
-(define-method set_password
-  (of-object "GdaXmlConnection")
-  (c-name "gda_xml_connection_set_password")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "password")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xml-database.h
-
-(define-function gda_xml_database_get_type
-  (c-name "gda_xml_database_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xml_database_new
-  (c-name "gda_xml_database_new")
-  (is-constructor-of "GdaXmlDatabase")
-  (return-type "GdaXmlDatabase*")
-)
-
-(define-function gda_xml_database_new_from_uri
-  (c-name "gda_xml_database_new_from_uri")
-  (return-type "GdaXmlDatabase*")
-  (parameters
-    '("const-gchar*" "uri")
-  )
-)
-
-(define-method get_name
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_get_name")
-  (return-type "const-gchar*")
-)
-
-(define-method set_name
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_set_name")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "name")
-  )
-)
-
-(define-method get_user_version
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_get_user_version")
-  (return-type "const-gchar*")
-)
-
-(define-method set_user_version
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_set_user_version")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "user_version")
-  )
-)
-
-(define-method get_version
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_get_version")
-  (return-type "const-gchar*")
-)
-
-(define-method get_uri
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_get_uri")
-  (return-type "const-gchar*")
-)
-
-(define-method set_uri
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_set_uri")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "uri")
-  )
-)
-
-(define-method changed
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_changed")
-  (return-type "none")
-)
-
-(define-method reload
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_reload")
-  (return-type "none")
-)
-
-(define-method save
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_save")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "uri")
-  )
-)
-
-(define-method to_string
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_to_string")
-  (return-type "gchar*")
-)
-
-(define-method get_tables
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_get_tables")
-  (return-type "GList*")
-)
-
-(define-function gda_xml_database_free_table_list
-  (c-name "gda_xml_database_free_table_list")
-  (return-type "none")
-  (parameters
-    '("GList*" "list")
-  )
-)
-
-(define-method find_table
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_find_table")
-  (return-type "GdaTable*")
-  (parameters
-    '("const-gchar*" "name")
-  )
-)
-
-(define-method new_table
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_new_table")
-  (return-type "GdaTable*")
-  (parameters
-    '("const-gchar*" "name")
-  )
-)
-
-(define-method new_table_from_model
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_new_table_from_model")
-  (return-type "GdaTable*")
-  (parameters
-    '("const-gchar*" "name")
-    '("const-GdaDataModel*" "model")
-    '("gboolean" "add_data")
-  )
-)
-
-(define-method new_table_from_node
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_new_table_from_node")
-  (return-type "GdaTable*")
-  (parameters
-    '("xmlNodePtr" "node")
-  )
-)
-
-(define-method remove_table
-  (of-object "GdaXmlDatabase")
-  (c-name "gda_xml_database_remove_table")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "name")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xml-document.h
-
-(define-function gda_xml_document_get_type
-  (c-name "gda_xml_document_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xml_document_new
-  (c-name "gda_xml_document_new")
-  (is-constructor-of "GdaXmlDocument")
-  (return-type "GdaXmlDocument*")
-  (parameters
-    '("const-gchar*" "root_doc")
-  )
-)
-
-(define-method construct
-  (of-object "GdaXmlDocument")
-  (c-name "gda_xml_document_construct")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "root_doc")
-  )
-)
-
-(define-method get_compress_mode
-  (of-object "GdaXmlDocument")
-  (c-name "gda_xml_document_get_compress_mode")
-  (return-type "gint")
-)
-
-(define-method set_compress_mode
-  (of-object "GdaXmlDocument")
-  (c-name "gda_xml_document_set_compress_mode")
-  (return-type "none")
-  (parameters
-    '("gint" "mode")
-  )
-)
-
-(define-method to_file
-  (of-object "GdaXmlDocument")
-  (c-name "gda_xml_document_to_file")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "uri")
-  )
-)
-
-(define-method stringify
-  (of-object "GdaXmlDocument")
-  (c-name "gda_xml_document_stringify")
-  (return-type "gchar*")
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-atom.h
-
-(define-function gda_xql_atom_get_type
-  (c-name "gda_xql_atom_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_atom_new
-  (c-name "gda_xql_atom_new")
-  (is-constructor-of "GdaXqlAtom")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "tag")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-bin.h
-
-(define-function gda_xql_bin_get_type
-  (c-name "gda_xql_bin_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_bin_new
-  (c-name "gda_xql_bin_new")
-  (is-constructor-of "GdaXqlBin")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "tag")
-    '("gchar*" "sqlfmt")
-    '("gchar*" "sqlop")
-  )
-)
-
-(define-function gda_xql_bin_new_with_data
-  (c-name "gda_xql_bin_new_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "tag")
-    '("gchar*" "sqlfmt")
-    '("gchar*" "sqlop")
-    '("GdaXqlItem*" "child")
-  )
-)
-
-(define-method get_child
-  (of-object "GdaXqlBin")
-  (c-name "gda_xql_bin_get_child")
-  (return-type "GdaXqlItem*")
-)
-
-(define-method set_child
-  (of-object "GdaXqlBin")
-  (c-name "gda_xql_bin_set_child")
-  (return-type "none")
-  (parameters
-    '("GdaXqlItem*" "item")
-  )
-)
-
-(define-function gda_xql_bin_new_union
-  (c-name "gda_xql_bin_new_union")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_bin_new_unionall
-  (c-name "gda_xql_bin_new_unionall")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_bin_new_intersect
-  (c-name "gda_xql_bin_new_intersect")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_bin_new_minus
-  (c-name "gda_xql_bin_new_minus")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_bin_new_where
-  (c-name "gda_xql_bin_new_where")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_bin_new_where_with_data
-  (c-name "gda_xql_bin_new_where_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "data")
-  )
-)
-
-(define-function gda_xql_bin_new_having
-  (c-name "gda_xql_bin_new_having")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_bin_new_having_with_data
-  (c-name "gda_xql_bin_new_having_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "data")
-  )
-)
-
-(define-function gda_xql_bin_new_on
-  (c-name "gda_xql_bin_new_on")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_bin_new_not
-  (c-name "gda_xql_bin_new_not")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_bin_new_not_with_data
-  (c-name "gda_xql_bin_new_not_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "data")
-  )
-)
-
-(define-function gda_xql_bin_new_exists
-  (c-name "gda_xql_bin_new_exists")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_bin_new_null
-  (c-name "gda_xql_bin_new_null")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_bin_new_null_with_data
-  (c-name "gda_xql_bin_new_null_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "data")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-column.h
-
-(define-function gda_xql_column_get_type
-  (c-name "gda_xql_column_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_column_new
-  (c-name "gda_xql_column_new")
-  (is-constructor-of "GdaXqlColumn")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_column_new_with_data
-  (c-name "gda_xql_column_new_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gint" "num")
-    '("gboolean" "asc")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-const.h
-
-(define-function gda_xql_const_get_type
-  (c-name "gda_xql_const_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_const_new
-  (c-name "gda_xql_const_new")
-  (is-constructor-of "GdaXqlConst")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_const_new_with_data
-  (c-name "gda_xql_const_new_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "value")
-    '("gchar*" "alias")
-    '("gchar*" "type")
-    '("gchar*" "null")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-delete.h
-
-(define-function gda_xql_delete_get_type
-  (c-name "gda_xql_delete_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_delete_new
-  (c-name "gda_xql_delete_new")
-  (is-constructor-of "GdaXqlDelete")
-  (return-type "GdaXqlItem*")
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-dml.h
-
-(define-function gda_xql_dml_get_type
-  (c-name "gda_xql_dml_get_type")
-  (return-type "GType")
-)
-
-(define-method add_target_from_text
-  (of-object "GdaXqlDml")
-  (c-name "gda_xql_dml_add_target_from_text")
-  (return-type "gchar*")
-  (parameters
-    '("gchar*" "name")
-    '("GdaXqlItem*" "join")
-  )
-)
-
-(define-method add_field_from_text
-  (of-object "GdaXqlDml")
-  (c-name "gda_xql_dml_add_field_from_text")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "id")
-    '("gchar*" "name")
-    '("gchar*" "alias")
-    '("gboolean" "group")
-  )
-)
-
-(define-method add_const_from_text
-  (of-object "GdaXqlDml")
-  (c-name "gda_xql_dml_add_const_from_text")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "value")
-    '("gchar*" "type")
-    '("gboolean" "null")
-  )
-)
-
-(define-method add_func
-  (of-object "GdaXqlDml")
-  (c-name "gda_xql_dml_add_func")
-  (return-type "none")
-  (parameters
-    '("GdaXqlItem*" "item")
-  )
-)
-
-(define-method add_query
-  (of-object "GdaXqlDml")
-  (c-name "gda_xql_dml_add_query")
-  (return-type "none")
-  (parameters
-    '("GdaXqlItem*" "item")
-  )
-)
-
-(define-method add_row_condition
-  (of-object "GdaXqlDml")
-  (c-name "gda_xql_dml_add_row_condition")
-  (return-type "none")
-  (parameters
-    '("GdaXqlItem*" "cond")
-    '("gchar*" "type")
-  )
-)
-
-(define-method add_group_condition
-  (of-object "GdaXqlDml")
-  (c-name "gda_xql_dml_add_group_condition")
-  (return-type "none")
-  (parameters
-    '("GdaXqlItem*" "cond")
-    '("gchar*" "type")
-  )
-)
-
-(define-method add_order
-  (of-object "GdaXqlDml")
-  (c-name "gda_xql_dml_add_order")
-  (return-type "none")
-  (parameters
-    '("gint" "column")
-    '("gboolean" "asc")
-  )
-)
-
-(define-method add_set
-  (of-object "GdaXqlDml")
-  (c-name "gda_xql_dml_add_set")
-  (return-type "none")
-  (parameters
-    '("GdaXqlItem*" "item")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-dual.h
-
-(define-function gda_xql_dual_get_type
-  (c-name "gda_xql_dual_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_dual_new
-  (c-name "gda_xql_dual_new")
-  (is-constructor-of "GdaXqlDual")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "tag")
-    '("gchar*" "sqlfmt")
-    '("gchar*" "sqlop")
-  )
-)
-
-(define-function gda_xql_dual_new_with_data
-  (c-name "gda_xql_dual_new_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "tag")
-    '("gchar*" "sqlfmt")
-    '("gchar*" "sqlop")
-    '("GdaXqlItem*" "left")
-    '("GdaXqlItem*" "right")
-  )
-)
-
-(define-method get_left
-  (of-object "GdaXqlDual")
-  (c-name "gda_xql_dual_get_left")
-  (return-type "GdaXqlItem*")
-)
-
-(define-method get_right
-  (of-object "GdaXqlDual")
-  (c-name "gda_xql_dual_get_right")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_dual_new_eq
-  (c-name "gda_xql_dual_new_eq")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_dual_new_eq_with_data
-  (c-name "gda_xql_dual_new_eq_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "left")
-    '("GdaXqlItem*" "right")
-  )
-)
-
-(define-function gda_xql_dual_new_ne
-  (c-name "gda_xql_dual_new_ne")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_dual_new_ne_with_data
-  (c-name "gda_xql_dual_new_ne_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "left")
-    '("GdaXqlItem*" "right")
-  )
-)
-
-(define-function gda_xql_dual_new_lt
-  (c-name "gda_xql_dual_new_lt")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_dual_new_lt_with_data
-  (c-name "gda_xql_dual_new_lt_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "left")
-    '("GdaXqlItem*" "right")
-  )
-)
-
-(define-function gda_xql_dual_new_le
-  (c-name "gda_xql_dual_new_le")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_dual_new_le_with_data
-  (c-name "gda_xql_dual_new_le_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "left")
-    '("GdaXqlItem*" "right")
-  )
-)
-
-(define-function gda_xql_dual_new_gt
-  (c-name "gda_xql_dual_new_gt")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_dual_new_gt_with_data
-  (c-name "gda_xql_dual_new_gt_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "left")
-    '("GdaXqlItem*" "right")
-  )
-)
-
-(define-function gda_xql_dual_new_ge
-  (c-name "gda_xql_dual_new_ge")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_dual_new_ge_with_data
-  (c-name "gda_xql_dual_new_ge_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "left")
-    '("GdaXqlItem*" "right")
-  )
-)
-
-(define-function gda_xql_dual_new_like
-  (c-name "gda_xql_dual_new_like")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_dual_new_like_with_data
-  (c-name "gda_xql_dual_new_like_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "left")
-    '("GdaXqlItem*" "right")
-  )
-)
-
-(define-function gda_xql_dual_new_in
-  (c-name "gda_xql_dual_new_in")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_dual_new_in_with_data
-  (c-name "gda_xql_dual_new_in_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "left")
-    '("GdaXqlItem*" "right")
-  )
-)
-
-(define-function gda_xql_dual_new_set
-  (c-name "gda_xql_dual_new_set")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_dual_new_set_with_data
-  (c-name "gda_xql_dual_new_set_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "left")
-    '("GdaXqlItem*" "right")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-field.h
-
-(define-function gda_xql_field_get_type
-  (c-name "gda_xql_field_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_field_new
-  (c-name "gda_xql_field_new")
-  (is-constructor-of "GdaXqlField")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_field_new_with_data
-  (c-name "gda_xql_field_new_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "source")
-    '("gchar*" "name")
-    '("gchar*" "alias")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-func.h
-
-(define-function gda_xql_func_get_type
-  (c-name "gda_xql_func_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_func_new
-  (c-name "gda_xql_func_new")
-  (is-constructor-of "GdaXqlFunc")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_func_new_with_data
-  (c-name "gda_xql_func_new_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "name")
-    '("gchar*" "alias")
-    '("gchar*" "aggregate")
-  )
-)
-
-(define-method add_const_from_text
-  (of-object "GdaXqlFunc")
-  (c-name "gda_xql_func_add_const_from_text")
-  (return-type "none")
-  (parameters
-    '("gchar*" "value")
-    '("gchar*" "type")
-    '("gchar*" "null")
-  )
-)
-
-(define-method add_field_from_text
-  (of-object "GdaXqlFunc")
-  (c-name "gda_xql_func_add_field_from_text")
-  (return-type "none")
-  (parameters
-    '("gchar*" "id")
-    '("gchar*" "name")
-    '("gchar*" "alias")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-insert.h
-
-(define-function gda_xql_insert_get_type
-  (c-name "gda_xql_insert_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_insert_new
-  (c-name "gda_xql_insert_new")
-  (is-constructor-of "GdaXqlInsert")
-  (return-type "GdaXqlItem*")
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-item.h
-
-(define-function gda_xql_item_get_type
-  (c-name "gda_xql_item_get_type")
-  (return-type "GType")
-)
-
-(define-method set_attrib
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_set_attrib")
-  (return-type "none")
-  (parameters
-    '("gchar*" "attrib")
-    '("gchar*" "value")
-  )
-)
-
-(define-method get_parent
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_get_parent")
-  (return-type "GdaXqlItem*")
-)
-
-(define-method set_parent
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_set_parent")
-  (return-type "none")
-  (parameters
-    '("GdaXqlItem*" "parent")
-  )
-)
-
-(define-method get_attrib
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_get_attrib")
-  (return-type "gchar*")
-  (parameters
-    '("gchar*" "attrib")
-  )
-)
-
-(define-method to_dom
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_to_dom")
-  (return-type "xmlNode*")
-  (parameters
-    '("xmlNode*" "parent")
-  )
-)
-
-(define-method add
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_add")
-  (return-type "none")
-  (parameters
-    '("GdaXqlItem*" "child")
-  )
-)
-
-(define-method set_tag
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_set_tag")
-  (return-type "none")
-  (parameters
-    '("gchar*" "tag")
-  )
-)
-
-(define-method get_tag
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_get_tag")
-  (return-type "gchar*")
-)
-
-(define-method find_root
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_find_root")
-  (return-type "GdaXqlItem*")
-)
-
-(define-method find_id
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_find_id")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "id")
-  )
-)
-
-(define-method find_ref
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_find_ref")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "ref")
-  )
-)
-
-(define-method add_id
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_add_id")
-  (return-type "none")
-  (parameters
-    '("gchar*" "id")
-  )
-)
-
-(define-method add_ref
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_add_ref")
-  (return-type "none")
-  (parameters
-    '("gchar*" "ref")
-  )
-)
-
-(define-method get_ref
-  (of-object "GdaXqlItem")
-  (c-name "gda_xql_item_get_ref")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "ref")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-join.h
-
-(define-function gda_xql_join_get_type
-  (c-name "gda_xql_join_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_join_new
-  (c-name "gda_xql_join_new")
-  (is-constructor-of "GdaXqlJoin")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_join_new_with_data
-  (c-name "gda_xql_join_new_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "target")
-    '("GdaXqlItem*" "cond")
-    '("gchar*" "type")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-list.h
-
-(define-function gda_xql_list_get_type
-  (c-name "gda_xql_list_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_list_new
-  (c-name "gda_xql_list_new")
-  (is-constructor-of "GdaXqlList")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "tag")
-  )
-)
-
-(define-function gda_xql_list_unref_list
-  (c-name "gda_xql_list_unref_list")
-  (return-type "none")
-  (parameters
-    '("GSList*" "list")
-  )
-)
-
-(define-function gda_xql_list_new_setlist
-  (c-name "gda_xql_list_new_setlist")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_list_new_sourcelist
-  (c-name "gda_xql_list_new_sourcelist")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_list_new_targetlist
-  (c-name "gda_xql_list_new_targetlist")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_list_new_order
-  (c-name "gda_xql_list_new_order")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_list_new_dest
-  (c-name "gda_xql_list_new_dest")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_list_new_arglist
-  (c-name "gda_xql_list_new_arglist")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_list_new_valuelist
-  (c-name "gda_xql_list_new_valuelist")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_list_new_joinlist
-  (c-name "gda_xql_list_new_joinlist")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_list_new_and
-  (c-name "gda_xql_list_new_and")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_list_new_or
-  (c-name "gda_xql_list_new_or")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_list_new_group
-  (c-name "gda_xql_list_new_group")
-  (return-type "GdaXqlItem*")
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-query.h
-
-(define-function gda_xql_query_get_type
-  (c-name "gda_xql_query_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_query_new
-  (c-name "gda_xql_query_new")
-  (is-constructor-of "GdaXqlQuery")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_query_new_with_data
-  (c-name "gda_xql_query_new_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("GdaXqlItem*" "xqlitem")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-select.h
-
-(define-function gda_xql_select_get_type
-  (c-name "gda_xql_select_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_select_new
-  (c-name "gda_xql_select_new")
-  (is-constructor-of "GdaXqlSelect")
-  (return-type "GdaXqlItem*")
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-stack.h
-
-(define-function gda_xql_stack_get_type
-  (c-name "gda_xql_stack_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_stack_new
-  (c-name "gda_xql_stack_new")
-  (is-constructor-of "GdaXqlStack")
-  (return-type "GdaXqlStack*")
-)
-
-(define-method push
-  (of-object "GdaXqlStack")
-  (c-name "gda_xql_stack_push")
-  (return-type "none")
-  (parameters
-    '("GdaXqlItem*" "item")
-  )
-)
-
-(define-method pop
-  (of-object "GdaXqlStack")
-  (c-name "gda_xql_stack_pop")
-  (return-type "GdaXqlItem*")
-)
-
-(define-method empty
-  (of-object "GdaXqlStack")
-  (c-name "gda_xql_stack_empty")
-  (return-type "gboolean")
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-target.h
-
-(define-function gda_xql_target_get_type
-  (c-name "gda_xql_target_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_target_new
-  (c-name "gda_xql_target_new")
-  (is-constructor-of "GdaXqlTarget")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_target_new_with_data
-  (c-name "gda_xql_target_new_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "id")
-    '("gchar*" "name")
-    '("GdaXqlItem*" "join")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-update.h
-
-(define-function gda_xql_update_get_type
-  (c-name "gda_xql_update_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_update_new
-  (c-name "gda_xql_update_new")
-  (is-constructor-of "GdaXqlUpdate")
-  (return-type "GdaXqlItem*")
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-utils.h
-
-(define-function gda_xql_gensym
-  (c-name "gda_xql_gensym")
-  (return-type "gchar*")
-  (parameters
-    '("gchar*" "sym")
-  )
-)
-
-(define-function gda_xql_destroy_hash_pair
-  (c-name "gda_xql_destroy_hash_pair")
-  (return-type "gboolean")
-  (parameters
-    '("gchar*" "key")
-    '("gpointer*" "value")
-    '("GFreeFunc" "func")
-  )
-)
-
-(define-function gda_xql_dom_to_xml
-  (c-name "gda_xql_dom_to_xml")
-  (return-type "gchar*")
-  (parameters
-    '("xmlNode*" "node")
-    '("gboolean" "freedoc")
-  )
-)
-
-(define-function gda_xql_dom_to_sql
-  (c-name "gda_xql_dom_to_sql")
-  (return-type "gchar*")
-  (parameters
-    '("xmlNode*" "node")
-    '("gboolean" "freedoc")
-  )
-)
-
-(define-function gda_xql_new_node
-  (c-name "gda_xql_new_node")
-  (return-type "xmlNode*")
-  (parameters
-    '("gchar*" "tag")
-    '("xmlNode*" "parNode")
-  )
-)
-
-(define-function gda_xql_new_attr
-  (c-name "gda_xql_new_attr")
-  (return-type "none")
-  (parameters
-    '("gchar*" "key")
-    '("gchar*" "value")
-    '("xmlNode*" "node")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-value.h
-
-(define-function gda_xql_value_get_type
-  (c-name "gda_xql_value_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_value_new
-  (c-name "gda_xql_value_new")
-  (is-constructor-of "GdaXqlValue")
-  (return-type "GdaXqlItem*")
-)
-
-(define-function gda_xql_value_new_with_data
-  (c-name "gda_xql_value_new_with_data")
-  (return-type "GdaXqlItem*")
-  (parameters
-    '("gchar*" "id")
-  )
-)
-
-
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-xql-valueref.h
-
-(define-function gda_xql_valueref_get_type
-  (c-name "gda_xql_valueref_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_xql_valueref_new
-  (c-name "gda_xql_valueref_new")
-  (is-constructor-of "GdaXqlValueref")
-  (return-type "GdaXqlItem*")
 )
 
 

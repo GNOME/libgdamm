@@ -28,10 +28,11 @@ _CONVERSION(`const Parameter&', `GdaParameter*', `const_cast<GdaParameter*>(($3)
 
 _CONVERSION(`const ParameterList&', `GdaParameterList*', `const_cast<GdaParameterList*>(($3).gobj())')
 
-_CONVERSION(`GdaColumn*',`Column',`Glib::wrap($3)')
-_CONVERSION(`const Column&', `GdaColumn*', `const_cast<GdaColumn*>(($3).gobj())')
-_CONVERSION(`const Column&', `const GdaColumn*', `($3).gobj()')
-_CONVERSION(`Column&', `GdaColumn*', `($3).gobj()')
+_CONVERSION(`GdaColumn*',`Glib::RefPtr<Column>',`Glib::wrap($3)')
+_CONVERSION(`GdaColumn*',`Glib::RefPtr<const Column>',`Glib::wrap($3)')
+_CONVERSION(`const Glib::RefPtr<Column>&', `GdaColumn*', `Glib::unwrap($3)')
+_CONVERSION(`const Glib::RefPtr<Column>&', `const GdaColumn*', `Glib::unwrap($3)')
+#_CONVERSION(`Column&', `GdaColumn*', `($3).gobj()')
 
 _CONVERSION(`GdaColumnIndex*',`Glib::RefPtr<ColumnIndex>',`Glib::wrap($3)')
 
