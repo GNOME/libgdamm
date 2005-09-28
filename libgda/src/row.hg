@@ -22,12 +22,10 @@
 
 
 #include <libgdamm/value.h>
-//#include <glibmm/object.h>
+#include <glibmm/object.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
-
-#include <libgda/gda-data-model.h>
 
 namespace Gnome
 {
@@ -38,19 +36,21 @@ namespace Gda
 class DataModel;
 class Value;
 
-class Row
+class Row : public Glib::Object
 {
-  _CLASS_OPAQUE_COPYABLE(Row, GdaRow, NONE, gda_row_copy, gda_row_free)
-  _IGNORE(gda_row_copy, gda_row_free)
+protected:
+  _CLASS_GOBJECT(Row, GdaRow, GDA_ROW, Glib::Object, GObject)
+
+  _WRAP_CTOR(Row(const Glib::RefPtr<DataModel>& model, int count), gda_row_new)
+
+//TODO: Use C++ type:
+  _WRAP_CTOR(Row(const Glib::RefPtr<DataModel>& model, const GList *values), gda_row_new_from_list)
+
 public:
-
-  Row(const Glib::RefPtr<DataModel>& model, int count);
-  _IGNORE(gda_row_new)
-  Row(const Glib::RefPtr<DataModel>& model, const GList *values);
-  _IGNORE(gda_row_new_from_list)
-
-  _WRAP_METHOD(Glib::RefPtr<DataModel> get_model(), gda_row_get_model)
-  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_model() const, gda_row_get_model)
+  _WRAP_METHOD(Glib::RefPtr<Row> copy() const, gda_row_copy)
+  
+  _WRAP_CREATE(const Glib::RefPtr<DataModel>& model, int count)
+  _WRAP_CREATE(const Glib::RefPtr<DataModel>& model, const GList *values)
 
   _WRAP_METHOD(int get_number() const, gda_row_get_number)
   _WRAP_METHOD(void set_number(int number), gda_row_set_number)
@@ -60,12 +60,18 @@ public:
   //We use a custom conversion here, because we need to copy the value:
   #m4 _CONVERSION(`GdaValue*',`Value',`Glib::wrap($3, true /* take_copy=true */)')
   _WRAP_METHOD(Value get_value(int num) const, gda_row_get_value)
+  _WRAP_METHOD(bool set_value(int num, const Value& value), gda_row_set_value);
+
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_model() const, gda_row_get_model)  
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_model(), gda_row_get_model)  
+  _WRAP_METHOD(void set_model(const Glib::RefPtr<DataModel>& model), gda_row_set_model)
 
   _WRAP_METHOD(int get_length() const, gda_row_get_length)
 
   _WRAP_METHOD(void set_is_default(int num, bool is_default = true), gda_row_set_is_default)
   _WRAP_METHOD(bool get_is_default(int num) const, gda_row_get_is_default)
 
+  //TODO: Properties.
 };
 
 } // namespace Gda

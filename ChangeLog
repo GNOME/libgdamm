@@ -1,3 +1,14 @@
+2005-09-28  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in: Increase need libgda version a bit.
+	* libgda/src/column.hg:
+	* libgda/src/datamodel.hg:
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/row.ccg:
+	* libgda/src/row.hg:
+	* tools/m4/convert_libgdamm.m4: Update for latest 
+	API changes.
+
 2005-09-22  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/column.hg: This is now a GObject, 

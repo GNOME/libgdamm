@@ -76,6 +76,13 @@
   (gtype-id "GDA_TYPE_DATA_MODEL_LIST")
 )
 
+(define-object Row
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaRow")
+  (gtype-id "GDA_TYPE_ROW")
+)
+
 (define-object Select
   (in-module "Gda")
   (parent "GdaDataModelArray")
@@ -376,9 +383,9 @@
   (return-type "gint")
 )
 
-(define-method stringify
+(define-method get_sql_id
   (of-object "GdaBlob")
-  (c-name "gda_blob_stringify")
+  (c-name "gda_blob_get_sql_id")
   (return-type "gchar*")
 )
 
@@ -594,6 +601,12 @@
 (define-function gda_column_new
   (c-name "gda_column_new")
   (is-constructor-of "GdaColumn")
+  (return-type "GdaColumn*")
+)
+
+(define-method copy
+  (of-object "GdaColumn")
+  (c-name "gda_column_copy")
   (return-type "GdaColumn*")
 )
 
@@ -1716,6 +1729,15 @@
   (return-type "GdaBlob*")
 )
 
+(define-method fetch_blob_by_id
+  (of-object "GdaConnection")
+  (c-name "gda_connection_fetch_blob_by_id")
+  (return-type "GdaBlob*")
+  (parameters
+    '("const-gchar*" "sql_id")
+  )
+)
+
 (define-method value_to_sql_string
   (of-object "GdaConnection")
   (c-name "gda_connection_value_to_sql_string")
@@ -1859,7 +1881,7 @@
 (define-method get_row
   (of-object "GdaDataModel")
   (c-name "gda_data_model_get_row")
-  (return-type "const-GdaRow*")
+  (return-type "GdaRow*")
   (parameters
     '("gint" "row")
   )
@@ -1884,7 +1906,7 @@
 (define-method append_values
   (of-object "GdaDataModel")
   (c-name "gda_data_model_append_values")
-  (return-type "const-GdaRow*")
+  (return-type "GdaRow*")
   (parameters
     '("const-GList*" "values")
   )
@@ -1899,41 +1921,28 @@
   )
 )
 
-(define-method remove_row
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_remove_row")
-  (return-type "gboolean")
-  (parameters
-    '("const-GdaRow*" "row")
-  )
-)
-
 (define-method update_row
   (of-object "GdaDataModel")
   (c-name "gda_data_model_update_row")
   (return-type "gboolean")
   (parameters
-    '("const-GdaRow*" "row")
+    '("GdaRow*" "row")
+  )
+)
+
+(define-method remove_row
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_remove_row")
+  (return-type "gboolean")
+  (parameters
+    '("GdaRow*" "row")
   )
 )
 
 (define-method append_column
   (of-object "GdaDataModel")
   (c-name "gda_data_model_append_column")
-  (return-type "gboolean")
-  (parameters
-    '("const-GdaColumn*" "attrs")
-  )
-)
-
-(define-method update_column
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_update_column")
-  (return-type "gboolean")
-  (parameters
-    '("gint" "col")
-    '("const-GdaColumn*" "attrs")
-  )
+  (return-type "GdaColumn*")
 )
 
 (define-method remove_column
@@ -2231,7 +2240,7 @@
 (define-method append_value
   (of-object "GdaDataModelList")
   (c-name "gda_data_model_list_append_value")
-  (return-type "const-GdaRow*")
+  (return-type "GdaRow*")
   (parameters
     '("const-GdaValue*" "value")
   )
@@ -2676,16 +2685,25 @@
   (return-type "GdaRow*")
 )
 
-(define-method free
+(define-method set_model
   (of-object "GdaRow")
-  (c-name "gda_row_free")
+  (c-name "gda_row_set_model")
   (return-type "none")
+  (parameters
+    '("GdaDataModel*" "model")
+  )
 )
 
 (define-method get_model
   (of-object "GdaRow")
   (c-name "gda_row_get_model")
   (return-type "GdaDataModel*")
+)
+
+(define-method get_length
+  (of-object "GdaRow")
+  (c-name "gda_row_get_length")
+  (return-type "gint")
 )
 
 (define-method get_number
@@ -2727,10 +2745,14 @@
   )
 )
 
-(define-method get_length
+(define-method set_value
   (of-object "GdaRow")
-  (c-name "gda_row_get_length")
-  (return-type "gint")
+  (c-name "gda_row_set_value")
+  (return-type "gboolean")
+  (parameters
+    '("gint" "num")
+    '("const-GdaValue*" "value")
+  )
 )
 
 (define-method set_is_default
@@ -3031,6 +3053,16 @@
   )
 )
 
+(define-method fetch_blob_by_id
+  (of-object "GdaServerProvider")
+  (c-name "gda_server_provider_fetch_blob_by_id")
+  (return-type "GdaBlob*")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "sql_id")
+  )
+)
+
 (define-method value_to_sql_string
   (of-object "GdaServerProvider")
   (c-name "gda_server_provider_value_to_sql_string")
@@ -3178,6 +3210,23 @@
     '("const-gchar*" "filename")
     '("const-gchar*" "buffer")
     '("gint" "len")
+  )
+)
+
+(define-function gda_provider_get_schema_nb_columns
+  (c-name "gda_provider_get_schema_nb_columns")
+  (return-type "gint")
+  (parameters
+    '("GdaConnectionSchema" "schema")
+  )
+)
+
+(define-function gda_provider_init_schema_model
+  (c-name "gda_provider_init_schema_model")
+  (return-type "gboolean")
+  (parameters
+    '("GdaDataModel*" "model")
+    '("GdaConnectionSchema" "schema")
   )
 )
 

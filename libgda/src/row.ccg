@@ -23,6 +23,9 @@
 #include <libgdamm/datamodel.h>
 #include <libgda/gda-row.h>
 #include <libgda/gda-enum-types.h>
+#include <libgda/gda-row.h>
+#include <libgda/gda-data-model.h>
+
 
 namespace Gnome
 {
@@ -30,17 +33,6 @@ namespace Gnome
 namespace Gda
 {
 
-Row::Row(const Glib::RefPtr<DataModel>& model, int count)
-: gobject_( gda_row_new(model->gobj(), count) )
-{
-  
-}
-
-Row::Row(const Glib::RefPtr<DataModel>& model, const GList *values)
-: gobject_( gda_row_new_from_list(model->gobj(), values) )
-{
-
-}
 
 
 } // namespace Gda

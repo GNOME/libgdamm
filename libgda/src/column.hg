@@ -43,6 +43,8 @@ protected:
 public:
   _WRAP_CREATE()
   _IGNORE(gda_column_new)
+
+  _WRAP_METHOD(Glib::RefPtr<Column> copy() const, gda_column_copy)
   
   _WRAP_METHOD(glong get_defined_size() const, gda_column_get_defined_size)
   _WRAP_METHOD(void set_defined_size(glong size), gda_column_set_defined_size)
