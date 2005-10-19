@@ -39,7 +39,7 @@ class Row;
 
 class DataModel : public Glib::Interface
 {
-  _CLASS_INTERFACE(DataModel, GdaDataModel, GDA_DATA_MODEL, GdaDataModelIface)
+  _CLASS_INTERFACE(DataModel, GdaDataModel, GDA_DATA_MODEL, GdaDataModelClass)
 public:
 
   _WRAP_METHOD(void freeze(), gda_data_model_freeze)  
