@@ -32,6 +32,11 @@ namespace Gda
 namespace Config
 {
 
+void DataSourceInfoTraits::release_c_type(CType ptr)
+{
+  gda_data_source_info_free(const_cast<CTypeNonConst>(ptr));
+}
+
 Glib::ustring get_value_string(const Glib::ustring& path)
 {
   return gda_config_get_string(path.c_str());

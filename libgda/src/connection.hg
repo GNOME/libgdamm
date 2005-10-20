@@ -25,7 +25,8 @@
 #include <libgdamm/command.h>
 #include <libgdamm/datamodel.h>
 #include <libgdamm/parameterlist.h>
-#include <libgda/gda-connection.h>
+#include <libgdamm/datamodelindex.h>
+//#include <libgda/gda-connection.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -85,7 +86,7 @@ public:
 						  const GList *attributes_list,
 						  const GList *index_list), gda_connection_create_table)
   _WRAP_METHOD(bool drop_table(const Glib::ustring& table_name), gda_connection_drop_table)
-  _WRAP_METHOD(bool create_index(const GdaDataModelIndex *index, const Glib::ustring& table_name), gda_connection_create_index)
+  _WRAP_METHOD(bool create_index(const DataModelIndex& index, const Glib::ustring& table_name), gda_connection_create_index)
   _WRAP_METHOD(bool drop_index(const Glib::ustring& index_name, bool primary_key, const Glib::ustring& table_name), gda_connection_drop_index)
 
 

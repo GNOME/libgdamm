@@ -23,6 +23,7 @@
 #include <libgdamm/client.h>
 #include <libgdamm/command.h>
 #include <libgda/gda-enum-types.h>
+#include <libgda/gda-connection.h>
 
 namespace Gnome
 {

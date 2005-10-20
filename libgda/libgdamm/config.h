@@ -89,7 +89,7 @@ struct DataSourceInfoTraits
   static CType   to_c_type      (const CppType& obj) { return obj.gobj(); }
   static CType   to_c_type      (CType ptr) { return ptr; }
   static CppType to_cpp_type    (CType ptr) { return CppType(const_cast<CTypeNonConst>(ptr), true); }
-  static void    release_c_type (CType ptr) { gda_data_source_info_free(const_cast<CTypeNonConst>(ptr)); }
+  static void    release_c_type (CType ptr);
 };
 
 

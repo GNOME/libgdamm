@@ -1,3 +1,14 @@
+2005-10-20  Murray Cumming <murrayc@murrayc.com>
+
+	* libgda/libgdamm/config.cc:
+	* libgda/libgdamm/config.h: Hide the C header, 
+	putting an implementation that needs it in 
+	the .cc file.
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg: create_index(): 
+	Use a DataModelIndex& instead of a 
+	GdaModelIndex*. Hide the C header.
+
 2005-10-19  Murray Cumming <murrayc@murrayc.com>
 
 	* configure.in: Check for libgda-2.0 1.9.101 
