@@ -34,6 +34,7 @@ _CONVERSION(`GdaColumn*',`Glib::RefPtr<Column>',`Glib::wrap($3)')
 _CONVERSION(`GdaColumn*',`Glib::RefPtr<const Column>',`Glib::wrap($3)')
 _CONVERSION(`const Glib::RefPtr<Column>&', `GdaColumn*', `Glib::unwrap($3)')
 _CONVERSION(`const Glib::RefPtr<Column>&', `const GdaColumn*', `Glib::unwrap($3)')
+_CONVERSION(`const Glib::RefPtr<const Column>&', `const GdaColumn*', `Glib::unwrap($3)')
 #_CONVERSION(`Column&', `GdaColumn*', `($3).gobj()')
 
 _CONVERSION(`GdaColumnIndex*',`Glib::RefPtr<ColumnIndex>',`Glib::wrap($3)')

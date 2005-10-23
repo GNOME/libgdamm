@@ -35,6 +35,7 @@ namespace Gda
 class ParameterList
 {
   _CLASS_OPAQUE_COPYABLE(ParameterList, GdaParameterList, gda_parameter_list_new, gda_parameter_list_copy, gda_parameter_list_free)
+  _IGNORE(gda_parameter_list_copy, gda_parameter_list_free)
 public:
   
   operator bool() const;

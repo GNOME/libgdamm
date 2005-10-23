@@ -323,7 +323,7 @@
 )
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-blob.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-blob.h
 
 (define-function gda_blob_get_type
   (c-name "gda_blob_get_type")
@@ -391,7 +391,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-client.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-client.h
 
 (define-function gda_client_get_type
   (c-name "gda_client_get_type")
@@ -591,7 +591,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-column.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-column.h
 
 (define-function gda_column_get_type
   (c-name "gda_column_get_type")
@@ -608,6 +608,15 @@
   (of-object "GdaColumn")
   (c-name "gda_column_copy")
   (return-type "GdaColumn*")
+)
+
+(define-method equal
+  (of-object "GdaColumn")
+  (c-name "gda_column_equal")
+  (return-type "gboolean")
+  (parameters
+    '("const-GdaColumn*" "rhs")
+  )
 )
 
 (define-method get_title
@@ -837,7 +846,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-column-index.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-column-index.h
 
 (define-function gda_column_index_get_type
   (c-name "gda_column_index_get_type")
@@ -927,7 +936,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-command.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-command.h
 
 (define-function gda_command_get_type
   (c-name "gda_command_get_type")
@@ -1019,7 +1028,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-config.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-config.h
 
 (define-function gda_config_get_string
   (c-name "gda_config_get_string")
@@ -1331,7 +1340,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-connection-event.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-connection-event.h
 
 (define-function gda_connection_event_get_type
   (c-name "gda_connection_event_get_type")
@@ -1461,7 +1470,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-connection.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-connection.h
 
 (define-function gda_connection_get_type
   (c-name "gda_connection_get_type")
@@ -1768,7 +1777,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-data-model-array.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-data-model-array.h
 
 (define-function gda_data_model_array_get_type
   (c-name "gda_data_model_array_get_type")
@@ -1810,7 +1819,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-data-model-base.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-data-model-base.h
 
 (define-function gda_data_model_base_get_type
   (c-name "gda_data_model_base_get_type")
@@ -1819,7 +1828,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-data-model.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-data-model.h
 
 (define-function gda_data_model_get_type
   (c-name "gda_data_model_get_type")
@@ -2047,7 +2056,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-data-model-hash.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-data-model-hash.h
 
 (define-function gda_data_model_hash_get_type
   (c-name "gda_data_model_hash_get_type")
@@ -2090,7 +2099,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-data-model-index.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-data-model-index.h
 
 (define-function gda_data_model_index_get_type
   (c-name "gda_data_model_index_get_type")
@@ -2216,7 +2225,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-data-model-list.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-data-model-list.h
 
 (define-function gda_data_model_list_get_type
   (c-name "gda_data_model_list_get_type")
@@ -2248,7 +2257,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-data-model-private.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-data-model-private.h
 
 (define-method changed
   (of-object "GdaDataModel")
@@ -2315,7 +2324,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-enum-types.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-enum-types.h
 
 (define-function gda_blob_mode_get_type
   (c-name "gda_blob_mode_get_type")
@@ -2384,11 +2393,11 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-intl.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-intl.h
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-log.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-log.h
 
 (define-function gda_log_enable
   (c-name "gda_log_enable")
@@ -2425,11 +2434,11 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-marshal.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-marshal.h
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-parameter.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-parameter.h
 
 (define-function gda_parameter_get_type
   (c-name "gda_parameter_get_type")
@@ -2584,7 +2593,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-quark-list.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-quark-list.h
 
 (define-function gda_quark_list_get_type
   (c-name "gda_quark_list_get_type")
@@ -2653,7 +2662,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-row.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-row.h
 
 (define-function gda_row_get_type
   (c-name "gda_row_get_type")
@@ -2776,7 +2785,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-select.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-select.h
 
 (define-function gda_select_get_type
   (c-name "gda_select_get_type")
@@ -2816,7 +2825,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-server-provider.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-server-provider.h
 
 (define-function gda_server_provider_get_type
   (c-name "gda_server_provider_get_type")
@@ -3075,7 +3084,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-threader.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-threader.h
 
 (define-function gda_threader_get_type
   (c-name "gda_threader_get_type")
@@ -3112,7 +3121,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-transaction.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-transaction.h
 
 (define-function gda_transaction_get_type
   (c-name "gda_transaction_get_type")
@@ -3160,7 +3169,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-util.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-util.h
 
 (define-function gda_type_to_string
   (c-name "gda_type_to_string")
@@ -3232,7 +3241,7 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-value.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/gda-value.h
 
 (define-method get_type
   (of-object "GdaValue")
@@ -4075,11 +4084,11 @@
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/global-decl.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/global-decl.h
 
 
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/libgda.h
+;; From /home/murrayc/cvs/gnome214/branches/HEAD/libgda/libgda/libgda.h
 
 (define-function gda_init
   (c-name "gda_init")

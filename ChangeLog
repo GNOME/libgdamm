@@ -1,3 +1,14 @@
+2005-10-23  Murray Cumming <murrayc@murrayc.com>
+
+	* libgda/src/column.hg: Add equal() and 
+	get/set_title().
+	* libgda/src/libgda_methods.defs: Regehnerated 
+	with h2defs.py.
+	* libgda/src/parameterlist.hg: Use _IGNORE() 
+	to avoid warnings.
+	* tools/m4/convert_libgdamm.m4: Added conversion
+	for Column:equal().
+
 2005-10-20  Murray Cumming <murrayc@murrayc.com>
 
 	* libgda/libgdamm/config.cc:
