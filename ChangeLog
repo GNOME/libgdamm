@@ -1,5 +1,10 @@
 2006-05-08  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/connection.hg: Added open(), set_dsn(), set_username(), 
+	set_password(), get_provider_obj(), fetch_blob_by_id().
+	* tools/m4/convert_libgdamm.m4: Added ServerProvider conversion.
+
+2006-05-08  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/datamodelbase.ccg:
 	* libgda/src/datamodelbase.hg: Removed, because it was removed 

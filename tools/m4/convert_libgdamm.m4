@@ -16,6 +16,7 @@ _CONVERSION(`GdaDictType*',`Glib::RefPtr<DictType>',`Glib::wrap($3)')
 _CONVERSION(`GdaObject*',`Glib::RefPtr<Object>',`Glib::wrap($3)')
 _CONVERSION(`GdaParameter*',`Glib::RefPtr<Parameter>',`Glib::wrap($3)')
 _CONVERSION(`GdaParameterList*',`Glib::RefPtr<ParameterList>',`Glib::wrap($3)')
+_CONVERSION(`GdaServerProvider*',`Glib::RefPtr<ServerProvider>',`Glib::wrap($3)')
 
 _CONVERSION(`const Glib::RefPtr<DataModel>&', `GdaDataModel*', `Glib::unwrap($3)')
 _CONVERSION(`const Glib::RefPtr<ServerProvider>&', `GdaServerProvider*', `Glib::unwrap($3)')

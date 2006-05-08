@@ -55,8 +55,11 @@ protected:
 public:
   _WRAP_CREATE()
 
+  _WRAP_METHOD(bool open(), gda_connection_open, errthrow)
+
   void close();
-  _IGNORE(gda_connection_close)
+  _IGNORE(gda_connection_close, gda_connection_close_no_warning)
+
   _WRAP_METHOD(bool reset(), gda_connection_reset)
   _WRAP_METHOD(bool is_opened() const, gda_connection_is_opened)
 
@@ -70,10 +73,18 @@ public:
 
   _WRAP_METHOD(Glib::ustring get_database() const, gda_connection_get_database)
   _WRAP_METHOD(Glib::ustring get_dsn() const, gda_connection_get_dsn)
+  _WRAP_METHOD(bool set_dsn(const Glib::ustring& dsn), gda_connection_set_dsn)
   _WRAP_METHOD(Glib::ustring get_cnc_string() const, gda_connection_get_cnc_string)
+
   _WRAP_METHOD(Glib::ustring get_provider() const, gda_connection_get_provider)
+  _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider_obj(), gda_connection_get_provider_obj)
+  _WRAP_METHOD(Glib::RefPtr<const ServerProvider> get_provider_obj() const, gda_connection_get_provider_obj, constversion)
+  //TODO: _WRAP_METHOD(GdaServerProviderInfo* get_infos(), gda_connection_get_infos)
+
   _WRAP_METHOD(Glib::ustring get_username() const, gda_connection_get_username)
+  _WRAP_METHOD(bool set_username(const Glib::ustring& username), gda_connection_set_username)
   _WRAP_METHOD(Glib::ustring get_password() const, gda_connection_get_password)
+  _WRAP_METHOD(bool set_password(const Glib::ustring& password), gda_connection_set_password)
 
   _WRAP_METHOD(void add_event(const Glib::RefPtr<ConnectionEvent>& error), gda_connection_add_event)
   _WRAP_METHOD(void add_event(const Glib::ustring& error), gda_connection_add_event_string)
@@ -117,6 +128,7 @@ public:
 
   //TODO: Use C++ type:
   _WRAP_METHOD(GdaBlob* create_blob(), gda_connection_create_blob)
+  _WRAP_METHOD(GdaBlob* fetch_blob_by_id(const Glib::ustring& sql_id), gda_connection_fetch_blob_by_id)
 
   _WRAP_METHOD(Glib::ustring value_to_sql_string(const Value& from) const, gda_connection_value_to_sql_string);
 
