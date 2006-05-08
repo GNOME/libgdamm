@@ -1,5 +1,17 @@
 2006-05-08  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg: Removed reset() because it was removed 
+	from libgda.
+	* libgda/src/datamodel.ccg:
+	* libgda/src/datamodel.hg: Added get_attributes_at, create_iter() move_iter_at_row(), 
+	move_iter_nex(), move_iter_prev, send_hint(), import_from_string(), import_from_file(), 
+	row_changed(), row_inserted(), row_updated(), row_removed(), move_iter_at_row_default(), 
+	move_iter_next_default(), move_iter_prev_default().
+	* tools/m4/convert_libgdamm.m4: Added const conversion.
+
+2006-05-08  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/connection.hg: Added open(), set_dsn(), set_username(), 
 	set_password(), get_provider_obj(), fetch_blob_by_id().
 	* tools/m4/convert_libgdamm.m4: Added ServerProvider conversion.

@@ -27,6 +27,7 @@ _CONVERSION(`const Glib::RefPtr<DictType>&', `GdaDictType*', `Glib::unwrap($3)')
 _CONVERSION(`const Glib::RefPtr<Object>&', `GdaObject*', `Glib::unwrap($3)')
 _CONVERSION(`const Glib::RefPtr<Parameter>&', `GdaParameter*', `Glib::unwrap($3)')
 _CONVERSION(`const Glib::RefPtr<ParameterList>&', `GdaParameterList*', `Glib::unwrap($3)')
+_CONVERSION(`const Glib::RefPtr<const ParameterList>&', `GdaParameterList*', `const_cast<GdaParameterList*>(Glib::unwrap($3))')
 
 # The const_cast here is silly and should not be necessary - we should fix the wrap() methods some time:
 _CONVERSION(`const Command&', `GdaCommand*', `const_cast<GdaCommand*>(($3).gobj())')
