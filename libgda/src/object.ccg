@@ -1,7 +1,7 @@
 /* $Id$ */
 // -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* datamodel.cc
+/* dict.cc
  * 
  * Copyright 2003 libgdamm Development Team
  *
@@ -20,16 +20,12 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgda/gda-data-model.h>
+#include <libgdamm/dict.h>
+#include <libgda/gda-object.h>
 
 namespace Gnome
 {
 
-namespace Gda
-{
-         
-
-} /* namespace Gda */
 
 } /* namespace Gnome */
 

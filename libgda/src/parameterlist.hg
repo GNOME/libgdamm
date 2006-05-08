@@ -32,27 +32,31 @@ namespace Gnome
 namespace Gda
 {
 
-class ParameterList
+class ParameterList : public Glib::Object
 {
-  _CLASS_OPAQUE_COPYABLE(ParameterList, GdaParameterList, gda_parameter_list_new, gda_parameter_list_copy, gda_parameter_list_free)
-  _IGNORE(gda_parameter_list_copy, gda_parameter_list_free)
+  _CLASS_GOBJECT(ParameterList, GdaParameterList, GDA_PARAMETER_LIST, Glib::Object, GObject)
+protected:
+
+  _CTOR_DEFAULT
+
 public:
+  _WRAP_CREATE()
+
   
   operator bool() const;
 
-  void add_parameter(const Parameter& param);
-  _IGNORE(gda_parameter_list_add_parameter)
+  _WRAP_METHOD(guint get_length(), gda_parameter_list_get_length)
 
-  template<typename T>
-  void add_parameter(const Glib::ustring& name, const T& value)
-  {
-    add_parameter(Parameter(name, value));
-  }
+
+  _WRAP_METHOD(void add_parameter(const Glib::RefPtr<Parameter>& param), gda_parameter_list_add_param)
+  _WRAP_METHOD(Glib::RefPtr<Parameter> add_parameter(const Glib::ustring& name, ValueType type, const Glib::ustring& str), gda_parameter_list_add_param_from_string)
+  _WRAP_METHOD(Glib::RefPtr<Parameter> add_parameter(const Glib::ustring& name, const Value& value), gda_parameter_list_add_param_from_value)
+
 
   //TODO: Use ListHandle:
   _WRAP_METHOD(GList* get_names(), gda_parameter_list_get_names)
   
-  _WRAP_METHOD(Parameter find(const Glib::ustring& name) const, gda_parameter_list_find)
+  _WRAP_METHOD(Glib::RefPtr<Parameter> find(const Glib::ustring& name) const, gda_parameter_list_find)
   _WRAP_METHOD(void clear(), gda_parameter_list_clear)
   _WRAP_METHOD(guint get_length() const, gda_parameter_list_get_length)
 

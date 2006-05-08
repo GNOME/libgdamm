@@ -20,6 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgdamm/parameterlist.h>
 #include <glibmm/object.h>
 #include <libgda/gda-config.h>
 
@@ -41,7 +42,8 @@ public:
   _MEMBER_GET(location, location, Glib::ustring, const char*)
   _MEMBER_GET(description, description, Glib::ustring, const char*)
   
-  Glib::ListHandle<Glib::ustring> get_gda_params() const;
+  Glib::RefPtr<ParameterList> get_gda_params();
+  Glib::RefPtr<const ParameterList> get_gda_params() const;
 };
 
 } // namespace Gda

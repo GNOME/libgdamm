@@ -45,7 +45,7 @@ class ServerProvider : public Glib::Object
 
   _WRAP_METHOD(Glib::ustring get_version() const, gda_server_provider_get_version)
   _WRAP_METHOD(bool open_connection(const Glib::RefPtr<Connection>& cnc, GdaQuarkList *params, const Glib::ustring& username, const Glib::ustring& password), gda_server_provider_open_connection)
-  _WRAP_METHOD(bool reset_connection(const Glib::RefPtr<Connection>& cnc), gda_server_provider_reset_connection)
+  //TODO: Not implemented: _WRAP_METHOD(bool reset_connection(const Glib::RefPtr<Connection>& cnc), gda_server_provider_reset_connection)
   _WRAP_METHOD(bool close_connection(const Glib::RefPtr<Connection>& cnc), gda_server_provider_close_connection)
 
   _WRAP_METHOD(Glib::ustring get_server_version(const Glib::RefPtr<Connection>& cnc) const, gda_server_provider_get_server_version)
@@ -53,7 +53,7 @@ class ServerProvider : public Glib::Object
   _WRAP_METHOD(bool change_database(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_change_database)
 
   _WRAP_METHOD(Glib::ustring get_specs(ClientSpecsType action_type) const, gda_server_provider_get_specs)
-  _WRAP_METHOD(bool perform_action_params(const ParameterList& params, ClientSpecsType action_type), gda_server_provider_perform_action_params, errthrow)
+  _WRAP_METHOD(bool perform_action_params(const Glib::RefPtr<ParameterList>& params, ClientSpecsType action_type), gda_server_provider_perform_action_params, errthrow)
 
   _WRAP_METHOD(bool create_database_cnc(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_create_database_cnc)
   _WRAP_METHOD(bool drop_database_cnc(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_drop_database_cnc)
@@ -76,7 +76,7 @@ class ServerProvider : public Glib::Object
 
   #m4 //Use deep ownership because we own both the list and its elements;
   #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Glib::RefPtr<Connection>& cnc, const Command& cmd, const ParameterList& params), gda_server_provider_execute_command)
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Glib::RefPtr<Connection>& cnc, const Command& cmd, const Glib::RefPtr<ParameterList>& params), gda_server_provider_execute_command)
 
   _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_begin_transaction)
   _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_commit_transaction)
@@ -85,8 +85,8 @@ class ServerProvider : public Glib::Object
   _WRAP_METHOD(bool supports(const Glib::RefPtr<Connection>& cnc, ConnectionFeature feature) const, gda_server_provider_supports)
 
   //TODO: Use C++ parameters, and add const version:
-  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const ParameterList& params), gda_server_provider_get_schema)
-  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const ParameterList& params) const, gda_server_provider_get_schema)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params), gda_server_provider_get_schema, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params) const, gda_server_provider_get_schema, errthrow)
 
   Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema);
   Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema) const;

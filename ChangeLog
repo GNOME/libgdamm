@@ -1,3 +1,44 @@
+2006-05-08  Murray Cumming  <murrayc@murrayc.com>
+
+
+	* libgda/src/datamodelbase.ccg:
+	* libgda/src/datamodelbase.hg: Removed, because it was removed 
+	from the libgda API.
+	* libgda/src/dictaggregate.ccg:
+	* libgda/src/dictaggregate.hg:
+	* libgda/src/dictdatabase.hg:
+	* libgda/src/dicttype.ccg:
+	* libgda/src/dicttype.hg:
+	* libgda/src/object.ccg:
+	* libgda/src/object.hg: New classes
+	* libgda/src/Makefile_list_of_hg.am_fragment: Mention new files.
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg: execute_single_command() renamed to 
+	execute_command().
+	* libgda/src/dict.ccg:
+	* libgda/src/dict.hg:
+	* libgda/src/client.hg:
+	* libgda/src/datamodel.ccg:
+	* libgda/src/datamodel.hg:
+	* libgda/src/parameter.ccg:
+	* libgda/src/parameter.hg:
+	* libgda/src/parameterlist.ccg:
+	* libgda/src/parameterlist.hg:
+	* libgda/src/providerinfo.ccg:
+	* libgda/src/providerinfo.hg:
+	* libgda/src/serverprovider.ccg:
+	* libgda/src/serverprovider.hg: Various API changes. For instance, 
+	most classes now derived from Glib::Object, so must be use with 
+	Glib::RefPtr.
+	* libgda/src/libgda_methods.defs: Updated with h2defs.py
+	* libgda/src/libgda_signals.defs: Updated with extra_defs_gen.
+	* tools/extra_defs_gen/generate_defs_gda.cc: Output .defs for the 
+	new types.
+	* tools/m4/convert_libgdamm.m4: New conversions.
+	* examples/introspection/main.cc:
+	* examples/list_data_sources/main.cc:
+	* examples/simple/main.cc: Update for new API.
+
 2005-10-23  Murray Cumming <murrayc@murrayc.com>
 
 	* libgda/src/column.hg: Add equal() and 

@@ -58,7 +58,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<Connection> find_connection(const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password), gda_client_find_connection)
   _WRAP_METHOD(void close_all_connections(), gda_client_close_all_connections)
 
-  _WRAP_METHOD(void notify_event(const Glib::RefPtr<Connection>& cnc, ClientEvent event, const ParameterList& params), gda_client_notify_event)
+  _WRAP_METHOD(void notify_event(const Glib::RefPtr<Connection>& cnc, ClientEvent event, const Glib::RefPtr<ParameterList>& params), gda_client_notify_event)
   //TODO: Wrap GdaConnectionEvent as exception.
   _WRAP_METHOD(void notify_error_event(const Glib::RefPtr<Connection>& cnc, GdaConnectionEvent *error), gda_client_notify_error_event)
   _WRAP_METHOD(void notify_connection_opened_event(const Glib::RefPtr<Connection>& cnc), gda_client_notify_connection_opened_event)
@@ -71,8 +71,8 @@ public:
   _WRAP_METHOD(Glib::ustring get_dsn_specs(const Glib::ustring& provider) const, gda_client_get_dsn_specs)
   _WRAP_METHOD(Glib::ustring get_provider_specs(const Glib::ustring& provider, ClientSpecsType type), gda_client_get_provider_specs)
 
-  _WRAP_METHOD(bool create_database(const Glib::ustring& provider, const ParameterList& params), gda_client_create_database, errthrow)
-  _WRAP_METHOD(bool drop_database(const Glib::ustring& provider, const ParameterList& params), gda_client_drop_database, errthrow)
+  _WRAP_METHOD(bool create_database(const Glib::ustring& provider, const Glib::RefPtr<ParameterList>& params), gda_client_create_database, errthrow)
+  _WRAP_METHOD(bool drop_database(const Glib::ustring& provider, const Glib::RefPtr<ParameterList>& params), gda_client_drop_database, errthrow)
 
 
   _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_begin_transaction)
@@ -80,7 +80,7 @@ public:
   _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_rollback_transaction)
 
   //TODO: Use C++ types:
-  //_WRAP_SIGNAL(void event_notification(const Glib::RefPtr<Connection>& cnc, ClientEvent event, const ParameterList& params), "event_notification")
+  //_WRAP_SIGNAL(void event_notification(const Glib::RefPtr<Connection>& cnc, ClientEvent event, const Glib::RefPtr<ParameterList>& params), "event_notification")
 };
 
 } // namespace Gda

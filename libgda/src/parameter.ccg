@@ -20,6 +20,9 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgdamm/datamodel.h>
+#include <libgda/gda-parameter.h>
+
 namespace Gnome
 {
 
@@ -34,23 +37,21 @@ Parameter::Parameter(const Glib::ustring& name, const Value& value)
 */
 
 Parameter::Parameter(const Glib::ustring& name, bool value)
+:
+  _CONSTRUCT()
 {
-  gobject_ = gda_parameter_new_boolean(name.c_str(), value);
-}
-
-Parameter::Parameter(const Glib::ustring& name, gdouble value)
-{
-  gobject_ = gda_parameter_new_double(name.c_str(), value);
-}
-
-Parameter::Parameter(const Glib::ustring& name, const Glib::RefPtr<Glib::Object>& value)
-{
-  gobject_ = gda_parameter_new_gobject(name.c_str(), value->gobj());
+  //Reimplemented from gda_parameter_new_string():
+  set_name(name);
+  set_value(value ? "true" : "false");
 }
 
 Parameter::Parameter(const Glib::ustring& name, const Glib::ustring& value)
+:
+  _CONSTRUCT()
 {
-  gobject_ = gda_parameter_new_string(name.c_str(), value.c_str());
+  //Reimplemented from gda_parameter_new_boolean():
+  set_name(name);
+  set_value(value);
 }
 
  

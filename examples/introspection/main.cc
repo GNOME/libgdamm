@@ -111,10 +111,10 @@ int main (int argc, char** argv)
           if(!table_name.empty())
           {
              //List the fields:
-             Gnome::Gda::Parameter param_table_name("name", table_name);
+             Glib::RefPtr<Gnome::Gda::Parameter> param_table_name = Gnome::Gda::Parameter::create("name", table_name);
 
-             Gnome::Gda::ParameterList param_list;
-             param_list.add_parameter(param_table_name);
+             Glib::RefPtr<Gnome::Gda::ParameterList> param_list = Gnome::Gda::ParameterList::create();
+             param_list->add_parameter(param_table_name);
 
              Glib::RefPtr<Gnome::Gda::DataModel> data_model_fields = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_FIELDS, param_list);
              //Alternatively, execute a query and call DataModel::describe_column() for each column.

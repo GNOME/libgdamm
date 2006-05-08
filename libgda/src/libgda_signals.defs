@@ -5,147 +5,905 @@
   (return-type "void")
   (when "last")
   (parameters
-    '("GdaConnection*" "p0")
-    '("GdaClientEvent" "p1")
-    '("GdaParameterList*" "p2")
+    '("gpointer" "p0")
+    '("gint" "p1")
+    '("gpointer" "p2")
   )
 )
 
+;; From GdaColumn
+
+(define-signal name-changed
+  (of-object "GdaColumn")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("const-gchar*" "p0")
+  )
+)
+
+(define-signal gda-type-changed
+  (of-object "GdaColumn")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+    '("gint" "p1")
+  )
+)
+
+;; From GdaColumnIndex
+
 ;; From GdaConnection
 
-;; We must change the gpointer by hand to the specific type:
 (define-signal error
   (of-object "GdaConnection")
   (return-type "void")
   (when "last")
   (parameters
-    '("GdaConnectionEvent*" "error")
+    '("GdaConnectionEvent*" "p0")
   )
 )
+
+(define-signal conn-opened
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal conn-to-close
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal conn-closed
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal dsn-changed
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "last")
+)
+
+;; From GdaConnectionEvent
 
 ;; From GdaDataModelArray
 
-;; From GdaDataModelList
+(define-property dict
+  (of-object "GdaDataModelArray")
+  (prop-type "GParamPointer")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
 
-;; From GdaDataModelBase
+(define-property changed-blocked
+  (of-object "GdaDataModelArray")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaDataModelArray")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property read-only
+  (of-object "GdaDataModelArray")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property command-text
+  (of-object "GdaDataModelArray")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property command-type
+  (of-object "GdaDataModelArray")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDataModelIndex
 
 ;; From GdaDataModel
 
+;; From GdaDict
+
+(define-signal data-type-added
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal data-type-removed
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal data-type-updated
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal function-added
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal function-removed
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal function-updated
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal aggregate-added
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal aggregate-removed
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal aggregate-updated
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal data-update-started
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal update-progress
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+    '("guint" "p1")
+    '("guint" "p2")
+  )
+)
+
+(define-signal data-update-finished
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal query-added
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal query-removed
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal query-updated
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal graph-added
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal graph-removed
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal graph-updated
+  (of-object "GdaDict")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
 (define-signal changed
-  (of-object "GdaDataModel")
+  (of-object "GdaDict")
   (return-type "void")
-  (when "last")
+  (when "first")
 )
 
-(define-signal row-inserted
-  (of-object "GdaDataModel")
+(define-property query-serial
+  (of-object "GdaDict")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property graph-serial
+  (of-object "GdaDict")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property with-functions
+  (of-object "GdaDict")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property dsn
+  (of-object "GdaDict")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property username
+  (of-object "GdaDict")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDictType
+
+(define-property dict
+  (of-object "GdaDictType")
+  (prop-type "GParamPointer")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaDictType")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaDictType")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property prop
+  (of-object "GdaDictType")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDictAggregate
+
+(define-property dict
+  (of-object "GdaDictAggregate")
+  (prop-type "GParamPointer")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaDictAggregate")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaDictAggregate")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property prop
+  (of-object "GdaDictAggregate")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaGraph
+
+(define-signal item-added
+  (of-object "GdaGraph")
   (return-type "void")
-  (when "last")
+  (when "first")
   (parameters
-    '("gint" "p0")
+    '("gpointer" "p0")
   )
 )
 
-(define-signal row-updated
-  (of-object "GdaDataModel")
+(define-signal item-dropped
+  (of-object "GdaGraph")
   (return-type "void")
-  (when "last")
+  (when "first")
   (parameters
-    '("gint" "p0")
+    '("gpointer" "p0")
   )
 )
 
-(define-signal row-removed
-  (of-object "GdaDataModel")
+(define-signal item-moved
+  (of-object "GdaGraph")
   (return-type "void")
-  (when "last")
+  (when "first")
   (parameters
-    '("gint" "p0")
+    '("gpointer" "p0")
   )
 )
 
-(define-signal column-inserted
-  (of-object "GdaDataModel")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("gint" "p0")
-  )
+(define-property dict
+  (of-object "GdaGraph")
+  (prop-type "GParamPointer")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
 )
 
-(define-signal column-updated
-  (of-object "GdaDataModel")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("gint" "p0")
-  )
+(define-property changed-blocked
+  (of-object "GdaGraph")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
-(define-signal column-removed
-  (of-object "GdaDataModel")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("gint" "p0")
-  )
+(define-property string-id
+  (of-object "GdaGraph")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
-(define-signal begin-update
-  (of-object "GdaDataModel")
-  (return-type "void")
-  (when "last")
+(define-property ref-object
+  (of-object "GdaGraph")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
-(define-signal cancel-update
-  (of-object "GdaDataModel")
-  (return-type "void")
-  (when "last")
+(define-property graph-type
+  (of-object "GdaGraph")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
-(define-signal commit-update
-  (of-object "GdaDataModel")
-  (return-type "void")
-  (when "last")
-)
-
-;; From GdaError
-
-;; From GdaTable
-
-;; From GdaXmlDatabase
+;; From GdaObject
 
 (define-signal changed
-  (of-object "GdaXmlDatabase")
+  (of-object "GdaObject")
   (return-type "void")
-  (when "last")
+  (when "first")
 )
 
-;; From GdaXqlAtom
+(define-signal name-changed
+  (of-object "GdaObject")
+  (return-type "void")
+  (when "first")
+)
 
-;; From GdaXqlBin
+(define-signal id-changed
+  (of-object "GdaObject")
+  (return-type "void")
+  (when "first")
+)
 
-;; From GdaXqlColumn
+(define-signal descr-changed
+  (of-object "GdaObject")
+  (return-type "void")
+  (when "first")
+)
 
-;; From GdaXqlConst
+(define-signal owner-changed
+  (of-object "GdaObject")
+  (return-type "void")
+  (when "first")
+)
 
-;; From GdaXqlDelete
+(define-signal destroyed
+  (of-object "GdaObject")
+  (return-type "void")
+  (when "first")
+)
 
-;; From GdaXqlDml
+(define-signal to-be-destroyed
+  (of-object "GdaObject")
+  (return-type "void")
+  (when "first")
+)
 
-;; From GdaXqlDual
+(define-property dict
+  (of-object "GdaObject")
+  (prop-type "GParamPointer")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
 
-;; From GdaXqlFunc
+(define-property changed-blocked
+  (of-object "GdaObject")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
 
-;; From GdaXqlInsert
+(define-property string-id
+  (of-object "GdaObject")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
 
-;; From GdaXqlJoin
+;; From GdaParameter
 
-;; From GdaXqlSelect
+(define-signal restrict-changed
+  (of-object "GdaParameter")
+  (return-type "void")
+  (when "first")
+)
 
-;; From GdaXqlTarget
+(define-property dict
+  (of-object "GdaParameter")
+  (prop-type "GParamPointer")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
 
-;; From GdaXqlValue
+(define-property changed-blocked
+  (of-object "GdaParameter")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
 
-;; From GdaXqlValueRef
+(define-property string-id
+  (of-object "GdaParameter")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property entry-plugin
+  (of-object "GdaParameter")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property use-default-value
+  (of-object "GdaParameter")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property simple-bind
+  (of-object "GdaParameter")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property full-bind
+  (of-object "GdaParameter")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property restrict-model
+  (of-object "GdaParameter")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property restrict-column
+  (of-object "GdaParameter")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property gda-type
+  (of-object "GdaParameter")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaParameterList
+
+(define-signal param-changed
+  (of-object "GdaParameterList")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GObject*" "p0")
+  )
+)
+
+(define-signal public-data-changed
+  (of-object "GdaParameterList")
+  (return-type "void")
+  (when "first")
+)
+
+(define-property dict
+  (of-object "GdaParameterList")
+  (prop-type "GParamPointer")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaParameterList")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaParameterList")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaQuery
+
+(define-signal type-changed
+  (of-object "GdaQuery")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal condition-changed
+  (of-object "GdaQuery")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal target-added
+  (of-object "GdaQuery")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal target-removed
+  (of-object "GdaQuery")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal target-updated
+  (of-object "GdaQuery")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal join-added
+  (of-object "GdaQuery")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal join-removed
+  (of-object "GdaQuery")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal join-updated
+  (of-object "GdaQuery")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal sub-query-added
+  (of-object "GdaQuery")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal sub-query-removed
+  (of-object "GdaQuery")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal sub-query-updated
+  (of-object "GdaQuery")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-property dict
+  (of-object "GdaQuery")
+  (prop-type "GParamPointer")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaQuery")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaQuery")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property target-serial
+  (of-object "GdaQuery")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property field-serial
+  (of-object "GdaQuery")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property cond-serial
+  (of-object "GdaQuery")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property really-all-fields
+  (of-object "GdaQuery")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property auto-clean
+  (of-object "GdaQuery")
+  (prop-type "GParamBoolean")
+  (docs "Determines if the query tries to clean unused objects")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaQueryObject
+
+(define-signal numid-changed
+  (of-object "GdaQueryObject")
+  (return-type "void")
+  (when "first")
+)
+
+(define-property dict
+  (of-object "GdaQueryObject")
+  (prop-type "GParamPointer")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaQueryObject")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaQueryObject")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
 

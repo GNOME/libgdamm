@@ -26,6 +26,7 @@
 #include <libgdamm/datamodel.h>
 #include <libgdamm/parameterlist.h>
 #include <libgdamm/datamodelindex.h>
+#include <libgdamm/dict.h>
 //#include <libgda/gda-connection.h>
 
 _DEFS(libgdamm,libgda)
@@ -54,10 +55,10 @@ protected:
 public:
   _WRAP_CREATE()
 
-  bool close();
+  void close();
   _IGNORE(gda_connection_close)
   _WRAP_METHOD(bool reset(), gda_connection_reset)
-  _WRAP_METHOD(bool is_open() const, gda_connection_is_open)
+  _WRAP_METHOD(bool is_opened() const, gda_connection_is_opened)
 
   _WRAP_METHOD(Glib::RefPtr<Client> get_client(), gda_connection_get_client, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Client> get_client() const, gda_connection_get_client, refreturn)
@@ -96,17 +97,12 @@ public:
   #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
 
 //TODO: Document that execute* throw exceptions.
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd, const ParameterList& params), gda_connection_execute_command, errthrow)
-  Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd);
+  _WRAP_METHOD(Glib::RefPtr<DataModel> execute_command(const Command& cmd, const Glib::RefPtr<ParameterList>& params), gda_connection_execute_command, errthrow)
+  Glib::RefPtr<DataModel> execute_command(const Command& cmd);
+  Glib::RefPtr<DataModel> execute_command(const Glib::ustring& cmd);
  
-  _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(const Command& cmd, const ParameterList& params), gda_connection_execute_single_command, errthrow)
+  //_WRAP_METHOD(Glib::RefPtr<DataModel> execute_command(const Command& cmd, const Glib::RefPtr<ParameterList>& params), gda_connection_execute_command_l, errthrow)
 
-  Glib::RefPtr<DataModel> execute_single_command(const Command& cmd);
-  Glib::RefPtr<DataModel> execute_single_command(const Glib::ustring& cmd);
-
-//Document that this throws:
-  _WRAP_METHOD(int execute_non_query(const Command& cmd, const ParameterList& params), gda_connection_execute_non_query, errthrow)
-  int execute_non_query(const Command& cmd);
 
   _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_begin_transaction)
   _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_commit_transaction)
@@ -126,8 +122,8 @@ public:
 
   _WRAP_METHOD(bool supports(ConnectionFeature feature) const, gda_connection_supports)
 
-  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, const ParameterList& params), gda_connection_get_schema)
-  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema, const ParameterList& params) const, gda_connection_get_schema)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params), gda_connection_get_schema, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params) const, gda_connection_get_schema, errthrow)
 
   Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema);
   Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema) const;
@@ -136,6 +132,11 @@ public:
 
 _CONVERSION(`GdaConnectionEvent*',`const Glib::RefPtr<ConnectionEvent>&',Glib::wrap($3, true))
   _WRAP_SIGNAL(void error(const Glib::RefPtr<ConnectionEvent>& error), "error")
+
+  _WRAP_SIGNAL(void conn_opened(), "conn_opened")
+  _WRAP_SIGNAL(void conn_to_close(), "conn_to_close")
+  _WRAP_SIGNAL(void conn_closed(), "conn_closed")
+  _WRAP_SIGNAL(void dsn_changed(), "dsn_changed")
 };
 
 } // namespace Gda

@@ -51,14 +51,15 @@ int main (int argc, char** argv)
         //The params:
         std::cout << "  GDA Params: ";
 
-        typedef std::list<Glib::ustring> type_list_of_strings;
-        type_list_of_strings params = info.get_gda_params();
+        Glib::RefPtr<const Gnome::Gda::ParameterList> params = info.get_gda_params();
+        /* TODO:
         for(type_list_of_strings::iterator iter = params.begin(); iter != params.end(); ++iter)
         {
           std::cout << *iter << ", ";
         }
 
         std::cout << std::endl << std::endl;
+        */
       }
 
     

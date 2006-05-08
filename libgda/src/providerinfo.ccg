@@ -28,9 +28,14 @@ namespace Gnome
 namespace Gda
 {
 
-Glib::ListHandle<Glib::ustring> ProviderInfo::get_gda_params() const
+Glib::RefPtr<ParameterList> ProviderInfo::get_gda_params()
 {
-  return Glib::ListHandle<Glib::ustring>(gobj()->gda_params, Glib::OWNERSHIP_NONE); //Glib::OWNERSHIP_NONE because we should not delete the list or its elements.
+  return Glib::wrap(gobj()->gda_params, true);
+}
+
+Glib::RefPtr<const ParameterList> ProviderInfo::get_gda_params() const
+{
+  return Glib::wrap(gobj()->gda_params, true);
 }
 
 } // namespace Gda
