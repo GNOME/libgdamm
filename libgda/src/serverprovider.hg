@@ -94,7 +94,7 @@ class ServerProvider : public Glib::Object
   //TODO: Use C++ type:
   _WRAP_METHOD(GdaBlob* create_blob(const Glib::RefPtr<Connection>& cnc), gda_server_provider_create_blob)
 
-  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Glib::RefPtr<Connection>& cnc, const Value& from) const, gda_server_provider_value_to_sql_string)
+  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Glib::RefPtr<Connection>& cnc, const Glib::ValueBase& from) const, gda_server_provider_value_to_sql_string)
 
   _WRAP_METHOD(Glib::ustring get_last_insert_id(const Glib::RefPtr<Connection>&, const Glib::RefPtr<DataModel>& recset) const, gda_server_provider_get_last_insert_id)
 

@@ -1,8 +1,13 @@
-/* $Id$ */
-// -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
+// -*- c++ -*-
+#ifndef _LIBGDAMM_VALUE_H
+#define _LIBGDAMM_VALUE_H
 
-/* datamodel.cc
- * 
+
+/* $Id$ */
+// -*- C++ -*- //
+
+/* value.h
+ *
  * Copyright 2003 libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
@@ -20,28 +25,39 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgda/gda-column.h>
-#include <libgda/gda-enum-types.h>
+#include <glibmm.h>
+#include <glibmm/value.h>
+#include <libgda/gda-value.h> //TODO: Patch libgda to use the struct _ technique.
+
 
 namespace Gnome
 {
 
 namespace Gda
 {
-  
-bool Column::get_default_value(Glib::ValueBase& value) const
-{
-  const GValue* cvalue =  gda_column_get_default_value(const_cast<GdaColumn*>(gobj()));
-  if(cvalue)
-  {
-    value.init(cvalue);
-    return true;
-  }
-  else
-    return false;
-}
 
-} // namespace Gda
+//gtkmmproc error: GValueType : enum defs lookup failed.
 
-} // namespace Gnome
+typedef GdaGeometricPoint GeometricPoint;
+
+/*  TODO:
+typedef struct {
+	gchar *currency;
+	gdouble amount;
+} GdaMoney;
+
+typedef struct {
+	gchar *number;
+	glong precision;
+	glong width;
+} GdaNumeric;
+*/
+
+Glib::ustring value_to_string(const Glib::ValueBase& value);
+
+} //namespace Gda
+} //namespaec Gnome
+
+
+#endif /* _LIBGDAMM_VALUE_H */
 

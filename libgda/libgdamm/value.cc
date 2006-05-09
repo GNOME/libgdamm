@@ -1,9 +1,9 @@
 /* $Id$ */
-// -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
+// -*- C++ -*- //
 
-/* datamodel.cc
+/* value.cc
  * 
- * Copyright 2003 libgdamm Development Team
+ * Copyright 2006 libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,28 +20,25 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgda/gda-column.h>
+#include <libgdamm/value.h>
+#include <libgda/gda-value.h>
 #include <libgda/gda-enum-types.h>
+#include <libgda/gda-util.h>
 
 namespace Gnome
 {
-
+  
 namespace Gda
 {
-  
-bool Column::get_default_value(Glib::ValueBase& value) const
+
+Glib::ustring value_to_string(const Glib::ValueBase& value)
 {
-  const GValue* cvalue =  gda_column_get_default_value(const_cast<GdaColumn*>(gobj()));
-  if(cvalue)
-  {
-    value.init(cvalue);
-    return true;
-  }
-  else
-    return false;
+  Glib::convert_return_gchar_ptr_to_ustring( gda_value_stringify(value.gobj()) );
 }
+
 
 } // namespace Gda
 
 } // namespace Gnome
+
 

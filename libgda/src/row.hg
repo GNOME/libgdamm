@@ -57,10 +57,10 @@ public:
   _WRAP_METHOD(Glib::ustring get_id() const, gda_row_get_id)
   _WRAP_METHOD(void set_id(const Glib::ustring& id), gda_row_set_id)
 
-  //We use a custom conversion here, because we need to copy the value:
-  #m4 _CONVERSION(`GdaValue*',`Value',`Glib::wrap($3, true /* take_copy=true */)')
-  _WRAP_METHOD(Value get_value(int num) const, gda_row_get_value)
-  _WRAP_METHOD(bool set_value(int num, const Value& value), gda_row_set_value);
+  bool get_value(int num, Glib::ValueBase& value) const;
+  _IGNORE(gda_row_get_value)
+
+  _WRAP_METHOD(bool set_value(int num, const Glib::ValueBase& value), gda_row_set_value);
 
   _WRAP_METHOD(Glib::RefPtr<const DataModel> get_model() const, gda_row_get_model)  
   _WRAP_METHOD(Glib::RefPtr<DataModel> get_model(), gda_row_get_model)  

@@ -46,7 +46,8 @@ public:
   _WRAP_CREATE()
   
   _WRAP_METHOD(Glib::RefPtr<Connection> open_connection(const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password, ConnectionOptions options = (ConnectionOptions)0), gda_client_open_connection, errthrow)
-  _WRAP_METHOD(Glib::RefPtr<Connection> open_connection_from_string(const Glib::ustring& provider_id, const Glib::ustring& cnc_string, ConnectionOptions options = (ConnectionOptions)0), gda_client_open_connection_from_string, errthrow)
+
+  _WRAP_METHOD(Glib::RefPtr<Connection> open_connection_from_string(const Glib::ustring& provider_id, const Glib::ustring& cnc_string, const Glib::ustring& username, const Glib::ustring& password, ConnectionOptions options = (ConnectionOptions)0), gda_client_open_connection_from_string, errthrow)
 
  //Use a special conversion here, because we should not own any part of the returned GList, and because we need to unconst the GList.:
  #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<Connection> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')

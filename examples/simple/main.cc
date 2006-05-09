@@ -94,8 +94,10 @@ int main (int argc, char** argv)
 
           for(int col = 0; col < columns; ++col)
           {
-            Gnome::Gda::Value value_name = data_model->get_value_at(col, i);
-            std::cout << value_name.to_string() << ", ";
+            Glib::ValueBase value_name;
+            const bool test = data_model->get_value_at(col, i, value_name);
+            if(test)
+              std::cout << Gnome::Gda::value_to_string(value_name) << ", ";
           }
 
           std::cout << std::endl;   

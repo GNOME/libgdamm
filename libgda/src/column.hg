@@ -77,14 +77,10 @@ public:
   _WRAP_METHOD(gint get_position() const, gda_column_get_position)
   _WRAP_METHOD(void set_position(gint position), gda_column_set_position)
 
-  //We use a custom conversion here because
-  //- we need to copy the value.
-  //- gda_column_get_default_value sometimes returns 0, but we want to return a gda_value_new_null() instead,
-  //  so that we don't need the concept of an invalid value.
-  #m4 _CONVERSION(`const GdaValue*',`Value',`(($3) ? Glib::wrap(const_cast<GdaValue*>($3), true /* take_copy */) : Value() )')
-  _WRAP_METHOD(Value get_default_value() const, gda_column_get_default_value)
+   bool get_default_value(Glib::ValueBase& value) const;
+  _IGNORE(gda_column_get_default_value)
   
-  _WRAP_METHOD(void set_default_value(const Value& default_value), gda_column_set_default_value)
+  _WRAP_METHOD(void set_default_value(const Glib::ValueBase& default_value), gda_column_set_default_value)
 
 };
 

@@ -70,14 +70,17 @@ int main (int argc, char** argv)
 
         for(int i = 0; i < rows; ++i)
         {
-          Gnome::Gda::Value value = data_model_databases->get_value_at(0, i);
+          Glib::Value<Glib::ustring> value;
+          const bool test = data_model_databases->get_value_at(0, i, value);
+          if(!test)
+            std::cerr << "data_model_databases->get_value_at() failed." << std::endl;
+          else
+          {
+            //Get the table name:
+            const Glib::ustring database_name = value.get();
 
-          //Get the table name:
-          Glib::ustring database_name;
-          if(value.get_value_type() ==  Gnome::Gda::VALUE_TYPE_STRING)
-            database_name = value.get_string();
-
-          std::cout << "  Database name: " <<  database_name << std::endl;
+            std::cout << "  Database name: " <<  database_name << std::endl;
+          }
         }
       }
 
@@ -91,7 +94,7 @@ int main (int argc, char** argv)
       {
         std::cout << " libgda reported 0 tables for the database." << std::endl;
       }
-      else if( data_model_tables) 
+      else if(data_model_tables) 
       {
         //List the tables:
         int rows = data_model_tables->get_n_rows();
@@ -99,12 +102,16 @@ int main (int argc, char** argv)
 
         for(int i = 0; i < rows; ++i)
         {
-          Gnome::Gda::Value value = data_model_tables->get_value_at(0, i);
-          
+          Glib::Value<Glib::ustring> value;
+          const bool test = data_model_tables->get_value_at(0, i, value);
+          if(!test)
+          {
+            std::cerr << "data_model_tables->get_value_at() failed." << std::endl;
+            break;
+          }
+ 
           //Get the table name:
-          Glib::ustring table_name;
-          if(value.get_value_type() ==  Gnome::Gda::VALUE_TYPE_STRING)
-            table_name = value.get_string();
+          Glib::ustring table_name = value.get();
           
           std::cout << "  Table name: " <<  table_name << std::endl;
            
@@ -125,7 +132,7 @@ int main (int argc, char** argv)
              }
              else if(data_model_fields)
              {
-               int fields_columns =  data_model_fields->get_n_columns();
+               const int fields_columns =  data_model_fields->get_n_columns();
                std::cout << "    Number of columns for field information: " << fields_columns << std::endl;
                for(int i = 0; i < fields_columns; ++i)
                {
@@ -137,28 +144,42 @@ int main (int argc, char** argv)
                
                for(int i = 0; i < rows; ++i)
                {
-                 Gnome::Gda::Value value_name = data_model_fields->get_value_at(0, i);
+                 Glib::Value<Glib::ustring> value_name;
+                 bool test = data_model_fields->get_value_at(0, i, value_name);
+                 if(!test)
+                 {
+                   std::cerr << "data_model_fields->get_value_at(0) failed." << std::endl;
+                   break;
+                 }
 
                  //Get the field name:
-                 Glib::ustring field_name;
-                 if(value_name.get_value_type() ==  Gnome::Gda::VALUE_TYPE_STRING)
-                   field_name = value_name.get_string();
+                 const Glib::ustring field_name = value_name.get();
 
                  std::cout << "      Field Name: " << field_name << std::endl;
 
                  //Get the field type:
-                 Gnome::Gda::Value value_fieldtype = data_model_fields->get_value_at(1, i);
-                 Glib::ustring field_type;
-                 //if(value_fieldtype.get_value_type() ==  Gnome::Gda::VALUE_TYPE_STRING)
-                   field_type = value_fieldtype.to_string();
+                 Glib::ValueBase value_fieldtype;
+                 test = data_model_fields->get_value_at(1, i, value_fieldtype);
+                 if(!test)
+                 {
+                    std::cerr << "data_model_fields->get_value_at(1) failed." << std::endl;
+                    break;
+                 }
+
+                 const Glib::ustring field_type = Gnome::Gda::value_to_string(value_fieldtype);
 
                  std::cout << "      Data Type: " << field_type << std::endl;
 
                  //Get the default value (though this can have strange values):
-                 Gnome::Gda::Value value_default = data_model_fields->get_value_at(8, i);
-                 Glib::ustring value_default_string;
-                 //if(value_fieldtype.get_value_type() ==  Gnome::Gda::VALUE_TYPE_STRING)
-                   value_default_string = value_default.to_string();
+                 Glib::ValueBase value_default;
+                 test = data_model_fields->get_value_at(8, i, value_default);
+                 if(!test)
+                 {
+                    std::cerr << "data_model_fields->get_value_at(8) failed." << std::endl;
+                    break;
+                 }
+
+                 const Glib::ustring value_default_string = Gnome::Gda::value_to_string(value_default);
 
                  std::cout << "      Default Value: " << value_default_string << std::endl;
 

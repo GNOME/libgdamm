@@ -54,8 +54,29 @@ Parameter::Parameter(const Glib::ustring& name, const Glib::ustring& value)
   set_value(value);
 }
 
- 
+bool Parameter::get_value(Glib::ValueBase& value) const
+{
+  const GValue* cvalue =  gda_parameter_get_value(const_cast<GdaParameter*>(gobj()));
+  if(cvalue)
+  {
+    value.init(cvalue);
+    return true;
+  }
+  else
+    return false;
+}
 
+bool Parameter::get_default_value(Glib::ValueBase& value) const
+{
+  const GValue* cvalue =  gda_parameter_get_default_value(const_cast<GdaParameter*>(gobj()));
+  if(cvalue)
+  {
+    value.init(cvalue);
+    return true;
+  }
+  else
+    return false;
+}
 
 } //namespace Gda
 

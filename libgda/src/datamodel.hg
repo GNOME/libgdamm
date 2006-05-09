@@ -59,9 +59,11 @@ public:
   //TODO:_WRAP_METHOD(int get_column_position(const Glib::ustring& title) const, gda_data_model_get_column_position)
 
   //We use a custom conversion here, because we need to copy the value:
-  //#m4 _CONVERSION(`GdaValue*',`Value',`Glib::wrap($3, true /* take_copy=true */)')
-  #m4 _CONVERSION(`const GdaValue*',`Value',`Glib::wrap(const_cast<GdaValue*>($3), true /* take_copy */)')
-  _WRAP_METHOD(Value get_value_at(int col, int row) const, gda_data_model_get_value_at)
+  //#m4 _CONVERSION(`GValue*',`Value',`Glib::wrap($3, true /* take_copy=true */)')
+  //#m4 _CONVERSION(`const GValue*',`Value',`Glib::wrap(const_cast<GValue*>($3), true /* take_copy */)')
+ 
+ bool get_value_at(int col, int row, Glib::ValueBase& value) const;
+  _IGNORE(gda_data_model_get_value_at)
 
   _WRAP_METHOD(guint get_attributes_at(int col, int row), gda_data_model_get_attributes_at)
   _WRAP_METHOD(GdaDataModelIter* create_iter(), gda_data_model_create_iter)
@@ -69,7 +71,7 @@ public:
   _WRAP_METHOD(bool move_iter_next(GdaDataModelIter* iter), gda_data_model_move_iter_next)
   _WRAP_METHOD(bool move_iter_prev(GdaDataModelIter* iter), gda_data_model_move_iter_prev)
 
-  _WRAP_METHOD(bool set_value_at(int col, int row, const Value& value), gda_data_model_set_value_at, errthrow)
+  _WRAP_METHOD(bool set_value_at(int col, int row, const Glib::ValueBase& value), gda_data_model_set_value_at, errthrow)
   //TODO: _WRAP_METHOD(bool gda_data_model_set_values(int row, GList *values), gda_data_model_set_values, errthrow)
 
   _WRAP_METHOD(bool is_updatable() const, gda_data_model_is_updatable)
@@ -84,7 +86,7 @@ public:
 
   //TODO: _WRAP_METHOD(int get_row_from_values(GSList *values, int *cols_index), gda_data_model_get_row_from_values)
 
-  _WRAP_METHOD(void send_hint(GdaDataModelHint hint, const Value& hint_value), gda_data_model_send_hint)
+  _WRAP_METHOD(void send_hint(GdaDataModelHint hint, const Glib::ValueBase& hint_value), gda_data_model_send_hint)
 
   //TODOL _WRAP_METHOD(Glib::ustring export_to_string(GdaDataModelIOFormat format, const int *cols, int nb_cols, const Glib::RefPtr<const ParameterList>& options), gda_data_model_export_to_string)
   _WRAP_METHOD(bool export_to_file(GdaDataModelIOFormat format,  const std::string& file, const gint *cols, int nb_cols,  const Glib::RefPtr<const ParameterList>& options), gda_data_model_export_to_file, errthrow)
@@ -143,7 +145,7 @@ protected:
   //_WRAP_VFUNC(Column describe_column(int col) const, i_describe_column)
 
   //TODO: _WRAP_VFUNC(Glib::RefPtr<Row> get_row(int row), i_get_row)
-  //TODO: _WRAP_VFUNC(Value get_value_at(int col, int row), i_get_value_at)
+  //TODO: _WRAP_VFUNC(Glib::ValueBase get_value_at(int col, int row), i_get_value_at)
   //TODO: _WRAP_VFUNC(bool is_updatable() const, i_is_updatable)
   //TODO: _WRAP_VFUNC(bool has_changed() const, i_has_changed)
   //TODO: _WRAP_VFUNC(void begin_changes() const, i_begin_changes)

@@ -67,7 +67,7 @@ public:
 
   _WRAP_METHOD(void set_client(const Glib::RefPtr<Client>& client), gda_connection_set_client)
 
-  _WRAP_METHOD(ConnectionOptions get_options() const, gda_connection_get_options)
+  _WRAP_METHOD(guint get_options() const, gda_connection_get_options)
   _WRAP_METHOD(Glib::ustring get_server_version() const, gda_connection_get_server_version)
 
   _WRAP_METHOD(Glib::ustring get_database() const, gda_connection_get_database)
@@ -129,7 +129,7 @@ public:
   _WRAP_METHOD(GdaBlob* create_blob(), gda_connection_create_blob)
   _WRAP_METHOD(GdaBlob* fetch_blob_by_id(const Glib::ustring& sql_id), gda_connection_fetch_blob_by_id)
 
-  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Value& from) const, gda_connection_value_to_sql_string);
+  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Glib::ValueBase& from) const, gda_connection_value_to_sql_string);
 
   _WRAP_METHOD(bool supports(ConnectionFeature feature) const, gda_connection_supports)
 

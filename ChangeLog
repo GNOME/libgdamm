@@ -1,3 +1,32 @@
+2006-05-09  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py
+	* libgda/src/client.hg:
+	* libgda/src/column.ccg:
+	* libgda/src/column.hg:
+	* libgda/src/connection.hg:
+	* libgda/src/datamodel.ccg:
+	* libgda/src/datamodel.hg:
+	* libgda/src/parameter.ccg:
+	* libgda/src/parameter.hg:
+	* libgda/src/parameterlist.hg:
+	* libgda/src/row.ccg:
+	* libgda/src/row.hg:
+	* libgda/src/serverprovider.hg: Use Glib::ValueBase instead of Gda::Value, 
+	and use it via an output parameter so that the caller can use a compile-time 
+	type-safe derived Glib::Value<> type. This requires the latest glibmm from cvs. 
+	* tools/m4/convert_libgdamm.m4:
+	* libgda/libgdamm/Makefile.am:
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/value.ccg:
+	* libgda/src/value.hg: Removed, replace with:
+	* libgda/libgdamm/value.cc:
+	* libgda/libgdamm/value.h: which has some non-class functions.
+	We need to add more stuff here that corresponds with the remaining 
+	functions in gda-value.h
+	* examples/introspection/main.cc:
+	* examples/simple/main.cc: Updated.
+
 2006-05-08  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/connection.ccg:
