@@ -1,3 +1,14 @@
+2006-05-14  Murray Cummingg  <murrayc@murrayc.com>
+
+	* libgda/src/client.hg: Added  declare_connection()
+	* libgda/src/connection.hg: Added  set_client()
+	* libgda/src/parameterlist.ccg:
+	* libgda/src/parameterlist.hg: Added find(), add_param(), add_param_from_string),
+	add_param_from_value(), merge(), is_coherent(), is_valid(), find_param(), 
+	find_param_for_user(), set_param_default_value(), set_param_default_alias(), 
+	get_param_default_value(), clear(), get_spec().
+	* tools/m4/convert_libgdamm.m4: Use conversion macros and added some conversions.
+
 2006-05-09  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py

@@ -28,6 +28,18 @@ namespace Gnome
 namespace Gda
 {
 
+bool ParameterList::get_param_default_value(const Glib::RefPtr<const Parameter>& param, Glib::ValueBase& value) const
+{
+  const GValue* cvalue = gda_parameter_list_get_param_default_value(const_cast<GdaParameterList*>(gobj()), const_cast<GdaParameter*>(param->gobj()));
+  if(cvalue)
+  {
+    value.init(cvalue);
+    return true;
+  }
+  else
+    return false;
+}
+
 } //namespace Gda
 
 } // namespace Gnome
