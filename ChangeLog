@@ -1,3 +1,14 @@
+2006-06-11  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/column.hg: Added set/get_gda_type()
+	* libgda/src/connectionevent.ccg:
+	* libgda/src/connectionevent.hg: Added set/get_event_type().
+	Changed get/set_number() to get/set_code(). Added get/set_gda_code().
+	* libgda/src/libgda_methods.defs:  Regenerated with h2defs.py.
+	* libgda/src/parameter.ccg:
+	* libgda/src/parameter.hg: Added  get_gda_type(), has_restrict_values().
+	* tools/m4/convert_libgdamm.m4: Added conversions for new enums.
+
 2006-05-14  Murray Cummingg  <murrayc@murrayc.com>
 
 	* libgda/src/client.hg: Added  declare_connection()

@@ -54,7 +54,7 @@ public:
   _WRAP_CREATE(const Glib::ustring& name, bool value);
   _WRAP_CREATE(const Glib::ustring& name, const Glib::ustring& value);
   
-
+//TODO:
 //  _WRAP_METHOD(void gda_parameter_declare_param_user      (GdaObject *user);
 //GSList                *gda_parameter_get_param_users(), )
 //  _WRAP_METHOD(void gda_parameter_replace_param_users     (GHashTable *replacements);
@@ -62,6 +62,8 @@ public:
   bool get_value(Glib::ValueBase& value) const;
   _IGNORE(gda_parameter_get_value)
   
+  _WRAP_METHOD(GType get_gda_type() const, gda_parameter_get_gda_type)
+
   _WRAP_METHOD(void set_value(const Glib::ValueBase& value), gda_parameter_set_value)
   _WRAP_METHOD(bool set_value(const Glib::ustring& value), gda_parameter_set_value_str)
 
@@ -79,8 +81,12 @@ public:
   _WRAP_METHOD(void set_not_null(bool not_null = true), gda_parameter_set_not_null)
   _WRAP_METHOD(bool get_not_null() const, gda_parameter_get_not_null)
 
-  _WRAP_METHOD(bool restrict_values(const Glib::RefPtr<DataModel>& model, gint col), gda_parameter_restrict_values, errthrow)
-  //_WRAP_METHOD(bool has_restrict_values(Glib::RefPtr<DataModel>& model, gint& col), gda_parameter_has_restrict_values)
+  _WRAP_METHOD(bool restrict_values(const Glib::RefPtr<DataModel>& model, int col), gda_parameter_restrict_values, errthrow)
+
+  bool has_restrict_values() const;
+  bool has_restrict_values(Glib::RefPtr<DataModel>& model, int& col) const;
+  _IGNORE(gda_parameter_has_restrict_values)
+
   _WRAP_METHOD(void bind_to_param(const Glib::RefPtr<Parameter>& bind_to), gda_parameter_bind_to_param)
   _WRAP_METHOD(Glib::RefPtr<Parameter> get_bind_param(), gda_parameter_get_bind_param)
 

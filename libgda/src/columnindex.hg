@@ -46,7 +46,9 @@ protected:
 public:
   _WRAP_CREATE()
 
+  //TODO: Is this usable?:
   _WRAP_EQUAL(gda_column_index_equal)
+  _IGNORE(gda_column_index_equal)
 
   _WRAP_METHOD(Glib::RefPtr<ColumnIndex> copy() const, gda_column_index_copy)
 

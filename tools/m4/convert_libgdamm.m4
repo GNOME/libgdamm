@@ -89,6 +89,8 @@ _CONV_ENUM(Gda,ConnectionOptions)
 _CONV_ENUM(Gda,ValueType)
 _CONV_ENUM(Gda,TransactionIsolation)
 _CONV_ENUM(Gda,Sorting)
+_CONV_ENUM(Gda,ConnectionEventCode)
+_CONV_ENUM(Gda,ConnectionEventType)
 
 # For signals:
 _CONVERSION(`GdaConnection*',`const Glib::RefPtr<Connection>&',`Glib::wrap($3)')
