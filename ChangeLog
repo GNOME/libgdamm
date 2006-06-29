@@ -1,5 +1,10 @@
 2006-06-29  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/column.hg: Remove duplicate get/set_gda_type() functions.
+	* libgda/src/dictdatabase.ccg: Add this to cvs, to fix the build.
+
+2006-06-29  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/Makefile.am:
 	* libgda/src/libgda.defs:
 	* libgda/src/libgda_others.defs: Add new defs file for signals 
