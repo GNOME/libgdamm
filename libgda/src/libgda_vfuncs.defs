@@ -2,65 +2,6 @@
 ; virtual function definitions
 ; define-vfunc is gtkmm-specific
 
-; GdaDataModel
-
-(define-vfunc i_get_n_columns
-  (of-object "GdaDataModel")
-  (return-type "int")
-)
-
-(define-vfunc i_get_n_rows
-  (of-object "GdaDataModel")
-  (return-type "int")
-)
-
-(define-vfunc i_describe_column
-  (of-object "GdaDataModel")
-  (return-type "GdaColumn*")
-  (parameters
-    '("int" "col")
-  )
-)
-
-
-(define-vfunc i_get_row
-  (of-object "GdaDataModel")
-  (return-type "const-GdaRow*")
-  (parameters
-    '("int" "row")
-  )
-)
-
-(define-vfunc i_get_value_at
-  (of-object "GdaDataModel")
-  (return-type "const-GdaValue*")
-  (parameters
-    '("int" "col")
-    '("int" "row")
-  )
-)
-
-(define-vfunc i_is_updatable
-  (of-object "GdaDataModel")
-  (return-type "gboolean')
-)
-
-(define-vfunc i_has_changed
-  (of-object "GdaDataModel")
-  (return-type "gboolean')
-)
-
-(define-vfunc i_begin_changes
-  (of-object "GdaDataModel")
-  (return-type "none")
-)
-
-(define-vfunc i_commit_changes
-  (of-object "GdaDataModel")
-  (return-type "gboolean')
-)
-
-(define-vfunc i_cancel_changes
-  (of-object "GdaDataModel")
-  (return-type "gboolean')
-)
+; We do not bother to wrap the vfuncs in libgda.
+; They are only useful for implementing new backends,
+; and they would add code size and per-object size.

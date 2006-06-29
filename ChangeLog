@@ -1,3 +1,19 @@
+2006-06-29  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/Makefile.am:
+	* libgda/src/libgda.defs:
+	* libgda/src/libgda_others.defs: Add new defs file for signals 
+	of interfaces, which must be hand-written.
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/libgda_signals.defs: Regenerated.
+	* libgda/src/libgda_vfuncs.defs: Remove these because they are 
+	not worth the code and memory size. 
+	* libgda/src/column.hg: Changed get_gdatype() to get_gda_type().
+	Wrapped signals.
+	* libgda/src/datamodel.hg: Wrapped the correct signals.
+	* tools/extra_defs_gen/generate_defs_gda.cc: Commented-out interfaces, 
+	which can not be instantiated.
+
 2006-06-11  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/column.hg: Added set/get_gda_type()

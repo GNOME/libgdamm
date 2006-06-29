@@ -88,7 +88,7 @@ public:
 
   _WRAP_METHOD(void send_hint(GdaDataModelHint hint, const Glib::ValueBase& hint_value), gda_data_model_send_hint)
 
-  //TODOL _WRAP_METHOD(Glib::ustring export_to_string(GdaDataModelIOFormat format, const int *cols, int nb_cols, const Glib::RefPtr<const ParameterList>& options), gda_data_model_export_to_string)
+  //TODO: _WRAP_METHOD(Glib::ustring export_to_string(GdaDataModelIOFormat format, const int *cols, int nb_cols, const Glib::RefPtr<const ParameterList>& options), gda_data_model_export_to_string)
   _WRAP_METHOD(bool export_to_file(GdaDataModelIOFormat format,  const std::string& file, const gint *cols, int nb_cols,  const Glib::RefPtr<const ParameterList>& options), gda_data_model_export_to_file, errthrow)
 
   //TODO: _WRAP_METHOD(bool import_from_model(GdaDataModel *to, GdaDataModel *from,  GHashTable *cols_trans), gda_data_model_import_from_model, errthrow)
@@ -125,32 +125,14 @@ public:
           gda_data_model_get_command_text, gda_data_model_set_command_text, gda_data_model_get_command_type, 
           gda_data_model_set_command_type, gda_data_model_to_xml_node, gda_data_model_add_data_from_xml_node)
 
-  _WRAP_SIGNAL(void changed(), changed)
   _WRAP_SIGNAL(void row_inserted(int row), row_inserted)
   _WRAP_SIGNAL(void row_updated(int row), row_updated)
   _WRAP_SIGNAL(void row_removed(int row), row_removed)
-  _WRAP_SIGNAL(void column_inserted(int col), column_inserted)
-  _WRAP_SIGNAL(void column_updated(int col), column_updated)
-  _WRAP_SIGNAL(void column_removed(int col), column_removed)
-
-  _WRAP_SIGNAL(void begin_update(), begin_update)
-  _WRAP_SIGNAL(void cancel_update(), cancel_update)
-  _WRAP_SIGNAL(void commit_update(), commit_update)
 
 protected:
-  _WRAP_VFUNC(int get_n_rows() const, i_get_n_rows)
-  _WRAP_VFUNC(int get_n_columns() const, i_get_n_columns)
 
-  //TODO: _CONVERSION(`Glib::RefPtr<Column>', `GdaColumn*', `($3)->gobj_copy()')
-  //_WRAP_VFUNC(Column describe_column(int col) const, i_describe_column)
-
-  //TODO: _WRAP_VFUNC(Glib::RefPtr<Row> get_row(int row), i_get_row)
-  //TODO: _WRAP_VFUNC(Glib::ValueBase get_value_at(int col, int row), i_get_value_at)
-  //TODO: _WRAP_VFUNC(bool is_updatable() const, i_is_updatable)
-  //TODO: _WRAP_VFUNC(bool has_changed() const, i_has_changed)
-  //TODO: _WRAP_VFUNC(void begin_changes() const, i_begin_changes)
-  //TODO: _WRAP_VFUNC(bool commit_changes() const, i_begin_changes)
-  //TODO: _WRAP_VFUNC(bool cancel_changes() const, i_cancel_changes)
+  //We don't wrap the vfuncs because they are only useful for creating new backends,
+  //and they have a high code-size and per-object memory cost.
 };
 
 } // namespace Gda

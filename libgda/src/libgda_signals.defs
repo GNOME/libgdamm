@@ -27,8 +27,8 @@
   (return-type "void")
   (when "last")
   (parameters
-    '("gint" "p0")
-    '("gint" "p1")
+    '("GType" "old_type")
+    '("GType" "new_type")
   )
 )
 
@@ -67,6 +67,69 @@
   (of-object "GdaConnection")
   (return-type "void")
   (when "last")
+)
+
+(define-property client
+  (of-object "GdaConnection")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property dsn
+  (of-object "GdaConnection")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property cnc-string
+  (of-object "GdaConnection")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property provider-obj
+  (of-object "GdaConnection")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property username
+  (of-object "GdaConnection")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property password
+  (of-object "GdaConnection")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property options
+  (of-object "GdaConnection")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
 ;; From GdaConnectionEvent
@@ -126,8 +189,6 @@
   (writable #t)
   (construct-only #f)
 )
-
-;; From GdaDataModelIndex
 
 ;; From GdaDataModel
 
@@ -654,7 +715,7 @@
 
 (define-property gda-type
   (of-object "GdaParameter")
-  (prop-type "GParamInt")
+  (prop-type "GParamULong")
   (docs "")
   (readable #t)
   (writable #t)

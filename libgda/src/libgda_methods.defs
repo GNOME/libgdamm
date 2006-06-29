@@ -8355,3 +8355,37 @@
 )
 
 
+
+;; From libgda.h
+
+(define-function gda_init
+  (c-name "gda_init")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "app_id")
+    '("const-gchar*" "version")
+    '("gint" "nargs")
+    '("gchar*[]" "args")
+  )
+)
+
+(define-function gda_get_default_dict
+  (c-name "gda_get_default_dict")
+  (return-type "GdaDict*")
+)
+
+(define-function gda_main_run
+  (c-name "gda_main_run")
+  (return-type "none")
+  (parameters
+    '("GdaInitFunc" "init_func")
+    '("gpointer" "user_data")
+  )
+)
+
+(define-function gda_main_quit
+  (c-name "gda_main_quit")
+  (return-type "none")
+)
+
+
