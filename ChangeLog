@@ -1,3 +1,14 @@
+2006-07-04  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/serveroperation.ccg:
+	* libgda/src/serveroperation.hg:
+	* tools/m4/convert_libgdamm.m4: Added ServerOperation.
+	* libgda/src/serverprovider.hg: Added supports_operation(), 
+	create_operation(), render_operation(), perform_operation(), 
+	fetch_blob_by_id().
+	* libgda/src/libgda_enums.defs: Regenerated with enums.pl
+
 2006-06-29  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/column.hg: Remove duplicate get/set_gda_type() functions.

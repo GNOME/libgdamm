@@ -1,4 +1,4 @@
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-blob.h
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-blob.h
 
 (define-flags-extended BlobMode
   (in-module "Gda")
@@ -10,7 +10,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-client.h
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-client.h
 
 (define-enum-extended ClientEvent
   (in-module "Gda")
@@ -35,7 +35,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-column-index.h
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-column-index.h
 
 (define-enum-extended Sorting
   (in-module "Gda")
@@ -46,7 +46,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-command.h
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-command.h
 
 (define-flags-extended CommandOptions
   (in-module "Gda")
@@ -71,7 +71,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-connection-event.h
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-connection-event.h
 
 (define-enum-extended ConnectionEventType
   (in-module "Gda")
@@ -109,7 +109,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-connection.h
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-connection.h
 
 (define-flags-extended ConnectionOptions
   (in-module "Gda")
@@ -158,20 +158,266 @@
     '("types" "GDA_CONNECTION_SCHEMA_TYPES" "11")
     '("users" "GDA_CONNECTION_SCHEMA_USERS" "12")
     '("views" "GDA_CONNECTION_SCHEMA_VIEWS" "13")
+    '("constraints" "GDA_CONNECTION_SCHEMA_CONSTRAINTS" "14")
   )
 )
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-export.h
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-data-model.h
 
-(define-enum-extended ExportFlags
+(define-flags-extended DataModelAccessFlags
   (in-module "Gda")
-  (c-name "GdaExportFlags")
+  (c-name "GdaDataModelAccessFlags")
   (values
-    '("a" "GDA_EXPORT_FLAGS_TABLE_DATA" "1")
+    '("random" "GDA_DATA_MODEL_ACCESS_RANDOM" "1 << 0")
+    '("cursor-forward" "GDA_DATA_MODEL_ACCESS_CURSOR_FORWARD" "1 << 1")
+    '("cursor-backward" "GDA_DATA_MODEL_ACCESS_CURSOR_BACKWARD" "1 << 2")
+    '("insert" "GDA_DATA_MODEL_ACCESS_INSERT" "1 << 3")
+    '("update" "GDA_DATA_MODEL_ACCESS_UPDATE" "1 << 4")
+    '("delete" "GDA_DATA_MODEL_ACCESS_DELETE" "1 << 5")
+    '("write" "GDA_DATA_MODEL_ACCESS_WRITE" "0x8")
   )
 )
 
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-transaction.h
+(define-enum-extended DataModelHint
+  (in-module "Gda")
+  (c-name "GdaDataModelHint")
+  (values
+    '("start-batch-update" "GDA_DATA_MODEL_HINT_START_BATCH_UPDATE" "0")
+    '("end-batch-update" "GDA_DATA_MODEL_HINT_END_BATCH_UPDATE" "1")
+    '("refresh" "GDA_DATA_MODEL_HINT_REFRESH" "2")
+  )
+)
+
+(define-enum-extended DataModelIOFormat
+  (in-module "Gda")
+  (c-name "GdaDataModelIOFormat")
+  (values
+    '("data-array-xml" "GDA_DATA_MODEL_IO_DATA_ARRAY_XML" "0")
+    '("text-separated" "GDA_DATA_MODEL_IO_TEXT_SEPARATED" "1")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-dict-constraint.h
+
+(define-enum-extended DictConstraintType
+  (in-module "Gda")
+  (c-name "GdaDictConstraintType")
+  (values
+    '("primary-key" "CONSTRAINT_PRIMARY_KEY" "0")
+    '("foreign-key" "CONSTRAINT_FOREIGN_KEY" "1")
+    '("unique" "CONSTRAINT_UNIQUE" "2")
+    '("not-null" "CONSTRAINT_NOT_NULL" "3")
+    '("check-expr" "CONSTRAINT_CHECK_EXPR" "4")
+    '("check-in-list" "CONSTRAINT_CHECK_IN_LIST" "5")
+    '("check-setof-list" "CONSTRAINT_CHECK_SETOF_LIST" "6")
+    '("unknown" "CONSTRAINT_UNKNOWN" "7")
+  )
+)
+
+(define-enum-extended DictConstraintFkAction
+  (in-module "Gda")
+  (c-name "GdaDictConstraintFkAction")
+  (values
+    '("cascade" "CONSTRAINT_FK_ACTION_CASCADE" "0")
+    '("set-null" "CONSTRAINT_FK_ACTION_SET_NULL" "1")
+    '("set-default" "CONSTRAINT_FK_ACTION_SET_DEFAULT" "2")
+    '("set-value" "CONSTRAINT_FK_ACTION_SET_VALUE" "3")
+    '("no-action" "CONSTRAINT_FK_ACTION_NO_ACTION" "4")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-dict-field.h
+
+(define-flags-extended DictFieldAttribute
+  (in-module "Gda")
+  (c-name "GdaDictFieldAttribute")
+  (values
+    '("t" "FIELD_AUTO_INCREMENT" "1 << 0")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-enums.h
+
+(define-flags-extended ValueAttribute
+  (in-module "G")
+  (c-name "GValueAttribute")
+  (values
+    '("is-null" "GDA_VALUE_ATTR_IS_NULL" "1 << 0")
+    '("can-be-null" "GDA_VALUE_ATTR_CAN_BE_NULL" "1 << 1")
+    '("is-default" "GDA_VALUE_ATTR_IS_DEFAULT" "1 << 2")
+    '("can-be-default" "GDA_VALUE_ATTR_CAN_BE_DEFAULT" "1 << 3")
+    '("is-unchanged" "GDA_VALUE_ATTR_IS_UNCHANGED" "1 << 4")
+    '("actions-shown" "GDA_VALUE_ATTR_ACTIONS_SHOWN" "1 << 5")
+    '("data-non-valid" "GDA_VALUE_ATTR_DATA_NON_VALID" "1 << 6")
+    '("has-value-orig" "GDA_VALUE_ATTR_HAS_VALUE_ORIG" "1 << 7")
+    '("no-modif" "GDA_VALUE_ATTR_NO_MODIF" "1 << 8")
+  )
+)
+
+(define-enum-extended GraphType
+  (in-module "Gda")
+  (c-name "GdaGraphType")
+  (values
+    '("db-relations" "GDA_GRAPH_DB_RELATIONS" "0")
+    '("query-joins" "GDA_GRAPH_QUERY_JOINS" "1")
+    '("modelling" "GDA_GRAPH_MODELLING" "2")
+  )
+)
+
+(define-flags-extended EntityFieldState
+  (in-module "Gda")
+  (c-name "GdaEntityFieldState")
+  (values
+    '("visible" "GDA_ENTITY_FIELD_VISIBLE" "1 << 0")
+    '("invisible" "GDA_ENTITY_FIELD_INVISIBLE" "1 << 1")
+    '("any" "GDA_ENTITY_FIELD_ANY" "0x1")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-object-ref.h
+
+(define-enum-extended ObjectRefType
+  (in-module "Gda")
+  (c-name "GdaObjectRefType")
+  (values
+    '("xml-id" "REFERENCE_BY_XML_ID" "0")
+    '("name" "REFERENCE_BY_NAME" "1")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-parameter-list.h
+
+(define-flags-extended ParameterListParamHint
+  (in-module "Gda")
+  (c-name "GdaParameterListParamHint")
+  (values
+    '("read-only" "GDA_PARAMETER_LIST_PARAM_READ_ONLY" "1 << 0")
+    '("hide" "GDA_PARAMETER_LIST_PARAM_HIDE" "1 << 1")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-query-condition.h
+
+(define-enum-extended QueryConditionType
+  (in-module "Gda")
+  (c-name "GdaQueryConditionType")
+  (values
+    '("node-and" "GDA_QUERY_CONDITION_NODE_AND" "0")
+    '("node-or" "GDA_QUERY_CONDITION_NODE_OR" "1")
+    '("node-not" "GDA_QUERY_CONDITION_NODE_NOT" "2")
+    '("leaf-equal" "GDA_QUERY_CONDITION_LEAF_EQUAL" "3")
+    '("leaf-diff" "GDA_QUERY_CONDITION_LEAF_DIFF" "4")
+    '("leaf-sup" "GDA_QUERY_CONDITION_LEAF_SUP" "5")
+    '("leaf-supequal" "GDA_QUERY_CONDITION_LEAF_SUPEQUAL" "6")
+    '("leaf-inf" "GDA_QUERY_CONDITION_LEAF_INF" "7")
+    '("leaf-infequal" "GDA_QUERY_CONDITION_LEAF_INFEQUAL" "8")
+    '("leaf-like" "GDA_QUERY_CONDITION_LEAF_LIKE" "9")
+    '("leaf-similar" "GDA_QUERY_CONDITION_LEAF_SIMILAR" "10")
+    '("leaf-regex" "GDA_QUERY_CONDITION_LEAF_REGEX" "11")
+    '("leaf-regex-nocase" "GDA_QUERY_CONDITION_LEAF_REGEX_NOCASE" "12")
+    '("leaf-not-regex" "GDA_QUERY_CONDITION_LEAF_NOT_REGEX" "13")
+    '("leaf-not-regex-nocase" "GDA_QUERY_CONDITION_LEAF_NOT_REGEX_NOCASE" "14")
+    '("leaf-in" "GDA_QUERY_CONDITION_LEAF_IN" "15")
+    '("leaf-between" "GDA_QUERY_CONDITION_LEAF_BETWEEN" "16")
+    '("type-unknown" "GDA_QUERY_CONDITION_TYPE_UNKNOWN" "17")
+  )
+)
+
+(define-enum-extended QueryConditionOperator
+  (in-module "Gda")
+  (c-name "GdaQueryConditionOperator")
+  (values
+    '("left" "GDA_QUERY_CONDITION_OP_LEFT" "0")
+    '("right" "GDA_QUERY_CONDITION_OP_RIGHT" "1")
+    '("right2" "GDA_QUERY_CONDITION_OP_RIGHT2" "2")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-query.h
+
+(define-enum-extended QueryType
+  (in-module "Gda")
+  (c-name "GdaQueryType")
+  (values
+    '("select" "GDA_QUERY_TYPE_SELECT" "0")
+    '("insert" "GDA_QUERY_TYPE_INSERT" "1")
+    '("update" "GDA_QUERY_TYPE_UPDATE" "2")
+    '("delete" "GDA_QUERY_TYPE_DELETE" "3")
+    '("union" "GDA_QUERY_TYPE_UNION" "4")
+    '("intersect" "GDA_QUERY_TYPE_INTERSECT" "5")
+    '("except" "GDA_QUERY_TYPE_EXCEPT" "6")
+    '("non-parsed-sql" "GDA_QUERY_TYPE_NON_PARSED_SQL" "7")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-query-join.h
+
+(define-enum-extended QueryJoinType
+  (in-module "Gda")
+  (c-name "GdaQueryJoinType")
+  (values
+    '("inner" "GDA_QUERY_JOIN_TYPE_INNER" "0")
+    '("left-outer" "GDA_QUERY_JOIN_TYPE_LEFT_OUTER" "1")
+    '("right-outer" "GDA_QUERY_JOIN_TYPE_RIGHT_OUTER" "2")
+    '("full-outer" "GDA_QUERY_JOIN_TYPE_FULL_OUTER" "3")
+    '("cross" "GDA_QUERY_JOIN_TYPE_CROSS" "4")
+    '("last" "GDA_QUERY_JOIN_TYPE_LAST" "5")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-query-target.h
+
+(define-enum-extended QueryTargetType
+  (in-module "Gda")
+  (c-name "GdaQueryTargetType")
+  (values
+    '("inner" "GDA_QUERY_TARGET_TYPE_INNER" "0")
+    '("left-outer" "GDA_QUERY_TARGET_TYPE_LEFT_OUTER" "1")
+    '("right-outer" "GDA_QUERY_TARGET_TYPE_RIGHT_OUTER" "2")
+    '("full-outer" "GDA_QUERY_TARGET_TYPE_FULL_OUTER" "3")
+    '("cross" "GDA_QUERY_TARGET_TYPE_CROSS" "4")
+    '("last" "GDA_QUERY_TARGET_TYPE_LAST" "5")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-renderer.h
+
+(define-flags-extended RendererOptions
+  (in-module "Gda")
+  (c-name "GdaRendererOptions")
+  (values
+    '("extra-pretty-sql" "GDA_RENDERER_EXTRA_PRETTY_SQL" "1 << 0")
+    '("extra-val-attrs" "GDA_RENDERER_EXTRA_VAL_ATTRS" "1 << 1")
+    '("error-if-default" "GDA_RENDERER_ERROR_IF_DEFAULT" "1 << 2")
+    '("fields-no-target-alias" "GDA_RENDERER_FIELDS_NO_TARGET_ALIAS" "1 << 3")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-server-operation.h
+
+(define-enum-extended ServerOperationType
+  (in-module "Gda")
+  (c-name "GdaServerOperationType")
+  (values
+    '("create-table" "GDA_SERVER_OPERATION_CREATE_TABLE" "0")
+    '("drop-table" "GDA_SERVER_OPERATION_DROP_TABLE" "1")
+    '("create-index" "GDA_SERVER_OPERATION_CREATE_INDEX" "2")
+    '("drop-index" "GDA_SERVER_OPERATION_DROP_INDEX" "3")
+  )
+)
+
+(define-enum-extended ServerOperationNodeType
+  (in-module "Gda")
+  (c-name "GdaServerOperationNodeType")
+  (values
+    '("paramlist" "GDA_SERVER_OPERATION_NODE_PARAMLIST" "0")
+    '("data-model" "GDA_SERVER_OPERATION_NODE_DATA_MODEL" "1")
+    '("param" "GDA_SERVER_OPERATION_NODE_PARAM" "2")
+    '("sequence" "GDA_SERVER_OPERATION_NODE_SEQUENCE" "3")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-transaction.h
 
 (define-enum-extended TransactionIsolation
   (in-module "Gda")
@@ -182,40 +428,6 @@
     '("read-uncommitted" "GDA_TRANSACTION_ISOLATION_READ_UNCOMMITTED" "2")
     '("repeatable-read" "GDA_TRANSACTION_ISOLATION_REPEATABLE_READ" "3")
     '("serializable" "GDA_TRANSACTION_ISOLATION_SERIALIZABLE" "4")
-  )
-)
-
-;; From /home/murrayc/cvs/gnome212/HEAD/libgda/libgda/gda-value.h
-
-(define-enum-extended ValueType
-  (in-module "Gda")
-  (c-name "GdaValueType")
-  (values
-    '("null" "GDA_VALUE_TYPE_NULL" "0")
-    '("bigint" "GDA_VALUE_TYPE_BIGINT" "1")
-    '("biguint" "GDA_VALUE_TYPE_BIGUINT" "2")
-    '("binary" "GDA_VALUE_TYPE_BINARY" "3")
-    '("blob" "GDA_VALUE_TYPE_BLOB" "4")
-    '("boolean" "GDA_VALUE_TYPE_BOOLEAN" "5")
-    '("date" "GDA_VALUE_TYPE_DATE" "6")
-    '("double" "GDA_VALUE_TYPE_DOUBLE" "7")
-    '("geometric-point" "GDA_VALUE_TYPE_GEOMETRIC_POINT" "8")
-    '("gobject" "GDA_VALUE_TYPE_GOBJECT" "9")
-    '("integer" "GDA_VALUE_TYPE_INTEGER" "10")
-    '("list" "GDA_VALUE_TYPE_LIST" "11")
-    '("money" "GDA_VALUE_TYPE_MONEY" "12")
-    '("numeric" "GDA_VALUE_TYPE_NUMERIC" "13")
-    '("single" "GDA_VALUE_TYPE_SINGLE" "14")
-    '("smallint" "GDA_VALUE_TYPE_SMALLINT" "15")
-    '("smalluint" "GDA_VALUE_TYPE_SMALLUINT" "16")
-    '("string" "GDA_VALUE_TYPE_STRING" "17")
-    '("time" "GDA_VALUE_TYPE_TIME" "18")
-    '("timestamp" "GDA_VALUE_TYPE_TIMESTAMP" "19")
-    '("tinyint" "GDA_VALUE_TYPE_TINYINT" "20")
-    '("tinyuint" "GDA_VALUE_TYPE_TINYUINT" "21")
-    '("type" "GDA_VALUE_TYPE_TYPE" "22")
-    '("uinteger" "GDA_VALUE_TYPE_UINTEGER" "23")
-    '("unknown" "GDA_VALUE_TYPE_UNKNOWN" "24")
   )
 )
 

@@ -24,7 +24,8 @@
 #include <libgdamm/command.h>
 #include <libgdamm/datamodelindex.h>
 #include <libgdamm/client.h>
-#include <libgda/gda-server-provider.h>
+#include <libgdamm/serveroperation.h>
+//#include <libgda/gda-server-provider.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -35,9 +36,11 @@ namespace Gnome
 namespace Gda
 {
 
+
 class Connection;
 
 //_WRAP_ENUM(ClientSpecsType, GdaClientSpecsType)
+_WRAP_ENUM(ServerOperationType, GdaServerOperationType)
 
 class ServerProvider : public Glib::Object
 {
@@ -54,6 +57,12 @@ class ServerProvider : public Glib::Object
 
   _WRAP_METHOD(Glib::ustring get_specs(ClientSpecsType action_type) const, gda_server_provider_get_specs)
   _WRAP_METHOD(bool perform_action_params(const Glib::RefPtr<ParameterList>& params, ClientSpecsType action_type), gda_server_provider_perform_action_params, errthrow)
+
+  _WRAP_METHOD(bool supports_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type) const, gda_server_provider_supports_operation)
+  _WRAP_METHOD(Glib::RefPtr<ServerOperation> create_operation (const Glib::RefPtr<Connection>& cnc,ServerOperationType type, const Glib::RefPtr<ParameterList>& options), gda_server_provider_create_operation, errthrow)
+  _WRAP_METHOD(Glib::ustring render_operation(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<ServerOperation>& op), gda_server_provider_render_operation, errthrow)
+  _WRAP_METHOD(bool perform_operation(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<ServerOperation>& op), gda_server_provider_perform_operation, errthrow)
+
 
   _WRAP_METHOD(bool create_database_cnc(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_create_database_cnc)
   _WRAP_METHOD(bool drop_database_cnc(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_drop_database_cnc)
@@ -93,6 +102,8 @@ class ServerProvider : public Glib::Object
 
   //TODO: Use C++ type:
   _WRAP_METHOD(GdaBlob* create_blob(const Glib::RefPtr<Connection>& cnc), gda_server_provider_create_blob)
+
+  _WRAP_METHOD(GdaBlob* fetch_blob_by_id(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& sql_id), gda_server_provider_fetch_blob_by_id)
 
   _WRAP_METHOD(Glib::ustring value_to_sql_string(const Glib::RefPtr<Connection>& cnc, const Glib::ValueBase& from) const, gda_server_provider_value_to_sql_string)
 
