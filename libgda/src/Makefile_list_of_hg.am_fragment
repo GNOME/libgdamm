@@ -2,11 +2,8 @@
 # The include happens in Makefile.am, not Makefile.in or Makefile,
 # so it's like copy-and-pasting this into each of those Makefile.am files.
 
-files_hg = client.hg columnindex.hg command.hg connection.hg \
-           datamodel.hg datamodelindex.hg datasourceinfo.hg connectionevent.hg \
-           column.hg dict.hg dictaggregate.hg dictdatabase.hg dicttype.hg \
-           object.hg  parameter.hg parameterlist.hg providerinfo.hg row.hg serverprovider.hg \
-           serveroperation.hg transaction.hg
+files_hg = plugin.hg launcher.hg preferencesdialog.hg preferences.hg \
+	status.hg shell.hg
 
 
 

@@ -1,6 +1,6 @@
-Base directory for libgdamm - the widget set.
+Base directory for libanjutamm - the widget set.
 
 Here is the layout
 
   src - actual sources used to build
-  gtkmm - built sources (do not edit)
+  libanjutamm - built sources (do not edit)

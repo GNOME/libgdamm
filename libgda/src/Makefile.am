@@ -1,12 +1,12 @@
-## Copyright (c) 2001
-## The libgdamm development team.
+## Copyright (c) 2006
+## The libanjutamm development team.
 
-sublib_name	= libgdamm
-sublib_namespace = Gda
-sublib_parentdir = libgdamm
-files_defs	= libgda.defs libgda_methods.defs libgda_signals.defs \
-                  libgda_enums.defs libgda_others.defs libgda_docs.xml \
-                  libgda_docs_override.xml
+sublib_name	= libanjutamm
+sublib_namespace = Anjuta
+sublib_parentdir = libanjutamm
+files_defs	= libanjuta.defs libanjuta_methods.defs libanjuta_signals.defs \
+                  libanjuta_enums.defs libanjuta_others.defs libanjuta_vfuncs.defs 
+		  libanjuta_docs.xml libanjuta_docs_override.xml
 
 include $(top_srcdir)/build_shared/Makefile_gensrc.am_fragment
 

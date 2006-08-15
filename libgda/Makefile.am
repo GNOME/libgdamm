@@ -1,15 +1,15 @@
-SUBDIRS		= src libgdamm
+SUBDIRS		= src libanjutamm
 
 EXTRA_DIST	= README					\
-		  libgdammconfig.h.in libgdamm.h	\
-		  libgdamm-2.0.pc.in
+		  libanjutammconfig.h.in libanjutamm.h	\
+		  libanjutamm-1.0.pc.in
 
-libgdamm_includedir		= $(includedir)/libgdamm-2.0
-libgdamm_include_HEADERS	= libgdamm.h
+libanjutamm_includedir		= $(includedir)/libanjutamm-1.0
+libanjutamm_include_HEADERS	= libanjutamm.h
 
-libgdamm_configdir		= $(libdir)/libgdamm-2.0/include
-libgdamm_config_DATA	= libgdammconfig.h
+libanjutamm_configdir		= $(libdir)/libanjutamm-1.0/include
+libanjutamm_config_DATA	= libanjutammconfig.h
 
 pkgconfigdir		= $(libdir)/pkgconfig
-pkgconfig_DATA		= libgdamm-2.0.pc
+pkgconfig_DATA		= libanjutamm-1.0.pc
 
