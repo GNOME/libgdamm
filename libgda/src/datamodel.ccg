@@ -23,6 +23,7 @@
 #include <libgdamm/serverprovider.h>
 #include <libgda/gda-data-model.h>
 #include <libgda/gda-data-model-extra.h>
+#include <libgda/gda-enum-types.h>
 
 
 namespace Gnome

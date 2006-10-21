@@ -31,6 +31,9 @@
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
 
+//TODO: Wrap this properly.
+typedef struct _GdaDataModelIter GdaDataModelIter;
+
 namespace Gnome
 {
 
@@ -39,6 +42,9 @@ namespace Gda
 
 class Row;
 class ServerProvider;
+
+_WRAP_ENUM(DataModelHint, GdaDataModelHint)
+_WRAP_ENUM(DataModelIOFormat, GdaDataModelIOFormat)
 
 class DataModel : public Glib::Interface
 {
@@ -86,11 +92,11 @@ public:
 
   //TODO: _WRAP_METHOD(int get_row_from_values(GSList *values, int *cols_index), gda_data_model_get_row_from_values)
 
-  _WRAP_METHOD(void send_hint(GdaDataModelHint hint, const Glib::ValueBase& hint_value), gda_data_model_send_hint)
+  _WRAP_METHOD(void send_hint(DataModelHint hint, const Glib::ValueBase& hint_value), gda_data_model_send_hint)
 
-  //TODO: _WRAP_METHOD(Glib::ustring export_to_string(GdaDataModelIOFormat format, const int *cols, int nb_cols, const Glib::RefPtr<const ParameterList>& options), gda_data_model_export_to_string)
+  //TODO: _WRAP_METHOD(Glib::ustring export_to_string(DataModelIOFormat format, const int *cols, int nb_cols, const Glib::RefPtr<const ParameterList>& options), gda_data_model_export_to_string)
 //TODO: Hand-code this to use an Array for the cols and rows, using less parameters:
-  _WRAP_METHOD(bool export_to_file(GdaDataModelIOFormat format,  const std::string& file, const gint* cols, int nb_cols, const gint* rows, int nb_rows, const Glib::RefPtr<const ParameterList>& options), gda_data_model_export_to_file, errthrow)
+  _WRAP_METHOD(bool export_to_file(DataModelIOFormat format,  const std::string& file, const gint* cols, int nb_cols, const gint* rows, int nb_rows, const Glib::RefPtr<const ParameterList>& options), gda_data_model_export_to_file, errthrow)
 
   //TODO: _WRAP_METHOD(bool import_from_model(GdaDataModel *to, GdaDataModel *from,  GHashTable *cols_trans), gda_data_model_import_from_model, errthrow)
   _WRAP_METHOD(bool import_from_string(const Glib::ustring& string, GHashTable *cols_trans, const Glib::RefPtr<const ParameterList>& options), gda_data_model_import_from_string, errthrow)

@@ -1,5 +1,14 @@
 2006-10-21  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/datamodel.ccg:
+	* libgda/src/datamodel.hg: Added prototype for GdaDataModelIter, 
+	which we should wrap properly.
+	Added DataModelHint and DataModelIOFormat enums and used them 
+	instead of the C enums.
+	* tools/m4/convert_libgdamm.m4: Added enum conversions.
+
+2006-10-21  Murray Cumming  <murrayc@murrayc.com>
+
 	* configure.in:
 	* libgda/Makefile.am:
 	* libgda/libgdamm-2.0.pc.in: Removed
