@@ -36,6 +36,17 @@ namespace Gnome
 namespace Gda
 {
 
+extern const GType VALUE_TYPE_NULL;
+extern const GType VALUE_TYPE_BINARY;
+extern const GType VALUE_TYPE_BLOB;
+extern const GType VALUE_TYPE_GEOMETRIC_POINT;
+extern const GType VALUE_TYPE_LIST;
+extern const GType VALUE_TYPE_NUMERIC;
+extern const GType VALUE_TYPE_SHORT;
+extern const GType VALUE_TYPE_USHORT;
+extern const GType VALUE_TYPE_TIME;
+extern const GType VALUE_TYPE_TIMESTAMP;
+
 typedef GdaGeometricPoint GeometricPoint;
 
 /*  TODO:
@@ -54,21 +65,6 @@ typedef struct {
 Glib::ustring value_to_string(const Glib::ValueBase& value);
 
 
-
-/*
-#define GDA_TIMEZONE_INVALID (2*12*60*60)
-
-#define GDA_TYPE_NULL 0
-#define	GDA_TYPE_BINARY (gda_binary_get_type())
-#define GDA_TYPE_BLOB (gda_blob_get_type())
-#define	GDA_TYPE_GEOMETRIC_POINT (gda_geometricpoint_get_type())
-#define	GDA_TYPE_LIST (gda_value_list_get_type())
-#define	GDA_TYPE_NUMERIC (gda_numeric_get_type())
-#define	GDA_TYPE_SHORT (gda_short_get_type()) 
-#define	GDA_TYPE_USHORT (gda_ushort_get_type())
-#define GDA_TYPE_TIME (gda_time_get_type())
-#define GDA_TYPE_TIMESTAMP (gda_timestamp_get_type())
-*/
 
 
 bool value_is_null(const Glib::ValueBase& value);

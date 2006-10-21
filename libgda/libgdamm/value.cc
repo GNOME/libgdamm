@@ -31,6 +31,18 @@ namespace Gnome
 namespace Gda
 {
 
+const GType VALUE_TYPE_NULL = GDA_TYPE_NULL;
+const GType VALUE_TYPE_BINARY = GDA_TYPE_BINARY;
+const GType VALUE_TYPE_BLOB = GDA_TYPE_BLOB;
+const GType VALUE_TYPE_GEOMETRIC_POINT = GDA_TYPE_GEOMETRIC_POINT;
+const GType VALUE_TYPE_LIST = GDA_TYPE_LIST;
+const GType VALUE_TYPE_NUMERIC = GDA_TYPE_NUMERIC;
+const GType VALUE_TYPE_SHORT = GDA_TYPE_SHORT;
+const GType VALUE_TYPE_USHORT = GDA_TYPE_USHORT;
+const GType VALUE_TYPE_TIME = GDA_TYPE_TIME;
+const GType VALUE_TYPE_TIMESTAMP = GDA_TYPE_TIMESTAMP;
+
+
 Glib::ustring value_to_string(const Glib::ValueBase& value)
 {
   Glib::convert_return_gchar_ptr_to_ustring( gda_value_stringify(value.gobj()) );
