@@ -33,16 +33,15 @@ namespace Gnome
 namespace Gda
 {
 
-bool Row::get_value(int num, Glib::ValueBase& value) const
+Glib::ValueBase Row::get_value(int num) const
 {
+  Glib::ValueBase value;
+
   const GValue* cvalue = gda_row_get_value(const_cast<GdaRow*>(gobj()), num);
   if(cvalue)
-  {
     value.init(cvalue);
-    return true;
-  }
-  else
-    return false;
+  
+  return value;
 }
 
 } // namespace Gda

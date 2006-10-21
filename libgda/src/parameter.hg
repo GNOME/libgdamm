@@ -59,7 +59,7 @@ public:
 //GSList                *gda_parameter_get_param_users(), )
 //  _WRAP_METHOD(void gda_parameter_replace_param_users     (GHashTable *replacements);
 
-  bool get_value(Glib::ValueBase& value) const;
+  Glib::ValueBase get_value() const;
   _IGNORE(gda_parameter_get_value)
   
   _WRAP_METHOD(GType get_gda_type() const, gda_parameter_get_gda_type)
@@ -71,7 +71,7 @@ public:
   _WRAP_METHOD(void declare_invalid(), gda_parameter_declare_invalid)
   _WRAP_METHOD(bool is_valid() const, gda_parameter_is_valid)
 
-  bool get_default_value(Glib::ValueBase& value) const;
+  Glib::ValueBase get_default_value() const;
   _IGNORE(gda_parameter_get_default_value)
 
   _WRAP_METHOD(void set_default_value(const Glib::ValueBase& value), gda_parameter_set_default_value)

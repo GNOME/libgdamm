@@ -1,5 +1,29 @@
 2006-10-21  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/column.ccg:
+	* libgda/src/column.hg:
+	* libgda/src/datamodel.ccg:
+	* libgda/src/datamodel.hg:
+	* libgda/src/parameter.ccg:
+	* libgda/src/parameter.hg:
+	* libgda/src/parameterlist.ccg:
+	* libgda/src/parameterlist.hg:
+	* libgda/src/row.ccg:
+	* libgda/src/row.hg: Use ValueBase as a return type, 
+	instead of as an output parameter. This loses the ability to do 
+	compile-time type-safe getting, but that is not very useful or 
+	safe with databases anyway.
+	* libgda/libgdamm/value.cc:
+	* libgda/libgdamm/value.h: Add get and set utility functions, 
+	matching the libgda ones. People getting a ValueBase will have 
+	to check the type and use a specific get method, deciding at 
+	runtime. That is not how ValueBase is usually used in gtkmm, 
+	but it is demanded by libgda, because the database structure 
+	is out of the control of the compiler.
+	* examples/introspection/main.cc: Adapted for new API.
+
+2006-10-21  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/libgdamm/value.cc:
 	* libgda/libgdamm/value.h: Add constants for libgda-specific 
 	GValue types.

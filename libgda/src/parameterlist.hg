@@ -75,7 +75,7 @@ public:
 
   _WRAP_METHOD(void set_param_default_value(const Glib::RefPtr<const Parameter>& param, const Glib::ValueBase& value), gda_parameter_list_set_param_default_value)
   _WRAP_METHOD(void set_param_default_alias(const Glib::RefPtr<const Parameter>& param, const Glib::RefPtr<const Parameter>& alias), gda_parameter_list_set_param_default_alias)
-  bool get_param_default_value(const Glib::RefPtr<const Parameter>& param, Glib::ValueBase& value) const;
+  Glib::ValueBase get_param_default_value(const Glib::RefPtr<const Parameter>& param) const;
   _IGNORE(gda_parameter_list_get_param_default_value)
 
 

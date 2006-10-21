@@ -70,17 +70,12 @@ int main (int argc, char** argv)
 
         for(int i = 0; i < rows; ++i)
         {
-          Glib::Value<Glib::ustring> value;
-          const bool test = data_model_databases->get_value_at(0, i, value);
-          if(!test)
-            std::cerr << "data_model_databases->get_value_at() failed." << std::endl;
-          else
-          {
-            //Get the table name:
-            const Glib::ustring database_name = value.get();
+          Glib::Value<Glib::ustring> value = data_model_databases->get_value_at(0, i);
+       
+          //Get the table name:
+          const Glib::ustring database_name = value.get();
 
-            std::cout << "  Database name: " <<  database_name << std::endl;
-          }
+          std::cout << "  Database name: " <<  database_name << std::endl;
         }
       }
 
@@ -102,14 +97,8 @@ int main (int argc, char** argv)
 
         for(int i = 0; i < rows; ++i)
         {
-          Glib::Value<Glib::ustring> value;
-          const bool test = data_model_tables->get_value_at(0, i, value);
-          if(!test)
-          {
-            std::cerr << "data_model_tables->get_value_at() failed." << std::endl;
-            break;
-          }
- 
+          Glib::Value<Glib::ustring> value = data_model_tables->get_value_at(0, i);
+    
           //Get the table name:
           Glib::ustring table_name = value.get();
           
@@ -144,13 +133,7 @@ int main (int argc, char** argv)
                
                for(int i = 0; i < rows; ++i)
                {
-                 Glib::Value<Glib::ustring> value_name;
-                 bool test = data_model_fields->get_value_at(0, i, value_name);
-                 if(!test)
-                 {
-                   std::cerr << "data_model_fields->get_value_at(0) failed." << std::endl;
-                   break;
-                 }
+                 Glib::Value<Glib::ustring> value_name = data_model_fields->get_value_at(0, i);
 
                  //Get the field name:
                  const Glib::ustring field_name = value_name.get();
@@ -158,26 +141,14 @@ int main (int argc, char** argv)
                  std::cout << "      Field Name: " << field_name << std::endl;
 
                  //Get the field type:
-                 Glib::ValueBase value_fieldtype;
-                 test = data_model_fields->get_value_at(1, i, value_fieldtype);
-                 if(!test)
-                 {
-                    std::cerr << "data_model_fields->get_value_at(1) failed." << std::endl;
-                    break;
-                 }
-
+                 Glib::ValueBase value_fieldtype = data_model_fields->get_value_at(1, i);
+     
                  const Glib::ustring field_type = Gnome::Gda::value_to_string(value_fieldtype);
 
                  std::cout << "      Data Type: " << field_type << std::endl;
 
                  //Get the default value (though this can have strange values):
-                 Glib::ValueBase value_default;
-                 test = data_model_fields->get_value_at(8, i, value_default);
-                 if(!test)
-                 {
-                    std::cerr << "data_model_fields->get_value_at(8) failed." << std::endl;
-                    break;
-                 }
+                 Glib::ValueBase value_default = data_model_fields->get_value_at(8, i);
 
                  const Glib::ustring value_default_string = Gnome::Gda::value_to_string(value_default);
 

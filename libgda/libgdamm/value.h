@@ -62,6 +62,8 @@ typedef struct {
 } GdaNumeric;
 */
 
+GType value_get_type();
+
 Glib::ustring value_to_string(const Glib::ValueBase& value);
 
 
@@ -70,39 +72,37 @@ Glib::ustring value_to_string(const Glib::ValueBase& value);
 bool value_is_null(const Glib::ValueBase& value);
 bool value_is_number(const Glib::ValueBase& value);
 
-/*
-GValue                           *gda_value_copy (const GValue *value);
 
-G_CONST_RETURN GdaBinary         *gda_value_get_binary (const GValue *value);
-void                              gda_value_set_binary (GValue *value, const GdaBinary *binary);
-void                              gda_value_take_binary (GValue *value, const GdaBinary *binary);
-G_CONST_RETURN GdaBlob           *gda_value_get_blob (const GValue *value);
-void                              gda_value_set_blob (GValue *value, const GdaBlob *val);
-G_CONST_RETURN GdaGeometricPoint *gda_value_get_geometric_point (const GValue *value);
-void                              gda_value_set_geometric_point (GValue *value, const GdaGeometricPoint *val);
-G_CONST_RETURN GdaValueList      *gda_value_get_list (const GValue *value);
-void                              gda_value_set_list (GValue *value, const GdaValueList *val);
-void                              gda_value_set_null (GValue *value);
-G_CONST_RETURN GdaNumeric        *gda_value_get_numeric (const GValue *value);
-void                              gda_value_set_numeric (GValue *value, const GdaNumeric *val);
-gshort                            gda_value_get_short (const GValue *value);
-void                              gda_value_set_short (GValue *value, const gshort val);
-gushort                           gda_value_get_ushort (const GValue *value);
-void                              gda_value_set_ushort (GValue *value, const gushort val);
-G_CONST_RETURN GdaTime           *gda_value_get_time (const GValue *value);
-void                              gda_value_set_time (GValue *value, const GdaTime *val);
-G_CONST_RETURN GdaTimestamp      *gda_value_get_timestamp (const GValue *value);
-void                              gda_value_set_timestamp (GValue *value, const GdaTimestamp *val);
+const GdaBinary* value_get_binary(const Glib::ValueBase& value);
+void value_set_binary(Glib::ValueBase& value, const GdaBinary& binary);
+//void                              gda_value_take_binary(Glib::ValueBase& value, const GdaBinary& binary);
 
+const GdaBlob* value_get_blob(const Glib::ValueBase& value);
+void value_set_blob(Glib::ValueBase& value, const GdaBlob& val);
 
+const GdaGeometricPoint* value_get_geometric_point(const Glib::ValueBase& value);
+void value_set_geometric_point(Glib::ValueBase& value, const GdaGeometricPoint& val);
 
+const GdaValueList* value_get_list(const Glib::ValueBase& value);
+void value_set_list(Glib::ValueBase& value, const GdaValueList& val);
 
+void value_set_null(Glib::ValueBase& value);
 
-gboolean                          gda_value_set_from_string (GValue *value, 
-						             const gchar *as_string,
-						             GType type);
-gboolean                          gda_value_set_from_value (GValue *value, const GValue *from);
-*/
+const GdaNumeric* value_get_numeric(const Glib::ValueBase& value);
+void value_set_numeric(Glib::ValueBase& value, const GdaNumeric& val);
+
+gshort value_get_short(const Glib::ValueBase& value);
+void value_set_short(Glib::ValueBase& value, const gshort val);
+
+gushort value_get_ushort(const Glib::ValueBase& value);
+void value_set_ushort(Glib::ValueBase& value, const gushort val);
+
+const GdaTime* value_get_time(const Glib::ValueBase& value);
+void value_set_time(Glib::ValueBase& value, const GdaTime& val);
+
+const GdaTimestamp* value_get_timestamp(const Glib::ValueBase& value);
+void value_set_timestamp(Glib::ValueBase& value, const GdaTimestamp& val);
+
 
 int value_compare(const Glib::ValueBase& value1, const Glib::ValueBase& value2);
 int value_compare_ext(const Glib::ValueBase& value1, const Glib::ValueBase& value2);
@@ -110,10 +110,10 @@ bool value_equal(const Glib::ValueBase& value1, const Glib::ValueBase& value2);
 
 
 /*
-xmlNodePtr                        gda_value_to_xml (const GValue *value);
+xmlNodePtr                        gda_value_to_xml(const Glib::ValueBase& value);
 
-gchar                            *gda_binary_to_string (const GdaBinary *bin, guint maxlen);
-gboolean                          gda_string_to_binary (const gchar *str, GdaBinary *bin);
+gchar                            *gda_binary_to_string(const GdaBinary& bin, guint maxlen);
+gboolean                          gda_string_to_binary(const gchar *str, GdaBinary *bin);
 
 
 GType                             gda_numeric_get_type (void) G_GNUC_CONST;

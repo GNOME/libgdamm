@@ -87,6 +87,96 @@ bool value_equal(const Glib::ValueBase& value1, const Glib::ValueBase& value2)
 }
 
 
+const GdaBinary* value_get_binary(const Glib::ValueBase& value)
+{
+  return gda_value_get_binary(value.gobj());
+}
+
+void value_set_binary(Glib::ValueBase& value, const GdaBinary& binary)
+{
+  gda_value_set_binary(value.gobj(), &binary);
+}
+
+const GdaBlob* value_get_blob(const Glib::ValueBase& value)
+{
+  return gda_value_get_blob(value.gobj());
+}
+
+void value_set_blob(Glib::ValueBase& value, const GdaBlob& val)
+{
+  gda_value_set_blob(value.gobj(), &val);
+}
+
+const GdaGeometricPoint* value_get_geometric_point(const Glib::ValueBase& value)
+{
+  return gda_value_get_geometric_point(value.gobj());
+}
+
+void value_set_geometric_point(Glib::ValueBase& value, const GdaGeometricPoint& val);
+
+const GdaValueList* value_get_list(const Glib::ValueBase& value)
+{
+  return gda_value_get_list(value.gobj());
+}
+
+void value_set_list(Glib::ValueBase& value, const GdaValueList& val)
+{
+  gda_value_set_list(value.gobj(), &val);
+}
+
+const GdaNumeric* value_get_numeric(const Glib::ValueBase& value)
+{
+  return gda_value_get_numeric(value.gobj());
+}
+
+void value_set_numeric(Glib::ValueBase& value, const GdaNumeric& val)
+{
+  gda_value_set_numeric(value.gobj(), &val);
+}
+
+gshort value_get_short(const Glib::ValueBase& value)
+{
+  return gda_value_get_short(value.gobj());
+}
+
+void value_set_short(Glib::ValueBase& value, const gshort val)
+{
+  gda_value_set_short(value.gobj(), val);
+}
+
+gushort value_get_ushort(const Glib::ValueBase& value)
+{
+  return gda_value_get_ushort(value.gobj());
+}
+
+void value_set_ushort(Glib::ValueBase& value, const gushort val)
+{
+  gda_value_set_ushort(value.gobj(), val);
+}
+
+const GdaTime* value_get_time(const Glib::ValueBase& value)
+{
+  return gda_value_get_time(value.gobj());
+}
+
+void value_set_time(Glib::ValueBase& value, const GdaTime& val)
+{
+  gda_value_set_time(value.gobj(), &val);
+}
+
+const GdaTimestamp* value_get_timestamp(const Glib::ValueBase& value)
+{
+  return gda_value_get_timestamp(value.gobj());
+}
+
+
+void value_set_timestamp(Glib::ValueBase& value, const GdaTimestamp& val)
+{
+  gda_value_set_timestamp(value.gobj(), &val);
+}
+
+
+
 
 } // namespace Gda
 

@@ -32,16 +32,15 @@ namespace Gnome
 namespace Gda
 {
      
-bool DataModel::get_value_at(int col, int row, Glib::ValueBase& value) const
+Glib::ValueBase DataModel::get_value_at(int col, int row) const
 {
+  Glib::ValueBase value;
+
   const GValue* cvalue = gda_data_model_get_value_at(const_cast<GdaDataModel*>(gobj()), col, row);
   if(cvalue)
-  {
     value.init(cvalue);
-    return true;
-  }
-  else
-    return false;
+  
+  return value;
 } 
 
 } /* namespace Gda */
