@@ -1,5 +1,15 @@
 2006-10-21  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/libgdamm/value.cc:
+	* libgda/libgdamm/value.h: Add some utility functions for 
+	working with Glib::Values with libgdamm:
+	value_compare(), value_compare_ex(), value_equal(), 
+	value_is_null(), value_is_number().  
+	* libgda/src/column.hg: Rename the gda_type_changed signal to 
+	g_type_changed() as in the C API.
+
+2006-10-21  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/datamodel.ccg:
 	* libgda/src/datamodel.hg: Added prototype for GdaDataModelIter, 
 	which we should wrap properly.

@@ -36,6 +36,32 @@ Glib::ustring value_to_string(const Glib::ValueBase& value)
   Glib::convert_return_gchar_ptr_to_ustring( gda_value_stringify(value.gobj()) );
 }
 
+bool value_is_null(const Glib::ValueBase& value)
+{
+  return gda_value_is_null( value.gobj() );
+}
+
+bool value_is_number(const Glib::ValueBase& value)
+{
+  return gda_value_is_number( value.gobj() );
+}
+
+int value_compare(const Glib::ValueBase& value1, const Glib::ValueBase& value2)
+{
+  return gda_value_compare(value1.gobj(), value2.gobj());
+}
+
+int value_compare_ext(const Glib::ValueBase& value1, const Glib::ValueBase& value2)
+{
+  return gda_value_compare_ext(value1.gobj(), value2.gobj());
+}
+
+bool value_equal(const Glib::ValueBase& value1, const Glib::ValueBase& value2)
+{
+  return (gda_value_compare(value1.gobj(), value2.gobj()) == 0);
+}
+
+
 
 } // namespace Gda
 
