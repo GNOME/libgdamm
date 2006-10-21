@@ -15,9 +15,9 @@ AC_INIT(libgda/libgdammconfig.h.in)
 #########################################################################
 #  Version and initialization
 #########################################################################
-LIBGDAMM_MAJOR_VERSION=1
-LIBGDAMM_MINOR_VERSION=5
-LIBGDAMM_MICRO_VERSION=0
+LIBGDAMM_MAJOR_VERSION=2
+LIBGDAMM_MINOR_VERSION=9
+LIBGDAMM_MICRO_VERSION=1
 
 #
 # +1 : ? : +1  == new interface that does not break old one
@@ -128,7 +128,7 @@ AC_OUTPUT([
   Makefile
 
   libgda/Makefile
-  libgda/libgdamm-2.0.pc
+  libgda/libgdamm-3.0.pc
   libgda/src/Makefile
   libgda/libgdamm/Makefile
   libgda/libgdamm/private/Makefile

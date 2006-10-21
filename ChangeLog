@@ -1,5 +1,18 @@
 2006-10-21  Murray Cumming  <murrayc@murrayc.com>
 
+	* configure.in:
+	* libgda/Makefile.am:
+	* libgda/libgdamm-2.0.pc.in: Removed
+	* libgda/libgdamm-3.0.pc.in: Added
+	* libgda/libgdamm/Makefile.am:
+	* libgda/libgdamm/private/Makefile.am:
+	* tools/m4/Makefile.am: Change the pkg-config name, the 
+	.so library name, and the include directory from 2.0 to 
+	3.0, to allow parallel installation with libgdamm-2.0.
+	Note that libgdamm-2.0 wrapped libgda-1.2.
+
+2006-10-21  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/libgda_docs.xml: Regenerated.
 	* libgda/src/libgda_enums.defs: Regenerated with enums.pl
 	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py
