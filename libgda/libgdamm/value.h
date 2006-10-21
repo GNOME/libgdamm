@@ -36,6 +36,19 @@ namespace Gnome
 namespace Gda
 {
 
+GType value_get_type_null();
+GType value_get_type_binary();
+GType value_get_type_blob();
+GType value_get_type_geometric_point();
+GType value_get_type_list();
+GType value_get_type_numeric();
+GType value_get_type_short();
+GType value_get_type_ushort();
+GType value_get_type_time();
+GType value_get_type_timestamp();
+
+//These can't work because the static instances would be instantiated before the GType system has been initialized.
+/*
 extern const GType VALUE_TYPE_NULL;
 extern const GType VALUE_TYPE_BINARY;
 extern const GType VALUE_TYPE_BLOB;
@@ -46,6 +59,7 @@ extern const GType VALUE_TYPE_SHORT;
 extern const GType VALUE_TYPE_USHORT;
 extern const GType VALUE_TYPE_TIME;
 extern const GType VALUE_TYPE_TIMESTAMP;
+*/
 
 typedef GdaGeometricPoint GeometricPoint;
 

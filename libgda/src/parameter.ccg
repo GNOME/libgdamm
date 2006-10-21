@@ -22,6 +22,7 @@
 
 #include <libgdamm/datamodel.h>
 #include <libgda/gda-parameter.h>
+#include <libgda/gda-enum-types.h>
 
 namespace Gnome
 {

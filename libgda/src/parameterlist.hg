@@ -32,6 +32,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** Exception class for Gda parameter list errors.
+ */
+_WRAP_GERROR(ParameterListError, GdaParameterListError, GDA_PARAMETER_LIST_ERROR)
+
 class ParameterList : public Glib::Object
 {
   _CLASS_GOBJECT(ParameterList, GdaParameterList, GDA_PARAMETER_LIST, Glib::Object, GObject)

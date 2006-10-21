@@ -1,5 +1,27 @@
 2006-10-21  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/libgdamm/value.cc:
+	* libgda/libgdamm/value.h:
+	* libgda/src/client.hg:
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg:
+	* libgda/src/datamodelindex.ccg:
+	* libgda/src/datasourceinfo.ccg:
+	* libgda/src/dict.ccg:
+	* libgda/src/dictaggregate.ccg:
+	* libgda/src/dictdatabase.ccg:
+	* libgda/src/dicttype.ccg:
+	* libgda/src/libgda_enums.defs:
+	* libgda/src/object.ccg:
+	* libgda/src/parameter.ccg:
+	* libgda/src/parameter.hg:
+	* libgda/src/parameterlist.ccg:
+	* libgda/src/parameterlist.hg:
+	* libgda/src/providerinfo.ccg: Wrap the GError types.
+	* examples/introspection/main.cc: Catch exception.
+
+2006-10-21  Murray Cumming  <murrayc@murrayc.com>
+
 	* examples/Makefile.am_fragment: Link to the correct library, now that 
 	we have changed the name.
 	* libgda/libgdamm/value.cc:

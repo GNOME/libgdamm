@@ -21,3 +21,4 @@
  */
 
 #include <libgda/gda-data-model-index.h>
+#include <libgda/gda-enum-types.h>

@@ -33,6 +33,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** Exception class for Gda parameter errors.
+ */
+_WRAP_GERROR(ParameterError, GdaParameterError, GDA_PARAMETER_ERROR)
+
 class DataModel;
 
 class Parameter : public Object

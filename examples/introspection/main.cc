@@ -23,11 +23,8 @@
 #include <iostream>
 
 
-int main (int argc, char** argv)
+void do_test()
 {
-  //Initialize libgdamm:
-  Gnome::Gda::init("libgdamm example", "0.1", argc, argv);
-
   Glib::RefPtr<Gnome::Gda::Client> gda_client = Gnome::Gda::Client::create();
   if(gda_client)
   {
@@ -168,9 +165,22 @@ int main (int argc, char** argv)
       }
     }
   } 
+}
+
+int main (int argc, char** argv)
+{
+  //Initialize libgdamm:
+  Gnome::Gda::init("libgdamm example", "0.1", argc, argv);
+
+  try
+  {
+    do_test();
+  }
+  catch(const Gnome::Gda::GeneralError& ex)
+  {
+    std::cout << "Exception caught: " << ex.what() << std::endl;
+  }
 
   
   return 0;
 }
-
-

@@ -38,6 +38,14 @@ namespace Gnome
 namespace Gda
 {
 
+/** Exception class for Gda errors.
+ */
+_WRAP_GERROR(GeneralError, GdaGeneralError, GDA_GENERAL_ERROR)
+
+/** Exception class for Gda connection errors.
+ */
+_WRAP_GERROR(ConnectionError, GdaConnectionError, GDA_CONNECTION_ERROR)
+
 class Client;
 
 _WRAP_ENUM(ConnectionFeature, GdaConnectionFeature)

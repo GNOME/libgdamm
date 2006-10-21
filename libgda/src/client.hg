@@ -33,6 +33,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** Exception class for Gda client errors.
+ */
+_WRAP_GERROR(ClientError, GdaClientError, GDA_CLIENT_ERROR)
+
 _WRAP_ENUM(ClientEvent, GdaClientEvent)
 
 class ServerOperation;

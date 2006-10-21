@@ -31,6 +31,57 @@ namespace Gnome
 namespace Gda
 {
 
+GType value_get_type_null()
+{
+  return GDA_TYPE_NULL;
+}
+
+GType value_get_type_binary()
+{
+  return GDA_TYPE_BINARY;
+}
+
+GType value_get_type_blob()
+{
+  return GDA_TYPE_BLOB;
+}
+
+GType value_get_type_geometric_point()
+{
+  return GDA_TYPE_GEOMETRIC_POINT;
+}
+
+GType value_get_type_list()
+{
+  return GDA_TYPE_LIST;
+}
+
+GType value_get_type_numeric()
+{
+  return GDA_TYPE_NUMERIC;
+}
+
+GType value_get_type_short()
+{
+  return GDA_TYPE_SHORT;
+}
+
+GType value_get_type_ushort()
+{
+  return GDA_TYPE_USHORT;
+}
+
+GType value_get_type_time()
+{
+  return GDA_TYPE_TIME;
+}
+
+GType value_get_type_timestamp()
+{
+  return GDA_TYPE_TIMESTAMP;
+}
+
+/*
 const GType VALUE_TYPE_NULL = GDA_TYPE_NULL;
 const GType VALUE_TYPE_BINARY = GDA_TYPE_BINARY;
 const GType VALUE_TYPE_BLOB = GDA_TYPE_BLOB;
@@ -41,6 +92,7 @@ const GType VALUE_TYPE_SHORT = GDA_TYPE_SHORT;
 const GType VALUE_TYPE_USHORT = GDA_TYPE_USHORT;
 const GType VALUE_TYPE_TIME = GDA_TYPE_TIME;
 const GType VALUE_TYPE_TIMESTAMP = GDA_TYPE_TIMESTAMP;
+*/
 
 
 

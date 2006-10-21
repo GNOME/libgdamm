@@ -22,6 +22,7 @@
 
 #include <libgdamm/dict.h>
 #include <libgda/gda-object.h>
+#include <libgda/gda-enum-types.h>
 
 namespace Gnome
 {
