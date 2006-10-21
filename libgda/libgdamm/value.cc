@@ -58,7 +58,20 @@ int value_compare_ext(const Glib::ValueBase& value1, const Glib::ValueBase& valu
 
 bool value_equal(const Glib::ValueBase& value1, const Glib::ValueBase& value2)
 {
-  return (gda_value_compare(value1.gobj(), value2.gobj()) == 0);
+  if( !value1.gobj() && !value2.gobj()) //If both are null.
+    return true;
+
+  if( !value1.gobj() && value2.gobj()) //If one is null.
+    return false;
+
+  if( value1.gobj() && !value2.gobj()) //If one is null.
+    return false;
+
+  if(G_VALUE_TYPE(value1.gobj()) != G_VALUE_TYPE(value2.gobj())) //gda_value_compare() can only compare GdaValues of the same type.
+    return false;
+    
+  int test = gda_value_compare(value1.gobj(), value2.gobj());
+  return test == 0;
 }
 
 

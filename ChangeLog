@@ -1,5 +1,11 @@
 2006-10-21  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/libgdamm/value.cc: equal(): Add extra checks, to 
+	match the extra checks that we had in Gnome::Gda::Value in 
+	libgdamm 2.0.
+
+2006-10-21  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/libgdamm/value.cc:
 	* libgda/libgdamm/value.h: Add some utility functions for 
 	working with Glib::Values with libgdamm:
