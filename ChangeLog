@@ -1,5 +1,17 @@
 2006-10-21  Murray Cumming  <murrayc@murrayc.com>
 
+	* examples/Makefile.am_fragment: Link to the correct library, now that 
+	we have changed the name.
+	* libgda/libgdamm/value.cc:
+	* libgda/libgdamm/value.h: Add value_get/set utility methods for 
+	the non-gda generic glib types. These are not in glibmm because 
+	Glib::Value is not usually used as a variant, without using specific 
+	Glib::Value<> specializations.
+	* examples/introspection/main.cc:
+	* examples/simple/main.cc: Adapt for the new API.
+
+2006-10-21  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/column.ccg:
 	* libgda/src/column.hg:
 	* libgda/src/datamodel.ccg:

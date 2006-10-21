@@ -52,25 +52,48 @@ typedef GdaGeometricPoint GeometricPoint;
 /*  TODO:
 typedef struct {
 	gchar *currency;
-	gdouble amount;
+	double amount;
 } GdaMoney;
 
 typedef struct {
 	gchar *number;
-	glong precision;
-	glong width;
+	long precision;
+	long width;
 } GdaNumeric;
 */
 
-GType value_get_type();
+GType value_get_type(const Glib::ValueBase& value);
 
 Glib::ustring value_to_string(const Glib::ValueBase& value);
 
-
-
-
 bool value_is_null(const Glib::ValueBase& value);
 bool value_is_number(const Glib::ValueBase& value);
+
+
+void value_set_char(Glib::ValueBase& value, gchar v_char);
+gchar value_get_char(const Glib::ValueBase& value);
+void value_set_uchar(Glib::ValueBase& value, guchar v_uchar);
+guchar value_get_uchar(const Glib::ValueBase& value);
+void value_set_boolean(Glib::ValueBase& value, bool v_boolean);
+bool value_get_boolean(const Glib::ValueBase& value);
+void value_set_int(Glib::ValueBase& value,  int v_int);
+int value_get_int(const Glib::ValueBase& value);
+void value_set_uint(Glib::ValueBase& value, guint v_uint);
+guint value_get_uint(const Glib::ValueBase& value);
+void value_set_long(Glib::ValueBase& value, long v_long);
+long value_get_long(const Glib::ValueBase& value);
+void value_set_ulong(Glib::ValueBase& value, unsigned long v_ulong);
+unsigned long value_get_ulong(const Glib::ValueBase& value);
+void value_set_int64(Glib::ValueBase& value, gint64 v_int64);
+gint64 value_get_int64(const Glib::ValueBase& value);
+void value_set_uint64(Glib::ValueBase& value, guint64 v_uint64);
+guint64 value_get_uint64(const Glib::ValueBase& value);
+void value_set_float(Glib::ValueBase& value, float v_float);
+float value_get_float(const Glib::ValueBase& value);
+void value_set_double(Glib::ValueBase& value, double v_double);
+double value_get_double(const Glib::ValueBase& value);
+void value_set_string(Glib::ValueBase& value, const Glib::ustring& v_string);
+Glib::ustring value_get_string(const Glib::ValueBase& value);
 
 
 const GdaBinary* value_get_binary(const Glib::ValueBase& value);
@@ -113,7 +136,7 @@ bool value_equal(const Glib::ValueBase& value1, const Glib::ValueBase& value2);
 xmlNodePtr                        gda_value_to_xml(const Glib::ValueBase& value);
 
 gchar                            *gda_binary_to_string(const GdaBinary& bin, guint maxlen);
-gboolean                          gda_string_to_binary(const gchar *str, GdaBinary *bin);
+bool                          gda_string_to_binary(const gchar *str, GdaBinary *bin);
 
 
 GType                             gda_numeric_get_type (void) G_GNUC_CONST;

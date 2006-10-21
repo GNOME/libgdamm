@@ -43,6 +43,12 @@ const GType VALUE_TYPE_TIME = GDA_TYPE_TIME;
 const GType VALUE_TYPE_TIMESTAMP = GDA_TYPE_TIMESTAMP;
 
 
+
+GType value_get_type(const Glib::ValueBase& value)
+{
+  return G_VALUE_TYPE(value.gobj());
+}
+
 Glib::ustring value_to_string(const Glib::ValueBase& value)
 {
   Glib::convert_return_gchar_ptr_to_ustring( gda_value_stringify(value.gobj()) );
@@ -86,6 +92,132 @@ bool value_equal(const Glib::ValueBase& value1, const Glib::ValueBase& value2)
   return test == 0;
 }
 
+
+void value_set_char(Glib::ValueBase& value, gchar v_char)
+{
+  g_value_set_char(value.gobj(), v_char);
+}
+
+gchar value_get_char(const Glib::ValueBase& value)
+{
+  return g_value_get_char(value.gobj());
+}
+
+void value_set_uchar(Glib::ValueBase& value, guchar v_uchar)
+{
+  g_value_set_uchar(value.gobj(), v_uchar);
+}
+
+guchar value_get_uchar(const Glib::ValueBase& value)
+{
+  return g_value_get_uchar(value.gobj());
+}
+
+void value_set_boolean(Glib::ValueBase& value, bool v_boolean)
+{
+  g_value_set_boolean(value.gobj(), v_boolean);
+}
+
+bool value_get_boolean(const Glib::ValueBase& value)
+{
+  return g_value_get_boolean(value.gobj());
+}
+
+void value_set_int(Glib::ValueBase& value,  int v_int)
+{
+  g_value_set_int(value.gobj(), v_int);
+}
+
+int value_get_int(const Glib::ValueBase& value)
+{
+  return g_value_get_int(value.gobj());
+}
+
+void value_set_uint(Glib::ValueBase& value, guint v_uint)
+{
+  g_value_set_uint(value.gobj(), v_uint);
+}
+
+guint value_get_uint(const Glib::ValueBase& value)
+{
+  return g_value_get_uint(value.gobj());
+}
+
+void value_set_long(Glib::ValueBase& value, long v_long)
+{
+  g_value_set_long(value.gobj(), v_long);
+}
+
+long value_get_long(const Glib::ValueBase& value)
+{
+  return g_value_get_long(value.gobj());
+}
+
+void value_set_ulong(Glib::ValueBase& value, unsigned long v_ulong)
+{
+  g_value_set_ulong(value.gobj(), v_ulong);
+}
+
+unsigned long value_get_ulong(const Glib::ValueBase& value)
+{
+  return g_value_get_ulong(value.gobj());
+}
+
+void value_set_int64(Glib::ValueBase& value, gint64 v_int64)
+{
+  g_value_set_int64(value.gobj(), v_int64);
+}
+
+gint64 value_get_int64(const Glib::ValueBase& value)
+{
+  return g_value_get_int64(value.gobj());
+}
+
+void value_set_uint64(Glib::ValueBase& value, guint64 v_uint64)
+{
+  g_value_set_uint64(value.gobj(), v_uint64);
+}
+
+guint64 value_get_uint64(const Glib::ValueBase& value)
+{
+  return g_value_get_uint64(value.gobj());
+}
+
+void value_set_float(Glib::ValueBase& value, float v_float)
+{
+  g_value_set_float(value.gobj(), v_float);
+}
+
+float value_get_float(const Glib::ValueBase& value)
+{
+  return g_value_get_float(value.gobj());
+}
+
+void value_set_double(Glib::ValueBase& value, double v_double)
+{
+  g_value_set_double(value.gobj(), v_double);
+}
+
+double value_get_double(const Glib::ValueBase& value)
+{
+  return g_value_get_double(value.gobj());
+}
+
+void value_set_string(Glib::ValueBase& value, const Glib::ustring& v_string)
+{
+  g_value_set_string(value.gobj(), v_string.c_str());
+}
+
+
+Glib::ustring value_get_string(const Glib::ValueBase& value)
+{
+  return g_value_get_string(value.gobj());
+}
+
+
+
+
+//Gda types:
 
 const GdaBinary* value_get_binary(const Glib::ValueBase& value)
 {

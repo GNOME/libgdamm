@@ -70,12 +70,14 @@ int main (int argc, char** argv)
 
         for(int i = 0; i < rows; ++i)
         {
-          Glib::Value<Glib::ustring> value = data_model_databases->get_value_at(0, i);
-       
-          //Get the table name:
-          const Glib::ustring database_name = value.get();
+          Glib::ValueBase value = data_model_databases->get_value_at(0, i);
+          if(Gnome::Gda::value_get_type(value) == G_TYPE_STRING)
+          {
+            //Get the table name:
+            const Glib::ustring database_name = Gnome::Gda::value_get_string(value);
 
-          std::cout << "  Database name: " <<  database_name << std::endl;
+            std::cout << "  Database name: " <<  database_name << std::endl;
+          }
         }
       }
 
@@ -97,10 +99,12 @@ int main (int argc, char** argv)
 
         for(int i = 0; i < rows; ++i)
         {
-          Glib::Value<Glib::ustring> value = data_model_tables->get_value_at(0, i);
-    
+          Glib::ValueBase value = data_model_tables->get_value_at(0, i);
+          if(!Gnome::Gda::value_get_type(value) == G_TYPE_STRING)
+            std::cerr << "Error: Value is not a string.";
+           
           //Get the table name:
-          Glib::ustring table_name = value.get();
+          Glib::ustring table_name = Gnome::Gda::value_get_string(value);
           
           std::cout << "  Table name: " <<  table_name << std::endl;
            
@@ -133,10 +137,13 @@ int main (int argc, char** argv)
                
                for(int i = 0; i < rows; ++i)
                {
-                 Glib::Value<Glib::ustring> value_name = data_model_fields->get_value_at(0, i);
+                 Glib::ValueBase value_name = data_model_fields->get_value_at(0, i);
 
+                 if(!Gnome::Gda::value_get_type(value) == G_TYPE_STRING)
+                   std::cerr << "Error: Value is not a string.";
+           
                  //Get the field name:
-                 const Glib::ustring field_name = value_name.get();
+                 const Glib::ustring field_name = Gnome::Gda::value_get_string(value);
 
                  std::cout << "      Field Name: " << field_name << std::endl;
 
