@@ -1,4 +1,4 @@
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-blob.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-blob.h
 
 (define-flags-extended BlobMode
   (in-module "Gda")
@@ -10,7 +10,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-client.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-client.h
 
 (define-enum-extended ClientEvent
   (in-module "Gda")
@@ -26,16 +26,7 @@
   )
 )
 
-(define-enum-extended ClientSpecsType
-  (in-module "Gda")
-  (c-name "GdaClientSpecsType")
-  (values
-    '("create-database" "GDA_CLIENT_SPECS_CREATE_DATABASE" "0")
-    '("drop-database" "GDA_CLIENT_SPECS_DROP_DATABASE" "1")
-  )
-)
-
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-column-index.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-column-index.h
 
 (define-enum-extended Sorting
   (in-module "Gda")
@@ -46,7 +37,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-command.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-command.h
 
 (define-flags-extended CommandOptions
   (in-module "Gda")
@@ -71,7 +62,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-connection-event.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-connection-event.h
 
 (define-enum-extended ConnectionEventType
   (in-module "Gda")
@@ -109,7 +100,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-connection.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-connection.h
 
 (define-flags-extended ConnectionOptions
   (in-module "Gda")
@@ -159,10 +150,11 @@
     '("users" "GDA_CONNECTION_SCHEMA_USERS" "12")
     '("views" "GDA_CONNECTION_SCHEMA_VIEWS" "13")
     '("constraints" "GDA_CONNECTION_SCHEMA_CONSTRAINTS" "14")
+    '("table-contents" "GDA_CONNECTION_SCHEMA_TABLE_CONTENTS" "15")
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-data-model.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-data-model.h
 
 (define-flags-extended DataModelAccessFlags
   (in-module "Gda")
@@ -197,7 +189,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-dict-constraint.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-dict-constraint.h
 
 (define-enum-extended DictConstraintType
   (in-module "Gda")
@@ -226,7 +218,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-dict-field.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-dict-field.h
 
 (define-flags-extended DictFieldAttribute
   (in-module "Gda")
@@ -236,7 +228,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-enums.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-enums.h
 
 (define-flags-extended ValueAttribute
   (in-module "G")
@@ -264,9 +256,9 @@
   )
 )
 
-(define-flags-extended EntityFieldState
+(define-flags-extended QueryFieldState
   (in-module "Gda")
-  (c-name "GdaEntityFieldState")
+  (c-name "GdaQueryFieldState")
   (values
     '("visible" "GDA_ENTITY_FIELD_VISIBLE" "1 << 0")
     '("invisible" "GDA_ENTITY_FIELD_INVISIBLE" "1 << 1")
@@ -274,7 +266,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-object-ref.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-object-ref.h
 
 (define-enum-extended ObjectRefType
   (in-module "Gda")
@@ -285,7 +277,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-parameter-list.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-parameter-list.h
 
 (define-flags-extended ParameterListParamHint
   (in-module "Gda")
@@ -296,7 +288,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-query-condition.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query-condition.h
 
 (define-enum-extended QueryConditionType
   (in-module "Gda")
@@ -333,7 +325,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-query.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query.h
 
 (define-enum-extended QueryType
   (in-module "Gda")
@@ -350,7 +342,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-query-join.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query-join.h
 
 (define-enum-extended QueryJoinType
   (in-module "Gda")
@@ -365,22 +357,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-query-target.h
-
-(define-enum-extended QueryTargetType
-  (in-module "Gda")
-  (c-name "GdaQueryTargetType")
-  (values
-    '("inner" "GDA_QUERY_TARGET_TYPE_INNER" "0")
-    '("left-outer" "GDA_QUERY_TARGET_TYPE_LEFT_OUTER" "1")
-    '("right-outer" "GDA_QUERY_TARGET_TYPE_RIGHT_OUTER" "2")
-    '("full-outer" "GDA_QUERY_TARGET_TYPE_FULL_OUTER" "3")
-    '("cross" "GDA_QUERY_TARGET_TYPE_CROSS" "4")
-    '("last" "GDA_QUERY_TARGET_TYPE_LAST" "5")
-  )
-)
-
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-renderer.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-renderer.h
 
 (define-flags-extended RendererOptions
   (in-module "Gda")
@@ -393,16 +370,22 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-server-operation.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-server-operation.h
 
 (define-enum-extended ServerOperationType
   (in-module "Gda")
   (c-name "GdaServerOperationType")
   (values
-    '("create-table" "GDA_SERVER_OPERATION_CREATE_TABLE" "0")
-    '("drop-table" "GDA_SERVER_OPERATION_DROP_TABLE" "1")
-    '("create-index" "GDA_SERVER_OPERATION_CREATE_INDEX" "2")
-    '("drop-index" "GDA_SERVER_OPERATION_DROP_INDEX" "3")
+    '("create-db" "GDA_SERVER_OPERATION_CREATE_DB" "0")
+    '("drop-db" "GDA_SERVER_OPERATION_DROP_DB" "1")
+    '("create-table" "GDA_SERVER_OPERATION_CREATE_TABLE" "2")
+    '("drop-table" "GDA_SERVER_OPERATION_DROP_TABLE" "3")
+    '("rename-table" "GDA_SERVER_OPERATION_RENAME_TABLE" "4")
+    '("add-column" "GDA_SERVER_OPERATION_ADD_COLUMN" "5")
+    '("drop-column" "GDA_SERVER_OPERATION_DROP_COLUMN" "6")
+    '("create-index" "GDA_SERVER_OPERATION_CREATE_INDEX" "7")
+    '("drop-index" "GDA_SERVER_OPERATION_DROP_INDEX" "8")
+    '("nb" "GDA_SERVER_OPERATION_NB" "9")
   )
 )
 
@@ -414,10 +397,23 @@
     '("data-model" "GDA_SERVER_OPERATION_NODE_DATA_MODEL" "1")
     '("param" "GDA_SERVER_OPERATION_NODE_PARAM" "2")
     '("sequence" "GDA_SERVER_OPERATION_NODE_SEQUENCE" "3")
+    '("sequence-item" "GDA_SERVER_OPERATION_NODE_SEQUENCE_ITEM" "4")
+    '("data-model-column" "GDA_SERVER_OPERATION_NODE_DATA_MODEL_COLUMN" "5")
+    '("unknown" "GDA_SERVER_OPERATION_NODE_UNKNOWN" "6")
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/libgda/libgda/gda-transaction.h
+(define-enum-extended ServerOperationNodeStatus
+  (in-module "Gda")
+  (c-name "GdaServerOperationNodeStatus")
+  (values
+    '("optional" "GDA_SERVER_OPERATION_STATUS_OPTIONAL" "0")
+    '("required" "GDA_SERVER_OPERATION_STATUS_REQUIRED" "1")
+    '("unknown" "GDA_SERVER_OPERATION_STATUS_UNKNOWN" "2")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-transaction.h
 
 (define-enum-extended TransactionIsolation
   (in-module "Gda")

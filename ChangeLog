@@ -1,3 +1,32 @@
+2006-10-21  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/libgda_docs.xml: Regenerated.
+	* libgda/src/libgda_enums.defs: Regenerated with enums.pl
+	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py
+	* libgda/src/client.ccg:
+	* libgda/src/client.hg: Remove ClientSpecsType enum, and
+	get_provider_specs() method.
+	Added prepare_create_database() and prepare_drop_database().
+	Rename create_database() and drop_database() to 
+	perform_create_database() and perform_drop_database(), taking 
+	ServerOperation instead of ParameterList.
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg: Rename execute_command() methods 
+	to execute_select_command(). There are 2 other execute* functions 
+	to wrap, but I need to find out how the GList result should be used.
+	Remove create_table(), drop_table(), create_index(), drop_index().
+	Renamed supports() to supports_feature().
+	* libgda/src/datamodel.hg: export_to_file(): Added rows parameters.
+	* libgda/src/object.hg: Renamed changed to signal_emit_changed().
+	Fixed typo in block_changed() method name.
+	* libgda/src/serverprovider.hg: Removed get_specs(), perform_action_params(),
+	create_database_cnc(), drop_database_cnc(), create_table(), drop_table(), 
+	create_index(), drop_index().
+	supports_operation(): Added ParameterList parameter.
+	Renamed supports() to supports_feature().
+	* examples/simple/main.cc: Update for latest API, changing use of 
+	execute_command() to execute_select_command().
+
 2006-07-04  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/Makefile_list_of_hg.am_fragment:

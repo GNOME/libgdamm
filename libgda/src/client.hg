@@ -34,7 +34,8 @@ namespace Gda
 {
 
 _WRAP_ENUM(ClientEvent, GdaClientEvent)
-_WRAP_ENUM(ClientSpecsType, GdaClientSpecsType)
+
+class ServerOperation;
 
 class Client : public Glib::Object
 {
@@ -72,10 +73,12 @@ public:
 
 
   _WRAP_METHOD(Glib::ustring get_dsn_specs(const Glib::ustring& provider) const, gda_client_get_dsn_specs)
-  _WRAP_METHOD(Glib::ustring get_provider_specs(const Glib::ustring& provider, ClientSpecsType type), gda_client_get_provider_specs)
 
-  _WRAP_METHOD(bool create_database(const Glib::ustring& provider, const Glib::RefPtr<ParameterList>& params), gda_client_create_database, errthrow)
-  _WRAP_METHOD(bool drop_database(const Glib::ustring& provider, const Glib::RefPtr<ParameterList>& params), gda_client_drop_database, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<ServerOperation> prepare_create_database(const Glib::ustring& provider), gda_client_prepare_create_database)
+  _WRAP_METHOD(bool perform_create_database(const Glib::ustring& provider, const Glib::RefPtr<ServerOperation>& op), gda_client_perform_create_database, errthrow)
+
+  _WRAP_METHOD(Glib::RefPtr<ServerOperation> prepare_drop_database(const Glib::ustring& provider), gda_client_prepare_drop_database)
+  _WRAP_METHOD(bool perform_drop_database(const Glib::ustring& provider, const Glib::RefPtr<ServerOperation>& op), gda_client_perform_drop_database, errthrow)
 
 
   _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_begin_transaction)

@@ -60,20 +60,20 @@ Glib::RefPtr<const DataModel> Connection::get_schema(ConnectionSchema schema) co
 }
 
 
-Glib::RefPtr<DataModel> Connection::execute_command(const Command& cmd)
+Glib::RefPtr<DataModel> Connection::execute_select_command(const Command& cmd)
 {
   GError *error = 0;
-  Glib::RefPtr<DataModel> retvalue = Glib::wrap(gda_connection_execute_command(gobj(), const_cast<GdaCommand*>((cmd).gobj()), 0, &(error)));
+  Glib::RefPtr<DataModel> retvalue = Glib::wrap(gda_connection_execute_select_command(gobj(), const_cast<GdaCommand*>((cmd).gobj()), 0, &(error)));
   if(error) ::Glib::Error::throw_exception(error);
   return retvalue;
 }
 
-Glib::RefPtr<DataModel> Connection::execute_command(const Glib::ustring& cmd)
+Glib::RefPtr<DataModel> Connection::execute_select_command(const Glib::ustring& cmd)
 {
   Command command(cmd);
 
   GError *error = 0;
-  Glib::RefPtr<DataModel> retvalue = Glib::wrap(gda_connection_execute_command(gobj(), const_cast<GdaCommand*>((command).gobj()), 0, &(error)));
+  Glib::RefPtr<DataModel> retvalue = Glib::wrap(gda_connection_execute_select_command(gobj(), const_cast<GdaCommand*>((command).gobj()), 0, &(error)));
   if(error) ::Glib::Error::throw_exception(error);
   return retvalue;
 }

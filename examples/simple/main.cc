@@ -61,7 +61,7 @@ int main (int argc, char** argv)
 
       //Get data from a table:
       Gnome::Gda::Command command("SELECT * FROM tbltest1");
-      Glib::RefPtr<Gnome::Gda::DataModel> data_model = gda_connection->execute_command(command);
+      Glib::RefPtr<Gnome::Gda::DataModel> data_model = gda_connection->execute_select_command(command);
 
       if(!data_model)
       {
