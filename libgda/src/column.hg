@@ -45,7 +45,7 @@ public:
   _IGNORE(gda_column_new)
 
   _WRAP_METHOD(Glib::RefPtr<Column> copy() const, gda_column_copy)
-  _WRAP_METHOD(bool equal(const Glib::RefPtr<const Column>& src) const, gda_column_equal)
+  bool equal(const Glib::RefPtr<const Column>& src) const;
 
   _WRAP_METHOD(Glib::ustring get_title() const, gda_column_get_title)
   _WRAP_METHOD(void set_title(const Glib::ustring& title), gda_column_set_title)
@@ -63,15 +63,15 @@ public:
   _WRAP_METHOD(Glib::ustring get_dbms_type() const, gda_column_get_dbms_type)
   _WRAP_METHOD(void set_dbms_type(const Glib::ustring& dbms_type), gda_column_set_dbms_type)
 
-  _WRAP_METHOD(GType get_gda_type() const, gda_column_get_gda_type)
-  _WRAP_METHOD(void set_gda_type(GType type), gda_column_set_gda_type)
+  _WRAP_METHOD(GType get_g_type() const, gda_column_get_g_type)
+  _WRAP_METHOD(void set_g_type(GType type), gda_column_set_g_type)
   _WRAP_METHOD(bool get_allow_null() const, gda_column_get_allow_null)
   _WRAP_METHOD(void set_allow_null(bool allow = true), gda_column_set_allow_null)
   _WRAP_METHOD(bool get_primary_key() const, gda_column_get_primary_key)
   _WRAP_METHOD(void set_primary_key(bool pk = true), gda_column_set_primary_key)
   _WRAP_METHOD(bool get_unique_key() const, gda_column_get_unique_key)
   _WRAP_METHOD(void set_unique_key(bool uk = true), gda_column_set_unique_key)
-  _WRAP_METHOD(Glib::ustring get_references(), gda_column_get_references)
+  _WRAP_METHOD(Glib::ustring get_references() const, gda_column_get_references) //TODO: What's this?
   _WRAP_METHOD(void set_references(const Glib::ustring& ref), gda_column_set_references)
   _WRAP_METHOD(bool get_auto_increment() const, gda_column_get_auto_increment)
   _WRAP_METHOD(void set_auto_increment(bool is_auto = true), gda_column_set_auto_increment)

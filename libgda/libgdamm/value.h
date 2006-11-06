@@ -148,7 +148,7 @@ public:
   
   void set(const GdaBlob* val);
   
-  bool get_bool() const;
+  bool get_boolean() const;
   
   void set(bool val);
   
@@ -212,7 +212,9 @@ public:
   
   void set(guint val);
   
-  GType get_vtype() const;
+  GType get_g_type() const;
+  
+  void set(GType val);
   
   //Use the copy constructor instead: _WRAP_METHOD(bool set_from_value(const Value& from), gda_value_set_from_value)
   
@@ -261,15 +263,6 @@ typedef struct {
 	long width;
 } GdaNumeric;
 */
-
-GType value_get_type(const Glib::ValueBase& value);
-
-Glib::ustring value_to_string(const Glib::ValueBase& value);
-
-bool value_is_null(const Glib::ValueBase& value);
-bool value_is_number(const Glib::ValueBase& value);
-
-
 
 
 int value_compare(const Glib::ValueBase& value1, const Glib::ValueBase& value2);

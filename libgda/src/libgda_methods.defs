@@ -378,6 +378,15 @@
   )
 )
 
+(define-enum ClientError
+  (in-module "Gda")
+  (c-name "GdaClientError")
+  (gtype-id "GDA_TYPE_CLIENT_ERROR")
+  (values
+    '("r" "GDA_CLIENT_GENERAL_ERROR")
+  )
+)
+
 (define-enum Sorting
   (in-module "Gda")
   (c-name "GdaSorting")
@@ -448,6 +457,21 @@
     '("duplicate-object" "GDA_CONNECTION_EVENT_CODE_DUPLICATE_OBJECT")
     '("syntax-error" "GDA_CONNECTION_EVENT_CODE_SYNTAX_ERROR")
     '("unknown" "GDA_CONNECTION_EVENT_CODE_UNKNOWN")
+  )
+)
+
+(define-enum ConnectionError
+  (in-module "Gda")
+  (c-name "GdaConnectionError")
+  (gtype-id "GDA_TYPE_CONNECTION_ERROR")
+  (values
+    '("conn-open-error" "GDA_CONNECTION_CONN_OPEN_ERROR")
+    '("do-query-error" "GDA_CONNECTION_DO_QUERY_ERROR")
+    '("nonexist-dsn-error" "GDA_CONNECTION_NONEXIST_DSN_ERROR")
+    '("no-cnc-spec-error" "GDA_CONNECTION_NO_CNC_SPEC_ERROR")
+    '("no-provider-spec-error" "GDA_CONNECTION_NO_PROVIDER_SPEC_ERROR")
+    '("open-error" "GDA_CONNECTION_OPEN_ERROR")
+    '("execute-command-error" "GDA_CONNECTION_EXECUTE_COMMAND_ERROR")
   )
 )
 
@@ -543,6 +567,52 @@
   )
 )
 
+(define-enum DataModelIterError
+  (in-module "Gda")
+  (c-name "GdaDataModelIterError")
+  (gtype-id "GDA_TYPE_DATA_MODEL_ITER_ERROR")
+  (values
+    '("r" "GDA_DATA_MODEL_ITER_WHAT_ERROR")
+  )
+)
+
+(define-enum DataModelQueryError
+  (in-module "Gda")
+  (c-name "GdaDataModelQueryError")
+  (gtype-id "GDA_TYPE_DATA_MODEL_QUERY_ERROR")
+  (values
+    '("r" "GDA_DATA_MODEL_QUERY_XML_LOAD_ERROR")
+  )
+)
+
+(define-enum DataProxyError
+  (in-module "Gda")
+  (c-name "GdaDataProxyError")
+  (gtype-id "GDA_TYPE_DATA_PROXY_ERROR")
+  (values
+    '("r" "GDA_DATA_PROXY_COMMIT_ERROR")
+  )
+)
+
+(define-enum DictAggregateError
+  (in-module "Gda")
+  (c-name "GdaDictAggregateError")
+  (gtype-id "GDA_TYPE_DICT_AGGREGATE_ERROR")
+  (values
+    '("r" "GDA_DICT_AGGREGATE_XML_LOAD_ERROR")
+  )
+)
+
+(define-enum DictConstraintError
+  (in-module "Gda")
+  (c-name "GdaDictConstraintError")
+  (gtype-id "GDA_TYPE_DICT_CONSTRAINT_ERROR")
+  (values
+    '("save-error" "GDA_DICT_CONSTRAINT_XML_SAVE_ERROR")
+    '("load-error" "GDA_DICT_CONSTRAINT_XML_LOAD_ERROR")
+  )
+)
+
 (define-enum DictConstraintType
   (in-module "Gda")
   (c-name "GdaDictConstraintType")
@@ -572,12 +642,80 @@
   )
 )
 
+(define-enum DictDatabaseError
+  (in-module "Gda")
+  (c-name "GdaDictDatabaseError")
+  (gtype-id "GDA_TYPE_DICT_DATABASE_ERROR")
+  (values
+    '("xml-save-error" "GDA_DICT_DATABASE_XML_SAVE_ERROR")
+    '("xml-load-error" "GDA_DICT_DATABASE_XML_LOAD_ERROR")
+    '("meta-data-update" "GDA_DICT_DATABASE_META_DATA_UPDATE")
+    '("meta-data-update-user-stopped" "GDA_DICT_DATABASE_META_DATA_UPDATE_USER_STOPPED")
+    '("tables-error" "GDA_DICT_DATABASE_TABLES_ERROR")
+    '("sequences-error" "GDA_DICT_DATABASE_SEQUENCES_ERROR")
+  )
+)
+
+(define-enum DictFieldError
+  (in-module "Gda")
+  (c-name "GdaDictFieldError")
+  (gtype-id "GDA_TYPE_DICT_FIELD_ERROR")
+  (values
+    '("r" "GDA_DICT_FIELD_XML_LOAD_ERROR")
+  )
+)
+
 (define-flags DictFieldAttribute
   (in-module "Gda")
   (c-name "GdaDictFieldAttribute")
   (gtype-id "GDA_TYPE_DICT_FIELD_ATTRIBUTE")
   (values
     '("t" "FIELD_AUTO_INCREMENT")
+  )
+)
+
+(define-enum DictFunctionError
+  (in-module "Gda")
+  (c-name "GdaDictFunctionError")
+  (gtype-id "GDA_TYPE_DICT_FUNCTION_ERROR")
+  (values
+    '("r" "GDA_DICT_FUNCTION_XML_LOAD_ERROR")
+  )
+)
+
+(define-enum DictError
+  (in-module "Gda")
+  (c-name "GdaDictError")
+  (gtype-id "GDA_TYPE_DICT_ERROR")
+  (values
+    '("meta-data-update-error" "GDA_DICT_META_DATA_UPDATE_ERROR")
+    '("meta-data-update-user-stopped" "GDA_DICT_META_DATA_UPDATE_USER_STOPPED")
+    '("load-file-not-exist-error" "GDA_DICT_LOAD_FILE_NOT_EXIST_ERROR")
+    '("file-load-error" "GDA_DICT_FILE_LOAD_ERROR")
+    '("file-save-error" "GDA_DICT_FILE_SAVE_ERROR")
+    '("datatype-error" "GDA_DICT_DATATYPE_ERROR")
+    '("functions-error" "GDA_DICT_FUNCTIONS_ERROR")
+    '("aggregates-error" "GDA_DICT_AGGREGATES_ERROR")
+  )
+)
+
+(define-enum DictTableError
+  (in-module "Gda")
+  (c-name "GdaDictTableError")
+  (gtype-id "GDA_TYPE_DICT_TABLE_ERROR")
+  (values
+    '("table-xml-load-error" "GDA_DICT_TABLE_XML_LOAD_ERROR")
+    '("table-meta-data-update" "GDA_DICT_TABLE_META_DATA_UPDATE")
+    '("fields-error" "GDA_DICT_FIELDS_ERROR")
+  )
+)
+
+(define-enum DictTypeError
+  (in-module "Gda")
+  (c-name "GdaDictTypeError")
+  (gtype-id "GDA_TYPE_DICT_TYPE_ERROR")
+  (values
+    '("r" "GDA_DICT_TYPE_XML_LOAD_ERROR")
   )
 )
 
@@ -630,6 +768,41 @@
   )
 )
 
+(define-enum ObjectRefError
+  (in-module "Gda")
+  (c-name "GdaObjectRefError")
+  (gtype-id "GDA_TYPE_OBJECT_REF_ERROR")
+  (values
+    '("r" "GDA_OBJECT_REF_XML_LOAD_ERROR")
+  )
+)
+
+(define-enum ParameterError
+  (in-module "Gda")
+  (c-name "GdaParameterError")
+  (gtype-id "GDA_TYPE_PARAMETER_ERROR")
+  (values
+    '("r" "GDA_PARAMETER_QUERY_LIMIT_ERROR")
+  )
+)
+
+(define-enum ParameterListError
+  (in-module "Gda")
+  (c-name "GdaParameterListError")
+  (gtype-id "GDA_TYPE_PARAMETER_LIST_ERROR")
+  (values
+    '("no-node-error" "GDA_PARAMETER_LIST_NO_NODE_ERROR")
+    '("node-outdated-error" "GDA_PARAMETER_LIST_NODE_OUTDATED_ERROR")
+    '("value-prov-obj-type-error" "GDA_PARAMETER_LIST_VALUE_PROV_OBJ_TYPE_ERROR")
+    '("value-prov-data-type-error" "GDA_PARAMETER_LIST_VALUE_PROV_DATA_TYPE_ERROR")
+    '("value-prov-invisible-error" "GDA_PARAMETER_LIST_VALUE_PROV_INVISIBLE_ERROR")
+    '("value-prov-query-type-error" "GDA_PARAMETER_LIST_VALUE_PROV_QUERY_TYPE_ERROR")
+    '("dependency-not-in-paramlist-error" "GDA_PARAMETER_LIST_DEPENDENCY_NOT_IN_PARAMLIST_ERROR")
+    '("dependency-position-error" "GDA_PARAMETER_LIST_DEPENDENCY_POSITION_ERROR")
+    '("xml-spec-error" "GDA_PARAMETER_LIST_XML_SPEC_ERROR")
+  )
+)
+
 (define-flags ParameterListParamHint
   (in-module "Gda")
   (c-name "GdaParameterListParamHint")
@@ -677,6 +850,78 @@
   )
 )
 
+(define-enum QueryConditionError
+  (in-module "Gda")
+  (c-name "GdaQueryConditionError")
+  (gtype-id "GDA_TYPE_QUERY_CONDITION_ERROR")
+  (values
+    '("xml-load-error" "GDA_QUERY_CONDITION_XML_LOAD_ERROR")
+    '("renderer-error" "GDA_QUERY_CONDITION_RENDERER_ERROR")
+    '("parent-error" "GDA_QUERY_CONDITION_PARENT_ERROR")
+  )
+)
+
+(define-enum QueryFieldAggError
+  (in-module "Gda")
+  (c-name "GdaQueryFieldAggError")
+  (gtype-id "GDA_TYPE_QUERY_FIELD_AGG_ERROR")
+  (values
+    '("xml-load-error" "GDA_QUERY_FIELD_AGG_XML_LOAD_ERROR")
+    '("render-error" "GDA_QUERY_FIELD_AGG_RENDER_ERROR")
+  )
+)
+
+(define-enum QueryFieldAllError
+  (in-module "Gda")
+  (c-name "GdaQueryFieldAllError")
+  (gtype-id "GDA_TYPE_QUERY_FIELD_ALL_ERROR")
+  (values
+    '("xml-load-error" "GDA_QUERY_FIELD_ALL_XML_LOAD_ERROR")
+    '("render-error" "GDA_QUERY_FIELD_ALL_RENDER_ERROR")
+  )
+)
+
+(define-enum QueryFieldFieldError
+  (in-module "Gda")
+  (c-name "GdaQueryFieldFieldError")
+  (gtype-id "GDA_TYPE_QUERY_FIELD_FIELD_ERROR")
+  (values
+    '("xml-load-error" "GDA_QUERY_FIELD_FIELD_XML_LOAD_ERROR")
+    '("render-error" "GDA_QUERY_FIELD_FIELD_RENDER_ERROR")
+  )
+)
+
+(define-enum QueryFieldFuncError
+  (in-module "Gda")
+  (c-name "GdaQueryFieldFuncError")
+  (gtype-id "GDA_TYPE_QUERY_FIELD_FUNC_ERROR")
+  (values
+    '("xml-load-error" "GDA_QUERY_FIELD_FUNC_XML_LOAD_ERROR")
+    '("render-error" "GDA_QUERY_FIELD_FUNC_RENDER_ERROR")
+  )
+)
+
+(define-enum QueryFieldError
+  (in-module "Gda")
+  (c-name "GdaQueryFieldError")
+  (gtype-id "GDA_TYPE_QUERY_FIELD_ERROR")
+  (values
+    '("r" "GDA_QUERY_FIELD_XML_LOAD_ERROR")
+  )
+)
+
+(define-enum QueryFieldValueError
+  (in-module "Gda")
+  (c-name "GdaQueryFieldValueError")
+  (gtype-id "GDA_TYPE_QUERY_FIELD_VALUE_ERROR")
+  (values
+    '("xml-load-error" "GDA_QUERY_FIELD_VALUE_XML_LOAD_ERROR")
+    '("render-error" "GDA_QUERY_FIELD_VALUE_RENDER_ERROR")
+    '("param-error" "GDA_QUERY_FIELD_VALUE_PARAM_ERROR")
+    '("default-param-error" "GDA_QUERY_FIELD_VALUE_DEFAULT_PARAM_ERROR")
+  )
+)
+
 (define-enum QueryType
   (in-module "Gda")
   (c-name "GdaQueryType")
@@ -693,6 +938,25 @@
   )
 )
 
+(define-enum QueryError
+  (in-module "Gda")
+  (c-name "GdaQueryError")
+  (gtype-id "GDA_TYPE_QUERY_ERROR")
+  (values
+    '("xml-load-error" "GDA_QUERY_XML_LOAD_ERROR")
+    '("meta-data-update" "GDA_QUERY_META_DATA_UPDATE")
+    '("fields-error" "GDA_QUERY_FIELDS_ERROR")
+    '("targets-error" "GDA_QUERY_TARGETS_ERROR")
+    '("render-error" "GDA_QUERY_RENDER_ERROR")
+    '("parse-error" "GDA_QUERY_PARSE_ERROR")
+    '("syntax-error" "GDA_QUERY_SYNTAX_ERROR")
+    '("structure-error" "GDA_QUERY_STRUCTURE_ERROR")
+    '("sql-analyse-error" "GDA_QUERY_SQL_ANALYSE_ERROR")
+    '("no-cnc-error" "GDA_QUERY_NO_CNC_ERROR")
+    '("cnc-closed-error" "GDA_QUERY_CNC_CLOSED_ERROR")
+  )
+)
+
 (define-enum QueryJoinType
   (in-module "Gda")
   (c-name "GdaQueryJoinType")
@@ -704,6 +968,31 @@
     '("full-outer" "GDA_QUERY_JOIN_TYPE_FULL_OUTER")
     '("cross" "GDA_QUERY_JOIN_TYPE_CROSS")
     '("last" "GDA_QUERY_JOIN_TYPE_LAST")
+  )
+)
+
+(define-enum QueryJoinError
+  (in-module "Gda")
+  (c-name "GdaQueryJoinError")
+  (gtype-id "GDA_TYPE_QUERY_JOIN_ERROR")
+  (values
+    '("xml-load-error" "GDA_QUERY_JOIN_XML_LOAD_ERROR")
+    '("meta-data-update" "GDA_QUERY_JOIN_META_DATA_UPDATE")
+    '("fields-error" "GDA_QUERY_JOIN_FIELDS_ERROR")
+    '("sql-analyse-error" "GDA_QUERY_JOIN_SQL_ANALYSE_ERROR")
+    '("parse-error" "GDA_QUERY_JOIN_PARSE_ERROR")
+  )
+)
+
+(define-enum QueryTargetError
+  (in-module "Gda")
+  (c-name "GdaQueryTargetError")
+  (gtype-id "GDA_TYPE_QUERY_TARGET_ERROR")
+  (values
+    '("xml-load-error" "GDA_QUERY_TARGET_XML_LOAD_ERROR")
+    '("xml-save-error" "GDA_QUERY_TARGET_XML_SAVE_ERROR")
+    '("meta-data-update" "GDA_QUERY_TARGET_META_DATA_UPDATE")
+    '("fields-error" "GDA_QUERY_TARGET_FIELDS_ERROR")
   )
 )
 
@@ -773,6 +1062,17 @@
     '("read-uncommitted" "GDA_TRANSACTION_ISOLATION_READ_UNCOMMITTED")
     '("repeatable-read" "GDA_TRANSACTION_ISOLATION_REPEATABLE_READ")
     '("serializable" "GDA_TRANSACTION_ISOLATION_SERIALIZABLE")
+  )
+)
+
+(define-enum GeneralError
+  (in-module "Gda")
+  (c-name "GdaGeneralError")
+  (gtype-id "GDA_TYPE_GENERAL_ERROR")
+  (values
+    '("object-name-error" "GDA_GENERAL_OBJECT_NAME_ERROR")
+    '("incorrect-value-error" "GDA_GENERAL_INCORRECT_VALUE_ERROR")
+    '("operation-error" "GDA_GENERAL_OPERATION_ERROR")
   )
 )
 
@@ -4695,6 +4995,11 @@
   (return-type "GType")
 )
 
+(define-function gda_client_error_get_type
+  (c-name "gda_client_error_get_type")
+  (return-type "GType")
+)
+
 (define-function gda_sorting_get_type
   (c-name "gda_sorting_get_type")
   (return-type "GType")
@@ -4717,6 +5022,11 @@
 
 (define-function gda_connection_event_code_get_type
   (c-name "gda_connection_event_code_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_connection_error_get_type
+  (c-name "gda_connection_error_get_type")
   (return-type "GType")
 )
 
@@ -4750,6 +5060,31 @@
   (return-type "GType")
 )
 
+(define-function gda_data_model_iter_error_get_type
+  (c-name "gda_data_model_iter_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_model_query_error_get_type
+  (c-name "gda_data_model_query_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_proxy_error_get_type
+  (c-name "gda_data_proxy_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_dict_aggregate_error_get_type
+  (c-name "gda_dict_aggregate_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_dict_constraint_error_get_type
+  (c-name "gda_dict_constraint_error_get_type")
+  (return-type "GType")
+)
+
 (define-function gda_dict_constraint_type_get_type
   (c-name "gda_dict_constraint_type_get_type")
   (return-type "GType")
@@ -4760,8 +5095,38 @@
   (return-type "GType")
 )
 
+(define-function gda_dict_database_error_get_type
+  (c-name "gda_dict_database_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_dict_field_error_get_type
+  (c-name "gda_dict_field_error_get_type")
+  (return-type "GType")
+)
+
 (define-function gda_dict_field_attribute_get_type
   (c-name "gda_dict_field_attribute_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_dict_function_error_get_type
+  (c-name "gda_dict_function_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_dict_error_get_type
+  (c-name "gda_dict_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_dict_table_error_get_type
+  (c-name "gda_dict_table_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_dict_type_error_get_type
+  (c-name "gda_dict_type_error_get_type")
   (return-type "GType")
 )
 
@@ -4785,6 +5150,21 @@
   (return-type "GType")
 )
 
+(define-function gda_object_ref_error_get_type
+  (c-name "gda_object_ref_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_parameter_error_get_type
+  (c-name "gda_parameter_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_parameter_list_error_get_type
+  (c-name "gda_parameter_list_error_get_type")
+  (return-type "GType")
+)
+
 (define-function gda_parameter_list_param_hint_get_type
   (c-name "gda_parameter_list_param_hint_get_type")
   (return-type "GType")
@@ -4800,13 +5180,63 @@
   (return-type "GType")
 )
 
+(define-function gda_query_condition_error_get_type
+  (c-name "gda_query_condition_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_query_field_agg_error_get_type
+  (c-name "gda_query_field_agg_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_query_field_all_error_get_type
+  (c-name "gda_query_field_all_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_query_field_field_error_get_type
+  (c-name "gda_query_field_field_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_query_field_func_error_get_type
+  (c-name "gda_query_field_func_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_query_field_error_get_type
+  (c-name "gda_query_field_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_query_field_value_error_get_type
+  (c-name "gda_query_field_value_error_get_type")
+  (return-type "GType")
+)
+
 (define-function gda_query_type_get_type
   (c-name "gda_query_type_get_type")
   (return-type "GType")
 )
 
+(define-function gda_query_error_get_type
+  (c-name "gda_query_error_get_type")
+  (return-type "GType")
+)
+
 (define-function gda_query_join_type_get_type
   (c-name "gda_query_join_type_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_query_join_error_get_type
+  (c-name "gda_query_join_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_query_target_error_get_type
+  (c-name "gda_query_target_error_get_type")
   (return-type "GType")
 )
 
@@ -4832,6 +5262,11 @@
 
 (define-function gda_transaction_isolation_get_type
   (c-name "gda_transaction_isolation_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_general_error_get_type
+  (c-name "gda_general_error_get_type")
   (return-type "GType")
 )
 
@@ -6247,7 +6682,7 @@
 (define-method execute
   (of-object "GdaQuery")
   (c-name "gda_query_execute")
-  (return-type "GdaDataModel*")
+  (return-type "GdaObject*")
   (parameters
     '("GdaParameterList*" "params")
     '("gboolean" "iter_model_only_requested")

@@ -301,7 +301,7 @@ void Value::set(const GdaBlob* val)
   gda_value_set_blob(gobj(), val); 
 }
 
-bool Value::get_bool() const
+bool Value::get_boolean() const
 {
   return g_value_get_boolean(const_cast<GValue*>(gobj()));
 }
@@ -314,7 +314,7 @@ void Value::set(bool val)
 Glib::Date Value::get_date() const
 {
   Glib::Date result;
-  GDate* gdate = (GDate*)g_value_get_boxed(gobj());
+  const GDate* gdate = (const GDate*)g_value_get_boxed(gobj());
   if(gdate)
     result = Glib::Date(*gdate);
 
@@ -444,6 +444,16 @@ guint Value::get_uint() const
 void Value::set(guint val)
 {
   g_value_set_uint(gobj(), val); 
+}
+
+GType Value::get_g_type() const
+{
+  return g_value_get_gtype(gobj());
+}
+
+void Value::set(GType val)
+{
+  g_value_set_gtype(gobj(), val);
 }
 
 Glib::ustring Value::to_string() const

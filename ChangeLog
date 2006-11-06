@@ -1,4 +1,17 @@
-2006-11-06  gMurray Cumming  <murrayc@murrayc.com>
+2006-11-07  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/libgdamm/value.cc:
+	* libgda/libgdamm/value.h: Rename get/set_bool() to get/set_boolean().
+	Added get_g_type() and set(GType), for Values that contain a GType, such 
+	as the field types.
+	* libgda/src/column.ccg:
+	* libgda/src/column.hg: Added a hand-coded equal() function because it 
+	has been removed from libgda.
+	Rename get/set_gda_type() to get/set_g_type().
+	get_references(): Make it const.
+	* libgda/src/libgda_methods.defs: Regenerate with h2defs.py.
+
+2006-11-06  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/libgdamm/value.cc:
 	* libgda/libgdamm/value.h: Derive a new 
