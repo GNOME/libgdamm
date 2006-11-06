@@ -46,7 +46,7 @@ protected:
 
   _CTOR_DEFAULT
 
-  Parameter(const Glib::ustring& name, const Glib::ValueBase& value);
+  Parameter(const Glib::ustring& name, const Value& value);
   _IGNORE(gda_parameter_new_from_value)
   Parameter(const Glib::ustring& name, bool value);
   _IGNORE(gda_parameter_new_boolean)
@@ -63,22 +63,22 @@ public:
 //GSList                *gda_parameter_get_param_users(), )
 //  _WRAP_METHOD(void gda_parameter_replace_param_users     (GHashTable *replacements);
 
-  Glib::ValueBase get_value() const;
+  Value get_value() const;
   _IGNORE(gda_parameter_get_value)
   
   _WRAP_METHOD(GType get_gda_type() const, gda_parameter_get_gda_type)
 
-  _WRAP_METHOD(void set_value(const Glib::ValueBase& value), gda_parameter_set_value)
+  _WRAP_METHOD(void set_value(const Value& value), gda_parameter_set_value)
   _WRAP_METHOD(bool set_value(const Glib::ustring& value), gda_parameter_set_value_str)
 
 
   _WRAP_METHOD(void declare_invalid(), gda_parameter_declare_invalid)
   _WRAP_METHOD(bool is_valid() const, gda_parameter_is_valid)
 
-  Glib::ValueBase get_default_value() const;
+  Value get_default_value() const;
   _IGNORE(gda_parameter_get_default_value)
 
-  _WRAP_METHOD(void set_default_value(const Glib::ValueBase& value), gda_parameter_set_default_value)
+  _WRAP_METHOD(void set_default_value(const Value& value), gda_parameter_set_default_value)
   _WRAP_METHOD(bool get_exists_default_value(), gda_parameter_get_exists_default_value)
   _WRAP_METHOD(void set_exists_default_value(bool default_value_exists = true), gda_parameter_set_exists_default_value)
 

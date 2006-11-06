@@ -29,9 +29,9 @@ namespace Gnome
 namespace Gda
 {
   
-Glib::ValueBase Column::get_default_value() const
+Value Column::get_default_value() const
 {
-  Glib::ValueBase value;
+  Value value;
 
   const GValue* cvalue =  gda_column_get_default_value(const_cast<GdaColumn*>(gobj()));
   if(cvalue)

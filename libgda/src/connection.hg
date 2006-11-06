@@ -141,7 +141,7 @@ gint                 gda_connection_execute_non_select_command (GdaConnection *c
   _WRAP_METHOD(GdaBlob* create_blob(), gda_connection_create_blob)
   _WRAP_METHOD(GdaBlob* fetch_blob_by_id(const Glib::ustring& sql_id), gda_connection_fetch_blob_by_id)
 
-  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Glib::ValueBase& from) const, gda_connection_value_to_sql_string);
+  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Value& from) const, gda_connection_value_to_sql_string);
 
   _WRAP_METHOD(bool supports_feature(ConnectionFeature feature) const, gda_connection_supports_feature)
 

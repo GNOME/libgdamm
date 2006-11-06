@@ -55,9 +55,9 @@ Parameter::Parameter(const Glib::ustring& name, const Glib::ustring& value)
   set_value(value);
 }
 
-Glib::ValueBase Parameter::get_value() const
+Value Parameter::get_value() const
 {
-  Glib::ValueBase value;
+  Value value;
 
   const GValue* cvalue =  gda_parameter_get_value(const_cast<GdaParameter*>(gobj()));
   if(cvalue)
@@ -66,9 +66,9 @@ Glib::ValueBase Parameter::get_value() const
   return value;
 }
 
-Glib::ValueBase Parameter::get_default_value() const
+Value Parameter::get_default_value() const
 {
-  Glib::ValueBase value;
+  Value value;
 
   const GValue* cvalue =  gda_parameter_get_default_value(const_cast<GdaParameter*>(gobj()));
   if(cvalue)

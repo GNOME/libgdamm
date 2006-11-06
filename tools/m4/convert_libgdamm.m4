@@ -62,8 +62,8 @@ _CONVERSION(`const Glib::RefPtr<Glib::Object>&', `const GObject*', `($3)->gobj()
 
 _CONVERSION(`const Glib::RefPtr<Client>&', `GdaClient*', __CONVERT_REFPTR_TO_P)
 
-_CONVERSION(`const Glib::ValueBase&', `GValue*', `const_cast<GValue*>(($3).gobj())')
-_CONVERSION(`const Glib::ValueBase&', `const GValue*', `($3).gobj()')
+_CONVERSION(`const Value&', `GValue*', `const_cast<GValue*>(($3).gobj())')
+_CONVERSION(`const Value&', `const GValue*', `($3).gobj()')
 
 
 _CONVERSION(`const Time&', `const GdaTime*', `&($3)')

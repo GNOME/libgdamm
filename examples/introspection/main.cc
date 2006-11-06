@@ -67,11 +67,11 @@ void do_test()
 
         for(int i = 0; i < rows; ++i)
         {
-          Glib::ValueBase value = data_model_databases->get_value_at(0, i);
-          if(Gnome::Gda::value_get_type(value) == G_TYPE_STRING)
+          Gnome::Gda::Value value = data_model_databases->get_value_at(0, i);
+          if(value.get_value_type() == G_TYPE_STRING)
           {
             //Get the table name:
-            const Glib::ustring database_name = Gnome::Gda::value_get_string(value);
+            const Glib::ustring database_name = value.get_string();
 
             std::cout << "  Database name: " <<  database_name << std::endl;
           }
@@ -96,12 +96,12 @@ void do_test()
 
         for(int i = 0; i < rows; ++i)
         {
-          Glib::ValueBase value = data_model_tables->get_value_at(0, i);
-          if(!Gnome::Gda::value_get_type(value) == G_TYPE_STRING)
+          Gnome::Gda::Value value = data_model_tables->get_value_at(0, i);
+          if(!value.get_value_type() == G_TYPE_STRING)
             std::cerr << "Error: Value is not a string.";
            
           //Get the table name:
-          Glib::ustring table_name = Gnome::Gda::value_get_string(value);
+          Glib::ustring table_name = value.get_string();
           
           std::cout << "  Table name: " <<  table_name << std::endl;
            
@@ -134,27 +134,27 @@ void do_test()
                
                for(int i = 0; i < rows; ++i)
                {
-                 Glib::ValueBase value_name = data_model_fields->get_value_at(0, i);
+                 Gnome::Gda::Value value_name = data_model_fields->get_value_at(0, i);
 
-                 if(!Gnome::Gda::value_get_type(value) == G_TYPE_STRING)
+                 if(!value.get_value_type() == G_TYPE_STRING)
                    std::cerr << "Error: Value is not a string.";
            
                  //Get the field name:
-                 const Glib::ustring field_name = Gnome::Gda::value_get_string(value);
+                 const Glib::ustring field_name = value.get_string();
 
                  std::cout << "      Field Name: " << field_name << std::endl;
 
                  //Get the field type:
-                 Glib::ValueBase value_fieldtype = data_model_fields->get_value_at(1, i);
+                 Gnome::Gda::Value value_fieldtype = data_model_fields->get_value_at(1, i);
      
-                 const Glib::ustring field_type = Gnome::Gda::value_to_string(value_fieldtype);
+                 const Glib::ustring field_type = value_fieldtype.to_string();
 
                  std::cout << "      Data Type: " << field_type << std::endl;
 
                  //Get the default value (though this can have strange values):
-                 Glib::ValueBase value_default = data_model_fields->get_value_at(8, i);
+                 Gnome::Gda::Value value_default = data_model_fields->get_value_at(8, i);
 
-                 const Glib::ustring value_default_string = Gnome::Gda::value_to_string(value_default);
+                 const Glib::ustring value_default_string = value_default.to_string();
 
                  std::cout << "      Default Value: " << value_default_string << std::endl;
 

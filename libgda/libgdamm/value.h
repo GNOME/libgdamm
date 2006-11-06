@@ -36,6 +36,192 @@ namespace Gnome
 namespace Gda
 {
 
+typedef GdaGeometricPoint GeometricPoint;
+typedef GdaTime Time;
+typedef GdaTimestamp Timestamp;
+
+/** 
+ *
+ * Use value_type() to identify the value type at runtime.
+ */
+class Value : public Glib::ValueBase
+{
+public:
+  Value();
+
+  explicit Value(const GValue* castitem);
+
+  Value(const Value& src);
+  Value& operator=(const Value& src);
+
+  ~Value();
+  
+
+//We can't have this constructor because gint64 and int are the same on 64-bit systems:
+//explicit Value(gint64 val);
+  static Value create_as_int64(gint64 val);
+
+//We can't have this constructor because guint64 and unsigned int are the same on 64-bit systems:
+//explicit Value(gint64 val);
+// explicit Value(guint64 val);
+   static Value create_as_uint64(guint64 val);
+  
+  explicit Value(const guchar* val, long size); 
+
+  explicit Value(const GdaBlob* val);
+
+  explicit Value(bool val);
+  
+  explicit Value(const Glib::Date& val);
+  
+  explicit Value(double val);
+  
+  explicit Value(const GeometricPoint& val);
+  
+  explicit Value(int val);
+  
+  explicit Value(const GdaValueList* val);
+  
+  explicit Value(const GdaNumeric* val);
+  
+  explicit Value(float val);
+  
+  explicit Value(gshort val);
+  
+  explicit Value(gushort val);
+  
+  explicit Value(const Glib::ustring& val);
+  
+
+  //If this constructor does not exists, then Value("something") uses Value(bool) instead of Value(ustring).
+  explicit Value(const char* val);
+
+  explicit Value(const Time& val);
+  
+  explicit Value(const Timestamp& val);
+  
+  
+  //This causes ambiguity with another constructor on 64-bit systems:
+  //explicit Value(time_t val);
+  
+  static Value create_as_time_t(time_t val);
+
+  explicit Value(gchar val);
+  
+  explicit Value(guchar val);
+  
+  explicit Value(guint val);
+  
+  explicit Value(const Glib::ustring& as_string, GType type);
+  
+  //TODO: explicit Value(const xmlNodePtr node);
+  //__IGNORE(gda_value_new_from_xml)
+
+  bool operator==(const Value& src) const;
+  bool operator!=(const Value& src) const;
+
+  
+  GType get_value_type() const;
+  
+  bool is_null() const;
+  
+  bool is_number() const;
+
+  
+  gint64 get_int64() const;
+  
+  void set(gint64 val);
+  
+  guint64 get_uint64() const;
+  
+  void set(guint64 val);
+
+  //TODO: The const here is quite meaningless:
+  
+  const guchar* get_binary(long& size) const;
+  
+  void set(const guchar* val, long size);
+
+  //TODO: The const here is quite meaningless:
+  
+  const GdaBlob* get_blob() const;
+  
+  void set(const GdaBlob* val);
+  
+  bool get_bool() const;
+  
+  void set(bool val);
+  
+  Glib::Date get_date() const;
+  
+  void set(const Glib::Date& val);
+  
+  double get_double() const;
+  
+  void set(double val);
+  
+  GeometricPoint get_geometric_point() const;
+  
+  void set(const GeometricPoint& val);
+  
+  Glib::RefPtr<const Glib::Object> get_gobject();
+  
+  void set(const Glib::RefPtr<Glib::Object>& val);
+  
+  int get_int() const;
+  
+  void set(int val);
+  
+  const GdaValueList* get_list();
+  
+  void set(const GdaValueList *val);
+  
+  const GdaNumeric* get_numeric() const;
+  
+  void set(const GdaNumeric *val);
+  
+  float get_float() const;
+  
+  void set(float val);
+  
+  gshort get_short() const;
+  
+  void set(gshort val);
+  
+  gushort get_ushort() const;
+  
+  void set(gushort val);
+  
+  Glib::ustring get_string() const;
+  
+  void set(const Glib::ustring& val);
+  
+  Time get_time() const;
+  
+  void set(const Time& val);
+  
+  Timestamp get_timestamp() const;
+  
+  void set(const Timestamp& val);
+  
+  void set(gchar val);
+  
+  void set(guchar val);
+  
+  guint get_uint() const;
+  
+  void set(guint val);
+  
+  GType get_vtype() const;
+  
+  //Use the copy constructor instead: _WRAP_METHOD(bool set_from_value(const Value& from), gda_value_set_from_value)
+  
+
+  //TODO: Wrap this as some stream operator thing?
+  
+  Glib::ustring to_string() const;
+};
+
 GType value_get_type_null();
 GType value_get_type_binary();
 GType value_get_type_blob();
@@ -84,61 +270,6 @@ bool value_is_null(const Glib::ValueBase& value);
 bool value_is_number(const Glib::ValueBase& value);
 
 
-void value_set_char(Glib::ValueBase& value, gchar v_char);
-gchar value_get_char(const Glib::ValueBase& value);
-void value_set_uchar(Glib::ValueBase& value, guchar v_uchar);
-guchar value_get_uchar(const Glib::ValueBase& value);
-void value_set_boolean(Glib::ValueBase& value, bool v_boolean);
-bool value_get_boolean(const Glib::ValueBase& value);
-void value_set_int(Glib::ValueBase& value,  int v_int);
-int value_get_int(const Glib::ValueBase& value);
-void value_set_uint(Glib::ValueBase& value, guint v_uint);
-guint value_get_uint(const Glib::ValueBase& value);
-void value_set_long(Glib::ValueBase& value, long v_long);
-long value_get_long(const Glib::ValueBase& value);
-void value_set_ulong(Glib::ValueBase& value, unsigned long v_ulong);
-unsigned long value_get_ulong(const Glib::ValueBase& value);
-void value_set_int64(Glib::ValueBase& value, gint64 v_int64);
-gint64 value_get_int64(const Glib::ValueBase& value);
-void value_set_uint64(Glib::ValueBase& value, guint64 v_uint64);
-guint64 value_get_uint64(const Glib::ValueBase& value);
-void value_set_float(Glib::ValueBase& value, float v_float);
-float value_get_float(const Glib::ValueBase& value);
-void value_set_double(Glib::ValueBase& value, double v_double);
-double value_get_double(const Glib::ValueBase& value);
-void value_set_string(Glib::ValueBase& value, const Glib::ustring& v_string);
-Glib::ustring value_get_string(const Glib::ValueBase& value);
-
-
-const GdaBinary* value_get_binary(const Glib::ValueBase& value);
-void value_set_binary(Glib::ValueBase& value, const GdaBinary& binary);
-//void                              gda_value_take_binary(Glib::ValueBase& value, const GdaBinary& binary);
-
-const GdaBlob* value_get_blob(const Glib::ValueBase& value);
-void value_set_blob(Glib::ValueBase& value, const GdaBlob& val);
-
-const GdaGeometricPoint* value_get_geometric_point(const Glib::ValueBase& value);
-void value_set_geometric_point(Glib::ValueBase& value, const GdaGeometricPoint& val);
-
-const GdaValueList* value_get_list(const Glib::ValueBase& value);
-void value_set_list(Glib::ValueBase& value, const GdaValueList& val);
-
-void value_set_null(Glib::ValueBase& value);
-
-const GdaNumeric* value_get_numeric(const Glib::ValueBase& value);
-void value_set_numeric(Glib::ValueBase& value, const GdaNumeric& val);
-
-gshort value_get_short(const Glib::ValueBase& value);
-void value_set_short(Glib::ValueBase& value, const gshort val);
-
-gushort value_get_ushort(const Glib::ValueBase& value);
-void value_set_ushort(Glib::ValueBase& value, const gushort val);
-
-const GdaTime* value_get_time(const Glib::ValueBase& value);
-void value_set_time(Glib::ValueBase& value, const GdaTime& val);
-
-const GdaTimestamp* value_get_timestamp(const Glib::ValueBase& value);
-void value_set_timestamp(Glib::ValueBase& value, const GdaTimestamp& val);
 
 
 int value_compare(const Glib::ValueBase& value1, const Glib::ValueBase& value2);

@@ -1,3 +1,29 @@
+2006-11-06  gMurray Cumming  <murrayc@murrayc.com>
+
+	* libgda/libgdamm/value.cc:
+	* libgda/libgdamm/value.h: Derive a new 
+	Gnome::Gda::Value class, from Glib::ValueBase, 
+	as a variant type (which Glib::ValueBase is not, 
+	because it must be used via specialized derived template 
+	instantiations), including the gda-specific types. This 
+	API is simpler and less ugly than lots of value_*(Glib::Value)
+	functions.
+	* tools/m4/convert_libgdamm.m4:
+	* libgda/src/column.ccg:
+	* libgda/src/column.hg:
+	* libgda/src/connection.hg:
+	* libgda/src/datamodel.ccg:
+	* libgda/src/datamodel.hg:
+	* libgda/src/parameter.ccg:
+	* libgda/src/parameter.hg:
+	* libgda/src/parameterlist.ccg:
+	* libgda/src/parameterlist.hg:
+	* libgda/src/row.ccg:
+	* libgda/src/row.hg:
+	* libgda/src/serverprovider.hg:
+	* examples/introspection/main.cc:
+	* examples/simple/main.cc: Adapt to new API.
+
 2006-10-21  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/libgdamm/value.cc:

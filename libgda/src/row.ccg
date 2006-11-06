@@ -33,9 +33,9 @@ namespace Gnome
 namespace Gda
 {
 
-Glib::ValueBase Row::get_value(int num) const
+Value Row::get_value(int num) const
 {
-  Glib::ValueBase value;
+  Value value;
 
   const GValue* cvalue = gda_row_get_value(const_cast<GdaRow*>(gobj()), num);
   if(cvalue)
