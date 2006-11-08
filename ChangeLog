@@ -1,5 +1,13 @@
 2006-11-08  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/datamodel.ccg:
+	* libgda/src/datamodel.hg: Added get_column_index() and 
+	get_value_at(column_name).
+	* libgda/src/parameter.hg: Renamed get_gda_type() to get_g_type().
+	* libgda/src/serverprovider.hg: Added get_info().
+
+2006-11-08  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/serverprovider.hg: Added ServerProviderInfo typedef.
 	* libgda/src/connection.ccg:
 	* libgda/src/connection.hg: Added get_infos().

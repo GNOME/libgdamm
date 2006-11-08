@@ -60,6 +60,7 @@ public:
   //TODO: Use C++ type:
   _WRAP_METHOD(Glib::RefPtr<Column> describe_column(int col), gda_data_model_describe_column)
   _WRAP_METHOD(Glib::RefPtr<const Column> describe_column(int col) const, gda_data_model_describe_column)
+  _WRAP_METHOD(int get_column_index(const Glib::ustring& name) const, gda_data_model_get_column_index_by_name)
   _WRAP_METHOD(Glib::ustring get_column_title(int col) const, gda_data_model_get_column_title)
   _WRAP_METHOD(void set_column_title(int col, const Glib::ustring& title), gda_data_model_set_column_title)
   //TODO:_WRAP_METHOD(int get_column_position(const Glib::ustring& title) const, gda_data_model_get_column_position)
@@ -70,6 +71,9 @@ public:
  
   Value get_value_at(int col, int row) const;
   _IGNORE(gda_data_model_get_value_at)
+
+  Value get_value_at(const Glib::ustring& column_name, int row) const;
+  _IGNORE(gda_data_model_get_value_at_col_name)
 
   _WRAP_METHOD(guint get_attributes_at(int col, int row), gda_data_model_get_attributes_at)
   _WRAP_METHOD(GdaDataModelIter* create_iter(), gda_data_model_create_iter)

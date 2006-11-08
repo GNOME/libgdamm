@@ -58,6 +58,10 @@ class ServerProvider : public Glib::Object
   _WRAP_METHOD(Glib::ustring get_database(const Glib::RefPtr<Connection>& cnc) const, gda_server_provider_get_database)
   _WRAP_METHOD(bool change_database(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_change_database)
 
+  //TODO: Copy-by-value somehow?
+  #m4 _CONVERSION(`GdaServerProviderInfo*', `const ServerProviderInfo*', `static_cast<ServerProviderInfo*>($3)')
+  _WRAP_METHOD(const ServerProviderInfo* get_info(const Glib::RefPtr<Connection>& cnc) const, gda_server_provider_get_info)
+
   //TODO: options may be NULL: Add a method overload.
   _WRAP_METHOD(bool supports_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type, const Glib::RefPtr<ParameterList>& options) const, gda_server_provider_supports_operation)
 

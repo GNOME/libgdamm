@@ -70,7 +70,7 @@ public:
   Value get_value() const;
   _IGNORE(gda_parameter_get_value)
   
-  _WRAP_METHOD(GType get_gda_type() const, gda_parameter_get_gda_type)
+  _WRAP_METHOD(GType get_g_type() const, gda_parameter_get_g_type)
 
   _WRAP_METHOD(void set_value(const Value& value), gda_parameter_set_value)
   _WRAP_METHOD(bool set_value(const Glib::ustring& value), gda_parameter_set_value_str)
