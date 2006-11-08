@@ -20,7 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/connection.h>
+//#include <libgdamm/connection.h>
 #include <libgdamm/command.h>
 #include <libgdamm/datamodelindex.h>
 #include <libgdamm/client.h>

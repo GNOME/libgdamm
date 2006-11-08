@@ -20,7 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/connection.h>
+//#include <libgdamm/connection.h>
 #include <libgdamm/command.h>
 #include <libgdamm/datamodelindex.h>
 #include <libgdamm/client.h>
@@ -41,6 +41,9 @@ class Connection;
 
 //_WRAP_ENUM(ClientSpecsType, GdaClientSpecsType)
 _WRAP_ENUM(ServerOperationType, GdaServerOperationType)
+
+/* TODO: Is this appropriate. Investigate how it is used. */
+typedef GdaServerProviderInfo ServerProviderInfo;
 
 class ServerProvider : public Glib::Object
 {

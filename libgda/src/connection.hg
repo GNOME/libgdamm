@@ -27,6 +27,7 @@
 #include <libgdamm/parameterlist.h>
 #include <libgdamm/datamodelindex.h>
 #include <libgdamm/dict.h>
+//#include <libgdamm/serverprovider.h>
 //#include <libgda/gda-connection.h>
 
 _DEFS(libgdamm,libgda)
@@ -37,6 +38,9 @@ namespace Gnome
 
 namespace Gda
 {
+
+class ServerProvider;
+typedef GdaServerProviderInfo ServerProviderInfo;
 
 /** Exception class for Gda errors.
  */
@@ -84,7 +88,10 @@ public:
   _WRAP_METHOD(Glib::ustring get_provider() const, gda_connection_get_provider)
   _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider_obj(), gda_connection_get_provider_obj)
   _WRAP_METHOD(Glib::RefPtr<const ServerProvider> get_provider_obj() const, gda_connection_get_provider_obj, constversion)
-  //TODO: _WRAP_METHOD(GdaServerProviderInfo* get_infos(), gda_connection_get_infos)
+
+  //TODO: Copy-by-value somehow?
+  #m4 _CONVERSION(`GdaServerProviderInfo*', `const ServerProviderInfo*', `static_cast<ServerProviderInfo*>($3)')
+  _WRAP_METHOD(const ServerProviderInfo* get_infos() const, gda_connection_get_infos)
 
   _WRAP_METHOD(Glib::ustring get_username() const, gda_connection_get_username)
   _WRAP_METHOD(bool set_username(const Glib::ustring& username), gda_connection_set_username)

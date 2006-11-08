@@ -20,9 +20,9 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgdamm/serverprovider.h>
 #include <libgdamm/client.h>
 #include <libgdamm/command.h>
-#include <libgdamm/serverprovider.h>
 #include <libgda/gda-enum-types.h>
 #include <libgda/gda-connection.h>
 #include <libgda/libgda.h> //For GDA_GENERAL_ERROR

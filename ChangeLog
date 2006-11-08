@@ -1,5 +1,11 @@
 2006-11-08  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/serverprovider.hg: Added ServerProviderInfo typedef.
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg: Added get_infos().
+
+2006-11-08  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/Makefile_list_of_hg.am_fragment:
 	* libgda/src/entity.ccg:
 	* libgda/src/entity.hg:
