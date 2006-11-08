@@ -1,3 +1,15 @@
+2006-11-08  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/entity.ccg:
+	* libgda/src/entity.hg:
+	* libgda/src/entityfield.ccg:
+	* libgda/src/entityfield.hg: Added the Entity and 
+	EntityField interfaces.
+	* libgda/src/parameter.hg: Added declare_param_user() and 
+	get_param_users().
+	* tools/m4/convert_libgdamm.m4: Added necessary conversions.
+
 2006-11-07  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/libgdamm/value.cc:

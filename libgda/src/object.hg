@@ -58,13 +58,23 @@ public:
   _WRAP_METHOD(Glib::ustring get_description() const, gda_object_get_description)
   _WRAP_METHOD(Glib::ustring get_owner() const, gda_object_get_owner)
 
-  //_WRAP_METHOD(void         gda_object_destroy (), ) /* force the object to completely clean itself */
-  //_WRAP_METHOD(void         gda_object_destroy_check   (GdaObject *object); 
-  //_WRAP_METHOD(gulong       gda_object_connect_destroy (gpointer object, GCallback callback, gpointer data);
+  //We ignore the *destroy methods because they are not appropriate for C++ and don't even seem necessary as public API.
+  _IGNORE(gda_object_destroy, gda_object_destroy_check, gda_object_connect_destroy)
 
   _WRAP_METHOD(void signal_emit_changed(), gda_object_signal_emit_changed)
   _WRAP_METHOD(void block_changed(), gda_object_block_changed)
   _WRAP_METHOD(void unblock_changed(), gda_object_unblock_changed)
+
+  /* Ignore these signals for now because they look strange and not useful:
+  _WRAP_SIGNAL(void changed(), "changed")
+  _WRAP_SIGNAL(void id_changed, "id_changed")
+  _WRAP_SIGNAL(void name_changed, "name_changed")
+  _WRAP_SIGNAL(void descr_changed, "descr_changed")
+  _WRAP_SIGNAL(void owner_changed, "owner_changed")
+
+  _WRAP_SIGNAL(void to_be_destroyed, "to_be_destroyed")
+  _WRAP_SIGNAL(void destroyed, "destroyed")
+  */
 
 };
 

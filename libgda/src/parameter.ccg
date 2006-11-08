@@ -24,6 +24,9 @@
 #include <libgda/gda-parameter.h>
 #include <libgda/gda-enum-types.h>
 
+//Make life easier for the generated code:
+typedef Gnome::Gda::Parameter::ListHandleEntityField ListHandleEntityField;
+
 namespace Gnome
 {
 

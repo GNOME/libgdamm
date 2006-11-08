@@ -27,6 +27,7 @@ _CONVERSION(`const Glib::RefPtr<Connection>&', `GdaConnection*', __CONVERT_REFPT
 _CONVERSION(`const Glib::RefPtr<Dict>&', `GdaDict*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DictType>&', `GdaDictType*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Object>&', `GdaObject*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<Gda::Object>&', `GdaObject*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Parameter>&', `GdaParameter*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const Parameter>&', `const GdaParameter*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const Parameter>&', `GdaParameter*', __CONVERT_CONST_REFPTR_TO_P)
@@ -51,6 +52,23 @@ _CONVERSION(`const Glib::RefPtr<Column>&', `GdaColumn*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Column>&', `const GdaColumn*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const Column>&', `const GdaColumn*', __CONVERT_REFPTR_TO_P)
 #_CONVERSION(`Column&', `GdaColumn*', `($3).gobj()')
+
+
+_CONVERSION(`GdaEntityField*',`Glib::RefPtr<EntityField>',`Glib::wrap($3)')
+_CONVERSION(`GdaEntityField*',`Glib::RefPtr<const EntityField>',`Glib::wrap($3)')
+_CONVERSION(`const Glib::RefPtr<EntityField>&', `GdaEntityField*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<const EntityField>&', `const GdaEntityField*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<const EntityField>&', `GdaEntityField*', __CONVERT_CONST_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<EntityField>&', `const GdaEntityField*', __CONVERT_REFPTR_TO_P)
+
+_CONVERSION(`GdaEntity*',`Glib::RefPtr<Entity>',`Glib::wrap($3)')
+_CONVERSION(`GdaEntity*',`Glib::RefPtr<const Entity>',`Glib::wrap($3)')
+_CONVERSION(`const Glib::RefPtr<Entity>&', `GdaEntity*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<const Entity>&', `const GdaEntity*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<Entity>&', `const GdaEntity*', __CONVERT_REFPTR_TO_P)
+
+_CONVERSION(`GdaDictType*',`Glib::RefPtr<DictType>',`Glib::wrap($3)')
+_CONVERSION(`GdaDictType*',`Glib::RefPtr<const DictType>',`Glib::wrap($3)')
 
 _CONVERSION(`GdaColumnIndex*',`Glib::RefPtr<ColumnIndex>',`Glib::wrap($3)')
 

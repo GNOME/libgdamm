@@ -5,6 +5,7 @@
 files_hg = client.hg columnindex.hg command.hg connection.hg \
            datamodel.hg datamodelindex.hg datasourceinfo.hg connectionevent.hg \
            column.hg dict.hg dictaggregate.hg dictdatabase.hg dicttype.hg \
+           entity.hg entityfield.hg \
            object.hg  parameter.hg parameterlist.hg providerinfo.hg row.hg serverprovider.hg \
            serveroperation.hg transaction.hg
 
