@@ -1,3 +1,31 @@
+2006-11-29  Armin Burgmeier  <armin@openismus.com>
+
+	* configure.in: Require libgda-3.0 >= 2.99.2.
+	* libgda/src/Makefile_list_of_hg.am_fragment: Moved transaction.hg to
+	transactionstatus.hg.
+
+	* libgda/src/client.hg:
+	* libgda/src/column.hg:
+	* libgda/src/command.hg:
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg:
+	* libgda/src/dict.ccg:
+	* libgda/src/dict.hg:
+	* libgda/src/parameterlist.hg: 
+	* libgda/src/serverprovider.hg: Build fixes to build against libgda
+	HEAD. Some functions had to be removed because the new API seems not
+	to offer them anymore. Some other, new functions are still unwrapped.
+
+	* libgda/src/transactionstatus.hg:
+	* libgda/src/transactionstatus.ccg: New files, replacing
+	transaction.hg respectively transaction.ccg.
+
+	* tools/m4/convert_libgdamm.m4: Replaced Transaction by
+	TransactionStatus.
+
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/libgda_signals.defs: Regenerated.
+
 2006-11-08  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/datamodel.ccg:

@@ -73,9 +73,13 @@ class ServerProvider : public Glib::Object
   #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Glib::RefPtr<Connection>& cnc, const Command& cmd, const Glib::RefPtr<ParameterList>& params), gda_server_provider_execute_command)
 
-  _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_begin_transaction)
-  _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_commit_transaction)
-  _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_rollback_transaction)
+  _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name, TransactionIsolation level), gda_server_provider_begin_transaction, errthrow)
+  _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_commit_transaction, errthrow)
+  _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_rollback_transaction, errthrow)
+
+  _WRAP_METHOD(bool add_savepoint(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_add_savepoint, errthrow)
+  _WRAP_METHOD(bool rollback_savepoint(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_rollback_savepoint, errthrow)
+  _WRAP_METHOD(bool delete_savepoint(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_delete_savepoint, errthrow)
 
   _WRAP_METHOD(bool supports_feature(const Glib::RefPtr<Connection>& cnc, ConnectionFeature feature) const, gda_server_provider_supports_feature)
 

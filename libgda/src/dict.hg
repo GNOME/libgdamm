@@ -59,8 +59,8 @@ public:
   //_WRAP_METHOD(void declare_object_string_id_change(const Glib::RefPtr<Object>& obj, const Glib::ustring& oldid), gda_dict_declare_object_string_id_change)
   //_WRAP_METHOD(Glib::RefPtr<Object> get_object_by_string_id(const Glib::ustring& strid), gda_dict_get_object_by_string_id)
 
-  _WRAP_METHOD(bool update_dbms_data(), gda_dict_update_dbms_data, errthrow)
-  _WRAP_METHOD(void stop_update_dbms_data(), gda_dict_stop_update_dbms_data)
+  _WRAP_METHOD(bool update_dbms_meta_data(GType limit_to_type, const Glib::ustring& limit_obj_name), gda_dict_update_dbms_meta_data, errthrow)
+  _WRAP_METHOD(void stop_update_dbms_meta_data(), gda_dict_stop_update_dbms_meta_data)
 
 //TODO: What is datasource? is it UTF-8?
   _WRAP_METHOD(std::string compute_xml_filename(const Glib::ustring& datasource, const Glib::ustring& app_id), gda_dict_compute_xml_filename, errthrow)
@@ -75,10 +75,11 @@ public:
   //_WRAP_METHOD(GdaDataHandler* get_default_handler(ValueType for_type), gda_dict_get_default_handler)
 
 /* GdaDictType manipulations */
-  _WRAP_METHOD(GSList* get_data_types() const, gda_dict_get_data_types)
-  _WRAP_METHOD(GdaDictType* get_data_type_by_name(const Glib::ustring& type_name), gda_dict_get_data_type_by_name)
-  _WRAP_METHOD(GdaDictType* get_data_type_by_xml_id(const Glib::ustring& xml_id), gda_dict_get_data_type_by_xml_id)
-  _WRAP_METHOD(bool declare_custom_data_type (GdaDictType* type), gda_dict_declare_custom_data_type)
+  // These cannot be generated via _WRAP_METHOD because these are #defines in gda-dict.h
+  GSList* get_dict_types() const;
+  GdaDictType* get_dict_type_by_name(const Glib::ustring& type_name);
+  GdaDictType* get_data_type_by_xml_id(const Glib::ustring& xml_id);
+  //_WRAP_METHOD(bool declare_custom_data_type (GdaDictType* type), gda_dict_declare_custom_data_type)
 
 /* GdaDictFunction manipulations */
   //_WRAP_METHOD(GSList* get_functions() const, gda_dict_get_functions)
@@ -87,11 +88,16 @@ public:
   //_WRAP_METHOD(GdaDictFunction* get_function_by_xml_id(const Glib::ustring& xml_id), gda_dict_get_function_by_xml_id)
   //_WRAP_METHOD(GdaDictFunction* get_function_by_dbms_id(const Glib::ustring& dbms_id), gda_dict_get_function_by_dbms_id)
 
-  _WRAP_METHOD(GSList* get_aggregates() const, gda_dict_get_aggregates)
-  _WRAP_METHOD(GSList* get_aggregates_by_name (const Glib::ustring& aggname), gda_dict_get_aggregates_by_name)
-  _WRAP_METHOD(Glib::RefPtr<DictAggregate> get_aggregate_by_name_arg(const Glib::ustring& aggname, GdaDictType *argtype), gda_dict_get_aggregate_by_name_arg)
-  _WRAP_METHOD(Glib::RefPtr<DictAggregate> get_aggregate_by_xml_id(const Glib::ustring& xml_id), *gda_dict_get_aggregate_by_xml_id)
-  _WRAP_METHOD(Glib::RefPtr<DictAggregate> get_aggregate_by_dbms_id(const Glib::ustring& dbms_id), gda_dict_get_aggregate_by_dbms_id)
+  GSList* get_aggregates() const;
+#if 0
+  // The C counterparts to these functions are declared in a header that is not surrounded by
+  // G_BEGIN_DECL / G_END_DECL (gda-dict-reg-aggregates.h). This is a bit strange since there is a macro calling these
+  // functions in the public gda-dict.h file.
+  GSList* get_aggregates_by_name (const Glib::ustring& aggname);
+  Glib::RefPtr<DictAggregate> get_aggregate_by_name_arg(const Glib::ustring& aggname, GdaDictType *argtype);
+  Glib::RefPtr<DictAggregate> get_aggregate_by_xml_id(const Glib::ustring& xml_id);
+  Glib::RefPtr<DictAggregate> get_aggregate_by_dbms_id(const Glib::ustring& dbms_id);
+#endif
 
 /* GdaQuery manipulations */
   //_WRAP_METHOD(void declare_query(const Glib::RefPtr<Query>& query), gda_dict_declare_query)

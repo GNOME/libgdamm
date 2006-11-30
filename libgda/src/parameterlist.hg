@@ -56,10 +56,6 @@ public:
   _WRAP_METHOD(Glib::RefPtr<Parameter> add_parameter(const Glib::ustring& name, GType type, const Glib::ustring& str), gda_parameter_list_add_param_from_string)
   _WRAP_METHOD(Glib::RefPtr<Parameter> add_parameter(const Glib::ustring& name, const Value& value), gda_parameter_list_add_param_from_value)
 
-
-  //TODO: Use ListHandle:
-  _WRAP_METHOD(GList* get_names(), gda_parameter_list_get_names)
-
   _WRAP_METHOD(void add_param(const Glib::RefPtr<Parameter>& param), gda_parameter_list_add_param)
   _WRAP_METHOD(Glib::RefPtr<Parameter> add_param_from_string(const Glib::ustring& name, GType type, const Glib::ustring& str), gda_parameter_list_add_param_from_string)
   _WRAP_METHOD(Glib::RefPtr<Parameter> add_param_from_value(const Glib::ustring& name, const Value& value), gda_parameter_list_add_param_from_value)
@@ -82,8 +78,6 @@ public:
   Value get_param_default_value(const Glib::RefPtr<const Parameter>& param) const;
   _IGNORE(gda_parameter_list_get_param_default_value)
 
-
-  _WRAP_METHOD(void clear(), gda_parameter_list_clear)
   _WRAP_METHOD(Glib::ustring get_spec() const, gda_parameter_list_get_spec)
   _WRAP_METHOD(guint get_length() const, gda_parameter_list_get_length)
 

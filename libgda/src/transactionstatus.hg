@@ -1,7 +1,7 @@
 /* $Id$ */
 // -*- C++ -*- // this is for the .hg, I realize gensig puts one in
 
-/* transaction.h
+/* transactionstatus.h
  * 
  * Copyright 2001      Free Software Foundation
  *
@@ -21,7 +21,6 @@
  */
 
 #include <glibmm/object.h>
-#include <libgda/gda-transaction.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -34,21 +33,18 @@ namespace Gda
 
 _WRAP_ENUM(TransactionIsolation, GdaTransactionIsolation)
 
-class Transaction : public Glib::Object
+class TransactionStatus : public Glib::Object
 {
-  _CLASS_GOBJECT(Transaction, GdaTransaction, GDA_TRANSACTION, Glib::Object, GObject)
+  _CLASS_GOBJECT(TransactionStatus, GdaTransactionStatus, GDA_TRANSACTION_STATUS, Glib::Object, GObject)
 protected:
-  explicit Transaction(const Glib::ustring& name = Glib::ustring());
-  _IGNORE(gda_transaction_new)
+  explicit TransactionStatus(const Glib::ustring& name = Glib::ustring());
+  _IGNORE(gda_transaction_status_new)
 
 public:
   _WRAP_CREATE(const Glib::ustring& name)
 
-  _WRAP_METHOD(TransactionIsolation get_isolation_level() const, gda_transaction_get_isolation_level)
-  _WRAP_METHOD(void set_isolation_level(GdaTransactionIsolation level), gda_transaction_set_isolation_level)
-                   
-  _WRAP_METHOD(Glib::ustring get_name() const, gda_transaction_get_name)
-  _WRAP_METHOD(void set_name(const Glib::ustring& name), gda_transaction_set_name)
+  _MEMBER_GET(get_isolation_level, isolation_level, TransactionIsolation, GdaTransactionIsolation)
+  _MEMBER_GET(get_name, name, Glib::ustring, gchar*)
 };
 
 } // namespace Gda

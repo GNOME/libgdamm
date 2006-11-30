@@ -20,7 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/transaction.h>
+#include <libgdamm/transactionstatus.h>
 #include <libgdamm/connection.h>
 //#include <libgda/gda-client.h>
 
@@ -71,23 +71,19 @@ public:
   _WRAP_METHOD(void notify_error_event(const Glib::RefPtr<Connection>& cnc, GdaConnectionEvent *error), gda_client_notify_error_event)
   _WRAP_METHOD(void notify_connection_opened_event(const Glib::RefPtr<Connection>& cnc), gda_client_notify_connection_opened_event)
   _WRAP_METHOD(void notify_connection_closed_event(const Glib::RefPtr<Connection>& cnc), gda_client_notify_connection_closed_event)
-  _WRAP_METHOD(void notify_transaction_started_event(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_client_notify_transaction_started_event)
-  _WRAP_METHOD(void notify_transaction_committed_event(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_client_notify_transaction_committed_event)
-  _WRAP_METHOD(void notify_transaction_cancelled_event(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_client_notify_transaction_cancelled_event)
-
 
   _WRAP_METHOD(Glib::ustring get_dsn_specs(const Glib::ustring& provider) const, gda_client_get_dsn_specs)
 
   _WRAP_METHOD(Glib::RefPtr<ServerOperation> prepare_create_database(const Glib::ustring& provider), gda_client_prepare_create_database)
-  _WRAP_METHOD(bool perform_create_database(const Glib::ustring& provider, const Glib::RefPtr<ServerOperation>& op), gda_client_perform_create_database, errthrow)
+  _WRAP_METHOD(bool perform_create_database(const Glib::RefPtr<ServerOperation>& op), gda_client_perform_create_database, errthrow)
 
   _WRAP_METHOD(Glib::RefPtr<ServerOperation> prepare_drop_database(const Glib::ustring& provider), gda_client_prepare_drop_database)
-  _WRAP_METHOD(bool perform_drop_database(const Glib::ustring& provider, const Glib::RefPtr<ServerOperation>& op), gda_client_perform_drop_database, errthrow)
+  _WRAP_METHOD(bool perform_drop_database(const Glib::RefPtr<ServerOperation>& op), gda_client_perform_drop_database, errthrow)
 
 
-  _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_begin_transaction)
-  _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_commit_transaction)
-  _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& xaction), gda_client_rollback_transaction)
+  _WRAP_METHOD(bool begin_transaction(const Glib::ustring& name, TransactionIsolation level), gda_client_begin_transaction, errthrow)
+  _WRAP_METHOD(bool commit_transaction(const Glib::ustring& name), gda_client_commit_transaction, errthrow)
+  _WRAP_METHOD(bool rollback_transaction(const Glib::ustring& name), gda_client_rollback_transaction, errthrow)
 
   //TODO: Use C++ types:
   //_WRAP_SIGNAL(void event_notification(const Glib::RefPtr<Connection>& cnc, ClientEvent event, const Glib::RefPtr<ParameterList>& params), "event_notification")

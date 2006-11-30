@@ -79,6 +79,25 @@ Glib::RefPtr<DataModel> Connection::execute_select_command(const Glib::ustring& 
   return retvalue;
 }
 
+int Connection::execute_non_select_command(const Command& cmd)
+{
+  GError *error = 0;
+
+  int retvalue = gda_connection_execute_non_select_command(gobj(), const_cast<GdaCommand*>((cmd).gobj()), 0, &(error));
+  if(error) ::Glib::Error::throw_exception(error);
+  return retvalue;
+}
+
+int Connection::execute_non_select_command(const Glib::ustring& cmd)
+{
+  Command command(cmd);
+
+  GError *error = 0;
+  int retvalue = gda_connection_execute_non_select_command(gobj(), const_cast<GdaCommand*>(command.gobj()), 0, &(error));
+  if(error) ::Glib::Error::throw_exception(error);
+  return retvalue;
+}
+
 void Connection::close()
 {
   //gda_connection_close() does an unref, but we don't want that:

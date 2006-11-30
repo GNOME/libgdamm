@@ -1,7 +1,7 @@
 /* $Id$ */
 // -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* transaction.cc
+/* transactionstatus.cc
  * 
  * Copyright 2001      Free Software Foundation
  *
@@ -20,6 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgda/gda-transaction-status.h>
 #include <libgda/gda-enum-types.h>
 
 namespace Gnome
@@ -28,14 +29,15 @@ namespace Gnome
 namespace Gda
 {
 
-//We custom-implement this, copying stuff from the gda_transaction_new() implemenation:
-Transaction::Transaction(const Glib::ustring& name)
+//We custom-implement this, copying stuff from the gda_transaction_status_new() implemenation:
+TransactionStatus::TransactionStatus(const Glib::ustring& name)
 :
   Glib::ObjectBase(0), //Mark this class as gtkmmproc-generated, rather than a custom class, to allow vfunc optimisations.
-  Glib::Object(Glib::ConstructParams(transaction_class_.init(), (char*) 0))
+  Glib::Object(Glib::ConstructParams(transactionstatus_class_.init(), (char*) 0))
 {
+  // Cannot use set_name because it just doesn't exist anymore.
   if(!name.empty())
-    set_name(name);
+    gobj()->name = g_strdup(name.c_str());
 }
 
 } //namespace Gda

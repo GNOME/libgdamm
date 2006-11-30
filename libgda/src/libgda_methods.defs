@@ -337,11 +337,11 @@
   (gtype-id "GDA_TYPE_THREADER")
 )
 
-(define-object Transaction
+(define-object TransactionStatus
   (in-module "Gda")
   (parent "GObject")
-  (c-name "GdaTransaction")
-  (gtype-id "GDA_TYPE_TRANSACTION")
+  (c-name "GdaTransactionStatus")
+  (gtype-id "GDA_TYPE_TRANSACTION_STATUS")
 )
 
 (define-object XmlStorage
@@ -499,6 +499,8 @@
     '("sequences" "GDA_CONNECTION_FEATURE_SEQUENCES")
     '("sql" "GDA_CONNECTION_FEATURE_SQL")
     '("transactions" "GDA_CONNECTION_FEATURE_TRANSACTIONS")
+    '("savepoints" "GDA_CONNECTION_FEATURE_SAVEPOINTS")
+    '("savepoints-remove" "GDA_CONNECTION_FEATURE_SAVEPOINTS_REMOVE")
     '("triggers" "GDA_CONNECTION_FEATURE_TRIGGERS")
     '("updatable-cursor" "GDA_CONNECTION_FEATURE_UPDATABLE_CURSOR")
     '("users" "GDA_CONNECTION_FEATURE_USERS")
@@ -719,10 +721,23 @@
   )
 )
 
-(define-flags Attribute
-  (in-module "GValue")
-  (c-name "GValueAttribute")
-  (gtype-id "G_TYPE_VALUE_ATTRIBUTE")
+(define-enum TransactionIsolation
+  (in-module "Gda")
+  (c-name "GdaTransactionIsolation")
+  (gtype-id "GDA_TYPE_TRANSACTION_ISOLATION")
+  (values
+    '("unknown" "GDA_TRANSACTION_ISOLATION_UNKNOWN")
+    '("read-committed" "GDA_TRANSACTION_ISOLATION_READ_COMMITTED")
+    '("read-uncommitted" "GDA_TRANSACTION_ISOLATION_READ_UNCOMMITTED")
+    '("repeatable-read" "GDA_TRANSACTION_ISOLATION_REPEATABLE_READ")
+    '("serializable" "GDA_TRANSACTION_ISOLATION_SERIALIZABLE")
+  )
+)
+
+(define-flags ValueAttribute
+  (in-module "Gda")
+  (c-name "GdaValueAttribute")
+  (gtype-id "GDA_TYPE_VALUE_ATTRIBUTE")
   (values
     '("is-null" "GDA_VALUE_ATTR_IS_NULL")
     '("can-be-null" "GDA_VALUE_ATTR_CAN_BE_NULL")
@@ -1052,16 +1067,14 @@
   )
 )
 
-(define-enum TransactionIsolation
+(define-enum TransactionStatusEventType
   (in-module "Gda")
-  (c-name "GdaTransactionIsolation")
-  (gtype-id "GDA_TYPE_TRANSACTION_ISOLATION")
+  (c-name "GdaTransactionStatusEventType")
+  (gtype-id "GDA_TYPE_TRANSACTION_STATUS_EVENT_TYPE")
   (values
-    '("unknown" "GDA_TRANSACTION_ISOLATION_UNKNOWN")
-    '("read-committed" "GDA_TRANSACTION_ISOLATION_READ_COMMITTED")
-    '("read-uncommitted" "GDA_TRANSACTION_ISOLATION_READ_UNCOMMITTED")
-    '("repeatable-read" "GDA_TRANSACTION_ISOLATION_REPEATABLE_READ")
-    '("serializable" "GDA_TRANSACTION_ISOLATION_SERIALIZABLE")
+    '("avepoint" "GDA_TRANSACTION_STATUS_EVENT_SAVEPOINT")
+    '("ql" "GDA_TRANSACTION_STATUS_EVENT_SQL")
+    '("ub-transaction" "GDA_TRANSACTION_STATUS_EVENT_SUB_TRANSACTION")
   )
 )
 
@@ -1256,36 +1269,6 @@
   )
 )
 
-(define-method notify_transaction_started_event
-  (of-object "GdaClient")
-  (c-name "gda_client_notify_transaction_started_event")
-  (return-type "none")
-  (parameters
-    '("GdaConnection*" "cnc")
-    '("GdaTransaction*" "xaction")
-  )
-)
-
-(define-method notify_transaction_committed_event
-  (of-object "GdaClient")
-  (c-name "gda_client_notify_transaction_committed_event")
-  (return-type "none")
-  (parameters
-    '("GdaConnection*" "cnc")
-    '("GdaTransaction*" "xaction")
-  )
-)
-
-(define-method notify_transaction_cancelled_event
-  (of-object "GdaClient")
-  (c-name "gda_client_notify_transaction_cancelled_event")
-  (return-type "none")
-  (parameters
-    '("GdaConnection*" "cnc")
-    '("GdaTransaction*" "xaction")
-  )
-)
-
 (define-method get_dsn_specs
   (of-object "GdaClient")
   (c-name "gda_client_get_dsn_specs")
@@ -1309,7 +1292,6 @@
   (c-name "gda_client_perform_create_database")
   (return-type "gboolean")
   (parameters
-    '("const-gchar*" "provider")
     '("GdaServerOperation*" "op")
     '("GError**" "error")
   )
@@ -1329,7 +1311,6 @@
   (c-name "gda_client_perform_drop_database")
   (return-type "gboolean")
   (parameters
-    '("const-gchar*" "provider")
     '("GdaServerOperation*" "op")
     '("GError**" "error")
   )
@@ -1340,7 +1321,9 @@
   (c-name "gda_client_begin_transaction")
   (return-type "gboolean")
   (parameters
-    '("GdaTransaction*" "xaction")
+    '("const-gchar*" "name")
+    '("GdaTransactionIsolation" "level")
+    '("GError**" "error")
   )
 )
 
@@ -1349,7 +1332,8 @@
   (c-name "gda_client_commit_transaction")
   (return-type "gboolean")
   (parameters
-    '("GdaTransaction*" "xaction")
+    '("const-gchar*" "name")
+    '("GError**" "error")
   )
 )
 
@@ -1358,7 +1342,8 @@
   (c-name "gda_client_rollback_transaction")
   (return-type "gboolean")
   (parameters
-    '("GdaTransaction*" "xaction")
+    '("const-gchar*" "name")
+    '("GError**" "error")
   )
 )
 
@@ -1772,21 +1757,6 @@
   (return-type "none")
   (parameters
     '("GdaCommandOptions" "options")
-  )
-)
-
-(define-method get_transaction
-  (of-object "GdaCommand")
-  (c-name "gda_command_get_transaction")
-  (return-type "GdaTransaction*")
-)
-
-(define-method set_transaction
-  (of-object "GdaCommand")
-  (c-name "gda_command_set_transaction")
-  (return-type "none")
-  (parameters
-    '("GdaTransaction*" "xaction")
   )
 )
 
@@ -2443,7 +2413,9 @@
   (c-name "gda_connection_begin_transaction")
   (return-type "gboolean")
   (parameters
-    '("GdaTransaction*" "xaction")
+    '("const-gchar*" "name")
+    '("GdaTransactionIsolation" "level")
+    '("GError**" "error")
   )
 )
 
@@ -2452,7 +2424,8 @@
   (c-name "gda_connection_commit_transaction")
   (return-type "gboolean")
   (parameters
-    '("GdaTransaction*" "xaction")
+    '("const-gchar*" "name")
+    '("GError**" "error")
   )
 )
 
@@ -2461,8 +2434,45 @@
   (c-name "gda_connection_rollback_transaction")
   (return-type "gboolean")
   (parameters
-    '("GdaTransaction*" "xaction")
+    '("const-gchar*" "name")
+    '("GError**" "error")
   )
+)
+
+(define-method add_savepoint
+  (of-object "GdaConnection")
+  (c-name "gda_connection_add_savepoint")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "name")
+    '("GError**" "error")
+  )
+)
+
+(define-method rollback_savepoint
+  (of-object "GdaConnection")
+  (c-name "gda_connection_rollback_savepoint")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "name")
+    '("GError**" "error")
+  )
+)
+
+(define-method delete_savepoint
+  (of-object "GdaConnection")
+  (c-name "gda_connection_delete_savepoint")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "name")
+    '("GError**" "error")
+  )
+)
+
+(define-method get_transaction_status
+  (of-object "GdaConnection")
+  (c-name "gda_connection_get_transaction_status")
+  (return-type "GdaTransactionStatus*")
 )
 
 (define-method create_blob
@@ -2506,6 +2516,87 @@
     '("GdaConnectionSchema" "schema")
     '("GdaParameterList*" "params")
     '("GError**" "error")
+  )
+)
+
+
+
+;; From gda-connection-private.h
+
+(define-method internal_transaction_started
+  (of-object "GdaConnection")
+  (c-name "gda_connection_internal_transaction_started")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "parent_trans")
+    '("const-gchar*" "trans_name")
+    '("GdaTransactionIsolation" "isol_level")
+  )
+)
+
+(define-method internal_transaction_rolledback
+  (of-object "GdaConnection")
+  (c-name "gda_connection_internal_transaction_rolledback")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "trans_name")
+  )
+)
+
+(define-method internal_transaction_committed
+  (of-object "GdaConnection")
+  (c-name "gda_connection_internal_transaction_committed")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "trans_name")
+  )
+)
+
+(define-method internal_sql_executed
+  (of-object "GdaConnection")
+  (c-name "gda_connection_internal_sql_executed")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "sql")
+    '("GdaConnectionEvent*" "error")
+  )
+)
+
+(define-method internal_savepoint_added
+  (of-object "GdaConnection")
+  (c-name "gda_connection_internal_savepoint_added")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "parent_trans")
+    '("const-gchar*" "svp_name")
+  )
+)
+
+(define-method internal_savepoint_rolledback
+  (of-object "GdaConnection")
+  (c-name "gda_connection_internal_savepoint_rolledback")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "svp_name")
+  )
+)
+
+(define-method internal_savepoint_removed
+  (of-object "GdaConnection")
+  (c-name "gda_connection_internal_savepoint_removed")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "svp_name")
+  )
+)
+
+(define-method internal_treat_sql
+  (of-object "GdaConnection")
+  (c-name "gda_connection_internal_treat_sql")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "sql")
+    '("GdaConnectionEvent*" "error")
   )
 )
 
@@ -3369,39 +3460,6 @@
 
 
 ;; From gda-data-model-private.h
-
-(define-method signal_emit_changed
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_signal_emit_changed")
-  (return-type "none")
-)
-
-(define-method row_inserted
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_row_inserted")
-  (return-type "none")
-  (parameters
-    '("gint" "row")
-  )
-)
-
-(define-method row_updated
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_row_updated")
-  (return-type "none")
-  (parameters
-    '("gint" "row")
-  )
-)
-
-(define-method row_removed
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_row_removed")
-  (return-type "none")
-  (parameters
-    '("gint" "row")
-  )
-)
 
 (define-method get_command_text
   (of-object "GdaDataModel")
@@ -5130,8 +5188,13 @@
   (return-type "GType")
 )
 
-(define-function g_value_attribute_get_type
-  (c-name "g_value_attribute_get_type")
+(define-function gda_transaction_isolation_get_type
+  (c-name "gda_transaction_isolation_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_value_attribute_get_type
+  (c-name "gda_value_attribute_get_type")
   (return-type "GType")
 )
 
@@ -5260,8 +5323,8 @@
   (return-type "GType")
 )
 
-(define-function gda_transaction_isolation_get_type
-  (c-name "gda_transaction_isolation_get_type")
+(define-function gda_transaction_status_event_type_get_type
+  (c-name "gda_transaction_status_event_type_get_type")
   (return-type "GType")
 )
 
@@ -7889,15 +7952,6 @@
   )
 )
 
-(define-method reset_connection
-  (of-object "GdaServerProvider")
-  (c-name "gda_server_provider_reset_connection")
-  (return-type "gboolean")
-  (parameters
-    '("GdaConnection*" "cnc")
-  )
-)
-
 (define-method close_connection
   (of-object "GdaServerProvider")
   (c-name "gda_server_provider_close_connection")
@@ -7998,7 +8052,9 @@
   (return-type "gboolean")
   (parameters
     '("GdaConnection*" "cnc")
-    '("GdaTransaction*" "xaction")
+    '("const-gchar*" "name")
+    '("GdaTransactionIsolation" "level")
+    '("GError**" "error")
   )
 )
 
@@ -8008,7 +8064,8 @@
   (return-type "gboolean")
   (parameters
     '("GdaConnection*" "cnc")
-    '("GdaTransaction*" "xaction")
+    '("const-gchar*" "name")
+    '("GError**" "error")
   )
 )
 
@@ -8018,7 +8075,41 @@
   (return-type "gboolean")
   (parameters
     '("GdaConnection*" "cnc")
-    '("GdaTransaction*" "xaction")
+    '("const-gchar*" "name")
+    '("GError**" "error")
+  )
+)
+
+(define-method add_savepoint
+  (of-object "GdaServerProvider")
+  (c-name "gda_server_provider_add_savepoint")
+  (return-type "gboolean")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "name")
+    '("GError**" "error")
+  )
+)
+
+(define-method rollback_savepoint
+  (of-object "GdaServerProvider")
+  (c-name "gda_server_provider_rollback_savepoint")
+  (return-type "gboolean")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "name")
+    '("GError**" "error")
+  )
+)
+
+(define-method delete_savepoint
+  (of-object "GdaServerProvider")
+  (c-name "gda_server_provider_delete_savepoint")
+  (return-type "gboolean")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "name")
+    '("GError**" "error")
   )
 )
 
@@ -8084,49 +8175,90 @@
 
 
 
-;; From gda-transaction.h
+;; From gda-transaction-status.h
 
-(define-function gda_transaction_get_type
-  (c-name "gda_transaction_get_type")
+(define-function gda_transaction_status_get_type
+  (c-name "gda_transaction_status_get_type")
   (return-type "GType")
 )
 
-(define-function gda_transaction_new
-  (c-name "gda_transaction_new")
-  (is-constructor-of "GdaTransaction")
-  (return-type "GdaTransaction*")
+(define-function gda_transaction_status_new
+  (c-name "gda_transaction_status_new")
+  (is-constructor-of "GdaTransactionStatus")
+  (return-type "GdaTransactionStatus*")
   (parameters
     '("const-gchar*" "name")
   )
 )
 
-(define-method get_isolation_level
-  (of-object "GdaTransaction")
-  (c-name "gda_transaction_get_isolation_level")
-  (return-type "GdaTransactionIsolation")
-)
 
-(define-method set_isolation_level
-  (of-object "GdaTransaction")
-  (c-name "gda_transaction_set_isolation_level")
-  (return-type "none")
+
+;; From gda-transaction-status-private.h
+
+(define-method add_event_svp
+  (of-object "GdaTransactionStatus")
+  (c-name "gda_transaction_status_add_event_svp")
+  (return-type "GdaTransactionStatusEvent*")
   (parameters
-    '("GdaTransactionIsolation" "level")
+    '("const-gchar*" "svp_name")
   )
 )
 
-(define-method get_name
-  (of-object "GdaTransaction")
-  (c-name "gda_transaction_get_name")
-  (return-type "const-gchar*")
+(define-method add_event_sql
+  (of-object "GdaTransactionStatus")
+  (c-name "gda_transaction_status_add_event_sql")
+  (return-type "GdaTransactionStatusEvent*")
+  (parameters
+    '("const-gchar*" "sql")
+    '("GdaConnectionEvent*" "conn_event")
+  )
 )
 
-(define-method set_name
-  (of-object "GdaTransaction")
-  (c-name "gda_transaction_set_name")
+(define-method add_event_sub
+  (of-object "GdaTransactionStatus")
+  (c-name "gda_transaction_status_add_event_sub")
+  (return-type "GdaTransactionStatusEvent*")
+  (parameters
+    '("GdaTransactionStatus*" "sub_trans")
+  )
+)
+
+(define-method free_events
+  (of-object "GdaTransactionStatus")
+  (c-name "gda_transaction_status_free_events")
   (return-type "none")
   (parameters
-    '("const-gchar*" "name")
+    '("GdaTransactionStatusEvent*" "event")
+    '("gboolean" "free_after")
+  )
+)
+
+(define-method find
+  (of-object "GdaTransactionStatus")
+  (c-name "gda_transaction_status_find")
+  (return-type "GdaTransactionStatus*")
+  (parameters
+    '("const-gchar*" "str")
+    '("GdaTransactionStatusEvent**" "destev")
+  )
+)
+
+(define-method find_current
+  (of-object "GdaTransactionStatus")
+  (c-name "gda_transaction_status_find_current")
+  (return-type "GdaTransactionStatus*")
+  (parameters
+    '("GdaTransactionStatusEvent**" "destev")
+    '("gboolean" "unnamed_only")
+  )
+)
+
+(define-method dump
+  (of-object "GdaTransactionStatus")
+  (c-name "gda_transaction_status_dump")
+  (return-type "none")
+  (parameters
+    '("guint" "offset")
   )
 )
 
@@ -8134,14 +8266,16 @@
 
 ;; From gda-util.h
 
-(define-method to_string
-  (of-object "GType")
-  (c-name "g_type_to_string")
+(define-function gda_g_type_to_string
+  (c-name "gda_g_type_to_string")
   (return-type "const-gchar*")
+  (parameters
+    '("GType" "type")
+  )
 )
 
-(define-function g_type_from_string
-  (c-name "g_type_from_string")
+(define-function gda_g_type_from_string
+  (c-name "gda_g_type_from_string")
   (return-type "GType")
   (parameters
     '("const-gchar*" "str")
@@ -8190,24 +8324,24 @@
   )
 )
 
-(define-function utility_table_field_attrs_stringify
-  (c-name "utility_table_field_attrs_stringify")
+(define-function gda_utility_table_field_attrs_stringify
+  (c-name "gda_utility_table_field_attrs_stringify")
   (return-type "gchar*")
   (parameters
     '("guint" "attributes")
   )
 )
 
-(define-function utility_table_field_attrs_parse
-  (c-name "utility_table_field_attrs_parse")
+(define-function gda_utility_table_field_attrs_parse
+  (c-name "gda_utility_table_field_attrs_parse")
   (return-type "guint")
   (parameters
     '("const-gchar*" "str")
   )
 )
 
-(define-function utility_build_encoded_id
-  (c-name "utility_build_encoded_id")
+(define-function gda_utility_build_encoded_id
+  (c-name "gda_utility_build_encoded_id")
   (return-type "gchar*")
   (parameters
     '("const-gchar*" "prefix")
@@ -8215,8 +8349,8 @@
   )
 )
 
-(define-function utility_build_decoded_id
-  (c-name "utility_build_decoded_id")
+(define-function gda_utility_build_decoded_id
+  (c-name "gda_utility_build_decoded_id")
   (return-type "gchar*")
   (parameters
     '("const-gchar*" "prefix")
@@ -8224,8 +8358,8 @@
   )
 )
 
-(define-function utility_check_data_model
-  (c-name "utility_check_data_model")
+(define-function gda_utility_check_data_model
+  (c-name "gda_utility_check_data_model")
   (return-type "gboolean")
   (parameters
     '("GdaDataModel*" "model")
@@ -8234,8 +8368,8 @@
   (varargs #t)
 )
 
-(define-function utility_data_model_dump_data_to_xml
-  (c-name "utility_data_model_dump_data_to_xml")
+(define-function gda_utility_data_model_dump_data_to_xml
+  (c-name "gda_utility_data_model_dump_data_to_xml")
   (return-type "none")
   (parameters
     '("GdaDataModel*" "model")
@@ -8248,8 +8382,8 @@
   )
 )
 
-(define-function utility_parameter_load_attributes
-  (c-name "utility_parameter_load_attributes")
+(define-function gda_utility_parameter_load_attributes
+  (c-name "gda_utility_parameter_load_attributes")
   (return-type "none")
   (parameters
     '("GdaParameter*" "param")
@@ -8258,8 +8392,8 @@
   )
 )
 
-(define-function utility_find_or_create_data_type
-  (c-name "utility_find_or_create_data_type")
+(define-function gda_utility_find_or_create_data_type
+  (c-name "gda_utility_find_or_create_data_type")
   (return-type "GdaDictType*")
   (parameters
     '("GdaDict*" "dict")

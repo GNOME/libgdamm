@@ -22,14 +22,23 @@
   )
 )
 
-(define-signal gda-type-changed
+(define-signal g-type-changed
   (of-object "GdaColumn")
   (return-type "void")
   (when "last")
   (parameters
-    '("GType" "old_type")
-    '("GType" "new_type")
+    '("GType" "p0")
+    '("GType" "p1")
   )
+)
+
+(define-property id
+  (of-object "GdaColumn")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
 ;; From GdaColumnIndex
@@ -64,6 +73,12 @@
 )
 
 (define-signal dsn-changed
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal transaction-status-changed
   (of-object "GdaConnection")
   (return-type "void")
   (when "last")
@@ -194,7 +209,7 @@
 
 ;; From GdaDict
 
-(define-signal data-type-added
+(define-signal object-added
   (of-object "GdaDict")
   (return-type "void")
   (when "first")
@@ -203,7 +218,7 @@
   )
 )
 
-(define-signal data-type-removed
+(define-signal object-removed
   (of-object "GdaDict")
   (return-type "void")
   (when "first")
@@ -212,7 +227,7 @@
   )
 )
 
-(define-signal data-type-updated
+(define-signal object-updated
   (of-object "GdaDict")
   (return-type "void")
   (when "first")
@@ -221,52 +236,7 @@
   )
 )
 
-(define-signal function-added
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("gpointer" "p0")
-  )
-)
-
-(define-signal function-removed
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("gpointer" "p0")
-  )
-)
-
-(define-signal function-updated
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("gpointer" "p0")
-  )
-)
-
-(define-signal aggregate-added
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("gpointer" "p0")
-  )
-)
-
-(define-signal aggregate-removed
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("gpointer" "p0")
-  )
-)
-
-(define-signal aggregate-updated
+(define-signal object-act-changed
   (of-object "GdaDict")
   (return-type "void")
   (when "first")
@@ -298,91 +268,10 @@
   (when "first")
 )
 
-(define-signal query-added
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("gpointer" "p0")
-  )
-)
-
-(define-signal query-removed
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("gpointer" "p0")
-  )
-)
-
-(define-signal query-updated
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("gpointer" "p0")
-  )
-)
-
-(define-signal graph-added
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("gpointer" "p0")
-  )
-)
-
-(define-signal graph-removed
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("gpointer" "p0")
-  )
-)
-
-(define-signal graph-updated
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("gpointer" "p0")
-  )
-)
-
 (define-signal changed
   (of-object "GdaDict")
   (return-type "void")
   (when "first")
-)
-
-(define-property query-serial
-  (of-object "GdaDict")
-  (prop-type "GParamUInt")
-  (docs "")
-  (readable #t)
-  (writable #f)
-  (construct-only #f)
-)
-
-(define-property graph-serial
-  (of-object "GdaDict")
-  (prop-type "GParamUInt")
-  (docs "")
-  (readable #t)
-  (writable #f)
-  (construct-only #f)
-)
-
-(define-property with-functions
-  (of-object "GdaDict")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
 )
 
 (define-property dsn
@@ -713,7 +602,7 @@
   (construct-only #f)
 )
 
-(define-property gda-type
+(define-property g-type
   (of-object "GdaParameter")
   (prop-type "GParamULong")
   (docs "")

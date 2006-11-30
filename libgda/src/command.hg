@@ -20,7 +20,6 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/transaction.h>
 #include <glibmm/object.h>
 
 _DEFS(libgdamm,libgda)
@@ -54,9 +53,6 @@ public:
   _WRAP_METHOD(void set_command_type(CommandType type), gda_command_set_command_type)
   _WRAP_METHOD(CommandOptions get_options() const, gda_command_get_options)
   _WRAP_METHOD(void set_options(CommandOptions options), gda_command_set_options)
-  _WRAP_METHOD(Glib::RefPtr<Transaction> get_transaction(), gda_command_get_transaction)
-  _WRAP_METHOD(Glib::RefPtr<const Transaction> get_transaction() const, gda_command_get_transaction)
-  _WRAP_METHOD(void set_transaction(const Glib::RefPtr<Transaction>& xaction), gda_command_set_transaction)
 
 };
 

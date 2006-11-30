@@ -20,7 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/transaction.h>
+#include <libgdamm/transactionstatus.h>
 #include <libgdamm/connectionevent.h>
 #include <libgdamm/command.h>
 #include <libgdamm/datamodel.h>
@@ -117,6 +117,13 @@ public:
   Glib::RefPtr<DataModel> execute_select_command(const Command& cmd);
   Glib::RefPtr<DataModel> execute_select_command(const Glib::ustring& cmd);
 
+  _WRAP_METHOD(int execute_non_select_command(const Command& cmd, const Glib::RefPtr<ParameterList>& params), gda_connection_execute_non_select_command, errthrow)
+  int execute_non_select_command(const Command& cmd);
+  int execute_non_select_command(const Glib::ustring& cmd);
+
+  _WRAP_METHOD(Glib::RefPtr<TransactionStatus> get_transaction_status(), gda_connection_get_transaction_status, errthrow)
+
+
 /*
 gint                 gda_connection_execute_non_select_command (GdaConnection *cnc, GdaCommand *cmd,
 								GdaParameterList *params, GError **error);
@@ -133,9 +140,14 @@ gint                 gda_connection_execute_non_select_command (GdaConnection *c
 */
 
 
-  _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_begin_transaction)
-  _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_commit_transaction)
-  _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_rollback_transaction)
+  _WRAP_METHOD(bool begin_transaction(const Glib::ustring& name, TransactionIsolation level), gda_connection_begin_transaction, errthrow)
+  _WRAP_METHOD(bool commit_transaction(const Glib::ustring& name), gda_connection_commit_transaction, errthrow)
+  _WRAP_METHOD(bool rollback_transaction(const Glib::ustring& name), gda_connection_rollback_transaction, errthrow)
+
+  _WRAP_METHOD(bool add_savepoint(const Glib::ustring& name), gda_connection_add_savepoint, errthrow)
+  _WRAP_METHOD(bool rollback_savepoint(const Glib::ustring& name), gda_connection_rollback_savepoint, errthrow)
+  _WRAP_METHOD(bool delete_savepoint(const Glib::ustring& name), gda_connection_delete_savepoint, errthrow)
+
 
    //Use a special conversion here, because we should not own any part of the returned GList, and because we need to unconst the GList.:
    #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
