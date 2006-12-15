@@ -1,3 +1,17 @@
+2006-12-15  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/datamodelquery.ccg:
+	* libgda/src/datamodelquery.hg: Added DataModelQuery class, which 
+	implements the DataModel interface. There are a few more of these 
+	DataModel* classes to wrap.
+	* tools/m4/convert_libgdamm.m4: Added new conversions.
+	* libgda/src/datamodel.hg: Ignore gda_data_model_move_iter_at_row, 
+	gda_data_model_move_iter_next, and gda_data_model_move_iter_prev, 
+	which have become private API in libgda.
+	* libgda/src/libgda_enums.defs:
+	* libgda/src/libgda_methods.defs: Regenerated.
+
 2006-11-29  Armin Burgmeier  <armin@openismus.com>
 
 	* configure.in: Require libgda-3.0 >= 2.99.2.

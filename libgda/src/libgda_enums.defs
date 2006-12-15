@@ -145,11 +145,13 @@
     '("sequences" "GDA_CONNECTION_FEATURE_SEQUENCES" "6")
     '("sql" "GDA_CONNECTION_FEATURE_SQL" "7")
     '("transactions" "GDA_CONNECTION_FEATURE_TRANSACTIONS" "8")
-    '("triggers" "GDA_CONNECTION_FEATURE_TRIGGERS" "9")
-    '("updatable-cursor" "GDA_CONNECTION_FEATURE_UPDATABLE_CURSOR" "10")
-    '("users" "GDA_CONNECTION_FEATURE_USERS" "11")
-    '("views" "GDA_CONNECTION_FEATURE_VIEWS" "12")
-    '("xml-queries" "GDA_CONNECTION_FEATURE_XML_QUERIES" "13")
+    '("savepoints" "GDA_CONNECTION_FEATURE_SAVEPOINTS" "9")
+    '("savepoints-remove" "GDA_CONNECTION_FEATURE_SAVEPOINTS_REMOVE" "10")
+    '("triggers" "GDA_CONNECTION_FEATURE_TRIGGERS" "11")
+    '("updatable-cursor" "GDA_CONNECTION_FEATURE_UPDATABLE_CURSOR" "12")
+    '("users" "GDA_CONNECTION_FEATURE_USERS" "13")
+    '("views" "GDA_CONNECTION_FEATURE_VIEWS" "14")
+    '("xml-queries" "GDA_CONNECTION_FEATURE_XML_QUERIES" "15")
   )
 )
 
@@ -227,7 +229,16 @@
   (in-module "Gda")
   (c-name "GdaDataModelQueryError")
   (values
-    '("r" "GDA_DATA_MODEL_QUERY_XML_LOAD_ERROR" "0")
+    '("xml-load-error" "GDA_DATA_MODEL_QUERY_XML_LOAD_ERROR" "0")
+    '("compute-modif-queries-error" "GDA_DATA_MODEL_QUERY_COMPUTE_MODIF_QUERIES_ERROR" "1")
+  )
+)
+
+(define-flags-extended DataModelQueryOptions
+  (in-module "Gda")
+  (c-name "GdaDataModelQueryOptions")
+  (values
+    '("k" "GDA_DATA_MODEL_QUERY_OPTION_USE_ALL_FIELDS_IF_NO_PK" "1 << 0")
   )
 )
 
@@ -373,9 +384,21 @@
 
 ;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-enums.h
 
+(define-enum-extended TransactionIsolation
+  (in-module "Gda")
+  (c-name "GdaTransactionIsolation")
+  (values
+    '("unknown" "GDA_TRANSACTION_ISOLATION_UNKNOWN" "0")
+    '("read-committed" "GDA_TRANSACTION_ISOLATION_READ_COMMITTED" "1")
+    '("read-uncommitted" "GDA_TRANSACTION_ISOLATION_READ_UNCOMMITTED" "2")
+    '("repeatable-read" "GDA_TRANSACTION_ISOLATION_REPEATABLE_READ" "3")
+    '("serializable" "GDA_TRANSACTION_ISOLATION_SERIALIZABLE" "4")
+  )
+)
+
 (define-flags-extended ValueAttribute
-  (in-module "G")
-  (c-name "GValueAttribute")
+  (in-module "Gda")
+  (c-name "GdaValueAttribute")
   (values
     '("is-null" "GDA_VALUE_ATTR_IS_NULL" "1 << 0")
     '("can-be-null" "GDA_VALUE_ATTR_CAN_BE_NULL" "1 << 1")
@@ -406,16 +429,6 @@
     '("visible" "GDA_ENTITY_FIELD_VISIBLE" "1 << 0")
     '("invisible" "GDA_ENTITY_FIELD_INVISIBLE" "1 << 1")
     '("any" "GDA_ENTITY_FIELD_ANY" "0x1")
-  )
-)
-
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-graphviz.h
-
-(define-enum-extended GraphvizError
-  (in-module "Gda")
-  (c-name "GdaGraphvizError")
-  (values
-    '("r" "GDA_GRAPHVIZ_SAVE_ERROR" "0")
   )
 )
 
@@ -720,17 +733,15 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-transaction.h
+;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-transaction-status.h
 
-(define-enum-extended TransactionIsolation
+(define-enum-extended TransactionStatusEventType
   (in-module "Gda")
-  (c-name "GdaTransactionIsolation")
+  (c-name "GdaTransactionStatusEventType")
   (values
-    '("unknown" "GDA_TRANSACTION_ISOLATION_UNKNOWN" "0")
-    '("read-committed" "GDA_TRANSACTION_ISOLATION_READ_COMMITTED" "1")
-    '("read-uncommitted" "GDA_TRANSACTION_ISOLATION_READ_UNCOMMITTED" "2")
-    '("repeatable-read" "GDA_TRANSACTION_ISOLATION_REPEATABLE_READ" "3")
-    '("serializable" "GDA_TRANSACTION_ISOLATION_SERIALIZABLE" "4")
+    '("savepoint" "GDA_TRANSACTION_STATUS_EVENT_SAVEPOINT" "0")
+    '("sql" "GDA_TRANSACTION_STATUS_EVENT_SQL" "1")
+    '("sub-transaction" "GDA_TRANSACTION_STATUS_EVENT_SUB_TRANSACTION" "2")
   )
 )
 
