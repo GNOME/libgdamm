@@ -1,9 +1,8 @@
-/* $Id$ */
 // -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* transactionstatus.cc
+/* datamodelrow.cc
  * 
- * Copyright 2001      Free Software Foundation
+ * Copyright 2003 libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,8 +19,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgda/gda-transaction-status.h>
-#include <libgda/gda-enum-types.h>
+#include <libgda/gda-data-model-row.h>
 
 namespace Gnome
 {
@@ -29,19 +27,7 @@ namespace Gnome
 namespace Gda
 {
 
-//We custom-implement this, copying stuff from the gda_transaction_status_new() implemenation:
-TransactionStatus::TransactionStatus(const Glib::ustring& name)
-:
-  Glib::ObjectBase(0), //Mark this class as gtkmmproc-generated, rather than a custom class, to allow vfunc optimisations.
-  Glib::Object(Glib::ConstructParams(transactionstatus_class_.init(), (char*) 0))
-{
-  // Cannot use set_name because it just doesn't exist anymore. //TODO: Is it a property instead? File a bug with libgda if necessary. murrayc.
-  if(!name.empty())
-    gobj()->name = g_strdup(name.c_str());
-}
-
-} //namespace Gda
-
+} /* namespace Gda */
 
 } /* namespace Gnome */
 
