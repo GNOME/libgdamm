@@ -1,3 +1,21 @@
+2006-12-22  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/datamodelrow.hg:
+	* libgda/src/datamodelarray.hg:
+	* libgda/src/datamodelrow.ccg:
+	* libgda/src/datamodelarray.ccg:
+	* libgda/src/Makefile_list_of_hg.am_fragment: Wrapped GdaDataModelRow
+	and GdaDataModelArray.
+
+	* libgda/src/client.hg: Added db_name parameter to
+	prepare_create_database() and prepare_drop_database().
+
+	* tools/extra_defs_gen/generate_defs_gda.cc: Added defs for
+	GDA_DATA_MODEL_ROW to output.
+
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/libgda_signals.defs: Regenerated.
+
 2006-12-15  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/Makefile_list_of_hg.am_fragment:

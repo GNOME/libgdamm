@@ -86,7 +86,7 @@
 
 (define-property client
   (of-object "GdaConnection")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "")
   (readable #t)
   (writable #t)
@@ -113,7 +113,7 @@
 
 (define-property provider-obj
   (of-object "GdaConnection")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "")
   (readable #t)
   (writable #t)
@@ -153,7 +153,7 @@
 
 (define-property dict
   (of-object "GdaDataModelArray")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "Dictionary to which the object is related")
   (readable #t)
   (writable #t)
@@ -198,6 +198,62 @@
 
 (define-property command-type
   (of-object "GdaDataModelArray")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDataModelRow
+
+(define-property dict
+  (of-object "GdaDataModelRow")
+  (prop-type "GParamObject")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaDataModelRow")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaDataModelRow")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property read-only
+  (of-object "GdaDataModelRow")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property command-text
+  (of-object "GdaDataModelRow")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property command-type
+  (of-object "GdaDataModelRow")
   (prop-type "GParamInt")
   (docs "")
   (readable #t)
@@ -296,7 +352,7 @@
 
 (define-property dict
   (of-object "GdaDictType")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "Dictionary to which the object is related")
   (readable #t)
   (writable #t)
@@ -334,7 +390,7 @@
 
 (define-property dict
   (of-object "GdaDictAggregate")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "Dictionary to which the object is related")
   (readable #t)
   (writable #t)
@@ -399,7 +455,7 @@
 
 (define-property dict
   (of-object "GdaGraph")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "Dictionary to which the object is related")
   (readable #t)
   (writable #t)
@@ -426,7 +482,7 @@
 
 (define-property ref-object
   (of-object "GdaGraph")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "")
   (readable #t)
   (writable #t)
@@ -488,7 +544,7 @@
 
 (define-property dict
   (of-object "GdaObject")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "Dictionary to which the object is related")
   (readable #t)
   (writable #t)
@@ -523,7 +579,7 @@
 
 (define-property dict
   (of-object "GdaParameter")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "Dictionary to which the object is related")
   (readable #t)
   (writable #t)
@@ -568,7 +624,7 @@
 
 (define-property simple-bind
   (of-object "GdaParameter")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "")
   (readable #t)
   (writable #t)
@@ -577,7 +633,7 @@
 
 (define-property full-bind
   (of-object "GdaParameter")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "")
   (readable #t)
   (writable #t)
@@ -586,7 +642,7 @@
 
 (define-property restrict-model
   (of-object "GdaParameter")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "")
   (readable #t)
   (writable #t)
@@ -611,9 +667,36 @@
   (construct-only #t)
 )
 
+(define-property not-null
+  (of-object "GdaParameter")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GdaParameterList
 
 (define-signal param-changed
+  (of-object "GdaParameterList")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GObject*" "p0")
+  )
+)
+
+(define-signal param-plugin-changed
+  (of-object "GdaParameterList")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GObject*" "p0")
+  )
+)
+
+(define-signal param-attr-changed
   (of-object "GdaParameterList")
   (return-type "void")
   (when "first")
@@ -630,7 +713,7 @@
 
 (define-property dict
   (of-object "GdaParameterList")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "Dictionary to which the object is related")
   (readable #t)
   (writable #t)
@@ -752,7 +835,7 @@
 
 (define-property dict
   (of-object "GdaQuery")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "Dictionary to which the object is related")
   (readable #t)
   (writable #t)
@@ -832,7 +915,7 @@
 
 (define-property dict
   (of-object "GdaQueryObject")
-  (prop-type "GParamPointer")
+  (prop-type "GParamObject")
   (docs "Dictionary to which the object is related")
   (readable #t)
   (writable #t)

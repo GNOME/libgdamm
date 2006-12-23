@@ -3,7 +3,7 @@
 # so it's like copy-and-pasting this into each of those Makefile.am files.
 
 files_hg = client.hg columnindex.hg command.hg connection.hg \
-           datamodel.hg datamodelindex.hg datamodelquery.hg datasourceinfo.hg connectionevent.hg \
+           datamodel.hg datamodelarray.hg datamodelindex.hg datamodelquery.hg datamodelrow.hg datasourceinfo.hg connectionevent.hg \
            column.hg dict.hg dictaggregate.hg dictdatabase.hg dicttype.hg \
            entity.hg entityfield.hg \
            object.hg  parameter.hg parameterlist.hg providerinfo.hg row.hg serverprovider.hg \
