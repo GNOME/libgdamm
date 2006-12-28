@@ -39,7 +39,7 @@ class HandlerTime : public Object,
   _IMPLEMENTS_INTERFACE(DataHandler)
 protected:
 
-  // Note that this wraps only the no_locale version of GdaHandlerTime. The
+  // TODO: Note that this wraps only the no_locale version of GdaHandlerTime. The
   // other version calls some private function that we have no access to. This
   // should be fixed in libgnomedb, I think. armin.
   _CTOR_DEFAULT()

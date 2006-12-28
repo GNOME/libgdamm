@@ -37,8 +37,8 @@ class DataHandler : public Glib::Interface
   _CLASS_INTERFACE(DataHandler, GdaDataHandler, GDA_DATA_HANDLER, GdaDataHandlerClass)
 public:
 
-  _WRAP_METHOD(Glib::ustring get_sql_from_value(const Value& value), gda_data_handler_get_sql_from_value)
-  _WRAP_METHOD(Glib::ustring get_str_from_value(const Value& value), gda_data_handler_get_str_from_value)
+  _WRAP_METHOD(Glib::ustring get_sql_from_value(const Value& value) const, gda_data_handler_get_sql_from_value)
+  _WRAP_METHOD(Glib::ustring get_str_from_value(const Value& value) const, gda_data_handler_get_str_from_value)
 
   // Hand-coded this to get proper return values
   _IGNORE(gda_data_handler_get_value_from_sql, gda_data_handler_get_value_from_str, gda_data_handler_get_sane_init_value)
@@ -53,6 +53,7 @@ public:
 
 protected:
 
+  //TODO: Is this comment meant to be here, or is it just a copy/paste error? murrayc:
   //We don't wrap the vfuncs because they are only useful for creating new backends,
   //and they have a high code-size and per-object memory cost.
 };

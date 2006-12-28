@@ -39,7 +39,7 @@ class HandlerBin : public Object,
   _IMPLEMENTS_INTERFACE(DataHandler)
 protected:
 
-  // We cannot wrap gda_handler_bin_new_with_prov because this sets some
+  // TODO: We cannot wrap gda_handler_bin_new_with_prov because this sets some
   // private fields. I guess these should be properties in libgnomedb. armin.
  _CTOR_DEFAULT
 

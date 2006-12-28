@@ -1,3 +1,11 @@
+2006-12-28  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/datahandler.hg: get_sql_from_value(),  get_str_from_value(): 
+	Made these const.
+	* libgda/src/handlerbin.hg:
+	* libgda/src/handlertime.hg: Added TODO next to the comments from Armin, 
+	so we remember to think about them later.
+
 2006-12-24  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/datahandler.hg:
