@@ -1,0 +1,99 @@
+;; From GdaClient
+
+(define-signal error
+  (of-object "GdaClient")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gpointer" "p0")
+    '("gpointer" "p1")
+  )
+)
+
+;; From GdaConnection
+
+(define-signal error
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GList*" "p0")
+  )
+)
+
+;; From GdaDataModelArray
+
+;; From GdaDataModelList
+
+;; From GdaDataModel
+
+(define-signal changed
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+)
+
+;; From GdaError
+
+;; From GdaRecordset
+
+;; From GdaServerConnection
+
+;; From GdaServerProvider
+
+;; From GdaServerRecordsetModel
+
+;; From GdaServerRecordset
+
+;; From GdaServer
+
+(define-signal last-component-unregistered
+  (of-object "GdaServer")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal last-client-gone
+  (of-object "GdaServer")
+  (return-type "void")
+  (when "last")
+)
+
+;; From GdaTable
+
+;; From GdaXmlDatabase
+
+(define-signal changed
+  (of-object "GdaXmlDatabase")
+  (return-type "void")
+  (when "last")
+)
+
+;; From GdaXqlAtom
+
+;; From GdaXqlBin
+
+;; From GdaXqlColumn
+
+;; From GdaXqlConst
+
+;; From GdaXqlDelete
+
+;; From GdaXqlDml
+
+;; From GdaXqlDual
+
+;; From GdaXqlFunc
+
+;; From GdaXqlInsert
+
+;; From GdaXqlJoin
+
+;; From GdaXqlSelect
+
+;; From GdaXqlTarget
+
+;; From GdaXqlValue
+
+;; From GdaXqlValueRef
+

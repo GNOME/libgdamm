@@ -1,0 +1,81 @@
+/* $Id: serverprovider.hg,v 1.5 2004/05/04 09:50:46 murrayc Exp $ */
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* serverprovider.h
+ *
+ * Copyright 2001      Free Software Foundation
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgdamm/connection.h>
+#include <libgdamm/command.h>
+#include <libgda/gda-server-provider.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+class Connection;
+
+class ServerProvider : public Glib::Object
+{
+  _CLASS_GOBJECT(ServerProvider, GdaServerProvider, GDA_SERVER_PROVIDER, Glib::Object, GObject)
+
+  _WRAP_METHOD(Glib::ustring get_version() const, gda_server_provider_get_version)
+  _WRAP_METHOD(bool open_connection(const Glib::RefPtr<Connection>& cnc, GdaQuarkList *params, const Glib::ustring& username, const Glib::ustring& password), gda_server_provider_open_connection)
+  _WRAP_METHOD(bool close_connection(const Glib::RefPtr<Connection>& cnc), gda_server_provider_close_connection)
+
+  _WRAP_METHOD(Glib::ustring get_server_version(const Glib::RefPtr<Connection>& cnc) const, gda_server_provider_get_server_version)
+  _WRAP_METHOD(Glib::ustring get_database(const Glib::RefPtr<Connection>& cnc) const, gda_server_provider_get_database)
+  _WRAP_METHOD(bool change_database(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_change_database)
+  _WRAP_METHOD(bool create_database(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_create_database)
+  _WRAP_METHOD(bool drop_database(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& name), gda_server_provider_drop_database)
+
+  #m4 //Use deep ownership because we own both the list and its elements;
+  #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Glib::RefPtr<Connection>& cnc, const Command& cmd, const ParameterList& params), gda_server_provider_execute_command)
+
+  _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_begin_transaction)
+  _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_commit_transaction)
+  _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Transaction>& xaction), gda_server_provider_rollback_transaction)
+
+  _WRAP_METHOD(bool supports(const Glib::RefPtr<Connection>& cnc, ConnectionFeature feature) const, gda_server_provider_supports)
+
+  //TODO: Use C++ parameters, and add const version:
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const ParameterList& params), gda_server_provider_get_schema)
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const ParameterList& params) const, gda_server_provider_get_schema)
+
+  Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema);
+  Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema) const;
+
+
+  
+  
+  _WRAP_METHOD(bool create_blob(const Glib::RefPtr<Connection>& cnc, GdaBlob *blob), gda_server_provider_create_blob)
+
+  _WRAP_METHOD(Glib::ustring get_last_insert_id(const Glib::RefPtr<Connection>&, const Glib::RefPtr<DataModel>& recset) const, gda_server_provider_get_last_insert_id)            
+
+ //TODO: vfuncs.
+};
+
+} // namespace Gda
+} // namespace Gnome
+

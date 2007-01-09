@@ -1,0 +1,162 @@
+;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-blob.h
+
+(define-flags-extended BlobMode
+  (in-module "Gda")
+  (c-name "GdaBlobMode")
+  (values
+    '("read" "GDA_BLOB_MODE_READ" "1")
+    '("write" "GDA_BLOB_MODE_WRITE" "1 << 1")
+    '("rdwr" "GDA_BLOB_MODE_RDWR" "0x03")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-client.h
+
+(define-enum-extended ClientEvent
+  (in-module "Gda")
+  (c-name "GdaClientEvent")
+  (values
+    '("invalid" "GDA_CLIENT_EVENT_INVALID" "0")
+    '("error" "GDA_CLIENT_EVENT_ERROR" "1")
+    '("connection-opened" "GDA_CLIENT_EVENT_CONNECTION_OPENED" "2")
+    '("connection-closed" "GDA_CLIENT_EVENT_CONNECTION_CLOSED" "3")
+    '("transaction-started" "GDA_CLIENT_EVENT_TRANSACTION_STARTED" "4")
+    '("transaction-committed" "GDA_CLIENT_EVENT_TRANSACTION_COMMITTED" "5")
+    '("transaction-cancelled" "GDA_CLIENT_EVENT_TRANSACTION_CANCELLED" "6")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-command.h
+
+(define-flags-extended CommandOptions
+  (in-module "Gda")
+  (c-name "GdaCommandOptions")
+  (values
+    '("ignore-errors" "GDA_COMMAND_OPTION_IGNORE_ERRORS" "1")
+    '("stop-on-errors" "GDA_COMMAND_OPTION_STOP_ON_ERRORS" "1 << 1")
+    '("bad-option" "GDA_COMMAND_OPTION_BAD_OPTION" "1 << 2")
+  )
+)
+
+(define-enum-extended CommandType
+  (in-module "Gda")
+  (c-name "GdaCommandType")
+  (values
+    '("sql" "GDA_COMMAND_TYPE_SQL" "0")
+    '("xml" "GDA_COMMAND_TYPE_XML" "1")
+    '("procedure" "GDA_COMMAND_TYPE_PROCEDURE" "2")
+    '("table" "GDA_COMMAND_TYPE_TABLE" "3")
+    '("schema" "GDA_COMMAND_TYPE_SCHEMA" "4")
+    '("invalid" "GDA_COMMAND_TYPE_INVALID" "5")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-connection.h
+
+(define-flags-extended ConnectionOptions
+  (in-module "Gda")
+  (c-name "GdaConnectionOptions")
+  (values
+    '("y" "GDA_CONNECTION_OPTIONS_READ_ONLY" "1 << 0")
+  )
+)
+
+(define-enum-extended ConnectionFeature
+  (in-module "Gda")
+  (c-name "GdaConnectionFeature")
+  (values
+    '("aggregates" "GDA_CONNECTION_FEATURE_AGGREGATES" "0")
+    '("indexes" "GDA_CONNECTION_FEATURE_INDEXES" "1")
+    '("inheritance" "GDA_CONNECTION_FEATURE_INHERITANCE" "2")
+    '("namespaces" "GDA_CONNECTION_FEATURE_NAMESPACES" "3")
+    '("procedures" "GDA_CONNECTION_FEATURE_PROCEDURES" "4")
+    '("sequences" "GDA_CONNECTION_FEATURE_SEQUENCES" "5")
+    '("sql" "GDA_CONNECTION_FEATURE_SQL" "6")
+    '("transactions" "GDA_CONNECTION_FEATURE_TRANSACTIONS" "7")
+    '("triggers" "GDA_CONNECTION_FEATURE_TRIGGERS" "8")
+    '("users" "GDA_CONNECTION_FEATURE_USERS" "9")
+    '("views" "GDA_CONNECTION_FEATURE_VIEWS" "10")
+    '("xml-queries" "GDA_CONNECTION_FEATURE_XML_QUERIES" "11")
+    '("blobs" "GDA_CONNECTION_FEATURE_BLOBS" "12")
+  )
+)
+
+(define-enum-extended ConnectionSchema
+  (in-module "Gda")
+  (c-name "GdaConnectionSchema")
+  (values
+    '("aggregates" "GDA_CONNECTION_SCHEMA_AGGREGATES" "0")
+    '("databases" "GDA_CONNECTION_SCHEMA_DATABASES" "1")
+    '("fields" "GDA_CONNECTION_SCHEMA_FIELDS" "2")
+    '("indexes" "GDA_CONNECTION_SCHEMA_INDEXES" "3")
+    '("languages" "GDA_CONNECTION_SCHEMA_LANGUAGES" "4")
+    '("namespaces" "GDA_CONNECTION_SCHEMA_NAMESPACES" "5")
+    '("parent-tables" "GDA_CONNECTION_SCHEMA_PARENT_TABLES" "6")
+    '("procedures" "GDA_CONNECTION_SCHEMA_PROCEDURES" "7")
+    '("sequences" "GDA_CONNECTION_SCHEMA_SEQUENCES" "8")
+    '("tables" "GDA_CONNECTION_SCHEMA_TABLES" "9")
+    '("triggers" "GDA_CONNECTION_SCHEMA_TRIGGERS" "10")
+    '("types" "GDA_CONNECTION_SCHEMA_TYPES" "11")
+    '("users" "GDA_CONNECTION_SCHEMA_USERS" "12")
+    '("views" "GDA_CONNECTION_SCHEMA_VIEWS" "13")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-export.h
+
+(define-enum-extended ExportFlags
+  (in-module "Gda")
+  (c-name "GdaExportFlags")
+  (values
+    '("a" "GDA_EXPORT_FLAGS_TABLE_DATA" "1")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-transaction.h
+
+(define-enum-extended TransactionIsolation
+  (in-module "Gda")
+  (c-name "GdaTransactionIsolation")
+  (values
+    '("unknown" "GDA_TRANSACTION_ISOLATION_UNKNOWN" "0")
+    '("read-committed" "GDA_TRANSACTION_ISOLATION_READ_COMMITTED" "1")
+    '("read-uncommitted" "GDA_TRANSACTION_ISOLATION_READ_UNCOMMITTED" "2")
+    '("repeatable-read" "GDA_TRANSACTION_ISOLATION_REPEATABLE_READ" "3")
+    '("serializable" "GDA_TRANSACTION_ISOLATION_SERIALIZABLE" "4")
+  )
+)
+
+;; From /home/murrayc/cvs/gnome26/libgda/libgda/gda-value.h
+
+(define-enum-extended ValueType
+  (in-module "Gda")
+  (c-name "GdaValueType")
+  (values
+    '("null" "GDA_VALUE_TYPE_NULL" "0")
+    '("bigint" "GDA_VALUE_TYPE_BIGINT" "1")
+    '("biguint" "GDA_VALUE_TYPE_BIGUINT" "2")
+    '("binary" "GDA_VALUE_TYPE_BINARY" "3")
+    '("blob" "GDA_VALUE_TYPE_BLOB" "4")
+    '("boolean" "GDA_VALUE_TYPE_BOOLEAN" "5")
+    '("date" "GDA_VALUE_TYPE_DATE" "6")
+    '("double" "GDA_VALUE_TYPE_DOUBLE" "7")
+    '("geometric-point" "GDA_VALUE_TYPE_GEOMETRIC_POINT" "8")
+    '("gobject" "GDA_VALUE_TYPE_GOBJECT" "9")
+    '("integer" "GDA_VALUE_TYPE_INTEGER" "10")
+    '("list" "GDA_VALUE_TYPE_LIST" "11")
+    '("money" "GDA_VALUE_TYPE_MONEY" "12")
+    '("numeric" "GDA_VALUE_TYPE_NUMERIC" "13")
+    '("single" "GDA_VALUE_TYPE_SINGLE" "14")
+    '("smallint" "GDA_VALUE_TYPE_SMALLINT" "15")
+    '("smalluint" "GDA_VALUE_TYPE_SMALLUINT" "16")
+    '("string" "GDA_VALUE_TYPE_STRING" "17")
+    '("time" "GDA_VALUE_TYPE_TIME" "18")
+    '("timestamp" "GDA_VALUE_TYPE_TIMESTAMP" "19")
+    '("tinyint" "GDA_VALUE_TYPE_TINYINT" "20")
+    '("tinyuint" "GDA_VALUE_TYPE_TINYUINT" "21")
+    '("type" "GDA_VALUE_TYPE_TYPE" "22")
+    '("uinteger" "GDA_VALUE_TYPE_UINTEGER" "23")
+    '("unknown" "GDA_VALUE_TYPE_UNKNOWN" "24")
+  )
+)
+

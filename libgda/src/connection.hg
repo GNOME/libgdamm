@@ -1,0 +1,128 @@
+/* $Id: connection.hg,v 1.18 2004/11/28 15:07:16 murrayc Exp $ */
+// -*- C++ -*- // 
+
+/* connection.h
+ * 
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgdamm/transaction.h>
+#include <libgdamm/error.h>
+#include <libgdamm/command.h>
+#include <libgdamm/datamodel.h>
+#include <libgdamm/parameterlist.h>
+#include <libgda/gda-connection.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+class Client;
+
+_WRAP_ENUM(ConnectionFeature, GdaConnectionFeature)
+_WRAP_ENUM(ConnectionSchema, GdaConnectionSchema)
+_WRAP_ENUM(ConnectionOptions, GdaConnectionOptions)
+
+class Connection : public Glib::Object
+{
+  _CLASS_GOBJECT(Connection, GdaConnection, GDA_CONNECTION, Glib::Object, GObject)
+protected:
+
+  _CTOR_DEFAULT
+  _CUSTOM_DTOR()
+
+public:
+  _WRAP_CREATE()
+
+  bool close();
+  _IGNORE(gda_connection_close)
+  _WRAP_METHOD(bool is_open() const, gda_connection_is_open)
+
+  _WRAP_METHOD(Glib::RefPtr<Client> get_client(), gda_connection_get_client, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Client> get_client() const, gda_connection_get_client, refreturn)
+    
+  _WRAP_METHOD(void set_client(const Glib::RefPtr<Client>& client), gda_connection_set_client)
+
+  _WRAP_METHOD(ConnectionOptions get_options() const, gda_connection_get_options)
+  _WRAP_METHOD(Glib::ustring get_server_version() const, gda_connection_get_server_version)
+
+  _WRAP_METHOD(Glib::ustring get_database() const, gda_connection_get_database)
+  _WRAP_METHOD(Glib::ustring get_dsn() const, gda_connection_get_dsn)
+  _WRAP_METHOD(Glib::ustring get_cnc_string() const, gda_connection_get_cnc_string)
+  _WRAP_METHOD(Glib::ustring get_provider() const, gda_connection_get_provider)
+  _WRAP_METHOD(Glib::ustring get_username() const, gda_connection_get_username)
+  _WRAP_METHOD(Glib::ustring get_password() const, gda_connection_get_password)
+
+  _WRAP_METHOD(void add_error(const Glib::RefPtr<Error>& error), gda_connection_add_error)
+  _WRAP_METHOD(void add_error(const Glib::ustring& error), gda_connection_add_error_string)
+  //TODO: Use ListHandle:
+  _WRAP_METHOD(void add_error_list(GList *error_list), gda_connection_add_error_list)
+
+  _WRAP_METHOD(bool change_database(const Glib::ustring& name), gda_connection_change_database)
+  _WRAP_METHOD(bool create_database(const Glib::ustring& name), gda_connection_create_database)
+  _WRAP_METHOD(bool drop_database(const Glib::ustring& name), gda_connection_drop_database)
+
+  //TODO:
+
+  #m4 //Use deep ownership because we own both the list and its elements;
+  #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
+ 
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd, const ParameterList& params), gda_connection_execute_command)
+  Glib::ListHandle< Glib::RefPtr<DataModel> > execute_command(const Command& cmd);
+  
+  _WRAP_METHOD(Glib::RefPtr<DataModel> execute_single_command(const Command& cmd, const ParameterList& params), gda_connection_execute_single_command)
+  Glib::RefPtr<DataModel> execute_single_command(const Command& cmd);
+  Glib::RefPtr<DataModel> execute_single_command(const Glib::ustring& cmd);
+    
+  _WRAP_METHOD(int execute_non_query(const Command& cmd, const ParameterList& params), gda_connection_execute_non_query)
+  int execute_non_query(const Command& cmd);
+  
+  _WRAP_METHOD(bool begin_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_begin_transaction)
+  _WRAP_METHOD(bool commit_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_commit_transaction)
+  _WRAP_METHOD(bool rollback_transaction(const Glib::RefPtr<Transaction>& transaction), gda_connection_rollback_transaction)
+
+   //Use a special conversion here, because we should not own any part of the returned GList, and because we need to unconst the GList.:
+   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<Error> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
+   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const Error> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
+
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<Error> > get_errors(), gda_connection_get_errors)
+  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const Error> > get_errors() const, gda_connection_get_errors)
+
+  //TODO: Use C++ type:
+  _WRAP_METHOD(bool create_blob(GdaBlob* blob), gda_connection_create_blob)
+
+  _WRAP_METHOD(bool supports(ConnectionFeature feature) const, gda_connection_supports)
+
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, const ParameterList& params), gda_connection_get_schema)
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema, const ParameterList& params) const, gda_connection_get_schema)
+
+  Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema);
+  Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema) const;
+
+  _WRAP_METHOD(Glib::ustring get_last_insert_id(const Glib::RefPtr<DataModel>& recset) const, gda_connection_get_last_insert_id) 
+  
+  _WRAP_SIGNAL(void error(GList* error_list), "error")
+};
+
+} // namespace Gda
+} // namespace Gnome
+

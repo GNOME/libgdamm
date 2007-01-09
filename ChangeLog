@@ -1,0 +1,278 @@
+2005-12-06   Jonathon Jongsma <jonathon.jongsma@gmail.com>
+
+	* configure.in: Look for gmmproc in generic libdir 
+	directory, because that is not always lib/. This 
+	fixes the build on some 64-bit systems.
+
+1.3.7:
+
+2005-07-13  Murray Cumming  <murrayc@murrayc.com>
+
+	* tools/m4/convert_libgdamm.m4: 
+	* libgda/src/value.ccg:
+	* libgda/src/value.hg: Use long instead of glong in the 
+	API, as in the other *mm libraries.
+	get_binary(): Use long& instead of glong* for the output 
+	parameter.
+
+2005-07-12  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/introspection/main.cc: Use a cnc_string to 
+	specify the template1 database, so the connection can 
+	succeed with postgres, and added a comment about that.
+
+1.3.6:
+
+2005-03-15  Murray Cumming <murrayc@murrayc.com>
+
+	* libgda/src/value.ccg:
+	* libgda/src/value.hg: Added Value(const char*)
+	constructor to stop the compiler from using Value(bool) with 
+	string literals, instead of Glib::ustring.
+
+2005-02-03  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/value.[hg|ccg]: Replace the Value(gint64) and 
+	Value(guint64) constructors with static create_as_* methods, to 
+	avoid conflicts on 64-bit systems. Bug #162253 from Daniel Holbach,
+	who wrote part of the patch.
+
+This is the libgda-1-2 branch, for the libgda 1.2 API.
+	
+The HEAD branch should work with the new libgda API.
+
+2005-01-06  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/value.ccg: Remove the implementation of the time_t 
+	constructor that I removed a couple of days ago, to fix the build.
+
+2005-01-06  Daniel Holbach <dh@mailempfang.de>
+
+	* docs/reference/Doxyfile.in: Replace old LIBGNOMEMM_ stuff with 
+	LIBGLADEMM_.
+
+2005-01-04  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/value.hg: Remove the time_t constructor, because it 
+	is ambiguous on 64-bit systems. Bug #162253 from Daniel Holbach.
+
+2004-11-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/introspection/main.cc: Reverted some useless changes that I 
+	made for my own debugging.
+
+1.3.5:
+
+2004-11-28  Murray Cumming  <murrayc@murrayc.com>
+
+	* Removed lots of extra ;s to fix problems with gcc 3.4.
+
+1.3.4:
+	
+2004-06-06  Murray Cumming  <murrayc@murrayc_debian>
+
+	* libgda/src/libgda_methods.defs: Updated with h2defs.py.
+	* libgda/src/datamodel.hg: Changed the update_column() and 
+	remove_column() arguments to match changes in libgda.
+
+2004-06-06  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/value.[hg|ccg]: Added typedefs for Date, Time, Timestamp,
+	and Geometric point, and used them by value instead of by pointer.
+
+2004-06-01  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/value.[hg|ccg]: Added operator==() and operator!=().
+
+1.3.3:
+
+2004-05-04  Murray Cumming  <murrayc@murrayc@murrayc.com>
+
+	* libgda/src/transaction.[hg|cc]: Hand-code the constructor because
+	it does not just use properties.
+
+2004-05-04  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/connection.hg: Added get_last_insert_id(), as wrapper for
+	the new gda_connection_get_last_insert_id() function.
+
+2004-04-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/connection.[hg|ccg]: Override the destructor so that it
+	closes the connection.
+
+2004-04-23  Murray Cumming  <murrayc@murayc.com>
+
+	* libgda/src/fieldattributes.hg: Tell it to use the _new() function in
+	the default constructor so that we don't get invalid null instances.
+
+2004-04-23  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/datamodel.hg: get_value_at(): Take a copy of the value
+	so it is not freed twice.
+
+2004-04-22  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/value.ccg: Implemented the constructors.
+
+2004-04-21  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/value.hg: Added type_to_string() and type_from_string()
+	static methods.
+	
+
+2004-04-20  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in, tools/extra_defs/Makefile.am: Update to use glibmm
+	2.4 gmmproc and extra_defs lib.
+	* libgda/src/connection.hg: Add an execute_single_command() override 
+	that takes a string.
+	* libgda/src/: Added FieldAttribute.
+	* libgda/src/datamodel.hg: Added append_column(), update_column(), 
+	and remove_column().
+	* libgda/src/transaction.hg: Added set/get_isolation_level();
+
+2004-04-08  Murray Cumming  <murrayc@murrayc.com>
+
+	Working bits of a patch from Alberto Paro.
+	* libgda/libgdamm-2.0.p.in: Depend on glibmm 2.4 instead of gtkmm 2.0.
+	* tools/extra_defs/Makefile.am: Link to the glibmm-2.3 library instead
+	of the gtkmm 2.0 one.
+
+1.3.2:
+
+2004-04-05  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/: Added README.txt. Moved simple example to
+	introspection. Added more appropriate simple example.
+	* libgda/src/command.hg: Add default parameter values.
+	* libgda/src/connection.hg: Added overloads of execute methods that
+	take no ParameterList.
+	* libgda/src/parameterlist.hg: Hand-code add_parameter() to give the 
+	C function a copy, because it takes ownership.
+
+2004-04-04  Murray Cumming  <murrayc@murrayc.com>
+
+	* Use Value and ParameterList in API.
+
+2004-04-04  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/: Added wrappers for Value, Parameter, ParameterList.
+
+1.3.1:
+
+2004-03-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* Wrapped some GList* return types as ListHandles.
+
+2004-03-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/row.[hg|ccg]: Added these files, wrapping GdaRow.
+	* libgda/src/datamodel.[hg.ccg]: Added foreach().
+
+2004-03-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/serverprovider.hg, datamodel.hg: Wrapped new methods.
+
+2004-03-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* tools/extra_defs_gen/generate_defs.gda.cc: Include glibmm_extra_defs
+	rather than the old gtkmm one, to really fix the build.
+
+2004-03-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/simple now also builds and works, though it is not yet 
+	a real example.
+
+2004-03-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/libgdamm/config.cc: get_gda_params(): Use OWNERSHIP_NONE so 
+	that we do not delete parts of the struct field that we do not own.
+	examples/list_data_sources now runs without crashing.
+
+2004-03-29  Murray Cumming  <murrayc@murrayc.com>
+
+	* Now uses glibmm 2.4 instead of gtkmm 2.2.
+
+2004-02-15  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/datamodel.hg: Renamed the C++ methods to match the
+	C function names, correcting the previous change. The API is not 
+	stable so we are free to change them to match changes in libgda.
+
+2003-12-17  Billy O'Connor <billyoc@gnuyork.org>
+
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/datamodel.hg: Changes to is_editable(), is_editing(),
+	begin_edit(), cancel_edit() and end_edit() wrappers to reflect 
+	libgda function renames.
+
+2003-11-05  Alexander Nedotsukov <bland@mail.ru>
+
+	* libgda/libgda-2.0.pc.in: Fixed pkgconfig package dependency and
+	library list. 
+
+2003-10-05  Murray Cumming  <murrayc@usa.net>
+
+	* Added wrappers for Client, Config, DataSourceInfo, ProviderInfo,
+	and used the C++ types in the rest of the API.
+	* libgda/libgdamm/init.[h|cc]: Added Gnome::Gda::init() function.
+	* Added examples/list_data_sources.
+
+1.3.0:
+	
+2003-10-01  Murray Cumming  <murrayc@usa.net>
+
+	* libgda/libgdamm/private/Makefile.am: Use _HEADERS instead of
+	_DATA (I looked at gnome-vfsmm) to fix the dist. distcheck now
+	works.
+
+2002-12-10  Bradley Bell  <btb@debian.org>
+	
+	* scripts/Makefile.am: distribute macros.m4
+
+2002-11-02  Murray Cumming  <murrayc@usa.net>
+
+	* libgdammconfig.h and init.h: Replaced "libgnomemm" with
+	"libgdamm".
+
+2002-07-20  Murray Cumming  <murrayc@usa.net>
+
+	* Connection, DataModel: wrapped a few more functions.
+
+2002-07-17  Murray Cumming  <murrayc@usa.net>
+
+	* DataModel: We don't need to specify the _vfunc suffixes now -
+	gtkmmproc adds them for us.
+
+2002-07-06  Murray Cumming  <murrayc@usa.net>
+
+	* Added Transaction wrapper, used in Connection methods.
+
+2002-05-03  Murray Cumming  <murrayc@usa.net>
+
+	* Revised build files so that they are like the other gnomemm
+	projects - this means that generated source is now distributed.
+	* Updated libgda_methods.defs and libgda_enums.defs for the libgda
+	HEAD branch refactoring. It now builds against libgda HEAD.
+
+2002-04-19  Muray Cumming  <murrayc@usa.net>
+
+	* Removed traces of libgnomemm, from which this project was copied
+	when it was first created.
+
+2002-04-17  Murray Cumming  <murrayc@usa.net>
+
+	* Build: Make it depend on glibmm rather than gtkmm, although they
+	are both in the same package at the moment.
+
+2002-04-15  Murray Cumming  <murrayc@usa.net>
+
+	* Added basic wrappers for GdaError and GdaDataModel, and used
+	those C++ types in the Gda::Connection interface, so that
+	people get the general idea.
+	* Added libgda_vuncs.defs (hand coded) and libgda_enums.defs
+	(generated with gtkmm/tools/enums.pl)
+	
+	
+

@@ -1,0 +1,83 @@
+/* $Id: datamodel.ccg,v 1.4 2004/03/30 18:40:28 murrayc Exp $ */
+// -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
+
+/* datamodel.cc
+ * 
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgda/gda-data-model.h>
+
+namespace //anonymous
+{
+
+// This Signal Proxy allows the C++ coder to specify
+// a sigc::slot instead of a static function.
+class SignalProxy_ForEach
+{
+public:
+  typedef Gnome::Gda::DataModel::SlotForEach SlotType;
+
+  SignalProxy_ForEach(const SlotType& slot)
+  : slot_(slot)
+  {}
+  
+  ~SignalProxy_ForEach();
+
+  static gboolean gtk_callback(GdaDataModel* model, GdaRow* row, gpointer user_data);
+
+private:
+  SlotType slot_;
+};
+
+SignalProxy_ForEach::~SignalProxy_ForEach()
+{}
+
+gboolean SignalProxy_ForEach::gtk_callback(GdaDataModel* model, GdaRow* row, gpointer user_data)
+{
+  SignalProxy_ForEach *const self = static_cast<SignalProxy_ForEach*>(user_data);
+
+  try
+  {
+    return (self->slot_)(Glib::wrap(row));
+  }
+  catch(...)
+  {
+    Glib::exception_handlers_invoke();
+  }
+
+  return 0;
+}
+
+} // anonymous namespace
+
+namespace Gnome
+{
+
+namespace Gda
+{
+  
+void DataModel::foreach(const SlotForEach& slot)
+{
+  SignalProxy_ForEach proxy(slot);
+  gda_data_model_foreach(gobj(), &SignalProxy_ForEach::gtk_callback, &proxy);
+}         
+
+} /* namespace Gda */
+
+} /* namespace Gnome */
+

@@ -1,0 +1,57 @@
+/* $Id: parameterlist.hg,v 1.2 2004/04/05 17:14:58 murrayc Exp $ */
+// -*- C++ -*- //
+
+/* parameterlist.h
+ *
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <libgdamm/parameter.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+class ParameterList
+{
+  _CLASS_OPAQUE_COPYABLE(ParameterList, GdaParameterList, gda_parameter_list_new, gda_parameter_list_copy, gda_parameter_list_free)
+public:
+  
+  operator bool() const;
+
+  void add_parameter(const Parameter& param);
+  _IGNORE(gda_parameter_list_add_parameter)
+
+  //TODO: Use ListHandle:
+  _WRAP_METHOD(GList* get_names(), gda_parameter_list_get_names)
+  
+  _WRAP_METHOD(Parameter find(const Glib::ustring& name) const, gda_parameter_list_find)
+  _WRAP_METHOD(void clear(), gda_parameter_list_clear)
+  _WRAP_METHOD(guint get_length() const, gda_parameter_list_get_length)
+
+
+};
+
+} // namespace Gda
+} // namespace Gnome
+

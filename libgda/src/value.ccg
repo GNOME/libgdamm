@@ -1,0 +1,221 @@
+/* $Id: value.ccg,v 1.6.2.3 2005/07/13 14:41:13 murrayc Exp $ */
+// -*- C++ -*- //
+
+/* value.cc
+ * 
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgda/gda-value.h>
+#include <libgda/gda-enum-types.h>
+#include <libgda/gda-util.h>
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+
+// gint64 and guint64 are the same as gint and guint on 64-bit systems, 
+// so these would cause conflicts/ambiguity.
+/*
+Value::Value(gint64 val)
+{
+  gobject_ = gda_value_new_integer(val);
+}
+
+Value::Value(guint64 val)
+{
+  gobject_ = gda_value_new_biguint(val);
+}
+*/
+
+
+//static:
+Value Value::create_as_bigint(gint64 val)
+{
+  return Value( gda_value_new_bigint(val) );
+}
+
+
+//static:
+Value Value::create_as_biguint(guint64 val)
+{
+  return Value( gda_value_new_biguint(val) );
+}
+
+
+Value::Value(const void* val, long size)
+{
+  gobject_ = gda_value_new_binary(val, size);
+}
+
+
+/* gda_value_new_blob() is not implemented
+Value::Value(const GdaBlob *val)
+{
+  gobject_ = gda_value_new_blob(val);
+}
+*/
+
+Value::Value(bool val)
+{
+  gobject_ = gda_value_new_boolean(val);
+}
+
+Value::Value(const Date& val)
+{
+  gobject_ = gda_value_new_date(&val);
+}
+
+Value::Value(double val)
+{
+  gobject_ = gda_value_new_double(val);
+}
+
+Value::Value(const GeometricPoint& val)
+{
+  gobject_ = gda_value_new_geometric_point(&val);
+}
+
+Value::Value(const GObject *val)
+{
+  gobject_ = gda_value_new_gobject(val);
+}
+
+Value::Value(int val)
+{
+  gobject_ = gda_value_new_integer(val);
+}
+
+Value::Value(const GdaValueList *val)
+{
+  gobject_ = gda_value_new_list(val);
+}
+
+Value::Value(const GdaMoney *val)
+{
+  gobject_ = gda_value_new_money(val);
+}
+
+Value::Value(const GdaNumeric *val)
+{
+  gobject_ = gda_value_new_numeric(val);
+}
+
+Value::Value(float val)
+{
+  gobject_ = gda_value_new_single(val);
+}
+
+Value::Value(gshort val)
+{
+  gobject_ = gda_value_new_smallint(val);
+}
+
+Value::Value(gushort val)
+{
+  gobject_ = gda_value_new_smalluint(val);
+}
+
+Value::Value(const Glib::ustring& val)
+{
+  gobject_ = gda_value_new_string(val.c_str());
+}
+
+Value::Value(const char* val)
+{
+  gobject_ = gda_value_new_string(val);
+}
+
+Value::Value(const Time& val)
+{
+  gobject_ = gda_value_new_time(&val);
+}
+
+Value::Value(const Timestamp& val)
+{
+  gobject_ = gda_value_new_timestamp(&val);
+}
+
+/*
+Value::Value(time_t val)
+{
+  gobject_ = gda_value_new_timestamp_from_timet(val);
+}
+*/
+
+//static:
+Value Value::create_as_time_t(time_t val)
+{
+  return Value( gda_value_new_timestamp_from_timet(val) );
+}
+
+
+Value::Value(gchar val)
+{
+  gobject_ = gda_value_new_tinyint(val);
+}
+
+Value::Value(guchar val)
+{
+  gobject_ = gda_value_new_tinyuint(val);
+}
+
+Value::Value(ValueType val)
+{
+  gobject_ = gda_value_new_type((GdaValueType)val);
+}
+
+Value::Value(guint val)
+{
+  gobject_ = gda_value_new_uinteger(val);
+}
+
+Value::Value(const Glib::ustring& as_string, ValueType type)
+{
+  gobject_ = gda_value_new_from_string(as_string.c_str(), (GdaValueType)type);
+}
+
+bool Value::operator==(const Value& src) const
+{
+  if( !gobject_ && !src.gobject_) //If both are null.
+    return true;
+
+  if( !gobject_ && src.gobject_) //If one is null.
+    return false;
+
+  if( gobject_ && !src.gobject_) //If one is null.
+    return false;
+
+  if(get_value_type() != src.get_value_type()) //gda_value_compare() can only compare GdaValues of the same type.
+    return false;
+    
+  gint test = gda_value_compare(const_cast<GdaValue*>(gobj()), const_cast<GdaValue*>(src.gobj()));   //returns 0 if both contain
+  return test == 0;
+}
+
+bool Value::operator!=(const Value& src) const
+{
+  return !operator==(src);
+}
+
+
+} //namespace Gda
+
+} //namespace Gnome

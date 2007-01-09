@@ -1,0 +1,210 @@
+/* $Id: value.hg,v 1.8.2.4 2005/07/13 14:41:13 murrayc Exp $ */
+// -*- C++ -*- //
+
+/* value.h
+ *
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <libgda/gda-value.h> //TODO: Patch libgda to use the struct _ technique.
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+_WRAP_ENUM(ValueType, GdaValueType)
+
+typedef GdaDate Date;
+typedef GdaGeometricPoint GeometricPoint;
+
+/*  TODO:
+typedef struct {
+	gchar *currency;
+	gdouble amount;
+} GdaMoney;
+
+typedef struct {
+	gchar *number;
+	long precision;
+	long width;
+} GdaNumeric;
+*/
+
+typedef GdaTime Time;
+typedef GdaTimestamp Timestamp;
+
+class Value
+{
+  _CLASS_OPAQUE_COPYABLE(Value, GdaValue, gda_value_new_null, gda_value_copy, gda_value_free)
+  _IGNORE(gda_value_new_null, gda_value_copy, gda_value_free)
+public:
+
+//We can't have this constructor because gint64 and int are the same on 64-bit systems:
+//explicit Value(gint64 val);
+  static Value create_as_bigint(gint64 val);
+  _IGNORE(gda_value_new_bigint)
+
+//We can't have this constructor because guint64 and unsigned int are the same on 64-bit systems:
+//explicit Value(gint64 val);
+// explicit Value(guint64 val);
+   static Value create_as_biguint(guint64 val);
+  _IGNORE(gda_value_new_biguint)
+
+  explicit Value(const void* val, long size); 
+  _IGNORE(gda_value_new_long)
+
+  _IGNORE(gda_value_new_binary)
+  //gda_value_new_blob() is not implemented. explicit Value(const GdaBlob *val);
+  //_IGNORE(gda_value_new_blob)
+
+  explicit Value(bool val);
+  _IGNORE(gda_value_new_boolean)
+  explicit Value(const Date& val);
+  _IGNORE(gda_value_new_date)
+  explicit Value(double val);
+  _IGNORE(gda_value_new_double)
+  explicit Value(const GeometricPoint& val);
+  _IGNORE(gda_value_new_geometric_point)
+  explicit Value(const GObject *val);
+  _IGNORE(gda_value_new_gobject)
+  explicit Value(int val);
+  _IGNORE(gda_value_new_integer)
+  explicit Value(const GdaValueList *val);
+  _IGNORE(gda_value_new_list)
+  explicit Value(const GdaMoney *val);
+  _IGNORE(gda_value_new_money)
+  explicit Value(const GdaNumeric *val);
+  _IGNORE(gda_value_new_numeric)
+  explicit Value(float val);
+  _IGNORE(gda_value_new_single)
+  explicit Value(gshort val);
+  _IGNORE(gda_value_new_smallint)
+  explicit Value(gushort val);
+  _IGNORE(gda_value_new_smalluint)
+  explicit Value(const Glib::ustring& val);
+  _IGNORE(gda_value_new_string)
+
+  //If this constructor does not exists, then Value("something") uses Value(bool) instead of Value(ustring).
+  explicit Value(const char* val);
+
+  explicit Value(const Time& val);
+  _IGNORE(gda_value_new_time)
+  explicit Value(const Timestamp& val);
+  _IGNORE(gda_value_new_timestamp)
+  
+  //This causes ambiguity with another constructor on 64-bit systems:
+  //explicit Value(time_t val);
+  _IGNORE(gda_value_new_timestamp_from_timet)
+ static Value create_as_time_t(time_t val);
+  explicit Value(gchar val);
+  _IGNORE(gda_value_new_tinyint)
+  explicit Value(guchar val);
+  _IGNORE(gda_value_new_tinyuint)
+  explicit Value(ValueType val);
+  _IGNORE(gda_value_new_type)
+  explicit Value(guint val);
+  _IGNORE(gda_value_new_uinteger)
+  explicit Value(const Glib::ustring& as_string, ValueType type);
+  _IGNORE(gda_value_new_from_string)
+  //TODO: explicit Value(const xmlNodePtr node);
+  //_IGNORE(gda_value_new_from_xml)
+
+  bool operator==(const Value& src) const;
+  bool operator!=(const Value& src) const;
+
+  _WRAP_METHOD(ValueType get_value_type() const, gda_value_get_type)
+  _WRAP_METHOD(bool is_null() const, gda_value_is_null)
+  _WRAP_METHOD(bool is_number() const, gda_value_is_number)
+
+  _WRAP_METHOD(gint64 get_bigint() const, gda_value_get_bigint)
+  _WRAP_METHOD(void set(gint64 val), gda_value_set_bigint)
+  _WRAP_METHOD(guint64 get_biguint() const, gda_value_get_biguint)
+  _WRAP_METHOD(void set(guint64 val), gda_value_set_biguint)
+
+  //TODO: The const here is quite meaningless:
+  _WRAP_METHOD(const gpointer get_binary(long& size) const, gda_value_get_binary)
+  _WRAP_METHOD(void set(gconstpointer val, long size), gda_value_set_binary)
+
+  //TODO: The const here is quite meaningless:
+  _WRAP_METHOD(const GdaBlob* get_blob() const, gda_value_get_blob)
+  _WRAP_METHOD(void set(const GdaBlob* val), gda_value_set_blob)
+  _WRAP_METHOD(bool get_bool() const, gda_value_get_boolean)
+  _WRAP_METHOD(void set(bool val), gda_value_set_boolean)
+  _WRAP_METHOD(Date get_date() const, gda_value_get_date)
+  _WRAP_METHOD(void set(const Date& val), gda_value_set_date)
+  _WRAP_METHOD(double get_double() const, gda_value_get_double)
+  _WRAP_METHOD(void set(double val), gda_value_set_double)
+  _WRAP_METHOD(GeometricPoint get_geometric_point() const, gda_value_get_geometric_point)
+  _WRAP_METHOD(void set(const GeometricPoint& val), gda_value_set_geometric_point)
+  _WRAP_METHOD(Glib::RefPtr<const Glib::Object> get_gobject(), gda_value_get_gobject, refreturn)
+  _WRAP_METHOD(void set(const Glib::RefPtr<Glib::Object>& val), gda_value_set_gobject)
+  _WRAP_METHOD(int get_integer() const, gda_value_get_integer)
+  _WRAP_METHOD(void set(int val), gda_value_set_integer)
+  _WRAP_METHOD(const GdaValueList* get_list(), gda_value_get_list)
+  _WRAP_METHOD(void set(const GdaValueList *val), gda_value_set_list)
+  _WRAP_METHOD(void set_null(), gda_value_set_null)
+  _WRAP_METHOD(const GdaMoney* get_money() const, gda_value_get_money)
+  _WRAP_METHOD(void set(const GdaMoney *val), gda_value_set_money)
+  _WRAP_METHOD(const GdaNumeric* get_numeric() const, gda_value_get_numeric)
+  _WRAP_METHOD(void set(const GdaNumeric *val), gda_value_set_numeric)
+  _WRAP_METHOD(float get_single() const, gda_value_get_single)
+  _WRAP_METHOD(void set(float val), gda_value_set_single)
+  _WRAP_METHOD(gshort get_smallint() const, gda_value_get_smallint)
+  _WRAP_METHOD(void set(gshort val), gda_value_set_smallint)
+  _WRAP_METHOD(gushort get_smalluint() const, gda_value_get_smalluint)
+  _WRAP_METHOD(void set(gushort val), gda_value_set_smalluint)
+  _WRAP_METHOD(Glib::ustring get_string() const, gda_value_get_string)
+  _WRAP_METHOD(void set(const Glib::ustring& val), gda_value_set_string)
+  _WRAP_METHOD(Time get_time() const, gda_value_get_time)
+  _WRAP_METHOD(void set(const Time& val), gda_value_set_time)
+  _WRAP_METHOD(Timestamp get_timestamp() const, gda_value_get_timestamp)
+  _WRAP_METHOD(void set(const Timestamp& val), gda_value_set_timestamp)
+  _WRAP_METHOD(gchar get_tinyint() const, gda_value_get_tinyint)
+  _WRAP_METHOD(void set(gchar val), gda_value_set_tinyint)
+  _WRAP_METHOD(guchar get_tinyuint(), gda_value_get_tinyuint)
+  _WRAP_METHOD(void set(guchar val), gda_value_set_tinyuint)
+  _WRAP_METHOD(guint get_uinteger() const, gda_value_get_uinteger)
+  _WRAP_METHOD(void set(guint val), gda_value_set_uinteger)
+  _WRAP_METHOD(ValueType get_vtype() const, gda_value_get_vtype)
+  _WRAP_METHOD(void set(GdaValueType type), gda_value_set_vtype)
+  _WRAP_METHOD(bool set_from_string(const Glib::ustring& as_string, ValueType type), gda_value_set_from_string)
+
+  //Use the copy constructor instead: _WRAP_METHOD(bool set_from_value(const Value& from), gda_value_set_from_value)
+  _IGNORE(gda_value_set_from_value)
+
+  _EQUAL(gda_value_compare)
+
+  //TODO: Wrap this as some stream operator thing?
+  _WRAP_METHOD(Glib::ustring to_string() const, gda_value_stringify)
+
+  //TODO: _WRAP_METHOD(xmlNodePtr gda_value_to_xml(), gda_value_to_xml)
+
+
+  _WRAP_METHOD(static Glib::ustring type_to_string(ValueType type), gda_type_to_string)
+  _WRAP_METHOD(static ValueType type_from_string(const Glib::ustring& type), gda_type_from_string)
+
+};
+
+} // namespace Gda
+} // namespace Gnome
+

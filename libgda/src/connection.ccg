@@ -1,0 +1,86 @@
+/* $Id: connection.ccg,v 1.10 2004/04/29 23:07:13 murrayc Exp $ */
+// -*- C++ -*- // 
+
+/* connection.cc
+ * 
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgdamm/client.h>
+#include <libgdamm/command.h>
+#include <libgda/gda-enum-types.h>
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+Connection::~Connection()
+{
+  //Make sure the connection is closed.
+  //An open connection with no associated connection object could never be closed.
+  if(gobj())
+  {
+    if(is_open())
+      close();
+  }
+}
+ 
+Glib::RefPtr<DataModel> Connection::get_schema(ConnectionSchema schema)
+{
+  return Glib::wrap(gda_connection_get_schema(gobj(), ((GdaConnectionSchema)(schema)), 0));
+}
+
+Glib::RefPtr<const DataModel> Connection::get_schema(ConnectionSchema schema) const
+{
+  return Glib::wrap(gda_connection_get_schema(const_cast<GdaConnection*>(gobj()), ((GdaConnectionSchema)(schema)), 0));
+}
+
+Glib::ListHandle< Glib::RefPtr<DataModel> > Connection::execute_command(const Command& cmd)
+{
+  return Glib::ListHandle< Glib::RefPtr<DataModel> >(gda_connection_execute_command(gobj(), const_cast<GdaCommand*>((cmd).gobj()), 0), Glib::OWNERSHIP_SHALLOW);
+}
+
+Glib::RefPtr<DataModel> Connection::execute_single_command(const Command& cmd)
+{
+  return Glib::wrap(gda_connection_execute_single_command(gobj(), const_cast<GdaCommand*>((cmd).gobj()), 0));
+}
+
+Glib::RefPtr<DataModel> Connection::execute_single_command(const Glib::ustring& cmd)
+{
+  Command command(cmd);
+  return Glib::wrap(gda_connection_execute_single_command(gobj(), const_cast<GdaCommand*>((command).gobj()), 0));
+}
+
+int Connection::execute_non_query(const Command& cmd)
+{
+  return gda_connection_execute_non_query(gobj(), const_cast<GdaCommand*>((cmd).gobj()), 0);
+}
+
+bool Connection::close()
+{
+  //gda_connection_close() does an unref, but we don't want that:
+  reference();
+  return gda_connection_close(gobj());
+}
+
+} //namespace Gda
+
+} //namespace Gnome
+
+
