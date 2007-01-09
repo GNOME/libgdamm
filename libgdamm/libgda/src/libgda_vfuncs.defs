@@ -1,0 +1,7 @@
+;; -*- scheme -*-
+; virtual function definitions
+; define-vfunc is gtkmm-specific
+
+; We do not bother to wrap the vfuncs in libgda.
+; They are only useful for implementing new backends,
+; and they would add code size and per-object size.
