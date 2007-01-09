@@ -1,0 +1,100 @@
+/* $Id: parameter.ccg,v 1.8 2006/11/08 00:07:38 murrayc Exp $ */
+// -*- C++ -*- //
+
+/* parameter.cc
+ * 
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgdamm/datamodel.h>
+#include <libgda/gda-parameter.h>
+#include <libgda/gda-enum-types.h>
+
+//Make life easier for the generated code:
+typedef Gnome::Gda::Parameter::ListHandleEntityField ListHandleEntityField;
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+/* TODO:
+Parameter::Parameter(const Glib::ustring& name, const Value& value)
+{
+  gobject_ = gda_parameter_new_from_value(name.c_str(), value.gobj());
+}
+*/
+
+Parameter::Parameter(const Glib::ustring& name, bool value)
+:
+  _CONSTRUCT()
+{
+  //Reimplemented from gda_parameter_new_string():
+  set_name(name);
+  set_value(value ? "true" : "false");
+}
+
+Parameter::Parameter(const Glib::ustring& name, const Glib::ustring& value)
+:
+  _CONSTRUCT()
+{
+  //Reimplemented from gda_parameter_new_boolean():
+  set_name(name);
+  set_value(value);
+}
+
+Value Parameter::get_value() const
+{
+  Value value;
+
+  const GValue* cvalue =  gda_parameter_get_value(const_cast<GdaParameter*>(gobj()));
+  if(cvalue)
+    value.init(cvalue);
+   
+  return value;
+}
+
+Value Parameter::get_default_value() const
+{
+  Value value;
+
+  const GValue* cvalue =  gda_parameter_get_default_value(const_cast<GdaParameter*>(gobj()));
+  if(cvalue)
+    value.init(cvalue);
+  
+  return value;
+}
+
+bool Parameter::has_restrict_values() const
+{
+  return gda_parameter_has_restrict_values(const_cast<GdaParameter*>(gobj()), 0, 0);
+}
+
+bool Parameter::has_restrict_values(Glib::RefPtr<DataModel>& model, int& col) const
+{
+  GdaDataModel* gda_model = 0;
+  return gda_parameter_has_restrict_values(const_cast<GdaParameter*>(gobj()), &gda_model, &col);
+  if(gda_model)
+    model = Glib::wrap(gda_model); //TODO ref this?
+}
+
+} //namespace Gda
+
+} // namespace Gnome
+
+
