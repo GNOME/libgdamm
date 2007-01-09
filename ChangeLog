@@ -1,5 +1,11 @@
 2007-01-09  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/connection.hg: add_event(string): Renamed to add_event_string(), 
+	because it is not really the same as add_event() and because it now returns 
+	something.
+
+2007-01-09  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/libgda_methods.defs: Regenerated.
 	* libgda/src/connection.hg: Remove create_blob() and fetch_blob_by_id(), 
 	because the C functions have been removed.
