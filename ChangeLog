@@ -1,3 +1,14 @@
+2007-01-10  Johannes Schmid <johannes.schmid@openismus.com>
+
+	* libgda/src/blobop.hg:
+	* libgda/src/blobop.ccg:
+	* libgda/src/blob.hg:
+	* libgda/src/blob.ccg:
+	Wrapped GdaBlob and GdaBlobOp
+	
+	* libgda/src/serverprovider.hg:
+	Used Gda::Blob instead of GdaBlob
+
 2007-01-08  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/referer.hg:

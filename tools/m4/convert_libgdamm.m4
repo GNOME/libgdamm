@@ -21,6 +21,7 @@ _CONVERSION(`GdaServerProvider*',`Glib::RefPtr<ServerProvider>',`Glib::wrap($3)'
 _CONVERSION(`GdaServerOperation*',`Glib::RefPtr<ServerOperation>',`Glib::wrap($3)')
 _CONVERSION(`GdaQuery*',`GliB::RefPtr<Query>',`Glib::wrap($3)')
 
+_CONVERSION(`const Glib::RefPtr<BlobOp>&', `GdaBlobOp*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DataModel>&', `GdaDataModel*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<ServerProvider>&', `GdaServerProvider*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<ServerOperation>&', `GdaServerOperation*', __CONVERT_REFPTR_TO_P)
@@ -97,6 +98,8 @@ _CONVERSION(`const GeometricPoint&', `const GdaGeometricPoint*', `&($3)')
 _CONVERSION(`const GdaGeometricPoint*', `GeometricPoint', `*($3)')
 
 _CONVERSION(`const GdaBinary&', `const GdaBinary*', `&($3)')
+_CONVERSION(`Blob&',`GdaBlob*',__FR2P)
+_CONVERSION(`GdaBlob*',`Blob', Glib::wrap($3))
 
 _CONVERSION(`const int*','const-gint*',`$3')
 

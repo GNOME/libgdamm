@@ -30,6 +30,8 @@
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
 
+#include <libgdamm/blob.h>
+
 namespace Gnome
 {
 
@@ -90,10 +92,9 @@ class ServerProvider : public Glib::Object
   Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema);
   Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema) const;
 
-  //TODO: Use C++ type:
-  _WRAP_METHOD(GdaBlob* create_blob(const Glib::RefPtr<Connection>& cnc), gda_server_provider_create_blob)
+  _WRAP_METHOD(Blob create_blob(const Glib::RefPtr<Connection>& cnc), gda_server_provider_create_blob)
 
-  _WRAP_METHOD(GdaBlob* fetch_blob_by_id(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& sql_id), gda_server_provider_fetch_blob_by_id)
+  _WRAP_METHOD(Blob fetch_blob_by_id(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& sql_id), gda_server_provider_fetch_blob_by_id)
 
   _WRAP_METHOD(Glib::ustring value_to_sql_string(const Glib::RefPtr<Connection>& cnc, const Value& from) const, gda_server_provider_value_to_sql_string)
 
