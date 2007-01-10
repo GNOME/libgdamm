@@ -1,3 +1,20 @@
+2007-01-08  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/referer.hg:
+	* libgda/src/referer.ccg:
+	* libgda/src/renderer.hg:
+	* libgda/src/renderer.ccg:
+	* libgda/src/xmlstorage.hg:
+	* libgda/src/xmlstorage.ccg:
+	* libgda/src/queryobject.hg:
+	* libgda/src/queryobject.ccg:
+	* libgda/src/query.hg:
+	* libgda/src/query.ccg:
+	* libgda/src/Makefile_list_of_hg.am_fragment: Wrapped GdaReferer,
+	GdaRenderer, GdaXmlStorage and parts of GdaQuery.
+
+	* tools/m4/convert_libgdamm.m4: Added new conversions.
+
 2007-01-09  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/connection.hg: add_event(string): Renamed to add_event_string(), 

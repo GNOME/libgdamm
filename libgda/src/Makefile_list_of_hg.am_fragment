@@ -7,8 +7,8 @@ files_hg = client.hg columnindex.hg command.hg connection.hg \
            column.hg dict.hg dictaggregate.hg dictdatabase.hg dicttype.hg \
            entity.hg entityfield.hg \
 	   handlerstring.hg handlerboolean.hg handlertime.hg handlernumerical.hg handlerbin.hg handlertype.hg \
-           object.hg  parameter.hg parameterlist.hg providerinfo.hg row.hg serverprovider.hg \
-           serveroperation.hg transactionstatus.hg
+           object.hg  parameter.hg parameterlist.hg providerinfo.hg query.hg queryobject.hg referer.hg renderer.hg row.hg serverprovider.hg \
+           serveroperation.hg transactionstatus.hg xmlstorage.hg
 
 
 

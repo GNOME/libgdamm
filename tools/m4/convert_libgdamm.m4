@@ -16,8 +16,10 @@ _CONVERSION(`GdaDictType*',`Glib::RefPtr<DictType>',`Glib::wrap($3)')
 _CONVERSION(`GdaObject*',`Glib::RefPtr<Object>',`Glib::wrap($3)')
 _CONVERSION(`GdaParameter*',`Glib::RefPtr<Parameter>',`Glib::wrap($3)')
 _CONVERSION(`GdaParameterList*',`Glib::RefPtr<ParameterList>',`Glib::wrap($3)')
+_CONVERSION(`GdaParameterList*',`const Glib::RefPtr<ParameterList>&',`Glib::wrap($3)')
 _CONVERSION(`GdaServerProvider*',`Glib::RefPtr<ServerProvider>',`Glib::wrap($3)')
 _CONVERSION(`GdaServerOperation*',`Glib::RefPtr<ServerOperation>',`Glib::wrap($3)')
+_CONVERSION(`GdaQuery*',`GliB::RefPtr<Query>',`Glib::wrap($3)')
 
 _CONVERSION(`const Glib::RefPtr<DataModel>&', `GdaDataModel*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<ServerProvider>&', `GdaServerProvider*', __CONVERT_REFPTR_TO_P)
@@ -33,6 +35,7 @@ _CONVERSION(`const Glib::RefPtr<const Parameter>&', `const GdaParameter*', __CON
 _CONVERSION(`const Glib::RefPtr<const Parameter>&', `GdaParameter*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<ParameterList>&', `GdaParameterList*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const ParameterList>&', `GdaParameterList*', __CONVERT_CONST_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<Query>&', `GdaQuery*', __CONVERT_REFPTR_TO_P)
 
 # The const_cast here is silly and should not be necessary - we should fix the wrap() methods some time:
 _CONVERSION(`const Command&', `GdaCommand*', `const_cast<GdaCommand*>(($3).gobj())')
@@ -116,6 +119,7 @@ _CONV_ENUM(Gda,ConnectionEventCode)
 _CONV_ENUM(Gda,ConnectionEventType)
 _CONV_ENUM(Gda,ServerOperationType)
 _CONV_ENUM(Gda,ServerOperationNodeType)
+_CONV_ENUM(Gda,QueryType)
 
 # For signals:
 _CONVERSION(`GdaConnection*',`const Glib::RefPtr<Connection>&',`Glib::wrap($3)')

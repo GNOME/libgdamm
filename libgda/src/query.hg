@@ -1,0 +1,108 @@
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* query.h
+ *
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <libgdamm/dict.h>
+#include <libgdamm/datamodel.h>
+
+#include <libgdamm/xmlstorage.h>
+#include <libgdamm/referer.h>
+#include <libgdamm/renderer.h>
+#include <libgdamm/entity.h>
+#include <libgdamm/queryobject.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(libgdamm/private/queryobject_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+_WRAP_ENUM(QueryType, GdaQueryType, NO_GTYPE)
+
+// TODO: Functions requiring GdaQuery* classes are still unwrapped because
+// they do not yet exist, however, we need GdaQuery to create gnome-db
+// examples.
+class Query
+ : public QueryObject
+{
+  _CLASS_GOBJECT(Query, GdaQuery, GDA_QUERY, QueryObject, GdaQueryObject)
+
+  _IMPLEMENTS_INTERFACE(XmlStorage)
+  _IMPLEMENTS_INTERFACE(Referer)
+  _IMPLEMENTS_INTERFACE(Renderer)
+  _IMPLEMENTS_INTERFACE(Entity)
+  
+protected:
+  _WRAP_CTOR(Query(const Glib::RefPtr<Dict>& dict), gda_query_new)
+
+public:
+  _WRAP_CREATE(const Glib::RefPtr<Dict>& dict)
+
+  // TODO: How to wrap GHashTable in g*mm? armin.
+  _IGNORE(gda_query_new_copy)
+
+  // Not wrapped because it does only call gda_query_set_sql_text. However,
+  // gda_query_set_sql_text might throw an exception and if this was a
+  // constructor, it would prevent the object from being constructed, but in
+  // C a new object is returned. This is why the caller should call
+  // gda_query_set_sql_text her/himself.
+  _IGNORE(gda_query_new_from_sql)
+
+  _WRAP_METHOD(void set_query_type(QueryType type), gda_query_set_query_type)
+  _WRAP_METHOD(QueryType get_query_type() const, gda_query_get_query_type)
+  _WRAP_METHOD(Glib::ustring get_query_type_string() const, gda_query_get_query_type_string)
+  _WRAP_METHOD(bool is_select_query() const, gda_query_is_select_query)
+  _WRAP_METHOD(bool is_insert_query() const, gda_query_is_insert_query)
+  _WRAP_METHOD(bool is_update_query() const, gda_query_is_update_query)
+  _WRAP_METHOD(bool is_delete_query() const, gda_query_is_delete_query)
+  _WRAP_METHOD(bool is_modif_query() const, gda_query_is_modif_query)
+
+  _WRAP_METHOD(void set_sql_text(const Glib::ustring& sql), gda_query_set_sql_text, errthrow)
+  _WRAP_METHOD(Glib::ustring get_sql_text() const, gda_query_get_sql_text)
+
+  #m4 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<Parameter> >',`$2($3, Glib::OWNERSHIP_DEEP)')
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<Parameter> > get_parameters(), gda_query_get_parameters)
+  _WRAP_METHOD(Glib::RefPtr<ParameterList> get_parameter_list(), gda_query_get_parameter_list)
+  _WRAP_METHOD(Glib::RefPtr<const ParameterList> get_parameter_list() const, gda_query_get_parameter_list, constversion)
+
+  _WRAP_METHOD(Glib::RefPtr<Object> execute(const Glib::RefPtr<ParameterList>& params, bool iter_model_only_requested), gda_query_execute, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<const Object> execute(const Glib::RefPtr<ParameterList>& params, bool iter_model_only_requested) const, gda_query_execute, errthrow, constversion)
+  _WRAP_METHOD(Glib::RefPtr<Query> get_parent_query(), gda_query_get_parent_query)
+  _WRAP_METHOD(Glib::RefPtr<const Query> get_parent_query() const, gda_query_get_parent_query, constversion)
+
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<Query> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<Query> > get_sub_queries(), gda_query_get_sub_queries)
+  _WRAP_METHOD(void add_param_source(const Glib::RefPtr<DataModel>& param_source), gda_query_add_param_source)
+  _WRAP_METHOD(void del_param_source(const Glib::RefPtr<DataModel>& param_source), gda_query_del_param_source)
+
+  #m4 _CONVERSION(`const GSList*', `Glib::SListHandle<Glib::RefPtr<const Query> >', `$2(const_cast<GSList*>($3), Glib::OWNERSHIP_NONE)')
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const Query> > get_param_sources() const, gda_query_get_param_sources)
+
+  _WRAP_METHOD(void add_sub_query(const Glib::RefPtr<Query>& sub_query), gda_query_add_sub_query)
+  _WRAP_METHOD(void del_sub_query(const Glib::RefPtr<Query>& sub_query), gda_query_del_sub_query)
+};
+
+} // namespace Gda
+} // namespace Gnome
+
