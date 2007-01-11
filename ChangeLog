@@ -1,5 +1,10 @@
 2007-01-11  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/serverprovider.hg: Remove create_blob() and fetch_blob_by_id(), 
+	because they have been removed from libgda.
+
+2007-01-11  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/query.hg: Inherit from the interfaces that we implement.
 	execute(): Remove the const overload. It does not seem appropriate.
 	get_parent_query(): Use refreturn to take a reference.
