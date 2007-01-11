@@ -44,7 +44,11 @@ _WRAP_ENUM(QueryType, GdaQueryType, NO_GTYPE)
 // they do not yet exist, however, we need GdaQuery to create gnome-db
 // examples.
 class Query
- : public QueryObject
+ : public QueryObject,
+   public XmlStorage,
+   public Referer,
+   public Renderer,
+   public Entity
 {
   _CLASS_GOBJECT(Query, GdaQuery, GDA_QUERY, QueryObject, GdaQueryObject)
 
@@ -86,9 +90,10 @@ public:
   _WRAP_METHOD(Glib::RefPtr<ParameterList> get_parameter_list(), gda_query_get_parameter_list)
   _WRAP_METHOD(Glib::RefPtr<const ParameterList> get_parameter_list() const, gda_query_get_parameter_list, constversion)
 
+//TODO: Add a suitable default value for the bool - look at the docs to choose a value?
   _WRAP_METHOD(Glib::RefPtr<Object> execute(const Glib::RefPtr<ParameterList>& params, bool iter_model_only_requested), gda_query_execute, errthrow)
-  _WRAP_METHOD(Glib::RefPtr<const Object> execute(const Glib::RefPtr<ParameterList>& params, bool iter_model_only_requested) const, gda_query_execute, errthrow, constversion)
-  _WRAP_METHOD(Glib::RefPtr<Query> get_parent_query(), gda_query_get_parent_query)
+  //I don't think that an exectute() function should be const. We can add it later if necessary. murrayc: _WRAP_METHOD(Glib::RefPtr<const Object> execute(const Glib::RefPtr<ParameterList>& params, bool iter_model_only_requested) const, gda_query_execute, errthrow, constversion)
+  _WRAP_METHOD(Glib::RefPtr<Query> get_parent_query(), gda_query_get_parent_query, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Query> get_parent_query() const, gda_query_get_parent_query, constversion)
 
   #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<Query> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')

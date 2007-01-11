@@ -1,3 +1,12 @@
+2007-01-11  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/query.hg: Inherit from the interfaces that we implement.
+	execute(): Remove the const overload. It does not seem appropriate.
+	get_parent_query(): Use refreturn to take a reference.
+	* libgda/src/renderer.hg: Make is_valid() const.
+	* libgda/src/queryobject.hg:
+	* libgda/src/xmlstorage.hg: Added some mostly unimportant TODO comments.
+
 2007-01-10  Johannes Schmid <johannes.schmid@openismus.com>
 
 	* libgda/src/blobop.hg:

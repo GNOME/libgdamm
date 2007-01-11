@@ -40,6 +40,7 @@ public:
   #m4 _CONVERSION(`guint', `int', `($3)')
   #m4 _CONVERSION(`int', `guint', `($3)')
 
+//TODO: Maybe libgda should use just "numid", "num_id", or "int_id" everywhere:
   _WRAP_METHOD(void set_int_id(int id), gda_query_object_set_int_id)
   _WRAP_METHOD(int get_int_id() const, gda_query_object_get_int_id)
 
