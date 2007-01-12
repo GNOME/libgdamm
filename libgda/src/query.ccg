@@ -21,7 +21,7 @@
 
 #include <libgdamm/query.h>
 #include <libgda/gda-query.h>
-
+#include <libgda/gda-enum-types.h>
 
 namespace Gnome
 {

@@ -1,3 +1,16 @@
+2007-01-12  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/datamodel.hg:
+	* libgda/src/datasourceinfo.ccg:
+	* libgda/src/datasourceinfo.hg:
+	* libgda/src/parameter.hg:
+	* libgda/src/query.ccg:
+	* libgda/src/query.hg:
+	* libgda/src/renderer.ccg:
+	* libgda/src/renderer.hg: Removed some unnecessary NO_GTYPE options from the 
+	_WRAP_ENUM() statements (this has been fixed in libgda), and removed some unnecessary 
+	includes of C headers from our C++ headers.
+
 2007-01-11  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/serverprovider.hg: Remove create_blob() and fetch_blob_by_id(), 

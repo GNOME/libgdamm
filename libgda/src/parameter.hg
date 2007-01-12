@@ -23,7 +23,6 @@
 #include <libgdamm/object.h>
 #include <libgdamm/value.h>
 #include <libgdamm/entityfield.h>
-//#include <libgda/gda-parameter.h> //TODO: Patch libgda to use the struct _ technique.
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(libgdamm/private/object_p.h)

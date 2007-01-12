@@ -57,7 +57,6 @@ public:
   _WRAP_METHOD(int get_n_rows() const, gda_data_model_get_n_rows)
   _WRAP_METHOD(int get_n_columns() const, gda_data_model_get_n_columns)
 
-  //TODO: Use C++ type:
   _WRAP_METHOD(Glib::RefPtr<Column> describe_column(int col), gda_data_model_describe_column)
   _WRAP_METHOD(Glib::RefPtr<const Column> describe_column(int col) const, gda_data_model_describe_column)
   _WRAP_METHOD(int get_column_index(const Glib::ustring& name) const, gda_data_model_get_column_index_by_name)

@@ -32,8 +32,7 @@ namespace Gnome
 namespace Gda
 {
 
-//TODO: NO_GTYPE should not be necessary. Fix libgda if necessary. murrayc.
-_WRAP_ENUM(RendererOptions, GdaRendererOptions, NO_GTYPE)
+_WRAP_ENUM(RendererOptions, GdaRendererOptions)
 
 class Renderer : public Glib::Interface
 {

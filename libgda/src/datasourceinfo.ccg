@@ -20,6 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgda/gda-config.h> //For GdaDataSourceInfo
 #include <libgda/gda-enum-types.h>
 
 namespace Gnome

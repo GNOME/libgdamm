@@ -21,10 +21,13 @@
  */
 
 #include <glibmm/object.h>
-#include <libgda/gda-config.h> //TODO: Patch libgda to use the struct _ technique.
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+typedef struct _GdaDataSourceInfo GdaDataSourceInfo;
+#endif //DOXYGEN_SHOULD_SKIP_THIS
 
 namespace Gnome
 {

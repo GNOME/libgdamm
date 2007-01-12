@@ -38,7 +38,7 @@ namespace Gnome
 namespace Gda
 {
 
-_WRAP_ENUM(QueryType, GdaQueryType, NO_GTYPE)
+_WRAP_ENUM(QueryType, GdaQueryType)
 
 // TODO: Functions requiring GdaQuery* classes are still unwrapped because
 // they do not yet exist, however, we need GdaQuery to create gnome-db
