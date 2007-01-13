@@ -1,3 +1,21 @@
+2007-01-13  Johannes Schmid <johannes.schmid@openismus.com>
+
+  * libgda/libgdamm-3.0.pc.in:
+  Require libgda-3.0 instead of 2.0
+  
+  * libgda/libgdamm.h:
+  Added some files but still needs complete fixing
+  
+  * libgda/src/parameter.hg
+  * libgda/src/renderer.hg:
+  Fixed build with latest libgda, added TODO in GdaRenderer
+  
+  * libgda/src/datamodelquery.hg:
+  Added correct create() method
+  
+  * tools/m4/convert_libgdamm.m4:
+  Added conversion and fixed type
+
 2007-01-12  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/datamodel.hg:

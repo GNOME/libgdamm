@@ -41,7 +41,9 @@ public:
 
   //TODO: Why is this conversion necessary? Are the .defs files wrong, because a property is wrongly registered? murrayc
   #m4 _CONVERSION(`RendererOptions', `guint', `static_cast<$2>($3)')
-  _WRAP_METHOD(Glib::ustring render_as_sql(const Glib::RefPtr<ParameterList>& context, RendererOptions options), gda_renderer_render_as_sql, errthrow)
+ 
+  // TODO: Wrap GSList* because signature changed in libgda
+  //_WRAP_METHOD(Glib::ustring render_as_sql(const Glib::RefPtr<ParameterList>& context, RendererOptions options), gda_renderer_render_as_sql, errthrow)
   _WRAP_METHOD(Glib::ustring render_as_str(const Glib::RefPtr<ParameterList>& context), gda_renderer_render_as_str)
   _WRAP_METHOD(bool is_valid(const Glib::RefPtr<ParameterList>& context) const, gda_renderer_is_valid, errthrow)
 };

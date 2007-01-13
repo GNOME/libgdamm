@@ -58,13 +58,9 @@ public:
   _WRAP_CREATE(const Glib::ustring& name, bool value);
   _WRAP_CREATE(const Glib::ustring& name, const Glib::ustring& value);
   
-  _WRAP_METHOD(void declare_param_user(const Glib::RefPtr<Gda::Object>& user), gda_parameter_declare_param_user)
 
   typedef Glib::SListHandle< Glib::RefPtr<EntityField> > ListHandleEntityField; 
   #m4 _CONVERSION(`GSList*',`ListHandleEntityField',`$2($3, Glib::OWNERSHIP_NONE)')
-  _WRAP_METHOD(ListHandleEntityField get_param_users(), gda_parameter_get_param_users) 
-
-//  _WRAP_METHOD(void gda_parameter_replace_param_users     (GHashTable *replacements);
 
   Value get_value() const;
   _IGNORE(gda_parameter_get_value)

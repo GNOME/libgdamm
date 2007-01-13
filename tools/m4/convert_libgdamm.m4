@@ -19,7 +19,7 @@ _CONVERSION(`GdaParameterList*',`Glib::RefPtr<ParameterList>',`Glib::wrap($3)')
 _CONVERSION(`GdaParameterList*',`const Glib::RefPtr<ParameterList>&',`Glib::wrap($3)')
 _CONVERSION(`GdaServerProvider*',`Glib::RefPtr<ServerProvider>',`Glib::wrap($3)')
 _CONVERSION(`GdaServerOperation*',`Glib::RefPtr<ServerOperation>',`Glib::wrap($3)')
-_CONVERSION(`GdaQuery*',`GliB::RefPtr<Query>',`Glib::wrap($3)')
+_CONVERSION(`GdaQuery*',`Glib::RefPtr<Query>',`Glib::wrap($3)')
 
 _CONVERSION(`const Glib::RefPtr<BlobOp>&', `GdaBlobOp*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DataModel>&', `GdaDataModel*', __CONVERT_REFPTR_TO_P)
