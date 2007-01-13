@@ -33,8 +33,7 @@ namespace Gda
 
 DataModelQuery::DataModelQuery(const Glib::RefPtr<Gda::Query>& query)
 :
-  Glib::ObjectBase(0), //Mark this class as gtkmmproc-generated, rather than a custom class, to allow vfunc optimisations.
-  Gda::Object(Glib::ConstructParams(datamodelquery_class_.init(), "query", Glib::unwrap(query), "dict", gda_object_get_dict(GDA_OBJECT(query->gobj())), (char*) 0))
+  _CONSTRUCT("query", Glib::unwrap(query), "dict", gda_object_get_dict(GDA_OBJECT(query->gobj())))
 {
 }
 

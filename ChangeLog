@@ -1,3 +1,8 @@
+2007-01-13  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/datamodelquery.ccg: Use _CONSTRUCT() macro instead of hard-coding 
+	the construct implementation.
+
 2007-01-13  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/datamodelquery.hg:
@@ -5,7 +10,7 @@
 	Gda::Object instead of Glib::Object, changed constructor to take a
 	Gda::Query argument.
 
-+	* libgda/libgdamm.h: Added datamodelquery.h to includes.
+	* libgda/libgdamm.h: Added datamodelquery.h to includes.
 
 2007-01-13  Johannes Schmid <johannes.schmid@openismus.com>
 
