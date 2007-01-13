@@ -38,6 +38,7 @@ extern const int libgdamm_micro_version;
 #include <libgdamm/connection.h>
 #include <libgdamm/datamodel.h>
 #include <libgdamm/connectionevent.h>
+#include <libgdamm/datamodelquery.h>
 #include <libgdamm/query.h>
 
 #endif /* #ifndef LIBGDAMM_H */

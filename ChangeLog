@@ -1,3 +1,12 @@
+2007-01-13  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/datamodelquery.hg:
+	* libgda/src/datamodelquery.ccg: Made Gda::DataModelQuery inherit from
+	Gda::Object instead of Glib::Object, changed constructor to take a
+	Gda::Query argument.
+
++	* libgda/libgdamm.h: Added datamodelquery.h to includes.
+
 2007-01-13  Johannes Schmid <johannes.schmid@openismus.com>
 
   * libgda/libgdamm-3.0.pc.in:

@@ -53,9 +53,6 @@ public:
   _WRAP_METHOD(void set_connection(const Glib::RefPtr<Connection>& cnc), gda_dict_set_connection)
   _WRAP_METHOD(Glib::RefPtr<Connection> get_connection() const, gda_dict_get_connection)
 
-  //TODO: Not implemented: _WRAP_METHOD(guint get_id_serial() const, gda_dict_get_id_serial)
-  //TODO: Not implemented: _WRAP_METHOD(void set_id_serial(guint value), gda_dict_set_id_serial)
-
   //_WRAP_METHOD(void declare_object_string_id_change(const Glib::RefPtr<Object>& obj, const Glib::ustring& oldid), gda_dict_declare_object_string_id_change)
   //_WRAP_METHOD(Glib::RefPtr<Object> get_object_by_string_id(const Glib::ustring& strid), gda_dict_get_object_by_string_id)
 
