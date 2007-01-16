@@ -1,3 +1,12 @@
+2007-01-16  Johannes Schmid <johannes.schmid@openismus.com>
+
+	* libgda/src/datamodel.hg:
+	* libgda/src/connection.hg:
+	* libgda/src/client.hg:
+	* libgda/src/libgda_signals.defs (regenerated):
+	
+	Fixed some unwrapped methods.
+
 2007-01-13  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/datamodelquery.ccg: Use _CONSTRUCT() macro instead of hard-coding 
