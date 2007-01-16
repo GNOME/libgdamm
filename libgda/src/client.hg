@@ -26,6 +26,7 @@
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
+_PINCLUDE(libgda/gda-client.h)
 
 namespace Gnome
 {
@@ -85,8 +86,7 @@ public:
   _WRAP_METHOD(bool commit_transaction(const Glib::ustring& name), gda_client_commit_transaction, errthrow)
   _WRAP_METHOD(bool rollback_transaction(const Glib::ustring& name), gda_client_rollback_transaction, errthrow)
 
-  //TODO: Use C++ types:
-  //_WRAP_SIGNAL(void event_notification(const Glib::RefPtr<Connection>& cnc, ClientEvent event, const Glib::RefPtr<ParameterList>& params), "event_notification")
+  _WRAP_SIGNAL(void event_notification(const Glib::RefPtr<Connection>& cnc, ClientEvent event, const Glib::RefPtr<ParameterList>& params), "event_notification")
 };
 
 } // namespace Gda

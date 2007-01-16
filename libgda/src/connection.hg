@@ -182,6 +182,7 @@ _CONVERSION(`GdaConnectionEvent*',`const Glib::RefPtr<ConnectionEvent>&',Glib::w
   _WRAP_SIGNAL(void conn_to_close(), "conn_to_close")
   _WRAP_SIGNAL(void conn_closed(), "conn_closed")
   _WRAP_SIGNAL(void dsn_changed(), "dsn_changed")
+  _WRAP_SIGNAL(void transaction_status_changed(), "transaction_status_changed")
 };
 
 } // namespace Gda

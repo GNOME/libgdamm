@@ -124,6 +124,11 @@ _CONV_ENUM(Gda,ServerOperationType)
 _CONV_ENUM(Gda,ServerOperationNodeType)
 _CONV_ENUM(Gda,QueryType)
 
+# Lists
+_CONVERSION(`const Glib::ListHandle<Value>&',`GList*',`$3.data()')
+_CONVERSION(`GList*',`const Glib::ListHandle<Value>',__FL2H_SHALLOW)
+
 # For signals:
-_CONVERSION(`GdaConnection*',`const Glib::RefPtr<Connection>&',`Glib::wrap($3)')
 _CONVERSION(`GdaParameterList*',`const ParameterList&',`Glib::wrap($3)')
+_CONVERSION(`GdaConnection*',`const Glib::RefPtr<Connection>&',`Glib::wrap($3)')
+

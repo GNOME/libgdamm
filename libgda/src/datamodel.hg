@@ -90,7 +90,7 @@ public:
 
   #m4 //Use deep ownership because we own both the list and its elements;
   #m4 _CONVERSION(`const Glib::ListHandle<Value>&',`const GList*',`$3.data()')
-  //_WRAP_METHOD(Glib::RefPtr<Row> append_values(const Glib::ListHandle<Value>& values), gda_data_model_append_values, errthrow)
+  _WRAP_METHOD(int append_values(const Glib::ListHandle<Value>& values), gda_data_model_append_values, errthrow)
 
   _WRAP_METHOD(bool append_row(), gda_data_model_append_row, errthrow)
   _WRAP_METHOD(bool remove_row(int row), gda_data_model_remove_row, errthrow)
@@ -101,9 +101,9 @@ public:
 
   //TODO: _WRAP_METHOD(Glib::ustring export_to_string(DataModelIOFormat format, const int *cols, int nb_cols, const Glib::RefPtr<const ParameterList>& options), gda_data_model_export_to_string)
 //TODO: Hand-code this to use an Array for the cols and rows, using less parameters:
-  _WRAP_METHOD(bool export_to_file(DataModelIOFormat format,  const std::string& file, const gint* cols, int nb_cols, const gint* rows, int nb_rows, const Glib::RefPtr<const ParameterList>& options), gda_data_model_export_to_file, errthrow)
+  //_WRAP_METHOD(bool export_to_file(DataModelIOFormat format,  const std::string& file, const gint* cols, int nb_cols, const gint* rows, int nb_rows, const Glib::RefPtr<const ParameterList>& options), gda_data_model_export_to_file, errthrow)
 
-  //TODO: _WRAP_METHOD(bool import_from_model(GdaDataModel *to, GdaDataModel *from,  GHashTable *cols_trans), gda_data_model_import_from_model, errthrow)
+  //TODO: _WRAP_METHOD(bool import_from_model(Glib::RefPtr<DataModel> from,  GHashTable *cols_trans), gda_data_model_import_from_model, errthrow)
   _WRAP_METHOD(bool import_from_string(const Glib::ustring& string, GHashTable *cols_trans, const Glib::RefPtr<const ParameterList>& options), gda_data_model_import_from_string, errthrow)
   _WRAP_METHOD(bool import_from_file(const std::string& file, GHashTable *cols_trans, const Glib::RefPtr<const ParameterList>& options), gda_data_model_import_from_file, errthrow)
 
@@ -131,6 +131,10 @@ public:
   _WRAP_METHOD(bool move_iter_next_default(GdaDataModelIter *iter), gda_data_model_move_iter_next_default)
   _WRAP_METHOD(bool move_iter_prev_default(GdaDataModelIter *iter), gda_data_model_move_iter_prev_default)
 
+	_WRAP_METHOD(bool set_values(int row, const Glib::ListHandle<Value>& values), gda_data_model_set_values, errthrow);
+
+	/* TODO: Is this correct here. Seems to be in the wrong header */
+  _WRAP_METHOD(Glib::RefPtr<DataModel> copy() const, gda_data_model_array_copy_model, errthrow)
 
   //These are in a private header. Ignore them:
   _IGNORE(gda_data_model_changed, gda_data_model_row_inserted, gda_data_model_row_updated, gda_data_model_row_removed, 

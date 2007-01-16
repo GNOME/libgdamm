@@ -5,9 +5,9 @@
   (return-type "void")
   (when "last")
   (parameters
-    '("gpointer" "p0")
-    '("gint" "p1")
-    '("gpointer" "p2")
+    '("GdaConnection*" "p0")
+    '("GdaClientEvent" "p1")
+    '("GdaParameterList*" "p2")
   )
 )
 
@@ -149,6 +149,15 @@
 
 ;; From GdaConnectionEvent
 
+(define-property type
+  (of-object "GdaConnectionEvent")
+  (prop-type "GParamInt")
+  (docs "Connection event type")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GdaDataModelArray
 
 (define-property dict
@@ -200,6 +209,15 @@
   (of-object "GdaDataModelArray")
   (prop-type "GParamInt")
   (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property n-columns
+  (of-object "GdaDataModelArray")
+  (prop-type "GParamUInt")
+  (docs "The number of columns in the model")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -377,15 +395,6 @@
   (construct-only #f)
 )
 
-(define-property prop
-  (of-object "GdaDictType")
-  (prop-type "GParamPointer")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
 ;; From GdaDictAggregate
 
 (define-property dict
@@ -409,15 +418,6 @@
 (define-property string-id
   (of-object "GdaDictAggregate")
   (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property prop
-  (of-object "GdaDictAggregate")
-  (prop-type "GParamPointer")
   (docs "")
   (readable #t)
   (writable #t)
