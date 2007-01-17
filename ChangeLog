@@ -1,3 +1,8 @@
+2007-01-17  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/datamodelquery.hg: Made Gda::DataModelQuery actually
+	derive from Gda::Object.
+
 2007-01-16  Johannes Schmid <johannes.schmid@openismus.com>
 
 	* libgda/src/datamodel.hg:

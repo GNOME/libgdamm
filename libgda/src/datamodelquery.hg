@@ -21,12 +21,13 @@
  */
 
 #include <glibmm/object.h>
+#include <libgdamm/object.h>
 #include <libgdamm/datamodel.h>
 #include <libgdamm/parameterlist.h>
 #include <libgdamm/query.h>
 
 _DEFS(libgdamm,libgda)
-_PINCLUDE(glibmm/private/object_p.h)
+_PINCLUDE(libgdamm/private/object_p.h)
 
 namespace Gnome
 {
@@ -41,10 +42,10 @@ _WRAP_GERROR(DataModelQueryError,GdaDataModelQueryError,GDA_DATA_MODEL_QUERY_ERR
 _WRAP_ENUM(DataModelQueryOptions, GdaDataModelQueryOptions)
 
 class DataModelQuery
- : public Glib::Object,
+ : public Object,
    public DataModel
 {
-  _CLASS_GOBJECT(DataModelQuery, GdaDataModelQuery, GDA_DATA_MODEL_QUERY, Glib::Object, GObject)
+  _CLASS_GOBJECT(DataModelQuery, GdaDataModelQuery, GDA_DATA_MODEL_QUERY, Object, GdaObject)
   _IMPLEMENTS_INTERFACE(DataModel)
 protected:
   // Hand-coded to also set dict property
