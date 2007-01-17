@@ -279,6 +279,95 @@
   (construct-only #f)
 )
 
+;; From GdaDataModelIter
+
+(define-signal row-to-change
+  (of-object "GdaDataModelIter")
+  (return-type "gboolean")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal row-changed
+  (of-object "GdaDataModelIter")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal end-of-data
+  (of-object "GdaDataModelIter")
+  (return-type "void")
+  (when "first")
+)
+
+(define-property dict
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamObject")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property data-model
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property current-row
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property forced-model
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property update-model
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GdaDataModel
 
 ;; From GdaDict

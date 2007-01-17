@@ -93,6 +93,16 @@ public:
   _WRAP_METHOD(void bind_to_param(const Glib::RefPtr<Parameter>& bind_to), gda_parameter_bind_to_param)
   _WRAP_METHOD(Glib::RefPtr<Parameter> get_bind_param(), gda_parameter_get_bind_param)
 
+  _WRAP_PROPERTY("g-type", GType)
+  _WRAP_PROPERTY("entry-plugin", Glib::ustring)
+  _WRAP_PROPERTY("use-default-value", bool)
+  _WRAP_PROPERTY("not-null", bool)
+  _WRAP_PROPERTY("simple-bind", Glib::RefPtr<Parameter>)
+  _WRAP_PROPERTY("full-bind", Glib::RefPtr<Parameter>)
+  _WRAP_PROPERTY("restrict-model", Glib::RefPtr<DataModel>)
+  _WRAP_PROPERTY("restrict-column", int)
+
+  _WRAP_SIGNAL(void restrict_changed(), "restrict-changed")
 };
 
 } // namespace Gda

@@ -1,7 +1,7 @@
-// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+// -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* datamodelrow.h
- *
+/* datamodeliter.cc
+ * 
  * Copyright 2003 libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
@@ -19,12 +19,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <glibmm/object.h>
-#include <libgdamm/object.h>
+#include <libgda/gda-data-model-iter.h>
 #include <libgdamm/datamodel.h>
-
-_DEFS(libgdamm,libgda)
-_PINCLUDE(libgdamm/private/object_p.h)
 
 namespace Gnome
 {
@@ -32,24 +28,7 @@ namespace Gnome
 namespace Gda
 {
 
-class DataModelRow
- : public Object,
-   public DataModel
-{
-  _CLASS_GOBJECT(DataModelRow, GdaDataModelRow, GDA_DATA_MODEL_ROW, Gda::Object, GdaObject)
-  _IMPLEMENTS_INTERFACE(DataModel)
+} /* namespace Gda */
 
-protected:
-  // There is no create() method because there is no _new function in the C API either.
-
-public:
-  _WRAP_PROPERTY("command-text", Glib::ustring)
-  _WRAP_PROPERTY("command-type", int)
-  _WRAP_PROPERTY("read-only", bool)
-
-  // TODO: Vfuncs
-};
-
-} // namespace Gda
-} // namespace Gnome
+} /* namespace Gnome */
 
