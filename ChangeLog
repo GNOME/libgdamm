@@ -1,5 +1,17 @@
 2007-01-17  Armin Burgmeier  <armin@openismus.com>
 
+	* libgda/src/dataproxy.hg:
+	* libgda/src/dataproxy.ccg:
+	* libgda/src/Makefile_list_of_hg.am_fragment: Wrapped GdaDataProxy.
+
+	* tools/extra_defs_gen/generate_defs_gda.cc: Added GDA_TYPE_DATA_PROXY
+	to output.
+
+	* libgda/src/libgda_signals.defs: Regenerated to contain properties
+	and signals from GdaDataProxy.
+
+2007-01-17  Armin Burgmeier  <armin@openismus.com>
+
 	* libgda/src/parameter.hg: Wrapped properties and signals.
 
 	* libgda/src/datamodeliter.hg:

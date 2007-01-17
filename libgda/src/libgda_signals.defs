@@ -370,6 +370,109 @@
 
 ;; From GdaDataModel
 
+(define-signal row-inserted
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal row-updated
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal row-removed
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+;; From GdaDataProxy
+
+(define-signal row-delete-changed
+  (of-object "GdaDataProxy")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gint" "p0")
+    '("gboolean" "p1")
+  )
+)
+
+(define-signal sample-size-changed
+  (of-object "GdaDataProxy")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal sample-changed
+  (of-object "GdaDataProxy")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gint" "p0")
+    '("gint" "p1")
+  )
+)
+
+(define-property dict
+  (of-object "GdaDataProxy")
+  (prop-type "GParamObject")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaDataProxy")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaDataProxy")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property model
+  (of-object "GdaDataProxy")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property prepend-null-entry
+  (of-object "GdaDataProxy")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GdaDict
 
 (define-signal object-added
