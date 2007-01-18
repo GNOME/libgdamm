@@ -1,5 +1,12 @@
 ;; -*- scheme -*-
 ; object definitions ...
+(define-object Blob
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaBlob")
+  (gtype-id "GDA_TYPE_BLOB")
+)
+
 (define-object BlobOp
   (in-module "Gda")
   (parent "GObject")
@@ -351,6 +358,17 @@
 )
 
 ;; Enumerations and flags ...
+
+(define-flags BlobMode
+  (in-module "Gda")
+  (c-name "GdaBlobMode")
+  (gtype-id "GDA_TYPE_BLOB_MODE")
+  (values
+    '("read" "GDA_BLOB_MODE_READ")
+    '("write" "GDA_BLOB_MODE_WRITE")
+    '("rdwr" "GDA_BLOB_MODE_RDWR")
+  )
+)
 
 (define-enum ClientEvent
   (in-module "Gda")
@@ -1081,6 +1099,16 @@
   )
 )
 
+(define-enum TransactionStatusState
+  (in-module "Gda")
+  (c-name "GdaTransactionStatusState")
+  (gtype-id "GDA_TYPE_TRANSACTION_STATUS_STATE")
+  (values
+    '("ok" "GDA_TRANSACTION_STATUS_STATE_OK")
+    '("failed" "GDA_TRANSACTION_STATUS_STATE_FAILED")
+  )
+)
+
 (define-enum GeneralError
   (in-module "Gda")
   (c-name "GdaGeneralError")
@@ -1091,6 +1119,74 @@
     '("operation-error" "GDA_GENERAL_OPERATION_ERROR")
   )
 )
+
+
+;; From gda-blob.h
+
+(define-function gda_blob_get_type
+  (c-name "gda_blob_get_type")
+  (return-type "GType")
+)
+
+(define-method open
+  (of-object "GdaBlob")
+  (c-name "gda_blob_open")
+  (return-type "gint")
+  (parameters
+    '("GdaBlobMode" "mode")
+  )
+)
+
+(define-method read
+  (of-object "GdaBlob")
+  (c-name "gda_blob_read")
+  (return-type "gint")
+  (parameters
+    '("gpointer" "buf")
+    '("gint" "size")
+    '("gint*" "bytes_read")
+  )
+)
+
+(define-method write
+  (of-object "GdaBlob")
+  (c-name "gda_blob_write")
+  (return-type "gint")
+  (parameters
+    '("gpointer" "buf")
+    '("gint" "size")
+    '("gint*" "bytes_written")
+  )
+)
+
+(define-method lseek
+  (of-object "GdaBlob")
+  (c-name "gda_blob_lseek")
+  (return-type "gint")
+  (parameters
+    '("gint" "offset")
+    '("gint" "whence")
+  )
+)
+
+(define-method close
+  (of-object "GdaBlob")
+  (c-name "gda_blob_close")
+  (return-type "gint")
+)
+
+(define-method remove
+  (of-object "GdaBlob")
+  (c-name "gda_blob_remove")
+  (return-type "gint")
+)
+
+(define-method get_sql_id
+  (of-object "GdaBlob")
+  (c-name "gda_blob_get_sql_id")
+  (return-type "gchar*")
+)
+
 
 
 ;; From gda-blob-op.h
@@ -1114,6 +1210,15 @@
     '("GdaBlob*" "blob")
     '("glong" "offset")
     '("glong" "size")
+  )
+)
+
+(define-method read_all
+  (of-object "GdaBlobOp")
+  (c-name "gda_blob_op_read_all")
+  (return-type "none")
+  (parameters
+    '("GdaBlob*" "blob")
   )
 )
 
@@ -2545,6 +2650,15 @@
   (return-type "none")
   (parameters
     '("const-gchar*" "svp_name")
+  )
+)
+
+(define-method internal_change_transaction_state
+  (of-object "GdaConnection")
+  (c-name "gda_connection_internal_change_transaction_state")
+  (return-type "none")
+  (parameters
+    '("GdaTransactionStatusState" "newstate")
   )
 )
 
@@ -5304,6 +5418,11 @@
   (return-type "GType")
 )
 
+(define-function gda_transaction_status_state_get_type
+  (c-name "gda_transaction_status_state_get_type")
+  (return-type "GType")
+)
+
 (define-function gda_general_error_get_type
   (c-name "gda_general_error_get_type")
   (return-type "GType")
@@ -5676,30 +5795,6 @@
   )
 )
 
-(define-method declare_param_user
-  (of-object "GdaParameter")
-  (c-name "gda_parameter_declare_param_user")
-  (return-type "none")
-  (parameters
-    '("GdaObject*" "user")
-  )
-)
-
-(define-method get_param_users
-  (of-object "GdaParameter")
-  (c-name "gda_parameter_get_param_users")
-  (return-type "GSList*")
-)
-
-(define-method replace_param_users
-  (of-object "GdaParameter")
-  (c-name "gda_parameter_replace_param_users")
-  (return-type "none")
-  (parameters
-    '("GHashTable*" "replacements")
-  )
-)
-
 (define-method get_value
   (of-object "GdaParameter")
   (c-name "gda_parameter_get_value")
@@ -5945,15 +6040,6 @@
   )
 )
 
-(define-method find_param_for_user
-  (of-object "GdaParameterList")
-  (c-name "gda_parameter_list_find_param_for_user")
-  (return-type "GdaParameter*")
-  (parameters
-    '("GdaObject*" "user")
-  )
-)
-
 (define-method find_node_for_param
   (of-object "GdaParameterList")
   (c-name "gda_parameter_list_find_node_for_param")
@@ -6016,6 +6102,43 @@
   (return-type "const-GValue*")
   (parameters
     '("GdaParameter*" "param")
+  )
+)
+
+
+
+;; From gda-parameter-util.h
+
+(define-method declare_param_user
+  (of-object "GdaParameter")
+  (c-name "gda_parameter_declare_param_user")
+  (return-type "none")
+  (parameters
+    '("GdaObject*" "user")
+  )
+)
+
+(define-method get_param_users
+  (of-object "GdaParameter")
+  (c-name "gda_parameter_get_param_users")
+  (return-type "GSList*")
+)
+
+(define-method replace_param_users
+  (of-object "GdaParameter")
+  (c-name "gda_parameter_replace_param_users")
+  (return-type "none")
+  (parameters
+    '("GHashTable*" "replacements")
+  )
+)
+
+(define-method find_param_for_user
+  (of-object "GdaParameterList")
+  (c-name "gda_parameter_list_find_param_for_user")
+  (return-type "GdaParameter*")
+  (parameters
+    '("GdaObject*" "user")
   )
 )
 
@@ -7428,6 +7551,7 @@
   (return-type "gchar*")
   (parameters
     '("GdaParameterList*" "context")
+    '("GSList**" "out_params_used")
     '("guint" "options")
     '("GError**" "error")
   )
@@ -7874,6 +7998,16 @@
   )
 )
 
+(define-function gda_server_provider_select_query_has_blobs
+  (c-name "gda_server_provider_select_query_has_blobs")
+  (return-type "gboolean")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("GdaQuery*" "query")
+    '("GError**" "error")
+  )
+)
+
 
 
 ;; From gda-server-provider.h
@@ -7978,6 +8112,26 @@
   (parameters
     '("GdaConnection*" "cnc")
     '("GType" "type")
+  )
+)
+
+(define-method escape_string
+  (of-object "GdaServerProvider")
+  (c-name "gda_server_provider_escape_string")
+  (return-type "gchar*")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "str")
+  )
+)
+
+(define-method unescape_string
+  (of-object "GdaServerProvider")
+  (c-name "gda_server_provider_unescape_string")
+  (return-type "gchar*")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "str")
   )
 )
 
@@ -8165,25 +8319,6 @@
   )
 )
 
-(define-method create_blob
-  (of-object "GdaServerProvider")
-  (c-name "gda_server_provider_create_blob")
-  (return-type "GdaBlob*")
-  (parameters
-    '("GdaConnection*" "cnc")
-  )
-)
-
-(define-method fetch_blob_by_id
-  (of-object "GdaServerProvider")
-  (c-name "gda_server_provider_fetch_blob_by_id")
-  (return-type "GdaBlob*")
-  (parameters
-    '("GdaConnection*" "cnc")
-    '("const-gchar*" "sql_id")
-  )
-)
-
 
 
 ;; From gda-server-provider-private.h
@@ -8342,16 +8477,16 @@
   )
 )
 
-(define-function gda_default_escape_chars
-  (c-name "gda_default_escape_chars")
+(define-function gda_default_escape_string
+  (c-name "gda_default_escape_string")
   (return-type "gchar*")
   (parameters
     '("const-gchar*" "string")
   )
 )
 
-(define-function gda_default_unescape_chars
-  (c-name "gda_default_unescape_chars")
+(define-function gda_default_unescape_string
+  (c-name "gda_default_unescape_string")
   (return-type "gchar*")
   (parameters
     '("const-gchar*" "string")

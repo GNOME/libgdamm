@@ -88,6 +88,8 @@ _CONVERSION(`const Glib::RefPtr<Client>&', `GdaClient*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Value&', `GValue*', `const_cast<GValue*>(($3).gobj())')
 _CONVERSION(`const Value&', `const GValue*', `($3).gobj()')
 
+_CONVERSION(`GdaRow*', `const Glib::RefPtr<Row>',  `Glib::wrap($3)')
+_CONVERSION(`GdaRow*', `const Glib::RefPtr<const Row>',  `Glib::wrap($3)')
 
 _CONVERSION(`const Time&', `const GdaTime*', `&($3)')
 _CONVERSION(`const GdaTime*', `Time', `*($3)')
@@ -128,6 +130,8 @@ _CONV_ENUM(Gda,QueryType)
 # Lists
 _CONVERSION(`const Glib::ListHandle<Value>&',`GList*',`$3.data()')
 _CONVERSION(`GList*',`const Glib::ListHandle<Value>',__FL2H_SHALLOW)
+_CONVERSION(`const Glib::ListHandle<ColumnIndex>&',`GList*',`$3.data()')
+_CONVERSION(`GList*',`Glib::ListHandle<ColumnIndex>',__FL2H_SHALLOW)
 
 # For signals:
 _CONVERSION(`GdaParameterList*',`const ParameterList&',`Glib::wrap($3)')

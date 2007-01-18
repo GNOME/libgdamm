@@ -47,6 +47,9 @@ public:
   _WRAP_PROPERTY("command-type", int)
   _WRAP_PROPERTY("read-only", bool)
 
+	_WRAP_METHOD(const Glib::RefPtr<Row>  get_row(int row), gda_data_model_row_get_row, errthrow)
+	_WRAP_METHOD(const Glib::RefPtr<const Row>  get_row(int row) const, gda_data_model_row_get_row, errthrow, constversion)	
+
   // TODO: Vfuncs
 };
 
