@@ -1,3 +1,12 @@
+2007-01-18  Johannes Schmid <johannes.schmid@openismus.com>
+
+	* libgda/src/datamodelrow.hg
+	* libgda/src/datamodelindex.hg:
+	Wrapped some unwrapped methods
+	
+	* libgda/src/libgda_methods.defs:
+	regenerated
+
 2007-01-17  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/dataproxy.hg:
