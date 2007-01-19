@@ -25,7 +25,8 @@
 #include <libgdamm/datamodelindex.h>
 #include <libgdamm/client.h>
 #include <libgdamm/serveroperation.h>
-//#include <libgda/gda-server-provider.h>
+#include <libgdamm/query.h>
+#include <libgdamm/datahandler.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -94,7 +95,14 @@ class ServerProvider : public Glib::Object
 
   _WRAP_METHOD(Glib::ustring value_to_sql_string(const Glib::RefPtr<Connection>& cnc, const Value& from) const, gda_server_provider_value_to_sql_string)
 
-  _WRAP_METHOD(Glib::ustring get_last_insert_id(const Glib::RefPtr<Connection>&, const Glib::RefPtr<DataModel>& recset) const, gda_server_provider_get_last_insert_id)
+  _WRAP_METHOD(Glib::ustring get_last_insert_id(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<DataModel>& recset) const, gda_server_provider_get_last_insert_id)
+
+  _WRAP_METHOD(Glib::ustring escape_string(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& str), gda_server_provider_escape_string)
+  _WRAP_METHOD(Glib::ustring unescape_string(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& str), gda_server_provider_unescape_string)
+  _WRAP_METHOD(Glib::RefPtr<Gda::Object> execute_query(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Query>& query, const Glib::RefPtr<ParameterList>& options), gda_server_provider_execute_query)
+  _WRAP_METHOD(Glib::RefPtr<DataHandler> get_data_handler_dbms(const Glib::RefPtr<Connection>& cnc,  const Glib::ustring& for_type), gda_server_provider_get_data_handler_dbms)
+
+  //TODO: What about the methods that take a GType argument? Johannes
 
  //TODO: vfuncs.
 };

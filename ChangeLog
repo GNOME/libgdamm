@@ -1,3 +1,12 @@
+2007-01-19  Johannes Schmid <johannes.schmid@openismus.com>
+
+	* libgda/src/connection.hg:
+	* libgda/src/object.hg:
+	* libgda/src/serverprovider.hg:
+	* tools/m4/convert_libgdamm.m4:
+	
+	Wrapped even more unwrapped methods. Added TODO about methods taking a GType argument
+
 2007-01-18  Johannes Schmid <johannes.schmid@openismus.com>
 
 	* libgda/src/datamodelrow.hg

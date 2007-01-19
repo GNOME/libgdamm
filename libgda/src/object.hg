@@ -61,6 +61,9 @@ public:
   //We ignore the *destroy methods because they are not appropriate for C++ and don't even seem necessary as public API.
   _IGNORE(gda_object_destroy, gda_object_destroy_check, gda_object_connect_destroy)
 
+	// Ignore this debugging method
+	_IGNORE(gda_object_dump)
+
   _WRAP_METHOD(void signal_emit_changed(), gda_object_signal_emit_changed)
   _WRAP_METHOD(void block_changed(), gda_object_block_changed)
   _WRAP_METHOD(void unblock_changed(), gda_object_unblock_changed)

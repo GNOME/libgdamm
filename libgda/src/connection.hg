@@ -76,7 +76,7 @@ public:
           gda_connection_internal_treat_sql, gda_connection_internal_transaction_rolledback,
           gda_connection_internal_savepoint_removed, gda_connection_internal_transaction_committed,
           gda_connection_internal_savepoint_rolledback, gda_connection_execute_command,
-          gda_connection_internal_sql_executed)
+          gda_connection_internal_sql_executed, gda_connection_internal_change_transaction_state)
 
   _WRAP_METHOD(bool is_opened() const, gda_connection_is_opened)
 
