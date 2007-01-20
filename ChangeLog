@@ -1,3 +1,7 @@
+2007-01-20  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in: Require glibmm 2.12, because we need the new Value::init(Value) method.
+
 2007-01-19  Johannes Schmid <johannes.schmid@openismus.com>
 
 	* libgda/src/connection.hg:
