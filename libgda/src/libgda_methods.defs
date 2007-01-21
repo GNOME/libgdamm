@@ -1,12 +1,5 @@
 ;; -*- scheme -*-
 ; object definitions ...
-(define-object Blob
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaBlob")
-  (gtype-id "GDA_TYPE_BLOB")
-)
-
 (define-object BlobOp
   (in-module "Gda")
   (parent "GObject")
@@ -358,17 +351,6 @@
 )
 
 ;; Enumerations and flags ...
-
-(define-flags BlobMode
-  (in-module "Gda")
-  (c-name "GdaBlobMode")
-  (gtype-id "GDA_TYPE_BLOB_MODE")
-  (values
-    '("read" "GDA_BLOB_MODE_READ")
-    '("write" "GDA_BLOB_MODE_WRITE")
-    '("rdwr" "GDA_BLOB_MODE_RDWR")
-  )
-)
 
 (define-enum ClientEvent
   (in-module "Gda")
@@ -1121,74 +1103,6 @@
 )
 
 
-;; From gda-blob.h
-
-(define-function gda_blob_get_type
-  (c-name "gda_blob_get_type")
-  (return-type "GType")
-)
-
-(define-method open
-  (of-object "GdaBlob")
-  (c-name "gda_blob_open")
-  (return-type "gint")
-  (parameters
-    '("GdaBlobMode" "mode")
-  )
-)
-
-(define-method read
-  (of-object "GdaBlob")
-  (c-name "gda_blob_read")
-  (return-type "gint")
-  (parameters
-    '("gpointer" "buf")
-    '("gint" "size")
-    '("gint*" "bytes_read")
-  )
-)
-
-(define-method write
-  (of-object "GdaBlob")
-  (c-name "gda_blob_write")
-  (return-type "gint")
-  (parameters
-    '("gpointer" "buf")
-    '("gint" "size")
-    '("gint*" "bytes_written")
-  )
-)
-
-(define-method lseek
-  (of-object "GdaBlob")
-  (c-name "gda_blob_lseek")
-  (return-type "gint")
-  (parameters
-    '("gint" "offset")
-    '("gint" "whence")
-  )
-)
-
-(define-method close
-  (of-object "GdaBlob")
-  (c-name "gda_blob_close")
-  (return-type "gint")
-)
-
-(define-method remove
-  (of-object "GdaBlob")
-  (c-name "gda_blob_remove")
-  (return-type "gint")
-)
-
-(define-method get_sql_id
-  (of-object "GdaBlob")
-  (c-name "gda_blob_get_sql_id")
-  (return-type "gchar*")
-)
-
-
-
 ;; From gda-blob-op.h
 
 (define-function gda_blob_op_get_type
@@ -1216,7 +1130,7 @@
 (define-method read_all
   (of-object "GdaBlobOp")
   (c-name "gda_blob_op_read_all")
-  (return-type "none")
+  (return-type "gboolean")
   (parameters
     '("GdaBlob*" "blob")
   )
@@ -1229,6 +1143,15 @@
   (parameters
     '("GdaBlob*" "blob")
     '("glong" "offset")
+  )
+)
+
+(define-method write_all
+  (of-object "GdaBlobOp")
+  (c-name "gda_blob_op_write_all")
+  (return-type "gboolean")
+  (parameters
+    '("GdaBlob*" "blob")
   )
 )
 
@@ -6140,6 +6063,12 @@
   (parameters
     '("GdaObject*" "user")
   )
+)
+
+(define-method get_alphanum_name
+  (of-object "GdaParameter")
+  (c-name "gda_parameter_get_alphanum_name")
+  (return-type "gchar*")
 )
 
 

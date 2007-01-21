@@ -81,7 +81,10 @@ public:
   _WRAP_METHOD(Glib::ustring get_spec() const, gda_parameter_list_get_spec)
   _WRAP_METHOD(guint get_length() const, gda_parameter_list_get_length)
 
-
+  _WRAP_SIGNAL(void public_data_changed(), "public_data_changed")
+  _WRAP_SIGNAL(void param_plugin_changed(Glib::RefPtr<Parameter> parameter), "param_plugin_changed")
+  _WRAP_SIGNAL(void param_changed(Glib::RefPtr<Parameter> parameter), "param_changed")
+  _WRAP_SIGNAL(void param_attr_changed(Glib::RefPtr<Parameter> parameter), "param_attr_changed")  
 };
 
 } // namespace Gda

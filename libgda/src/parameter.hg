@@ -65,6 +65,9 @@ public:
   Value get_value() const;
   _IGNORE(gda_parameter_get_value)
   
+  _WRAP_METHOD(Glib::ustring get_alphanum_name() const, gda_parameter_get_alphanum_name)
+  
+  
   _WRAP_METHOD(GType get_g_type() const, gda_parameter_get_g_type)
 
   _WRAP_METHOD(void set_value(const Value& value), gda_parameter_set_value)
@@ -92,6 +95,15 @@ public:
 
   _WRAP_METHOD(void bind_to_param(const Glib::RefPtr<Parameter>& bind_to), gda_parameter_bind_to_param)
   _WRAP_METHOD(Glib::RefPtr<Parameter> get_bind_param(), gda_parameter_get_bind_param)
+
+  _IGNORE(gda_parameter_get_value_str)
+  // Hand-code because it might return NULL;
+  Glib::ustring get_value_str();
+
+  //TODO: Wrap list correctly - Johannes
+  // It is defined in gda-parameter-utils.c, check whether it is useful API
+  // _WRAP_METHOD(GSList* get_param_users(), gda_parameter_get_param_users);
+  // same for replace_param_users and declare_param_user    
 
   _WRAP_PROPERTY("g-type", GType)
   _WRAP_PROPERTY("entry-plugin", Glib::ustring)

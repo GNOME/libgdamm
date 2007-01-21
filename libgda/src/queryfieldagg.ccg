@@ -1,7 +1,6 @@
-/* $Id: parameterlist.ccg,v 1.7 2006/11/06 04:38:05 murrayc Exp $ */
-// -*- C++ -*- //
+// -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* parameter.cc
+/* queryfieldagg.cc
  * 
  * Copyright 2003 libgdamm Development Team
  *
@@ -20,9 +19,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgda/gda-parameter-list.h>
-#include <libgda/gda-parameter.h>
-#include <libgda/gda-enum-types.h>
+#include <libgda/gda-query-field-agg.h>
 
 namespace Gnome
 {
@@ -30,18 +27,7 @@ namespace Gnome
 namespace Gda
 {
 
-Value ParameterList::get_param_default_value(const Glib::RefPtr<const Parameter>& param) const
-{
-  Value value;
-  const GValue* cvalue = gda_parameter_list_get_param_default_value(const_cast<GdaParameterList*>(gobj()), const_cast<GdaParameter*>(param->gobj()));
-  if(cvalue)
-    value.init(cvalue);
-  
-  return value;
-}
+} /* namespace Gda */
 
-} //namespace Gda
-
-} // namespace Gnome
-
+} /* namespace Gnome */
 

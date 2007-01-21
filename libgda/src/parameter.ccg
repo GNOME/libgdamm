@@ -22,6 +22,7 @@
 
 #include <libgdamm/datamodel.h>
 #include <libgda/gda-parameter.h>
+#include <libgda/gda-parameter-util.h>
 #include <libgda/gda-enum-types.h>
 
 //Make life easier for the generated code:
@@ -91,6 +92,15 @@ bool Parameter::has_restrict_values(Glib::RefPtr<DataModel>& model, int& col) co
   return gda_parameter_has_restrict_values(const_cast<GdaParameter*>(gobj()), &gda_model, &col);
   if(gda_model)
     model = Glib::wrap(gda_model); //TODO ref this?
+}
+
+Glib::ustring Parameter::get_value_str()
+{
+  const gchar* value = gda_parameter_get_value_str(gobj());
+  if (value)
+    return Glib::ustring(value);
+  else
+    return Glib::ustring();
 }
 
 } //namespace Gda

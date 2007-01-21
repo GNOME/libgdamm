@@ -55,7 +55,8 @@ public:
   _WRAP_METHOD(void set_unique_key(bool uk = true), gda_data_model_index_set_unique_key)
   _WRAP_METHOD(Glib::ustring get_references() const, gda_data_model_index_get_references)
   _WRAP_METHOD(void set_references(const Glib::ustring& ref), gda_data_model_index_set_references)
-  //TODO: _WRAP_METHOD(Glib::ListHandle<ColumnIndex> get_column_index_list() const, gda_data_model_index_get_column_index_list)
+  //TODO: Use correct list types Johannes
+  // _WRAP_METHOD(Glib::ListHandle<ColumnIndex> get_column_index_list() const, gda_data_model_index_get_column_index_list)
   //_WRAP_METHOD(void set_column_index_list(const Glib::ListHandle<ColumnIndex>& col_idx_list), gda_data_model_index_set_column_index_list)
 
 };

@@ -16,6 +16,7 @@ _CONVERSION(`GdaDictType*',`Glib::RefPtr<DictType>',`Glib::wrap($3)')
 _CONVERSION(`GdaObject*',`Glib::RefPtr<Gda::Object>',`Glib::wrap($3)')
 _CONVERSION(`GdaObject*',`Glib::RefPtr<Object>',`Glib::wrap($3)')
 _CONVERSION(`GdaObject*',`const Glib::RefPtr<Object>',`Glib::wrap($3)')
+_CONVERSION(`GObject*',`Glib::RefPtr<Parameter>',`Glib::wrap($3)')
 _CONVERSION(`GdaParameter*',`Glib::RefPtr<Parameter>',`Glib::wrap($3)')
 _CONVERSION(`GdaParameter*',`Glib::RefPtr<const Parameter>',`Glib::wrap($3)')
 _CONVERSION(`GdaParameterList*',`Glib::RefPtr<ParameterList>',`Glib::wrap($3)')
@@ -24,6 +25,7 @@ _CONVERSION(`GdaServerProvider*',`Glib::RefPtr<ServerProvider>',`Glib::wrap($3)'
 _CONVERSION(`GdaServerOperation*',`Glib::RefPtr<ServerOperation>',`Glib::wrap($3)')
 _CONVERSION(`GdaQuery*',`Glib::RefPtr<Query>',`Glib::wrap($3)')
 _CONVERSION(`GdaDataHandler*',`Glib::RefPtr<DataHandler>',`Glib::wrap($3)')
+_CONVERSION(`GdaQueryField*',`Glib::RefPtr<QueryField>',`Glib::wrap($3)')
 
 _CONVERSION(`const Glib::RefPtr<BlobOp>&', `GdaBlobOp*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DataModel>&', `GdaDataModel*', __CONVERT_REFPTR_TO_P)
@@ -36,11 +38,14 @@ _CONVERSION(`const Glib::RefPtr<DictType>&', `GdaDictType*', __CONVERT_REFPTR_TO
 _CONVERSION(`const Glib::RefPtr<Object>&', `GdaObject*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Gda::Object>&', `GdaObject*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Parameter>&', `GdaParameter*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`Glib::RefPtr<Parameter>', `GdaParameter*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const Parameter>&', `const GdaParameter*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const Parameter>&', `GdaParameter*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<ParameterList>&', `GdaParameterList*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const ParameterList>&', `GdaParameterList*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Query>&', `GdaQuery*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<QueryField>&', `GdaQueryField*', __CONVERT_REFPTR_TO_P)
+
 
 # The const_cast here is silly and should not be necessary - we should fix the wrap() methods some time:
 _CONVERSION(`const Command&', `GdaCommand*', `const_cast<GdaCommand*>(($3).gobj())')
@@ -139,4 +144,3 @@ _CONVERSION(`GList*',`Glib::ListHandle<ColumnIndex>',__FL2H_SHALLOW)
 # For signals:
 _CONVERSION(`GdaParameterList*',`const ParameterList&',`Glib::wrap($3)')
 _CONVERSION(`GdaConnection*',`const Glib::RefPtr<Connection>&',`Glib::wrap($3)')
-

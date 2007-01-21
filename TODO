@@ -1,5 +1,9 @@
 TODO:
 
+* File more bugs about buggy _new methods
+* Wrap the rest of GdaQuery* objects (are they useful, public?)
+* Check TODOs in code about lists and other things
+
 Relevant libgda bugs:
 
 * http://bugzilla.gnome.org/show_bug.cgi?id=340989

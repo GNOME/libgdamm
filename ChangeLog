@@ -1,3 +1,37 @@
+2007-01-21  Johannes Schmid <johannes.schmid@openismus.com>
+
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/queryfield.ccg:
+	* libgda/src/queryfield.hg:
+	* libgda/src/queryfieldagg.ccg:
+	* libgda/src/queryfieldagg.hg:
+  Wrapped GdaQueryField and GdaQueryFieldAgg
+
+	* libgda/src/libgda_methods.defs:
+	Regenerated (this time from correct sources...)
+
+	* libgda/src/libgda_signals.defs:
+	* libgda/src/parameterlist.ccg:
+	* libgda/src/parameterlist.hg:
+	Fixed GdaParameterList signals
+
+	* libgda/src/blobop.hg:
+	Wrapped read_all/write_all
+
+	* libgda/src/parameter.ccg:
+	* libgda/src/parameter.hg:
+	Wrapped gda_parameter_get_alphanum_name
+	
+	* libgda/src/datamodelindex.hg:
+	* libgda/src/object.hg:
+	Added TODOs
+
+	* tools/m4/convert_libgdamm.m4:
+	Added new conversions
+	
+	* TODO:
+	Added some more TODOs
+
 2007-01-20  Murray Cumming  <murrayc@murrayc.com>
 
 	* configure.in: Require glibmm 2.12, because we need the new Value::init(Value) method.
