@@ -32,6 +32,46 @@ namespace Gnome
 namespace Gda
 {
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+bool Dict::update_dbms_meta_data(GType limit_to_type)
+#else
+bool Dict::update_dbms_meta_data(GType limit_to_type, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  bool retvalue = gda_dict_update_dbms_meta_data(gobj(), limit_to_type, 0, &(gerror));
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  return retvalue;
+
+}
+  
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+bool Dict::update_dbms_meta_data()
+#else
+bool Dict::update_dbms_meta_data(std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  bool retvalue = gda_dict_update_dbms_meta_data(gobj(), 0, 0, &(gerror));
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  return retvalue;
+
+}
+
 GSList* Dict::get_dict_types() const
 {
   return gda_dict_get_dict_types(const_cast<GdaDict*>(gobj()));

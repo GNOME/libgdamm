@@ -1,3 +1,9 @@
+2007-01-27  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/dict.ccg:
+	* libgda/src/dict.hg: Added overloads of update_dbms_meta_data() that 
+	take 1 or no arguments.
+
 2007-01-27  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/libgdamm.h: Added datamodelarray.h.

@@ -39,6 +39,17 @@ class Object;
 
 class Connection;
 
+/** This object is a "proxy repository" for objects in a database.
+ * This is a proxy repository for
+ * - object existing within a database such as data types (see the Gda::DictType object), functions (see the Gda::DictFunction object), aggregates (see the Gda::DictAggregate object), and the database structure (through the Gda::DictDatabase and associated object)
+ * - pre-defined queries as Gda::Query objects
+ * - graphs as Gda::Graph objects
+ *
+ * Each Dict object can be saved to an XML file and loaded back in an efficient way.
+ * Any Dict object can be assigned a Gda::Connection object which tells it how to use a real connection to a data source.
+ *
+ * The Dict object is responsible for the lifetime management of all the objects it handles. See the Gda::Object class for more information. 
+ */
 class Dict : public Glib::Object
 {
   _CLASS_GOBJECT(Dict, GdaDict, GDA_DICT, Glib::Object, GObject)
@@ -57,6 +68,32 @@ public:
   //_WRAP_METHOD(Glib::RefPtr<Object> get_object_by_string_id(const Glib::ustring& strid), gda_dict_get_object_by_string_id)
 
   _WRAP_METHOD(bool update_dbms_meta_data(GType limit_to_type, const Glib::ustring& limit_obj_name), gda_dict_update_dbms_meta_data, errthrow)
+
+  /** Updates the list of data types, functions, tables, etc from the database, 
+   * which means that the dict object uses an opened connection to the DBMS. 
+   * Use set_connection() to set a Gda::Connection for the Dict.
+   *
+   * @param limit_to_type Limit the DBMS update to this type, or 0 for no limit.
+   * @result True if there was no error.
+   */
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  bool update_dbms_meta_data(GType limit_to_type);
+  #else
+  bool update_dbms_meta_data(GType limit_to_type, std::auto_ptr<Glib::Error>& error);
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+  
+  /** Updates the list of data types, functions, tables, etc from the database, 
+   * which means that the dict object uses an opened connection to the DBMS. 
+   * Use set_connection() to set a Gda::Connection for the Dict.
+   *
+   * @result True if there was no error.
+   */
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  bool update_dbms_meta_data();
+  #else
+  bool update_dbms_meta_data(std::auto_ptr<Glib::Error>& error);
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+
   _WRAP_METHOD(void stop_update_dbms_meta_data(), gda_dict_stop_update_dbms_meta_data)
 
 //TODO: What is datasource? is it UTF-8?
