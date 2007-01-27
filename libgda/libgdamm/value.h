@@ -224,6 +224,24 @@ public:
   Glib::ustring to_string() const;
 };
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+struct ValueTraits
+{
+  typedef Value CppType;
+  typedef const GValue* CType;
+  typedef GValue* CTypeNonConst;
+
+  /* TODO: Should to_c_type make a copy of the actualy GValue? */
+  static CType to_c_type(const CppType& obj) { return obj.gobj(); }
+  static CType to_c_type(const CType& obj) { return obj; }
+  static CppType to_cpp_type(const CType& obj) { return CppType(obj); }
+  static void release_c_type(const CType& obj) {}
+};
+#endif
+
+typedef Glib::ListHandle<Value, ValueTraits> ValueList;
+typedef Glib::SListHandle<Value, ValueTraits> ValueSList;
+
 GType value_get_type_null();
 GType value_get_type_binary();
 GType value_get_type_blob();

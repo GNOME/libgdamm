@@ -25,6 +25,7 @@
 #include <libgdamm/row.h>
 #include <libgdamm/column.h>
 #include <libgdamm/parameterlist.h>
+#include <libgdamm/datamodeliter.h>
 //#include <libgdamm/serverprovider.h>
 #include <libgda/gda-data-model.h>
 
@@ -76,8 +77,7 @@ public:
 
   _WRAP_METHOD(guint get_attributes_at(int col, int row), gda_data_model_get_attributes_at)
 
-  //TODO: Wrap the iterator somehow.
-  _WRAP_METHOD(GdaDataModelIter* create_iter(), gda_data_model_create_iter)
+  _WRAP_METHOD(Glib::RefPtr<DataModelIter> create_iter(), gda_data_model_create_iter)
    
   //Ignore private functions:
   _IGNORE(gda_data_model_move_iter_at_row, gda_data_model_move_iter_next, gda_data_model_move_iter_prev)
@@ -88,9 +88,8 @@ public:
   _WRAP_METHOD(bool is_updatable() const, gda_data_model_is_updatable)
   _WRAP_METHOD(guint get_access_flags() const, gda_data_model_get_access_flags)
 
-  #m4 //Use deep ownership because we own both the list and its elements;
-  #m4 _CONVERSION(`const Glib::ListHandle<Value>&',`const GList*',`$3.data()')
-  _WRAP_METHOD(int append_values(const Glib::ListHandle<Value>& values), gda_data_model_append_values, errthrow)
+  #m4 _CONVERSION(`const ValueList&',`const GList*',`$3.data()')
+  _WRAP_METHOD(int append_values(const ValueList& values), gda_data_model_append_values, errthrow)
 
   _WRAP_METHOD(bool append_row(), gda_data_model_append_row, errthrow)
   _WRAP_METHOD(bool remove_row(int row), gda_data_model_remove_row, errthrow)
@@ -131,7 +130,8 @@ public:
   _WRAP_METHOD(bool move_iter_next_default(GdaDataModelIter *iter), gda_data_model_move_iter_next_default)
   _WRAP_METHOD(bool move_iter_prev_default(GdaDataModelIter *iter), gda_data_model_move_iter_prev_default)
 
-	_WRAP_METHOD(bool set_values(int row, const Glib::ListHandle<Value>& values), gda_data_model_set_values, errthrow);
+  #m4 _CONVERSION(`const ValueList&',`GList*',`const_cast<$2>($3.data())')
+  _WRAP_METHOD(bool set_values(int row, const ValueList& values), gda_data_model_set_values, errthrow);
 
 	/* TODO: Is this correct here. Seems to be in the wrong header */
   _WRAP_METHOD(Glib::RefPtr<DataModel> copy() const, gda_data_model_array_copy_model, errthrow)

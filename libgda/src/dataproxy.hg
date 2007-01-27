@@ -50,7 +50,7 @@ public:
   _WRAP_METHOD(int get_proxied_model_n_rows() const, gda_data_proxy_get_proxied_model_n_rows)
   _WRAP_METHOD(bool is_read_only() const, gda_data_proxy_is_read_only)
 
-  Glib::SListHandle<Gda::Value> get_values(int proxy_row, const Glib::ArrayHandle<int>& cols_index) const;
+  ValueSList get_values(int proxy_row, const Glib::ArrayHandle<int>& cols_index) const;
   _IGNORE(gda_data_proxy_get_values)
 
   // TODO: Wrap proper type (GdaValueAttribute?) for flags
@@ -65,9 +65,9 @@ public:
   _WRAP_METHOD(bool row_is_deleted(int proxy_row) const, gda_data_proxy_row_is_deleted)
   _WRAP_METHOD(bool row_is_inserted(int proxy_row) const, gda_data_proxy_row_is_inserted)
 
-  #m4 _CONVERSION(`const Glib::SListHandle<Value>&', `GSList*', `($3).data()')
+  #m4 _CONVERSION(`const ValueSList&', `GSList*', `($3).data()')
   #m4 _CONVERSION(`const Glib::ArrayHandle<int>&', `gint*', `const_cast<gint*>(($3).data())')
-  _WRAP_METHOD(int find_row_from_values(const Glib::SListHandle<Value>& values, const Glib::ArrayHandle<int>& cols_index) const, gda_data_proxy_find_row_from_values)
+  _WRAP_METHOD(int find_row_from_values(const ValueSList& values, const Glib::ArrayHandle<int>& cols_index) const, gda_data_proxy_find_row_from_values)
   _WRAP_METHOD(void cancel_row_changes(int proxy_row, int col), gda_data_proxy_cancel_row_changes)
   _WRAP_METHOD(void apply_row_changes(int proxy_row), gda_data_proxy_apply_row_changes, errthrow)
   _WRAP_METHOD(bool has_changed() const, gda_data_proxy_has_changed)

@@ -28,9 +28,9 @@ namespace Gnome
 namespace Gda
 {
 
-Glib::SListHandle<Value> DataProxy::get_values(int proxy_row, const Glib::ArrayHandle<int>& cols_index) const
+ValueSList DataProxy::get_values(int proxy_row, const Glib::ArrayHandle<int>& cols_index) const
 {
-  return Glib::SListHandle<Value>(gda_data_proxy_get_values(const_cast<GdaDataProxy*>(gobj()), proxy_row, const_cast<gint*>(cols_index.data()), cols_index.size()), Glib::OWNERSHIP_SHALLOW);
+  return ValueSList(gda_data_proxy_get_values(const_cast<GdaDataProxy*>(gobj()), proxy_row, const_cast<gint*>(cols_index.data()), cols_index.size()), Glib::OWNERSHIP_SHALLOW);
 }
 
 } /* namespace Gda */
