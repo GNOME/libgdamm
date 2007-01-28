@@ -87,7 +87,8 @@ public:
 
   #m4 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<Parameter> >',`$2($3, Glib::OWNERSHIP_DEEP)')
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<Parameter> > get_parameters(), gda_query_get_parameters)
-  _WRAP_METHOD(Glib::RefPtr<ParameterList> get_parameter_list(), gda_query_get_parameter_list)
+
+  _WRAP_METHOD(Glib::RefPtr<ParameterList> get_parameter_list(), gda_query_get_parameter_list, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const ParameterList> get_parameter_list() const, gda_query_get_parameter_list, constversion)
 
 //TODO: Add a suitable default value for the bool - look at the docs to choose a value?

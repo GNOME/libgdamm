@@ -94,9 +94,9 @@ bool Parameter::has_restrict_values(Glib::RefPtr<DataModel>& model, int& col) co
     model = Glib::wrap(gda_model); //TODO ref this?
 }
 
-Glib::ustring Parameter::get_value_str()
+Glib::ustring Parameter::get_value_str() const
 {
-  const gchar* value = gda_parameter_get_value_str(gobj());
+  const gchar* value = gda_parameter_get_value_str(const_cast<GdaParameter*>(gobj()));
   if (value)
     return Glib::ustring(value);
   else

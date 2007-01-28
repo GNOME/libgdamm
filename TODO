@@ -1,8 +1,21 @@
 TODO:
 
 * File more bugs about buggy _new methods
+  - Fix them (nobody else will), by either 
+  a) Adding properties.
+  b) Move code into public _construct(object) methods, called by both the _new() method and our constructor.
+     (Ask Murray if that is not clear)
 * Wrap the rest of GdaQuery* objects (are they useful, public?)
-* Check TODOs in code about lists and other things
+* Wrap GdaDataModelHash, GdaDataModelFilterSQL, GdaDataAccessWrapper, and GdaDataModelImport.
+  (though they might not be very useful to application developers.)
+  (remember to put them in the DataModels doxygen group and add their documentation, based on the C documentation.)
+* Check TODOs in code and tutorial .xml about lists and other things
+* Reference Documentation:
+  - Check for doxygen errors and fix it it's easy. 
+  - Group the classes appropriately.
+    (See http://www.openismus.com/temp/libgnomedb_3_0_docs/html/ and 
+         http://www.openismus.com/temp/libgda_3_0_docs/html/
+     for some existing categories.)
 
 Relevant libgda bugs:
 

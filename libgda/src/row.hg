@@ -62,8 +62,9 @@ public:
 
   _WRAP_METHOD(bool set_value(int num, const Value& value), gda_row_set_value);
 
-  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_model() const, gda_row_get_model)  
-  _WRAP_METHOD(Glib::RefPtr<DataModel> get_model(), gda_row_get_model)  
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_model(), gda_row_get_model, refreturn)  
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_model() const, gda_row_get_model, constversion) 
+
   _WRAP_METHOD(void set_model(const Glib::RefPtr<DataModel>& model), gda_row_set_model)
 
   _WRAP_METHOD(int get_length() const, gda_row_get_length)

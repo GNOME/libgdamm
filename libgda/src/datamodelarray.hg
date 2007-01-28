@@ -31,6 +31,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** An implementation of DataModel based on an array.
+ *
+ * @ingroup DataModels
+ */
 class DataModelArray
  : public DataModelRow
 {

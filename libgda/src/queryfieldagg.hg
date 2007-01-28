@@ -44,9 +44,13 @@ class QueryFieldAgg
 public:
   _WRAP_CTOR(QueryFieldAgg(const Glib::RefPtr<Query>& query, const Glib::ustring& agg_name), gda_query_field_agg_new)
   
-  _WRAP_METHOD(Glib::RefPtr<DictAggregate> get_ref_agg(), gda_query_field_agg_get_ref_agg)
-  _WRAP_METHOD(void set_arg(const Glib::RefPtr<QueryField>& arg), gda_query_field_agg_set_arg)  
-  _WRAP_METHOD(Glib::RefPtr<QueryField> get_arg(), gda_query_field_agg_get_arg)
+  _WRAP_METHOD(Glib::RefPtr<DictAggregate> get_ref_agg(), gda_query_field_agg_get_ref_agg, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DictAggregate> get_ref_agg() const, gda_query_field_agg_get_ref_agg, constversion)
+
+  _WRAP_METHOD(void set_arg(const Glib::RefPtr<QueryField>& arg), gda_query_field_agg_set_arg)
+
+  _WRAP_METHOD(Glib::RefPtr<QueryField> get_arg(), gda_query_field_agg_get_arg, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const QueryField> get_arg() const, gda_query_field_agg_get_arg, refreturn)
 };
 
 } // namespace Gda

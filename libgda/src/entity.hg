@@ -42,18 +42,21 @@ protected:
 
 public:
 
-  _WRAP_METHOD(bool has_field(const Glib::RefPtr<EntityField>& field) const, gda_entity_has_field)
+  _WRAP_METHOD(bool has_field(const Glib::RefPtr<const EntityField>& field) const, gda_entity_has_field)
+
+  //TODO: Use a ListHandle or similar:
   _WRAP_METHOD(GSList* get_fields(), gda_entity_get_fields)
+
   _WRAP_METHOD(int get_n_fields() const, gda_entity_get_n_fields)
 
-  _WRAP_METHOD(Glib::RefPtr<EntityField> get_field_by_name(const Glib::ustring& name), gda_entity_get_field_by_name)
-  _WRAP_METHOD(Glib::RefPtr<const EntityField> get_field_by_name(const Glib::ustring& name) const, gda_entity_get_field_by_name)
+  _WRAP_METHOD(Glib::RefPtr<EntityField> get_field_by_name(const Glib::ustring& name), gda_entity_get_field_by_name, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const EntityField> get_field_by_name(const Glib::ustring& name) const, gda_entity_get_field_by_name, constversion)
 
-  _WRAP_METHOD(Glib::RefPtr<EntityField> get_field_by_xml_id(const Glib::ustring& xml_id), gda_entity_get_field_by_xml_id)
-  _WRAP_METHOD(Glib::RefPtr<const EntityField> get_field_by_xml_id(const Glib::ustring& xml_id) const, gda_entity_get_field_by_xml_id)
+  _WRAP_METHOD(Glib::RefPtr<EntityField> get_field_by_xml_id(const Glib::ustring& xml_id), gda_entity_get_field_by_xml_id, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const EntityField> get_field_by_xml_id(const Glib::ustring& xml_id) const, gda_entity_get_field_by_xml_id, constversion)
 
-  _WRAP_METHOD(Glib::RefPtr<EntityField> get_field_by_index(int index), gda_entity_get_field_by_index)
-  _WRAP_METHOD(Glib::RefPtr<const EntityField> get_field_by_index(int index) const, gda_entity_get_field_by_index)
+  _WRAP_METHOD(Glib::RefPtr<EntityField> get_field_by_index(int index), gda_entity_get_field_by_index, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const EntityField> get_field_by_index(int index) const, gda_entity_get_field_by_index, constversion)
 
   _WRAP_METHOD(int get_field_index(const Glib::RefPtr<const EntityField>& field) const, gda_entity_get_field_index)
   _WRAP_METHOD(void add_field(const Glib::RefPtr<EntityField>& field), gda_entity_add_field)

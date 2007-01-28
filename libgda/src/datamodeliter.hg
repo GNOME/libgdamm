@@ -48,8 +48,8 @@ public:
   _WRAP_METHOD(int get_row() const, gda_data_model_iter_get_row)
   _WRAP_METHOD(void invalidate_contents(), gda_data_model_iter_invalidate_contents)
   _WRAP_METHOD(int get_column_for_param(const Glib::RefPtr<Parameter>& param), gda_data_model_iter_get_column_for_param)
-  _WRAP_METHOD(Glib::RefPtr<Parameter> get_param_for_column(int col), gda_data_model_iter_get_param_for_column)
-  _WRAP_METHOD(Glib::RefPtr<const Parameter> get_param_for_column(int col) const, gda_data_model_iter_get_param_for_column, const)
+  _WRAP_METHOD(Glib::RefPtr<Parameter> get_param_for_column(int col), gda_data_model_iter_get_param_for_column, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Parameter> get_param_for_column(int col) const, gda_data_model_iter_get_param_for_column, constversion)
 
   _WRAP_PROPERTY("current-row", int)
   _WRAP_PROPERTY("data-model", Glib::RefPtr<DataModel>)

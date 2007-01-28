@@ -81,7 +81,7 @@ public:
   _WRAP_METHOD(bool is_opened() const, gda_connection_is_opened)
 
   _WRAP_METHOD(Glib::RefPtr<Client> get_client(), gda_connection_get_client, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<const Client> get_client() const, gda_connection_get_client, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Client> get_client() const, gda_connection_get_client, constversion)
 
   _WRAP_METHOD(guint get_options() const, gda_connection_get_options)
   _WRAP_METHOD(Glib::ustring get_server_version() const, gda_connection_get_server_version)
@@ -92,7 +92,7 @@ public:
   _WRAP_METHOD(Glib::ustring get_cnc_string() const, gda_connection_get_cnc_string)
 
   _WRAP_METHOD(Glib::ustring get_provider() const, gda_connection_get_provider)
-  _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider_obj(), gda_connection_get_provider_obj)
+  _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider_obj(), gda_connection_get_provider_obj, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const ServerProvider> get_provider_obj() const, gda_connection_get_provider_obj, constversion)
 
   //TODO: Copy-by-value somehow?
@@ -128,7 +128,7 @@ public:
   int execute_non_select_command(const Command& cmd);
   int execute_non_select_command(const Glib::ustring& cmd);
 
-  _WRAP_METHOD(Glib::RefPtr<TransactionStatus> get_transaction_status(), gda_connection_get_transaction_status, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<TransactionStatus> get_transaction_status(), gda_connection_get_transaction_status, errthrow, refreturn)
 
 
 /*
@@ -160,6 +160,7 @@ gint                 gda_connection_execute_non_select_command (GdaConnection *c
    #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
    #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const ConnectionEvent> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
 
+  //TODO: Check that we use the correct ListHandle ownership here:
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<ConnectionEvent> > get_events(), gda_connection_get_events)
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const ConnectionEvent> > get_events() const, gda_connection_get_events)
 
@@ -167,9 +168,10 @@ gint                 gda_connection_execute_non_select_command (GdaConnection *c
 
   _WRAP_METHOD(bool supports_feature(ConnectionFeature feature) const, gda_connection_supports_feature)
 
-  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params), gda_connection_get_schema, errthrow)
-  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params) const, gda_connection_get_schema, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params), gda_connection_get_schema, errthrow, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params) const, gda_connection_get_schema, constversion)
 
+  //TODO: Check that this takes a reference, like the generated oens:
   Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema);
   Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema) const;
 

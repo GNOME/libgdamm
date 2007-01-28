@@ -42,9 +42,11 @@ class QueryField
 
 public:
   // TODO: Constructors use GError* argument
-  _WRAP_METHOD(Glib::RefPtr<DictType> get_dict_type(), gda_query_field_get_dict_type)
+  _WRAP_METHOD(Glib::RefPtr<DictType> get_dict_type(), gda_query_field_get_dict_type, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DictType> get_dict_type() const, gda_query_field_get_dict_type, constversion)
   
   // TODO: This method should use const parameters in libgda
+  // TODO: So, fix libgda, please. murrayc
   //_WRAP_EQUAL(gda_query_field_is_equal)
   //_IGNORE(gda_query_field_is_equal)
   
@@ -53,11 +55,11 @@ public:
   _WRAP_METHOD(Glib::ustring get_alias() const, gda_query_field_get_alias)
 
   // TODO: use get_ instead of is_?
-  _WRAP_METHOD(void set_visible(bool visible), gda_query_field_set_visible)
-  _WRAP_METHOD(bool get_visible(), gda_query_field_is_visible)
-  _WRAP_METHOD(void set_internal(bool internal), gda_query_field_set_internal)
-  _WRAP_METHOD(bool get_internal(), gda_query_field_is_internal)
-  _WRAP_METHOD(bool is_list(), gda_query_field_is_list)
+  _WRAP_METHOD(void set_visible(bool visible = true), gda_query_field_set_visible)
+  _WRAP_METHOD(bool get_visible() const, gda_query_field_is_visible)
+  _WRAP_METHOD(void set_internal(bool internal = true), gda_query_field_set_internal)
+  _WRAP_METHOD(bool get_internal() const, gda_query_field_is_internal)
+  _WRAP_METHOD(bool is_list() const, gda_query_field_is_list)
   
 };
 

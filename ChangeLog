@@ -1,3 +1,32 @@
+2007-01-28  Murray Cumming  <murrayc@murrayc.com>
+
+	* TODO: Added some stuff.
+	* docs/reference/Makefile.am: Copy/pasted stuff from the hildon-libsmm equivalent.
+	* libgda/src/client.hg:
+	* libgda/src/connection.hg:
+	* libgda/src/datamodel.hg:
+	* libgda/src/datamodelarray.hg:
+	* libgda/src/datamodelindex.hg:
+	* libgda/src/datamodeliter.hg:
+	* libgda/src/datamodelquery.hg:
+	* libgda/src/datamodelrow.hg:
+	* libgda/src/dataproxy.hg:
+	* libgda/src/dict.hg:
+	* libgda/src/entity.hg:
+	* libgda/src/entityfield.hg:
+	* libgda/src/object.hg:
+	* libgda/src/parameter.ccg:
+	* libgda/src/parameter.hg:
+	* libgda/src/providerinfo.hg:
+	* libgda/src/query.hg:
+	* libgda/src/queryfield.hg:
+	* libgda/src/queryfieldagg.hg:
+	* libgda/src/row.hg:
+	* libgda/src/serveroperation.hg:
+	* libgda/src/serverprovider.hg:
+	* tools/m4/convert_libgdamm.m4: Added lots of refreturn and constversion options, 
+	added some const overloads, and made some methods const.
+
 2007-01-27  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/dict.ccg:

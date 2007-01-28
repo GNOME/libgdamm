@@ -32,6 +32,9 @@ namespace Gnome
 namespace Gda
 {
 
+/** Base implementation for other objects to implement the DataModel interface based on the use of rows.
+ * This object is not intended to be instantiated directly, but to be used as a base class.
+ */
 class DataModelRow
  : public Object,
    public DataModel

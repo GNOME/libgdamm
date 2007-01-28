@@ -45,7 +45,7 @@ protected:
 public:
   _WRAP_CREATE()
 
-  _WRAP_METHOD(Glib::RefPtr<Dict> get_dict(), gda_object_get_dict)
+  _WRAP_METHOD(Glib::RefPtr<Dict> get_dict(), gda_object_get_dict, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Dict> get_dict() const, gda_object_get_dict, constversion)
 
   _WRAP_METHOD(void set_id(const Glib::ustring& strid), gda_object_set_id)
@@ -61,8 +61,8 @@ public:
   //We ignore the *destroy methods because they are not appropriate for C++ and don't even seem necessary as public API.
   _IGNORE(gda_object_destroy, gda_object_destroy_check, gda_object_connect_destroy)
 
-	// Ignore this debugging method
-	_IGNORE(gda_object_dump)
+  // Ignore this debugging method
+  _IGNORE(gda_object_dump)
 
   _WRAP_METHOD(void signal_emit_changed(), gda_object_signal_emit_changed)
   _WRAP_METHOD(void block_changed(), gda_object_block_changed)

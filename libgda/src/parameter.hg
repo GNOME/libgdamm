@@ -94,11 +94,14 @@ public:
   _IGNORE(gda_parameter_has_restrict_values)
 
   _WRAP_METHOD(void bind_to_param(const Glib::RefPtr<Parameter>& bind_to), gda_parameter_bind_to_param)
-  _WRAP_METHOD(Glib::RefPtr<Parameter> get_bind_param(), gda_parameter_get_bind_param)
+
+  _WRAP_METHOD(Glib::RefPtr<Parameter> get_bind_param(), gda_parameter_get_bind_param, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Parameter> get_bind_param() const, gda_parameter_get_bind_param, constversion)
 
   _IGNORE(gda_parameter_get_value_str)
   // Hand-code because it might return NULL;
-  Glib::ustring get_value_str();
+  // TODO: That shouldn't be a problem. murrayc
+  Glib::ustring get_value_str() const;
 
   //TODO: Wrap list correctly - Johannes
   // It is defined in gda-parameter-utils.c, check whether it is useful API

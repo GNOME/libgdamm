@@ -45,6 +45,7 @@ class ServerOperation : public Glib::Object
 {
   _CLASS_GOBJECT(ServerOperation, GdaServerOperation, GDA_SERVER_OPERATION, Glib::Object, GObject)
 
+//TODO ?:
   //_WRAP_METHOD(ServerOperationNodeType get_node_type(const Glib::ustring& path) const, gda_server_operation_get_node_type)
 //_WRAP_METHOD(ServerOperationNodeType get_node_type_v(const Glib::ustring& *path_array),  gda_server_operation_get_node_type_v)
 
@@ -54,8 +55,8 @@ class ServerOperation : public Glib::Object
   //_WRAP_METHOD(GdaParameter* get_node_param(const Glib::ustring& path) const, gda_server_operation_get_node_param)
   //_WRAP_METHOD(GdaParameter* gda_server_operation_get_node_param_v(const Glib::ustring& *path_array), gda_server_operation_get_node_param_v)
 
-  //_WRAP_METHOD(GdaDataModel* get_node_datamodel(const Glib::ustring& path) const, gda_server_operation_get_node_datamodel)
-  //_WRAP_METHOD(GdaDataModel* get_node_datamodel_v(const Glib::ustring& *path_array), gda_server_operation_get_node_datamodel_v)
+  //_WRAP_METHOD(GdaDataModel* get_node_datamodel(const Glib::ustring& path) const, gda_server_operation_get_node_datamodel, refreturn)
+  //_WRAP_METHOD(GdaDataModel* get_node_datamodel_v(const Glib::ustring& *path_array), gda_server_operation_get_node_datamodel_v, refreturn)
 
   //_WRAP_METHOD(int get_node_seq_size(const Glib::ustring& path) const, gda_server_operation_get_node_seq_size)
   //_WRAP_METHOD(int get_node_seq_size_v(const Glib::ustring& path_array) const, gda_server_operation_get_node_seq_size_v)

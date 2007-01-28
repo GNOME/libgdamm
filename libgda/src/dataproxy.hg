@@ -32,6 +32,24 @@ namespace Gnome
 namespace Gda
 {
 
+/** Proxy to hold modifications for any DataModel, providing the DataModel interface itself.
+ *  This object stores modifications made to a DataModel object which is proxied until asked to make the changes 
+ * inside the DataModel. It also filters the proxied data model to show only a sample (a defined number of continuous 
+ * rows) of it.
+ *
+ * Specifically, for a proxied data model having nb_cols columns and nb_rows rows, the DataProxy object has the following attributes:
+ * - 2 * nb_cols columns:
+ *  - The first (>= 0) nb_cols columns are the current values stored in the proxy (which correspond to the values of the proxied data model if the considered row has not been changed). The associated values are writable.
+ *  - The last nb_cols columns are the values stored in the proxied data model, at column col - nb_cols.
+ * - A variable number of rows depending on the following attributes:
+ *  - Whether the proxy is configured to have an empty row as the first row.
+ *  - Whether the proxy only displays parts of the proxied data model.
+ *  - Whether new rows have been added to the proxy.
+ *
+ * Note that unless explicitely mentioned, the columns are read-only. 
+ *
+ * @ingroup DataModels
+ */
 class DataProxy
  : public Object,
    public DataModel
@@ -45,7 +63,7 @@ public:
   _WRAP_CREATE(const Glib::RefPtr<DataModel>& model)
 
   _WRAP_METHOD(Glib::RefPtr<DataModel> get_proxied_model(), gda_data_proxy_get_proxied_model, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_proxied_model() const, gda_data_proxy_get_proxied_model, constversion, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_proxied_model() const, gda_data_proxy_get_proxied_model, constversion)
   _WRAP_METHOD(int get_proxied_model_n_cols() const, gda_data_proxy_get_proxied_model_n_cols)
   _WRAP_METHOD(int get_proxied_model_n_rows() const, gda_data_proxy_get_proxied_model_n_rows)
   _WRAP_METHOD(bool is_read_only() const, gda_data_proxy_is_read_only)

@@ -61,10 +61,11 @@ public:
  #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<Connection> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
  #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const Connection> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
  
+  //TODO: Check that we use the correct ListHandle ownership here:
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<Connection> > get_connections(), gda_client_get_connections)
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const Connection> > get_connections() const, gda_client_get_connections)
    
-  _WRAP_METHOD(Glib::RefPtr<Connection> find_connection(const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password), gda_client_find_connection)
+  _WRAP_METHOD(Glib::RefPtr<Connection> find_connection(const Glib::ustring& dsn, const Glib::ustring& username, const Glib::ustring& password), gda_client_find_connection, refreturn)
   _WRAP_METHOD(void close_all_connections(), gda_client_close_all_connections)
 
   _WRAP_METHOD(void notify_event(const Glib::RefPtr<Connection>& cnc, ClientEvent event, const Glib::RefPtr<ParameterList>& params), gda_client_notify_event)

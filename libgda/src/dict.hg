@@ -62,10 +62,11 @@ public:
   _WRAP_CREATE()
 
   _WRAP_METHOD(void set_connection(const Glib::RefPtr<Connection>& cnc), gda_dict_set_connection)
-  _WRAP_METHOD(Glib::RefPtr<Connection> get_connection() const, gda_dict_get_connection)
+  _WRAP_METHOD(Glib::RefPtr<Connection> get_connection(), gda_dict_get_connection, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Connection> get_connection() const, gda_dict_get_connection, constversion)
 
   //_WRAP_METHOD(void declare_object_string_id_change(const Glib::RefPtr<Object>& obj, const Glib::ustring& oldid), gda_dict_declare_object_string_id_change)
-  //_WRAP_METHOD(Glib::RefPtr<Object> get_object_by_string_id(const Glib::ustring& strid), gda_dict_get_object_by_string_id)
+  //_WRAP_METHOD(Glib::RefPtr<Object> get_object_by_string_id(const Glib::ustring& strid), gda_dict_get_object_by_string_id, refreturn)
 
   _WRAP_METHOD(bool update_dbms_meta_data(GType limit_to_type, const Glib::ustring& limit_obj_name), gda_dict_update_dbms_meta_data, errthrow)
 
@@ -122,12 +123,16 @@ public:
   //_WRAP_METHOD(GdaDictFunction* get_function_by_xml_id(const Glib::ustring& xml_id), gda_dict_get_function_by_xml_id)
   //_WRAP_METHOD(GdaDictFunction* get_function_by_dbms_id(const Glib::ustring& dbms_id), gda_dict_get_function_by_dbms_id)
 
+  //TODO: Use a ListHandle or similar?
   GSList* get_aggregates() const;
 #if 0
   // The C counterparts to these functions are declared in a header that is not surrounded by
   // G_BEGIN_DECL / G_END_DECL (gda-dict-reg-aggregates.h). This is a bit strange since there is a macro calling these
   // functions in the public gda-dict.h file.
   GSList* get_aggregates_by_name (const Glib::ustring& aggname);
+
+  //TODO: Use a C++ type, or at least a reference instead of a pointer:
+  //TODO: Make sure that these take a reference.
   Glib::RefPtr<DictAggregate> get_aggregate_by_name_arg(const Glib::ustring& aggname, GdaDictType *argtype);
   Glib::RefPtr<DictAggregate> get_aggregate_by_xml_id(const Glib::ustring& xml_id);
   Glib::RefPtr<DictAggregate> get_aggregate_by_dbms_id(const Glib::ustring& dbms_id);
@@ -138,7 +143,7 @@ public:
   //_WRAP_METHOD(void assume_query (const Glib::RefPtr<Query>& query), gda_dict_assume_query)
   //_WRAP_METHOD(void unassume_query(const Glib::RefPtr<Query>& query), gda_dict_unassume_query)
   //_WRAP_METHOD(GSList* get_queries  () const, gda_dict_get_queries)
-  //_WRAP_METHOD(Glib::RefPtr<Query> get_query_by_xml_id(const Glib::ustring& xml_id), gda_dict_get_query_by_xml_id)
+  //_WRAP_METHOD(Glib::RefPtr<Query> get_query_by_xml_id(const Glib::ustring& xml_id), gda_dict_get_query_by_xml_id, refreturn)
   //_WRAP_METHOD(Glib::RefPtr<const Query> get_query_by_xml_id(const Glib::ustring& xml_id), gda_dict_get_query_by_xml_id, constversion)
 
 /* GdaGraph manipulations */
@@ -149,7 +154,8 @@ public:
   //_WRAP_METHOD(GdaGraph* get_graph_by_xml_id(const Glib::ustring& xml_id), gda_dict_get_graph_by_xml_id)
   //_WRAP_METHOD(GdaGraph* get_graph_for_object(GObject *obj), gda_dict_get_graph_for_object)
 
-  _WRAP_METHOD(Glib::RefPtr<DictDatabase> get_database(), gda_dict_get_database)
+  _WRAP_METHOD(Glib::RefPtr<DictDatabase> get_database(), gda_dict_get_database, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DictDatabase> get_database() const, gda_dict_get_database, constversion)
 
   //_WRAP_METHOD(GSList* get_entities_fk_constraints(GdaEntity *entity1, GdaEntity *entity2, bool entity1_has_fk), gda_dict_get_entities_fk_constraints)
 

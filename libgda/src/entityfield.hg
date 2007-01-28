@@ -43,17 +43,18 @@ protected:
 
 public:
 
-  _WRAP_METHOD(Glib::RefPtr<Entity> get_entity(), gda_entity_field_get_entity)
-  _WRAP_METHOD(Glib::RefPtr<const Entity> get_entity() const, gda_entity_field_get_entity)
+  _WRAP_METHOD(Glib::RefPtr<Entity> get_entity(), gda_entity_field_get_entity, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Entity> get_entity() const, gda_entity_field_get_entity, constversion)
 
   _WRAP_METHOD(GType get_g_type() const, gda_entity_field_get_g_type)
 
-  _WRAP_METHOD(Glib::RefPtr<DictType> get_dict_type(), gda_entity_field_get_dict_type)
-  _WRAP_METHOD(Glib::RefPtr<const DictType> get_dict_type() const, gda_entity_field_get_dict_type)
+  _WRAP_METHOD(Glib::RefPtr<DictType> get_dict_type(), gda_entity_field_get_dict_type, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DictType> get_dict_type() const, gda_entity_field_get_dict_type, constversion)
 
   _WRAP_METHOD(Glib::ustring get_name() const, gda_entity_field_get_name)
   _WRAP_METHOD(Glib::ustring get_description() const, gda_entity_field_get_description)
 
+//TODO: Watch out, this might not do correct reference counting:
   _WRAP_VFUNC(Glib::RefPtr<Entity> get_entity(), get_entity)
   _WRAP_VFUNC(GType get_g_type(), get_g_type)
   _WRAP_VFUNC(Glib::RefPtr<DictType> get_data_type(), get_data_type)
