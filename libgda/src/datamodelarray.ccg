@@ -29,10 +29,8 @@ namespace Gda
 
 DataModelArray::DataModelArray(int cols)
 :
-  Glib::ObjectBase(0), //Mark this class as gtkmmproc-generated, rather than a custom class, to allow vfunc optimisations.
-  Gda::DataModelRow(Glib::ConstructParams(datamodelarray_class_.init(), (char*) 0))
+  _CONSTRUCT("n-columns", cols)
 {
-  set_n_columns(cols);
 }
 
 } /* namespace Gda */

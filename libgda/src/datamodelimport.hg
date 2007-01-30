@@ -1,0 +1,68 @@
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* datamodelimport.h
+ *
+ * Copyright 2007 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <libgdamm/datamodelrow.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(libgdamm/private/datamodelrow_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+/** An implementation of DataModel based on an array.
+ *
+ * @ingroup DataModels
+ */
+class DataModelImport
+ : public DataModelRow
+{
+  _CLASS_GOBJECT(DataModelImport, GdaDataModelImport, GDA_DATA_MODEL_IMPORT, Gda::DataModelRow, GdaDataModelRow)
+  _IMPLEMENTS_INTERFACE(DataModel)
+protected:
+  DataModelImport(const std::string& filename, bool random_access, const Glib::RefPtr<const ParameterList>& options);
+  _IGNORE(gda_data_model_import_new_file)
+
+  //TODO: What defines the size of data?
+  DataModelImport(const gchar* data, bool random_access, const Glib::RefPtr<const ParameterList>& options);
+  _IGNORE(gda_data_model_import_new_mem)
+
+  explicit DataModelImport(xmlNodePtr node);
+  _IGNORE(gda_data_model_import_new_xml_node)
+
+public:
+  _WRAP_CREATE(const std::string& filename, bool random_access, const Glib::RefPtr<const ParameterList>& options)
+  _WRAP_CREATE(const gchar* data, bool random_access, const Glib::RefPtr<const ParameterList>& options)
+  _WRAP_CREATE(xmlNodePtr node)
+
+
+  //TODO: Use ListHandle or similar:
+  _WRAP_METHOD(GSList* get_errors(), gda_data_model_import_get_errors)
+
+  _WRAP_METHOD(void clean_errors(), gda_data_model_import_clean_errors)
+};
+
+} // namespace Gda
+} // namespace Gnome
+

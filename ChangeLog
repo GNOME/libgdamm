@@ -1,5 +1,17 @@
 2007-01-30  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/datamodelfiltersql.ccg:
+	* libgda/src/datamodelfiltersql.hg:
+	* libgda/src/datamodelhash.ccg:
+	* libgda/src/datamodelhash.hg:
+	* libgda/src/datamodelimport.ccg:
+	* libgda/src/datamodelimport.hg: Added wrappers.
+	* libgda/src/datamodelarray.ccg:
+	* libgda/src/transactionstatus.ccg: Use _CONSTRUCT() instead of using ConstructParams() directly.
+
+2007-01-30  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/dict.hg:
 	* libgda/src/dictaggregate.hg:
 	* libgda/src/dictdatabase.ccg:
