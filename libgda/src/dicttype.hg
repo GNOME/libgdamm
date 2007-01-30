@@ -21,10 +21,11 @@
  */
 
 #include <libgdamm/object.h>
+#include <libgdamm/xmlstorage.h>
 
 
 _DEFS(libgdamm,libgda)
-_PINCLUDE(glibmm/private/object_p.h)
+_PINCLUDE(libgdamm/private/object_p.h)
 
 namespace Gnome
 {
@@ -34,9 +35,24 @@ namespace Gda
 
 class Connection;
 
-class DictType : public Glib::Object
+/** Represents a data type in the DBMS.
+ * DBMS systems usually have a large set of data types (which can sometimes be expanded by users). Each DictType 
+ * object represents one data type. The libgda library provides some data types, and so it is possible, for each 
+ * DictType object, to get the corresponding libgda data type.
+ *
+ * Every data type can be represented by a DictType (even user defined data types). Complex data types (data types 
+ * described as the aggregation of several other data types, similar to C structures) are handled like any other data 
+ * type and it is not possible to individually access the different components of the complex data type (it is, however, 
+ * possible to write a plugin for this data type). 
+ * 
+ * @ingroup Dictionaries.
+ */
+class DictType
+: public Gda::Object,
+  public XmlStorage
 {
-  _CLASS_GOBJECT(DictType, GdaDictType, GDA_DICT_TYPE, Glib::Object, GObject)
+  _CLASS_GOBJECT(DictType, GdaDictType, GDA_DICT_TYPE, Gda::Object, GdaObject)
+  _IMPLEMENTS_INTERFACE(XmlStorage)
 protected:
 
   _CTOR_DEFAULT
@@ -44,8 +60,20 @@ protected:
 public:
   _WRAP_CREATE()
 
-  
+  _WRAP_METHOD(void set_sqlname(const Glib::ustring& sqlname), gda_dict_type_set_sqlname)
+  _WRAP_METHOD(Glib::ustring get_sqlname() const, gda_dict_type_get_sqlname)
 
+  _WRAP_METHOD(void set_g_type(GType g_type), gda_dict_type_set_g_type)
+  _WRAP_METHOD(GType get_g_type() const, gda_dict_type_get_g_type)
+
+  _WRAP_METHOD(void add_synonym(const Glib::ustring& synonym), gda_dict_type_add_synonym)
+
+  //TODO: Use ListHandle or similar:
+  //_WRAP_METHOD(const GSList* get_synonyms(), gda_dict_type_get_synonyms)
+
+  _WRAP_METHOD(void clear_synonyms(), gda_dict_type_clear_synonyms)
+
+ //TODO: properties, signals, vfuncs.
 };
 
 } // namespace Gda

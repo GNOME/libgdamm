@@ -1,3 +1,17 @@
+2007-01-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/dict.hg:
+	* libgda/src/dictaggregate.hg:
+	* libgda/src/dictdatabase.ccg:
+	* libgda/src/dictdatabase.hg:
+	* libgda/src/dicttype.hg: Made them all inherit from Gda::Object, not Glib::Object, 
+	and made them all implement the XmlStorage interface.
+	Added class documentation based on the C documentation, and put them all in a Dictionaries 
+	doxygen group. Wrapped some of their methods.
+	Several Dict* objects still need to be wrapped.
+	* libgda/src/xmlstorage.hg: Added class documentation.
+	* tools/m4/convert_libgdamm.m4: Added necessary conversion.
+
 2007-01-28  Murray Cumming  <murrayc@murrayc.com>
 
 	* TODO: Added some stuff.

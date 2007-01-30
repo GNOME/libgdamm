@@ -20,6 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgdamm/dict.h>
 #include <libgda/gda-dict-database.h>
 //#include <libgdamm/connection.h>
 #include <libgda/gda-enum-types.h>

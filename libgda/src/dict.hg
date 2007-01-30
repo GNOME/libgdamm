@@ -39,6 +39,9 @@ class Object;
 
 class Connection;
 
+/** defgroup Dictionaries Dictionaries
+ */
+
 /** This object is a "proxy repository" for objects in a database.
  * This is a proxy repository for
  * - object existing within a database such as data types (see the Gda::DictType object), functions (see the Gda::DictFunction object), aggregates (see the Gda::DictAggregate object), and the database structure (through the Gda::DictDatabase and associated object)
@@ -49,6 +52,8 @@ class Connection;
  * Any Dict object can be assigned a Gda::Connection object which tells it how to use a real connection to a data source.
  *
  * The Dict object is responsible for the lifetime management of all the objects it handles. See the Gda::Object class for more information. 
+ *
+ * @ingroup Dictionaries
  */
 class Dict : public Glib::Object
 {

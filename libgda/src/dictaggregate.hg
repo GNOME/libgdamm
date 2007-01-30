@@ -21,10 +21,11 @@
  */
 
 #include <libgdamm/object.h>
-
+#include <libgdamm/xmlstorage.h>
+#include <libgdamm/dicttype.h>
 
 _DEFS(libgdamm,libgda)
-_PINCLUDE(glibmm/private/object_p.h)
+_PINCLUDE(libgdamm/private/object_p.h)
 
 namespace Gnome
 {
@@ -33,10 +34,20 @@ namespace Gda
 {
 
 class Connection;
+class Dict;
 
-class DictAggregate : public Glib::Object
+/** Represents an aggregate in the DBMS (like COUNT() or AVG(), for example).
+ * Because aggregates can be polymorphic, the name is not enough to identify them, so the DBMS provides a unique id which 
+ * can be used to uniquely identify an aggregate.
+ * 
+ * @ingroup Dictionaries.
+ */
+class DictAggregate
+: public Gda::Object,
+  public XmlStorage
 {
-  _CLASS_GOBJECT(DictAggregate, GdaDictAggregate, GDA_DICT_AGGREGATE, Glib::Object, GObject)
+  _CLASS_GOBJECT(DictAggregate, GdaDictAggregate, GDA_DICT_AGGREGATE, Gda::Object, GdaObject)
+  _IMPLEMENTS_INTERFACE(XmlStorage)
 protected:
 
  _CTOR_DEFAULT
@@ -44,8 +55,19 @@ protected:
 public:
   _WRAP_CREATE()
 
-  
+  _WRAP_METHOD(void              set_dbms_id(const Glib::ustring& id), gda_dict_aggregate_set_dbms_id)
+  _WRAP_METHOD(Glib::ustring get_dbms_id() const, gda_dict_aggregate_get_dbms_id)
+  _WRAP_METHOD(void              set_sqlname(const Glib::ustring& sqlname), gda_dict_aggregate_set_sqlname)
+  _WRAP_METHOD(Glib::ustring get_sqlname() const, gda_dict_aggregate_get_sqlname)
+  _WRAP_METHOD(void              set_arg_dict_type(const Glib::RefPtr<DictType>& dt), gda_dict_aggregate_set_arg_dict_type)
 
+  _WRAP_METHOD(Glib::RefPtr<DictType> get_arg_dict_type(), gda_dict_aggregate_get_arg_dict_type, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DictType> get_arg_dict_type() const, gda_dict_aggregate_get_arg_dict_type, constversion)
+
+  _WRAP_METHOD(void set_ret_dict_type(const Glib::RefPtr<DictType>& dt), gda_dict_aggregate_set_ret_dict_type)
+
+  _WRAP_METHOD(Glib::RefPtr<DictType> get_ret_dict_type(), gda_dict_aggregate_get_ret_dict_type, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DictType> get_ret_dict_type() const, gda_dict_aggregate_get_ret_dict_type, constversion)
 };
 
 } // namespace Gda

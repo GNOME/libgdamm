@@ -21,10 +21,12 @@
  */
 
 #include <libgdamm/object.h>
+#include <libgdamm/xmlstorage.h>
+
 
 
 _DEFS(libgdamm,libgda)
-_PINCLUDE(glibmm/private/object_p.h)
+_PINCLUDE(libgdamm/private/object_p.h)
 
 namespace Gnome
 {
@@ -34,9 +36,18 @@ namespace Gda
 
 class Connection;
 
-class DictDatabase : public Glib::Object
+/** Represents a database structure in the DBMS server.
+ * This object manages an internal dictionary mirroring the real database structure 
+ * with objects such as DictTable (composed of Dictfield objects) and DictConstraint.
+ * 
+ * @ingroup Dictionaries.
+ */
+class DictDatabase
+: public Gda::Object,
+  public Gda::XmlStorage
 {
-  _CLASS_GOBJECT(DictDatabase, GdaDictDatabase, GDA_DICT_DATABASE, Glib::Object, GObject)
+  _CLASS_GOBJECT(DictDatabase, GdaDictDatabase, GDA_DICT_DATABASE, Gda::Object, GdaObject)
+  _IMPLEMENTS_INTERFACE(XmlStorage)
 protected:
 
  _CTOR_DEFAULT
@@ -44,7 +55,32 @@ protected:
 public:
   _WRAP_CREATE()
 
-  
+  _WRAP_METHOD(Glib::RefPtr<Dict> get_dict(), gda_dict_database_get_dict, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Dict> get_dict() const, gda_dict_database_get_dict, constversion)
+
+  _WRAP_METHOD(bool update_dbms_data(GType limit_to_type, const Glib::ustring& limit_obj_name), gda_dict_database_update_dbms_data, errthrow)
+  _WRAP_METHOD(void stop_update_dbms_data() const, gda_dict_database_stop_update_dbms_data)
+
+  //TODO: Use ListHandle or similar:
+  //_WRAP_METHOD(GSList* get_tables(), gda_dict_database_get_tables)
+
+  //TODO: Wrap DictTable and DictField:
+  //_WRAP_METHOD(Glib::RefPtr<DictTable> gda_dict_database_get_table_by_name(const Glib::ustring& name), gda_dict_database_get_table_by_name, refreturn);
+  //_WRAP_METHOD(Glib::RefPtr<DictTable> gda_dict_database_get_table_by_name(const Glib::ustring& name), gda_dict_database_get_table_by_name, constversion);
+
+  //_WRAP_METHOD(Glib::RefPtr<DictTable> gda_dict_database_get_table_by_xml_id(const Glib::ustring& xml_id), gda_dict_database_get_table_by_xml_id, refreturn)
+  //_WRAP_METHOD(Glib::RefPtr<const DictTable> gda_dict_database_get_table_by_xml_id(const Glib::ustring& xml_id) const, gda_dict_database_get_table_by_xml_id, constversion)
+
+  //_WRAP_METHOD(Glib::RefPtr<DictField> gda_dict_database_get_field_by_name(const Glib::ustring& fullname), gda_dict_database_get_field_by_name, refreturn)
+  //_WRAP_METHOD(Glib::RefPtr<DictField> gda_dict_database_get_field_by_xml_id(const Glib::ustring& xml_id), gda_dict_database_get_field_by_xml_id, constversion)
+
+  //_WRAP_METHOD(void add_constraint(const Glib::RefPtr<DictConstraint>& cstr), gda_dict_database_add_constraint)
+
+  //TODO: Use ListHandle or similar, and wrap DictTable:
+  //_WRAP_METHOD(GSList* get_all_constraints() const, gda_dict_database_get_all_constraints)
+  //_WRAP_METHOD(GSList* get_all_fk_constraints(), gda_dict_database_get_all_fk_constraints)
+  //_WRAP_METHOD(GSList* get_table_constraints(const Glib::RefPtr<DictTable>& table), da_dict_database_get_table_constraints)
+  //_WRAP_METHOD(GSList* get_tables_fk_constraints(const Glib::RefPtr<DictTable>& table1, const Glib::RefPtr<DictTable>& table2, bool table1_has_fk), gda_dict_database_get_tables_fk_constraints)
 
 };
 

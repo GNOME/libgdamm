@@ -31,7 +31,9 @@ namespace Gnome
 namespace Gda
 {
 
-//TODO: Is this class really public API? What is it good for? murrayc.
+/** Base class which provides saving and loading using XML structures.
+ * Any object which implements this interface can be streamed and restored to and from an XML file.
+ */
 class XmlStorage : public Glib::Interface
 {
   _CLASS_INTERFACE(XmlStorage, GdaXmlStorage, GDA_XML_STORAGE, GdaXmlStorageIface)

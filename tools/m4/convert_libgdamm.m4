@@ -82,6 +82,9 @@ _CONVERSION(`const Glib::RefPtr<Entity>&', `GdaEntity*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const Entity>&', `const GdaEntity*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Entity>&', `const GdaEntity*', __CONVERT_REFPTR_TO_P)
 
+_CONVERSION(`GdaDict*',`Glib::RefPtr<Dict>',`Glib::wrap($3)')
+_CONVERSION(`GdaDict*',`Glib::RefPtr<const Dict>',`Glib::wrap($3)')
+
 _CONVERSION(`GdaDictType*',`Glib::RefPtr<DictType>',`Glib::wrap($3)')
 _CONVERSION(`GdaDictType*',`Glib::RefPtr<const DictType>',`Glib::wrap($3)')
 
