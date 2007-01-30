@@ -1,6 +1,24 @@
 2007-01-30  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/dictconstraint.ccg:
+	* libgda/src/dictconstraint.hg:
+	* libgda/src/dictfield.ccg:
+	* libgda/src/dictfield.hg:
+	* libgda/src/dictfunction.ccg:
+	* libgda/src/dictfunction.hg:
+	* libgda/src/dicttable.ccg:
+	* libgda/src/dicttable.hg: Added new wrappers.
+	* libgda/src/dictdatabase.hg: Uncommented methods that used these classes.
+	* tools/m4/convert_libgdamm.m4: Added necessary conversions.
+	* libgda/src/datamodelfiltersql.hg:
+	* libgda/src/datamodelhash.hg: 
+	* libgda/src/datamodelimport.hg: Added class documentation based on the documentation.
+
+
+2007-01-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/Makefile_list_of_hg.am_fragment:
 	* libgda/src/datamodelfiltersql.ccg:
 	* libgda/src/datamodelfiltersql.hg:
 	* libgda/src/datamodelhash.ccg:

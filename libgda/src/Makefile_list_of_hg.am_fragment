@@ -8,7 +8,7 @@ files_hg = blob.hg blobop.hg client.hg columnindex.hg command.hg connection.hg \
 	   datamodeliter.hg datamodelquery.hg datamodelrow.hg \
 	   dataproxy.hg \
 	   datasourceinfo.hg connectionevent.hg \
-           column.hg dict.hg dictaggregate.hg dictdatabase.hg dicttype.hg \
+           column.hg dict.hg dictaggregate.hg dictconstraint.hg dictdatabase.hg dictfield.hg dicttable.hg dicttype.hg \
            entity.hg entityfield.hg \
 	   handlerstring.hg handlerboolean.hg handlertime.hg \
 	   handlernumerical.hg handlerbin.hg handlertype.hg \

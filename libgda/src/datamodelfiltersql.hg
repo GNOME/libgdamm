@@ -31,7 +31,8 @@ namespace Gnome
 namespace Gda
 {
 
-/** An implementation of DataModel based on an array.
+/** Filtering data from one or several DataModel objects.
+ * This object implements simple SQL "SELECT" queries accessing data stored in various DataModel objects which it is instructed to use.
  *
  * @ingroup DataModels
  */

@@ -31,7 +31,7 @@ namespace Gnome
 namespace Gda
 {
 
-/** An implementation of DataModel based on an array.
+/** An implementation of GdaDataModel based on a hash table.
  *
  * @ingroup DataModels
  */

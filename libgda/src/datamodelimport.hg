@@ -31,7 +31,25 @@ namespace Gnome
 namespace Gda
 {
 
-/** An implementation of DataModel based on an array.
+//TODO: This is presumably an alternative to using a database provider. If so, document it as such. murrayc.
+
+/** Importing data from a string or a file.
+ * This data model imports data from a string or a file. The data can either be in a CSV (comma separated values) 
+ * format or in an XML format as described by the libgda-array.dtd DTD (It is also possible to import 
+ * data from an already-build XML tree validated against that DTD).
+ * The caller must decide, upon construction, if the new DataModelImport must support random access or simply  
+ * cursor based access. Random access makes it easier to use the resulting data model but consumes more memory as all 
+ * the data is copied in memory, and this is thus not suitable for large data sets. Note that importing from an 
+ * already-built XML tree will always result in a random access data model.
+ *
+ * Various import options can be specified using parameters in a ParameterList object. The available options depend 
+ * on the format of the imported data listed here:
+ * - "SEPARATOR" (string, CVS import only): specifies the separator to consider.
+ * - "ESCAPE_CHAR" (string, CVS import only): specifies the character used to "escape" the strings contained between two separators.
+ * - "ENCODING" (string, CVS import only): specifies the character set used in the imported data.
+ * - "TITLE_AS_FIRST_LINE" (boolean, CVS import only): TRUE to specify that the first line of the imported data contains the column names.
+ * - "GDA_TYPE_<col number>" (gda type, CVS import only): specifies the requested GDA type for the column numbered "col number".
+ * - "DBMS_TYPE_<col number>" (string, CVS import only): specifies the requested DBMS type for the column numbered "col number"; if the DBMS type is listed in the dictionary used by the created model, then the GDA type is set in accordance.
  *
  * @ingroup DataModels
  */
