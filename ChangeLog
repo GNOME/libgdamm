@@ -1,3 +1,16 @@
+2007-01-31  Johannes Schmid <johannes.schmid@openismus.com>
+
+	* libgda/src/datamodel.hg:
+	* tools/m4/convert_libgdamm.m4:
+	Use Gda::DataModelter instead of GdaDataModelIter
+
+	* libgda/src/object.hg:
+	Enabled changed() signal as I might be useful
+
+	* libgda/src/queryfield.ccg:
+	* libgda/src/queryfield.hg:
+	Fixed file header
+	
 2007-01-30  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/Makefile_list_of_hg.am_fragment:
@@ -103,7 +116,7 @@
 	* libgda/src/queryfield.hg:
 	* libgda/src/queryfieldagg.ccg:
 	* libgda/src/queryfieldagg.hg:
-  Wrapped GdaQueryField and GdaQueryFieldAgg
+	Wrapped GdaQueryField and GdaQueryFieldAgg
 
 	* libgda/src/libgda_methods.defs:
 	Regenerated (this time from correct sources...)

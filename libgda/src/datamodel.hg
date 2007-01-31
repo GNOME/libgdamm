@@ -32,9 +32,6 @@
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
 
-//TODO: Wrap this properly.
-typedef struct _GdaDataModelIter GdaDataModelIter;
-
 namespace Gnome
 {
 
@@ -157,10 +154,9 @@ public:
   _WRAP_METHOD(void row_updated(int row), gda_data_model_row_updated)
   _WRAP_METHOD(void row_removed(int row), gda_data_model_row_removed)
 
-  //TODO: Use C++ type for GdaDataModelIter:
-  _WRAP_METHOD(bool move_iter_at_row_default(GdaDataModelIter *iter, int row), gda_data_model_move_iter_at_row_default)
-  _WRAP_METHOD(bool move_iter_next_default(GdaDataModelIter *iter), gda_data_model_move_iter_next_default)
-  _WRAP_METHOD(bool move_iter_prev_default(GdaDataModelIter *iter), gda_data_model_move_iter_prev_default)
+  _WRAP_METHOD(bool move_iter_at_row_default(const Glib::RefPtr<DataModelIter>& iter, int row), gda_data_model_move_iter_at_row_default)
+  _WRAP_METHOD(bool move_iter_next_default(const Glib::RefPtr<DataModelIter>& iter), gda_data_model_move_iter_next_default)
+  _WRAP_METHOD(bool move_iter_prev_default(const Glib::RefPtr<DataModelIter>& iter), gda_data_model_move_iter_prev_default)
 
   #m4 _CONVERSION(`const ValueList&',`GList*',`const_cast<$2>($3.data())')
   _WRAP_METHOD(bool set_values(int row, const ValueList& values), gda_data_model_set_values, errthrow);

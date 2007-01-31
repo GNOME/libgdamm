@@ -1,6 +1,6 @@
 // -*- C++ -*- // this is for the .hg, I realize gensig puts one in
 
-/* query.h
+/* queryfield.h
  *
  * Copyright 2003 libgdamm Development Team
  *

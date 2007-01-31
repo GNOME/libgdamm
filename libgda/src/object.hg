@@ -68,8 +68,10 @@ public:
   _WRAP_METHOD(void block_changed(), gda_object_block_changed)
   _WRAP_METHOD(void unblock_changed(), gda_object_unblock_changed)
 
+  // IMHO, this one might be useful because it is emitted when a Gda::Parameter changes for example
+  _WRAP_SIGNAL(void signal_changed(), "changed")
+
   /* TODO: Ignore these signals for now because they look strange and not useful:
-  _WRAP_SIGNAL(void changed(), "changed")
   _WRAP_SIGNAL(void id_changed, "id_changed")
   _WRAP_SIGNAL(void name_changed, "name_changed")
   _WRAP_SIGNAL(void descr_changed, "descr_changed")
