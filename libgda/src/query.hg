@@ -29,6 +29,9 @@
 #include <libgdamm/entity.h>
 #include <libgdamm/queryobject.h>
 
+#include <libgdamm/queryfield.h>
+#include <libgdamm/querytarget.h>
+
 _DEFS(libgdamm,libgda)
 _PINCLUDE(libgdamm/private/queryobject_p.h)
 
@@ -39,6 +42,7 @@ namespace Gda
 {
 
 _WRAP_ENUM(QueryType, GdaQueryType)
+_WRAP_ENUM(QueryFieldState, GdaQueryFieldState)
 
 // TODO: Functions requiring GdaQuery* classes are still unwrapped because
 // they do not yet exist, however, we need GdaQuery to create gnome-db
@@ -92,7 +96,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<const ParameterList> get_parameter_list() const, gda_query_get_parameter_list, constversion)
 
 //TODO: Add a suitable default value for the bool - look at the docs to choose a value?
-  _WRAP_METHOD(Glib::RefPtr<Object> execute(const Glib::RefPtr<ParameterList>& params, bool iter_model_only_requested), gda_query_execute, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<Object> execute(const Glib::RefPtr<ParameterList>& params, bool iter_model_only_requested = false), gda_query_execute, errthrow)
   //I don't think that an exectute() function should be const. We can add it later if necessary. murrayc: _WRAP_METHOD(Glib::RefPtr<const Object> execute(const Glib::RefPtr<ParameterList>& params, bool iter_model_only_requested) const, gda_query_execute, errthrow, constversion)
   _WRAP_METHOD(Glib::RefPtr<Query> get_parent_query(), gda_query_get_parent_query, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Query> get_parent_query() const, gda_query_get_parent_query, constversion)
@@ -107,6 +111,52 @@ public:
 
   _WRAP_METHOD(void add_sub_query(const Glib::RefPtr<Query>& sub_query), gda_query_add_sub_query)
   _WRAP_METHOD(void del_sub_query(const Glib::RefPtr<Query>& sub_query), gda_query_del_sub_query)
+
+  _WRAP_METHOD(bool add_target(const Glib::RefPtr<QueryTarget>& target), gda_query_add_target, errthrow)
+  _WRAP_METHOD(void del_target(const Glib::RefPtr<QueryTarget>& target), gda_query_del_target)
+
+  // TODO: I am not quite sure what the correct ownership is here and whether
+  // we have to unref the objects in the list. armin.
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<QueryTarget> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const QueryTarget> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryTarget> > get_targets(), gda_query_get_targets)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const QueryTarget> > get_targets() const, gda_query_get_targets)
+
+  _WRAP_METHOD(Glib::RefPtr<QueryTarget> get_target_by_xml_id(const Glib::ustring& xml_id), gda_query_get_target_by_xml_id)
+  _WRAP_METHOD(Glib::RefPtr<const QueryTarget> get_target_by_xml_id(const Glib::ustring& xml_id) const, gda_query_get_target_by_xml_id, constversion)
+  _WRAP_METHOD(Glib::RefPtr<QueryTarget> get_target_by_alias(const Glib::ustring& alias_or_name), gda_query_get_target_by_alias)
+  _WRAP_METHOD(Glib::RefPtr<const QueryTarget> get_target_by_alias(const Glib::ustring& alias_or_name) const, gda_query_get_target_by_alias, constversion)
+
+  // TODO: I am not quite usre what the correct ownership is here and
+  // whether we have to unref the objects in the list. armin.
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<QueryField> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const QueryField> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryField> > get_target_pkfields(const Glib::RefPtr<QueryTarget>& target), gda_query_get_target_pkfields)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const QueryField> > get_target_pkfields(const Glib::RefPtr<QueryTarget>& target) const, gda_query_get_target_pkfields)
+  
+  // TODO: Wrap join and condition API
+
+  _IGNORE(gda_query_get_order_by_field)
+  _WRAP_METHOD(void set_order_by_field(const Glib::RefPtr<QueryField>& field, int order, bool ascendant), gda_query_set_order_by_field)
+  int get_order_by_field(const Glib::RefPtr<QueryField>& field) const;
+  int get_order_by_field(const Glib::RefPtr<QueryField>& field, bool& ascendant) const;
+
+  _WRAP_METHOD(Glib::RefPtr<QueryField> add_field_from_sql(const Glib::ustring& field), gda_query_add_field_from_sql, errthrow)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryField> > get_all_fields(), gda_query_get_all_fields)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const QueryField> > get_all_fields() const, gda_query_get_all_fields)
+  _WRAP_METHOD(Glib::RefPtr<QueryField> get_field_by_sql_naming(const Glib::ustring& sql_name), gda_query_get_field_by_sql_naming)
+  _WRAP_METHOD(Glib::RefPtr<const QueryField> get_field_by_sql_naming(const Glib::ustring& sql_name) const, gda_query_get_field_by_sql_naming, constversion)
+  _WRAP_METHOD(Glib::RefPtr<QueryField> get_field_by_param_name(const Glib::ustring& param_name), gda_query_get_field_by_param_name)
+  _WRAP_METHOD(Glib::RefPtr<const QueryField> get_field_by_param_name(const Glib::ustring& param_name) const, gda_query_get_field_by_param_name, constversion)
+  _WRAP_METHOD(Glib::RefPtr<QueryField> get_field_by_ref_field(const Glib::RefPtr<QueryTarget>& target, const Glib::RefPtr<EntityField>& field, QueryFieldState field_state), gda_query_get_field_by_ref_field)
+  _WRAP_METHOD(Glib::RefPtr<const QueryField> get_field_by_ref_field(const Glib::RefPtr<QueryTarget>& target, const Glib::RefPtr<EntityField>& field, QueryFieldState field_state) const, gda_query_get_field_by_ref_field, constversion)
+  _WRAP_METHOD(Glib::RefPtr<QueryField> get_first_field_for_target(const Glib::RefPtr<QueryTarget>& target), gda_query_get_first_field_for_target)
+  _WRAP_METHOD(Glib::RefPtr<const QueryField> get_first_field_for_target(const Glib::RefPtr<QueryTarget>& target) const, gda_query_get_first_field_for_target, constversion)
+
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryField> > expand_all_field(const Glib::RefPtr<QueryTarget>& target), gda_query_expand_all_field)
+  _WRAP_METHOD(void order_fields_using_join_conds(), gda_query_order_fields_using_join_conds)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryField> > get_fields_by_target(const Glib::RefPtr<QueryTarget>& target, bool visible_fields_only = true), gda_query_get_fields_by_target)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const QueryField> > get_fields_by_target(const Glib::RefPtr<QueryTarget>& target, bool visible_fields_only = true) const, gda_query_get_fields_by_target)
 };
 
 } // namespace Gda

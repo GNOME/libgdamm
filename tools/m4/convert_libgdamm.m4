@@ -34,6 +34,7 @@ _CONVERSION(`GdaQuery*',`Glib::RefPtr<Query>',`Glib::wrap($3)')
 _CONVERSION(`GdaDataHandler*',`Glib::RefPtr<DataHandler>',`Glib::wrap($3)')
 _CONVERSION(`GdaQueryField*',`Glib::RefPtr<QueryField>',`Glib::wrap($3)')
 _CONVERSION(`GdaQueryField*',`Glib::RefPtr<const QueryField>',`Glib::wrap($3)')
+_CONVERSION(`GdaQueryTarget*',`Glib::RefPtr<QueryTarget>',`Glib::wrap($3)')
 
 _CONVERSION(`const Glib::RefPtr<BlobOp>&', `GdaBlobOp*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DataModel>&', `GdaDataModel*', __CONVERT_REFPTR_TO_P)
@@ -59,6 +60,7 @@ _CONVERSION(`const Glib::RefPtr<ParameterList>&', `GdaParameterList*', __CONVERT
 _CONVERSION(`const Glib::RefPtr<const ParameterList>&', `GdaParameterList*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Query>&', `GdaQuery*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<QueryField>&', `GdaQueryField*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<QueryTarget>&', `GdaQueryTarget*', __CONVERT_REFPTR_TO_P)
 
 
 # The const_cast here is silly and should not be necessary - we should fix the wrap() methods some time:
@@ -153,6 +155,7 @@ _CONV_ENUM(Gda,ConnectionEventType)
 _CONV_ENUM(Gda,ServerOperationType)
 _CONV_ENUM(Gda,ServerOperationNodeType)
 _CONV_ENUM(Gda,QueryType)
+_CONV_ENUM(Gda,QueryFieldState)
 _CONV_ENUM(Gda,DictConstraintType)
 _CONV_ENUM(Gda,DictConstraintFkAction)
 

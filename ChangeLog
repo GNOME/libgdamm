@@ -1,3 +1,19 @@
+2007-02-02  Armin Burgmeier  <armin@arbur.net>
+
+	* libgda/src/querytarget.hg:
+	* libgda/src/querytarget.ccg:
+	* libgda/src/Makefile_list_of_hg.am_fragment: Wrapped GdaQueryTarget.
+
+	* tools/extra_defs_gen/generate_defs_gda.cc:
+	* libgda/src/libgda_signals.defs: Added GDA_TYPE_QUERY_FIELD and
+	GDA_TYPE_QUERY_TARGET to defs generation and regenerated
+	libgda_signals.defs.
+
+	* libgda/src/query.hg: Wrapped further GdaQuery API.
+
+	* tools/m4/convert_libgdamm.m4: Added new conversions belonging to
+	GdaQueryTarget.
+
 2007-01-31  Johannes Schmid <johannes.schmid@openismus.com>
 
 	* libgda/src/datamodel.hg:

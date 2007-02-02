@@ -428,6 +428,26 @@
   )
 )
 
+(define-signal pre-changes-applied
+  (of-object "GdaDataProxy")
+  (return-type "gboolean")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+    '("gint" "p1")
+  )
+)
+
+(define-signal post-changes-applied
+  (of-object "GdaDataProxy")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gint" "p0")
+    '("gint" "p1")
+  )
+)
+
 (define-property dict
   (of-object "GdaDataProxy")
   (prop-type "GParamObject")
@@ -1128,6 +1148,100 @@
   (prop-type "GParamString")
   (docs "")
   (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaQueryField
+
+(define-property dict
+  (of-object "GdaQueryField")
+  (prop-type "GParamObject")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaQueryField")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaQueryField")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaQueryTarget
+
+(define-property dict
+  (of-object "GdaQueryTarget")
+  (prop-type "GParamObject")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaQueryTarget")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaQueryTarget")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property query
+  (of-object "GdaQueryTarget")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property entity
+  (of-object "GdaQueryTarget")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property entity-name
+  (of-object "GdaQueryTarget")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property entity-id
+  (of-object "GdaQueryTarget")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #f)
   (writable #t)
   (construct-only #f)
 )
