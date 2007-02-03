@@ -1,3 +1,13 @@
+2007-02-03  Armin Burgmeier  <armin@arbur.net>
+
+	* libgda/src/query.hg: Fixed some missing refreturns
+
+	* libgda/src/dictfield.hg: Fixed _CLASS_GOBJECT invocation (third
+	parameter was GDA_DICT_TYPE instead of GDA_DICT_FIELD).
+
+	* libgda/src/querytarget.ccg: Fixed order of properties in _CONSTRUCT
+	macro to match the one gda_query_target_new uses.
+
 2007-02-02  Armin Burgmeier  <armin@arbur.net>
 
 	* libgda/src/querytarget.hg:

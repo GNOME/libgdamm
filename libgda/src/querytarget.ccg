@@ -31,7 +31,7 @@ namespace Gda
 
 QueryTarget::QueryTarget(const Glib::RefPtr<Query>& query, const Glib::ustring& table)
 :
-  _CONSTRUCT("query", Glib::unwrap(query), "dict", gda_object_get_dict(GDA_OBJECT(query->gobj())), "entity_name", table.c_str())
+  _CONSTRUCT("dict", gda_object_get_dict(GDA_OBJECT(query->gobj())), "query", Glib::unwrap(query), "entity_name", table.c_str())
 {
 }
 

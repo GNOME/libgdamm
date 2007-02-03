@@ -48,7 +48,7 @@ class DictField
 : public Gda::Object,
   public XmlStorage
 {
-  _CLASS_GOBJECT(DictField, GdaDictField, GDA_DICT_TYPE, Gda::Object, GdaObject)
+  _CLASS_GOBJECT(DictField, GdaDictField, GDA_DICT_FIELD, Gda::Object, GdaObject)
   _IMPLEMENTS_INTERFACE(XmlStorage)
 protected:
 
