@@ -1,5 +1,21 @@
 2007-02-03  Armin Burgmeier  <armin@arbur.net>
 
+	* libgda/src/queryfieldfield.ccg: 
+	* libgda/src/queryfieldfield.hg:
+	* libgda/src/queryfieldall.hg:
+	* libgda/src/queryfieldall.ccg:
+	* libgda/src/Makefile_list_of_hg.am_fragment: Wrapped
+	GdaQueryFieldField, GdaQueryFieldAll.
+
+	* tools/extra_defs_gen/generate_defs_gda.cc:
+	* libgda/src/libgda_signals.defs: Added GdaQueryField* classes to
+	output and regenerated libgda_signals.defs.
+
+	* libgda/libgdamm.h: Added libgdamm/queryfieldagg.h,
+	libgdamm/queryfieldall.h, libgdamm/queryfieldfield.h.
+
+2007-02-03  Armin Burgmeier  <armin@arbur.net>
+
 	* libgda/src/query.hg: Fixed some missing refreturns
 
 	* libgda/src/dictfield.hg: Fixed _CLASS_GOBJECT invocation (third

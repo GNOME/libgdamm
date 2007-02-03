@@ -41,5 +41,8 @@ extern const int libgdamm_micro_version;
 #include <libgdamm/datamodelarray.h>
 #include <libgdamm/datamodelquery.h>
 #include <libgdamm/query.h>
+#include <libgdamm/queryfieldagg.h>
+#include <libgdamm/queryfieldall.h>
+#include <libgdamm/queryfieldfield.h>
 
 #endif /* #ifndef LIBGDAMM_H */

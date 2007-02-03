@@ -51,7 +51,12 @@ int main (int argc, char *argv[])
                  << get_defs(GDA_TYPE_QUERY)
                  << get_defs(GDA_TYPE_QUERY_OBJECT)
                  << get_defs(GDA_TYPE_QUERY_FIELD)
-                 << get_defs(GDA_TYPE_QUERY_TARGET);
+                 << get_defs(GDA_TYPE_QUERY_TARGET)
+                 << get_defs(GDA_TYPE_QUERY_FIELD_AGG)
+                 << get_defs(GDA_TYPE_QUERY_FIELD_ALL)
+                 << get_defs(GDA_TYPE_QUERY_FIELD_FIELD)
+                 << get_defs(GDA_TYPE_QUERY_FIELD_FUNC)
+                 << get_defs(GDA_TYPE_QUERY_FIELD_VALUE);
 //                 << get_defs(GDA_TYPE_SERVER_CONNECTION)
 //                 << get_defs(GDA_TYPE_SERVER_PROVIDER)
 //                 << get_defs(GDA_TYPE_SERVER_RECORDSET_MODEL)
