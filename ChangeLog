@@ -1,11 +1,11 @@
-2007-02-04  Armin Burgmeier  <armin@arbur.net>
+2007-02-04  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/libgdamm/value.h:
 	* libgda/libgdamm/value.cc: Added set(const char*) overload, otherwise
 	the Value(const char*) constructor calls set(bool) after having
 	initialized the type to string.
 
-2007-02-04  Armin Burgmeier  <armin@arbur.net>
+2007-02-04  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/queryfieldvalue.ccg:
 	* libgda/src/queryfieldvalue.hg:
@@ -18,7 +18,7 @@
 
 	* libgda/libgdamm.h: Added queryfieldvalue.h to includes.
 
-2007-02-04  Armin Burgmeier  <armin@arbur.net>
+2007-02-04  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/queryfieldfield.hg:
 	* libgda/src/queryfieldfield.ccg: Added QueryFieldField(query, field,
@@ -35,7 +35,7 @@
 
 	* tools/m4/convert_libgdamm.m4: Added needed conversions.
 
-2007-02-03  Armin Burgmeier  <armin@arbur.net>
+2007-02-03  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/queryfieldfield.ccg: 
 	* libgda/src/queryfieldfield.hg:
@@ -51,7 +51,7 @@
 	* libgda/libgdamm.h: Added libgdamm/queryfieldagg.h,
 	libgdamm/queryfieldall.h, libgdamm/queryfieldfield.h.
 
-2007-02-03  Armin Burgmeier  <armin@arbur.net>
+2007-02-03  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/query.hg: Fixed some missing refreturns
 
@@ -61,7 +61,7 @@
 	* libgda/src/querytarget.ccg: Fixed order of properties in _CONSTRUCT
 	macro to match the one gda_query_target_new uses.
 
-2007-02-02  Armin Burgmeier  <armin@arbur.net>
+2007-02-02  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/querytarget.hg:
 	* libgda/src/querytarget.ccg:
