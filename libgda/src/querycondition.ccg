@@ -1,6 +1,6 @@
 // -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* queryfieldfield.cc
+/* querycondition.cc
  * 
  * Copyright 2003 libgdamm Development Team
  *
@@ -19,7 +19,12 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgda/gda-query-field-field.h>
+#include <libgda/gda-enum-types.h>
+#include <libgda/gda-query-condition.h>
+
+#include <libgdamm/query.h>
+#include <libgdamm/queryfield.h>
+#include <libgdamm/querytarget.h>
 
 namespace Gnome
 {
@@ -27,15 +32,9 @@ namespace Gnome
 namespace Gda
 {
 
-QueryFieldField::QueryFieldField(const Glib::RefPtr<Query>& query, const Glib::ustring& field)
+QueryCondition::QueryCondition(const Glib::RefPtr<Query>& query, QueryConditionType type)
 :
-  _CONSTRUCT("dict", gda_object_get_dict(GDA_OBJECT(query->gobj())), "query", Glib::unwrap(query), "field_name", field.c_str())
-{
-}
-
-QueryFieldField::QueryFieldField(const Glib::RefPtr<Query>& query, const Glib::ustring& field, const Glib::RefPtr<QueryTarget>& target)
-:
-  _CONSTRUCT("dict", gda_object_get_dict(GDA_OBJECT(query->gobj())), "query", Glib::unwrap(query), "field_name", field.c_str(), "target", Glib::unwrap(target))
+  _CONSTRUCT("dict", gda_object_get_dict(GDA_OBJECT(query->gobj())), "query", Glib::unwrap(query), "cond_type", type)
 {
 }
 

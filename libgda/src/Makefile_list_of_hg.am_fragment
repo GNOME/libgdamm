@@ -13,7 +13,7 @@ files_hg = blob.hg blobop.hg client.hg columnindex.hg command.hg connection.hg \
 	   handlerstring.hg handlerboolean.hg handlertime.hg \
 	   handlernumerical.hg handlerbin.hg handlertype.hg \
            object.hg  parameter.hg parameterlist.hg providerinfo.hg query.hg \
-           queryfield.hg queryfieldagg.hg queryfieldall.hg queryfieldfield.hg \
+           querycondition.hg queryfield.hg queryfieldagg.hg queryfieldall.hg queryfieldfield.hg \
 	   queryobject.hg querytarget.hg referer.hg renderer.hg row.hg \
            serverprovider.hg serveroperation.hg transactionstatus.hg xmlstorage.hg
 
