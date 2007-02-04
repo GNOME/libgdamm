@@ -195,6 +195,9 @@ public:
   Glib::ustring get_string() const;
   
   void set(const Glib::ustring& val);
+
+  //If this method does not exists, then set("something") uses set(bool) instead of set(ustring).
+  void set(const char* val);
   
   Time get_time() const;
   

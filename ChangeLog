@@ -1,5 +1,12 @@
 2007-02-04  Armin Burgmeier  <armin@arbur.net>
 
+	* libgda/libgdamm/value.h:
+	* libgda/libgdamm/value.cc: Added set(const char*) overload, otherwise
+	the Value(const char*) constructor calls set(bool) after having
+	initialized the type to string.
+
+2007-02-04  Armin Burgmeier  <armin@arbur.net>
+
 	* libgda/src/queryfieldvalue.ccg:
 	* libgda/src/queryfieldvalue.hg:
 	* libgda/src/Makefile_list_of_hg.am_fragment: Wrapped

@@ -416,6 +416,11 @@ void Value::set(const Glib::ustring& val)
   g_value_set_string(gobj(), val.c_str()); 
 }
 
+void Value::set(const char* val)
+{
+  g_value_set_string(gobj(), val);
+}
+
 Time Value::get_time() const
 {
   return *(gda_value_get_time(const_cast<GValue*>(gobj())));
