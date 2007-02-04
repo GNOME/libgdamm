@@ -117,6 +117,8 @@ _CONVERSION(`const Glib::RefPtr<Client>&', `GdaClient*', __CONVERT_REFPTR_TO_P)
 
 _CONVERSION(`const Value&', `GValue*', `const_cast<GValue*>(($3).gobj())')
 _CONVERSION(`const Value&', `const GValue*', `($3).gobj()')
+_CONVERSION(`GValue*', `Value', `$2($3)')
+_CONVERSION(`const GValue*', `Value', `$2($3)')
 
 _CONVERSION(`GdaRow*', `const Glib::RefPtr<Row>',  `Glib::wrap($3)')
 _CONVERSION(`GdaRow*', `const Glib::RefPtr<const Row>',  `Glib::wrap($3)')

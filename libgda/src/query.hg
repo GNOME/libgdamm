@@ -31,6 +31,7 @@
 
 #include <libgdamm/queryfield.h>
 #include <libgdamm/querytarget.h>
+#include <libgdamm/querycondition.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(libgdamm/private/queryobject_p.h)
@@ -133,8 +134,12 @@ public:
   #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const QueryField> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryField> > get_target_pkfields(const Glib::RefPtr<QueryTarget>& target), gda_query_get_target_pkfields)
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const QueryField> > get_target_pkfields(const Glib::RefPtr<QueryTarget>& target) const, gda_query_get_target_pkfields)
-  
-  // TODO: Wrap join and condition API
+
+  // TODO: Wrap join API
+
+  _WRAP_METHOD(Glib::RefPtr<QueryCondition> get_condition(), gda_query_get_condition, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const QueryCondition> get_condition() const, gda_query_get_condition, refreturn, constversion)
+  _WRAP_METHOD(void set_condition(const Glib::RefPtr<QueryCondition>& cond), gda_query_set_condition)
 
   _IGNORE(gda_query_get_order_by_field)
   _WRAP_METHOD(void set_order_by_field(const Glib::RefPtr<QueryField>& field, int order, bool ascendant), gda_query_set_order_by_field)

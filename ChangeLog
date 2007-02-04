@@ -1,5 +1,18 @@
 2007-02-04  Armin Burgmeier  <armin@arbur.net>
 
+	* libgda/src/queryfieldvalue.ccg:
+	* libgda/src/queryfieldvalue.hg:
+	* libgda/src/Makefile_list_of_hg.am_fragment: Wrapped
+	GdaQueryFieldValue.
+
+	* tools/m4/convert_libgdamm.m4: Added needed conversions.
+
+	* libgda/src/query.hg: Wrapped set/get_condition.
+
+	* libgda/libgdamm.h: Added queryfieldvalue.h to includes.
+
+2007-02-04  Armin Burgmeier  <armin@arbur.net>
+
 	* libgda/src/queryfieldfield.hg:
 	* libgda/src/queryfieldfield.ccg: Added QueryFieldField(query, field,
 	target) convenience constructor.
