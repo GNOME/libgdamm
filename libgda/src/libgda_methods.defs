@@ -6768,9 +6768,9 @@
   (return-type "gboolean")
 )
 
-(define-method is_modif_query
+(define-method is_modify_query
   (of-object "GdaQuery")
-  (c-name "gda_query_is_modif_query")
+  (c-name "gda_query_is_modify_query")
   (return-type "gboolean")
 )
 

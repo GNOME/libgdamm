@@ -71,8 +71,8 @@ public:
   // TODO: How to wrap GHashTable in g*mm? armin.
   _IGNORE(gda_query_new_copy)
 
-  // Not wrapped because it does only call gda_query_set_sql_text. However,
-  // gda_query_set_sql_text might throw an exception and if this was a
+  // Not wrapped because it only calls gda_query_set_sql_text(). However,
+  // gda_query_set_sql_text() might throw an exception and if this was a
   // constructor, it would prevent the object from being constructed, but in
   // C a new object is returned. This is why the caller should call
   // gda_query_set_sql_text her/himself.
@@ -85,7 +85,7 @@ public:
   _WRAP_METHOD(bool is_insert_query() const, gda_query_is_insert_query)
   _WRAP_METHOD(bool is_update_query() const, gda_query_is_update_query)
   _WRAP_METHOD(bool is_delete_query() const, gda_query_is_delete_query)
-  _WRAP_METHOD(bool is_modif_query() const, gda_query_is_modif_query)
+  _WRAP_METHOD(bool is_modify_query() const, gda_query_is_modify_query)
 
   _WRAP_METHOD(void set_sql_text(const Glib::ustring& sql), gda_query_set_sql_text, errthrow)
   _WRAP_METHOD(Glib::ustring get_sql_text() const, gda_query_get_sql_text)

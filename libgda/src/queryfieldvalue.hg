@@ -55,6 +55,7 @@ class QueryFieldValue
 
 protected:
   _IGNORE(gda_query_field_value_new)
+  //TODO: Documentation
   QueryFieldValue(const Glib::RefPtr<Query>& query, GType type);
   QueryFieldValue(const Glib::RefPtr<Query>& query, const Value& value);
 
@@ -68,9 +69,9 @@ public:
   _WRAP_METHOD(Value get_default_value() const, gda_query_field_value_get_default_value)
   _WRAP_METHOD(GType get_g_type() const, gda_query_field_value_get_g_type)
 
-  _WRAP_METHOD(void set_is_parameter(bool is_param), gda_query_field_value_set_is_parameter)
+  _WRAP_METHOD(void set_is_parameter(bool is_param = true), gda_query_field_value_set_is_parameter)
   _WRAP_METHOD(bool is_parameter() const, gda_query_field_value_is_parameter)
-  _WRAP_METHOD(void set_not_null(bool not_null), gda_query_field_value_set_not_null)
+  _WRAP_METHOD(void set_not_null(bool not_null = true), gda_query_field_value_set_not_null)
   _WRAP_METHOD(bool get_not_null() const, gda_query_field_value_get_not_null)
   _WRAP_METHOD(bool is_value_null(const Glib::RefPtr<ParameterList>& context) const, gda_query_field_value_is_value_null)
   _WRAP_METHOD(bool restrict(const Glib::RefPtr<DataModel>& model, int col), gda_query_field_value_restrict, errthrow)
