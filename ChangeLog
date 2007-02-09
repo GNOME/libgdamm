@@ -1,3 +1,16 @@
+2007-02-09  MMurray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/libgda_enums.defs:
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/libgda_signals.defs: Regenerated.
+	* libgda/src/connection.hg:
+
+	* libgda/src/datamodel.hg:
+	* libgda/src/dataproxy.hg:
+	* libgda/src/dictfield.hg:
+	* libgda/src/object.hg:
+	* tools/m4/convert_libgdamm.m4: Updated for changed parameter types.
+
 2007-02-05  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/libgda_methods.defs:

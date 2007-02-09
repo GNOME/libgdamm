@@ -1,16 +1,4 @@
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-blob.h
-
-(define-flags-extended BlobMode
-  (in-module "Gda")
-  (c-name "GdaBlobMode")
-  (values
-    '("read" "GDA_BLOB_MODE_READ" "1")
-    '("write" "GDA_BLOB_MODE_WRITE" "1 << 1")
-    '("rdwr" "GDA_BLOB_MODE_RDWR" "0x03")
-  )
-)
-
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-client.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-client.h
 
 (define-enum-extended ClientEvent
   (in-module "Gda")
@@ -34,7 +22,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-column-index.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-column-index.h
 
 (define-enum-extended Sorting
   (in-module "Gda")
@@ -45,7 +33,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-command.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-command.h
 
 (define-flags-extended CommandOptions
   (in-module "Gda")
@@ -70,7 +58,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-connection-event.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-connection-event.h
 
 (define-enum-extended ConnectionEventType
   (in-module "Gda")
@@ -108,7 +96,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-connection.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-connection.h
 
 (define-enum-extended ConnectionError
   (in-module "Gda")
@@ -128,7 +116,8 @@
   (in-module "Gda")
   (c-name "GdaConnectionOptions")
   (values
-    '("y" "GDA_CONNECTION_OPTIONS_READ_ONLY" "1 << 0")
+    '("none" "GDA_CONNECTION_OPTIONS_NONE" "0")
+    '("read-only" "GDA_CONNECTION_OPTIONS_READ_ONLY" "1 << 0")
   )
 )
 
@@ -178,7 +167,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-data-model.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-data-model.h
 
 (define-flags-extended DataModelAccessFlags
   (in-module "Gda")
@@ -213,7 +202,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-data-model-iter.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-data-model-iter.h
 
 (define-enum-extended DataModelIterError
   (in-module "Gda")
@@ -223,7 +212,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-data-model-query.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-data-model-query.h
 
 (define-enum-extended DataModelQueryError
   (in-module "Gda")
@@ -242,17 +231,18 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-data-proxy.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-data-proxy.h
 
 (define-enum-extended DataProxyError
   (in-module "Gda")
   (c-name "GdaDataProxyError")
   (values
-    '("r" "GDA_DATA_PROXY_COMMIT_ERROR" "0")
+    '("error" "GDA_DATA_PROXY_COMMIT_ERROR" "0")
+    '("cancelled" "GDA_DATA_PROXY_COMMIT_CANCELLED" "1")
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-dict-aggregate.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-dict-aggregate.h
 
 (define-enum-extended DictAggregateError
   (in-module "Gda")
@@ -262,7 +252,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-dict-constraint.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-dict-constraint.h
 
 (define-enum-extended DictConstraintError
   (in-module "Gda")
@@ -300,7 +290,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-dict-database.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-dict-database.h
 
 (define-enum-extended DictDatabaseError
   (in-module "Gda")
@@ -315,7 +305,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-dict-field.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-dict-field.h
 
 (define-enum-extended DictFieldError
   (in-module "Gda")
@@ -333,7 +323,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-dict-function.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-dict-function.h
 
 (define-enum-extended DictFunctionError
   (in-module "Gda")
@@ -343,7 +333,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-dict.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-dict.h
 
 (define-enum-extended DictError
   (in-module "Gda")
@@ -360,7 +350,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-dict-table.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-dict-table.h
 
 (define-enum-extended DictTableError
   (in-module "Gda")
@@ -372,7 +362,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-dict-type.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-dict-type.h
 
 (define-enum-extended DictTypeError
   (in-module "Gda")
@@ -382,7 +372,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-enums.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-enums.h
 
 (define-enum-extended TransactionIsolation
   (in-module "Gda")
@@ -400,6 +390,7 @@
   (in-module "Gda")
   (c-name "GdaValueAttribute")
   (values
+    '("none" "GDA_VALUE_ATTR_NONE" "0")
     '("is-null" "GDA_VALUE_ATTR_IS_NULL" "1 << 0")
     '("can-be-null" "GDA_VALUE_ATTR_CAN_BE_NULL" "1 << 1")
     '("is-default" "GDA_VALUE_ATTR_IS_DEFAULT" "1 << 2")
@@ -409,6 +400,7 @@
     '("data-non-valid" "GDA_VALUE_ATTR_DATA_NON_VALID" "1 << 6")
     '("has-value-orig" "GDA_VALUE_ATTR_HAS_VALUE_ORIG" "1 << 7")
     '("no-modif" "GDA_VALUE_ATTR_NO_MODIF" "1 << 8")
+    '("unused" "GDA_VALUE_ATTR_UNUSED" "1 << 9")
   )
 )
 
@@ -432,7 +424,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-object-ref.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-object-ref.h
 
 (define-enum-extended ObjectRefType
   (in-module "Gda")
@@ -451,7 +443,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-parameter.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-parameter.h
 
 (define-enum-extended ParameterError
   (in-module "Gda")
@@ -461,7 +453,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-parameter-list.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-parameter-list.h
 
 (define-enum-extended ParameterListError
   (in-module "Gda")
@@ -488,7 +480,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query-condition.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-query-condition.h
 
 (define-enum-extended QueryConditionType
   (in-module "Gda")
@@ -535,7 +527,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query-field-agg.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-query-field-agg.h
 
 (define-enum-extended QueryFieldAggError
   (in-module "Gda")
@@ -546,7 +538,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query-field-all.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-query-field-all.h
 
 (define-enum-extended QueryFieldAllError
   (in-module "Gda")
@@ -557,7 +549,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query-field-field.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-query-field-field.h
 
 (define-enum-extended QueryFieldFieldError
   (in-module "Gda")
@@ -568,7 +560,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query-field-func.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-query-field-func.h
 
 (define-enum-extended QueryFieldFuncError
   (in-module "Gda")
@@ -579,7 +571,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query-field.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-query-field.h
 
 (define-enum-extended QueryFieldError
   (in-module "Gda")
@@ -589,7 +581,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query-field-value.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-query-field-value.h
 
 (define-enum-extended QueryFieldValueError
   (in-module "Gda")
@@ -602,7 +594,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-query.h
 
 (define-enum-extended QueryType
   (in-module "Gda")
@@ -634,10 +626,11 @@
     '("sql-analyse-error" "GDA_QUERY_SQL_ANALYSE_ERROR" "8")
     '("no-cnc-error" "GDA_QUERY_NO_CNC_ERROR" "9")
     '("cnc-closed-error" "GDA_QUERY_CNC_CLOSED_ERROR" "10")
+    '("exec-error" "GDA_QUERY_EXEC_ERROR" "11")
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query-join.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-query-join.h
 
 (define-enum-extended QueryJoinType
   (in-module "Gda")
@@ -664,7 +657,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-query-target.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-query-target.h
 
 (define-enum-extended QueryTargetError
   (in-module "Gda")
@@ -677,20 +670,22 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-renderer.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-renderer.h
 
 (define-flags-extended RendererOptions
   (in-module "Gda")
   (c-name "GdaRendererOptions")
   (values
     '("extra-pretty-sql" "GDA_RENDERER_EXTRA_PRETTY_SQL" "1 << 0")
-    '("extra-val-attrs" "GDA_RENDERER_EXTRA_VAL_ATTRS" "1 << 1")
+    '("params-as-detailed" "GDA_RENDERER_PARAMS_AS_DETAILED" "1 << 1")
     '("error-if-default" "GDA_RENDERER_ERROR_IF_DEFAULT" "1 << 2")
     '("fields-no-target-alias" "GDA_RENDERER_FIELDS_NO_TARGET_ALIAS" "1 << 3")
+    '("params-as-colon" "GDA_RENDERER_PARAMS_AS_COLON" "1 << 4")
+    '("params-as-dollar" "GDA_RENDERER_PARAMS_AS_DOLLAR" "1 << 5")
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-server-operation.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-server-operation.h
 
 (define-enum-extended ServerOperationType
   (in-module "Gda")
@@ -733,7 +728,7 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/gda-transaction-status.h
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/gda-transaction-status.h
 
 (define-enum-extended TransactionStatusEventType
   (in-module "Gda")
@@ -745,7 +740,16 @@
   )
 )
 
-;; From /home/murrayc/cvs/gnome216/branches/HEAD/libgda/libgda/libgda.h
+(define-enum-extended TransactionStatusState
+  (in-module "Gda")
+  (c-name "GdaTransactionStatusState")
+  (values
+    '("ok" "GDA_TRANSACTION_STATUS_STATE_OK" "0")
+    '("failed" "GDA_TRANSACTION_STATUS_STATE_FAILED" "1")
+  )
+)
+
+;; From /home/murrayc/svn/gnome218/FULL/libgda/trunk/libgda/libgda.h
 
 (define-enum-extended GeneralError
   (in-module "Gda")

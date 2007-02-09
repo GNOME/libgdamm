@@ -33,6 +33,8 @@ namespace Gnome
 namespace Gda
 {
 
+_WRAP_ENUM(ValueAttribute, GdaValueAttribute)
+
 class Dict;
 
 class Object : public Glib::Object

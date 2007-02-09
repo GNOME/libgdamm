@@ -469,6 +469,7 @@
   (c-name "GdaConnectionOptions")
   (gtype-id "GDA_TYPE_CONNECTION_OPTIONS")
   (values
+    '("none" "GDA_CONNECTION_OPTIONS_NONE")
     '("read-only" "GDA_CONNECTION_OPTIONS_READ_ONLY")
     '("dont-share" "GDA_CONNECTION_OPTIONS_DONT_SHARE")
   )
@@ -591,7 +592,8 @@
   (c-name "GdaDataProxyError")
   (gtype-id "GDA_TYPE_DATA_PROXY_ERROR")
   (values
-    '("r" "GDA_DATA_PROXY_COMMIT_ERROR")
+    '("error" "GDA_DATA_PROXY_COMMIT_ERROR")
+    '("cancelled" "GDA_DATA_PROXY_COMMIT_CANCELLED")
   )
 )
 
@@ -738,6 +740,7 @@
   (c-name "GdaValueAttribute")
   (gtype-id "GDA_TYPE_VALUE_ATTRIBUTE")
   (values
+    '("none" "GDA_VALUE_ATTR_NONE")
     '("is-null" "GDA_VALUE_ATTR_IS_NULL")
     '("can-be-null" "GDA_VALUE_ATTR_CAN_BE_NULL")
     '("is-default" "GDA_VALUE_ATTR_IS_DEFAULT")
@@ -2194,7 +2197,7 @@
     '("const-gchar*" "dsn")
     '("const-gchar*" "username")
     '("const-gchar*" "password")
-    '("guint" "options")
+    '("GdaConnectionOptions" "options")
   )
 )
 
@@ -2252,7 +2255,7 @@
 (define-method get_options
   (of-object "GdaConnection")
   (c-name "gda_connection_get_options")
-  (return-type "guint")
+  (return-type "GdaConnectionOptions")
 )
 
 (define-method get_server_version
@@ -2323,7 +2326,7 @@
   (c-name "gda_connection_add_event")
   (return-type "none")
   (parameters
-    '("GdaConnectionEvent*" "error")
+    '("GdaConnectionEvent*" "event")
   )
 )
 
@@ -2882,7 +2885,7 @@
 (define-method get_access_flags
   (of-object "GdaDataModel")
   (c-name "gda_data_model_get_access_flags")
-  (return-type "guint")
+  (return-type "GdaDataModelAccessFlags")
 )
 
 (define-method get_n_rows
@@ -2957,7 +2960,7 @@
 (define-method get_attributes_at
   (of-object "GdaDataModel")
   (c-name "gda_data_model_get_attributes_at")
-  (return-type "guint")
+  (return-type "GdaValueAttribute")
   (parameters
     '("gint" "col")
     '("gint" "row")
@@ -3645,7 +3648,7 @@
 (define-method get_value_attributes
   (of-object "GdaDataProxy")
   (c-name "gda_data_proxy_get_value_attributes")
-  (return-type "guint")
+  (return-type "GdaValueAttribute")
   (parameters
     '("gint" "proxy_row")
     '("gint" "col")
@@ -3659,7 +3662,7 @@
   (parameters
     '("gint" "proxy_row")
     '("gint" "col")
-    '("guint" "alter_flags")
+    '("GdaValueAttribute" "alter_flags")
   )
 )
 
@@ -3736,6 +3739,12 @@
 (define-method get_n_new_rows
   (of-object "GdaDataProxy")
   (c-name "gda_data_proxy_get_n_new_rows")
+  (return-type "gint")
+)
+
+(define-method get_n_modified_rows
+  (of-object "GdaDataProxy")
+  (c-name "gda_data_proxy_get_n_modified_rows")
   (return-type "gint")
 )
 
@@ -4266,14 +4275,14 @@
   (c-name "gda_dict_field_set_attributes")
   (return-type "none")
   (parameters
-    '("guint" "attributes")
+    '("GdaDictFieldAttribute" "attributes")
   )
 )
 
 (define-method get_attributes
   (of-object "GdaDictField")
   (c-name "gda_dict_field_get_attributes")
-  (return-type "guint")
+  (return-type "GdaValueAttribute")
 )
 
 
@@ -4619,6 +4628,7 @@
   (c-name "gda_dict_class_always_register")
   (return-type "none")
   (parameters
+    '("GdaDictRegFunc" "func")
   )
 )
 
@@ -5520,7 +5530,7 @@
   (c-name "gda_object_connect_destroy")
   (return-type "gulong")
   (parameters
-    '("gpointer" "object")
+    '("gpointer" "gdaobj")
     '("GCallback" "callback")
     '("gpointer" "data")
   )
@@ -7036,7 +7046,7 @@
   (c-name "gda_query_get_field_by_sql_naming")
   (return-type "GdaQueryField*")
   (parameters
-    '("const-gchar*" "sql_naming")
+    '("const-gchar*" "sql_name")
   )
 )
 
@@ -7481,7 +7491,7 @@
   (parameters
     '("GdaParameterList*" "context")
     '("GSList**" "out_params_used")
-    '("guint" "options")
+    '("GdaRendererOptions" "options")
     '("GError**" "error")
   )
 )
@@ -8444,7 +8454,7 @@
   (c-name "gda_utility_table_field_attrs_stringify")
   (return-type "gchar*")
   (parameters
-    '("guint" "attributes")
+    '("GdaValueAttribute" "attributes")
   )
 )
 
@@ -8538,7 +8548,7 @@
   (c-name "gda_value_new_binary")
   (return-type "GValue*")
   (parameters
-    '("guchar*" "val")
+    '("const-guchar*" "val")
     '("glong" "size")
   )
 )
@@ -8547,7 +8557,7 @@
   (c-name "gda_value_new_blob")
   (return-type "GValue*")
   (parameters
-    '("guchar*" "val")
+    '("const-guchar*" "val")
     '("glong" "size")
   )
 )

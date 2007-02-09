@@ -140,7 +140,7 @@
 
 (define-property options
   (of-object "GdaConnection")
-  (prop-type "GParamUInt")
+  (prop-type "GParamFlags")
   (docs "")
   (readable #t)
   (writable #t)
@@ -500,7 +500,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaObject*" "p0")
   )
 )
 
@@ -509,7 +509,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaObject*" "p0")
   )
 )
 
@@ -518,7 +518,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaObject*" "p0")
   )
 )
 
@@ -527,7 +527,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaObject*" "p0")
   )
 )
 
@@ -542,7 +542,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaObject*" "p0")
     '("guint" "p1")
     '("guint" "p2")
   )
@@ -643,7 +643,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaGraphItem*" "p0")
   )
 )
 
@@ -652,7 +652,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaGraphItem*" "p0")
   )
 )
 
@@ -661,7 +661,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaGraphItem*" "p0")
   )
 )
 
@@ -969,7 +969,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaQueryTarget*" "p0")
   )
 )
 
@@ -978,7 +978,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaQueryTarget*" "p0")
   )
 )
 
@@ -987,7 +987,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaQueryTarget*" "p0")
   )
 )
 
@@ -996,7 +996,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaQueryJoin*" "p0")
   )
 )
 
@@ -1005,7 +1005,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaQueryJoin*" "p0")
   )
 )
 
@@ -1014,7 +1014,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaQueryJoin*" "p0")
   )
 )
 
@@ -1023,7 +1023,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaQuery*" "p0")
   )
 )
 
@@ -1032,7 +1032,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaQuery*" "p0")
   )
 )
 
@@ -1041,7 +1041,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaQuery*" "p0")
   )
 )
 

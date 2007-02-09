@@ -41,6 +41,7 @@ namespace Gda
 class Row;
 class ServerProvider;
 
+_WRAP_ENUM(DataModelAccessFlags, GdaDataModelAccessFlags)
 _WRAP_ENUM(DataModelHint, GdaDataModelHint)
 _WRAP_ENUM(DataModelIOFormat, GdaDataModelIOFormat)
 
@@ -102,7 +103,7 @@ public:
   Value get_value_at(const Glib::ustring& column_name, int row) const;
   _IGNORE(gda_data_model_get_value_at_col_name)
 
-  _WRAP_METHOD(guint get_attributes_at(int col, int row), gda_data_model_get_attributes_at)
+  _WRAP_METHOD(ValueAttribute get_attributes_at(int col, int row), gda_data_model_get_attributes_at)
 
   _WRAP_METHOD(Glib::RefPtr<DataModelIter> create_iter(), gda_data_model_create_iter)
    
@@ -113,7 +114,7 @@ public:
   //TODO: _WRAP_METHOD(bool gda_data_model_set_values(int row, GList *values), gda_data_model_set_values, errthrow)
 
   _WRAP_METHOD(bool is_updatable() const, gda_data_model_is_updatable)
-  _WRAP_METHOD(guint get_access_flags() const, gda_data_model_get_access_flags)
+  _WRAP_METHOD(DataModelAccessFlags get_access_flags() const, gda_data_model_get_access_flags)
 
   #m4 _CONVERSION(`const ValueList&',`const GList*',`$3.data()')
   _WRAP_METHOD(int append_values(const ValueList& values), gda_data_model_append_values, errthrow)

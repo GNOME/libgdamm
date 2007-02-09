@@ -69,6 +69,7 @@ public:
 
   _WRAP_METHOD(bool open(), gda_connection_open, errthrow)
 
+  //TODO: Documentation
   void close();
   _IGNORE(gda_connection_close, gda_connection_close_no_warning)
 
@@ -83,7 +84,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<Client> get_client(), gda_connection_get_client, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Client> get_client() const, gda_connection_get_client, constversion)
 
-  _WRAP_METHOD(guint get_options() const, gda_connection_get_options)
+  _WRAP_METHOD(ConnectionOptions get_options() const, gda_connection_get_options)
   _WRAP_METHOD(Glib::ustring get_server_version() const, gda_connection_get_server_version)
 
   _WRAP_METHOD(Glib::ustring get_database() const, gda_connection_get_database)

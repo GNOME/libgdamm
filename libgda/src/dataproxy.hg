@@ -72,8 +72,8 @@ public:
   _IGNORE(gda_data_proxy_get_values)
 
   // TODO: Wrap proper type (GdaValueAttribute?) for flags
-  _WRAP_METHOD(guint get_value_attributes(int proxy_row, int col) const, gda_data_proxy_get_value_attributes)
-  _WRAP_METHOD(void alter_value_attributes(int proxy_row, int col, guint alter_flags), gda_data_proxy_alter_value_attributes)
+  _WRAP_METHOD(ValueAttribute get_value_attributes(int proxy_row, int col) const, gda_data_proxy_get_value_attributes)
+  _WRAP_METHOD(void alter_value_attributes(int proxy_row, int col, ValueAttribute alter_flags), gda_data_proxy_alter_value_attributes)
 
   _WRAP_METHOD(int get_proxied_model_row(int proxy_row) const, gda_data_proxy_get_proxied_model_row)
 

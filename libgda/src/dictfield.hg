@@ -76,8 +76,8 @@ public:
   _WRAP_METHOD(bool is_fkey_part() const, gda_dict_field_is_fkey_par)
   _WRAP_METHOD(bool is_fkey_alone() const, gda_dict_field_is_fkey_alone)
 
-  _WRAP_METHOD(void set_attributes(guint attributes), gda_dict_field_set_attribute)
-  _WRAP_METHOD(guint get_attributes() const, gda_dict_field_get_attributes)
+  _WRAP_METHOD(void set_attributes(ValueAttribute attributes), gda_dict_field_set_attribute)
+  _WRAP_METHOD(ValueAttribute get_attributes() const, gda_dict_field_get_attributes)
 
  //TODO: properties, signals, vfuncs.
 };
