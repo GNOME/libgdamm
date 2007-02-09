@@ -1,4 +1,14 @@
-2007-02-09  MMurray Cumming  <murrayc@murrayc.com>
+2007-02-09  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/reference/Doxyfile.in:
+	* docs/reference/Makefile.am: Use glibmm tags to link to 
+	glibmm documentation where appropriate.
+	And upload to a temporary location.
+	* docs/reference/glibmm_doxygen_tags: Added, using a 
+	copy rather than a relative path, for convenience.
+	* libgda/src/libgda_docs.xml: Regenerated.
+
+2007-02-09  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/libgda_enums.defs:
 	* libgda/src/libgda_methods.defs:
