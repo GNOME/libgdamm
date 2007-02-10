@@ -34,7 +34,10 @@ namespace Gda
 
 //TODO: In the libgda documentation, if the "STR" format is the human-readable text representation in the current locale, then say so.
 
-/** Interface which provides data handling capabilities.
+/** @defgroup DataHandlers Data Handlers
+ */
+
+/** Base class which provides data handling capabilities.
  *
  * Because data types vary a lot from one DBMS to another, the DataHandler interface helps with designing modules 
  * which can handle very specific pieces of data through plugins. Each object which imlements the DataHandler interface 

@@ -35,7 +35,7 @@ namespace Gnome
 namespace Gda
 {
 
-/** Interface to represent a generic entity (for tables, views or queries).
+/** Base class to represent a generic entity (for tables, views or queries).
  */
 class Entity : public Glib::Interface
 {

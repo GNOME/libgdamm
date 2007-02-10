@@ -31,6 +31,9 @@ namespace Gnome
 namespace Gda
 {
 
+/** defgroup Queryies Queries
+ */
+
 /** Parent class for any object participating in a GdaQuery query.
  *
  * @ingroup Queries
