@@ -32,6 +32,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** Default Handler for booleans.
+ * 
+ * @ingroup DataHandlers
+ */
 class HandlerBoolean : public Object,
                        public DataHandler
 {

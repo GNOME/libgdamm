@@ -31,6 +31,8 @@ namespace Gnome
 namespace Gda
 {
 
+/** Interface to know when on object is completely defined.
+ */
 class Referer : public Glib::Interface
 {
   _CLASS_INTERFACE(Referer, GdaReferer, GDA_REFERER, GdaRefererIface)
@@ -42,6 +44,9 @@ public:
 
   // TODO: Find out what the purpose of gda_referer_get_ref_objects and
   // gda_referer_replace_refs are for and wrap them appropriately.
+  
+  _WRAP_SIGNAL(void activated(), activated)
+  _WRAP_SIGNAL(void deactivated(), deactivated)
 };
 
 } // namespace Gda

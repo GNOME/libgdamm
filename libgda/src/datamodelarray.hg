@@ -39,7 +39,6 @@ class DataModelArray
  : public DataModelRow
 {
   _CLASS_GOBJECT(DataModelArray, GdaDataModelArray, GDA_DATA_MODEL_ARRAY, Gda::DataModelRow, GdaDataModelRow)
-  _IMPLEMENTS_INTERFACE(DataModel)
 protected:
   explicit DataModelArray(int cols);
 

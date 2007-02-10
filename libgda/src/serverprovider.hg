@@ -48,6 +48,7 @@ _WRAP_ENUM(ServerOperationType, GdaServerOperationType)
 /* TODO: Is this appropriate. Investigate how it is used. */
 typedef GdaServerProviderInfo ServerProviderInfo;
 
+//TODO:
 class ServerProvider : public Glib::Object
 {
   _CLASS_GOBJECT(ServerProvider, GdaServerProvider, GDA_SERVER_PROVIDER, Glib::Object, GObject)

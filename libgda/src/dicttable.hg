@@ -22,6 +22,7 @@
 
 #include <libgdamm/object.h>
 #include <libgdamm/xmlstorage.h>
+#include <libgdamm/entity.h>
 
 
 _DEFS(libgdamm,libgda)
@@ -40,14 +41,16 @@ class DictConstraint;
 /** Represents a table or a view in the database.
  * Use this object to query the real structure of the table it represents.
  * 
- * @ingroup Dictionaries.
+ * @ingroup Dictionaries
  */
 class DictTable
 : public Gda::Object,
-  public XmlStorage
+  public XmlStorage,
+  public Entity
 {
   _CLASS_GOBJECT(DictTable, GdaDictTable, GDA_DICT_TABLE, Gda::Object, GdaObject)
   _IMPLEMENTS_INTERFACE(XmlStorage)
+  _IMPLEMENTS_INTERFACE(Entity)
 protected:
 
   _CTOR_DEFAULT()

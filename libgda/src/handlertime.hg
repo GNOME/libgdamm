@@ -32,6 +32,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** Default handler for time, date and timestamp.
+ *
+ * @ingroup DataHanders
+ */
 class HandlerTime : public Object,
                     public DataHandler
 {

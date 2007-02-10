@@ -35,6 +35,8 @@ namespace Gnome
 namespace Gda
 {
 
+/** Parent class for any query's field.
+ */
 class QueryField
  : public QueryObject
 {

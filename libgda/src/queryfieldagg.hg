@@ -26,6 +26,7 @@
 #include <libgdamm/xmlstorage.h>
 #include <libgdamm/queryfield.h>
 #include <libgdamm/query.h>
+#include <libgdamm/referer.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(libgdamm/private/queryfield_p.h)
@@ -36,10 +37,16 @@ namespace Gnome
 namespace Gda
 {
 
+/** Represents a function (selected by a DictAggregate object).
+ * 
+ * @ingroup Queries
+ */
 class QueryFieldAgg
- : public QueryField
+ : public QueryField,
+   public Referer
 {
   _CLASS_GOBJECT(QueryFieldAgg, GdaQueryFieldAgg, GDA_QUERY_FIELD_AGG, QueryField, GdaQueryField)
+  _IMPLEMENTS_INTERFACE(Referer)
 
 public:
   _WRAP_CTOR(QueryFieldAgg(const Glib::RefPtr<Query>& query, const Glib::ustring& agg_name), gda_query_field_agg_new)

@@ -35,16 +35,15 @@ namespace Gda
 
 class Row;
 
-
+//TODO:
 class DataModelIndex
 {
   _CLASS_BOXEDTYPE(DataModelIndex, GdaDataModelIndex, gda_data_model_index_new, gda_data_model_index_copy, gda_data_model_index_free)
   _IGNORE(gda_data_model_index_new, gda_data_model_index_copy, gda_data_model_index_free)
 public:
 
-	// hmm, seems like gmmproc misses something here
-	_IGNORE(gda_data_model_index_equal)
   _WRAP_EQUAL(gda_data_model_index_equal)
+  _IGNORE(gda_data_model_index_equal) // hmm, seems like gmmproc doesn't know that we used it in _WRAP_EQUAL().
 
   _WRAP_METHOD(Glib::ustring get_name() const, gda_data_model_index_get_name)
   _WRAP_METHOD(void gda_data_set_name(const Glib::ustring& name), gda_data_model_index_set_name)

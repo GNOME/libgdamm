@@ -31,6 +31,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** Parent class for any object participating in a GdaQuery query.
+ *
+ * @ingroup Queries
+ */
 class QueryObject
  : public Object
 {

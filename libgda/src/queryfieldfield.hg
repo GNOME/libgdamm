@@ -40,6 +40,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** Represents one field of an entity (through a QueryTarget object)
+ * 
+ * @ingroup Queries
+ */
 class QueryFieldField
  : public QueryField,
    public XmlStorage,

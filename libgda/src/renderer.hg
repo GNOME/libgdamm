@@ -34,17 +34,17 @@ namespace Gda
 
 _WRAP_ENUM(RendererOptions, GdaRendererOptions)
 
+/** Interface to get representations of objects as SQL statements, XML nodes or human readable text.
+ */
 class Renderer : public Glib::Interface
 {
   _CLASS_INTERFACE(Renderer, GdaRenderer, GDA_RENDERER, GdaRendererIface)
 public:
-
-  //TODO: Why is this conversion necessary? Are the .defs files wrong, because a property is wrongly registered? murrayc
-  #m4 _CONVERSION(`RendererOptions', `guint', `static_cast<$2>($3)')
  
-  // TODO: Wrap GSList* because signature changed in libgda
-  //_WRAP_METHOD(Glib::ustring render_as_sql(const Glib::RefPtr<ParameterList>& context, RendererOptions options), gda_renderer_render_as_sql, errthrow)
-  _WRAP_METHOD(Glib::ustring render_as_str(const Glib::RefPtr<ParameterList>& context), gda_renderer_render_as_str)
+  // TODO: Wrap GSList* output parameter:
+  //_WRAP_METHOD(Glib::ustring render_as_sql(const Glib::RefPtr<GdaParameterList> context, GSList **out_params_used, RendererOptions options), gda_renderer_render_as_sql, errthrow)
+
+  _WRAP_METHOD(Glib::ustring render_as_str(const Glib::RefPtr<ParameterList>& context) const, gda_renderer_render_as_str)
   _WRAP_METHOD(bool is_valid(const Glib::RefPtr<ParameterList>& context) const, gda_renderer_is_valid, errthrow)
 };
 

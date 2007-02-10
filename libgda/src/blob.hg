@@ -31,6 +31,7 @@ namespace Gnome
 namespace Gda
 {
 
+//TODO:
 class Blob
 {
   _CLASS_BOXEDTYPE_STATIC(Blob, GdaBlob)

@@ -23,6 +23,7 @@
 #include <libgdamm/object.h>
 #include <libgdamm/value.h>
 #include <libgdamm/entityfield.h>
+#include <libgdamm/referer.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(libgdamm/private/object_p.h)
@@ -39,9 +40,14 @@ _WRAP_GERROR(ParameterError, GdaParameterError, GDA_PARAMETER_ERROR)
 
 class DataModel;
 
-class Parameter : public Object
+/** Represents a Value with various attributes.
+ */
+class Parameter
+  : public Object,
+    public Referer
 {
   _CLASS_GOBJECT(Parameter, GdaParameter, GDA_PARAMETER, Object, GdaObject)
+  _IMPLEMENTS_INTERFACE(Referer)
 protected:
 
   _CTOR_DEFAULT

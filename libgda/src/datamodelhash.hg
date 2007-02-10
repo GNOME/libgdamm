@@ -39,7 +39,6 @@ class DataModelHash
  : public DataModelRow
 {
   _CLASS_GOBJECT(DataModelHash, GdaDataModelHash, GDA_DATA_MODEL_HASH, Gda::DataModelRow, GdaDataModelRow)
-  _IMPLEMENTS_INTERFACE(DataModel)
 protected:
   explicit DataModelHash(int cols);
 

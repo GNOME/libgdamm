@@ -40,7 +40,6 @@ class DataModelFilterSQL
  : public DataModelRow
 {
   _CLASS_GOBJECT(DataModelFilterSQL, GdaDataModelFilterSQL, GDA_DATA_MODEL_FILTER_SQL, Gda::DataModelRow, GdaDataModelRow)
-  _IMPLEMENTS_INTERFACE(DataModel)
 protected:
   _CTOR_DEFAULT()
   _IGNORE(gda_data_model_filter_sql_new)

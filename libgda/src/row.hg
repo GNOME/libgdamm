@@ -36,6 +36,7 @@ namespace Gda
 class DataModel;
 class Value;
 
+//TODO:
 class Row : public Glib::Object
 {
 protected:

@@ -45,9 +45,10 @@ namespace Gda
 _WRAP_ENUM(QueryType, GdaQueryType)
 _WRAP_ENUM(QueryFieldState, GdaQueryFieldState)
 
-// TODO: Functions requiring GdaQuery* classes are still unwrapped because
-// they do not yet exist, however, we need GdaQuery to create gnome-db
-// examples.
+/** Represents any kind of DML query.
+ *
+ * @ingroup Queries
+ */
 class Query
  : public QueryObject,
    public XmlStorage,

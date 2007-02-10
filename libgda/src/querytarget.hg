@@ -40,6 +40,16 @@ namespace Gda
 
 class Query;
 
+/** Represents a target entity within a query.
+ * A QueryTarget object represents an entity (usually a table, as a DictTable) which is taking part in a query. 
+ * For SELECT queries, the targets are the entities listed after the FROM clause; 
+ * for the INSERT, DELETE and UPDATE queries, there is only one target which is the entity to which the modifications apply.
+ *
+ * Within a single SELECT query, there can be more than one QueryTarget object representing the same entity for queries 
+ * making usage of an entity more than one time. 
+ *
+ * @ingroup Queries
+ */
 class QueryTarget
  : public QueryObject,
    public XmlStorage,

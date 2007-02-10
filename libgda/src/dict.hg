@@ -24,6 +24,7 @@
 #include <libgdamm/dictaggregate.h>
 #include <libgdamm/dictdatabase.h>
 #include <libgdamm/dicttype.h>
+#include <libgdamm/datahandler.h>
 
 
 _DEFS(libgdamm,libgda)
@@ -70,8 +71,9 @@ public:
   _WRAP_METHOD(Glib::RefPtr<Connection> get_connection(), gda_dict_get_connection, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Connection> get_connection() const, gda_dict_get_connection, constversion)
 
-  //_WRAP_METHOD(void declare_object_string_id_change(const Glib::RefPtr<Object>& obj, const Glib::ustring& oldid), gda_dict_declare_object_string_id_change)
-  //_WRAP_METHOD(Glib::RefPtr<Object> get_object_by_string_id(const Glib::ustring& strid), gda_dict_get_object_by_string_id, refreturn)
+  _WRAP_METHOD(void declare_object_string_id_change(const Glib::RefPtr<Gda::Object>& obj, const Glib::ustring& oldid), gda_dict_declare_object_string_id_change)
+  _WRAP_METHOD(Glib::RefPtr<Gda::Object> get_object_by_string_id(const Glib::ustring& strid), gda_dict_get_object_by_string_id, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Gda::Object> get_object_by_string_id(const Glib::ustring& strid) const, gda_dict_get_object_by_string_id, refreturn, constversion)
 
   _WRAP_METHOD(bool update_dbms_meta_data(GType limit_to_type, const Glib::ustring& limit_obj_name), gda_dict_update_dbms_meta_data, errthrow)
 
@@ -111,15 +113,20 @@ public:
   _WRAP_METHOD(bool load_xml_file(const std::string& xmlfile), gda_dict_load_xml_file, errthrow)
   _WRAP_METHOD(bool save_xml_file(const std::string& xmlfile), gda_dict_save_xml_file, errthrow)
 
-  //_WRAP_METHOD(GdaDataHandler* get_handler(ValueType for_type), gda_dict_get_handler)
-  //_WRAP_METHOD(GdaDataHandler* get_default_handler(ValueType for_type), gda_dict_get_default_handler)
+  _WRAP_METHOD(Glib::RefPtr<DataHandler> get_handler(GType for_type), gda_dict_get_handler, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DataHandler> get_handler(GType for_type) const, gda_dict_get_handler, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<DataHandler> get_default_handler(GType for_type), gda_dict_get_default_handler, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DataHandler> get_default_handler(GType for_type) const, gda_dict_get_default_handler, refreturn, constversion)
 
-/* GdaDictType manipulations */
-  // These cannot be generated via _WRAP_METHOD because these are #defines in gda-dict.h
-  GSList* get_dict_types() const;
-  GdaDictType* get_dict_type_by_name(const Glib::ustring& type_name);
-  GdaDictType* get_data_type_by_xml_id(const Glib::ustring& xml_id);
-  //_WRAP_METHOD(bool declare_custom_data_type (GdaDictType* type), gda_dict_declare_custom_data_type)
+  //Note that these are described in libgda_others.defs, because the C functions are actually macros:
+  //TODO: Use SListHandle:
+  _WRAP_METHOD(GSList* get_dict_types(), gda_dict_get_dict_types)
+
+  _WRAP_METHOD(Glib::RefPtr<DictType> get_dict_type_by_name(const Glib::ustring& type_name), gda_dict_get_dict_type_by_name, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DictType> get_dict_type_by_name(const Glib::ustring& type_name) const, gda_dict_get_dict_type_by_name, refreturn, constversion)
+
+  _WRAP_METHOD(Glib::RefPtr<DictType> get_dict_type_by_xml_id(const Glib::ustring& xml_id), gda_dict_get_dict_type_by_xml_id, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DictType> get_dict_type_by_xml_id(const Glib::ustring& xml_id) const, gda_dict_get_dict_type_by_xml_id, refreturn, constversion)
 
 /* GdaDictFunction manipulations */
   //_WRAP_METHOD(GSList* get_functions() const, gda_dict_get_functions)

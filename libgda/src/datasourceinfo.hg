@@ -35,6 +35,7 @@ namespace Gnome
 namespace Gda
 {
 
+//TODO:
 class DataSourceInfo
 {
   _CLASS_OPAQUE_COPYABLE(DataSourceInfo, GdaDataSourceInfo, NONE, gda_data_source_info_copy, gda_data_source_info_free)

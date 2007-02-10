@@ -35,6 +35,10 @@ _WRAP_ENUM(ConnectionEventType, GdaConnectionEventType)
 namespace Gda
 {
 
+/** Any event which has occurred on a GdaConnection.
+ * Events occuring on a connection are each represented as a ConnectionEvent object. 
+ * Each Connection is responsible for keeping a list of past events; that list can be consulted using the Connection::get_events() function.
+ */
 class ConnectionEvent : public Glib::Object
 {
   _CLASS_GOBJECT(ConnectionEvent, GdaConnectionEvent, GDA_CONNECTION_EVENT, Glib::Object, GObject)
@@ -59,6 +63,7 @@ public:
   _WRAP_METHOD(Glib::ustring get_sqlstate() const, gda_connection_event_get_sqlstate)
   _WRAP_METHOD(void set_sqlstate(const Glib::ustring& sqlstate), gda_connection_event_set_sqlstate)
 
+  _WRAP_PROPERTY("type", ConnectionEventType)
 };
 
 } // namespace Gda

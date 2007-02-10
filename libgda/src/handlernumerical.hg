@@ -32,6 +32,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** Default handler for numeric values.
+ * 
+ * @ingroup DataHandlers
+ */
 class HandlerNumerical : public Object,
                          public DataHandler
 {

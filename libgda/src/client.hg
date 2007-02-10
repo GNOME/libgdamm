@@ -42,6 +42,20 @@ _WRAP_ENUM(ClientEvent, GdaClientEvent)
 
 class ServerOperation;
 
+/** Database client access.
+ *
+ * This class is the main entry point for libgda client applications. It provides the way by which client applications 
+ * open connections. Thus, before using any other database-oriented function in libgda, applications must create a 
+ * Client object and open the connections from it.
+ *
+ * The Client class also provides a way to treat several connections as if they were only one (a connection pool), which 
+ * allows applications to, for instance, commit/rollback a transaction in all the connections being managed by a unique 
+ * Client object, or obtain the list of all tables in all opened connections.
+ *
+ * Database creation and destruction is done through a Client object using the create_database() and 
+ * drop_database() methods. Note however that depending on the provider, an opened connection may be required in order 
+ * to create or destroy a database. 
+ */
 class Client : public Glib::Object
 {
   _CLASS_GOBJECT(Client, GdaClient, GDA_CLIENT, Glib::Object, GObject)
@@ -57,11 +71,12 @@ public:
 
   _WRAP_METHOD(void declare_connection(const Glib::RefPtr<Connection>& cnc), gda_client_declare_connection)
 
- //Use a special conversion here, because we should not own any part of the returned GList, and because we need to unconst the GList.:
- #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<Connection> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
- #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const Connection> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
+ //Use a special conversion here, because we should not own any part of the returned GList,
+ //as specified by the gda_client_get_connections() documentation,
+ // and because we need to unconst the GList.:
+ #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<Connection> >',`$2((GList*)$3, Glib::OWNERSHIP_NONE)')
+ #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const Connection> >',`$2((GList*)$3, Glib::OWNERSHIP_NONE)')
  
-  //TODO: Check that we use the correct ListHandle ownership here:
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<Connection> > get_connections(), gda_client_get_connections)
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const Connection> > get_connections() const, gda_client_get_connections)
    
@@ -69,7 +84,8 @@ public:
   _WRAP_METHOD(void close_all_connections(), gda_client_close_all_connections)
 
   _WRAP_METHOD(void notify_event(const Glib::RefPtr<Connection>& cnc, ClientEvent event, const Glib::RefPtr<ParameterList>& params), gda_client_notify_event)
-  //TODO: Wrap GdaConnectionEvent as exception.
+
+  //TODO: Wrap GdaConnectionEvent as exception?
   _WRAP_METHOD(void notify_error_event(const Glib::RefPtr<Connection>& cnc, GdaConnectionEvent *error), gda_client_notify_error_event)
   _WRAP_METHOD(void notify_connection_opened_event(const Glib::RefPtr<Connection>& cnc), gda_client_notify_connection_opened_event)
   _WRAP_METHOD(void notify_connection_closed_event(const Glib::RefPtr<Connection>& cnc), gda_client_notify_connection_closed_event)

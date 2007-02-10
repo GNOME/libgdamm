@@ -166,6 +166,7 @@ _CONV_ENUM(Gda,QueryConditionOperator)
 _CONV_ENUM(Gda,QueryFieldState)
 _CONV_ENUM(Gda,DictConstraintType)
 _CONV_ENUM(Gda,DictConstraintFkAction)
+_CONV_ENUM(Gda,DictFieldAttribute)
 _CONV_ENUM(Gda,ValueAttribute)
 
 # Lists

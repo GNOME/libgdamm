@@ -39,6 +39,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** Represents all the fields of an entity (through a GdaQueryTarget object)
+ *
+ * @ingroup Queries
+ */
 class QueryFieldAll
  : public QueryField,
    public XmlStorage,

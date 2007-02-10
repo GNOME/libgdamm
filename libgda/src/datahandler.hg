@@ -32,6 +32,25 @@ namespace Gnome
 namespace Gda
 {
 
+//TODO: In the libgda documentation, if the "STR" format is the human-readable text representation in the current locale, then say so.
+
+/** Interface which provides data handling capabilities.
+ *
+ * Because data types vary a lot from one DBMS to another, the DataHandler interface helps with designing modules 
+ * which can handle very specific pieces of data through plugins. Each object which imlements the DataHandler interface 
+ * is expected to handle a subset of the possible libgda defined data types.
+ * 
+ * The DataHandler object can convert a Value to and from both SQL and 'STR'. The SQL representation of a value is the 
+ * actual string which would be used in an SQL statement (for example a string's SQL representation is surrounded by 
+ * quotes such as 'that\'s a string'). The 'STR' representation is a user friendly representation of a value (and the 
+ * previous example would simply be: that's a string).
+ * 
+ * Only one object which implements this interface is needed for any given data type, and it mainly contains some methods 
+ * to manage values (as Value structures). The Gnome::Db::DataEntry interface is complementary to this one since it is 
+ * implemented by widgets in which the user can enter or modify some data. 
+ *
+ * @ingroup DataHandlers
+ */
 class DataHandler : public Glib::Interface
 {
   _CLASS_INTERFACE(DataHandler, GdaDataHandler, GDA_DATA_HANDLER, GdaDataHandlerClass)
@@ -42,8 +61,39 @@ public:
 
   // Hand-coded this to get proper return values
   _IGNORE(gda_data_handler_get_value_from_sql, gda_data_handler_get_value_from_str, gda_data_handler_get_sane_init_value)
+
+  /** Creates a new Value which represents the SQL value given as argument. 
+   * This is the opposite of the function get_sql_from_value(). 
+   * The type argument is used to determine the real data type requested for the returned value.
+   *
+   * If the sql string is empty, then the returned Value is of type TYPE_NULL.
+   * If the sql string does not correspond to a valid SQL string for the requested type, then a NULL Value is returned.
+   * 
+   * @param sql
+   * @param type
+   * @result The new Value.
+   */
   Value get_value_from_sql(const Glib::ustring& sql, GType type) const;
+
+  /** Creates a new Value which represents the STR value given as argument. 
+   * This is the opposite of the function get_str_from_value(). The type argument is used to determine the real data 
+   * type requested for the returned value.
+   *
+   * If the str string is empty, then the returned Value is of type TYPE_NULL.
+   * If the str string does not correspond to a valid STR string for the requested type, then a NULL value is returned.
+   * 
+   * @param str
+   * @param type
+   * @result The new Value.
+   */
   Value get_value_from_str(const Glib::ustring& str, GType type) const;
+
+  /** Creates a new Value which holds a sane initial value to be used if no value is specifically provided.
+   * For example, for a simple string, this would return a new value containing the "" string.
+   * 
+   * @param type
+   * @result The new Value.
+   */
   Value get_sane_init_value(GType type) const;
 
   _WRAP_METHOD(unsigned int get_nb_g_types() const, gda_data_handler_get_nb_g_types)

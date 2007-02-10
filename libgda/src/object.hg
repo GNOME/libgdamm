@@ -37,6 +37,8 @@ _WRAP_ENUM(ValueAttribute, GdaValueAttribute)
 
 class Dict;
 
+/** The base class for many of the libgda objects.
+ */
 class Object : public Glib::Object
 {
   _CLASS_GOBJECT(Object, GdaObject, GDA_OBJECT, Glib::Object, GObject)

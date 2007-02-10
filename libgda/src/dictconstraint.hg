@@ -25,7 +25,7 @@
 #include <libgdamm/dicttable.h>
 #include <libgdamm/dictfield.h>
 #include <libgdamm/dicttype.h>
-
+#include <libgdamm/referer.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(libgdamm/private/object_p.h)
@@ -47,14 +47,16 @@ class Connection;
  * constraints). As some constraints may not depend exclusively on a table, all the constraints are attached to the 
  * database itself.
  * 
- * @ingroup Dictionaries.
+ * @ingroup Dictionaries
  */
 class DictConstraint
 : public Gda::Object,
-  public XmlStorage
+  public XmlStorage,
+  public Referer
 {
   _CLASS_GOBJECT(DictConstraint, GdaDictConstraint, GDA_DICT_CONSTRAINT, Gda::Object, GdaObject)
   _IMPLEMENTS_INTERFACE(XmlStorage)
+  _IMPLEMENTS_INTERFACE(Referer)
 protected:
 
   //TODO: File bug about gda_dict_constraint_new() and gda_dict_constraint_new_with_db() using private API:

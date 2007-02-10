@@ -36,6 +36,15 @@ namespace Gda
  */
 _WRAP_GERROR(ParameterListError, GdaParameterListError, GDA_PARAMETER_LIST_ERROR)
 
+/** Manages a list of GdaParameter objects which contain individual values.
+ *
+ * A ParameterList is a list of Parameter objects, but also creates other lists such as:
+ * - a list of ParameterListNode structures (the nodes_list attribute): for each parameter a structure is created to show in a single place all the information about each parameter: the DataModel which may restrict the list of values along with the column number in it, and any hint for the parameter (a value made of ParameterListParamHint flags)
+ * - a list of ParameterListSource structures (the sources_list attribute): each ParameterListSource structure is complementary to the ParameterListNode structures listed in its "nodes" attribute: there is one such structure for each DataModel which may restrict values of one or more parameters.
+ * - a list of ParameterListGroup structures (the groups_list attribute): there is one such structure for each _independant_ parameter (parameters which are constrained by the same data model all appear in the same ParameterListGroup structure).
+ *
+ * Some queries require arguments before they can be executed. For such queries, the arguments are passed using Parameter objects (the list of parameters can be obtained using Query::get_parameters() or Query::get_parameter_list()).
+ */
 class ParameterList : public Glib::Object
 {
   _CLASS_GOBJECT(ParameterList, GdaParameterList, GDA_PARAMETER_LIST, Glib::Object, GObject)

@@ -33,6 +33,7 @@ namespace Gnome
 namespace Gda
 {
 
+//TODO: 
 class ProviderInfo
 {
   _CLASS_OPAQUE_COPYABLE(ProviderInfo, GdaProviderInfo, NONE, gda_provider_info_copy, gda_provider_info_free)
@@ -42,7 +43,6 @@ public:
   _MEMBER_GET(location, location, Glib::ustring, const char*)
   _MEMBER_GET(description, description, Glib::ustring, const char*)
   
-  //TODO: Check that this takes a reference:
   Glib::RefPtr<ParameterList> get_gda_params();
   Glib::RefPtr<const ParameterList> get_gda_params() const;
 };

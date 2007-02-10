@@ -56,6 +56,13 @@ _WRAP_ENUM(ConnectionFeature, GdaConnectionFeature)
 _WRAP_ENUM(ConnectionSchema, GdaConnectionSchema)
 _WRAP_ENUM(ConnectionOptions, GdaConnectionOptions)
 
+/** Manages a connection to a data source.
+ * This class offers access to all operations involving an opened connection to a database. 
+ * Connection objects are obtained via the Client class.
+ * 
+ * Once obtained, applications can use a Connection to execute commands, run transactions, and get information about all 
+ * objects stored in the underlying database. 
+ */
 class Connection : public Glib::Object
 {
   _CLASS_GOBJECT(Connection, GdaConnection, GDA_CONNECTION, Glib::Object, GObject)
@@ -69,7 +76,8 @@ public:
 
   _WRAP_METHOD(bool open(), gda_connection_open, errthrow)
 
-  //TODO: Documentation
+  /** Closes the connection to the underlying data source, but first emits the "conn_to_close" signal.
+   */
   void close();
   _IGNORE(gda_connection_close, gda_connection_close_no_warning)
 
@@ -129,7 +137,8 @@ public:
   int execute_non_select_command(const Command& cmd);
   int execute_non_select_command(const Glib::ustring& cmd);
 
-  _WRAP_METHOD(Glib::RefPtr<TransactionStatus> get_transaction_status(), gda_connection_get_transaction_status, errthrow, refreturn)
+  //Note that we do not add a non-const version of this because the documentation says that it should not be modified:
+  _WRAP_METHOD(Glib::RefPtr<const TransactionStatus> get_transaction_status() const, gda_connection_get_transaction_status, errthrow, refreturn)
 
 
 /*
@@ -157,13 +166,15 @@ gint                 gda_connection_execute_non_select_command (GdaConnection *c
   _WRAP_METHOD(bool delete_savepoint(const Glib::ustring& name), gda_connection_delete_savepoint, errthrow)
 
 
-   //Use a special conversion here, because we should not own any part of the returned GList, and because we need to unconst the GList.:
-   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
-   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const ConnectionEvent> >',`$2((GList*)$3, Glib::OWNERSHIP_SHALLOW)')
+   //Use a special conversion here, because we should not own any part of the returned GList, 
+   //according to the documentation for gda_connection_get_events(), 
+   //and because we need to unconst the GList.:
+   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >',`$2((GList*)$3, Glib::OWNERSHIP_NONE)')
+   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const ConnectionEvent> >',`$2((GList*)$3, Glib::OWNERSHIP_NONE)')
 
-  //TODO: Check that we use the correct ListHandle ownership here:
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<ConnectionEvent> > get_events(), gda_connection_get_events)
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const ConnectionEvent> > get_events() const, gda_connection_get_events)
+
 
   _WRAP_METHOD(Glib::ustring value_to_sql_string(const Value& from) const, gda_connection_value_to_sql_string);
 
@@ -172,8 +183,34 @@ gint                 gda_connection_execute_non_select_command (GdaConnection *c
   _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params), gda_connection_get_schema, errthrow, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params) const, gda_connection_get_schema, constversion)
 
-  //TODO: Check that this takes a reference, like the generated oens:
+  /** Asks the underlying data source for a list of database objects.
+   * This is the function that lets applications ask the different providers about all their database objects (tables,
+   * views, procedures, etc). The set of database objects that are retrieved are given by the 2 parameters of this 
+   * function: schema, which specifies the specific schema required, and params, which is a list of parameters that can 
+   * be used to give more detail about the objects to be returned.
+   *
+   * The list of parameters is specific to each schema type, see the get_schema() virtual method for providers for more details.
+   *
+   * @param schema Database schema to get.
+   * @result A DataModel containing the data required.
+   *
+   * @throw Gda::ConnectionError
+   */
   Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema);
+
+  /** Asks the underlying data source for a list of database objects.
+   * This is the function that lets applications ask the different providers about all their database objects (tables,
+   * views, procedures, etc). The set of database objects that are retrieved are given by the 2 parameters of this 
+   * function: schema, which specifies the specific schema required, and params, which is a list of parameters that can 
+   * be used to give more detail about the objects to be returned.
+   *
+   * The list of parameters is specific to each schema type, see the get_schema() virtual method for providers for more details.
+   *
+   * @param schema Database schema to get.
+   * @result A DataModel containing the data required.
+   *
+   * @throw Gda::ConnectionError
+   */
   Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema) const;
 
   _WRAP_METHOD(Glib::ustring get_last_insert_id(const Glib::RefPtr<DataModel>& recset) const, gda_connection_get_last_insert_id) 

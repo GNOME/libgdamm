@@ -4282,7 +4282,7 @@
 (define-method get_attributes
   (of-object "GdaDictField")
   (c-name "gda_dict_field_get_attributes")
-  (return-type "GdaValueAttribute")
+  (return-type "GdaDictFieldAttribute")
 )
 
 

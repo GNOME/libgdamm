@@ -55,11 +55,11 @@ protected:
 public:
   _WRAP_CREATE()
 
-  _WRAP_METHOD(void              set_dbms_id(const Glib::ustring& id), gda_dict_aggregate_set_dbms_id)
+  _WRAP_METHOD(void set_dbms_id(const Glib::ustring& id), gda_dict_aggregate_set_dbms_id)
   _WRAP_METHOD(Glib::ustring get_dbms_id() const, gda_dict_aggregate_get_dbms_id)
-  _WRAP_METHOD(void              set_sqlname(const Glib::ustring& sqlname), gda_dict_aggregate_set_sqlname)
+  _WRAP_METHOD(void set_sqlname(const Glib::ustring& sqlname), gda_dict_aggregate_set_sqlname)
   _WRAP_METHOD(Glib::ustring get_sqlname() const, gda_dict_aggregate_get_sqlname)
-  _WRAP_METHOD(void              set_arg_dict_type(const Glib::RefPtr<DictType>& dt), gda_dict_aggregate_set_arg_dict_type)
+  _WRAP_METHOD(void set_arg_dict_type(const Glib::RefPtr<DictType>& dt), gda_dict_aggregate_set_arg_dict_type)
 
   _WRAP_METHOD(Glib::RefPtr<DictType> get_arg_dict_type(), gda_dict_aggregate_get_arg_dict_type, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const DictType> get_arg_dict_type() const, gda_dict_aggregate_get_arg_dict_type, constversion)

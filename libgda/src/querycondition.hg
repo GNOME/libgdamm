@@ -42,6 +42,10 @@ class QueryTarget;
 _WRAP_ENUM(QueryConditionType, GdaQueryConditionType)
 _WRAP_ENUM(QueryConditionOperator, GdaQueryConditionOperator)
 
+/** Represents a condition within a query.
+ *
+ * @ingroup Queries
+ */
 class QueryCondition
  : public QueryObject,
    public XmlStorage,

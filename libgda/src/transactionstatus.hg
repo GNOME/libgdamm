@@ -33,6 +33,17 @@ namespace Gda
 
 _WRAP_ENUM(TransactionIsolation, GdaTransactionIsolation)
 
+/** Keeps track of the transactional status of a connection.
+ *
+ * On any connection (as a Connection object), if the database provider used by the connection supports it, 
+ * transactions may be started, committed or rolledback, or savepoints added, removed or rolledback. 
+ * These operations can be performed using libgda's API (such as Connection::begin_transaction()), or directly using some 
+ * SQL on the connection (usually a "BEGIN;" command). The TransactionStatus's aim is to make it easy to keep track of 
+ * all the commands which have been issued on a connection regarding transactions.
+ * 
+ * One TransactionStatus object is automatically attached to a Connection when a transaction is started, and is destroyed 
+ * when the transaction is finished. This object can be fetched using Connection::get_transaction_status() (beware that it should then not be modified).
+ */
 class TransactionStatus : public Glib::Object
 {
   _CLASS_GOBJECT(TransactionStatus, GdaTransactionStatus, GDA_TRANSACTION_STATUS, Glib::Object, GObject)

@@ -32,6 +32,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** Default handler for strings.
+ * 
+ * @ingroup DataHandlers
+ */
 class HandlerString : public Object,
                       public DataHandler
 {

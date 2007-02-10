@@ -1,3 +1,60 @@
+2007-02-10  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/blob.hg:
+	* libgda/src/blobop.hg:
+	* libgda/src/client.hg:
+	* libgda/src/column.hg:
+	* libgda/src/columnindex.hg:
+	* libgda/src/command.hg:
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg:
+	* libgda/src/connectionevent.hg:
+	* libgda/src/datahandler.hg:
+	* libgda/src/datamodelarray.hg:
+	* libgda/src/datamodelfiltersql.hg:
+	* libgda/src/datamodelhash.hg:
+	* libgda/src/datamodelimport.hg:
+	* libgda/src/datamodelindex.hg:
+	* libgda/src/datamodelquery.hg:
+	* libgda/src/datasourceinfo.hg:
+	* libgda/src/dict.ccg:
+	* libgda/src/dict.hg:
+	* libgda/src/dictconstraint.hg:
+	* libgda/src/dictfield.hg:
+	* libgda/src/dictfunction.hg:
+	* libgda/src/dicttable.hg:
+	* libgda/src/entity.hg:
+	* libgda/src/entityfield.hg:
+	* libgda/src/handlerbin.hg:
+	* libgda/src/handlerboolean.hg:
+	* libgda/src/handlernumerical.hg:
+	* libgda/src/handlerstring.hg:
+	* libgda/src/handlertime.hg:
+	* libgda/src/handlertype.hg:
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/libgda_others.defs:
+	* libgda/src/object.hg:
+	* libgda/src/parameter.hg:
+	* libgda/src/parameterlist.hg:
+	* libgda/src/providerinfo.hg:
+	* libgda/src/query.hg:
+	* libgda/src/querycondition.hg:
+	* libgda/src/queryfield.hg:
+	* libgda/src/queryfieldagg.hg:
+	* libgda/src/queryfieldall.hg:
+	* libgda/src/queryfieldfield.hg:
+	* libgda/src/queryfieldvalue.hg:
+	* libgda/src/queryobject.hg:
+	* libgda/src/querytarget.hg:
+	* libgda/src/referer.hg:
+	* libgda/src/renderer.hg:
+	* libgda/src/row.hg:
+	* libgda/src/serveroperation.hg:
+	* libgda/src/serverprovider.hg:
+	* libgda/src/transactionstatus.hg:
+	* tools/m4/convert_libgdamm.m4: Added lots of class documentation, 
+	and dealt with some minor TODOs.
+
 2007-02-10  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/queryfieldfield.ccg:

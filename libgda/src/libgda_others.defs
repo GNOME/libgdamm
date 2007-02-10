@@ -28,3 +28,34 @@
   (when "last")
 )
 
+; These are written by hand because they are defines, which are not recognised by h2defs.py:
+
+(define-method get_dict_types
+  (of-object "GdaDict")
+  (c-name "gda_dict_get_dict_types")
+  (return-type "GSList*")
+  (parameters
+  )
+)
+
+(define-method get_dict_type_by_name
+  (of-object "GdaDict")
+  (c-name "gda_dict_get_dict_type_by_name")
+  (return-type "GdaDictType*")
+  (parameters
+    '("const-gchar*" "name")
+  )
+) 
+
+(define-method get_dict_type_by_xml_id
+  (of-object "GdaDict")
+  (c-name "gda_dict_get_dict_type_by_xml_id")
+  (return-type "GdaDictType*")
+  (parameters
+    '("const-gchar*" "xml_id")
+  )
+) 
+
+
+
+

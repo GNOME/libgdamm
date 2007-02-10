@@ -39,6 +39,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** Represents a single value (or a parameter).
+ *
+ * @ingroup Queries
+ */
 class QueryFieldValue
  : public QueryField,
    public XmlStorage,
