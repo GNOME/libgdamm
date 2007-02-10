@@ -58,10 +58,14 @@ protected:
   _IGNORE(gda_query_field_field_new)
   QueryFieldField(const Glib::RefPtr<Query>& query, const Glib::ustring& field);
   QueryFieldField(const Glib::RefPtr<Query>& query, const Glib::ustring& field, const Glib::RefPtr<QueryTarget>& target);
+  //QueryFieldField(const Glib::RefPtr<Query>& query, const Glib::ustring& field, const Glib::RefPtr<QueryField>& value_provider);
+  QueryFieldField(const Glib::RefPtr<Query>& query, const Glib::ustring& field, const Glib::RefPtr<QueryTarget>& target, const Glib::RefPtr<QueryField>& value_provider);
 
 public:
   _WRAP_CREATE(const Glib::RefPtr<Query>& query, const Glib::ustring& field)
   _WRAP_CREATE(const Glib::RefPtr<Query>& query, const Glib::ustring& field, const Glib::RefPtr<QueryTarget>& target)
+  //_WRAP_CREATE(const Glib::RefPtr<Query>& query, const Glib::ustring& field, const Glib::RefPtr<QueryField>& value_provider)
+  _WRAP_CREATE(const Glib::RefPtr<Query>& query, const Glib::ustring& field, const Glib::RefPtr<QueryTarget>& target, const Glib::RefPtr<QueryField>& value_provider)
 
   _WRAP_METHOD(Glib::ustring get_ref_field_name() const, gda_query_field_field_get_ref_field_name)
   _WRAP_METHOD(Glib::RefPtr<EntityField> get_ref_field(), gda_query_field_field_get_ref_field, refreturn)

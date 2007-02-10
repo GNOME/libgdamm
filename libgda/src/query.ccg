@@ -29,6 +29,12 @@ namespace Gnome
 namespace Gda
 {
 
+Query::Query(const Glib::RefPtr<Dict>& dict, QueryType type)
+  : _CONSTRUCT("dict", Glib::unwrap(dict))
+{
+  set_query_type(type);
+}
+
 } /* namespace Gda */
 
 } /* namespace Gnome */

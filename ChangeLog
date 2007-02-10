@@ -1,3 +1,13 @@
+2007-02-10  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/queryfieldfield.ccg:
+	* libgda/src/queryfieldfield.hg: Added QueryFieldField(query, field,
+	target, value_provider) convenience constructor.
+
+	* libgda/src/query.ccg:
+	* libgda/src/query.hg: Added another constructor that takes a query
+	type, added default arguments for set_order_by_field().
+
 2007-02-09  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/reference/Doxyfile.in:

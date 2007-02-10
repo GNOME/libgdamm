@@ -39,6 +39,18 @@ QueryFieldField::QueryFieldField(const Glib::RefPtr<Query>& query, const Glib::u
 {
 }
 
+/*QueryFieldField::QueryFieldField(const Glib::RefPtr<Query>& query, const Glib::ustring& field, const Glib::RefPtr<QueryField>& value_provider)
+:
+  _CONSTRUCT("dict", gda_object_get_dict(GDA_OBJECT(query->gobj())), "query", Glib::unwrap(query), "field_name", field.c_str(), "value_provider", Glib::unwrap(value_provider))
+{
+}*/
+
+QueryFieldField::QueryFieldField(const Glib::RefPtr<Query>& query, const Glib::ustring& field, const Glib::RefPtr<QueryTarget>& target, const Glib::RefPtr<QueryField>& value_provider)
+:
+  _CONSTRUCT("dict", gda_object_get_dict(GDA_OBJECT(query->gobj())), "query", Glib::unwrap(query), "field_name", field.c_str(), "target", Glib::unwrap(target), "value_provider", Glib::unwrap(value_provider))
+{
+}
+
 } /* namespace Gda */
 
 } /* namespace Gnome */
