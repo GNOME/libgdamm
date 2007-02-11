@@ -1,32 +1,35 @@
 TODO:
 
-* File more bugs about buggy _new methods
-  - Fix them (nobody else will), by either 
-  a) Adding properties.
-  b) Move code into public _construct(object) methods, called by both the _new() method and our constructor.
-     (Ask Murray if that is not clear)
+* Do libgnomedb TODO items first if possible, so we can document how to use the UI widgets.
+* Reference Documentation:
+  - Check for doxygen errors and fix if it's easy. 
+  - Group the classes appropriately, using @defgroup and @ingroup.
+    (See http://www.openismus.com/temp/libgnomedb_3_0_docs/html/ and 
+         http://www.openismus.com/temp/libgda_3_0_docs/html/
+     for some existing categories.)
 * Wrap the rest of GdaQuery* objects (are they useful, public?)
 * Wrap GdaDataModelHash, GdaDataModelFilterSQL, GdaDataAccessWrapper, and GdaDataModelImport.
   (though they might not be very useful to application developers.)
   (remember to put them in the DataModels doxygen group and add their documentation, based on the C documentation.)
 * Check TODOs in code and tutorial .xml about lists and other things
-* Reference Documentation:
-  - Check for doxygen errors and fix it it's easy. 
-  - Group the classes appropriately.
-    (See http://www.openismus.com/temp/libgnomedb_3_0_docs/html/ and 
-         http://www.openismus.com/temp/libgda_3_0_docs/html/
-     for some existing categories.)
+
 
 Relevant libgda bugs:
 
 * http://bugzilla.gnome.org/show_bug.cgi?id=340989
 "gda_parameter_list_new() does more than g_object_new()"
 
-* http://bugzilla.gnome.org/show_bug.cgi?id=321724
-"
-gda_connection_event_new() accesses a private member field.
-gda_data_model_array_new() calls an extra function.
-gda_data_model_hash_new() (or just document it as private API).
 
-Can you tell me whether the objects under report/ are public API?
-"
+
+DONE:
+
+
+* 321724
+  http://bugzilla.gnome.org/show_bug.cgi?id=321724
+  *_new() functions with more than g_object_new() (done)
+
+* 406373
+  http://bugzilla.gnome.org/show_bug.cgi?id=406373
+  GdaQuery makes explicit type checks (done)
+
+
