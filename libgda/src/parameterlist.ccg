@@ -43,6 +43,11 @@ Glib::RefPtr<ParameterList> ParameterList::create(const Glib::SListHandle<Parame
 	return Glib::RefPtr<ParameterList>(new ParameterList(dict, params));
 }
 
+Glib::RefPtr<ParameterList> ParameterList::create()
+{
+  return Glib::RefPtr<ParameterList>(Glib::wrap(gda_parameter_list_new(NULL)));
+}
+
 Value ParameterList::get_param_default_value(const Glib::RefPtr<const Parameter>& param) const
 {
   Value value;

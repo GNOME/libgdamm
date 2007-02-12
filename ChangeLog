@@ -2,6 +2,12 @@
 
 	* libgda/src/parameterlist.ccg:
 	* libgda/src/parameterlist.hg:
+	Added constructor for NULL argument (to fix examples...)
+	
+2007-02-12  Johannes Schmid <johannes.schmid@openismus.com>
+
+	* libgda/src/parameterlist.ccg:
+	* libgda/src/parameterlist.hg:
 	* tools/m4/convert_libgdamm.m4:
 	
 	Added proper constructors for Gda::ParameterList. The xml constructors are ommitted (see #340989)

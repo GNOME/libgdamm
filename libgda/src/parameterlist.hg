@@ -55,6 +55,7 @@ protected:
 
 public:
   static Glib::RefPtr<ParameterList> create(const Glib::SListHandle<Parameter>& param);
+  static Glib::RefPtr<ParameterList> create();
 
   operator bool() const;
 
