@@ -23,12 +23,25 @@
 #include <libgda/gda-parameter-list.h>
 #include <libgda/gda-parameter.h>
 #include <libgda/gda-enum-types.h>
+#include <libgda/gda-dict.h>
 
 namespace Gnome
 {
 
 namespace Gda
 {
+
+ParameterList::ParameterList(const Glib::RefPtr<Dict>& dict, const Glib::SListHandle<Parameter>& params) :
+  _CONSTRUCT("dict", dict->gobj(), "params", params.data(), NULL)
+{
+
+}
+
+Glib::RefPtr<ParameterList> ParameterList::create(const Glib::SListHandle<Parameter>& params)
+{
+	Glib::RefPtr<Dict> dict(Glib::wrap(_gda_parameter_list_get_dict(params.data())));
+	return Glib::RefPtr<ParameterList>(new ParameterList(dict, params));
+}
 
 Value ParameterList::get_param_default_value(const Glib::RefPtr<const Parameter>& param) const
 {
