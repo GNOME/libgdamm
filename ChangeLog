@@ -1,3 +1,16 @@
+2.9.2:
+
+2007-02-12  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/datahandler.ccg:
+	* libgda/src/datamodel.ccg:
+	* libgda/src/dictfield.ccg:
+	* libgda/src/dictfield.hg:
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/parameter.ccg:
+	* libgda/src/queryfieldvalue.hg:
+	* libgda/src/row.ccg: Updated for latest API changes.
+
 2007-02-12  Johannes Schmid <johannes.schmid@openismus.com>
 
 	* libgda/src/parameterlist.ccg:

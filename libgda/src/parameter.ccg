@@ -63,6 +63,7 @@ Value Parameter::get_value() const
 {
   Value value;
 
+  //Note that the function does not return a new value, so we should not free it:
   const GValue* cvalue =  gda_parameter_get_value(const_cast<GdaParameter*>(gobj()));
   if(cvalue)
     value.init(cvalue);

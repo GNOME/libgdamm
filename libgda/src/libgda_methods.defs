@@ -6649,9 +6649,9 @@
   )
 )
 
-(define-method is_parameter
+(define-method get_is_parameter
   (of-object "GdaQueryFieldValue")
-  (c-name "gda_query_field_value_is_parameter")
+  (c-name "gda_query_field_value_get_is_parameter")
   (return-type "gboolean")
 )
 
