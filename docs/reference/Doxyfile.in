@@ -43,10 +43,10 @@ HIDE_IN_BODY_DOCS      = NO
 INTERNAL_DOCS          = NO
 CASE_SENSE_NAMES       = YES
 HIDE_SCOPE_NAMES       = NO
-SHOW_INCLUDE_FILES     = YES
+SHOW_INCLUDE_FILES     = NO
 INLINE_INFO            = YES
 SORT_MEMBER_DOCS       = YES
-SORT_BRIEF_DOCS        = NO
+SORT_BRIEF_DOCS        = YES
 SORT_BY_SCOPE_NAME     = NO
 GENERATE_TODOLIST      = YES
 GENERATE_TESTLIST      = YES
@@ -75,11 +75,12 @@ FILE_PATTERNS          = *.h
 RECURSIVE              = NO
 EXCLUDE                = 
 EXCLUDE_SYMLINKS       = NO
-EXCLUDE_PATTERNS       = 
-EXAMPLE_PATH           = 
-EXAMPLE_PATTERNS       = 
-EXAMPLE_RECURSIVE      = NO
-IMAGE_PATH             = 
+EXCLUDE_PATTERNS       = */wrap_init.h
+EXAMPLE_PATH           = @top_srcdir@/examples
+EXAMPLE_PATTERNS       = *.h \
+                         *.cc
+EXAMPLE_RECURSIVE      = YES
+IMAGE_PATH             = $(DOXYGEN_IMAGE_PATH)
 INPUT_FILTER           = 
 FILTER_PATTERNS        = 
 FILTER_SOURCE_FILES    = NO
@@ -88,10 +89,10 @@ FILTER_SOURCE_FILES    = NO
 #---------------------------------------------------------------------------
 SOURCE_BROWSER         = NO
 INLINE_SOURCES         = NO
-STRIP_CODE_COMMENTS    = YES
+STRIP_CODE_COMMENTS    = NO
 REFERENCED_BY_RELATION = YES
 REFERENCES_RELATION    = YES
-VERBATIM_HEADERS       = YES
+VERBATIM_HEADERS       = NO
 #---------------------------------------------------------------------------
 # configuration options related to the alphabetical class index
 #---------------------------------------------------------------------------
@@ -104,8 +105,8 @@ IGNORE_PREFIX          =
 GENERATE_HTML          = YES
 HTML_OUTPUT            = html
 HTML_FILE_EXTENSION    = .html
-HTML_HEADER            = 
-HTML_FOOTER            = 
+HTML_HEADER            = libgdamm_header.html_fragment
+HTML_FOOTER            = libgdamm_footer.html_fragment
 HTML_STYLESHEET        = 
 HTML_ALIGN_MEMBERS     = YES
 GENERATE_HTMLHELP      = NO
@@ -114,8 +115,8 @@ HHC_LOCATION           =
 GENERATE_CHI           = NO
 BINARY_TOC             = NO
 TOC_EXPAND             = NO
-DISABLE_INDEX          = NO
-ENUM_VALUES_PER_LINE   = 4
+DISABLE_INDEX          = YES
+ENUM_VALUES_PER_LINE   = 1
 GENERATE_TREEVIEW      = NO
 TREEVIEW_WIDTH         = 250
 #---------------------------------------------------------------------------
@@ -152,7 +153,7 @@ MAN_LINKS              = NO
 #---------------------------------------------------------------------------
 # configuration options related to the XML output
 #---------------------------------------------------------------------------
-GENERATE_XML           = NO
+GENERATE_XML           = YES
 XML_OUTPUT             = xml
 XML_SCHEMA             = 
 XML_DTD                = 
@@ -172,18 +173,25 @@ PERLMOD_MAKEVAR_PREFIX =
 # Configuration options related to the preprocessor   
 #---------------------------------------------------------------------------
 ENABLE_PREPROCESSING   = YES
-MACRO_EXPANSION        = NO
-EXPAND_ONLY_PREDEF     = NO
-SEARCH_INCLUDES        = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+SEARCH_INCLUDES        = NO
 INCLUDE_PATH           = 
 INCLUDE_FILE_PATTERNS  = 
-PREDEFINED             = DOXYGEN_SHOULD_SKIP_THIS
+PREDEFINED             = DOXYGEN_SHOULD_SKIP_THIS \
+                         GTKMM_USING_STD(x)= \
+                         GTKMM_API \
+                         GTKMM_ATKMM_ENABLED \
+                         GLIBMM_VFUNCS_ENABLED \
+                         GLIBMM_PROPERTIES_ENABLED \
+                         GLIBMM_EXCEPTIONS_ENABLED \
+                         GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED
 EXPAND_AS_DEFINED      = 
 SKIP_FUNCTION_MACROS   = YES
 #---------------------------------------------------------------------------
 # Configuration::additions related to external references   
 #---------------------------------------------------------------------------
-TAGFILES               = glibmm_doxygen_tags
+TAGFILES               = glibmm_doxygen_tags gtkmm_doxygen_tags libgdamm_tags
 GENERATE_TAGFILE       = libgdamm_doxygen_tags
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = YES
