@@ -28,6 +28,16 @@
   (when "last")
 )
 
+(define-signal activated
+  (of-object "GdaReferer")
+  (return-type "void")
+)
+
+(define-signal deactivated
+  (of-object "GdaReferer")
+  (return-type "void")
+)
+
 ; These are written by hand because they are defines, which are not recognised by h2defs.py:
 
 (define-method get_dict_types

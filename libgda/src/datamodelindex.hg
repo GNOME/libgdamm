@@ -56,9 +56,12 @@ public:
   _WRAP_METHOD(Glib::ustring get_references() const, gda_data_model_index_get_references)
   _WRAP_METHOD(void set_references(const Glib::ustring& ref), gda_data_model_index_set_references)
 
-  //TODO: Use correct list types (and ownershipt). Johannes
-  // _WRAP_METHOD(Glib::ListHandle<ColumnIndex> get_column_index_list() const, gda_data_model_index_get_column_index_list)
-  //_WRAP_METHOD(void set_column_index_list(const Glib::ListHandle<ColumnIndex>& col_idx_list), gda_data_model_index_set_column_index_list)
+  #m4 _CONVERSION(`GList*', `Glib::ListHandle<Glib::RefPtr<ColumnIndex> >', `$2($3, Glib::OWNERSHIP_NONE)')
+  #m4 _CONVERSION(`GList*', `Glib::ListHandle<Glib::RefPtr<const ColumnIndex> >', `$2($3, Glib::OWNERSHIP_NONE)')
+  #m4 _CONVERSION(`const Glib::ListHandle<Glib::RefPtr<ColumnIndex> >&', `GList*', `$3.data()')
+  _WRAP_METHOD(Glib::ListHandle<Glib::RefPtr<ColumnIndex> > get_column_index_list(), gda_data_model_index_get_column_index_list)
+  _WRAP_METHOD(Glib::ListHandle<Glib::RefPtr<const ColumnIndex> > get_column_index_list() const, gda_data_model_index_get_column_index_list)
+  _WRAP_METHOD(void set_column_index_list(const Glib::ListHandle<Glib::RefPtr<ColumnIndex> >& col_idx_list), gda_data_model_index_set_column_index_list)
 
 };
 

@@ -15,11 +15,13 @@ _CONVERSION(`GdaDict*',`Glib::RefPtr<Dict>',`Glib::wrap($3)')
 _CONVERSION(`GdaDictAggregate*',`Glib::RefPtr<DictAggregate>',`Glib::wrap($3)')
 _CONVERSION(`GdaDictDatabase*',`Glib::RefPtr<DictDatabase>',`Glib::wrap($3)')
 _CONVERSION(`GdaDictDatabase*',`Glib::RefPtr<const DictDatabase>',`Glib::wrap($3)')
-_CONVERSION(`GdaDictType*',`Glib::RefPtr<DictType>',`Glib::wrap($3)')
 _CONVERSION(`GdaDictTable*',`Glib::RefPtr<DictTable>',`Glib::wrap($3)')
+_CONVERSION(`GdaDictTable*',`const Glib::RefPtr<DictTable>&',`Glib::wrap($3)')
 _CONVERSION(`GdaDictField*',`Glib::RefPtr<DictField>',`Glib::wrap($3)')
 _CONVERSION(`GdaDictField*',`Glib::RefPtr<const DictField>',`Glib::wrap($3)')
+_CONVERSION(`GdaDictField*',`const Glib::RefPtr<DictField>&',`Glib::wrap($3)')
 _CONVERSION(`GdaDictConstraint*',`Glib::RefPtr<DictConstraint>',`Glib::wrap($3)')
+_CONVERSION(`GdaDictConstraint*',`const Glib::RefPtr<DictConstraint>&',`Glib::wrap($3)')
 _CONVERSION(`GdaObject*',`Glib::RefPtr<Gda::Object>',`Glib::wrap($3)')
 _CONVERSION(`GdaObject*',`Glib::RefPtr<Object>',`Glib::wrap($3)')
 _CONVERSION(`GdaObject*',`const Glib::RefPtr<Object>',`Glib::wrap($3)')
@@ -46,11 +48,13 @@ _CONVERSION(`const Glib::RefPtr<ServerOperation>&', `GdaServerOperation*', __CON
 _CONVERSION(`const Glib::RefPtr<TransactionStatus>&', `GdaTransactionStatus*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Connection>&', `GdaConnection*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Dict>&', `GdaDict*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`Glib::RefPtr<DictType>', `GdaDictType*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DictType>&', `GdaDictType*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DictField>&', `GdaDictField*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const DictField>&', `GdaDictField*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DictTable>&', `GdaDictTable*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DictConstraint>&', `GdaDictConstraint*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<const DictConstraint>&', `GdaDictConstraint*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DictDatabase>&', `GdaDictDatabase*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Object>&', `GdaObject*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Gda::Object>&', `GdaObject*', __CONVERT_REFPTR_TO_P)
@@ -62,6 +66,7 @@ _CONVERSION(`const Glib::RefPtr<ParameterList>&', `GdaParameterList*', __CONVERT
 _CONVERSION(`const Glib::RefPtr<const ParameterList>&', `GdaParameterList*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Query>&', `GdaQuery*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<QueryField>&', `GdaQueryField*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<const QueryField>&', `GdaQueryField*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<QueryTarget>&', `GdaQueryTarget*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<QueryCondition>&', `GdaQueryCondition*', __CONVERT_REFPTR_TO_P)
 
@@ -95,6 +100,7 @@ _CONVERSION(`const Glib::RefPtr<EntityField>&', `const GdaEntityField*', __CONVE
 
 _CONVERSION(`GdaEntity*',`Glib::RefPtr<Entity>',`Glib::wrap($3)')
 _CONVERSION(`GdaEntity*',`Glib::RefPtr<const Entity>',`Glib::wrap($3)')
+_CONVERSION(`Glib::RefPtr<Entity>', `GdaEntity*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Entity>&', `GdaEntity*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const Entity>&', `const GdaEntity*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Entity>&', `const GdaEntity*', __CONVERT_REFPTR_TO_P)
@@ -103,6 +109,7 @@ _CONVERSION(`GdaDict*',`Glib::RefPtr<Dict>',`Glib::wrap($3)')
 _CONVERSION(`GdaDict*',`Glib::RefPtr<const Dict>',`Glib::wrap($3)')
 
 _CONVERSION(`GdaDictType*',`Glib::RefPtr<DictType>',`Glib::wrap($3)')
+_CONVERSION(`GdaDictType*',`const Glib::RefPtr<DictType>&',`Glib::wrap($3)')
 _CONVERSION(`GdaDictType*',`Glib::RefPtr<const DictType>',`Glib::wrap($3)')
 
 _CONVERSION(`GdaColumnIndex*',`Glib::RefPtr<ColumnIndex>',`Glib::wrap($3)')
@@ -140,6 +147,8 @@ _CONVERSION(`const int*','const-gint*',`$3')
 
 _CONVERSION(`long&',`glong*',`&($3)')
 
+_CONVERSION(`Glib::ustring', `const gchar*', `($3).c_str()')
+
 _CONVERSION(`DictConstraintFkAction&',`GdaDictConstraintFkAction*',`(($2) &($3))')
 
 _CONV_ENUM(Gda,CommandType)
@@ -176,6 +185,8 @@ _CONVERSION(`const Glib::ListHandle<ColumnIndex>&',`GList*',`$3.data()')
 _CONVERSION(`GList*',`Glib::ListHandle<ColumnIndex>',__FL2H_SHALLOW)
 _CONVERSION(`const Glib::SListHandle<Parameter>&',`GSList*',`$3.data()')
 _CONVERSION(`GSList*',`Glib::SListHandle<Parameter>',__FL2H_SHALLOW)
+
+_CONVERSION(`const ValueSList&', `GSList*', `$3.data()')
 
 # For signals:
 _CONVERSION(`GdaParameterList*',`const ParameterList&',`Glib::wrap($3)')

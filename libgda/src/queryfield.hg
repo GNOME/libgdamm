@@ -43,14 +43,13 @@ class QueryField
   _CLASS_GOBJECT(QueryField, GdaQueryField, GDA_QUERY_FIELD, QueryObject, GdaQueryObject)
 
 public:
+  _WRAP_METHOD(Glib::RefPtr<QueryField> copy() const, gda_query_field_new_copy)
+
   // TODO: Constructors use GError* argument
   _WRAP_METHOD(Glib::RefPtr<DictType> get_dict_type(), gda_query_field_get_dict_type, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const DictType> get_dict_type() const, gda_query_field_get_dict_type, constversion)
   
-  // TODO: This method should use const parameters in libgda
-  // TODO: So, fix libgda, please. murrayc
-  //_WRAP_EQUAL(gda_query_field_is_equal)
-  //_IGNORE(gda_query_field_is_equal)
+  _WRAP_METHOD(bool is_equal(const Glib::RefPtr<const QueryField>&) const, gda_query_field_is_equal)
   
   // TODO: GList* gda_query_field_get_parameters
   _WRAP_METHOD(void set_alias(const Glib::ustring& alias), gda_query_field_set_alias)
@@ -62,7 +61,11 @@ public:
   _WRAP_METHOD(void set_internal(bool internal = true), gda_query_field_set_internal)
   _WRAP_METHOD(bool get_internal() const, gda_query_field_is_internal)
   _WRAP_METHOD(bool is_list() const, gda_query_field_is_list)
-  
+
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<Parameter> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const Parameter> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<Parameter> > get_parameters(), gda_query_field_get_parameters)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const Parameter> > get_parameters() const, gda_query_field_get_parameters)
 };
 
 } // namespace Gda

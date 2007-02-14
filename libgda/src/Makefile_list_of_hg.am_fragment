@@ -2,13 +2,13 @@
 # The include happens in Makefile.am, not Makefile.in or Makefile,
 # so it's like copy-and-pasting this into each of those Makefile.am files.
 
-files_hg = blob.hg blobop.hg client.hg columnindex.hg command.hg connection.hg \
+files_hg = blob.hg blobop.hg client.hg column.hg columnindex.hg command.hg \
+           connection.hg connectionevent.hg \
            datahandler.hg datamodel.hg datamodelarray.hg datamodelfiltersql.hg \
            datamodelhash.hg datamodelimport.hg datamodelindex.hg \
 	   datamodeliter.hg datamodelquery.hg datamodelrow.hg \
-	   dataproxy.hg \
-	   datasourceinfo.hg connectionevent.hg \
-           column.hg dict.hg dictaggregate.hg dictconstraint.hg dictdatabase.hg dictfield.hg dicttable.hg dicttype.hg \
+	   dataproxy.hg datasourceinfo.hg \
+           dict.hg dictaggregate.hg dictconstraint.hg dictdatabase.hg dictfield.hg dicttable.hg dicttype.hg \
            entity.hg entityfield.hg \
 	   handlerstring.hg handlerboolean.hg handlertime.hg \
 	   handlernumerical.hg handlerbin.hg handlertype.hg \

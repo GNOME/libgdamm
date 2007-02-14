@@ -106,7 +106,13 @@ class ServerProvider : public Glib::Object
   _WRAP_METHOD(Glib::RefPtr<DataHandler> get_data_handler_dbms(const Glib::RefPtr<Connection>& cnc,  const Glib::ustring& for_type), gda_server_provider_get_data_handler_dbms, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const DataHandler> get_data_handler_dbms(const Glib::RefPtr<Connection>& cnc,  const Glib::ustring& for_type) const, gda_server_provider_get_data_handler_dbms, constversion)
 
-  //TODO: What about the methods that take a GType argument? Johannes
+  _WRAP_METHOD(Glib::RefPtr<DataHandler> get_data_handler_gtype(const Glib::RefPtr<Connection>& cnc, GType for_type), gda_server_provider_get_data_handler_gtype, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DataHandler> get_data_handler_gtype(const Glib::RefPtr<Connection>& cnc, GType for_type) const, gda_server_provider_get_data_handler_gtype, refreturn, constversion)
+
+  _WRAP_METHOD(Glib::ustring get_default_dbms_type(const Glib::RefPtr<Connection>& cnc, GType type), gda_server_provider_get_default_dbms_type)
+
+  // These are in a private header, so ignore them
+  _IGNORE(gda_server_provider_handler_declare, gda_server_provider_handler_find)
 
  //TODO: vfuncs.
 };

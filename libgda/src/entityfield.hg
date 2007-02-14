@@ -59,7 +59,8 @@ public:
 //TODO: Watch out, this might not do correct reference counting:
   _WRAP_VFUNC(Glib::RefPtr<Entity> get_entity(), get_entity)
   _WRAP_VFUNC(GType get_g_type(), get_g_type)
-  _WRAP_VFUNC(Glib::RefPtr<DictType> get_data_type(), get_data_type)
+  _WRAP_VFUNC(void set_dict_type(const Glib::RefPtr<DictType>& type), set_dict_type)
+  _WRAP_VFUNC(Glib::RefPtr<DictType> get_dict_type(), get_dict_type)
   _WRAP_VFUNC(Glib::ustring get_alias(), get_alias)
 };
 

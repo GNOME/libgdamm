@@ -68,7 +68,7 @@ public:
   _WRAP_CREATE(const Glib::RefPtr<DictDatabase>& db)
 
   _WRAP_METHOD(DictConstraintType get_constraint_type() const, gda_dict_constraint_get_constraint_type)
-  //_WRAP_METHOD(bool equal(const Glib::RefPtr<const DictConstraint>& cstr2) const , gda_dict_constraint_equal)
+  _WRAP_METHOD(bool equal(const Glib::RefPtr<const DictConstraint>& cstr2) const, gda_dict_constraint_equal)
 
   _WRAP_METHOD(Glib::RefPtr<DictTable> get_table(), gda_dict_constraint_get_table, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const DictTable> get_table() const, gda_dict_constraint_get_table, constversion)
@@ -102,6 +102,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<DictField> not_null_get_field(), gda_dict_constraint_not_null_get_field)
   _WRAP_METHOD(Glib::RefPtr<const DictField> not_null_get_field() const, gda_dict_constraint_not_null_get_field)
 
+  _WRAP_PROPERTY("user-constraint", bool)
   //TODO: properties, signals, vfuncs.
 };
 

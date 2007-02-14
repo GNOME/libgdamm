@@ -91,6 +91,7 @@ public:
   _WRAP_METHOD(bool has_changed() const, gda_data_proxy_has_changed)
   _WRAP_METHOD(bool row_has_changed(int proxy_row) const, gda_data_proxy_row_has_changed)
   _WRAP_METHOD(int get_n_new_rows() const, gda_data_proxy_get_n_new_rows)
+  _WRAP_METHOD(int get_n_modified_rows() const, gda_data_proxy_get_n_modified_rows)
   _WRAP_METHOD(void set_sample_size(int sample_size), gda_data_proxy_set_sample_size)
   _WRAP_METHOD(int get_sample_size() const, gda_data_proxy_get_sample_size)
   _WRAP_METHOD(void set_sample_start(int sample_start), gda_data_proxy_set_sample_start)
@@ -105,6 +106,8 @@ public:
   _WRAP_SIGNAL(void row_delete_changed(int row, bool to_be_deleted), "row-delete-changed")
   _WRAP_SIGNAL(void sample_changed(int sample_start, int sample_end), "sample-changed")
   _WRAP_SIGNAL(void sample_size_changed(int sample_size), "sample-size-changed")
+  _WRAP_SIGNAL(bool pre_changes_applied(int row, int proxied_row), "pre-changes-applied")
+  _WRAP_SIGNAL(void post_changes_applied(int row, int proxied_row), "post-changes-applied")
 };
 
 } // namespace Gda

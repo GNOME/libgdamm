@@ -332,6 +332,15 @@
   (construct-only #f)
 )
 
+(define-property params
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamPointer")
+  (docs "Parameters the list should contain")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+)
+
 (define-property data-model
   (of-object "GdaDataModelIter")
   (prop-type "GParamObject")
@@ -395,6 +404,12 @@
   (parameters
     '("gint" "p0")
   )
+)
+
+(define-signal reset
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
 )
 
 ;; From GdaDataProxy
@@ -481,7 +496,7 @@
   (docs "")
   (readable #t)
   (writable #t)
-  (construct-only #t)
+  (construct-only #f)
 )
 
 (define-property prepend-null-entry
@@ -629,6 +644,224 @@
 
 (define-property string-id
   (of-object "GdaDictAggregate")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDictConstraint
+
+(define-property dict
+  (of-object "GdaDictConstraint")
+  (prop-type "GParamObject")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaDictConstraint")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaDictConstraint")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property user-constraint
+  (of-object "GdaDictConstraint")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDictDatabase
+
+(define-signal data-update-started
+  (of-object "GdaDictDatabase")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal update-progress
+  (of-object "GdaDictDatabase")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("const-gchar*" "p0")
+    '("guint" "p1")
+    '("guint" "p2")
+  )
+)
+
+(define-signal data-update-finished
+  (of-object "GdaDictDatabase")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal table-added
+  (of-object "GdaDictDatabase")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaDictTable*" "p0")
+  )
+)
+
+(define-signal table-removed
+  (of-object "GdaDictDatabase")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaDictTable*" "p0")
+  )
+)
+
+(define-signal table-updated
+  (of-object "GdaDictDatabase")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaDictTable*" "p0")
+  )
+)
+
+(define-signal field-added
+  (of-object "GdaDictDatabase")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaDictField*" "p0")
+  )
+)
+
+(define-signal field-removed
+  (of-object "GdaDictDatabase")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaDictField*" "p0")
+  )
+)
+
+(define-signal field-updated
+  (of-object "GdaDictDatabase")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaDictField*" "p0")
+  )
+)
+
+(define-signal constraint-added
+  (of-object "GdaDictDatabase")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaDictConstraint*" "p0")
+  )
+)
+
+(define-signal constraint-removed
+  (of-object "GdaDictDatabase")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaDictConstraint*" "p0")
+  )
+)
+
+(define-signal constraint-updated
+  (of-object "GdaDictDatabase")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaDictConstraint*" "p0")
+  )
+)
+
+(define-property dict
+  (of-object "GdaDictDatabase")
+  (prop-type "GParamObject")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaDictDatabase")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaDictDatabase")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDictField
+
+(define-property dict
+  (of-object "GdaDictField")
+  (prop-type "GParamObject")
+  (docs "Dictionary to which the object is related")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property changed-blocked
+  (of-object "GdaDictField")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property string-id
+  (of-object "GdaDictField")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property db-table
+  (of-object "GdaDictField")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property entry-plugin
+  (of-object "GdaDictField")
   (prop-type "GParamString")
   (docs "")
   (readable #t)
@@ -948,6 +1181,15 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+)
+
+(define-property params
+  (of-object "GdaParameterList")
+  (prop-type "GParamPointer")
+  (docs "Parameters the list should contain")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
 )
 
 ;; From GdaQuery
@@ -1770,6 +2012,15 @@
 (define-property entry-plugin
   (of-object "GdaQueryFieldValue")
   (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property is-parameter
+  (of-object "GdaQueryFieldValue")
+  (prop-type "GParamBoolean")
   (docs "")
   (readable #t)
   (writable #t)

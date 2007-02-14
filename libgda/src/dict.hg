@@ -120,7 +120,11 @@ public:
 
   //Note that these are described in libgda_others.defs, because the C functions are actually macros:
   //TODO: Use SListHandle:
-  _WRAP_METHOD(GSList* get_dict_types(), gda_dict_get_dict_types)
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<DictType> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const DictType> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<DictType> > get_dict_types(), gda_dict_get_dict_types)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const DictType> > get_dict_types() const, gda_dict_get_dict_types)
 
   _WRAP_METHOD(Glib::RefPtr<DictType> get_dict_type_by_name(const Glib::ustring& type_name), gda_dict_get_dict_type_by_name, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const DictType> get_dict_type_by_name(const Glib::ustring& type_name) const, gda_dict_get_dict_type_by_name, refreturn, constversion)

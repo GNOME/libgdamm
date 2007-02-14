@@ -2799,6 +2799,12 @@
   )
 )
 
+(define-method reset
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_reset")
+  (return-type "none")
+)
+
 (define-method move_iter_at_row_default
   (of-object "GdaDataModel")
   (c-name "gda_data_model_move_iter_at_row_default")
@@ -4216,15 +4222,6 @@
   (return-type "GSList*")
 )
 
-(define-method set_dict_type
-  (of-object "GdaDictField")
-  (c-name "gda_dict_field_set_dict_type")
-  (return-type "none")
-  (parameters
-    '("GdaDictType*" "type")
-  )
-)
-
 (define-method set_default_value
   (of-object "GdaDictField")
   (c-name "gda_dict_field_set_default_value")
@@ -4928,6 +4925,15 @@
   (of-object "GdaEntityField")
   (c-name "gda_entity_field_get_g_type")
   (return-type "GType")
+)
+
+(define-method set_dict_type
+  (of-object "GdaEntityField")
+  (c-name "gda_entity_field_set_dict_type")
+  (return-type "none")
+  (parameters
+    '("GdaDictType*" "type")
+  )
 )
 
 (define-method get_dict_type
@@ -6617,27 +6623,6 @@
   (of-object "GdaQueryFieldValue")
   (c-name "gda_query_field_value_get_default_value")
   (return-type "const-GValue*")
-)
-
-(define-method get_g_type
-  (of-object "GdaQueryFieldValue")
-  (c-name "gda_query_field_value_get_g_type")
-  (return-type "GType")
-)
-
-(define-method set_dict_type
-  (of-object "GdaQueryFieldValue")
-  (c-name "gda_query_field_value_set_dict_type")
-  (return-type "none")
-  (parameters
-    '("GdaDictType*" "type")
-  )
-)
-
-(define-method get_dict_type
-  (of-object "GdaQueryFieldValue")
-  (c-name "gda_query_field_value_get_dict_type")
-  (return-type "GdaDictType*")
 )
 
 (define-method set_is_parameter

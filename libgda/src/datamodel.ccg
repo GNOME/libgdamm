@@ -55,7 +55,35 @@ Value DataModel::get_value_at(const Glib::ustring& column_name, int row) const
     value.init(cvalue);
   
   return value;
-} 
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+bool DataModel::export_to_file(DataModelIOFormat format, const std::string& file, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<ParameterList>& options)
+#else
+bool DataModel::export_to_file(DataModelIOFormat format, const std::string& file, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<ParameterList>& options, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  bool retvalue = gda_data_model_export_to_file(gobj(), static_cast<GdaDataModelIOFormat>(format), file.c_str(), cols.data(), cols.size(), rows.data(), rows.size(), const_cast<GdaParameterList*>(options->gobj()), &gerror);
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  return retvalue;
+}
+
+Glib::ustring DataModel::export_to_string(DataModelIOFormat format, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<ParameterList>& options)
+{
+  gchar* retvalue = gda_data_model_export_to_string(gobj(), static_cast<GdaDataModelIOFormat>(format), cols.data(), cols.size(), rows.data(), rows.size(), options->gobj());
+  Glib::ustring cppretvalue(retvalue);
+  g_free(retvalue);
+
+  return cppretvalue;
+}
 
 } /* namespace Gda */
 

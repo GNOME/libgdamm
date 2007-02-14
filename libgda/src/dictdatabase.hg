@@ -26,7 +26,6 @@
 #include <libgdamm/dictfield.h>
 #include <libgdamm/dictconstraint.h>
 
-
 _DEFS(libgdamm,libgda)
 _PINCLUDE(libgdamm/private/object_p.h)
 
@@ -63,8 +62,10 @@ public:
   _WRAP_METHOD(bool update_dbms_data(GType limit_to_type, const Glib::ustring& limit_obj_name), gda_dict_database_update_dbms_data, errthrow)
   _WRAP_METHOD(void stop_update_dbms_data() const, gda_dict_database_stop_update_dbms_data)
 
-  //TODO: Use ListHandle or similar:
-  //_WRAP_METHOD(GSList* get_tables(), gda_dict_database_get_tables)
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<DictTable> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const DictTable> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<DictTable> > get_tables(), gda_dict_database_get_tables)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const DictTable> > get_tables() const, gda_dict_database_get_tables)
 
   _WRAP_METHOD(Glib::RefPtr<DictTable> get_table_by_name(const Glib::ustring& name), gda_dict_database_get_table_by_name, refreturn);
   _WRAP_METHOD(Glib::RefPtr<const DictTable> get_table_by_name(const Glib::ustring& name) const, gda_dict_database_get_table_by_name, constversion);
@@ -80,12 +81,35 @@ public:
 
   _WRAP_METHOD(void add_constraint(const Glib::RefPtr<DictConstraint>& cstr), gda_dict_database_add_constraint)
 
-  //TODO: Use ListHandle or similar, and wrap DictTable:
-  //_WRAP_METHOD(GSList* get_all_constraints() const, gda_dict_database_get_all_constraints)
-  //_WRAP_METHOD(GSList* get_all_fk_constraints(), gda_dict_database_get_all_fk_constraints)
-  //_WRAP_METHOD(GSList* get_table_constraints(const Glib::RefPtr<DictTable>& table), da_dict_database_get_table_constraints)
-  //_WRAP_METHOD(GSList* get_tables_fk_constraints(const Glib::RefPtr<DictTable>& table1, const Glib::RefPtr<DictTable>& table2, bool table1_has_fk), gda_dict_database_get_tables_fk_constraints)
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<DictConstraint> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const DictConstraint> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<DictConstraint> > get_all_constraints(), gda_dict_database_get_all_constraints)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const DictConstraint> > get_all_constraints() const, gda_dict_database_get_all_constraints)
 
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<DictConstraint> > get_all_fk_constraints(), gda_dict_database_get_all_fk_constraints)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const DictConstraint> > get_all_fk_constraints() const, gda_dict_database_get_all_fk_constraints)
+
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<DictConstraint> > get_table_constraints(const Glib::RefPtr<DictTable>& table), gda_dict_database_get_table_constraints)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const DictConstraint> > get_table_constraints(const Glib::RefPtr<DictTable>& table) const, gda_dict_database_get_table_constraints)
+
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<DictConstraint> > get_tables_fk_constraints(const Glib::RefPtr<DictTable>& table1, const Glib::RefPtr<DictTable>& table2, bool table1_has_fk = true), gda_dict_database_get_tables_fk_constraints)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const DictConstraint> > get_tables_fk_constraints(const Glib::RefPtr<DictTable>& table1, const Glib::RefPtr<DictTable>& table2, bool table1_has_fk = true) const, gda_dict_database_get_tables_fk_constraints)
+
+  _WRAP_SIGNAL(void table_added(const Glib::RefPtr<DictTable>& table), "table_added")
+  _WRAP_SIGNAL(void table_removed(const Glib::RefPtr<DictTable>& table), "table_removed")
+  _WRAP_SIGNAL(void table_updated(const Glib::RefPtr<DictTable>& table), "table_updated")
+  _WRAP_SIGNAL(void field_added(const Glib::RefPtr<DictField>& field), "field_added")
+  _WRAP_SIGNAL(void field_removed(const Glib::RefPtr<DictField>& field), "field_removed")
+  _WRAP_SIGNAL(void field_updated(const Glib::RefPtr<DictField>& field), "field_updated")
+  _WRAP_SIGNAL(void constraint_added(const Glib::RefPtr<DictConstraint>& constraint), "constraint_added")
+  _WRAP_SIGNAL(void constraint_removed(const Glib::RefPtr<DictConstraint>& constraint), "constraint_removed")
+  _WRAP_SIGNAL(void constraint_updated(const Glib::RefPtr<DictConstraint>& constraint), "constraint_updated")
+  _WRAP_SIGNAL(void data_update_started(), "data_update_started")
+  // TODO: These ints should be unsigned int, but gmmproc bails out when using unsigned ints here. armin.
+  #m4 _CONVERSION(`guint', `int', `$3')
+  #m4 _CONVERSION(`int', `guint', `$3')
+  _WRAP_SIGNAL(void update_progress(const Glib::ustring& msg, int now, int total), "update_progress")
+  _WRAP_SIGNAL(void data_update_finished(), "data_update_finished")
 };
 
 } // namespace Gda

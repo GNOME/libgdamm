@@ -1,3 +1,34 @@
+2007-02-14  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/datamodel.ccg:
+	* libgda/src/datamodel.hg:
+	* libgda/src/dicttype.hg:
+	* libgda/src/entityfield.hg:
+	* libgda/src/parameter.hg:
+	* libgda/src/dictconstraint.hg:
+	* libgda/src/referer.hg:
+	* libgda/src/queryfield.hg:
+	* libgda/src/dict.hg:
+	* libgda/src/dataproxy.hg:
+	* libgda/src/serverprovider.hg:
+	* libgda/src/datamodelindex.hg:
+	* libgda/src/dictdatabase.hg: Wrapped some missing methods, properties
+	and signals.
+
+	* libgda/src/Makefile_list_of_hg.am_fragment: Restored alphabetical
+	order.
+
+	* tools/m4/convert_libgdamm.m4: Added new conversions.
+
+	* tools/extra_defs_gen/generate_defs_gda.cc: Added
+	GDA_TYPE_DICT_CONSTRAINT, GDA_TYPE_DICT_DATABASE and
+	GDA_TYPE_DICT_FIELD:
+
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/libgda_others.defs:
+	* libgda/src/libgda_signals.defs:
+	* libgda/src/libgda_vfuncs.defs: Regenerated.
+
 2007-02-14  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/reference/Doxyfile.in:

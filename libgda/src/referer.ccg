@@ -20,6 +20,7 @@
  */
 
 #include <libgdamm/referer.h>
+#include <libgdamm/object.h>
 
 namespace Gnome
 {

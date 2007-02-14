@@ -63,13 +63,14 @@ public:
   _WRAP_CREATE()
   _WRAP_CREATE(const Glib::ustring& name, bool value);
   _WRAP_CREATE(const Glib::ustring& name, const Glib::ustring& value);
-  
 
   typedef Glib::SListHandle< Glib::RefPtr<EntityField> > ListHandleEntityField; 
   #m4 _CONVERSION(`GSList*',`ListHandleEntityField',`$2($3, Glib::OWNERSHIP_NONE)')
 
   Value get_value() const;
   _IGNORE(gda_parameter_get_value)
+
+  _WRAP_METHOD(Glib::RefPtr<Parameter> copy() const, gda_parameter_new_copy)
   
   _WRAP_METHOD(Glib::ustring get_alphanum_name() const, gda_parameter_get_alphanum_name)
   
@@ -109,10 +110,15 @@ public:
   // TODO: That shouldn't be a problem. murrayc
   Glib::ustring get_value_str() const;
 
-  //TODO: Wrap list correctly - Johannes
-  // It is defined in gda-parameter-utils.c, check whether it is useful API
-  // _WRAP_METHOD(GSList* get_param_users(), gda_parameter_get_param_users);
-  // same for replace_param_users and declare_param_user    
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<EntityField> >', `$2($3, Glib::OWNERSHIP_NONE)')
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const EntityField> >', `$2($3, Glib::OWNERSHIP_NONE)')
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<EntityField> > get_param_users(), gda_parameter_get_param_users);
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const EntityField> > get_param_users() const, gda_parameter_get_param_users);
+
+  // TODO: How to wrap GHashTable?
+  //_WRAP_METHOD(void replace_param_users(GHashTable* param), gda_parameter_replace_param_users)
+
+  _WRAP_METHOD(void declare_param_user(const Glib::RefPtr<Object>& object), gda_parameter_declare_param_user)
 
   _WRAP_PROPERTY("g-type", GType)
   _WRAP_PROPERTY("entry-plugin", Glib::ustring)
