@@ -52,9 +52,9 @@ class ServerOperation;
  * allows applications to, for instance, commit/rollback a transaction in all the connections being managed by a unique 
  * Client object, or obtain the list of all tables in all opened connections.
  *
- * Database creation and destruction is done through a Client object using the create_database() and 
- * drop_database() methods. Note however that depending on the provider, an opened connection may be required in order 
- * to create or destroy a database. 
+ * Database creation and destruction is done through a Client object using the perform_create_database() and 
+ * perform_drop_database() methods. Note however that depending on the provider, an opened connection may be 
+ * required in order to create or destroy a database. 
  */
 class Client : public Glib::Object
 {

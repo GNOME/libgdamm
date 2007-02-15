@@ -1,5 +1,10 @@
 2007-02-15  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/client.hg: Correct function names mentioned in the class overview 
+	documentation.
+
+2007-02-15  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/connection.hg: Add documentation for execute*() methods.
 	* libgda/src/datamodel.hg: Add get_column_position(), set_values().
 	Corrected the doxygen comments for export_to_file() and export_to_string().
