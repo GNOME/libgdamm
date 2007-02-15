@@ -113,6 +113,15 @@ do
 done
 AC_SUBST(LIBGDAMM_DOXYGEN_INPUT)
 
+# Add an --enable-reference option:
+AC_ARG_ENABLE(reference,
+     [  --enable-reference   Build the reference documentation],
+     [case "${enableval}" in
+       yes) reference=true ;;
+       no)  reference=false ;;
+       *) AC_MSG_ERROR(bad value ${enableval} for --enable-reference) ;;
+     esac],[reference=false])
+AM_CONDITIONAL(BUILD_REFERENCE, test x$reference = xtrue)
 
 
 # Dummy conditional just to make automake-1.4 happy.
