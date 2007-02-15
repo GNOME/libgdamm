@@ -67,7 +67,7 @@ public:
    * @param type The type of the command.
    * @param options Additional command options.
    */
-  explicit Command(const Glib::ustring& text, CommandType type = COMMAND_TYPE_SQL, CommandOptions options = COMMAND_OPTION_STOP_ON_ERRORS); //TODO: Good defaults.
+  explicit Command(const Glib::ustring& text, CommandType type = COMMAND_TYPE_SQL, CommandOptions options = COMMAND_OPTION_STOP_ON_ERRORS);
  
   _WRAP_METHOD(Glib::ustring get_text() const, gda_command_get_text)
   _WRAP_METHOD(void set_text(const Glib::ustring& text), gda_command_set_text)

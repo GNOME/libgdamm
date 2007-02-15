@@ -106,9 +106,8 @@ public:
 
 protected:
 
-  //TODO: Is this comment meant to be here, or is it just a copy/paste error? murrayc:
-  //We don't wrap the vfuncs because they are only useful for creating new backends,
-  //and they have a high code-size and per-object memory cost.
+  //We don't wrap the vfuncs because they are only useful for implementation of libgda itself,
+  //and they have a high code-size and per-object memory cost. murrayc
 };
 
 } // namespace Gda

@@ -104,7 +104,8 @@ public:
   _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider_obj(), gda_connection_get_provider_obj, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const ServerProvider> get_provider_obj() const, gda_connection_get_provider_obj, constversion)
 
-  //TODO: Copy-by-value somehow?
+  //Let's not bother trying to copy the ServerProviderInfo by value.
+  //Its (boolean) contents should just be examined quickly and then forgotten.
   #m4 _CONVERSION(`GdaServerProviderInfo*', `const ServerProviderInfo*', `static_cast<ServerProviderInfo*>($3)')
   _WRAP_METHOD(const ServerProviderInfo* get_infos() const, gda_connection_get_infos)
 
@@ -116,25 +117,81 @@ public:
   _WRAP_METHOD(void add_event(const Glib::RefPtr<ConnectionEvent>& error), gda_connection_add_event)
   _WRAP_METHOD( Glib::RefPtr<ConnectionEvent> add_event_string(const Glib::ustring& error), gda_connection_add_event_string)
 
-  //TODO: Use ListHandle:
-  _WRAP_METHOD(void add_events_list(GList *error_list), gda_connection_add_events_list)
+  //TODO: Use ListHandle, and watch out because the C function frees the input list parameter.
+  //However, this is not high-priority because this is apparently just a convenience function.
+  //You canuse add_event() repeatedly instead.
+  //_WRAP_METHOD(void add_events_list(GList *error_list), gda_connection_add_events_list)
+  _IGNORE(gda_connection_add_events_list)
+
   _WRAP_METHOD(void clear_events_list(), gda_connection_clear_events_list)
 
   _WRAP_METHOD(bool change_database(const Glib::ustring& name), gda_connection_change_database)
 
-  //TODO:
-
   #m4 //Use deep ownership because we own both the list and its elements;
   #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
 
-//TODO: Document that execute* throw exceptions.
 
   _WRAP_METHOD(Glib::RefPtr<DataModel> execute_select_command(const Command& cmd, const Glib::RefPtr<ParameterList>& params), gda_connection_execute_select_command, errthrow)
+
+  /** Executes a selection command on the given connection.
+   *
+   * Note that no check is made regarding the actual number of statements in @a cmd or if it really contains a SELECT
+   * statement. This function is just a convenience function around the execute_command()
+   * method. If @a cmd contains several statements, only the last DataModel is returned.
+   *
+   * @param cmd A Command.
+   * @result A DataModel containing the data returned by the data source, or a null DataModel if an error occurred.
+   *
+   * @throw ConnectionError
+   */
   Glib::RefPtr<DataModel> execute_select_command(const Command& cmd);
+
+  /** Executes a selection command on the given connection.
+   *
+   * Note that no check is made regarding the actual number of statements in @a cmd or if it really contains a SELECT
+   * statement. This function is just a convenience function around the execute_command()
+   * method. If @a cmd contains several statements, only the last DataModel is returned.
+   *
+   * @param cmd A SQL command string.
+   * @result A DataModel containing the data returned by the
+   * data source, or a null DataModel if an error occurred.
+   *
+   * @throw ConnectionError
+   */
   Glib::RefPtr<DataModel> execute_select_command(const Glib::ustring& cmd);
 
   _WRAP_METHOD(int execute_non_select_command(const Command& cmd, const Glib::RefPtr<ParameterList>& params), gda_connection_execute_non_select_command, errthrow)
+
+  /** Executes a non-selection command on the given connection.
+   *
+   * This function returns the number of rows impacted by the execution of @a cmd, or -1
+   * if an error occurred, or -2 if the provider does not return the number of rows impacted.
+   *
+   * Note that no check is made regarding the actual number of statements in @a cmd or if it really contains a non SELECT
+   * statement. This function is just a convenience function around the execute_command()
+   * function. If @a cmd contains several statements, the last ParameterList is returned.
+   *
+   * @param cmd A Command.
+   * @result the number of rows affected (>=0) or -1 or -2 
+   *
+   * @throw ConnectionError
+   */
   int execute_non_select_command(const Command& cmd);
+
+  /** Executes a non-selection command on the given connection.
+   *
+   * This function returns the number of rows impacted by the execution of @a cmd, or -1
+   * if an error occurred, or -2 if the provider does not return the number of rows impacted.
+   *
+   * Note that no check is made regarding the actual number of statements in @a cmd or if it really contains a non SELECT
+   * statement. This function is just a convenience function around the execute_command()
+   * function. If @a cmd contains several statements, the last ParameterList is returned.
+   *
+   * @param cmd A Command.
+   * @result the number of rows affected (>=0) or -1 or -2 
+   *
+   * @throw ConnectionError
+   */
   int execute_non_select_command(const Glib::ustring& cmd);
 
   //Note that we do not add a non-const version of this because the documentation says that it should not be modified:

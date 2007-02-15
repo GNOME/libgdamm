@@ -85,6 +85,7 @@ Glib::ustring DataModel::export_to_string(DataModelIOFormat format, const Glib::
   return cppretvalue;
 }
 
+
 } /* namespace Gda */
 
 } /* namespace Gnome */

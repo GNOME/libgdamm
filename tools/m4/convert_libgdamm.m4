@@ -181,13 +181,15 @@ _CONV_ENUM(Gda,ValueAttribute)
 # Lists
 _CONVERSION(`const Glib::ListHandle<Value>&',`GList*',`$3.data()')
 _CONVERSION(`GList*',`const Glib::ListHandle<Value>',__FL2H_SHALLOW)
-_CONVERSION(`const Glib::ListHandle<ColumnIndex>&',`GList*',`$3.data()')
-_CONVERSION(`GList*',`Glib::ListHandle<ColumnIndex>',__FL2H_SHALLOW)
-_CONVERSION(`const Glib::SListHandle<Parameter>&',`GSList*',`$3.data()')
 _CONVERSION(`GSList*',`Glib::SListHandle<Parameter>',__FL2H_SHALLOW)
+_CONVERSION(`const Glib::SListHandle<Parameter>&',`GSList*',`$3.data()')
 
+<<<<<<< .mine
+
+=======
 _CONVERSION(`const ValueSList&', `GSList*', `$3.data()')
 
+>>>>>>> .r1017
 # For signals:
 _CONVERSION(`GdaParameterList*',`const ParameterList&',`Glib::wrap($3)')
 _CONVERSION(`GdaConnection*',`const Glib::RefPtr<Connection>&',`Glib::wrap($3)')
