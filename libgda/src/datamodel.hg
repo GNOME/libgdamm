@@ -93,7 +93,6 @@ public:
   _WRAP_METHOD(int get_column_index(const Glib::ustring& name) const, gda_data_model_get_column_index_by_name)
   _WRAP_METHOD(Glib::ustring get_column_title(int col) const, gda_data_model_get_column_title)
   _WRAP_METHOD(void set_column_title(int col, const Glib::ustring& title), gda_data_model_set_column_title)
-  _WRAP_METHOD(int get_column_position(const Glib::ustring& title) const, gda_data_model_get_column_position)
 
   //We use a custom conversion here, because we need to copy the value:
   //#m4 _CONVERSION(`GValue*',`Value',`Glib::wrap($3, true /* take_copy=true */)')
@@ -129,6 +128,7 @@ public:
   //TODO: Maybe wrap the two input parameters (list of values, and list of their column indexes) as a map,
   //but it's not urgent. murrayc.
   #m4 _CONVERSION(`const Glib::ArrayHandle<int>&', `gint*', `const_cast<gint*>(($3).data())')
+  #m4 _CONVERSION(`const ValueSList&', `GSList*', `$3.data()')
   _WRAP_METHOD(int get_row_from_values(const ValueSList& values, const Glib::ArrayHandle<int>& cols_index), gda_data_model_get_row_from_values)
 
   _WRAP_METHOD(void send_hint(DataModelHint hint, const Value& hint_value), gda_data_model_send_hint)

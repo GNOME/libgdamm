@@ -52,6 +52,7 @@ public:
 
   _WRAP_METHOD(Glib::RefPtr<DictType> get_dict_type(), gda_entity_field_get_dict_type, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const DictType> get_dict_type() const, gda_entity_field_get_dict_type, constversion)
+  _WRAP_METHOD(void set_dict_type(const Glib::RefPtr<DictType>& type), gda_entity_field_set_dict_type)
 
   _WRAP_METHOD(Glib::ustring get_name() const, gda_entity_field_get_name)
   _WRAP_METHOD(Glib::ustring get_description() const, gda_entity_field_get_description)

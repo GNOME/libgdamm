@@ -15,8 +15,9 @@ files_hg = blob.hg blobop.hg client.hg column.hg columnindex.hg command.hg \
            object.hg  parameter.hg parameterlist.hg providerinfo.hg query.hg \
            querycondition.hg queryfield.hg \
 	   queryfieldagg.hg queryfieldall.hg queryfieldfield.hg queryfieldvalue.hg \
-	   queryobject.hg querytarget.hg referer.hg renderer.hg row.hg \
-           serverprovider.hg serveroperation.hg transactionstatus.hg xmlstorage.hg
+	   queryjoin.hg queryobject.hg querytarget.hg referer.hg renderer.hg \
+	   row.hg serverprovider.hg serveroperation.hg transactionstatus.hg \
+	   xmlstorage.hg
 
 
 

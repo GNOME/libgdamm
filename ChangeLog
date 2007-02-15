@@ -1,3 +1,20 @@
+2007-02-15  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/queryjoin.ccg:
+	* libgda/src/queryjoin.hg:
+	* libgda/src/Makefile_list_of_hg.am_fragment: Wrapped GdaQueryJoin.
+
+	* libgda/src/query.hg: Wrapped functions that deal with joins, wrapped
+	signals.
+
+	* libgda/src/entityfield.hg: Wrapped gda_entity_field_set_type().
+
+	* libgda/src/datamodel.hg: Removed wrapper for
+	gda_data_model_get_column_position() because that method does not
+	exist anymore.
+
+	* tools/m4/convert_libgdamm.m4: Added new conversions.
+
 2007-02-15  Johannes Schmid  <johannes.schmid@openismus.com>
 
 	* configure.in:

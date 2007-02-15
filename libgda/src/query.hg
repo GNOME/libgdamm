@@ -32,6 +32,7 @@
 #include <libgdamm/queryfield.h>
 #include <libgdamm/querytarget.h>
 #include <libgdamm/querycondition.h>
+#include <libgdamm/queryjoin.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(libgdamm/private/queryobject_p.h)
@@ -62,6 +63,14 @@ class Query
   _IMPLEMENTS_INTERFACE(Referer)
   _IMPLEMENTS_INTERFACE(Renderer)
   _IMPLEMENTS_INTERFACE(Entity)
+
+  // These have nothing to do with query
+  _IGNORE(gda_query_field_all_new, gda_query_field_agg_new,
+          gda_query_target_new, gda_query_condition_new,
+          gda_query_join_new_with_targets, gda_query_field_value_new,
+          gda_query_field_func_new, gda_query_condition_new_from_sql,
+          gda_query_join_new_with_xml_ids, gda_query_field_new_from_xml,
+          gda_query_field_field_new, gda_query_field_new_from_sql)
   
 protected:
   _WRAP_CTOR(Query(const Glib::RefPtr<Dict>& dict), gda_query_new)
@@ -89,6 +98,7 @@ public:
   _WRAP_METHOD(bool is_update_query() const, gda_query_is_update_query)
   _WRAP_METHOD(bool is_delete_query() const, gda_query_is_delete_query)
   _WRAP_METHOD(bool is_modify_query() const, gda_query_is_modify_query)
+  _WRAP_METHOD(bool is_well_formed(const Glib::RefPtr<ParameterList>& context) const, gda_query_is_well_formed, errthrow)
 
   _WRAP_METHOD(void set_sql_text(const Glib::ustring& sql), gda_query_set_sql_text, errthrow)
   _WRAP_METHOD(Glib::ustring get_sql_text() const, gda_query_get_sql_text)
@@ -119,8 +129,6 @@ public:
   _WRAP_METHOD(bool add_target(const Glib::RefPtr<QueryTarget>& target), gda_query_add_target, errthrow)
   _WRAP_METHOD(void del_target(const Glib::RefPtr<QueryTarget>& target), gda_query_del_target)
 
-  // TODO: I am not quite sure what the correct ownership is here and whether
-  // we have to unref the objects in the list. armin.
   #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<QueryTarget> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
   #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const QueryTarget> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryTarget> > get_targets(), gda_query_get_targets)
@@ -131,18 +139,36 @@ public:
   _WRAP_METHOD(Glib::RefPtr<QueryTarget> get_target_by_alias(const Glib::ustring& alias_or_name), gda_query_get_target_by_alias, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const QueryTarget> get_target_by_alias(const Glib::ustring& alias_or_name) const, gda_query_get_target_by_alias, constversion, refreturn)
 
-  // TODO: I am not quite usre what the correct ownership is here and
-  // whether we have to unref the objects in the list. armin.
   #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<QueryField> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
   #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const QueryField> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  #m4 _CONVERSION(`const Glib::SListHandle<Glib::RefPtr<QueryField> >&', `GSList*', `const_cast<GSList*>($3.data())')
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryField> > get_target_pkfields(const Glib::RefPtr<QueryTarget>& target), gda_query_get_target_pkfields)
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const QueryField> > get_target_pkfields(const Glib::RefPtr<QueryTarget>& target) const, gda_query_get_target_pkfields)
 
-  // TODO: Wrap join API
+  _WRAP_METHOD(bool add_join(const Glib::RefPtr<QueryJoin>& join), gda_query_add_join)
+  _WRAP_METHOD(void del_join(const Glib::RefPtr<QueryJoin>& join), gda_query_del_join)
+
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<QueryJoin> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const QueryJoin> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryJoin> > get_joins(), gda_query_get_joins)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const QueryJoin> > get_joins() const, gda_query_get_joins)
+
+  _WRAP_METHOD(Glib::RefPtr<QueryJoin> get_join_by_targets(const Glib::RefPtr<QueryTarget>& target1, const Glib::RefPtr<QueryTarget>& target2), gda_query_get_join_by_targets, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const QueryJoin> get_join_by_targets(const Glib::RefPtr<QueryTarget>& target1, const Glib::RefPtr<QueryTarget>& target2) const, gda_query_get_join_by_targets, refreturn, constversion)
 
   _WRAP_METHOD(Glib::RefPtr<QueryCondition> get_condition(), gda_query_get_condition, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const QueryCondition> get_condition() const, gda_query_get_condition, refreturn, constversion)
   _WRAP_METHOD(void set_condition(const Glib::RefPtr<QueryCondition>& cond), gda_query_set_condition)
+  _WRAP_METHOD(void append_condition(const Glib::RefPtr<QueryCondition>& cond, bool append_as_and = true), gda_query_append_condition)
+
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<QueryCondition> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const QueryCondition> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryCondition> > get_main_conditions(), gda_query_get_main_conditions)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const QueryCondition> > get_main_conditions() const, gda_query_get_main_conditions)
+
+  // The libgda documentation says these are internally used functions
+  _IGNORE(gda_query_declare_condition)
+  _IGNORE(gda_query_undeclare_condition)
 
   _IGNORE(gda_query_get_order_by_field)
   _WRAP_METHOD(void set_order_by_field(const Glib::RefPtr<QueryField>& field, int order = 0, bool ascendant = true), gda_query_set_order_by_field)
@@ -165,6 +191,25 @@ public:
   _WRAP_METHOD(void order_fields_using_join_conds(), gda_query_order_fields_using_join_conds)
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryField> > get_fields_by_target(const Glib::RefPtr<QueryTarget>& target, bool visible_fields_only = true), gda_query_get_fields_by_target)
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const QueryField> > get_fields_by_target(const Glib::RefPtr<QueryTarget>& target, bool visible_fields_only = true) const, gda_query_get_fields_by_target)
+
+  // TODO: This is declared in a separate header that has no G_BEGIN_DECS /
+  // G_END_DECL pairs and also looks a bit private. We can still add it
+  // later if we need it. armin.
+  //_WRAP_METHOD(Glib::RefPtr<QueryField> get_field_by_sql_naming_fields(const Glib::ustring& sql_name, const Glib::SListHandle<Glib::RefPtr<QueryField> >& fields_list), gda_query_get_field_by_sql_naming_fields, refreturn)
+  //_WRAP_METHOD(Glib::RefPtr<const QueryField> get_field_by_sql_naming_fields(const Glib::ustring& sql_name, const Glib::SListHandle<Glib::RefPtr<QueryField> >& fields_list) const, gda_query_get_field_by_sql_naming_fields, refreturn, constversion)
+
+  _WRAP_SIGNAL(void type_changed(), "type_changed")
+  _WRAP_SIGNAL(void condition_changed(), "condition_changed")
+  _WRAP_SIGNAL(void target_added(const Glib::RefPtr<QueryTarget>& target), "target_added")
+  _WRAP_SIGNAL(void target_removed(const Glib::RefPtr<QueryTarget>& target), "target_removed")
+  _WRAP_SIGNAL(void target_updated(const Glib::RefPtr<QueryTarget>& target), "target_updated")
+  _WRAP_SIGNAL(void join_added(const Glib::RefPtr<QueryJoin>& join), "join_added")
+  _WRAP_SIGNAL(void join_removed(const Glib::RefPtr<QueryJoin>& join), "join_removed")
+  _WRAP_SIGNAL(void join_updated(const Glib::RefPtr<QueryJoin>& join), "join_updated")
+  _WRAP_SIGNAL(void sub_query_added(const Glib::RefPtr<Query>& query), "sub_query_added")
+  _WRAP_SIGNAL(void sub_query_removed(const Glib::RefPtr<Query>& query), "sub_query_removed")
+  _WRAP_SIGNAL(void sub_query_updated(const Glib::RefPtr<Query>& query), "sub_query_updated")
+
 };
 
 } // namespace Gda

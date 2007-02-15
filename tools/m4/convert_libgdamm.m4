@@ -33,12 +33,17 @@ _CONVERSION(`GdaParameterList*',`const Glib::RefPtr<ParameterList>&',`Glib::wrap
 _CONVERSION(`GdaServerProvider*',`Glib::RefPtr<ServerProvider>',`Glib::wrap($3)')
 _CONVERSION(`GdaServerOperation*',`Glib::RefPtr<ServerOperation>',`Glib::wrap($3)')
 _CONVERSION(`GdaQuery*',`Glib::RefPtr<Query>',`Glib::wrap($3)')
+_CONVERSION(`GdaQuery*',`const Glib::RefPtr<Query>&',`Glib::wrap($3)')
 _CONVERSION(`GdaDataHandler*',`Glib::RefPtr<DataHandler>',`Glib::wrap($3)')
 _CONVERSION(`GdaQueryField*',`Glib::RefPtr<QueryField>',`Glib::wrap($3)')
 _CONVERSION(`GdaQueryField*',`Glib::RefPtr<const QueryField>',`Glib::wrap($3)')
 _CONVERSION(`GdaQueryTarget*',`Glib::RefPtr<QueryTarget>',`Glib::wrap($3)')
+_CONVERSION(`GdaQueryTarget*',`const Glib::RefPtr<QueryTarget>&',`Glib::wrap($3)')
 _CONVERSION(`GdaQueryCondition*',`Glib::RefPtr<QueryCondition>',`Glib::wrap($3)')
 _CONVERSION(`GdaQueryCondition*',`Glib::RefPtr<const QueryCondition>',`Glib::wrap($3)')
+_CONVERSION(`GdaQueryJoin*',`Glib::RefPtr<QueryJoin>',`Glib::wrap($3)')
+_CONVERSION(`GdaQueryJoin*',`Glib::RefPtr<const QueryJoin>',`Glib::wrap($3)')
+_CONVERSION(`GdaQueryJoin*',`const Glib::RefPtr<QueryJoin>&',`Glib::wrap($3)')
 
 _CONVERSION(`const Glib::RefPtr<BlobOp>&', `GdaBlobOp*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DataModel>&', `GdaDataModel*', __CONVERT_REFPTR_TO_P)
@@ -69,6 +74,7 @@ _CONVERSION(`const Glib::RefPtr<QueryField>&', `GdaQueryField*', __CONVERT_REFPT
 _CONVERSION(`const Glib::RefPtr<const QueryField>&', `GdaQueryField*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<QueryTarget>&', `GdaQueryTarget*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<QueryCondition>&', `GdaQueryCondition*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<QueryJoin>&', `GdaQueryJoin*', __CONVERT_REFPTR_TO_P)
 
 
 # The const_cast here is silly and should not be necessary - we should fix the wrap() methods some time:
@@ -172,6 +178,7 @@ _CONV_ENUM(Gda,ServerOperationNodeType)
 _CONV_ENUM(Gda,QueryType)
 _CONV_ENUM(Gda,QueryConditionType)
 _CONV_ENUM(Gda,QueryConditionOperator)
+_CONV_ENUM(Gda,QueryJoinType)
 _CONV_ENUM(Gda,QueryFieldState)
 _CONV_ENUM(Gda,DictConstraintType)
 _CONV_ENUM(Gda,DictConstraintFkAction)
@@ -184,12 +191,6 @@ _CONVERSION(`GList*',`const Glib::ListHandle<Value>',__FL2H_SHALLOW)
 _CONVERSION(`GSList*',`Glib::SListHandle<Parameter>',__FL2H_SHALLOW)
 _CONVERSION(`const Glib::SListHandle<Parameter>&',`GSList*',`$3.data()')
 
-<<<<<<< .mine
-
-=======
-_CONVERSION(`const ValueSList&', `GSList*', `$3.data()')
-
->>>>>>> .r1017
 # For signals:
 _CONVERSION(`GdaParameterList*',`const ParameterList&',`Glib::wrap($3)')
 _CONVERSION(`GdaConnection*',`const Glib::RefPtr<Connection>&',`Glib::wrap($3)')
