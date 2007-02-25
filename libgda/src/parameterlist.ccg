@@ -58,6 +58,14 @@ Value ParameterList::get_param_default_value(const Glib::RefPtr<const Parameter>
   return value;
 }
 
+bool ParameterList::restrict_param_by_name(const Glib::ustring& param_name, const Glib::RefPtr<DataModel>& model, int col)
+{
+  Glib::RefPtr<Parameter> param = find_param(param_name);
+  if(!param) return false;
+
+  return param->restrict_values(model, col);
+}
+
 } //namespace Gda
 
 } // namespace Gnome

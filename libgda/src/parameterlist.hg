@@ -72,10 +72,26 @@ public:
   _WRAP_METHOD(void merge(const Glib::RefPtr<ParameterList>& paramlist_to_merge), gda_parameter_list_merge)
   _WRAP_METHOD(bool is_coherent() const, gda_parameter_list_is_coherent, errthrow)
   _WRAP_METHOD(bool is_valid() const, gda_parameter_list_is_valid)
- 
 
   _WRAP_METHOD(Glib::RefPtr<Parameter> find_param(const Glib::ustring& param_name), gda_parameter_list_find_param, refreturn)
   //_WRAP_METHOD(Glib::RefPtr<Parameter> find_param_for_user(const Glib::RefPtr<Object>& user), gda_parameter_list_find_param_for_user)
+
+  /** @brief Restricts the values of a parameter in the list.
+   *
+   * @param param_name The name of the parameter
+   * @param model A Gda::DataModel
+   * @param col The reference column in @a model
+   * @return Whether the parameter was found and the restriction was set.
+   *
+   * Sets a limit on the possible values of the paramater with name @a
+   * param_name. This function is actually a shortcut for:
+   *
+   * <code>
+   *   Glib::RefPtr<Parameter> param = list->find_param(param_name);
+   *   param->restrict_values(model, col);
+   * </code>
+   */
+  bool restrict_param_by_name(const Glib::ustring& param_name, const Glib::RefPtr<DataModel>& model, int col);
 
   //TODO: What on earth are these for? Who should use them, and when?
   //_WRAP_METHOD(GdaParameterListNode* find_node_for_param(const Glib::RefPtr<Parameter>& param), gda_parameter_list_find_node_for_param)
