@@ -91,7 +91,11 @@ public:
    *   param->restrict_values(model, col);
    * </code>
    */
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   bool restrict_param_by_name(const Glib::ustring& param_name, const Glib::RefPtr<DataModel>& model, int col);
+#else
+  bool restrict_param_by_name(const Glib::ustring& param_name, const Glib::RefPtr<DataModel>& model, int col, std::auto_ptr<Glib::Error>& error);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
 
   //TODO: What on earth are these for? Who should use them, and when?
   //_WRAP_METHOD(GdaParameterListNode* find_node_for_param(const Glib::RefPtr<Parameter>& param), gda_parameter_list_find_node_for_param)

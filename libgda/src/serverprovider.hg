@@ -87,13 +87,26 @@ class ServerProvider : public Glib::Object
 
   _WRAP_METHOD(bool supports_feature(const Glib::RefPtr<Connection>& cnc, ConnectionFeature feature) const, gda_server_provider_supports_feature)
 
-  //TODO: Use C++ parameters, and add const version:
+  // TODO: The libgda docs say that these functions return a new GdaDataModel.
+  // Normally, the caller should already own a reference on such a new model,
+  // but refreturn adds anotherone. We should check that it does the right
+  // thing. armin.
   _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params), gda_server_provider_get_schema, retreturn, errthrow)
-  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params) const, gda_server_provider_get_schema, constversion)
+  // TODO: This is not constversion because the generated code does not pass
+  // error to the non-const function if exceptions are disabled.
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params) const, gda_server_provider_get_schema, refreturn, errthrow)
 
-  //TODO: Check that these take a reference, like the generated ones:
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema);
+#else
+  Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, std::auto_ptr<Glib::Error>& error);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema) const;
+#else
+  Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, std::auto_ptr<Glib::Error>& error) const;
+#endif // GLIBMM_EXCEPTIONS_ENABLED
 
   _WRAP_METHOD(Glib::ustring value_to_sql_string(const Glib::RefPtr<Connection>& cnc, const Value& from) const, gda_server_provider_value_to_sql_string)
 

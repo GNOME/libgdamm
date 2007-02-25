@@ -1,5 +1,18 @@
 2007-02-25  Armin Burgmeier  <armin@openismus.com>
 
+	* libgda/src/connection.hg:
+	* libgda/src/connection.ccg:
+	* libgda/src/parameterlist.ccg:
+	* libgda/src/serverprovider.hg:
+	* libgda/src/serverprovider.ccg:
+	* libgda/src/datamodelrow.hg:
+	* libgda/src/parameterlist.hg:
+	* examples/introspection/main.cc:
+	* examples/simple/main.cc: Made libgdamm build without exceptions
+	enabled.
+
+2007-02-25  Armin Burgmeier  <armin@openismus.com>
+
 	* libgda/src/parameterlist.hg:
 	* libgda/src/parameterlist.ccg: Added convenience function to restrict
 	the values of a paremeter with given name.

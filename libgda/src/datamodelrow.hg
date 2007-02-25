@@ -50,8 +50,10 @@ public:
   _WRAP_PROPERTY("command-type", int)
   _WRAP_PROPERTY("read-only", bool)
 
-	_WRAP_METHOD(const Glib::RefPtr<Row>  get_row(int row), gda_data_model_row_get_row, errthrow)
-	_WRAP_METHOD(const Glib::RefPtr<const Row>  get_row(int row) const, gda_data_model_row_get_row, errthrow, constversion)	
+  _WRAP_METHOD(const Glib::RefPtr<Row> get_row(int row), gda_data_model_row_get_row, errthrow, refreturn)
+  // TODO: This is not constversion because the generated code does not pass
+  // error to the non-const function if exceptions are disabled.
+  _WRAP_METHOD(const Glib::RefPtr<const Row> get_row(int row) const, gda_data_model_row_get_row, errthrow, refreturn)
 
   // TODO: Vfuncs
 };

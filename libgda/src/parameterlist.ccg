@@ -58,12 +58,20 @@ Value ParameterList::get_param_default_value(const Glib::RefPtr<const Parameter>
   return value;
 }
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool ParameterList::restrict_param_by_name(const Glib::ustring& param_name, const Glib::RefPtr<DataModel>& model, int col)
+#else
+bool ParameterList::restrict_param_by_name(const Glib::ustring& param_name, const Glib::RefPtr<DataModel>& model, int col, std::auto_ptr<Glib::Error>& error)
+#endif
 {
   Glib::RefPtr<Parameter> param = find_param(param_name);
   if(!param) return false;
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   return param->restrict_values(model, col);
+#else
+  return param->restrict_values(model, col, error);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
 }
 
 } //namespace Gda

@@ -23,7 +23,11 @@
 #include <iostream>
 
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 void do_test()
+#else
+void do_test(std::auto_ptr<Glib::Error>& error)
+#endif
 {
   Glib::RefPtr<Gnome::Gda::Client> gda_client = Gnome::Gda::Client::create();
   if(gda_client)
@@ -47,14 +51,25 @@ void do_test()
 
     std::cout << " Data source = " << data_source.get_name() << ", User = " << data_source.get_username() << std::endl;
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
     Glib::RefPtr<Gnome::Gda::Connection> gda_connection = gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password() );
+#else
+    Glib::RefPtr<Gnome::Gda::Connection> gda_connection = gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password(), Gnome::Gda::ConnectionOptions(0), error);
+    if(error.get() != NULL) return;
+#endif
     
     if(!gda_connection)
       std::cerr << "Error: Could not open connection to " << data_source.get_name();
     else
     {
       //List the databases:
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
       Glib::RefPtr<Gnome::Gda::DataModel> data_model_databases = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_DATABASES);
+#else
+      Glib::RefPtr<Gnome::Gda::DataModel> data_model_databases = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_DATABASES, error);
+      if(error.get() != NULL) return;
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+
       if(data_model_databases && (data_model_databases->get_n_columns() == 0))
       {
         std::cout << " libgda reported 0 databases for the provider." << std::endl;
@@ -83,7 +98,13 @@ void do_test()
       //Open one of the databases:
       //gda_connection->change_database("tblTest1");
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
       Glib::RefPtr<Gnome::Gda::DataModel> data_model_tables = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_TABLES);
+#else
+      Glib::RefPtr<Gnome::Gda::DataModel> data_model_tables = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_TABLES, error);
+      if(error.get() != NULL) return;
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+
       if(data_model_tables && (data_model_tables->get_n_columns() == 0)) 
       {
         std::cout << " libgda reported 0 tables for the database." << std::endl;
@@ -113,7 +134,12 @@ void do_test()
              Glib::RefPtr<Gnome::Gda::ParameterList> param_list = Gnome::Gda::ParameterList::create();
              param_list->add_parameter(param_table_name);
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
              Glib::RefPtr<Gnome::Gda::DataModel> data_model_fields = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_FIELDS, param_list);
+#else
+             Glib::RefPtr<Gnome::Gda::DataModel> data_model_fields = gda_connection->get_schema(Gnome::Gda::CONNECTION_SCHEMA_FIELDS, param_list, error);
+            if(error.get() != NULL) return;
+#endif // GLIBMM_EXCEPTIONS_ENABLED
              //Alternatively, execute a query and call DataModel::describe_column() for each column.
              
              if(data_model_fields && (data_model_fields->get_n_columns() == 0))
@@ -172,6 +198,7 @@ int main (int argc, char** argv)
   //Initialize libgdamm:
   Gnome::Gda::init("libgdamm example", "0.1", argc, argv);
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {
     do_test();
@@ -180,6 +207,13 @@ int main (int argc, char** argv)
   {
     std::cout << "Exception caught: " << ex.what() << std::endl;
   }
+#else
+  std::auto_ptr<Glib::Error> error;
+  do_test(error);
+
+  if(error.get())
+    std::cout << "Exception caught: " << error->what() << std::endl;
+#endif // GLIBMM_EXCEPTIONS_ENABLED
 
   
   return 0;

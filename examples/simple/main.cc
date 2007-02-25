@@ -28,6 +28,10 @@ int main (int argc, char** argv)
   //Initialize libgdamm:
   Gnome::Gda::init("libgdamm example", "0.1", argc, argv);
 
+#ifndef GLIBMM_EXCEPTIONS_ENABLED
+  std::auto_ptr<Glib::Error> error;
+#endif // !GLIBMM_EXCEPTIONS_ENABLED
+
   Glib::RefPtr<Gnome::Gda::Client> gda_client = Gnome::Gda::Client::create();
   if(gda_client)
   {
@@ -50,7 +54,11 @@ int main (int argc, char** argv)
 
     std::cout << " Data source = " << data_source.get_name() << ", User = " << data_source.get_username() << std::endl;
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
     Glib::RefPtr<Gnome::Gda::Connection> gda_connection = gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password() );
+#else
+    Glib::RefPtr<Gnome::Gda::Connection> gda_connection = gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password(), Gnome::Gda::ConnectionOptions(0), error);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
     
     if(!gda_connection)
       std::cerr << "Error: Could not open connection to " << data_source.get_name();
@@ -61,7 +69,12 @@ int main (int argc, char** argv)
 
       //Get data from a table:
       Gnome::Gda::Command command("SELECT * FROM tbltest1");
+
+#ifdef GLIBMM_EXCEPTIONS_ENABELD
       Glib::RefPtr<Gnome::Gda::DataModel> data_model = gda_connection->execute_select_command(command);
+#else
+      Glib::RefPtr<Gnome::Gda::DataModel> data_model = gda_connection->execute_select_command(command, error);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
 
       if(!data_model)
       {

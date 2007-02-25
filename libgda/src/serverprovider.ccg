@@ -30,18 +30,37 @@ namespace Gda
 {
 
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::RefPtr<DataModel> ServerProvider::get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema)
+#else
+Glib::RefPtr<DataModel> ServerProvider::get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, std::auto_ptr<Glib::Error>& error)
+#endif // GLIBMM_EXCEPTIONS_ENABLED
 {
-  GError *error = 0;
-  Glib::RefPtr<DataModel> retvalue = Glib::wrap(gda_server_provider_get_schema(const_cast<GdaServerProvider*>(gobj()), Glib::unwrap(cnc), ((GdaConnectionSchema)(schema)), 0, &(error)));
-  if(error) ::Glib::Error::throw_exception(error);
+  GError *gerror = 0;
+  Glib::RefPtr<DataModel> retvalue = Glib::wrap(gda_server_provider_get_schema(const_cast<GdaServerProvider*>(gobj()), Glib::unwrap(cnc), ((GdaConnectionSchema)(schema)), 0, &(gerror)));
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror) ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror) error = ::Glib::Error::throw_exception(gerror);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+
   return retvalue;
 }
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::RefPtr<const DataModel> ServerProvider::get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema) const
+#else
+Glib::RefPtr<const DataModel> ServerProvider::get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, std::auto_ptr<Glib::Error>& error) const
+#endif // GLIBMM_EXCEPTIONS_ENABLED
 {
   ServerProvider* this_nonconst = const_cast<ServerProvider*>(this);
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   return this_nonconst->get_schema(cnc, schema);
+#else
+  return this_nonconst->get_schema(cnc, schema, error);
+#endif
 }
 
 
