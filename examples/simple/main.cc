@@ -70,7 +70,7 @@ int main (int argc, char** argv)
       //Get data from a table:
       Gnome::Gda::Command command("SELECT * FROM tbltest1");
 
-#ifdef GLIBMM_EXCEPTIONS_ENABELD
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
       Glib::RefPtr<Gnome::Gda::DataModel> data_model = gda_connection->execute_select_command(command);
 #else
       Glib::RefPtr<Gnome::Gda::DataModel> data_model = gda_connection->execute_select_command(command, error);
