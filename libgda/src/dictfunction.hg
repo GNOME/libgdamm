@@ -22,6 +22,8 @@
 
 #include <libgdamm/object.h>
 #include <libgdamm/xmlstorage.h>
+#include <libgdamm/dicttype.h>
+#include <libgdamm/dict.h>
 
 
 _DEFS(libgdamm,libgda)
@@ -57,26 +59,25 @@ protected:
   _WRAP_CTOR(DictFunction(const Glib::RefPtr<Dict>& dict), gda_dict_function_new)
 
 public:
-  _WRAP_CREATE(DictFunction(const Glib::RefPtr<Dict>& dict))
+  _WRAP_CREATE(const Glib::RefPtr<Dict>& dict)
 
   _WRAP_METHOD(void set_dbms_id(const Glib::ustring& id), gda_dict_function_set_dbms_id )
-  _WRAP_METHOD(Glib::ustring gda_dict_function_get_dbms_id() const, gda_dict_function_get_dbms_id)
+  _WRAP_METHOD(Glib::ustring get_dbms_id() const, gda_dict_function_get_dbms_id)
   _WRAP_METHOD(void set_sqlname(const Glib::ustring& sqlname), gda_dict_function_set_sqlname)
   _WRAP_METHOD(Glib::ustring get_sqlname() const, gda_dict_function_get_sqlname)
 
-  //TODO: Use ListHandle or similar:
-  _WRAP_METHOD(void set_arg_dict_types(const GSList *arg_types), gda_dict_function_set_arg_dict_types)
-  _WRAP_METHOD(const GSList     *gda_dict_function_get_arg_dict_types(), gda_dict_function_get_arg_dict_types)
-
+  _WRAP_METHOD(void set_arg_dict_types(const Glib::SListHandle<DictType>& types), gda_dict_function_set_arg_dict_types)
+  // TODO: Does not work because it's a const GSList* 
+  // _WRAP_METHOD(Glib::SListHandle<const DictType> get_arg_dict_types(), gda_dict_function_get_arg_dict_types)
+  
+    
   _WRAP_METHOD(void set_ret_dict_type(const Glib::RefPtr<DictType>& dt), gda_dict_function_set_ret_dict_type)
 
-  _WRAP_METHOD(Glib::RefPtr<DictType> gda_dict_function_get_ret_dict_type(), gda_dict_function_get_ret_dict_type, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<const DictType> gda_dict_function_get_ret_dict_type() const, gda_dict_function_get_ret_dict_type, constversion)
+  _WRAP_METHOD(Glib::RefPtr<DictType> get_ret_dict_type(), gda_dict_function_get_ret_dict_type, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DictType> get_ret_dict_type() const, gda_dict_function_get_ret_dict_type, constversion)
 
-  //TODO: Use ListHandle or similar:
-  _WRAP_METHOD(bool accepts_arg_dict_types(const GSList *arg_types), gda_dict_function_accepts_arg_dict_types)
+  _WRAP_METHOD(bool accepts_arg_dict_types(const Glib::SListHandle<DictType>& arg_types), gda_dict_function_accepts_arg_dict_types)
 
- //TODO: properties, signals, vfuncs.
 };
 
 } // namespace Gda
