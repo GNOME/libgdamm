@@ -37,7 +37,12 @@ _WRAP_ENUM(ValueAttribute, GdaValueAttribute)
 
 class Dict;
 
+/** @defgroup Miscellaneous Miscellaneous
+ */
+
 /** The base class for many of the libgda objects.
+ *
+ * @ingroup Miscellaneous
  */
 class Object : public Glib::Object
 {

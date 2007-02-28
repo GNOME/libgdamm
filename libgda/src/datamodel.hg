@@ -74,6 +74,8 @@ _WRAP_ENUM(DataModelIOFormat, GdaDataModelIOFormat)
  * As a side note there are also data models which wrap other data models such as:
  * - The DataProxy data model which stores temporary modifications and shows only some parts of the wrapped data model.
  * - The DataAccessWrapper data model which offers memory-efficient random access on top of a wrapped cursor based access data model.
+ *
+ * @ingroup DataModels
  */
 class DataModel : public Glib::Interface
 {
@@ -142,7 +144,6 @@ public:
    * - OVERWRITE: a boolean value which tells if the file must be over-written if it already exists.  
    *
    * @param format The format in which to export data.
-   * @param file The filename to export to.
    * @param cols An array containing which columns of @model will be exported.
    * @param rows An array containing which rows of @model will be exported.
    * @param options List of options for the export.

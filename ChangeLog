@@ -1,3 +1,37 @@
+2007-02-28  Johannes Schmid <johannes.schmid@openismus.com>
+
+	* TODO:
+	Removed items that are already done
+	
+	* libgda/src/blob.hg:
+	* libgda/src/client.hg:
+	* libgda/src/column.hg:
+	* libgda/src/columnindex.hg:
+	* libgda/src/command.hg:
+	* libgda/src/connection.hg:
+	* libgda/src/connectionevent.hg:
+	* libgda/src/datamodel.hg:
+	* libgda/src/datamodeliter.hg:
+	* libgda/src/datamodelrow.hg:
+	* libgda/src/dictfunction.hg:
+	* libgda/src/entity.hg:
+	* libgda/src/entityfield.hg:
+	* libgda/src/object.hg:
+	* libgda/src/parameter.hg:
+	* libgda/src/parameterlist.hg:
+	* libgda/src/query.hg:
+	* libgda/src/queryfield.hg:
+	* libgda/src/queryfieldfunc.hg:
+	* libgda/src/referer.hg:
+	* libgda/src/renderer.hg:
+	* libgda/src/serveroperation.hg:
+	* libgda/src/serverprovider.hg:
+	* libgda/src/transactionstatus.hg:
+	* libgda/src/xmlstorage.hg:
+	
+	Added groups for all classes that have documentation and fixed
+	the trivial doxygen errors.
+
 2007-02-27  Johannes Schmid <johannes.schmid@openismus.com>
 
 	* libgda/src/Makefile_list_of_hg.am_fragment:

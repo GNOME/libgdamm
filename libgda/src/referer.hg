@@ -34,6 +34,8 @@ namespace Gda
 class Object;
 
 /** Base class to know when on object is completely defined.
+ *
+ * @ingroup Miscellaneous
  */
 class Referer : public Glib::Interface
 {

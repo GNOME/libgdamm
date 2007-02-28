@@ -61,7 +61,9 @@ _WRAP_ENUM(ConnectionOptions, GdaConnectionOptions)
  * Connection objects are obtained via the Client class.
  * 
  * Once obtained, applications can use a Connection to execute commands, run transactions, and get information about all 
- * objects stored in the underlying database. 
+ * objects stored in the underlying database.
+ *
+ * @ingroup Connections
  */
 class Connection : public Glib::Object
 {
@@ -97,7 +99,7 @@ public:
 
   _WRAP_METHOD(Glib::ustring get_database() const, gda_connection_get_database)
   _WRAP_METHOD(Glib::ustring get_dsn() const, gda_connection_get_dsn)
-  _WRAP_METHOD(bool set_dsn(const Glib::ustring& dsn), gda_connection_set_dsn)
+  _WRAP_METHOD(bool set_dsn(const Glib::ustring& datasource), gda_connection_set_dsn)
   _WRAP_METHOD(Glib::ustring get_cnc_string() const, gda_connection_get_cnc_string)
 
   _WRAP_METHOD(Glib::ustring get_provider() const, gda_connection_get_provider)
@@ -114,8 +116,8 @@ public:
   _WRAP_METHOD(Glib::ustring get_password() const, gda_connection_get_password)
   _WRAP_METHOD(bool set_password(const Glib::ustring& password), gda_connection_set_password)
 
-  _WRAP_METHOD(void add_event(const Glib::RefPtr<ConnectionEvent>& error), gda_connection_add_event)
-  _WRAP_METHOD( Glib::RefPtr<ConnectionEvent> add_event_string(const Glib::ustring& error), gda_connection_add_event_string)
+  _WRAP_METHOD(void add_event(const Glib::RefPtr<ConnectionEvent>& event), gda_connection_add_event)
+  _WRAP_METHOD( Glib::RefPtr<ConnectionEvent> add_event_string(const Glib::ustring& str), gda_connection_add_event_string)
 
   //TODO: Use ListHandle, and watch out because the C function frees the input list parameter.
   //However, this is not high-priority because this is apparently just a convenience function.

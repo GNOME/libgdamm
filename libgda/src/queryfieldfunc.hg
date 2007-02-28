@@ -38,7 +38,7 @@ namespace Gnome
 namespace Gda
 {
 
-/** Represents a function (selected by a DictAggregate object).
+/** Represents a function (selected by a GdaDictFunction object)
  * 
  * @ingroup Queries
  */

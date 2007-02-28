@@ -52,7 +52,9 @@ _WRAP_ENUM(CommandOptions, GdaCommandOptions)
  * and reuse the same command over and over, just using different values for the placeholders.
  *
  * The value for the placeholders is specified when sending the Command to a database connection, 
- * which is done via the Gda::Connection::execute function. 
+ * which is done via the Gda::Connection::execute function.
+ *
+ * @ingroup Connections
  */
 class Command
 {

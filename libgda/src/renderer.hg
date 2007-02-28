@@ -35,6 +35,8 @@ namespace Gda
 _WRAP_ENUM(RendererOptions, GdaRendererOptions)
 
 /** Base class to get representations of objects as SQL statements, XML nodes or human readable text.
+ *
+ * @ingroup Miscellaneous
  */
 class Renderer : public Glib::Interface
 {

@@ -45,6 +45,8 @@ _WRAP_GERROR(ParameterListError, GdaParameterListError, GDA_PARAMETER_LIST_ERROR
  * - a list of ParameterListGroup structures (the groups_list attribute): there is one such structure for each _independant_ parameter (parameters which are constrained by the same data model all appear in the same ParameterListGroup structure).
  *
  * Some queries require arguments before they can be executed. For such queries, the arguments are passed using Parameter objects (the list of parameters can be obtained using Query::get_parameters() or Query::get_parameter_list()).
+ *
+ * @ingroup DataModels
  */
 class ParameterList : public Glib::Object
 {

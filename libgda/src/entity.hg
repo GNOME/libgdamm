@@ -35,7 +35,12 @@ namespace Gnome
 namespace Gda
 {
 
+/** @defgroup LesserUsed Lesser used Interfaces
+ */
+
 /** Base class to represent a generic entity (for tables, views or queries).
+ *
+ * @ingroup LesserUsed
  */
 class Entity : public Glib::Interface
 {

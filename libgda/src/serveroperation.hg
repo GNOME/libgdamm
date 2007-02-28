@@ -41,8 +41,12 @@ class Connection;
 //_WRAP_ENUM(ClientSpecsType, GdaClientSpecsType)
 _WRAP_ENUM(ServerOperationNodeType, GdaServerOperationNodeType)
 
+/** @defgroup DDL Data definition (DDL) queries
+ */
+
 /** Handles any DDL query in an abstract way.
  *
+ * @ingroup DDL
  */
 class ServerOperation : public Glib::Object
 {

@@ -36,6 +36,7 @@ namespace Gda
 {
 
 /** Parent class for any query's field.
+ * @ingroup Queries
  */
 class QueryField
  : public QueryObject
@@ -49,7 +50,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<DictType> get_dict_type(), gda_query_field_get_dict_type, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const DictType> get_dict_type() const, gda_query_field_get_dict_type, constversion)
   
-  _WRAP_METHOD(bool is_equal(const Glib::RefPtr<const QueryField>&) const, gda_query_field_is_equal)
+  _WRAP_METHOD(bool is_equal(const Glib::RefPtr<const QueryField>& qfield2) const, gda_query_field_is_equal)
   
   // TODO: GList* gda_query_field_get_parameters
   _WRAP_METHOD(void set_alias(const Glib::ustring& alias), gda_query_field_set_alias)

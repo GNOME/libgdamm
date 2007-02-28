@@ -43,6 +43,8 @@ _WRAP_ENUM(TransactionIsolation, GdaTransactionIsolation)
  * 
  * One TransactionStatus object is automatically attached to a Connection when a transaction is started, and is destroyed 
  * when the transaction is finished. This object can be fetched using Connection::get_transaction_status() (beware that it should then not be modified).
+ *
+ * @ingroup Connections
  */
 class TransactionStatus : public Glib::Object
 {

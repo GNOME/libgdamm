@@ -182,7 +182,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<const QueryField> get_field_by_sql_naming(const Glib::ustring& sql_name) const, gda_query_get_field_by_sql_naming, constversion, refreturn)
   _WRAP_METHOD(Glib::RefPtr<QueryField> get_field_by_param_name(const Glib::ustring& param_name), gda_query_get_field_by_param_name, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const QueryField> get_field_by_param_name(const Glib::ustring& param_name) const, gda_query_get_field_by_param_name, constversion, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<QueryField> get_field_by_ref_field(const Glib::RefPtr<QueryTarget>& target, const Glib::RefPtr<EntityField>& field, QueryFieldState field_state), gda_query_get_field_by_ref_field, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<QueryField> get_field_by_ref_field(const Glib::RefPtr<QueryTarget>& target, const Glib::RefPtr<EntityField>& ref_field, QueryFieldState field_state), gda_query_get_field_by_ref_field, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const QueryField> get_field_by_ref_field(const Glib::RefPtr<QueryTarget>& target, const Glib::RefPtr<EntityField>& field, QueryFieldState field_state) const, gda_query_get_field_by_ref_field, constversion, refreturn)
   _WRAP_METHOD(Glib::RefPtr<QueryField> get_first_field_for_target(const Glib::RefPtr<QueryTarget>& target), gda_query_get_first_field_for_target, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const QueryField> get_first_field_for_target(const Glib::RefPtr<QueryTarget>& target) const, gda_query_get_first_field_for_target, constversion, refreturn)

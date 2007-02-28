@@ -37,6 +37,8 @@ namespace Gda
 class Entity;
 
 /** Base class to represent a generic field (for tables' fields, etc).
+ *
+ * @ingroup LesserUsed
  */
 class EntityField : public Glib::Interface
 {

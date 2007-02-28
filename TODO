@@ -3,23 +3,10 @@ TODO:
 * Do libgnomedb TODO items first if possible, so we can document how to use the UI widgets.
 * Reference Documentation:
   - Check for doxygen errors and fix if it's easy. 
-  - Group the classes appropriately, using @defgroup and @ingroup.
-    (See http://www.openismus.com/temp/libgnomedb_3_0_docs/html/ and 
-         http://www.openismus.com/temp/libgda_3_0_docs/html/
-     for some existing categories.)
-* Wrap the rest of GdaQuery* objects (are they useful, public?)
-* Wrap GdaDataModelHash, GdaDataModelFilterSQL, GdaDataAccessWrapper, and GdaDataModelImport.
-  (though they might not be very useful to application developers.)
-  (remember to put them in the DataModels doxygen group and add their documentation, based on the C documentation.)
 * Check TODOs in code and tutorial .xml about lists and other things
 
 
 Relevant libgda bugs:
-
-* http://bugzilla.gnome.org/show_bug.cgi?id=340989
-"gda_parameter_list_new() does more than g_object_new()"
-
-
 
 DONE:
 
@@ -32,4 +19,6 @@ DONE:
   http://bugzilla.gnome.org/show_bug.cgi?id=406373
   GdaQuery makes explicit type checks (done)
 
-
+* 340989
+  http://bugzilla.gnome.org/show_bug.cgi?id=340989
+  "gda_parameter_list_new() does more than g_object_new()" (done)

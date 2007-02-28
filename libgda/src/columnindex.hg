@@ -37,6 +37,8 @@ _WRAP_ENUM(Sorting, GdaSorting)
 class Row;
 
 /** DataModel column indexes — Management of DataModel column index attributes.
+ *
+ * @ingroup DataHandlers
  */
 class ColumnIndex : public Glib::Object
 {

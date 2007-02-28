@@ -41,6 +41,8 @@ _WRAP_GERROR(ParameterError, GdaParameterError, GDA_PARAMETER_ERROR)
 class DataModel;
 
 /** Represents a Value with various attributes.
+ *
+ * @ingroup DataModels
  */
 class Parameter
   : public Object,
@@ -118,7 +120,7 @@ public:
   // TODO: How to wrap GHashTable?
   //_WRAP_METHOD(void replace_param_users(GHashTable* param), gda_parameter_replace_param_users)
 
-  _WRAP_METHOD(void declare_param_user(const Glib::RefPtr<Object>& object), gda_parameter_declare_param_user)
+  _WRAP_METHOD(void declare_param_user(const Glib::RefPtr<Object>& user), gda_parameter_declare_param_user)
 
   _WRAP_PROPERTY("g-type", GType)
   _WRAP_PROPERTY("entry-plugin", Glib::ustring)

@@ -42,6 +42,9 @@ _WRAP_ENUM(ClientEvent, GdaClientEvent)
 
 class ServerOperation;
 
+/** @defgroup Connections Connections and Commands
+ */
+
 /** Database client access.
  *
  * This class is the main entry point for libgda client applications. It provides the way by which client applications 
@@ -54,7 +57,9 @@ class ServerOperation;
  *
  * Database creation and destruction is done through a Client object using the perform_create_database() and 
  * perform_drop_database() methods. Note however that depending on the provider, an opened connection may be 
- * required in order to create or destroy a database. 
+ * required in order to create or destroy a database.
+ *
+ * @ingroup Connections
  */
 class Client : public Glib::Object
 {

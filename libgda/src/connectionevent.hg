@@ -38,6 +38,8 @@ namespace Gda
 /** Any event which has occurred on a GdaConnection.
  * Events occuring on a connection are each represented as a ConnectionEvent object. 
  * Each Connection is responsible for keeping a list of past events; that list can be consulted using the Connection::get_events() function.
+ *
+ * @ingroup Connections
  */
 class ConnectionEvent : public Glib::Object
 {

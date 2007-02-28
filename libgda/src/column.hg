@@ -36,6 +36,7 @@ namespace Gda
 
 /** Management of DataModel column attributes.
  *
+ * @ingroup DataHandlers
  */
 class Column : public Glib::Object
 {
