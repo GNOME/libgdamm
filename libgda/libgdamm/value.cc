@@ -255,7 +255,7 @@ gint64 Value::get_int64() const
   return g_value_get_int64(const_cast<GValue*>(gobj()));
 }
 
-void Value::set(gint64 val)
+void Value::set_int64(gint64 val)
 {
   g_value_set_int64(gobj(), val); 
 }
@@ -265,7 +265,7 @@ guint64 Value::get_uint64() const
   return g_value_get_uint64(const_cast<GValue*>(gobj()));
 }
 
-void Value::set(guint64 val)
+void Value::set_uint64(guint64 val)
 {
   g_value_set_uint64(gobj(), val); 
 }

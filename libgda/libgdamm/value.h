@@ -130,11 +130,15 @@ public:
   
   gint64 get_int64() const;
   
-  void set(gint64 val);
+  // We can't have this as a regular set() overload because it has the same
+  // type as GType on 64bit systems.
+  void set_int64(gint64 val);
   
   guint64 get_uint64() const;
   
-  void set(guint64 val);
+  // We can't have this as a regular set() overload because it has the same
+  // type as GType on 64bit systems.
+  void set_uint64(guint64 val);
 
   //TODO: The const here is quite meaningless:
   

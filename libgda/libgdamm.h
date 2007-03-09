@@ -45,5 +45,6 @@ extern const int libgdamm_micro_version;
 #include <libgdamm/queryfieldall.h>
 #include <libgdamm/queryfieldfield.h>
 #include <libgdamm/queryfieldvalue.h>
+#include <libgdamm/serveroperation.h>
 
 #endif /* #ifndef LIBGDAMM_H */
