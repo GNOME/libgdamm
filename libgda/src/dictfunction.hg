@@ -52,7 +52,7 @@ class DictFunction
 : public Gda::Object,
   public XmlStorage
 {
-  _CLASS_GOBJECT(DictFunction, GdaDictFunction, GDA_DICT_TYPE, Gda::Object, GdaObject)
+  _CLASS_GOBJECT(DictFunction, GdaDictFunction, GDA_DICT_FUNCTION, Gda::Object, GdaObject)
   _IMPLEMENTS_INTERFACE(XmlStorage)
 protected:
 

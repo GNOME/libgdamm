@@ -1,3 +1,8 @@
+2007-03-11  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/dictfunction.hg: Changed GDA_DICT_TYPE to
+	GDA_DICT_FUNCTION in _CLASS_GOBJECT invocation.
+
 2007-03-09  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/libgdamm/value.h:
