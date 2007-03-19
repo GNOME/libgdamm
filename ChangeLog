@@ -1,3 +1,8 @@
+2007-03-18  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/libgdamm/value.cc: Make sure that the underlaying GValue has
+	the correct type before setting a new value.
+
 2007-03-11  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/dictfunction.hg: Changed GDA_DICT_TYPE to

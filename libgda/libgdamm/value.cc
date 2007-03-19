@@ -25,6 +25,19 @@
 #include <libgda/gda-enum-types.h>
 #include <libgda/gda-util.h>
 
+namespace
+{
+  // Changes the type of a given value
+  void value_reinit(GValue* value, GType g_type)
+  {
+    if(G_IS_VALUE(value) && G_VALUE_TYPE(value) != g_type)
+      g_value_unset(value);
+
+    if(!G_IS_VALUE(value))
+      g_value_init(value, g_type);
+  }
+}
+
 namespace Gnome
 {
   
@@ -51,112 +64,81 @@ Value Value::create_as_uint64(guint64 val)
 
 Value::Value(const guchar* val, long size)
 {
-  init(GDA_TYPE_BINARY);
-
   set(val, size);
 }
 
 Value::Value(const GdaBlob *val)
 {
-  init(GDA_TYPE_BLOB);
   set(val);
 }
 
 Value::Value(bool val)
 {
-  init( Glib::Value<bool>::value_type() );
-
   set(val);
 }
 
 Value::Value(const Glib::Date& val)
 {
-  init( Glib::Value<Glib::Date>::value_type() );
-
   set(val);
 }
 
 Value::Value(double val)
 {
-  init( Glib::Value<double>::value_type() );
-
   set(val);
 }
 
 Value::Value(const GeometricPoint& val)
 {
-  init( GDA_TYPE_GEOMETRIC_POINT );
-
   set(val);
 }
 
 Value::Value(int val)
 {
-  init( Glib::Value<int>::value_type() );
-
   set(val);
 }
 
 Value::Value(const GdaValueList* val)
 {
-  init(GDA_TYPE_LIST);
-
   set(val);
 }
 
 Value::Value(const GdaNumeric* val)
 {
-  init(GDA_TYPE_NUMERIC);
-
   set(val);
 }
 
 Value::Value(float val)
 {
-  init( Glib::Value<float>::value_type() );
-
   set(val);
 }
 
 Value::Value(gshort val)
 {
-  init(GDA_TYPE_SHORT);
-
   set(val);
 }
 
 Value::Value(gushort val)
 {
-  init(GDA_TYPE_USHORT);
-
   set(val);
 }
 
 Value::Value(const Glib::ustring& val)
 {
-  init( Glib::Value<Glib::ustring>::value_type() );
-
   set(val);
 }
 
 Value::Value(const char* val)
 {
-  init( Glib::Value<Glib::ustring>::value_type() );
-
   set(val);
 }
 
 Value::Value(const Time& val)
 {
-  init( GDA_TYPE_TIME );
-
   set(val);
 }
 
 Value::Value(const Timestamp& val)
 {
-  init( GDA_TYPE_TIMESTAMP );
-
   set(val);
 }
 
@@ -175,7 +157,7 @@ Value Value::create_as_time_t(time_t val)
 
 Value::Value(guint val)
 {
-  init( Glib::Value<guint>::value_type() );
+  set(val);
 }
 
 /*
@@ -216,23 +198,31 @@ Value::Value()
 
 Value::Value(const Value& src)
 {
-  init(src.gobj());
+  if(G_IS_VALUE(src.gobj()))
+    init(src.gobj());
 }
 
 Value::Value(const GValue* castitem)
 {
-  init(castitem);
+  if(G_IS_VALUE(castitem))
+    init(castitem);
 }
 
 Value& Value::operator=(const Value& src)
 {
-  init(src.gobj()); //TODO: We probably shouldn't allow this to be called twice.
+  // Unset current value, if any
+  if(G_IS_VALUE(gobj())) g_value_unset(gobj());
+  init(src.gobj());
 
   return *this;
 }
 
 Value::~Value()
 {
+  // If the value does not have a type, we just set one so that the
+  // ValueBase constructor does not complain.
+  if(!G_IS_VALUE(gobj()))
+    init(G_TYPE_INT);
 }
 
 GType Value::get_value_type() const
@@ -257,7 +247,8 @@ gint64 Value::get_int64() const
 
 void Value::set_int64(gint64 val)
 {
-  g_value_set_int64(gobj(), val); 
+  value_reinit(gobj(), G_TYPE_INT64);
+  g_value_set_int64(gobj(), val);
 }
 
 guint64 Value::get_uint64() const
@@ -267,6 +258,7 @@ guint64 Value::get_uint64() const
 
 void Value::set_uint64(guint64 val)
 {
+  value_reinit(gobj(), G_TYPE_UINT64);
   g_value_set_uint64(gobj(), val); 
 }
 
@@ -308,6 +300,7 @@ bool Value::get_boolean() const
 
 void Value::set(bool val)
 {
+  value_reinit(gobj(), Glib::Value<bool>::value_type());
   g_value_set_boolean(gobj(), static_cast<int>(val)); 
 }
 
@@ -323,6 +316,7 @@ Glib::Date Value::get_date() const
 
 void Value::set(const Glib::Date& val)
 {
+  value_reinit(gobj(), Glib::Value<Glib::Date>::value_type());
   g_value_set_boxed(gobj(), val.gobj());
 }
 
@@ -333,6 +327,7 @@ double Value::get_double() const
 
 void Value::set(double val)
 {
+  value_reinit(gobj(), Glib::Value<double>::value_type());
   g_value_set_double(gobj(), val); 
 }
 
@@ -353,6 +348,7 @@ int Value::get_int() const
 
 void Value::set(int val)
 {
+  value_reinit(gobj(), Glib::Value<int>::value_type());
   g_value_set_int(gobj(), val); 
 }
 
@@ -383,6 +379,7 @@ float Value::get_float() const
 
 void Value::set(float val)
 {
+  value_reinit(gobj(), Glib::Value<float>::value_type());
   g_value_set_float(gobj(), val); 
 }
 
@@ -413,6 +410,7 @@ Glib::ustring Value::get_string() const
 
 void Value::set(const Glib::ustring& val)
 {
+  value_reinit(gobj(), G_TYPE_STRING);
   g_value_set_string(gobj(), val.c_str()); 
 }
 
@@ -448,6 +446,7 @@ guint Value::get_uint() const
 
 void Value::set(guint val)
 {
+  value_reinit(gobj(), Glib::Value<unsigned int>::value_type());
   g_value_set_uint(gobj(), val); 
 }
 
@@ -458,6 +457,7 @@ GType Value::get_g_type() const
 
 void Value::set(GType val)
 {
+  value_reinit(gobj(), G_TYPE_GTYPE);
   g_value_set_gtype(gobj(), val);
 }
 
