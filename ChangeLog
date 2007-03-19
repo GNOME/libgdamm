@@ -1,5 +1,16 @@
 2007-03-18  Armin Burgmeier  <armin@openismus.com>
 
+	* libgda/src/parameter.hg:
+	* libgda/src/parameter.ccg: Set g-type property on construction as the
+	C implementation does, otherwise the value is always NULL. Added a
+	constructor that takes a const char*, otherwise
+	Parameter::create("foo", "bar") calls actually
+	Parameter::create(ustring, bool). Just call Value constructor with the
+	GValue* as argument in get_value() and get_default_value(). This works
+	also if the value is NULL.
+
+2007-03-18  Armin Burgmeier  <armin@openismus.com>
+
 	* libgda/libgdamm/value.cc: Make sure that the underlaying GValue has
 	the correct type before setting a new value.
 

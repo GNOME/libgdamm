@@ -61,10 +61,14 @@ protected:
   Parameter(const Glib::ustring& name, const Glib::ustring& value);
   _IGNORE(gda_parameter_new_string)
 
+  // Parameter("foo", "bar") calls Parameter(ustring, bool) without this.
+  Parameter(const Glib::ustring& name, const char* value);
+
 public:
   _WRAP_CREATE()
   _WRAP_CREATE(const Glib::ustring& name, bool value);
   _WRAP_CREATE(const Glib::ustring& name, const Glib::ustring& value);
+  _WRAP_CREATE(const Glib::ustring& name, const gchar* value);
 
   typedef Glib::SListHandle< Glib::RefPtr<EntityField> > ListHandleEntityField; 
   #m4 _CONVERSION(`GSList*',`ListHandleEntityField',`$2($3, Glib::OWNERSHIP_NONE)')

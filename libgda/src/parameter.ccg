@@ -43,7 +43,7 @@ Parameter::Parameter(const Glib::ustring& name, const Value& value)
 
 Parameter::Parameter(const Glib::ustring& name, bool value)
 :
-  _CONSTRUCT()
+  _CONSTRUCT("g_type", G_TYPE_BOOLEAN)
 {
   //Reimplemented from gda_parameter_new_string():
   set_name(name);
@@ -52,34 +52,29 @@ Parameter::Parameter(const Glib::ustring& name, bool value)
 
 Parameter::Parameter(const Glib::ustring& name, const Glib::ustring& value)
 :
-  _CONSTRUCT()
+  _CONSTRUCT("g_type", G_TYPE_STRING)
 {
   //Reimplemented from gda_parameter_new_boolean():
   set_name(name);
   set_value(value);
 }
 
+Parameter::Parameter(const Glib::ustring& name, const char* value)
+:
+  _CONSTRUCT("g_type", G_TYPE_STRING)
+{
+  set_name(name);
+  set_value(Glib::ustring(value));
+}
+
 Value Parameter::get_value() const
 {
-  Value value;
-
-  //Note that the function does not return a new value, so we should not free it:
-  const GValue* cvalue =  gda_parameter_get_value(const_cast<GdaParameter*>(gobj()));
-  if(cvalue)
-    value.init(cvalue);
-   
-  return value;
+  return Value(gda_parameter_get_value(const_cast<GdaParameter*>(gobj())));
 }
 
 Value Parameter::get_default_value() const
 {
-  Value value;
-
-  const GValue* cvalue =  gda_parameter_get_default_value(const_cast<GdaParameter*>(gobj()));
-  if(cvalue)
-    value.init(cvalue);
-  
-  return value;
+  return Value(gda_parameter_get_default_value(const_cast<GdaParameter*>(gobj())));
 }
 
 bool Parameter::has_restrict_values() const
