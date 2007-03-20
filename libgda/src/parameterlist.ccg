@@ -50,12 +50,7 @@ Glib::RefPtr<ParameterList> ParameterList::create()
 
 Value ParameterList::get_param_default_value(const Glib::RefPtr<const Parameter>& param) const
 {
-  Value value;
-  const GValue* cvalue = gda_parameter_list_get_param_default_value(const_cast<GdaParameterList*>(gobj()), const_cast<GdaParameter*>(param->gobj()));
-  if(cvalue)
-    value.init(cvalue);
-  
-  return value;
+  return Value(gda_parameter_list_get_param_default_value(const_cast<GdaParameterList*>(gobj()), const_cast<GdaParameter*>(param->gobj())));
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED

@@ -31,13 +31,7 @@ namespace Gda
   
 Value Column::get_default_value() const
 {
-  Value value;
-
-  const GValue* cvalue =  gda_column_get_default_value(const_cast<GdaColumn*>(gobj()));
-  if(cvalue)
-    value.init(cvalue);
-  
-  return value;
+  return Value(gda_column_get_default_value(const_cast<GdaColumn*>(gobj())));
 }
 
 bool Column::equal(const Glib::RefPtr<const Column>& src) const

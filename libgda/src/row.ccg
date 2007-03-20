@@ -35,14 +35,8 @@ namespace Gda
 
 Value Row::get_value(int num) const
 {
-  Value value;
-
   //Note that the function does not return a new value, so we should not free it:
-  const GValue* cvalue = gda_row_get_value(const_cast<GdaRow*>(gobj()), num);
-  if(cvalue)
-    value.init(cvalue);
-  
-  return value;
+  return Value(gda_row_get_value(const_cast<GdaRow*>(gobj()), num));
 }
 
 } // namespace Gda

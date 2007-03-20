@@ -169,13 +169,13 @@ Value::Value(const Glib::ustring& as_string, GType type)
 
 bool Value::operator==(const Value& src) const
 {
-  if( !gobj() && !src.gobj()) //If both are null.
+  if( !G_IS_VALUE(gobj()) && !G_IS_VALUE(src.gobj())) //If both are null.
     return true;
 
-  if( !gobj() && src.gobj()) //If one is null.
+  if( !G_IS_VALUE(gobj()) && G_IS_VALUE(src.gobj())) //If one is null.
     return false;
 
-  if( gobj() && !src.gobj()) //If one is null.
+  if( G_IS_VALUE(gobj()) && !G_IS_VALUE(src.gobj())) //If one is null.
     return false;
 
   if(get_value_type() != src.get_value_type()) //gda_value_compare() can only compare GValues of the same type.
@@ -212,7 +212,8 @@ Value& Value::operator=(const Value& src)
 {
   // Unset current value, if any
   if(G_IS_VALUE(gobj())) g_value_unset(gobj());
-  init(src.gobj());
+  // Set new value, if any
+  if(G_IS_VALUE(src.gobj())) init(src.gobj());
 
   return *this;
 }
@@ -220,7 +221,7 @@ Value& Value::operator=(const Value& src)
 Value::~Value()
 {
   // If the value does not have a type, we just set one so that the
-  // ValueBase constructor does not complain.
+  // ValueBase destructor does not complain.
   if(!G_IS_VALUE(gobj()))
     init(G_TYPE_INT);
 }

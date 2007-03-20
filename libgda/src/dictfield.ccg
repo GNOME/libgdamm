@@ -33,14 +33,7 @@ namespace Gda
 
 Value DictField::get_default_value() const
 {
-  Value value;
-  const GValue* cvalue = gda_dict_field_get_default_value(const_cast<GdaDictField*>(gobj()));
-  if(cvalue)
-    value.init(cvalue);
-
-  //g_value_unset(cvalue);
-  
-  return value;
+  return Value(gda_dict_field_get_default_value(const_cast<GdaDictField*>(gobj())));
 }
 
 } //namespace Gda

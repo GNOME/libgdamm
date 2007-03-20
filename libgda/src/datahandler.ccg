@@ -33,37 +33,26 @@ namespace Gda
 
 Value DataHandler::get_value_from_sql(const Glib::ustring& sql, GType type) const
 {
-  Value value;
-  GValue* cvalue = gda_data_handler_get_value_from_sql(const_cast<GdaDataHandler*>(gobj()), sql.c_str(), type);
-  if(cvalue)
-  {
-    value.init(cvalue);
-    g_value_unset(cvalue); //The C documentation says that it returns a new value.
-  }
-
-  return value;
+  return Value(gda_data_handler_get_value_from_sql(const_cast<GdaDataHandler*>(gobj()), sql.c_str(), type));
 }
 
 Value DataHandler::get_value_from_str(const Glib::ustring& str, GType type) const
 {
-  Value value;
   GValue* cvalue = gda_data_handler_get_value_from_str(const_cast<GdaDataHandler*>(gobj()), str.c_str(), type);
-  if(cvalue)
-  {
-    value.init(cvalue);
-    g_value_unset(cvalue); //The C documentation says that it returns a new value.
-  }
-  
+  Value value(cvalue);
+
+  // The C documentation says that it returns a new value:
+  if(G_IS_VALUE(cvalue)) g_value_unset(cvalue);
   return value;
 }
 
 Value DataHandler::get_sane_init_value(GType type) const
 {
-  Value value;
   GValue* cvalue = gda_data_handler_get_sane_init_value(const_cast<GdaDataHandler*>(gobj()), type);
-  if(cvalue) value.init(cvalue);
-  g_value_unset(cvalue);
-  
+  Value value(cvalue);
+
+  // The C documentation says that it returns a new value:
+  if(G_IS_VALUE(cvalue)) g_value_unset(cvalue);
   return value;
 }
 

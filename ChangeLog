@@ -1,3 +1,17 @@
+2007-03-20  Armin Burgmeier  <armin@openismus.com>
+	
+	* libgda/src/column.ccg:
+	* libgda/src/dictfield.ccg:
+	* libgda/src/datamodel.ccg:
+	* libgda/src/parameterlist.ccg:
+	* libgda/src/datahandler.ccg:
+	* libgda/src/row.ccg: Call Value constructor with the GValue* as
+	argument in functions returning a Gnome::Gda::Value, so that it also
+	works if the value exists but is null.
+
+	* libgda/libgdamm/value.cc: Added explicit check for values that have an
+	underlaying GValue but which is null in Value::compare().
+
 2007-03-18  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/parameter.hg:
@@ -1559,6 +1573,3 @@ This is the HEAD branch. The libgda-1-2 branch builds against libgda 1.2.
 	people get the general idea.
 	* Added libgda_vuncs.defs (hand coded) and libgda_enums.defs
 	(generated with gtkmm/tools/enums.pl)
-	
-	
-
