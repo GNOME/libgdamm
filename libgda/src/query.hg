@@ -45,6 +45,7 @@ namespace Gda
 
 _WRAP_ENUM(QueryType, GdaQueryType)
 _WRAP_ENUM(QueryFieldState, GdaQueryFieldState)
+_WRAP_GERROR(QueryError, GdaQueryError, GDA_QUERY_ERROR)
 
 /** Represents any kind of DML query.
  *

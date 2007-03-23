@@ -30,6 +30,9 @@ namespace Gnome
 
 namespace Gda
 {
+
+_WRAP_GERROR(DataModelIterError, GdaDataModelIterError, GDA_DATA_MODEL_ITER_ERROR)
+
 // TODO
 class DataModelIter
  : public ParameterList

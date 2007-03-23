@@ -22,6 +22,7 @@
 
 #include <libgda/gda-parameter-list.h>
 #include <libgda/gda-parameter.h>
+#include <libgda/gda-parameter-util.h>
 #include <libgda/gda-enum-types.h>
 #include <libgda/gda-dict.h>
 

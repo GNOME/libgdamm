@@ -82,7 +82,7 @@ class DataModel : public Glib::Interface
   _CLASS_INTERFACE(DataModel, GdaDataModel, GDA_DATA_MODEL, GdaDataModelClass)
 public:
   // This does not belong into this class
-  _IGNORE(gda_data_model_iter_new)
+  _IGNORE(gda_data_model_iter_new, gda_data_model_array_copy_model)
 
   _WRAP_METHOD(void freeze(), gda_data_model_freeze)  
   _WRAP_METHOD(void thaw(), gda_data_model_thaw)
@@ -173,8 +173,7 @@ public:
 #endif
   _IGNORE(gda_data_model_export_to_file)
 
-
-  //TODO: _WRAP_METHOD(bool import_from_model(Glib::RefPtr<DataModel> from,  GHashTable *cols_trans), gda_data_model_import_from_model, errthrow)
+  _WRAP_METHOD(bool import_from_model(const Glib::RefPtr<DataModel>& from,  bool overwrite, GHashTable *cols_trans), gda_data_model_import_from_model, errthrow)
   _WRAP_METHOD(bool import_from_string(const Glib::ustring& string, GHashTable *cols_trans, const Glib::RefPtr<const ParameterList>& options), gda_data_model_import_from_string, errthrow)
   _WRAP_METHOD(bool import_from_file(const std::string& file, GHashTable *cols_trans, const Glib::RefPtr<const ParameterList>& options), gda_data_model_import_from_file, errthrow)
 
@@ -198,6 +197,8 @@ public:
   _WRAP_METHOD(bool move_iter_at_row_default(const Glib::RefPtr<DataModelIter>& iter, int row), gda_data_model_move_iter_at_row_default)
   _WRAP_METHOD(bool move_iter_next_default(const Glib::RefPtr<DataModelIter>& iter), gda_data_model_move_iter_next_default)
   _WRAP_METHOD(bool move_iter_prev_default(const Glib::RefPtr<DataModelIter>& iter), gda_data_model_move_iter_prev_default)
+
+  _WRAP_METHOD(void signal_emit_changed(), gda_data_model_signal_emit_changed)
 
   //These are in a private header. Ignore them:
   _IGNORE(gda_data_model_changed, gda_data_model_row_inserted, gda_data_model_row_updated, gda_data_model_row_removed, 

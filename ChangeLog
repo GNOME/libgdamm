@@ -1,3 +1,22 @@
+2007-03-23  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/libgda_methods.defs: Regenerated.
+
+	* libgda/src/datamodel.hg: Wrapped gda_data_model_import_from_model
+	and gda_data_model_emit_signal_changed, ignore
+	gda_data_model_array_copy_model since this belongs to
+	GdaDataModelArray.
+
+	* libgda/src/datamodeliter.hg:
+	* libgda/src/dict.hg:
+	* libgda/src/query.hg:
+	* libgda/src/datamodeliter.ccg: Wrapped error values, and include
+	gda-enum-types.h in datamodeliter.cc, so that it compiles.
+
+	* libgda/src/parameterlist.hg:
+	* libgda/src/parameterlist.ccg: Wrapped
+	gda_parameter_list_find_param_for_user().
+
 2007-03-20  Armin Burgmeier  <armin@openismus.com>
 	
 	* libgda/src/column.ccg:

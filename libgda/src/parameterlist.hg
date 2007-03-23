@@ -22,6 +22,7 @@
 
 #include <glibmm/object.h>
 #include <libgdamm/parameter.h>
+#include <libgdamm/object.h>
 #include <libgdamm/dict.h>
 
 _DEFS(libgdamm,libgda)
@@ -76,7 +77,7 @@ public:
   _WRAP_METHOD(bool is_valid() const, gda_parameter_list_is_valid)
 
   _WRAP_METHOD(Glib::RefPtr<Parameter> find_param(const Glib::ustring& param_name), gda_parameter_list_find_param, refreturn)
-  //_WRAP_METHOD(Glib::RefPtr<Parameter> find_param_for_user(const Glib::RefPtr<Object>& user), gda_parameter_list_find_param_for_user)
+   _WRAP_METHOD(Glib::RefPtr<Parameter> find_param_for_user(const Glib::RefPtr<Gda::Object>& user), gda_parameter_list_find_param_for_user, refreturn)
 
   /** @brief Restricts the values of a parameter in the list.
    *
