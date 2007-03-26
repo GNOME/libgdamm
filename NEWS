@@ -1,3 +1,30 @@
+2.9.4:
+
+* Added DictFunction and QueryFieldFunc.
+  (Johannes Schmid, Openismus)
+* Added QueryJoin
+* DataModel:
+  - Added import_from_model() and emit_signal_changed().
+   (Armin Burgmeier, Openismus)
+  - Added set_column_position(), set_values()
+   (Murray Cumming, Openismus)
+* Parameter:
+  - Constructor: Set the g-type property, as in the C code.
+  - Added const char* create().
+* ParameterList: Added find_param_for_user().
+* Value:
+  - Deal better with NULL pointer GValue*s.
+  - Make sure that the underlying GValue has the correct type before setting a new value.
+  - Renamed some set*() methods to avoid ambiguities on 64-bit systems.
+* Build: Builds with exceptions disabled in glibmm.
+ (Armin Burgmeier, Openismus)
+* Documentation: Added doxygen groups, add fixed minor doxygen warnings.
+  (Johannes Schmid, Openismus)
+
+2.9.3:
+
+Skipped, I think.
+
 2.9.2:
 
 * Correct constructors, after fixing the underlying libgda source code:
