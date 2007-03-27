@@ -1,3 +1,9 @@
+2007-03-27  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/parameter.hg:
+	* libgda/src/parameter.ccg: Added a set_entry_plugin() convenience
+	function.
+
 2.9.4:
 
 2007-03-23  Armin Burgmeier  <armin@openismus.com>

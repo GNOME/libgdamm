@@ -126,6 +126,11 @@ public:
 
   _WRAP_METHOD(void declare_param_user(const Glib::RefPtr<Object>& user), gda_parameter_declare_param_user)
 
+  /** This is a convenience method that sets the value of the "entry-plugin" 
+   * property.
+   */
+  void set_entry_plugin(const Glib::ustring& plugin);
+
   _WRAP_PROPERTY("g-type", GType)
   _WRAP_PROPERTY("entry-plugin", Glib::ustring)
   _WRAP_PROPERTY("use-default-value", bool)

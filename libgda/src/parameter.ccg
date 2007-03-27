@@ -99,6 +99,11 @@ Glib::ustring Parameter::get_value_str() const
     return Glib::ustring();
 }
 
+void Parameter::set_entry_plugin(const Glib::ustring& entry)
+{
+  g_object_set(gobj(), "entry-plugin", entry.c_str(), NULL);
+}
+
 } //namespace Gda
 
 } // namespace Gnome
