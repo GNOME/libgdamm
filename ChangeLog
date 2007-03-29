@@ -1,3 +1,9 @@
+2007-03-29  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/serverprovider.hg:
+	* libgda/src/serverprovider.ccg: Wrapped
+	gda_server_provider_get_value_at and gda_server_provider_set_value_at.
+
 2007-03-27  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/parameter.hg:

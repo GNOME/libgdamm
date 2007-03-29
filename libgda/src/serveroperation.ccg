@@ -27,6 +27,31 @@
 namespace Gnome
 {
 
+namespace Gda
+{
+
+Value ServerOperation::get_value_at(const Glib::ustring& path) const
+{
+  return Gnome::Gda::Value(gda_server_operation_get_value_at(const_cast<GdaServerOperation*>(gobj()), "%s", path.c_str()));
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+void ServerOperation::set_value_at(const Glib::ustring& path, const Glib::ustring& value)
+#else
+void ServerOperation::set_value_at(const Glib::ustring& path, const Glib::ustring& value, std::auto_ptr<Glib::Error>& error)
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  gda_server_operation_set_value_at(gobj(), value.c_str(), &gerror, "%s", path.c_str());
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror) ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror) error = ::Glib::Error::throw_exception(gerror);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+}
+
+} /* namespace Gda */
 
 } /* namespace Gnome */
 

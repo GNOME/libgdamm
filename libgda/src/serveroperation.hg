@@ -52,6 +52,18 @@ class ServerOperation : public Glib::Object
 {
   _CLASS_GOBJECT(ServerOperation, GdaServerOperation, GDA_SERVER_OPERATION, Glib::Object, GObject)
 
+public:
+  // The C version of these take varargs for some reason.
+  _WRAP_METHOD_DOCS_ONLY(gda_server_operation_get_value_at)
+  Value get_value_at(const Glib::ustring& path) const;
+
+  _WRAP_METHOD_DOCS_ONLY(gda_server_operation_set_value_at)
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  void set_value_at(const Glib::ustring& path, const Glib::ustring& value);
+#else
+  void set_value_at(const Glib::ustring& path, const Glib::ustring& value, std::auto_ptr<Glib::Error>& error);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+
 //TODO ?:
   //_WRAP_METHOD(ServerOperationNodeType get_node_type(const Glib::ustring& path) const, gda_server_operation_get_node_type)
 //_WRAP_METHOD(ServerOperationNodeType get_node_type_v(const Glib::ustring& *path_array),  gda_server_operation_get_node_type_v)
