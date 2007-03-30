@@ -290,9 +290,11 @@ typedef struct {
 */
 
 
+#if 0
 int value_compare(const Glib::ValueBase& value1, const Glib::ValueBase& value2);
 int value_compare_ext(const Glib::ValueBase& value1, const Glib::ValueBase& value2);
 bool value_equal(const Glib::ValueBase& value1, const Glib::ValueBase& value2);
+#endif
 
 
 /*

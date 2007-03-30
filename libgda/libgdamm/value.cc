@@ -541,7 +541,7 @@ const GType VALUE_TYPE_TIMESTAMP = GDA_TYPE_TIMESTAMP;
 */
 
 
-
+#if 0
 int value_compare_ext(const Glib::ValueBase& value1, const Glib::ValueBase& value2)
 {
   return gda_value_compare_ext(value1.gobj(), value2.gobj());
@@ -564,6 +564,7 @@ bool value_equal(const Glib::ValueBase& value1, const Glib::ValueBase& value2)
   int test = gda_value_compare(value1.gobj(), value2.gobj());
   return test == 0;
 }
+#endif
 
 
 

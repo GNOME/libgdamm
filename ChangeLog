@@ -1,3 +1,13 @@
+2007-03-30  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/libgdamm/value.h:
+	* libgda/libgdamm/value.cc: Removed Gnome::Gda::value_compare,
+	Gnome::Gda::value_compare_ext and Gnome::Gda::value_equal. There is
+	Gnome::Gda::Value::operator== to test for equality. Furthermore,
+	Gnome::Gda::value_compare was not even defined, so I don't think these
+	are really used. I just commented them out so we can re-enable them
+	when required.
+
 2007-03-29  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/serverprovider.hg:
