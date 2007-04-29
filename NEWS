@@ -1,3 +1,13 @@
+2.9.5:
+
+* ServerProvider: Added get_value_at() and set_value_at().
+  (Armin Burgmeier, Openismus) 
+* Removed Gnome::Gda::value_compare(), Gnome::Gda::value_compare_ext()
+  and Gnome::Gda::value_equal(). There is Gnome::Gda::Value::operator== 
+  to test for equality.  (Armin Burgmeier, Openismus)
+* Parameter: Added set_entry_plugin(). (Armin Burgmeier, Openismus)
+* Build: Cope with newer versions of m4. (Yselkowitz)
+ 
 2.9.4:
 
 * Added DictFunction and QueryFieldFunc.
