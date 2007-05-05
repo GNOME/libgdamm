@@ -191,7 +191,7 @@ SKIP_FUNCTION_MACROS   = YES
 #---------------------------------------------------------------------------
 # Configuration::additions related to external references   
 #---------------------------------------------------------------------------
-TAGFILES               = glibmm_doxygen_tags gtkmm_doxygen_tags libgdamm_tags
+TAGFILES               = ../../../glibmm/docs/reference/glibmm_doxygen_tags
 GENERATE_TAGFILE       = libgdamm_doxygen_tags
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = YES

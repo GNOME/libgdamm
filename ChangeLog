@@ -1,3 +1,12 @@
+2007-05-05  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/reference/Doxyfile.in: Use the Doxygen tag files with relevant paths, 
+	assuming that everything is checked out at the same level, as with 
+	jhbuild.
+	* docs/reference/Makefile.am:
+	* docs/reference/libgdamm_header.html_fragment:
+	Correct the upload path, now that this is on gtkmm.org.
+
 2.9.5:
 
 2007-04-24  Yselkowitz <yselkowitz@users.sourceforge.net>
