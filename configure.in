@@ -17,7 +17,7 @@ AC_INIT(libgda/libgdammconfig.h.in)
 #########################################################################
 LIBGDAMM_MAJOR_VERSION=2
 LIBGDAMM_MINOR_VERSION=9
-LIBGDAMM_MICRO_VERSION=5
+LIBGDAMM_MICRO_VERSION=6
 
 #
 # +1 : ? : +1  == new interface that does not break old one

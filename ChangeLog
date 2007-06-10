@@ -1,3 +1,11 @@
+2.9.6:
+
+2007-06-10  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/libgdamm/config.cc: get_provider_by_name(), get_providers(): 
+	Avoid freeing memory that we don't own.
+	get_value_string(): Avoid leaking memory
+
 2007-05-05  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/reference/Doxyfile.in: Use the Doxygen tag files with relevant paths, 

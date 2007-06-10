@@ -1,3 +1,9 @@
+2.9.6:
+
+* Config: get_provider_by_name(), get_providers(), get_value_string(): 
+  Fix memory problems, fixing crashes.
+  (Murray Cumming)
+
 2.9.5:
 
 * ServerProvider: Added get_value_at() and set_value_at().
