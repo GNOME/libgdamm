@@ -34,7 +34,7 @@ namespace Config
 
 Glib::ustring get_value_string(const Glib::ustring& path)
 {
-  return gda_config_get_string(path.c_str());
+  return Glib::convert_return_gchar_ptr_to_ustring (gda_config_get_string(path.c_str()));
 }
 
 int get_value_int(const Glib::ustring& path)
@@ -125,7 +125,7 @@ ListHandle_ProviderInfo get_providers()
 
 ProviderInfo get_provider_by_name(const Glib::ustring& name)
 {
-  return Glib::wrap( gda_config_get_provider_by_name(name.c_str()) );
+  return Glib::wrap( gda_config_get_provider_by_name(name.c_str()), true /* take_copy */ );
 }
 
 ListHandle_DataSourceInfo get_data_sources()
@@ -135,11 +135,14 @@ ListHandle_DataSourceInfo get_data_sources()
 
 DataSourceInfo find_data_source(const Glib::ustring& name)
 {
+  //We own the result:
   return Glib::wrap( gda_config_find_data_source(name.c_str()) );
 }
 
 Glib::RefPtr<DataModel> get_data_source_model()
 {
+  // This doesn't need an extra reference, 
+  // because it is a new object.
   return Glib::wrap( gda_config_get_data_source_model() );
 }
 

@@ -1,3 +1,9 @@
+2007-06-10  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/libgdamm/config.cc: get_provider_by_name():
+	Avoid freeing memory that we don't own.
+	get_value_string(): Avoid leaking memory
+
 2005-12-06   Jonathon Jongsma <jonathon.jongsma@gmail.com>
 
 	* configure.in: Look for gmmproc in generic libdir 
