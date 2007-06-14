@@ -76,25 +76,34 @@ public:
   _WRAP_METHOD(bool uses_field(const Glib::RefPtr<const DictField>& field) const, gda_dict_constraint_uses_field)
 
 /* Primary KEY specific */
- //TODO: Use ListHandle or similar:
-  _WRAP_METHOD(void pkey_set_fields(const GSList *fields), gda_dict_constraint_pkey_set_fields)
-  _WRAP_METHOD(GSList* pkey_get_fields(), gda_dict_constraint_pkey_get_fields)
+
+  #m4 _CONVERSION(`const Glib::SListHandle< Glib::RefPtr<DictField> >&', `const GSList*', `$3.data()')
+  _WRAP_METHOD(void pkey_set_fields(const Glib::SListHandle< Glib::RefPtr<DictField> >& fields), gda_dict_constraint_pkey_set_fields)
+
+  #m4 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<DictField> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
+  #m4 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<const DictField> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<DictField> > pkey_get_fields(), gda_dict_constraint_pkey_get_fields)
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<const DictField> > pkey_get_fields() const, gda_dict_constraint_pkey_get_fields)
 
 /* Foreign KEY specific */
+  //TODO:
   _WRAP_METHOD(void fkey_set_fields(const GSList *pairs), gda_dict_constraint_fkey_set_fields)
 
   _WRAP_METHOD(Glib::RefPtr<DictTable> fkey_get_ref_table(), gda_dict_constraint_fkey_get_ref_table, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const DictTable> fkey_get_ref_table() const, gda_dict_constraint_fkey_get_ref_table, constversion)
 
- //TODO: Use ListHandle or similar:
-  _WRAP_METHOD(GSList* fkey_get_fields() const, gda_dict_constraint_fkey_get_fields)
+  //TODO: Wrap GdaDictConstraintFkeyPair (which might or might not be a GObject):
+  //_WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<DictConstraintFkeyPair> > fkey_get_fields(), gda_dict_constraint_fkey_get_fields)
+  //_WRAP_METHOD(Glib::SListHandle<const DictConstraintFkeyPair> fkey_get_fields() const, gda_dict_constraint_fkey_get_fields)
+
   _WRAP_METHOD(void fkey_set_actions(DictConstraintFkAction on_update,  DictConstraintFkAction on_delete), gda_dict_constraint_fkey_set_actions)
   _WRAP_METHOD(void fkey_get_actions(DictConstraintFkAction& on_update, DictConstraintFkAction& on_delete), gda_dict_constraint_fkey_get_actions)
 
 /* UNIQUE specific */
- //TODO: Use ListHandle or similar:
-  _WRAP_METHOD(void unique_set_fields(const GSList *fields), gda_dict_constraint_unique_set_fields)
-  _WRAP_METHOD(GSList* unique_get_fields() const, gda_dict_constraint_unique_get_fields)
+  _WRAP_METHOD(void unique_set_fields(const Glib::SListHandle< Glib::RefPtr<DictField> >& fields), gda_dict_constraint_unique_set_fields)
+
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<DictField> > unique_get_fields(), gda_dict_constraint_unique_get_fields)
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<const DictField> > unique_get_fields() const, gda_dict_constraint_unique_get_fields)
 
 /* NOT NULL specific */
   _WRAP_METHOD(void not_null_set_field(const Glib::RefPtr<DictField>& field), gda_dict_constraint_not_null_set_field)

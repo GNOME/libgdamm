@@ -71,7 +71,6 @@ public:
   ValueSList get_values(int proxy_row, const Glib::ArrayHandle<int>& cols_index) const;
   _IGNORE(gda_data_proxy_get_values)
 
-  // TODO: Wrap proper type (GdaValueAttribute?) for flags
   _WRAP_METHOD(ValueAttribute get_value_attributes(int proxy_row, int col) const, gda_data_proxy_get_value_attributes)
   _WRAP_METHOD(void alter_value_attributes(int proxy_row, int col, ValueAttribute alter_flags), gda_data_proxy_alter_value_attributes)
 

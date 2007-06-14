@@ -57,7 +57,24 @@ public:
   // error to the non-const function if exceptions are disabled.
   _WRAP_METHOD(const Glib::RefPtr<const Row> get_row(int row) const, gda_data_model_row_get_row, errthrow, refreturn)
 
-  // TODO: Vfuncs
+
+/* TODO: 
+  _WRAP_VFUNC(int get_n_rows() const, get_n_rows)
+  _WRAP_VFUNC(int get_n_columns) const, get_n_columns)
+*/
+
+ // TODO: Vfuncs:
+  /*
+	GdaRow             *(* get_row)         (GdaDataModelRow *model, gint row, GError **error);
+	const GValue       *(* get_value_at)    (GdaDataModelRow *model, gint col, gint row);
+	
+	gboolean            (* is_updatable)    (GdaDataModelRow *model);
+
+	GdaRow             *(* append_values)   (GdaDataModelRow *model, const GList *values, GError **error);
+	gboolean            (* append_row)      (GdaDataModelRow *model, GdaRow *row, GError **error);
+	gboolean            (* update_row)      (GdaDataModelRow *model, GdaRow *row, GError **error);
+	gboolean            (* remove_row)      (GdaDataModelRow *model, GdaRow *row, GError **error);
+  */
 };
 
 } // namespace Gda

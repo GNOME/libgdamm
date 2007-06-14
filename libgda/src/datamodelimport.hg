@@ -61,7 +61,7 @@ protected:
   DataModelImport(const std::string& filename, bool random_access, const Glib::RefPtr<const ParameterList>& options);
   _IGNORE(gda_data_model_import_new_file)
 
-  //TODO: What defines the size of data?
+  //Note: data is a null-terminated string, not copied, so the instance must stay alive as long as this model.
   DataModelImport(const gchar* data, bool random_access, const Glib::RefPtr<const ParameterList>& options);
   _IGNORE(gda_data_model_import_new_mem)
 

@@ -1,3 +1,10 @@
+2.9.7:
+
+* DictConstraint: pkey_set_fields(), pkey_get_fields(), 
+  fkey_set_fields(), fkey_set_actions(), fkey_get_actions(), 
+  unique_set_fields(), unique_get_fields(): Use SListHandle, so the 
+  application coder can use standard C++ containers.
+
 2.9.6:
 
 * Config: get_provider_by_name(), get_providers(), get_value_string(): 

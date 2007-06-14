@@ -1,3 +1,17 @@
+2.9.7:
+
+2007-06-14  Murray Cumming  <murrayc@murrayc.com>
+
+	* Makefile.am:
+	* README:
+	* COPYING.examples: Added GPL text, requested by the Ubuntu maintainer, 
+	because the examples are GPL, though the library is LGPL.
+
+	* libgda/src/dictconstraint.hg: pkey_set_fields(), pkey_get_fields(), 
+	fkey_set_fields(), fkey_set_actions(), fkey_get_actions(), 
+	unique_set_fields(), unique_get_fields(): Use SListHandle, so the 
+	application coder can use standard C++ containers.
+	These function names are not very nice.
 2.9.6:
 
 2007-06-10  Murray Cumming  <murrayc@murrayc.com>

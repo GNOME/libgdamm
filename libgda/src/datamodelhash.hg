@@ -49,7 +49,7 @@ public:
   _WRAP_METHOD(void clear(), gda_data_model_hash_clear)
   _WRAP_METHOD(void insert_row(int rownum, const Glib::RefPtr<Row>& row), gda_data_model_hash_insert_row)
 
-  //TODO: properties, signals, vfuncs
+  _WRAP_PROPERTY("n_columns", guint)
 };
 
 } // namespace Gda
