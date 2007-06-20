@@ -456,7 +456,7 @@ GType Value::get_g_type() const
   return g_value_get_gtype(gobj());
 }
 
-void Value::set(GType val)
+void Value::set_g_type(GType val)
 {
   value_reinit(gobj(), G_TYPE_GTYPE);
   g_value_set_gtype(gobj(), val);

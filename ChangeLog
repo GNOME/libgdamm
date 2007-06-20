@@ -1,3 +1,10 @@
+2007-06-20  Murray Cummingg  <murrayc@murrayc.com>
+
+	* libgda/libgdamm/value.cc:
+	* libgda/libgdamm/value.h: Rename set(GType) to set_g_type(GType) because 
+	it is ambiguous with set(int) (or maybe set(guint)). I do not know why this 
+	is only a problem now.
+
 2.9.7:
 
 2007-06-14  Murray Cumming  <murrayc@murrayc.com>

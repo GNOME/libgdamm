@@ -221,7 +221,7 @@ public:
   
   GType get_g_type() const;
   
-  void set(GType val);
+  void set_g_type(GType val);
   
   //Use the copy constructor instead: _WRAP_METHOD(bool set_from_value(const Value& from), gda_value_set_from_value)
   
