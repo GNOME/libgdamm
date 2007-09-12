@@ -317,7 +317,8 @@ Glib::Date Value::get_date() const
 
 void Value::set(const Glib::Date& val)
 {
-  value_reinit(gobj(), Glib::Value<Glib::Date>::value_type());
+  //There is no Glib::Value<> specialization, so we explicitly mention G_TYPE_DATE: value_reinit(gobj(), Glib::Value<Glib::Date>::value_type());
+  value_reinit(gobj(), G_TYPE_DATE);
   g_value_set_boxed(gobj(), val.gobj());
 }
 
@@ -370,7 +371,7 @@ const GdaNumeric* Value::get_numeric() const
 
 void Value::set(const GdaNumeric * val)
 {
-  gda_value_set_numeric(gobj(), val); 
+  gda_value_set_numeric(gobj(), val);
 }
 
 float Value::get_float() const

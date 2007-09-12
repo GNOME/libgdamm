@@ -1,4 +1,11 @@
-2007-06-20  Murray Cummingg  <murrayc@murrayc.com>
+2.9.8:
+
+2007-09-10  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/libgdamm/value.cc: set(Glib::Date): Correctly initialize 
+	the GValue, so that the date is actually used. 
+
+2007-06-20  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/libgdamm/value.cc:
 	* libgda/libgdamm/value.h: Rename set(GType) to set_g_type(GType) because 

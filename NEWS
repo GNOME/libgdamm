@@ -1,3 +1,9 @@
+2.9.8:
+
+* Value:
+  - Rename set(GType) to set_g_type(GType).
+  - set(Glib::Date): Correct the GValue initialization.
+
 2.9.7:
 
 * DictConstraint: pkey_set_fields(), pkey_get_fields(), 
