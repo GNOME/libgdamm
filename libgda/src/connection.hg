@@ -170,6 +170,27 @@ public:
   Glib::RefPtr<DataModel> execute_select_command(const Glib::ustring& cmd, std::auto_ptr<Glib::Error>& error);
 #endif
 
+  /** Executes a selection command on the given connection.
+   *
+   * Note that no check is made regarding the actual number of statements in @a cmd or if it really contains a SELECT
+   * statement. This function is just a convenience function around the execute_command()
+   * method. If @a cmd contains several statements, only the last DataModel is returned.
+   * See the documentation of the execute_command() for information
+   * about the @a params  list of parameters.
+   *
+   * @param cmd A Command.
+   * @param params Parameter list for the command.
+   * @result A DataModel containing the data returned by the
+   * data source, or a null DataModel if an error occurred.
+   *
+   * @throw ConnectionError
+   */
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  Glib::RefPtr<DataModel> execute_select_command(const Glib::ustring& cmd, const Glib::RefPtr<ParameterList>& params);
+#else
+  Glib::RefPtr<DataModel> execute_select_command(const Glib::ustring& cmd, const Glib::RefPtr<ParameterList>& params, std::auto_ptr<Glib::Error>& error);
+#endif
+
   _WRAP_METHOD(int execute_non_select_command(const Command& cmd, const Glib::RefPtr<ParameterList>& params), gda_connection_execute_non_select_command, errthrow)
 
   /** Executes a non-selection command on the given connection.
@@ -210,6 +231,29 @@ public:
   int execute_non_select_command(const Glib::ustring& cmd);
 #else
   int execute_non_select_command(const Glib::ustring& cmd, std::auto_ptr<Glib::Error>& error);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+
+  /** Executes a non-selection command on the given connection.
+   *
+   * This function returns the number of rows impacted by the execution of @a cmd, or -1
+   * if an error occurred, or -2 if the provider does not return the number of rows impacted.
+   *
+   * Note that no check is made regarding the actual number of statements in @a cmd or if it really contains a non SELECT
+   * statement. This function is just a convenience function around the execute_command()
+   * function. If @a cmd contains several statements, the last ParameterList is returned.
+   * See the documentation of the execute_command() for information
+   * about the @a params  list of parameters.
+   *
+   * @param cmd A Command.
+   * @param params Parameter list for the command.
+   * @result the number of rows affected (>=0) or -1 or -2 
+   *
+   * @throw ConnectionError
+   */
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  int execute_non_select_command(const Glib::ustring& cmd, const Glib::RefPtr<ParameterList>& params);
+#else
+  int execute_non_select_command(const Glib::ustring& cmd, const Glib::RefPtr<ParameterList>& params, std::auto_ptr<Glib::Error>& error);
 #endif // GLIBMM_EXCEPTIONS_ENABLED
 
   //Note that we do not add a non-const version of this because the documentation says that it should not be modified:

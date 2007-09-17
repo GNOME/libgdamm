@@ -116,6 +116,27 @@ Glib::RefPtr<DataModel> Connection::execute_select_command(const Glib::ustring& 
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::RefPtr<DataModel> Connection::execute_select_command(const Glib::ustring& cmd, const Glib::RefPtr<ParameterList>& params)
+#else
+Glib::RefPtr<DataModel> Connection::execute_select_command(const Glib::ustring& cmd, const Glib::RefPtr<ParameterList>& params, std::auto_ptr<Glib::Error>& error)
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+{
+  Command command(cmd);
+
+  GError *gerror = 0;
+  Glib::RefPtr<DataModel> retvalue = Glib::wrap(gda_connection_execute_select_command(gobj(), const_cast<GdaCommand*>((command).gobj()), Glib::unwrap(params), &(gerror)));
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror) ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror) error = ::Glib::Error::throw_exception(gerror);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+
+  return retvalue;
+}
+
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 int Connection::execute_non_select_command(const Command& cmd)
 #else
 int Connection::execute_non_select_command(const Command& cmd, std::auto_ptr<Glib::Error>& error)
@@ -134,6 +155,7 @@ int Connection::execute_non_select_command(const Command& cmd, std::auto_ptr<Gli
   return retvalue;
 }
 
+
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 int Connection::execute_non_select_command(const Glib::ustring& cmd)
 #else
@@ -143,7 +165,27 @@ int Connection::execute_non_select_command(const Glib::ustring& cmd, std::auto_p
   Command command(cmd);
 
   GError *gerror = 0;
-  int retvalue = gda_connection_execute_non_select_command(gobj(), const_cast<GdaCommand*>(command.gobj()), 0, &(gerror));
+  const int retvalue = gda_connection_execute_non_select_command(gobj(), const_cast<GdaCommand*>(command.gobj()), 0, &(gerror));
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror) ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror) error = ::Glib::Error::throw_exception(gerror);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+
+  return retvalue;
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+int Connection::execute_non_select_command(const Glib::ustring& cmd, const Glib::RefPtr<ParameterList>& params)
+#else
+int Connection::execute_non_select_command(const Glib::ustring& cmd, const Glib::RefPtr<ParameterList>& params, std::auto_ptr<Glib::Error>& error)
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+{
+  Command command(cmd);
+
+  GError *gerror = 0;
+  const int retvalue = gda_connection_execute_non_select_command(gobj(), const_cast<GdaCommand*>((command).gobj()), Glib::unwrap(params), &(gerror));
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror) ::Glib::Error::throw_exception(gerror);

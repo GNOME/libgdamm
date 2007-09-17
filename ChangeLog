@@ -1,3 +1,12 @@
+2007-09-17  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg: Added execute_select_command() and execute_non_select_command() that 
+	take the command as a string and that take a parameter list, for convenience.
+	* libgda/src/parameterlist.hg: Remove add_param_*() methods, because we already have add_parameter() 
+	methods that wrap the same C functions. Ref the return, to avoid a crash. None of these could have 
+	worked before.
+
 2.9.8:
 
 2007-09-10  Murray Cumming  <murrayc@murrayc.com>
