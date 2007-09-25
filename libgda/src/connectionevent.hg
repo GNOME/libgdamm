@@ -29,11 +29,11 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace Gnome
 {
 
-_WRAP_ENUM(ConnectionEventCode, GdaConnectionEventCode)
-_WRAP_ENUM(ConnectionEventType, GdaConnectionEventType)
-
 namespace Gda
 {
+
+_WRAP_ENUM(ConnectionEventCode, GdaConnectionEventCode)
+_WRAP_ENUM(ConnectionEventType, GdaConnectionEventType)
 
 /** Any event which has occurred on a GdaConnection.
  * Events occuring on a connection are each represented as a ConnectionEvent object. 
