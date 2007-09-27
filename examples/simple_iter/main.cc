@@ -35,37 +35,27 @@ int main (int argc, char** argv)
   Glib::RefPtr<Gnome::Gda::Client> gda_client = Gnome::Gda::Client::create();
   if(gda_client)
   {
-    //Get a stored data source:
-    const Glib::ustring data_source_name = "datasource_libgdamm_example_simple";
-    Gnome::Gda::DataSourceInfo data_source = Gnome::Gda::Config::find_data_source(data_source_name);
-    if(!data_source)
-    {
-      std::cout << "Creating the DataSource, because it does not exist yet." << std::endl;
-      //Create it if it does not exist already:
-      data_source = Gnome::Gda::DataSourceInfo();
-      data_source.set_name(data_source_name);
-      data_source.set_username("murrayc");
-      data_source.set_password("murraycpw");      
-      data_source.set_description("Data Source for libgdamm simple example.");
-      data_source.set_provider("PostgreSQL");
-      
-      Gnome::Gda::Config::save_data_source(data_source);
-    }
+    const gchar* connection_provider = "PostgreSQL";
 
-    std::cout << " Data source = " << data_source.get_name() << ", User = " << data_source.get_username() << std::endl;
+    const gchar* connection_host = "localhost";
+    const gchar* connection_table = "glom_musiccollection21";
+    const Glib::ustring connection_string = Glib::ustring("HOST=") + connection_host + ";DB_NAME=" + connection_table;
 
+    const gchar* connection_username = "murrayc";
+    const gchar* connection_password = "murraycpw"; 
+     
     Glib::RefPtr<Gnome::Gda::Connection> gda_connection;
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
     try
     {
-      gda_connection= gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password() );
+      gda_connection= gda_client->open_connection_from_string(connection_provider, connection_string, connection_username, connection_password);
     }
     catch(const Glib::Exception& ex)
     {
       std::cerr << "Exception caught: " << ex.what() << std::endl;
     }
 #else
-    gda_connection = gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password(), Gnome::Gda::ConnectionOptions(0), error);
+    gda_connection = gda_client->open_connection_from_string(connection_provider, connection_string, connection_username, connection_password, Gnome::Gda::ConnectionOptions(0), error);
     if(error)
     {
       std::cerr << "Exception caught: " << error->what() << std::endl;
@@ -73,14 +63,14 @@ int main (int argc, char** argv)
 #endif // GLIBMM_EXCEPTIONS_ENABLED
     
     if(!gda_connection)
-      std::cerr << "Error: Could not open connection to " << data_source.get_name() << std::endl;
+      std::cerr << "Error: Could not open connection to " << connection_string << std::endl;
     else
     {
       //Open database:
       //gda_connection->change_database("murrayc");
 
       //Get data from a table:
-      Gnome::Gda::Command command("SELECT * FROM tbltest1");
+      Gnome::Gda::Command command("SELECT * FROM artists");
 
       //Specify a parameter, to request an iter-only model:
       Glib::RefPtr<Gnome::Gda::ParameterList> params = Gnome::Gda::ParameterList::create();
@@ -120,6 +110,7 @@ int main (int argc, char** argv)
           std::cout << "      column " << i << ": " <<  data_model->get_column_title(i);
 
           //Find out whether it's the primary key:
+          //TODO: This does not seem to work.
           const Glib::RefPtr<Gnome::Gda::Column> field = data_model->describe_column(i);
           const bool is_primary_key = field->get_primary_key();
           if(is_primary_key)
@@ -127,6 +118,8 @@ int main (int argc, char** argv)
 
           std::cout << std::endl;
         }
+
+        std::cout << std::endl;
 
         Glib::RefPtr<Gnome::Gda::DataModelIter> iter = data_model->create_iter();
         int row = 0;
@@ -142,6 +135,7 @@ int main (int argc, char** argv)
           }
 
           std::cout << std::endl;   
+          ++row;
         }
 
         std::cout << "    Number of rows: " << row << std::endl;

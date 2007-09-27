@@ -36,6 +36,7 @@ int main (int argc, char** argv)
   if(gda_client)
   {
     //Get a stored data source:
+    //(Note that you might prefer to just use Gnome::Gda::Client::open_connection_from_string() instead.)
     const Glib::ustring data_source_name = "datasource_libgdamm_example_simple";
     Gnome::Gda::DataSourceInfo data_source = Gnome::Gda::Config::find_data_source(data_source_name);
     if(!data_source)
@@ -48,16 +49,29 @@ int main (int argc, char** argv)
       data_source.set_password("murraycpw");      
       data_source.set_description("Data Source for libgdamm simple example.");
       data_source.set_provider("PostgreSQL");
+      data_source.set_cnc_string("DB_NAME=glom_musiccollection21");
       
       Gnome::Gda::Config::save_data_source(data_source);
     }
 
     std::cout << " Data source = " << data_source.get_name() << ", User = " << data_source.get_username() << std::endl;
 
+    Glib::RefPtr<Gnome::Gda::Connection> gda_connection;
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-    Glib::RefPtr<Gnome::Gda::Connection> gda_connection = gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password() );
+    try
+    {
+      gda_connection = gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password() );
+    }
+    catch(const Glib::Exception& ex)
+    {
+      std::cerr << "Exception caught: " << ex.what() << std::endl;
+    }
 #else
-    Glib::RefPtr<Gnome::Gda::Connection> gda_connection = gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password(), Gnome::Gda::ConnectionOptions(0), error);
+    gda_connection = gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password(), Gnome::Gda::ConnectionOptions(0), error);
+    if(error)
+    {
+      std::cerr << "Exception caught: " << error->what() << std::endl;
+    }
 #endif // GLIBMM_EXCEPTIONS_ENABLED
     
     if(!gda_connection)
@@ -68,13 +82,25 @@ int main (int argc, char** argv)
       //gda_connection->change_database("murrayc");
 
       //Get data from a table:
-      Gnome::Gda::Command command("SELECT * FROM tbltest1");
+      Gnome::Gda::Command command("SELECT * FROM artists");
 
+      Glib::RefPtr<Gnome::Gda::DataModel> data_model;
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-      Glib::RefPtr<Gnome::Gda::DataModel> data_model = gda_connection->execute_select_command(command);
+      try
+      {
+        data_model = gda_connection->execute_select_command(command);
+      }
+      catch(const Glib::Exception& ex)
+      {
+       std::cerr << "Exception caught: " << ex.what() << std::endl;
+      }
 #else
-      Glib::RefPtr<Gnome::Gda::DataModel> data_model = gda_connection->execute_select_command(command, error);
-#endif // GLIBMM_EXCEPTIONS_ENABLED
+      data_model = gda_connection->execute_select_command(command, error);
+      if(error)
+      {
+        std::cerr << "Exception caught: " << error->what() << std::endl;
+      }
+#endif //GLIBMM_EXCEPTIONS_ENABLED
 
       if(!data_model)
       {

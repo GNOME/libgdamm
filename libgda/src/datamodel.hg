@@ -90,8 +90,9 @@ public:
   _WRAP_METHOD(int get_n_rows() const, gda_data_model_get_n_rows)
   _WRAP_METHOD(int get_n_columns() const, gda_data_model_get_n_columns)
 
-  _WRAP_METHOD(Glib::RefPtr<Column> describe_column(int col), gda_data_model_describe_column)
-  _WRAP_METHOD(Glib::RefPtr<const Column> describe_column(int col) const, gda_data_model_describe_column)
+  _WRAP_METHOD(Glib::RefPtr<Column> describe_column(int col), gda_data_model_describe_column, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Column> describe_column(int col) const, gda_data_model_describe_column, refreturn, constversion)
+
   _WRAP_METHOD(int get_column_index(const Glib::ustring& name) const, gda_data_model_get_column_index_by_name)
   _WRAP_METHOD(Glib::ustring get_column_title(int col) const, gda_data_model_get_column_title)
   _WRAP_METHOD(void set_column_title(int col, const Glib::ustring& title), gda_data_model_set_column_title)

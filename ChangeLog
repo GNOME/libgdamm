@@ -1,5 +1,14 @@
 2007-09-27  Murray Cumming  <murrayc@murrayc.com>
 
+	* examples/simple/main.cc: Add a cnc_string to the DataSourceInfo to 
+	specify the table, to make this work. Catch exceptions.
+	* examples/simple_iter/main.cc: Use a full cnc_string instead of a 
+	DataSourceInfo, to show how that is done.
+	* libgda/src/datamodel.hg: describe_column(): Use refreturn to avoid 
+	a reference-counting problem.
+
+2007-09-27  Murray Cumming  <murrayc@murrayc.com>
+
 	* configure.in:
 	* examples/Makefile.am:
 	* examples/simple_iter/main.cc: Added an example that uses ITER_MODEL_ONLY.
