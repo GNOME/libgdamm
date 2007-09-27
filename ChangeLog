@@ -1,3 +1,12 @@
+2007-09-27  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in:
+	* examples/Makefile.am:
+	* examples/simple_iter/main.cc: Added an example that uses ITER_MODEL_ONLY.
+	This does not actually work, and the simple example probably doesn't work either, 
+	because we have not specified a table name - see bug #480860. Everybody must 
+	be using the DSN string instead of the DataSourceInfo.
+
 2007-09-25  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/connectionevent.hg: Put the enums inside the Gnome::Gda namespace instead of 

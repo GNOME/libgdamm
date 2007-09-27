@@ -156,5 +156,6 @@ AC_OUTPUT([
     examples/list_data_sources/Makefile
     examples/introspection/Makefile
     examples/simple/Makefile
+    examples/simple_iter/Makefile
 ])
 
