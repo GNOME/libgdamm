@@ -89,6 +89,8 @@ public:
   explicit Value(gshort val);
   
   explicit Value(gushort val);
+
+  explicit Value(gulong val);
   
   explicit Value(const Glib::ustring& val);
   
@@ -195,6 +197,10 @@ public:
   gushort get_ushort() const;
   
   void set(gushort val);
+
+  gulong get_ulong() const;
+  
+  void set(gulong val);
   
   Glib::ustring get_string() const;
   

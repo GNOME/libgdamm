@@ -122,6 +122,11 @@ Value::Value(gushort val)
   set(val);
 }
 
+Value::Value(gulong val)
+{
+  set(val);
+}
+
 Value::Value(const Glib::ustring& val)
 {
   set(val);
@@ -403,6 +408,16 @@ gushort Value::get_ushort() const
 void Value::set(gushort val)
 {
   gda_value_set_ushort(gobj(), val); 
+}
+
+gulong Value::get_ulong() const
+{
+  return g_value_get_ulong(const_cast<GValue*>(gobj()));
+}
+
+void Value::set(gulong val)
+{
+  g_value_set_ulong(gobj(), val); 
 }
 
 Glib::ustring Value::get_string() const

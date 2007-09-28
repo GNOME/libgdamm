@@ -1,3 +1,9 @@
+2007-09-28  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/libgdamm/value.cc:
+	* libgda/libgdamm/value.h: Added get_ulong() and set_ulong() and 
+	a constructor.
+
 2007-09-27  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/simple/main.cc: Add a cnc_string to the DataSourceInfo to 
