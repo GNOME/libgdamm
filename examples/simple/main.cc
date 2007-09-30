@@ -68,7 +68,7 @@ int main (int argc, char** argv)
     }
 #else
     gda_connection = gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password(), Gnome::Gda::ConnectionOptions(0), error);
-    if(error)
+    if(error.get())
     {
       std::cerr << "Exception caught: " << error->what() << std::endl;
     }
@@ -96,7 +96,7 @@ int main (int argc, char** argv)
       }
 #else
       data_model = gda_connection->execute_select_command(command, error);
-      if(error)
+      if(error.get())
       {
         std::cerr << "Exception caught: " << error->what() << std::endl;
       }
