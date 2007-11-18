@@ -1,3 +1,23 @@
+2.9.81
+
+* DataModel: describe_column(): Use refreturn to avoid 
+  a reference-counting problem.
+* Connection: Added execute_select_command() and execute_non_select_command() that 
+  take the command as a string and that take a parameter list, for convenience.
+* ParameterList: Remove add_param_*() methods, because we already have add_parameter() 
+  methods that wrap the same C functions. Ref the return, to avoid a crash.
+  None of these could have worked before.
+* ConnectionEvent: Put the enums inside the Gnome::Gda namespace 
+  instead of inside Gnome::.
+* Value:
+  Added get_ulong() and set_ulong() and a constructor.
+  (Murray Cumming)
+* Build: Fix build when exceptions are disabled in glibmm.
+  (Armin Burgmeier)
+* Documentation: Added simple_iter example to show the use 
+  of ITER_MODEL_ONLY models.
+  (Murray Cumming)
+
 2.9.8:
 
 * Value:
