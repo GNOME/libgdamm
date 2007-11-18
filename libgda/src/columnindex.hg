@@ -45,7 +45,7 @@ class ColumnIndex : public Glib::Object
    _CLASS_GOBJECT(ColumnIndex, GdaColumnIndex, GDA_COLUMN_INDEX, Glib::Object, GObject)
 protected:
   _CTOR_DEFAULT()
-  _IGNORE(gda_column_index_new);
+  _IGNORE(gda_column_index_new)
 
 public:
   _WRAP_CREATE()

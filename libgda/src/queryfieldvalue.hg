@@ -64,8 +64,8 @@ protected:
   QueryFieldValue(const Glib::RefPtr<Query>& query, const Value& value);
 
 public:
-  _WRAP_CREATE(const Glib::RefPtr<Query>& query, GType type);
-  _WRAP_CREATE(const Glib::RefPtr<Query>& query, const Value& value);
+  _WRAP_CREATE(const Glib::RefPtr<Query>& query, GType type)
+  _WRAP_CREATE(const Glib::RefPtr<Query>& query, const Value& value)
 
   _WRAP_METHOD(void set_value(const Value& val), gda_query_field_value_set_value)
   _WRAP_METHOD(Value get_value() const, gda_query_field_value_get_value)

@@ -61,7 +61,7 @@ public:
   Value get_value(int num) const;
   _IGNORE(gda_row_get_value)
 
-  _WRAP_METHOD(bool set_value(int num, const Value& value), gda_row_set_value);
+  _WRAP_METHOD(bool set_value(int num, const Value& value), gda_row_set_value)
 
   _WRAP_METHOD(Glib::RefPtr<DataModel> get_model(), gda_row_get_model, refreturn)  
   _WRAP_METHOD(Glib::RefPtr<const DataModel> get_model() const, gda_row_get_model, constversion) 

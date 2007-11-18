@@ -1,3 +1,17 @@
+2007-11-18  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/blobop.hg:
+	* libgda/src/column.hg:
+	* libgda/src/columnindex.hg:
+	* libgda/src/connection.hg:
+	* libgda/src/dictdatabase.hg:
+	* libgda/src/parameter.hg:
+	* libgda/src/queryfieldvalue.hg:
+	* libgda/src/row.hg:
+	* libgda/src/serveroperation.hg:
+	Remove trailing ;s to avoid warnings when --pedantic is used with 
+	gcc.
+
 2007-09-30  Armin Burgmeier  <armin@openismus.com>
 
 	* examples/simple/main.cc:

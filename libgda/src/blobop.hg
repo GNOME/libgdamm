@@ -44,11 +44,11 @@ class BlobOp : public Glib::Object
   public:
     _WRAP_CREATE()
     
-    _WRAP_METHOD(long get_length() const, gda_blob_op_get_length);
-    _WRAP_METHOD(long read(Blob& blob, long offset, long size), gda_blob_op_read);
-    _WRAP_METHOD(long write(Blob& blob, long offset), gda_blob_op_write);
-    _WRAP_METHOD(bool read_all(Blob& blob), gda_blob_op_read_all);
-    _WRAP_METHOD(bool write_all(Blob& blob), gda_blob_op_write_all);
+    _WRAP_METHOD(long get_length() const, gda_blob_op_get_length)
+    _WRAP_METHOD(long read(Blob& blob, long offset, long size), gda_blob_op_read)
+    _WRAP_METHOD(long write(Blob& blob, long offset), gda_blob_op_write)
+    _WRAP_METHOD(bool read_all(Blob& blob), gda_blob_op_read_all)
+    _WRAP_METHOD(bool write_all(Blob& blob), gda_blob_op_write_all)
     
     // vfuncs are not wrapped!
 };

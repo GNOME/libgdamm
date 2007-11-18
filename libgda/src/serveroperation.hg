@@ -69,7 +69,7 @@ public:
 //_WRAP_METHOD(ServerOperationNodeType get_node_type_v(const Glib::ustring& *path_array),  gda_server_operation_get_node_type_v)
 
   //_WRAP_METHOD(GdaParameterList* get_node_parameter_list(const Glib::ustring& path) const, gda_server_operation_get_node_plist)
-  //_WRAP_METHOD(GdaParameterList *gda_server_operation_get_node_plist_v(const Glib::ustring& *path_array);
+  //_WRAP_METHOD(GdaParameterList *gda_server_operation_get_node_plist_v(const Glib::ustring& *path_array)
 
   //_WRAP_METHOD(GdaParameter* get_node_param(const Glib::ustring& path) const, gda_server_operation_get_node_param)
   //_WRAP_METHOD(GdaParameter* gda_server_operation_get_node_param_v(const Glib::ustring& *path_array), gda_server_operation_get_node_param_v)

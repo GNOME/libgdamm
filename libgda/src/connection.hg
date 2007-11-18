@@ -295,7 +295,7 @@ gint                 gda_connection_execute_non_select_command (GdaConnection *c
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const ConnectionEvent> > get_events() const, gda_connection_get_events)
 
 
-  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Value& from) const, gda_connection_value_to_sql_string);
+  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Value& from) const, gda_connection_value_to_sql_string)
 
   _WRAP_METHOD(bool supports_feature(ConnectionFeature feature) const, gda_connection_supports_feature)
 

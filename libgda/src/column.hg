@@ -88,7 +88,7 @@ public:
   _WRAP_METHOD(void set_default_value(const Value& default_value), gda_column_set_default_value)
 
   _WRAP_SIGNAL(void name_changed(const Glib::ustring& old_name), "name-changed")
-  _WRAP_SIGNAL(void g_type_changed(GType old_type, GType new_type), "g-type-changed");
+  _WRAP_SIGNAL(void g_type_changed(GType old_type, GType new_type), "g-type-changed")
 
   _WRAP_PROPERTY("id", Glib::ustring)
 };

@@ -67,8 +67,8 @@ public:
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<DictTable> > get_tables(), gda_dict_database_get_tables)
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const DictTable> > get_tables() const, gda_dict_database_get_tables)
 
-  _WRAP_METHOD(Glib::RefPtr<DictTable> get_table_by_name(const Glib::ustring& name), gda_dict_database_get_table_by_name, refreturn);
-  _WRAP_METHOD(Glib::RefPtr<const DictTable> get_table_by_name(const Glib::ustring& name) const, gda_dict_database_get_table_by_name, constversion);
+  _WRAP_METHOD(Glib::RefPtr<DictTable> get_table_by_name(const Glib::ustring& name), gda_dict_database_get_table_by_name, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const DictTable> get_table_by_name(const Glib::ustring& name) const, gda_dict_database_get_table_by_name, constversion)
 
   _WRAP_METHOD(Glib::RefPtr<DictTable> get_table_by_xml_id(const Glib::ustring& xml_id), gda_dict_database_get_table_by_xml_id, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const DictTable> get_table_by_xml_id(const Glib::ustring& xml_id) const, gda_dict_database_get_table_by_xml_id, constversion)
