@@ -1,3 +1,9 @@
+2008-01-28  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/column.hg:
+	* libgda/src/dictdatabase.hg: Added a string conversion for the signal, 
+	because this is no longer in the .m4 file installed by glibmm.
+
 2007-12-31  Armin Burgmeier  <armin@openismus.com>
 
 	* configure.in: Detect whether building for Windows (copied from
