@@ -1,3 +1,15 @@
+2008-03-01  Stefan Potyra  <stefan.potyra@informatik.uni-erlangen.de >
+
+	* configure.in: Increase the first number in LIBGDAMM_SO_VERSION, 
+	to change the .so name to indicate the build breakage in 2.9.81, 
+	wanted by Ubuntu (launchpad bug 190744).
+
+	Note from Murray: We do not normally use that version string much 
+	because it just causes problems and there is no way to indicate 
+	breakage of unstable parts while showing that the whole thing has only 
+	API additions when comparing major stable releases. But libgdamm has 
+	never yet been API stable so we can do it this time.
+
 2008-01-28  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/column.hg:
