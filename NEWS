@@ -1,3 +1,10 @@
+2.9.82:
+
+* .so name change to please Ubuntu.
+  (Stefan Potyra. Launchpad bug 190744.)
+* Windows build fixes.
+  (Armin Burgmeier)
+
 2.9.81
 
 * DataModel: describe_column(): Use refreturn to avoid 
