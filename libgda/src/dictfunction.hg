@@ -67,8 +67,9 @@ public:
   _WRAP_METHOD(Glib::ustring get_sqlname() const, gda_dict_function_get_sqlname)
 
   _WRAP_METHOD(void set_arg_dict_types(const Glib::SListHandle<DictType>& arg_types), gda_dict_function_set_arg_dict_types)
-  // TODO: Does not work because it's a const GSList* 
-  // _WRAP_METHOD(Glib::SListHandle<const DictType> get_arg_dict_types(), gda_dict_function_get_arg_dict_types)
+
+#m4 _CONVERSION(`const GSList*',`Glib::SListHandle< Glib::RefPtr<const DictType> >',`$2((GSList*)$3, Glib::OWNERSHIP_NONE)')
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<const DictType> > get_arg_dict_types() const, gda_dict_function_get_arg_dict_types)
   
     
   _WRAP_METHOD(void set_ret_dict_type(const Glib::RefPtr<DictType>& dt), gda_dict_function_set_ret_dict_type)

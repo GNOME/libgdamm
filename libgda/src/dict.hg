@@ -121,7 +121,6 @@ public:
   _WRAP_METHOD(Glib::RefPtr<const DataHandler> get_default_handler(GType for_type) const, gda_dict_get_default_handler, refreturn, constversion)
 
   //Note that these are described in libgda_others.defs, because the C functions are actually macros:
-  //TODO: Use SListHandle:
   #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<DictType> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
   #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const DictType> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
 

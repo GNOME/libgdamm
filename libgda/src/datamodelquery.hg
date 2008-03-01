@@ -55,8 +55,11 @@ class DataModelQuery
   _CLASS_GOBJECT(DataModelQuery, GdaDataModelQuery, GDA_DATA_MODEL_QUERY, Object, GdaObject)
   _IMPLEMENTS_INTERFACE(DataModel)
 protected:
+
   // Hand-coded to also set dict property
-  //TODO: Documentation.
+  /** Creates a new DataModel object using the data returned by the execution of the query SELECT query.
+   * @param query A SELECT query.
+   */
   explicit DataModelQuery(const Glib::RefPtr<Query>& query);
   _IGNORE(gda_data_model_query_new)
 

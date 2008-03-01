@@ -22,7 +22,7 @@
 
 #include <libgda/gda-dict-type.h>
 #include <libgdamm/dict.h>
-//#include <libgdamm/connection.h>
+#include <libgdamm/connection.h>
 #include <libgda/gda-enum-types.h>
 
 namespace Gnome

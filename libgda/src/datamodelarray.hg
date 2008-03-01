@@ -48,9 +48,9 @@ public:
   _WRAP_METHOD(void set_n_columns(int cols), gda_data_model_array_set_n_columns)
   _WRAP_METHOD(void clear(), gda_data_model_array_clear)
 
-  
-  //TODO: Wrap this if anyone finds it useful:
-  //_WRAP_METHOD(static Glib::RefPtr<DataModelArray> copy(const <Glib::RefPtr<DataModel>& src) const, gda_data_model_array_copy_model, errthrow)
+//TODO: gmmproc can't handle the errthrow with a static, it seems, so hand code:
+//#m4 _CONVERSION(`GdaDataModel*',`Glib::RefPtr<DataModelArray>',`Glib::wrap((GdaDataModelArray*)$3)')
+// _WRAP_METHOD(static Glib::RefPtr<DataModelArray> copy(const Glib::RefPtr<const DataModel>& src) const, gda_data_model_array_copy_model, errthrow)
 };
 
 } // namespace Gda

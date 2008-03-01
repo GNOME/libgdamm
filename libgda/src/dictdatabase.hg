@@ -105,11 +105,10 @@ public:
   _WRAP_SIGNAL(void constraint_removed(const Glib::RefPtr<DictConstraint>& constraint), "constraint_removed")
   _WRAP_SIGNAL(void constraint_updated(const Glib::RefPtr<DictConstraint>& constraint), "constraint_updated")
   _WRAP_SIGNAL(void data_update_started(), "data_update_started")
-  // TODO: These ints should be unsigned int, but gmmproc bails out when using unsigned ints here. armin.
-  #m4 _CONVERSION(`guint', `int', `$3')
-  #m4 _CONVERSION(`int', `guint', `$3')
+
   #m4 _CONVERSION(`const char*',`const Glib::ustring&',__GCHARP_TO_USTRING)
-  _WRAP_SIGNAL(void update_progress(const Glib::ustring& msg, int now, int total), "update_progress")
+  _WRAP_SIGNAL(void update_progress(const Glib::ustring& msg, guint now, guint total), "update_progress")
+
   _WRAP_SIGNAL(void data_update_finished(), "data_update_finished")
 };
 

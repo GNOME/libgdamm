@@ -193,8 +193,7 @@ public:
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryField> > get_fields_by_target(const Glib::RefPtr<QueryTarget>& target, bool visible_fields_only = true), gda_query_get_fields_by_target)
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const QueryField> > get_fields_by_target(const Glib::RefPtr<QueryTarget>& target, bool visible_fields_only = true) const, gda_query_get_fields_by_target)
 
-  // TODO: This is declared in a separate header that has no G_BEGIN_DECS /
-  // G_END_DECL pairs and also looks a bit private. We can still add it
+  // TODO: This is declared in a separate header that looks a bit private. We can still add it
   // later if we need it. armin.
   //_WRAP_METHOD(Glib::RefPtr<QueryField> get_field_by_sql_naming_fields(const Glib::ustring& sql_name, const Glib::SListHandle<Glib::RefPtr<QueryField> >& fields_list), gda_query_get_field_by_sql_naming_fields, refreturn)
   //_WRAP_METHOD(Glib::RefPtr<const QueryField> get_field_by_sql_naming_fields(const Glib::ustring& sql_name, const Glib::SListHandle<Glib::RefPtr<QueryField> >& fields_list) const, gda_query_get_field_by_sql_naming_fields, refreturn, constversion)

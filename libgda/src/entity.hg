@@ -51,8 +51,11 @@ public:
 
   _WRAP_METHOD(bool has_field(const Glib::RefPtr<const EntityField>& field) const, gda_entity_has_field)
 
-  //TODO: Use a ListHandle or similar:
-  _WRAP_METHOD(GSList* get_fields(), gda_entity_get_fields)
+#m4 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<EntityField> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<EntityField> > get_fields(), gda_entity_get_fields)
+
+#m4 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<const EntityField> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<const EntityField> > get_fields() const, gda_entity_get_fields)
 
   _WRAP_METHOD(int get_n_fields() const, gda_entity_get_n_fields)
 

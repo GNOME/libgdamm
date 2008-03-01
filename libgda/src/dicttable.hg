@@ -64,11 +64,15 @@ public:
 
   _WRAP_METHOD(bool is_view() const, gda_dict_table_is_view)
 
-  //TODO: Use ListHandle or similar:
-  _WRAP_METHOD(const GSList* get_parents(), gda_dict_table_get_parents)
 
-  //TODO: Use ListHandle or similar:
-  _WRAP_METHOD(GSList* get_constraints(), gda_dict_table_get_constraints)
+#m4 _CONVERSION(`const GSList*',`Glib::SListHandle< Glib::RefPtr<const DictTable> >',`$2((GSList*)$3, Glib::OWNERSHIP_NONE)')
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<const DictTable> > get_parents() const, gda_dict_table_get_parents)
+
+#m4 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<DictConstraint> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<DictConstraint> > get_constraints(), gda_dict_table_get_constraints)
+
+#m4 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<const DictConstraint> >',`$2((GSList*)$3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<const DictConstraint> > get_constraints() const, gda_dict_table_get_constraints)
 
   _WRAP_METHOD(Glib::RefPtr<DictConstraint> get_pk_constraint(), gda_dict_table_get_pk_constraint, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const DictConstraint> get_pk_constraint() const, gda_dict_table_get_pk_constraint, constversion)

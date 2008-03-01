@@ -69,7 +69,7 @@ public:
   _WRAP_METHOD(void add_synonym(const Glib::ustring& synonym), gda_dict_type_add_synonym)
 
   #m4 _CONVERSION(`const GSList*', `Glib::SListHandle<Glib::ustring>', `$2(const_cast<GSList*>($3), Glib::OWNERSHIP_NONE)')
-  _WRAP_METHOD(Glib::SListHandle<Glib::ustring> get_synonyms(), gda_dict_type_get_synonyms)
+  _WRAP_METHOD(Glib::SListHandle<Glib::ustring> get_synonyms() const, gda_dict_type_get_synonyms)
 
   _WRAP_METHOD(void clear_synonyms(), gda_dict_type_clear_synonyms)
 

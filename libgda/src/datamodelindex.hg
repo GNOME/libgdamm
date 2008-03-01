@@ -35,7 +35,8 @@ namespace Gda
 
 class Row;
 
-//TODO:
+/** Management of DataModel indexes.
+ */
 class DataModelIndex
 {
   _CLASS_BOXEDTYPE(DataModelIndex, GdaDataModelIndex, gda_data_model_index_new, gda_data_model_index_copy, gda_data_model_index_free)

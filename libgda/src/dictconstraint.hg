@@ -59,7 +59,8 @@ class DictConstraint
   _IMPLEMENTS_INTERFACE(Referer)
 protected:
 
-  //TODO: File bug about gda_dict_constraint_new() and gda_dict_constraint_new_with_db() using private API:
+  //TODO: gda_dict_constraint_new() and gda_dict_constraint_new_with_db() use private API.
+  //see http://bugzilla.gnome.org/show_bug.cgi?id=519772
   _WRAP_CTOR(DictConstraint(const Glib::RefPtr<DictTable>& table, DictConstraintType type), gda_dict_constraint_new)
   _WRAP_CTOR(DictConstraint(const Glib::RefPtr<DictDatabase>& db), gda_dict_constraint_new_with_db)
 
@@ -112,7 +113,9 @@ public:
   _WRAP_METHOD(Glib::RefPtr<const DictField> not_null_get_field() const, gda_dict_constraint_not_null_get_field)
 
   _WRAP_PROPERTY("user-constraint", bool)
-  //TODO: properties, signals, vfuncs.
+  //There are no signals.
+
+  //TODO: vfuncs?
 };
 
 } // namespace Gda

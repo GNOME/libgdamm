@@ -64,8 +64,10 @@ public:
   _WRAP_METHOD(void set_scale(int length), gda_dict_field_set_scale)
   _WRAP_METHOD(int get_scale() const, gda_dict_field_get_scale)
 
-  //TODO: Use ListHandle or similar:
-  _WRAP_METHOD(GSList* get_constraints(), gda_dict_field_get_constraints)
+ #m4 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<Connection> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
+ #m4 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<const Connection> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<Connection> > get_constraints(), gda_dict_field_get_constraints)
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<const Connection> > get_constraints() const, gda_dict_field_get_constraints)
 
   _WRAP_METHOD(void set_default_value(const Value& value), gda_dict_field_set_default_value)
   Value get_default_value() const;

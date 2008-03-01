@@ -1,3 +1,16 @@
+2008-03-01  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/dictfield.ccg:
+	* libgda/src/dictfield.hg: get_constraints(), 
+	* libgda/src/dictfunction.hg: get_arg_dict_types((), 
+	* libgda/src/dicttable.hg: get_parents(), get_constraints(),
+	* libgda/src/dicttype.hg: get_synonyms(),
+	* libgda/src/entity.hg: get_fields()
+
+	* libgda/src/queryfieldvalue.hg: Added get_is_parameter().
+	* libgda/src/dictdatabase.hg: update_progress(): 
+	Corrected int to guint for parameters.
+
 2.9.82:
 
 2008-03-01  Murray Cumming  <murrayc@murrayc.com>
