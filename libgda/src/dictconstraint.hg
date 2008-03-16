@@ -87,8 +87,8 @@ public:
   _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<const DictField> > pkey_get_fields() const, gda_dict_constraint_pkey_get_fields)
 
 /* Foreign KEY specific */
-  //TODO:
-  _WRAP_METHOD(void fkey_set_fields(const GSList *pairs), gda_dict_constraint_fkey_set_fields)
+  //TODO: Wrap GdaDictConstraintFkeyPair (which might or might not be a GObject):
+  //_WRAP_METHOD(void fkey_set_fields(const Glib::SListHandle< Glib::RefPtr<DictConstraintFkeyPair> >& pairs), gda_dict_constraint_fkey_set_fields)
 
   _WRAP_METHOD(Glib::RefPtr<DictTable> fkey_get_ref_table(), gda_dict_constraint_fkey_get_ref_table, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const DictTable> fkey_get_ref_table() const, gda_dict_constraint_fkey_get_ref_table, constversion)

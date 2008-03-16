@@ -157,6 +157,9 @@ _CONVERSION(`long&',`glong*',`&($3)')
 _CONVERSION(`Glib::ustring', `const gchar*', `($3).c_str()')
 
 _CONVERSION(`DictConstraintFkAction&',`GdaDictConstraintFkAction*',`(($2) &($3))')
+_CONVERSION(`ServerOperationNodeStatus&',`GdaServerOperationNodeStatus*',`(($2) &($3))')
+
+#_CONVERSION(`GdaServerOperationNodeType' `ServerOperationNodeType',`(($2)($3))')
 
 _CONV_ENUM(Gda,CommandType)
 _CONV_ENUM(Gda,CommandOptions)
@@ -176,6 +179,7 @@ _CONV_ENUM(Gda,ConnectionEventCode)
 _CONV_ENUM(Gda,ConnectionEventType)
 _CONV_ENUM(Gda,ServerOperationType)
 _CONV_ENUM(Gda,ServerOperationNodeType)
+_CONV_ENUM(Gda,ServerOperationNodeStatus)
 _CONV_ENUM(Gda,QueryType)
 _CONV_ENUM(Gda,QueryConditionType)
 _CONV_ENUM(Gda,QueryConditionOperator)

@@ -44,7 +44,7 @@ class HandlerBin : public Object,
 protected:
 
   // TODO: We cannot wrap gda_handler_bin_new_with_prov because this sets some
-  // private fields. I guess these should be properties in libgnomedb. armin.
+  // private fields. I guess these should be properties in libgda. armin.
   //   Maybe that is fixed now. murrayc.
  _CTOR_DEFAULT
 

@@ -74,6 +74,11 @@ public:
   _WRAP_METHOD(bool get_is_default(int num) const, gda_row_get_is_default)
 
   //TODO: Properties.
+
+  _WRAP_PROPERTY("model", Glib::RefPtr<DataModel>)
+  //These are not sensible for libgdamm:
+  //_WRAP_PROPERTY("values", GList*)
+  //_WRAP_PROPERTY("nb_values", int)
 };
 
 } // namespace Gda

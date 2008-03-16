@@ -72,8 +72,6 @@ public:
   _WRAP_METHOD(void set_cond_type(QueryConditionType type), gda_query_condition_set_cond_type)
   _WRAP_METHOD(QueryConditionType get_cond_type() const, gda_query_condition_get_cond_type)
 
-  // TODO: I am not sure whether refcounting works correctly for the
-  // returned QueryConditions. armin.
   #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<QueryCondition> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
   #m4 _CONVERSION(`GSList*', `Glib::SListHandle<Glib::RefPtr<const QueryCondition> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<QueryCondition> > get_children(), gda_query_condition_get_children)

@@ -55,7 +55,6 @@ class ServerProvider : public Glib::Object
 
   _WRAP_METHOD(Glib::ustring get_version() const, gda_server_provider_get_version)
   _WRAP_METHOD(bool open_connection(const Glib::RefPtr<Connection>& cnc, GdaQuarkList *params, const Glib::ustring& username, const Glib::ustring& password), gda_server_provider_open_connection)
-  //TODO: Not implemented: _WRAP_METHOD(bool reset_connection(const Glib::RefPtr<Connection>& cnc), gda_server_provider_reset_connection)
   _WRAP_METHOD(bool close_connection(const Glib::RefPtr<Connection>& cnc), gda_server_provider_close_connection)
 
   _WRAP_METHOD(Glib::ustring get_server_version(const Glib::RefPtr<Connection>& cnc) const, gda_server_provider_get_server_version)
@@ -87,12 +86,10 @@ class ServerProvider : public Glib::Object
 
   _WRAP_METHOD(bool supports_feature(const Glib::RefPtr<Connection>& cnc, ConnectionFeature feature) const, gda_server_provider_supports_feature)
 
-  // TODO: The libgda docs say that these functions return a new GdaDataModel.
-  // Normally, the caller should already own a reference on such a new model,
-  // but refreturn adds anotherone. We should check that it does the right
-  // thing. armin.
-  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params), gda_server_provider_get_schema, retreturn, errthrow)
-  // TODO: This is not constversion because the generated code does not pass
+  // We don't use refreturn here because this returns a new object with an initial reference:
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params), gda_server_provider_get_schema, errthrow)
+ 
+ // TODO: This is not constversion because the generated code does not pass
   // error to the non-const function if exceptions are disabled.
   _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params) const, gda_server_provider_get_schema, refreturn, errthrow)
 

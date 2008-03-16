@@ -73,7 +73,7 @@ public:
 
   _WRAP_METHOD(void clear_synonyms(), gda_dict_type_clear_synonyms)
 
- //TODO: properties, signals, vfuncs.
+ //There are no properties, signals or vfuncs.
 };
 
 } // namespace Gda

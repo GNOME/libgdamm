@@ -82,7 +82,10 @@ public:
   _WRAP_METHOD(void set_attributes(DictFieldAttribute attributes), gda_dict_field_set_attributes)
   _WRAP_METHOD(DictFieldAttribute get_attributes() const, gda_dict_field_get_attributes)
 
- //TODO: properties, signals, vfuncs.
+  _WRAP_PROPERTY("table", Glib::RefPtr<DictTable>)
+  _WRAP_PROPERTY("entry-plugin", std::string)
+
+  //There are no signals or vfuncs.
 };
 
 } // namespace Gda

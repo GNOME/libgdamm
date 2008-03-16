@@ -40,6 +40,7 @@ class Connection;
 
 //_WRAP_ENUM(ClientSpecsType, GdaClientSpecsType)
 _WRAP_ENUM(ServerOperationNodeType, GdaServerOperationNodeType)
+_WRAP_ENUM(ServerOperationNodeStatus, GdaServerOperationNodeStatus)
 
 /** @defgroup DDL Data definition (DDL) queries
  */
@@ -64,9 +65,8 @@ public:
   void set_value_at(const Glib::ustring& path, const Glib::ustring& value, std::auto_ptr<Glib::Error>& error);
 #endif // GLIBMM_EXCEPTIONS_ENABLED
 
-//TODO ?:
-  //_WRAP_METHOD(ServerOperationNodeType get_node_type(const Glib::ustring& path) const, gda_server_operation_get_node_type)
-//_WRAP_METHOD(ServerOperationNodeType get_node_type_v(const Glib::ustring& *path_array),  gda_server_operation_get_node_type_v)
+  _WRAP_METHOD(ServerOperationNodeType get_node_type(const Glib::ustring& path, ServerOperationNodeStatus& status) const, gda_server_operation_get_node_type)
+ //_WRAP_METHOD(ServerOperationNodeType get_node_type_v(const Glib::ustring& *path_array),  gda_server_operation_get_node_type_v)
 
   //_WRAP_METHOD(GdaParameterList* get_node_parameter_list(const Glib::ustring& path) const, gda_server_operation_get_node_plist)
   //_WRAP_METHOD(GdaParameterList *gda_server_operation_get_node_plist_v(const Glib::ustring& *path_array)

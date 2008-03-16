@@ -79,7 +79,10 @@ public:
 
   _WRAP_METHOD(bool update_dbms_data(), gda_dict_table_update_dbms_data, errthrow)
 
- //TODO: properties, signals, vfuncs.
+  _WRAP_PROPERTY("db", Glib::RefPtr<DictDatabase>)
+  _WRAP_PROPERTY("is-view", bool)
+
+ //There are no signals or vfuncs.
 };
 
 } // namespace Gda

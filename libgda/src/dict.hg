@@ -142,18 +142,14 @@ public:
 
   //TODO: Use a ListHandle or similar?
   GSList* get_aggregates() const;
-#if 0
-  // The C counterparts to these functions are declared in a header that is not surrounded by
-  // G_BEGIN_DECL / G_END_DECL (gda-dict-reg-aggregates.h). This is a bit strange since there is a macro calling these
-  // functions in the public gda-dict.h file.
-  GSList* get_aggregates_by_name (const Glib::ustring& aggname);
+
+  GSList* get_aggregates_by_name(const Glib::ustring& aggname);
 
   //TODO: Use a C++ type, or at least a reference instead of a pointer:
   //TODO: Make sure that these take a reference.
   Glib::RefPtr<DictAggregate> get_aggregate_by_name_arg(const Glib::ustring& aggname, GdaDictType *argtype);
   Glib::RefPtr<DictAggregate> get_aggregate_by_xml_id(const Glib::ustring& xml_id);
   Glib::RefPtr<DictAggregate> get_aggregate_by_dbms_id(const Glib::ustring& dbms_id);
-#endif
 
 /* GdaQuery manipulations */
   //_WRAP_METHOD(void declare_query(const Glib::RefPtr<Query>& query), gda_dict_declare_query)

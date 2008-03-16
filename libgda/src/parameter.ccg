@@ -87,7 +87,7 @@ bool Parameter::has_restrict_values(Glib::RefPtr<DataModel>& model, int& col) co
   GdaDataModel* gda_model = 0;
   return gda_parameter_has_restrict_values(const_cast<GdaParameter*>(gobj()), &gda_model, &col);
   if(gda_model)
-    model = Glib::wrap(gda_model); //TODO ref this?
+    model = Glib::wrap(gda_model, true); //No ref is provided, so we ref this.
 }
 
 Glib::ustring Parameter::get_value_str() const

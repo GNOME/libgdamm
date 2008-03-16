@@ -1,3 +1,20 @@
+2008-03-16  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py
+	* libgda/src/dictconstraint.hg: Comment out fkey_set_fields() because 
+	we do not yet have a wrapper for GdaDictConstraintFkeyPair.
+	* libgda/src/dictfield.hg: Added table and entry-plugin properties.
+	* libgda/src/dicttable.hg: Added db and is-view properties.
+	* libgda/src/row.hg: Added row property.
+
+	* tools/m4/convert_libgdamm.m4:
+	* libgda/src/serveroperation.hg: Added get_node_type().
+
+	* libgda/src/entity.hg: Added signals, though not really because we 
+	do not have .defs for these yet.
+	* libgda/src/entityfield.hg: Removed vfuncs which probaly have 
+	incorrect refcounting. We can work on this for libgdamm 4.0.
+
 2008-03-01  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/dictfield.ccg:

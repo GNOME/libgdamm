@@ -76,8 +76,13 @@ public:
 
   _WRAP_METHOD(bool is_writable() const, gda_entity_is_writable)
 
+  //TODO: .defs.
+  _WRAP_SIGNAL(void field_added(const Glib::RefPtr<EntityField>& field), field_added)
+  _WRAP_SIGNAL(void field_removed(const Glib::RefPtr<EntityField>& field), field_removed)
+  _WRAP_SIGNAL(void field_updated(const Glib::RefPtr<EntityField>& field), field_updated)
+  _WRAP_SIGNAL(void fields_order_changed(), fields_order_changed)
 
-  //TODO: vfuncs and signals.
+  //TODO: vfuncs
 };
 
 } // namespace Gda
