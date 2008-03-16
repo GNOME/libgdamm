@@ -188,6 +188,7 @@ public:
 
   //These are from gda-datamodel-extra.h:
   //TODO: Are these meant to be public API?
+  //See http://bugzilla.gnome.org/show_bug.cgi?id=513543
   /* Let's assume not. It's safer to add them later if necessary:
   _WRAP_METHOD(void signal_emit_changed(), gda_data_model_signal_emit_changed)
   _WRAP_METHOD(void row_inserted(int row), gda_data_model_row_inserted)

@@ -32,8 +32,6 @@ namespace Gnome
 namespace Gda
 {
 
-//TODO: In the libgda documentation, if the "STR" format is the human-readable text representation in the current locale, then say so.
-
 /** @defgroup DataHandlers Data Handlers
  */
 
@@ -45,8 +43,9 @@ namespace Gda
  * 
  * The DataHandler object can convert a Value to and from both SQL and 'STR'. The SQL representation of a value is the 
  * actual string which would be used in an SQL statement (for example a string's SQL representation is surrounded by 
- * quotes such as 'that\'s a string'). The 'STR' representation is a user friendly representation of a value (and the 
- * previous example would simply be: that's a string).
+ * quotes such as 'that\'s a string'). The 'STR' representation is a human-readable representation of a value appropriate 
+ * for the user's current locale. The 'STR' respresentation of a string is simply the original string without quotes but 
+ * a numerical value or date, for instance, will be formatted according to the user's current locale.
  * 
  * Only one object which implements this interface is needed for any given data type, and it mainly contains some methods 
  * to manage values (as Value structures). The Gnome::Db::DataEntry interface is complementary to this one since it is 

@@ -31,7 +31,6 @@ namespace Gnome
 namespace Gda
 {
 
-//TODO: This is presumably an alternative to using a database provider. If so, document it as such. murrayc.
 
 /** Importing data from a string or a file.
  * This data model imports data from a string or a file. The data can either be in a CSV (comma separated values) 
