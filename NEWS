@@ -1,4 +1,23 @@
-2.9.82:
+3.0.0: (stable)
+
+* DictConstraint: Removed fkey_set_fields().
+* DictDatabase: update_progress(): 
+  Corrected int to guint for parameters.
+* DictField:
+  - Added table and entry-plugin properties.
+  - get_constraints(): Return a Listhandle.
+* DictFuntion: get_arg_dict_types(): Return a Listhandle.
+* DictTable:
+  - Added db and is-view properties.
+  - get_parents(), get_constraints(): Return a Listhandle.
+* DictType: get_synonyms(): Return a Listhandle.
+* Entiry: get_fields(): Return a Listhandle.
+* Row: Added row property.
+* ServerOperation.hg: Added get_node_type().
+* EntityField.hg: Removed some vfuncs.
+* QueryFieldValue: Added get_is_parameter().
+
+2.9.82: (unstable)
 
 * .so name change to please Ubuntu.
   (Stefan Potyra. Launchpad bug 190744.)

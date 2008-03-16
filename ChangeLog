@@ -1,3 +1,5 @@
+3.0.0:
+
 2008-03-16  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py
@@ -22,7 +24,7 @@
 	* libgda/src/dictfunction.hg: get_arg_dict_types((), 
 	* libgda/src/dicttable.hg: get_parents(), get_constraints(),
 	* libgda/src/dicttype.hg: get_synonyms(),
-	* libgda/src/entity.hg: get_fields()
+	* libgda/src/entity.hg: get_fields(): Use ListHandles.
 
 	* libgda/src/queryfieldvalue.hg: Added get_is_parameter().
 	* libgda/src/dictdatabase.hg: update_progress(): 
