@@ -52,8 +52,6 @@ Glib::RefPtr<DataModel> Connection::get_schema(ConnectionSchema schema, std::aut
 {
   GError *gerror = 0;
   Glib::RefPtr<DataModel> retval = Glib::wrap(gda_connection_get_schema(gobj(), ((GdaConnectionSchema)(schema)), 0, &gerror));
-  if(retval)
-    retval->reference();
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror) ::Glib::Error::throw_exception(gerror);

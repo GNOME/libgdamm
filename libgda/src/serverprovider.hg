@@ -91,7 +91,7 @@ class ServerProvider : public Glib::Object
  
  // TODO: This is not constversion because the generated code does not pass
   // error to the non-const function if exceptions are disabled.
-  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params) const, gda_server_provider_get_schema, refreturn, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params) const, gda_server_provider_get_schema, errthrow)
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::RefPtr<DataModel> get_schema(const Glib::RefPtr<Connection>& cnc, ConnectionSchema schema);

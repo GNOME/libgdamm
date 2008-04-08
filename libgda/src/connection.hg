@@ -299,10 +299,10 @@ gint                 gda_connection_execute_non_select_command (GdaConnection *c
 
   _WRAP_METHOD(bool supports_feature(ConnectionFeature feature) const, gda_connection_supports_feature)
 
-  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params), gda_connection_get_schema, errthrow, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_schema(ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params), gda_connection_get_schema, errthrow)
   // TODO: This is not constversion because the generated code does not pass
   // error to the non-const function if exceptions are disabled.
-  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params) const, gda_connection_get_schema, refreturn, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<const DataModel> get_schema(ConnectionSchema schema, const Glib::RefPtr<ParameterList>& params) const, gda_connection_get_schema, errthrow)
 
   /** Asks the underlying data source for a list of database objects.
    * This is the function that lets applications ask the different providers about all their database objects (tables,

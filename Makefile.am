@@ -1,4 +1,4 @@
-SUBDIRS		= tools libgda docs examples
+SUBDIRS		= tools libgda docs examples tests
 DIST_SUBDIRS	= $(SUBDIRS) scripts
 
 EXTRA_DIST	=  \

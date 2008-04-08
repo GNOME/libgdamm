@@ -1,6 +1,6 @@
 /* main.cc
  *
- * Copyright (C) 2007 libgdamm Development Team
+ * Copyright (C) 2008 libgdamm Development Team
  *
  * This program is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU General Public License as 
@@ -66,90 +66,22 @@ int main (int argc, char** argv)
       std::cerr << "Error: Could not open connection to " << connection_string << std::endl;
     else
     {
-      //Open database:
-      //gda_connection->change_database("murrayc");
-
-      //Get data from a table:
-      Gnome::Gda::Command command("SELECT artist_id, picture FROM artists");
-
-      //Specify a parameter, to request an iter-only model:
-      Glib::RefPtr<Gnome::Gda::ParameterList> params = Gnome::Gda::ParameterList::create();
-      Gnome::Gda::Value value;
-      value.set(true);
-      params->add_parameter("ITER_MODEL_ONLY", value);
-
-      Glib::RefPtr<Gnome::Gda::DataModel> data_model;
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
       try
       {
-        data_model = gda_connection->execute_select_command(command, params);
+        gda_connection->execute_non_select_command("SET DATESTYLE = 'ISO'");
       }
       catch(const Glib::Exception& ex)
       {
        std::cerr << "Exception caught: " << ex.what() << std::endl;
       }
 #else
-      data_model = gda_connection->execute_select_command(command, params, error);
+      gda_connection->execute_non_select_command("SET DATESTYLE = 'ISO'", error);
       if(error.get())
       {
         std::cerr << "Exception caught: " << error->what() << std::endl;
       }
 #endif //GLIBMM_EXCEPTIONS_ENABLED
-
-      if(!data_model)
-      {
-        std::cout << "command execution failed." << std::endl;
-      }
-      else if(data_model) 
-      {
-        const int columns =  data_model->get_n_columns();
-        std::cout << "    Number of columns: " << columns << std::endl;
-
-        for(int i = 0; i < columns; ++i)
-        {
-          std::cout << "      column " << i << ": " <<  data_model->get_column_title(i);
-
-          //Find out whether it's the primary key:
-          //TODO: This does not seem to work.
-          const Glib::RefPtr<Gnome::Gda::Column> field = data_model->describe_column(i);
-          const bool is_primary_key = field->get_primary_key();
-          if(is_primary_key)
-            std:: cout << "  (primary key)";
-
-          std::cout << std::endl;
-        }
-
-        std::cout << std::endl;
-
-        Glib::RefPtr<Gnome::Gda::DataModelIter> iter = data_model->create_iter();
-        int row = 0;
-        while(iter->move_next()) //The first move_next() makes the iter point to the first row.
-        {
-          std::cout << "      row " << row << ": ";
-
-          for(int col = 0; col < columns; ++col)
-          {
-            Glib::RefPtr<Gnome::Gda::Parameter> param = iter->get_param_for_column(col);
-            Gnome::Gda::Value value_name = param->get_value();
-
-            std::string str = value_name.to_string();
-            try
-            {
-              std::cout << str << ", ";
-            }
-            catch(const Glib::ConvertError& ex)
-            {
-              std::cout << "(INVALID UTF-8), ";
-            }
-          }
-
-          std::cout << std::endl;   
-          ++row;
-        }
-
-        std::cout << "    Number of rows: " << row << std::endl;
-
-      }
     }
   } 
 

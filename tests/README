@@ -1,0 +1,5 @@
+These are not examples of how to use libgdamm. They are fragments of code to 
+test for regressions and leaks in libgdamm.
+
+See the examples folder for useful example code.
+

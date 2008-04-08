@@ -1,3 +1,18 @@
+2008-04-08  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg: get_schema():
+	* libgda/src/serverprovider.hg: get_schema(): Do not use refreturn 
+	with these, to avoid a leak.
+
+	* Makefile.am:
+	* configure.in:
+	* tests/Makefile.am:
+	* tests/README:
+	* tests/test_execute_command.cc:
+	* tests/test_execute_nonselect_command.cc:
+	* tests/test_get_schema.cc: Added these tests to help me find leaks.
+
 3.0.0:
 
 2008-03-16  Murray Cumming  <murrayc@murrayc.com>

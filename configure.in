@@ -187,5 +187,7 @@ AC_OUTPUT([
     examples/introspection/Makefile
     examples/simple/Makefile
     examples/simple_iter/Makefile
+
+  tests/Makefile
 ])
 
