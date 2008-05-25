@@ -1,16 +1,3 @@
-;; From GdaClient
-
-(define-signal event-notification
-  (of-object "GdaClient")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("GdaConnection*" "p0")
-    '("GdaClientEvent" "p1")
-    '("GdaParameterList*" "p2")
-  )
-)
-
 ;; From GdaColumn
 
 (define-signal name-changed
@@ -27,8 +14,8 @@
   (return-type "void")
   (when "last")
   (parameters
-    '("GType" "p0")
-    '("GType" "p1")
+    '("gint" "p0")
+    '("gint" "p1")
   )
 )
 
@@ -41,7 +28,16 @@
   (construct-only #f)
 )
 
-;; From GdaColumnIndex
+;; From GdaConnectionEvent
+
+(define-property type
+  (of-object "GdaConnectionEvent")
+  (prop-type "GParamInt")
+  (docs "Connection event type")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
 
 ;; From GdaConnection
 
@@ -69,7 +65,7 @@
 (define-signal conn-closed
   (of-object "GdaConnection")
   (return-type "void")
-  (when "first")
+  (when "last")
 )
 
 (define-signal dsn-changed
@@ -82,15 +78,6 @@
   (of-object "GdaConnection")
   (return-type "void")
   (when "last")
-)
-
-(define-property client
-  (of-object "GdaConnection")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
 )
 
 (define-property dsn
@@ -120,16 +107,7 @@
   (construct-only #f)
 )
 
-(define-property username
-  (of-object "GdaConnection")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property password
+(define-property auth-string
   (of-object "GdaConnection")
   (prop-type "GParamString")
   (docs "")
@@ -147,12 +125,39 @@
   (construct-only #f)
 )
 
-;; From GdaConnectionEvent
+(define-property meta-store
+  (of-object "GdaConnection")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
 
-(define-property type
-  (of-object "GdaConnectionEvent")
-  (prop-type "GParamInt")
-  (docs "Connection event type")
+;; From GdaDataComparator
+
+(define-signal diff-computed
+  (of-object "GdaDataComparator")
+  (return-type "gboolean")
+  (when "last")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-property old-model
+  (of-object "GdaDataComparator")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property new-model
+  (of-object "GdaDataComparator")
+  (prop-type "GParamObject")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -160,54 +165,9 @@
 
 ;; From GdaDataModelArray
 
-(define-property dict
-  (of-object "GdaDataModelArray")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaDataModelArray")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaDataModelArray")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
 (define-property read-only
   (of-object "GdaDataModelArray")
   (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property command-text
-  (of-object "GdaDataModelArray")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property command-type
-  (of-object "GdaDataModelArray")
-  (prop-type "GParamInt")
   (docs "")
   (readable #t)
   (writable #t)
@@ -223,60 +183,121 @@
   (construct-only #f)
 )
 
-;; From GdaDataModelRow
+;; From GdaDataModelBdb
 
-(define-property dict
-  (of-object "GdaDataModelRow")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
+(define-property filename
+  (of-object "GdaDataModelBdb")
+  (prop-type "GParamString")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #t)
 )
 
-(define-property changed-blocked
-  (of-object "GdaDataModelRow")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaDataModelRow")
+(define-property db-name
+  (of-object "GdaDataModelBdb")
   (prop-type "GParamString")
   (docs "")
   (readable #t)
   (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaDataModelQuery
+
+(define-property query
+  (of-object "GdaDataModelQuery")
+  (prop-type "GParamObject")
+  (docs "SELECT Query to be executed to populate the model with data")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property insert-query
+  (of-object "GdaDataModelQuery")
+  (prop-type "GParamObject")
+  (docs "INSERT Query to be executed to add data")
+  (readable #t)
+  (writable #t)
   (construct-only #f)
 )
 
-(define-property read-only
-  (of-object "GdaDataModelRow")
+(define-property update-query
+  (of-object "GdaDataModelQuery")
+  (prop-type "GParamObject")
+  (docs "UPDATE Query to be executed to update data")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property delete-query
+  (of-object "GdaDataModelQuery")
+  (prop-type "GParamObject")
+  (docs "DELETE Query to be executed to remove data")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property use-transaction
+  (of-object "GdaDataModelQuery")
   (prop-type "GParamBoolean")
-  (docs "")
+  (docs "Run modification statements within a transaction")
   (readable #t)
   (writable #t)
   (construct-only #f)
 )
 
-(define-property command-text
-  (of-object "GdaDataModelRow")
-  (prop-type "GParamString")
-  (docs "")
+(define-property connection
+  (of-object "GdaDataModelQuery")
+  (prop-type "GParamObject")
+  (docs "Connection to use to execute statements")
   (readable #t)
   (writable #t)
   (construct-only #f)
 )
 
-(define-property command-type
-  (of-object "GdaDataModelRow")
-  (prop-type "GParamInt")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
+;; From GdaDataModel
+
+(define-signal changed
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal reset
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal row-inserted
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal row-updated
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal row-removed
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
 )
 
 ;; From GdaDataModelIter
@@ -305,25 +326,7 @@
   (when "first")
 )
 
-(define-property dict
-  (of-object "GdaDataModelIter")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaDataModelIter")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
+(define-property id
   (of-object "GdaDataModelIter")
   (prop-type "GParamString")
   (docs "")
@@ -332,10 +335,28 @@
   (construct-only #f)
 )
 
-(define-property params
+(define-property name
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property description
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property holders
   (of-object "GdaDataModelIter")
   (prop-type "GParamPointer")
-  (docs "Parameters the list should contain")
+  (docs "Holders the set should contain")
   (readable #f)
   (writable #t)
   (construct-only #t)
@@ -377,39 +398,73 @@
   (construct-only #f)
 )
 
-;; From GdaDataModel
+;; From GdaDataModelImport
 
-(define-signal row-inserted
-  (of-object "GdaDataModel")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("gint" "p0")
-  )
+(define-property random-access
+  (of-object "GdaDataModelImport")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
 )
 
-(define-signal row-updated
-  (of-object "GdaDataModel")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("gint" "p0")
-  )
+(define-property filename
+  (of-object "GdaDataModelImport")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
 )
 
-(define-signal row-removed
-  (of-object "GdaDataModel")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("gint" "p0")
-  )
+(define-property data-string
+  (of-object "GdaDataModelImport")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
 )
 
-(define-signal reset
-  (of-object "GdaDataModel")
-  (return-type "void")
-  (when "last")
+(define-property xml-node
+  (of-object "GdaDataModelImport")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property options
+  (of-object "GdaDataModelImport")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaDataModelDir
+
+(define-property basedir
+  (of-object "GdaDataModelDir")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaDataAccessWrapper
+
+(define-property model
+  (of-object "GdaDataAccessWrapper")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
 )
 
 ;; From GdaDataProxy
@@ -463,31 +518,10 @@
   )
 )
 
-(define-property dict
+(define-signal filter-changed
   (of-object "GdaDataProxy")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaDataProxy")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaDataProxy")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
+  (return-type "void")
+  (when "first")
 )
 
 (define-property model
@@ -508,104 +542,8 @@
   (construct-only #f)
 )
 
-;; From GdaDict
-
-(define-signal object-added
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaObject*" "p0")
-  )
-)
-
-(define-signal object-removed
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaObject*" "p0")
-  )
-)
-
-(define-signal object-updated
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaObject*" "p0")
-  )
-)
-
-(define-signal object-act-changed
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaObject*" "p0")
-  )
-)
-
-(define-signal data-update-started
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-)
-
-(define-signal update-progress
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaObject*" "p0")
-    '("guint" "p1")
-    '("guint" "p2")
-  )
-)
-
-(define-signal data-update-finished
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-)
-
-(define-signal changed
-  (of-object "GdaDict")
-  (return-type "void")
-  (when "first")
-)
-
-(define-property dsn
-  (of-object "GdaDict")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property username
-  (of-object "GdaDict")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaDictType
-
-(define-property dict
-  (of-object "GdaDictType")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaDictType")
+(define-property defer-sync
+  (of-object "GdaDataProxy")
   (prop-type "GParamBoolean")
   (docs "")
   (readable #t)
@@ -613,329 +551,8 @@
   (construct-only #f)
 )
 
-(define-property string-id
-  (of-object "GdaDictType")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaDictAggregate
-
-(define-property dict
-  (of-object "GdaDictAggregate")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaDictAggregate")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaDictAggregate")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaDictConstraint
-
-(define-property dict
-  (of-object "GdaDictConstraint")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaDictConstraint")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaDictConstraint")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property user-constraint
-  (of-object "GdaDictConstraint")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaDictDatabase
-
-(define-signal data-update-started
-  (of-object "GdaDictDatabase")
-  (return-type "void")
-  (when "first")
-)
-
-(define-signal update-progress
-  (of-object "GdaDictDatabase")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("const-gchar*" "p0")
-    '("guint" "p1")
-    '("guint" "p2")
-  )
-)
-
-(define-signal data-update-finished
-  (of-object "GdaDictDatabase")
-  (return-type "void")
-  (when "first")
-)
-
-(define-signal table-added
-  (of-object "GdaDictDatabase")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaDictTable*" "p0")
-  )
-)
-
-(define-signal table-removed
-  (of-object "GdaDictDatabase")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaDictTable*" "p0")
-  )
-)
-
-(define-signal table-updated
-  (of-object "GdaDictDatabase")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaDictTable*" "p0")
-  )
-)
-
-(define-signal field-added
-  (of-object "GdaDictDatabase")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaDictField*" "p0")
-  )
-)
-
-(define-signal field-removed
-  (of-object "GdaDictDatabase")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaDictField*" "p0")
-  )
-)
-
-(define-signal field-updated
-  (of-object "GdaDictDatabase")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaDictField*" "p0")
-  )
-)
-
-(define-signal constraint-added
-  (of-object "GdaDictDatabase")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaDictConstraint*" "p0")
-  )
-)
-
-(define-signal constraint-removed
-  (of-object "GdaDictDatabase")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaDictConstraint*" "p0")
-  )
-)
-
-(define-signal constraint-updated
-  (of-object "GdaDictDatabase")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaDictConstraint*" "p0")
-  )
-)
-
-(define-property dict
-  (of-object "GdaDictDatabase")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaDictDatabase")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaDictDatabase")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaDictField
-
-(define-property dict
-  (of-object "GdaDictField")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaDictField")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaDictField")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property db-table
-  (of-object "GdaDictField")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property entry-plugin
-  (of-object "GdaDictField")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaGraph
-
-(define-signal item-added
-  (of-object "GdaGraph")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaGraphItem*" "p0")
-  )
-)
-
-(define-signal item-dropped
-  (of-object "GdaGraph")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaGraphItem*" "p0")
-  )
-)
-
-(define-signal item-moved
-  (of-object "GdaGraph")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaGraphItem*" "p0")
-  )
-)
-
-(define-property dict
-  (of-object "GdaGraph")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaGraph")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaGraph")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property ref-object
-  (of-object "GdaGraph")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property graph-type
-  (of-object "GdaGraph")
+(define-property sample-size
+  (of-object "GdaDataProxy")
   (prop-type "GParamInt")
   (docs "")
   (readable #t)
@@ -943,70 +560,270 @@
   (construct-only #f)
 )
 
-;; From GdaObject
+;; From GdaRow
+
+(define-signal value-changed
+  (of-object "GdaRow")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+    '("GValue*" "p1")
+    '("GValue*" "p2")
+  )
+)
+
+(define-signal value-to-change
+  (of-object "GdaRow")
+  (return-type "gboolean")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+    '("GValue*" "p1")
+    '("GValue*" "p2")
+  )
+)
+
+(define-property model
+  (of-object "GdaRow")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property values
+  (of-object "GdaRow")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property nb-values
+  (of-object "GdaRow")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaServerOperation
+
+(define-signal sequence-item-added
+  (of-object "GdaServerOperation")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("const-gchar*" "p0")
+    '("gint" "p1")
+  )
+)
+
+(define-signal sequence-item-remove
+  (of-object "GdaServerOperation")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("const-gchar*" "p0")
+    '("gint" "p1")
+  )
+)
+
+(define-property connection
+  (of-object "GdaServerOperation")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property provider-obj
+  (of-object "GdaServerOperation")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property op-type
+  (of-object "GdaServerOperation")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property spec-file
+  (of-object "GdaServerOperation")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaServerProvider
+
+;; From GdaThreader
+
+(define-signal finished
+  (of-object "GdaThreader")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("guint" "p0")
+    '("gpointer" "p1")
+  )
+)
+
+(define-signal cancelled
+  (of-object "GdaThreader")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("guint" "p0")
+    '("gpointer" "p1")
+  )
+)
+
+;; From GdaTransactionStatus
+
+;; From GdaDataHandler
+
+;; From GdaMetaStore
+
+(define-signal suggest-update
+  (of-object "GdaMetaStore")
+  (return-type "gpointer")
+  (when "last")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal meta-changed
+  (of-object "GdaMetaStore")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal meta-reset
+  (of-object "GdaMetaStore")
+  (return-type "void")
+  (when "first")
+)
+
+(define-property cnc-string
+  (of-object "GdaMetaStore")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property cnc
+  (of-object "GdaMetaStore")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property catalog
+  (of-object "GdaMetaStore")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property schema
+  (of-object "GdaMetaStore")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaMetaStruct
+
+(define-property features
+  (of-object "GdaMetaStruct")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaStatement
+
+(define-signal reset
+  (of-object "GdaStatement")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal checked
+  (of-object "GdaStatement")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaConnection*" "p0")
+    '("gboolean" "p1")
+  )
+)
+
+(define-property structure
+  (of-object "GdaStatement")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaBatch
 
 (define-signal changed
-  (of-object "GdaObject")
+  (of-object "GdaBatch")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GObject*" "p0")
+  )
+)
+
+;; From GdaHolder
+
+(define-signal source-changed
+  (of-object "GdaHolder")
   (return-type "void")
   (when "first")
 )
 
-(define-signal name-changed
-  (of-object "GdaObject")
+(define-signal changed
+  (of-object "GdaHolder")
   (return-type "void")
   (when "first")
 )
 
-(define-signal id-changed
-  (of-object "GdaObject")
-  (return-type "void")
-  (when "first")
-)
-
-(define-signal descr-changed
-  (of-object "GdaObject")
-  (return-type "void")
-  (when "first")
-)
-
-(define-signal owner-changed
-  (of-object "GdaObject")
-  (return-type "void")
-  (when "first")
-)
-
-(define-signal destroyed
-  (of-object "GdaObject")
-  (return-type "void")
-  (when "first")
-)
-
-(define-signal to-be-destroyed
-  (of-object "GdaObject")
-  (return-type "void")
-  (when "first")
-)
-
-(define-property dict
-  (of-object "GdaObject")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaObject")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaObject")
+(define-property id
+  (of-object "GdaHolder")
   (prop-type "GParamString")
   (docs "")
   (readable #t)
@@ -1014,34 +831,8 @@
   (construct-only #f)
 )
 
-;; From GdaParameter
-
-(define-signal restrict-changed
-  (of-object "GdaParameter")
-  (return-type "void")
-  (when "first")
-)
-
-(define-property dict
-  (of-object "GdaParameter")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaParameter")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaParameter")
+(define-property name
+  (of-object "GdaHolder")
   (prop-type "GParamString")
   (docs "")
   (readable #t)
@@ -1049,8 +840,8 @@
   (construct-only #f)
 )
 
-(define-property entry-plugin
-  (of-object "GdaParameter")
+(define-property description
+  (of-object "GdaHolder")
   (prop-type "GParamString")
   (docs "")
   (readable #t)
@@ -1058,9 +849,9 @@
   (construct-only #f)
 )
 
-(define-property use-default-value
-  (of-object "GdaParameter")
-  (prop-type "GParamBoolean")
+(define-property plugin
+  (of-object "GdaHolder")
+  (prop-type "GParamString")
   (docs "")
   (readable #t)
   (writable #t)
@@ -1068,7 +859,7 @@
 )
 
 (define-property simple-bind
-  (of-object "GdaParameter")
+  (of-object "GdaHolder")
   (prop-type "GParamObject")
   (docs "")
   (readable #t)
@@ -1077,7 +868,7 @@
 )
 
 (define-property full-bind
-  (of-object "GdaParameter")
+  (of-object "GdaHolder")
   (prop-type "GParamObject")
   (docs "")
   (readable #t)
@@ -1085,8 +876,8 @@
   (construct-only #f)
 )
 
-(define-property restrict-model
-  (of-object "GdaParameter")
+(define-property source-model
+  (of-object "GdaHolder")
   (prop-type "GParamObject")
   (docs "")
   (readable #t)
@@ -1094,8 +885,8 @@
   (construct-only #f)
 )
 
-(define-property restrict-column
-  (of-object "GdaParameter")
+(define-property source-column
+  (of-object "GdaHolder")
   (prop-type "GParamInt")
   (docs "")
   (readable #t)
@@ -1104,7 +895,7 @@
 )
 
 (define-property g-type
-  (of-object "GdaParameter")
+  (of-object "GdaHolder")
   (prop-type "GParamULong")
   (docs "")
   (readable #t)
@@ -1113,7 +904,7 @@
 )
 
 (define-property not-null
-  (of-object "GdaParameter")
+  (of-object "GdaHolder")
   (prop-type "GParamBoolean")
   (docs "")
   (readable #t)
@@ -1121,61 +912,43 @@
   (construct-only #f)
 )
 
-;; From GdaParameterList
+;; From GdaSet
 
-(define-signal param-changed
-  (of-object "GdaParameterList")
+(define-signal holder-changed
+  (of-object "GdaSet")
   (return-type "void")
   (when "first")
   (parameters
-    '("GdaParameter*" "p0")
+    '("GdaHolder*" "p0")
   )
 )
 
-(define-signal param-plugin-changed
-  (of-object "GdaParameterList")
+(define-signal holder-plugin-changed
+  (of-object "GdaSet")
   (return-type "void")
   (when "first")
   (parameters
-    '("GdaParameter*" "p0")
+    '("GdaHolder*" "p0")
   )
 )
 
-(define-signal param-attr-changed
-  (of-object "GdaParameterList")
+(define-signal holder-attr-changed
+  (of-object "GdaSet")
   (return-type "void")
   (when "first")
   (parameters
-    '("GdaParameter*" "p0")
+    '("GdaHolder*" "p0")
   )
 )
 
 (define-signal public-data-changed
-  (of-object "GdaParameterList")
+  (of-object "GdaSet")
   (return-type "void")
   (when "first")
 )
 
-(define-property dict
-  (of-object "GdaParameterList")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaParameterList")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaParameterList")
+(define-property id
+  (of-object "GdaSet")
   (prop-type "GParamString")
   (docs "")
   (readable #t)
@@ -1183,847 +956,31 @@
   (construct-only #f)
 )
 
-(define-property params
-  (of-object "GdaParameterList")
+(define-property name
+  (of-object "GdaSet")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property description
+  (of-object "GdaSet")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property holders
+  (of-object "GdaSet")
   (prop-type "GParamPointer")
-  (docs "Parameters the list should contain")
+  (docs "Holders the set should contain")
   (readable #f)
   (writable #t)
   (construct-only #t)
 )
 
-;; From GdaQuery
-
-(define-signal type-changed
-  (of-object "GdaQuery")
-  (return-type "void")
-  (when "first")
-)
-
-(define-signal condition-changed
-  (of-object "GdaQuery")
-  (return-type "void")
-  (when "first")
-)
-
-(define-signal target-added
-  (of-object "GdaQuery")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaQueryTarget*" "p0")
-  )
-)
-
-(define-signal target-removed
-  (of-object "GdaQuery")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaQueryTarget*" "p0")
-  )
-)
-
-(define-signal target-updated
-  (of-object "GdaQuery")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaQueryTarget*" "p0")
-  )
-)
-
-(define-signal join-added
-  (of-object "GdaQuery")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaQueryJoin*" "p0")
-  )
-)
-
-(define-signal join-removed
-  (of-object "GdaQuery")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaQueryJoin*" "p0")
-  )
-)
-
-(define-signal join-updated
-  (of-object "GdaQuery")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaQueryJoin*" "p0")
-  )
-)
-
-(define-signal sub-query-added
-  (of-object "GdaQuery")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaQuery*" "p0")
-  )
-)
-
-(define-signal sub-query-removed
-  (of-object "GdaQuery")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaQuery*" "p0")
-  )
-)
-
-(define-signal sub-query-updated
-  (of-object "GdaQuery")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaQuery*" "p0")
-  )
-)
-
-(define-property dict
-  (of-object "GdaQuery")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaQuery")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaQuery")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property target-serial
-  (of-object "GdaQuery")
-  (prop-type "GParamUInt")
-  (docs "")
-  (readable #t)
-  (writable #f)
-  (construct-only #f)
-)
-
-(define-property field-serial
-  (of-object "GdaQuery")
-  (prop-type "GParamUInt")
-  (docs "")
-  (readable #t)
-  (writable #f)
-  (construct-only #f)
-)
-
-(define-property cond-serial
-  (of-object "GdaQuery")
-  (prop-type "GParamUInt")
-  (docs "")
-  (readable #t)
-  (writable #f)
-  (construct-only #f)
-)
-
-(define-property really-all-fields
-  (of-object "GdaQuery")
-  (prop-type "GParamPointer")
-  (docs "")
-  (readable #t)
-  (writable #f)
-  (construct-only #f)
-)
-
-(define-property auto-clean
-  (of-object "GdaQuery")
-  (prop-type "GParamBoolean")
-  (docs "Determines if the query tries to clean unused objects")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaQueryObject
-
-(define-signal numid-changed
-  (of-object "GdaQueryObject")
-  (return-type "void")
-  (when "first")
-)
-
-(define-property dict
-  (of-object "GdaQueryObject")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaQueryObject")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaQueryObject")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaQueryField
-
-(define-property dict
-  (of-object "GdaQueryField")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaQueryField")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaQueryField")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaQueryTarget
-
-(define-property dict
-  (of-object "GdaQueryTarget")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaQueryTarget")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaQueryTarget")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property query
-  (of-object "GdaQueryTarget")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property entity
-  (of-object "GdaQueryTarget")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property entity-name
-  (of-object "GdaQueryTarget")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property entity-id
-  (of-object "GdaQueryTarget")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaQueryCondition
-
-(define-property dict
-  (of-object "GdaQueryCondition")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaQueryCondition")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaQueryCondition")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property query
-  (of-object "GdaQueryCondition")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property join
-  (of-object "GdaQueryCondition")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property cond-type
-  (of-object "GdaQueryCondition")
-  (prop-type "GParamInt")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaQueryJoin
-
-(define-signal type-changed
-  (of-object "GdaQueryJoin")
-  (return-type "void")
-  (when "first")
-)
-
-(define-signal condition-changed
-  (of-object "GdaQueryJoin")
-  (return-type "void")
-  (when "first")
-)
-
-(define-property dict
-  (of-object "GdaQueryJoin")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaQueryJoin")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaQueryJoin")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property query
-  (of-object "GdaQueryJoin")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property target1
-  (of-object "GdaQueryJoin")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property target1-id
-  (of-object "GdaQueryJoin")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property target2
-  (of-object "GdaQueryJoin")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property target2-id
-  (of-object "GdaQueryJoin")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaQueryFieldAgg
-
-(define-property dict
-  (of-object "GdaQueryFieldAgg")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaQueryFieldAgg")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaQueryFieldAgg")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property query
-  (of-object "GdaQueryFieldAgg")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property aggregate
-  (of-object "GdaQueryFieldAgg")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property aggregate-name
-  (of-object "GdaQueryFieldAgg")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property aggregate-id
-  (of-object "GdaQueryFieldAgg")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaQueryFieldAll
-
-(define-property dict
-  (of-object "GdaQueryFieldAll")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaQueryFieldAll")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaQueryFieldAll")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property query
-  (of-object "GdaQueryFieldAll")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property target
-  (of-object "GdaQueryFieldAll")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property target-name
-  (of-object "GdaQueryFieldAll")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property target-id
-  (of-object "GdaQueryFieldAll")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaQueryFieldField
-
-(define-property dict
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property query
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property value-provider
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property value-provider-xml-id
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property entry-plugin
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property target
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property target-name
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property target-id
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property field
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property field-name
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property field-id
-  (of-object "GdaQueryFieldField")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaQueryFieldFunc
-
-(define-property dict
-  (of-object "GdaQueryFieldFunc")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaQueryFieldFunc")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaQueryFieldFunc")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property query
-  (of-object "GdaQueryFieldFunc")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property function
-  (of-object "GdaQueryFieldFunc")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property function-name
-  (of-object "GdaQueryFieldFunc")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property function-id
-  (of-object "GdaQueryFieldFunc")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaQueryFieldValue
-
-(define-property dict
-  (of-object "GdaQueryFieldValue")
-  (prop-type "GParamObject")
-  (docs "Dictionary to which the object is related")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property changed-blocked
-  (of-object "GdaQueryFieldValue")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property string-id
-  (of-object "GdaQueryFieldValue")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property query
-  (of-object "GdaQueryFieldValue")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property g-type
-  (of-object "GdaQueryFieldValue")
-  (prop-type "GParamULong")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property restrict-model
-  (of-object "GdaQueryFieldValue")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property restrict-column
-  (of-object "GdaQueryFieldValue")
-  (prop-type "GParamInt")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property entry-plugin
-  (of-object "GdaQueryFieldValue")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property is-parameter
-  (of-object "GdaQueryFieldValue")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
 
