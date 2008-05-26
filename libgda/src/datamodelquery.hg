@@ -23,8 +23,8 @@
 #include <glibmm/object.h>
 #include <libgdamm/object.h>
 #include <libgdamm/datamodel.h>
-#include <libgdamm/parameterlist.h>
-#include <libgdamm/query.h>
+#include <libgdamm/set.h>
+#include <libgdamm/statement.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(libgdamm/private/object_p.h)
@@ -66,11 +66,11 @@ protected:
 public:
   _WRAP_CREATE(Glib::RefPtr<Query>& query)
 
-  _WRAP_METHOD(Glib::RefPtr<ParameterList> get_parameter_list(), gda_data_model_query_get_parameter_list, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<const ParameterList> get_parameter_list() const, gda_data_model_query_get_parameter_list, constversion)
+  _WRAP_METHOD(Glib::RefPtr<Set> get_parameter_list(), gda_data_model_query_get_parameter_list, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Set> get_parameter_list() const, gda_data_model_query_get_parameter_list, constversion)
 
   _WRAP_METHOD(bool query_refresh(), gda_data_model_query_refresh, errthrow)
-  _WRAP_METHOD(bool set_modification_query(const Glib::ustring& query), gda_data_model_query_set_modification_query, errthrow)
+  _WRAP_METHOD(bool set_modification_query(const Glib::RefPtr<Statement>& query), gda_data_model_query_set_modification_query, errthrow)
   _WRAP_METHOD(bool compute_modification_queries(const Glib::ustring& target, DataModelQueryOptions options), gda_data_model_query_compute_modification_queries, errthrow)
 };
 

@@ -21,12 +21,7 @@
  */
 
 #include <glibmm/object.h>
-#include <libgdamm/command.h>
-#include <libgdamm/row.h>
-#include <libgdamm/column.h>
-#include <libgdamm/parameterlist.h>
 #include <libgdamm/datamodeliter.h>
-//#include <libgdamm/serverprovider.h>
 #include <libgda/gda-data-model.h>
 
 _DEFS(libgdamm,libgda)
@@ -82,7 +77,7 @@ class DataModel : public Glib::Interface
   _CLASS_INTERFACE(DataModel, GdaDataModel, GDA_DATA_MODEL, GdaDataModelClass)
 public:
   // This does not belong into this class
-  _IGNORE(gda_data_model_iter_new, gda_data_model_array_copy_model)
+  _IGNORE(gda_data_model_create_iter, gda_data_model_array_copy_model)
 
   _WRAP_METHOD(void freeze(), gda_data_model_freeze)  
   _WRAP_METHOD(void thaw(), gda_data_model_thaw)
@@ -151,8 +146,8 @@ public:
    * @result The string.
    */
   _IGNORE(gda_data_model_export_to_string)
-  Glib::ustring export_to_string(DataModelIOFormat format, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<ParameterList>& options);
-
+  Glib::ustring export_to_string(DataModelIOFormat format, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<Set>& options);
+    
   /** Exports data contained in @a model to the @a file; the format is specified using the @a format argument.
    *
    * Specifically, the parameters in the @options list can be:
@@ -168,15 +163,15 @@ public:
    * @result true if no error occurred.
    */
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  bool export_to_file(DataModelIOFormat format, const std::string& file, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<ParameterList>& options);
+  bool export_to_file(DataModelIOFormat format, const std::string& file, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<Set>& options);
 #else
-  bool export_to_file(DataModelIOFormat format, const std::string& file, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<ParameterList>& options, std::auto_ptr<Glib::Error>& error);
+  bool export_to_file(DataModelIOFormat format, const std::string& file, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<Set>& options, std::auto_ptr<Glib::Error>& error);
 #endif
   _IGNORE(gda_data_model_export_to_file)
 
   _WRAP_METHOD(bool import_from_model(const Glib::RefPtr<DataModel>& from,  bool overwrite, GHashTable *cols_trans), gda_data_model_import_from_model, errthrow)
-  _WRAP_METHOD(bool import_from_string(const Glib::ustring& string, GHashTable *cols_trans, const Glib::RefPtr<const ParameterList>& options), gda_data_model_import_from_string, errthrow)
-  _WRAP_METHOD(bool import_from_file(const std::string& file, GHashTable *cols_trans, const Glib::RefPtr<const ParameterList>& options), gda_data_model_import_from_file, errthrow)
+  _WRAP_METHOD(bool import_from_string(const Glib::ustring& string, GHashTable *cols_trans, const Glib::RefPtr<const Set>& options), gda_data_model_import_from_string, errthrow)
+  _WRAP_METHOD(bool import_from_file(const std::string& file, GHashTable *cols_trans, const Glib::RefPtr<const Set>& options), gda_data_model_import_from_file, errthrow)
 
   //Let's not wrap these. They are ugly and do not seem useful. murrayc.
   _IGNORE(gda_data_model_to_xml_node, gda_data_model_add_data_from_xml_node)
@@ -202,6 +197,9 @@ public:
 
   _WRAP_METHOD(void signal_emit_changed(), gda_data_model_signal_emit_changed)
 
+  _WRAP_METHOD(void set_column_name (int col, const Glib::ustring& name), gda_data_model_set_column_name)
+  _WRAP_METHOD(Glib::ustring get_column_name (int col), gda_data_model_get_column_name)      
+      
   //These are in a private header. Ignore them:
   _IGNORE(gda_data_model_changed, gda_data_model_row_inserted, gda_data_model_row_updated, gda_data_model_row_removed, 
           gda_data_model_get_command_text, gda_data_model_set_command_text, gda_data_model_get_command_type, 
@@ -211,6 +209,7 @@ public:
   _WRAP_SIGNAL(void row_updated(int row), row_updated)
   _WRAP_SIGNAL(void row_removed(int row), row_removed)
   _WRAP_SIGNAL(void reset(), reset)
+  _WRAP_SIGNAL(void changed(), changed)
 
 protected:
 

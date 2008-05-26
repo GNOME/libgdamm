@@ -1,9 +1,8 @@
-/* $Id: serverprovider.ccg,v 1.5 2006/05/08 10:18:53 murrayc Exp $ */
 // -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* connection.cc
+/* set.cc
  * 
- * Copyright 2001      Free Software Foundation
+ * Copyright 2003 libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,18 +19,11 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/connection.h>
-#include <libgda/gda-enum-types.h>
+#include <libgdamm/set.h>
 
 namespace Gnome
 {
 
-namespace Gda
-{
 
-
-} // namespace Gda
-
-} // namespace Gnome
-
+} /* namespace Gnome */
 

@@ -20,7 +20,7 @@
  */
 
 #include <glibmm/object.h>
-#include <libgdamm/parameterlist.h>
+#include <glibmm/set.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(libgdamm/private/parameterlist_p.h)
@@ -39,7 +39,7 @@ class DataModelIter
 {
   _CLASS_GOBJECT(DataModelIter, GdaDataModelIter, GDA_DATA_MODEL_ITER, ParameterList, GdaParameterList)
 protected:
-  _WRAP_CTOR(DataModelIter(const Glib::RefPtr<DataModel>& data_model), gda_data_model_iter_new)
+  _WRAP_CTOR(DataModelIter(const Glib::RefPtr<DataModel>& data_model), gda_data_model_create_iter)
 
 public:
   _WRAP_CREATE(const Glib::RefPtr<DataModel>& data_model)
@@ -50,9 +50,9 @@ public:
   _WRAP_METHOD(bool move_prev(), gda_data_model_iter_move_prev)
   _WRAP_METHOD(int get_row() const, gda_data_model_iter_get_row)
   _WRAP_METHOD(void invalidate_contents(), gda_data_model_iter_invalidate_contents)
-  _WRAP_METHOD(int get_column_for_param(const Glib::RefPtr<Parameter>& param), gda_data_model_iter_get_column_for_param)
-  _WRAP_METHOD(Glib::RefPtr<Parameter> get_param_for_column(int col), gda_data_model_iter_get_param_for_column, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<const Parameter> get_param_for_column(int col) const, gda_data_model_iter_get_param_for_column, constversion)
+
+  _WRAP_METHOD(Glib::Value get_value_at (int col), gda_data_model_iter_get_value_at)
+  _WRAP_METHOD(Glib::Value get_value_for_field (const Glib::ustring& field_name), gda_data_model_iter_get_value_for_field)
 
   _WRAP_PROPERTY("current-row", int)
   _WRAP_PROPERTY("data-model", Glib::RefPtr<DataModel>)
@@ -61,6 +61,7 @@ public:
 
   _WRAP_SIGNAL(void end_of_data(), "end-of-data")
   _WRAP_SIGNAL(void row_changed(int row), "row-changed")
+  _WRAP_SIGNAL(bool row_to_change(int row), "row-to-change")
 };
 
 } // namespace Gda

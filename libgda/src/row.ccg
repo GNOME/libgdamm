@@ -1,7 +1,7 @@
-/* $Id: command.ccg,v 1.2 2004/03/30 21:46:24 murrayc Exp $ */
+/* $Id: row.ccg,v 1.5 2006/11/06 04:38:05 murrayc Exp $ */
 // -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* datamodel.cc
+/* row.cc
  * 
  * Copyright 2003 libgdamm Development Team
  *
@@ -20,8 +20,12 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgda/gda-data-model.h>
+#include <libgdamm/datamodel.h>
+#include <libgda/gda-row.h>
 #include <libgda/gda-enum-types.h>
+#include <libgda/gda-row.h>
+#include <libgda/gda-data-model.h>
+
 
 namespace Gnome
 {
@@ -29,10 +33,10 @@ namespace Gnome
 namespace Gda
 {
 
-Command::Command(const Glib::ustring& text, CommandType type, CommandOptions options)
-: gobject_( gda_command_new(text.c_str(), (GdaCommandType)type, (GdaCommandOptions)options) )
+Value Row::get_value(int num) const
 {
-  
+  //Note that the function does not return a new value, so we should not free it:
+  return Value(gda_row_get_value(const_cast<GdaRow*>(gobj()), num));
 }
 
 } // namespace Gda
