@@ -19,6 +19,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgdamm/holder.h>
+
 _DEFS(libgdamm,libgda)
 _PINCLUDE(libgdamm/private/object_p.h)
 
@@ -32,14 +34,14 @@ namespace Gda
  *
  * @ingroup Connection
  */
-class GdaSet : public Glib::Object
+class Set : public Glib::Object
 {
   _CLASS_GOBJECT(Set, GdaSet, GDA_SET, Glib::Object, GObject)
 public:
   _WRAP_CREATE()
   
   _WRAP_METHOD (Glib::ustring get_spec(), gda_set_get_spec)
-  _WRAP_METHOD (Glib::Value get_holder_value(const Glib::ustring& holder_id), gda_set_get_holder_value)
+  _WRAP_METHOD (Glib::ValueBase get_holder_value(const Glib::ustring& holder_id), gda_set_get_holder_value)
   // TODO:
   //_WRAP_METHOD (bool set_holder_value())
   

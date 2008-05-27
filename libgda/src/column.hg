@@ -26,8 +26,6 @@
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
 
-#include <libgdamm/value.h>
-
 namespace Gnome
 {
 
@@ -82,10 +80,10 @@ public:
   _WRAP_METHOD(gint get_position() const, gda_column_get_position)
   _WRAP_METHOD(void set_position(gint position), gda_column_set_position)
 
-   Value get_default_value() const;
+   Glib::ValueBase get_default_value() const;
   _IGNORE(gda_column_get_default_value)
   
-  _WRAP_METHOD(void set_default_value(const Value& default_value), gda_column_set_default_value)
+  _WRAP_METHOD(void set_default_value(const Glib::ValueBase& default_value), gda_column_set_default_value)
 
 #m4 _CONVERSION(`const char*',`const Glib::ustring&',__GCHARP_TO_USTRING)
   _WRAP_SIGNAL(void name_changed(const Glib::ustring& old_name), "name-changed")

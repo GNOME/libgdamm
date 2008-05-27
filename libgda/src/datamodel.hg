@@ -22,6 +22,7 @@
 
 #include <glibmm/object.h>
 #include <libgdamm/datamodeliter.h>
+#include <libgdamm/column.h>
 #include <libgda/gda-data-model.h>
 
 _DEFS(libgdamm,libgda)
@@ -40,6 +41,7 @@ _WRAP_ENUM(DataModelAccessFlags, GdaDataModelAccessFlags)
 _WRAP_ENUM(DataModelHint, GdaDataModelHint)
 _WRAP_ENUM(DataModelIOFormat, GdaDataModelIOFormat)
 
+typedef GdaValueAttribute ValueAttribute;
 
 /** @defgroup DataModels Data Models
  */
@@ -96,10 +98,10 @@ public:
   //#m4 _CONVERSION(`GValue*',`Value',`Glib::wrap($3, true /* take_copy=true */)')
   //#m4 _CONVERSION(`const GValue*',`Value',`Glib::wrap(const_cast<GValue*>($3), true /* take_copy */)')
  
-  Value get_value_at(int col, int row) const;
+  Glib::ValueBase get_value_at(int col, int row) const;
   _IGNORE(gda_data_model_get_value_at)
 
-  Value get_value_at(const Glib::ustring& column_name, int row) const;
+  Glib::ValueBase get_value_at(const Glib::ustring& column_name, int row) const;
   _IGNORE(gda_data_model_get_value_at_col_name)
 
   _WRAP_METHOD(ValueAttribute get_attributes_at(int col, int row), gda_data_model_get_attributes_at)
@@ -109,7 +111,7 @@ public:
   //Ignore private functions:
   _IGNORE(gda_data_model_move_iter_at_row, gda_data_model_move_iter_next, gda_data_model_move_iter_prev)
 
-  _WRAP_METHOD(bool set_value_at(int col, int row, const Value& value), gda_data_model_set_value_at, errthrow)
+  _WRAP_METHOD(bool set_value_at(int col, int row, const Glib::ValueBase& value), gda_data_model_set_value_at, errthrow)
 
   #m4 _CONVERSION(`const ValueList&',`const GList*',`$3.data()')
   #m4 _CONVERSION(`const ValueList&',`GList*',`$3.data()')
@@ -129,7 +131,7 @@ public:
   #m4 _CONVERSION(`const ValueSList&', `GSList*', `$3.data()')
   _WRAP_METHOD(int get_row_from_values(const ValueSList& values, const Glib::ArrayHandle<int>& cols_index), gda_data_model_get_row_from_values)
 
-  _WRAP_METHOD(void send_hint(DataModelHint hint, const Value& hint_value), gda_data_model_send_hint)
+  _WRAP_METHOD(void send_hint(DataModelHint hint, const Glib::ValueBase& hint_value), gda_data_model_send_hint)
 
 
   /** Exports data contained in @a model to the a string; the format is specified using the @a format argument.

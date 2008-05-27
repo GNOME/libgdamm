@@ -40,8 +40,6 @@ typedef GdaServerProviderInfo ServerProviderInfo;
  */
 _WRAP_GERROR(ConnectionError, GdaConnectionError, GDA_CONNECTION_ERROR)
 
-class Client;
-
 _WRAP_ENUM(ConnectionFeature, GdaConnectionFeature)
 _WRAP_ENUM(ConnectionSchema, GdaConnectionSchema)
 _WRAP_ENUM(ConnectionOptions, GdaConnectionOptions)
@@ -136,7 +134,7 @@ public:
   _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const ConnectionEvent> > get_events() const, gda_connection_get_events)
 
 
-  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Value& from) const, gda_connection_value_to_sql_string)
+  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Glib::ValueBase& from) const, gda_connection_value_to_sql_string)
 
   _WRAP_METHOD(bool supports_feature(ConnectionFeature feature) const, gda_connection_supports_feature)
       

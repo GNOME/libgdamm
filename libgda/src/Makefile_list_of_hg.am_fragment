@@ -10,7 +10,7 @@ files_hg = connection.hg connectionevent.hg \
 	   handlerstring.hg handlerboolean.hg handlertime.hg \
 	   handlernumerical.hg handlerbin.hg handlertype.hg \
      serverprovider.hg serveroperation.hg transactionstatus.hg \
-     set.hg row.hg column.hg
+     set.hg row.hg column.hg holder.hg statement.hg
 
 
 

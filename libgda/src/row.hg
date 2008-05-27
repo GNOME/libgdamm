@@ -20,8 +20,6 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-
-#include <libgdamm/value.h>
 #include <glibmm/object.h>
 
 _DEFS(libgdamm,libgda)
@@ -34,7 +32,6 @@ namespace Gda
 {
 
 class DataModel;
-class Value;
 
 //TODO:
 class Row : public Glib::Object
@@ -58,10 +55,10 @@ public:
   _WRAP_METHOD(Glib::ustring get_id() const, gda_row_get_id)
   _WRAP_METHOD(void set_id(const Glib::ustring& id), gda_row_set_id)
 
-  Value get_value(int num) const;
+  Glib::ValueBase get_value(int num) const;
   _IGNORE(gda_row_get_value)
 
-  _WRAP_METHOD(bool set_value(int num, const Value& value), gda_row_set_value)
+  _WRAP_METHOD(bool set_value(int num, const Glib::ValueBase& value), gda_row_set_value)
 
   _WRAP_METHOD(Glib::RefPtr<DataModel> get_model(), gda_row_get_model, refreturn)  
   _WRAP_METHOD(Glib::RefPtr<const DataModel> get_model() const, gda_row_get_model, constversion) 
@@ -80,8 +77,8 @@ public:
   //_WRAP_PROPERTY("values", GList*)
   //_WRAP_PROPERTY("nb_values", int)
 
-  _WRAP_SIGNAL (bool value_to_change (int num, Glib::Value& current, Glib::Value& proposed), "value-to-change")
-  _WRAP_SIGNAL (void value_changed (int num, Glib::Value& current, Glib::Value& proposed), "value-changed")
+  _WRAP_SIGNAL (bool value_to_change (int num, Glib::ValueBase& current, Glib::ValueBase& proposed), "value-to-change")
+  _WRAP_SIGNAL (void value_changed (int num, Glib::ValueBase& current, Glib::ValueBase& proposed), "value-changed")
 };
 
 } // namespace Gda
