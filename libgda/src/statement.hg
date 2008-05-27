@@ -28,7 +28,10 @@ namespace Gnome
 namespace Gda
 {
 
-_WRAP_ENUM (GdaSqlStatementType, SqlStatementType)
+class Connection;
+
+_WRAP_ENUM (SqlStatementType, GdaSqlStatementType)
+_WRAP_ENUM (StatementModelUsage, GdaStatementModelUsage)
 
 /** Container for several values
  *

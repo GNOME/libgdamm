@@ -43,6 +43,9 @@ _WRAP_ENUM(DataModelIOFormat, GdaDataModelIOFormat)
 
 typedef GdaValueAttribute ValueAttribute;
 
+typedef Glib::ListHandle<Glib::ValueBase> ValueList;
+typedef Glib::SListHandle<Glib::ValueBase> ValueSList;
+
 /** @defgroup DataModels Data Models
  */
 
