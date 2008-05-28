@@ -1,7 +1,6 @@
-/* $Id: connection.ccg,v 1.18 2006/11/30 06:58:55 murrayc Exp $ */
-// -*- C++ -*- // 
+// -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* connection.cc
+/* metastore.cc
  * 
  * Copyright 2003 libgdamm Development Team
  *
@@ -20,37 +19,11 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/serverprovider.h>
-#include <libgda/gda-enum-types.h>
-#include <libgda/gda-connection.h>
-#include <libgda/libgda.h> //For GDA_GENERAL_ERROR
+#include <libgdamm/metastore.h>
 
 namespace Gnome
 {
 
-namespace Gda
-{
 
-Connection::~Connection()
-{
-  //Make sure the connection is closed.
-  //An open connection with no associated connection object could never be closed.
-  if(gobj())
-  {
-    if(is_opened())
-      close();
-  }
-}
-
-void Connection::close()
-{
-  //gda_connection_close() does an unref, but we don't want that:
-  reference();
-  gda_connection_close(gobj());
-}
-
-} //namespace Gda
-
-} //namespace Gnome
-
+} /* namespace Gnome */
 

@@ -21,6 +21,7 @@
 
 #include "glibmm_generate_extra_defs/generate_extra_defs.h"
 #include <libgda/libgda.h>
+#include <sql-parser/gda-sql-parser.h>
 //#include <libgda/gda-server-recordset-model.h>
 
 int main (int argc, char *argv[])
@@ -51,7 +52,9 @@ int main (int argc, char *argv[])
     << get_defs (GDA_TYPE_STATEMENT)
     << get_defs (GDA_TYPE_BATCH)
     << get_defs (GDA_TYPE_HOLDER)
-    << get_defs (GDA_TYPE_SET)    
+    << get_defs (GDA_TYPE_SET)
+    << get_defs (GDA_TYPE_SQL_PARSER)
+    << get_defs (GDA_TYPE_STATEMENT)
     << std::endl;
     return 0;
 }

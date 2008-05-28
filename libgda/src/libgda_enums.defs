@@ -587,3 +587,166 @@
   )
 )
 
+;; From /usr/include/libgda-4.0/sql-parser/gda-sql-parser.h
+
+(define-enum-extended SqlParserError
+  (in-module "Gda")
+  (c-name "GdaSqlParserError")
+  (values
+    '("syntax-error" "GDA_SQL_PARSER_SYNTAX_ERROR" "0")
+    '("overflow-error" "GDA_SQL_PARSER_OVERFLOW_ERROR" "1")
+    '("empty-sql-error" "GDA_SQL_PARSER_EMPTY_SQL_ERROR" "2")
+  )
+)
+
+(define-enum-extended SqlParserMode
+  (in-module "Gda")
+  (c-name "GdaSqlParserMode")
+  (values
+    '("parse" "GDA_SQL_PARSER_MODE_PARSE" "0")
+    '("delimit" "GDA_SQL_PARSER_MODE_DELIMIT" "1")
+  )
+)
+
+(define-enum-extended SqlParserFlavour
+  (in-module "Gda")
+  (c-name "GdaSqlParserFlavour")
+  (values
+    '("standard" "GDA_SQL_PARSER_FLAVOUR_STANDARD" "0")
+    '("sqlite" "GDA_SQL_PARSER_FLAVOUR_SQLITE" "1")
+    '("mysql" "GDA_SQL_PARSER_FLAVOUR_MYSQL" "2")
+    '("oracle" "GDA_SQL_PARSER_FLAVOUR_ORACLE" "3")
+    '("postgresql" "GDA_SQL_PARSER_FLAVOUR_POSTGRESQL" "4")
+  )
+)
+
+;; From /usr/include/libgda-4.0/sql-parser/gda-statement-struct-compound.h
+
+(define-enum-extended SqlStatementCompoundType
+  (in-module "Gda")
+  (c-name "GdaSqlStatementCompoundType")
+  (values
+    '("union" "GDA_SQL_STATEMENT_COMPOUND_UNION" "0")
+    '("union-all" "GDA_SQL_STATEMENT_COMPOUND_UNION_ALL" "1")
+    '("intersect" "GDA_SQL_STATEMENT_COMPOUND_INTERSECT" "2")
+    '("intersect-all" "GDA_SQL_STATEMENT_COMPOUND_INTERSECT_ALL" "3")
+    '("except" "GDA_SQL_STATEMENT_COMPOUND_EXCEPT" "4")
+    '("except-all" "GDA_SQL_STATEMENT_COMPOUND_EXCEPT_ALL" "5")
+  )
+)
+
+;; From /usr/include/libgda-4.0/sql-parser/gda-statement-struct-decl.h
+
+(define-enum-extended SqlErrorType
+  (in-module "Gda")
+  (c-name "GdaSqlErrorType")
+  (values
+    '("structure-contents-error" "GDA_SQL_STRUCTURE_CONTENTS_ERROR" "0")
+    '("malformed-identifier-error" "GDA_SQL_MALFORMED_IDENTIFIER_ERROR" "1")
+    '("missing-identifier-error" "GDA_SQL_MISSING_IDENTIFIER_ERROR" "2")
+    '("validation-error" "GDA_SQL_VALIDATION_ERROR" "3")
+  )
+)
+
+(define-enum-extended SqlStatementType
+  (in-module "Gda")
+  (c-name "GdaSqlStatementType")
+  (values
+    '("select" "GDA_SQL_STATEMENT_SELECT" "0")
+    '("insert" "GDA_SQL_STATEMENT_INSERT" "1")
+    '("update" "GDA_SQL_STATEMENT_UPDATE" "2")
+    '("delete" "GDA_SQL_STATEMENT_DELETE" "3")
+    '("compound" "GDA_SQL_STATEMENT_COMPOUND" "4")
+    '("begin" "GDA_SQL_STATEMENT_BEGIN" "5")
+    '("rollback" "GDA_SQL_STATEMENT_ROLLBACK" "6")
+    '("commit" "GDA_SQL_STATEMENT_COMMIT" "7")
+    '("savepoint" "GDA_SQL_STATEMENT_SAVEPOINT" "8")
+    '("rollback-savepoint" "GDA_SQL_STATEMENT_ROLLBACK_SAVEPOINT" "9")
+    '("delete-savepoint" "GDA_SQL_STATEMENT_DELETE_SAVEPOINT" "10")
+    '("unknown" "GDA_SQL_STATEMENT_UNKNOWN" "11")
+    '("none" "GDA_SQL_STATEMENT_NONE" "12")
+  )
+)
+
+(define-enum-extended SqlAnyPartType
+  (in-module "Gda")
+  (c-name "GdaSqlAnyPartType")
+  (values
+    '("stmt-select" "GDA_SQL_ANY_STMT_SELECT" "#error")
+    '("stmt-insert" "GDA_SQL_ANY_STMT_INSERT" "1")
+    '("stmt-update" "GDA_SQL_ANY_STMT_UPDATE" "2")
+    '("stmt-delete" "GDA_SQL_ANY_STMT_DELETE" "3")
+    '("stmt-compound" "GDA_SQL_ANY_STMT_COMPOUND" "4")
+    '("stmt-begin" "GDA_SQL_ANY_STMT_BEGIN" "5")
+    '("stmt-rollback" "GDA_SQL_ANY_STMT_ROLLBACK" "6")
+    '("stmt-commit" "GDA_SQL_ANY_STMT_COMMIT" "7")
+    '("stmt-savepoint" "GDA_SQL_ANY_STMT_SAVEPOINT" "8")
+    '("stmt-rollback-savepoint" "GDA_SQL_ANY_STMT_ROLLBACK_SAVEPOINT" "9")
+    '("stmt-delete-savepoint" "GDA_SQL_ANY_STMT_DELETE_SAVEPOINT" "10")
+    '("stmt-unknown" "GDA_SQL_ANY_STMT_UNKNOWN" "11")
+    '("expr" "GDA_SQL_ANY_EXPR" "500")
+    '("sql-field" "GDA_SQL_ANY_SQL_FIELD" "501")
+    '("sql-table" "GDA_SQL_ANY_SQL_TABLE" "502")
+    '("sql-function" "GDA_SQL_ANY_SQL_FUNCTION" "503")
+    '("sql-operation" "GDA_SQL_ANY_SQL_OPERATION" "504")
+    '("sql-case" "GDA_SQL_ANY_SQL_CASE" "505")
+    '("sql-select-field" "GDA_SQL_ANY_SQL_SELECT_FIELD" "506")
+    '("sql-select-target" "GDA_SQL_ANY_SQL_SELECT_TARGET" "507")
+    '("sql-select-join" "GDA_SQL_ANY_SQL_SELECT_JOIN" "508")
+    '("sql-select-from" "GDA_SQL_ANY_SQL_SELECT_FROM" "509")
+    '("sql-select-order" "GDA_SQL_ANY_SQL_SELECT_ORDER" "510")
+  )
+)
+
+;; From /usr/include/libgda-4.0/sql-parser/gda-statement-struct-parts.h
+
+(define-enum-extended SqlOperatorType
+  (in-module "Gda")
+  (c-name "GdaSqlOperatorType")
+  (values
+    '("and" "GDA_SQL_OPERATOR_TYPE_AND" "0")
+    '("or" "GDA_SQL_OPERATOR_TYPE_OR" "1")
+    '("eq" "GDA_SQL_OPERATOR_TYPE_EQ" "2")
+    '("is" "GDA_SQL_OPERATOR_TYPE_IS" "3")
+    '("like" "GDA_SQL_OPERATOR_TYPE_LIKE" "4")
+    '("between" "GDA_SQL_OPERATOR_TYPE_BETWEEN" "5")
+    '("gt" "GDA_SQL_OPERATOR_TYPE_GT" "6")
+    '("lt" "GDA_SQL_OPERATOR_TYPE_LT" "7")
+    '("geq" "GDA_SQL_OPERATOR_TYPE_GEQ" "8")
+    '("leq" "GDA_SQL_OPERATOR_TYPE_LEQ" "9")
+    '("diff" "GDA_SQL_OPERATOR_TYPE_DIFF" "10")
+    '("regexp" "GDA_SQL_OPERATOR_TYPE_REGEXP" "11")
+    '("regexp-ci" "GDA_SQL_OPERATOR_TYPE_REGEXP_CI" "12")
+    '("not-regexp" "GDA_SQL_OPERATOR_TYPE_NOT_REGEXP" "13")
+    '("not-regexp-ci" "GDA_SQL_OPERATOR_TYPE_NOT_REGEXP_CI" "14")
+    '("similar" "GDA_SQL_OPERATOR_TYPE_SIMILAR" "15")
+    '("isnull" "GDA_SQL_OPERATOR_TYPE_ISNULL" "16")
+    '("isnotnull" "GDA_SQL_OPERATOR_TYPE_ISNOTNULL" "17")
+    '("not" "GDA_SQL_OPERATOR_TYPE_NOT" "18")
+    '("in" "GDA_SQL_OPERATOR_TYPE_IN" "19")
+    '("notin" "GDA_SQL_OPERATOR_TYPE_NOTIN" "20")
+    '("concat" "GDA_SQL_OPERATOR_TYPE_CONCAT" "21")
+    '("plus" "GDA_SQL_OPERATOR_TYPE_PLUS" "22")
+    '("minus" "GDA_SQL_OPERATOR_TYPE_MINUS" "23")
+    '("star" "GDA_SQL_OPERATOR_TYPE_STAR" "24")
+    '("div" "GDA_SQL_OPERATOR_TYPE_DIV" "25")
+    '("rem" "GDA_SQL_OPERATOR_TYPE_REM" "26")
+    '("bitand" "GDA_SQL_OPERATOR_TYPE_BITAND" "27")
+    '("bitor" "GDA_SQL_OPERATOR_TYPE_BITOR" "28")
+    '("bitnot" "GDA_SQL_OPERATOR_TYPE_BITNOT" "29")
+  )
+)
+
+(define-enum-extended SqlSelectJoinType
+  (in-module "Gda")
+  (c-name "GdaSqlSelectJoinType")
+  (values
+    '("cross" "GDA_SQL_SELECT_JOIN_CROSS" "0")
+    '("natural" "GDA_SQL_SELECT_JOIN_NATURAL" "1")
+    '("inner" "GDA_SQL_SELECT_JOIN_INNER" "2")
+    '("left" "GDA_SQL_SELECT_JOIN_LEFT" "3")
+    '("right" "GDA_SQL_SELECT_JOIN_RIGHT" "4")
+    '("full" "GDA_SQL_SELECT_JOIN_FULL" "5")
+  )
+)
+

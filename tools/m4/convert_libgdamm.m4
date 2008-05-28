@@ -19,6 +19,8 @@ _CONVERSION(`GdaServerProvider*',`Glib::RefPtr<ServerProvider>',`Glib::wrap($3)'
 _CONVERSION(`GdaServerOperation*',`Glib::RefPtr<ServerOperation>',`Glib::wrap($3)')
 _CONVERSION(`GdaDataHandler*',`Glib::RefPtr<DataHandler>',`Glib::wrap($3)')
 _CONVERSION(`GdaSqlParser*',`Glib::RefPtr<SqlParser>',`Glib::wrap($3)')
+_CONVERSION(`GdaBatch*',`Glib::RefPtr<Batch>',`Glib::wrap($3)')
+_CONVERSION(`GdaMetaStruct*',`Glib::RefPtr<MetaStruct>',`Glib::wrap($3)')
 
 _CONVERSION(`const Glib::RefPtr<DataModel>&', `GdaDataModel*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DataHandler>&', `GdaDataHandler*', __CONVERT_REFPTR_TO_P)
@@ -32,6 +34,10 @@ _CONVERSION(`const Glib::RefPtr<Set>&', `GdaSet*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Holder>&', `GdaHolder*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const Set>&', `const GdaSet*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const Set>&', `GdaSet*', __CONVERT_CONST_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<Batch>&', `GdaBatch*', __CONVERT_CONST_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<MetaStore>&', `GdaMetaStore*', __CONVERT_CONST_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<MetaContext>&', `GdaMetaContext*', __CONVERT_CONST_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<MetaStruct>&', `GdaMetaStruct*', __CONVERT_CONST_REFPTR_TO_P)
 
 _CONVERSION(`const Glib::RefPtr<const Row>&', `const GdaRow*', `($3)->gobj()')
 _CONVERSION(`const Glib::RefPtr<Row>&', `GdaRow*', `const_cast<GdaRow*>(($3)->gobj())')
@@ -92,6 +98,8 @@ _CONV_ENUM(Gda,ServerOperationNodeStatus)
 _CONV_ENUM(Gda,ValueAttribute)
 _CONV_ENUM(Gda,StatementModelUsage)
 _CONV_ENUM(Gda,SqlStatementType)
+_CONV_ENUM(Gda,SqlParserMode)
+_CONV_ENUM(Gda,MetaStructFeature)
 
 # Lists
 _CONVERSION(`const Glib::ListHandle<Value>&',`GList*',`$3.data()')

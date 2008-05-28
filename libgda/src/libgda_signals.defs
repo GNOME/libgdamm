@@ -261,13 +261,13 @@
 
 ;; From GdaDataModel
 
-(define-signal changed
+(define-signal reset
   (of-object "GdaDataModel")
   (return-type "void")
   (when "last")
 )
 
-(define-signal reset
+(define-signal changed
   (of-object "GdaDataModel")
   (return-type "void")
   (when "last")
@@ -981,6 +981,71 @@
   (readable #f)
   (writable #t)
   (construct-only #t)
+)
+
+;; From GdaSqlParser
+
+(define-property tokenizer-flavour
+  (of-object "GdaSqlParser")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property mode
+  (of-object "GdaSqlParser")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property line-error
+  (of-object "GdaSqlParser")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property column-error
+  (of-object "GdaSqlParser")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+;; From GdaStatement
+
+(define-signal reset
+  (of-object "GdaStatement")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal checked
+  (of-object "GdaStatement")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaConnection*" "p0")
+    '("gboolean" "p1")
+  )
+)
+
+(define-property structure
+  (of-object "GdaStatement")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
 

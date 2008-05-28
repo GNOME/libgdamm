@@ -1,0 +1,67 @@
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* set.h
+ *
+ * Copyright 2006 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or(at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgdamm/batch.h>
+#include <libgdamm/statement.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(libgdamm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+_WRAP_ENUM(SqlParserMode, GdaSqlParserMode)
+
+/** Container for several values
+ *
+ * @ingroup Connection
+ */
+class SqlParser : public Glib::Object
+{
+  _CLASS_GOBJECT(SqlParser, GdaSqlParser, GDA_SQL_PARSER, Glib::Object, GObject)
+public:
+  _WRAP_CREATE()
+  
+  _WRAP_METHOD_DOCS_ONLY(gda_sql_parser_parse_string)
+  Glib::RefPtr<Statement> parse_string(const Glib::ustring& sql, Glib::ustring& remain);
+  _WRAP_METHOD_DOCS_ONLY(gda_sql_parser_parse_string_as_batch)
+  Glib::RefPtr<Batch> parse_string_as_batch(const Glib::ustring& sql, Glib::ustring& remain);
+
+  _WRAP_METHOD(Glib::RefPtr<Batch> parse_file_as_batch(const std::string& filename), gda_sql_parser_parse_file_as_batch, errthrow)
+
+  _IGNORE(gda_sql_parser_set_overflow_error, gda_sql_parser_set_syntax_error)
+
+  //TODO:
+#if 0  
+  _WPAP_PROPERTY("column-error", int)
+  _WPAP_PROPERTY("line-error", int)
+  _WPAP_PROPERTY("mode", int)
+  _WPAP_PROPERTY("tokenizer-flavour", int)
+#endif
+
+};
+
+} // namespace Gda
+} // namespace Gnome
+

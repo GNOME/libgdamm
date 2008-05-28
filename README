@@ -2,3 +2,5 @@ C++ wrappers for libgda
 
 The library is under the LGPL license.
 The examples are under the GPL license.
+
+Note: .defs fils have to be generated on libgda/ and on sql-parser/ directory!

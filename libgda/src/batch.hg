@@ -1,0 +1,58 @@
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* set.h
+ *
+ * Copyright 2006 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or(at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgdamm/holder.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(libgdamm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+/** Container for several values
+ *
+ * @ingroup Connection
+ */
+class Batch : public Glib::Object
+{
+  _CLASS_GOBJECT(Batch, GdaBatch, GDA_BATCH, Glib::Object, GObject)
+public:
+  _WRAP_CREATE()
+  
+  _WRAP_METHOD(void gda_batch_add_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_add_statement)
+  _WRAP_METHOD(void gda_batch_remove_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_remove_statement)
+  _WRAP_METHOD(Glib::ustring gda_batch_serialize(), gda_batch_serialize)
+
+  typedef Glib::SListHandle<const Statement> StatementSList;
+  #m4 _CONVERSION(`const GSList*', `StatementSList', __FL2H_SHALLOW)
+  _WRAP_METHOD(StatementSList get_statements(), gda_batch_get_statements)
+
+  #m4 _CONVERSION(`GObject*',`Glib::RefPtr<Statement>',`Glib::wrap($3)')
+  #m4 _CONVERSION(`Glib::RefPtr<Statement>', `GObject*', G_OBJECT($3.gobj())')
+  _WRAP_SIGNAL(void changed(Glib::RefPtr<Statement> stmt), "changed")
+};
+
+} // namespace Gda
+} // namespace Gnome
+

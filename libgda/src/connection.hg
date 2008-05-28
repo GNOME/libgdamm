@@ -24,6 +24,9 @@
 #include <libgdamm/connectionevent.h>
 #include <libgdamm/datamodel.h>
 #include <libgdamm/statement.h>
+#include <libgdamm/sqlparser.h>
+
+#include <libgda/gda-meta-store.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
