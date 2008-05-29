@@ -4,7 +4,7 @@
 
 files_hg = connection.hg connectionevent.hg \
      datahandler.hg datamodel.hg datamodelarray.hg \
-     datamodelimport.hg \
+     datamodelimport.hg datamodelrow.hg \
 	   datamodeliter.hg datamodelquery.hg \
 	   dataproxy.hg \
 	   handlerstring.hg handlerboolean.hg handlertime.hg \

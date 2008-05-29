@@ -27,7 +27,7 @@ namespace Gnome
 namespace Gda
 {
 
-DataModelImport::DataModelImport(const std::string& filename, bool random_access, const Glib::RefPtr<const ParameterList>& options)
+DataModelImport::DataModelImport(const std::string& filename, bool random_access, const Glib::RefPtr<const Set>& options)
 :
   //Based on the implementation of gda_data_model_import_new_file():
   //The ASSERT_DICT(NULL) is very odd. I suspect that gda_data_model_import_new_file() cannot work.
@@ -36,7 +36,7 @@ DataModelImport::DataModelImport(const std::string& filename, bool random_access
 {
 }
 
-DataModelImport::DataModelImport(const gchar* data, bool random_access, const Glib::RefPtr<const ParameterList>& options)
+DataModelImport::DataModelImport(const gchar* data, bool random_access, const Glib::RefPtr<const Set>& options)
 :
   //Based on the implementation of gda_data_model_import_new_file():
   //The ASSERT_DICT(NULL) is very odd. I suspect that gda_data_model_import_new_file() cannot work.

@@ -23,7 +23,7 @@
 #include <libgdamm/set.h>
 
 _DEFS(libgdamm,libgda)
-_PINCLUDE(libgdamm/private/parameterlist_p.h)
+_PINCLUDE(libgdamm/private/set_p.h)
 
 namespace Gnome
 {
@@ -51,8 +51,10 @@ public:
   _WRAP_METHOD(int get_row() const, gda_data_model_iter_get_row)
   _WRAP_METHOD(void invalidate_contents(), gda_data_model_iter_invalidate_contents)
 
-  _WRAP_METHOD(Glib::ValueBase get_value_at (int col), gda_data_model_iter_get_value_at)
-  _WRAP_METHOD(Glib::ValueBase get_value_for_field (const Glib::ustring& field_name), gda_data_model_iter_get_value_for_field)
+  _WRAP_METHOD_DOCS_ONLY(gda_data_model_iter_get_value_at)
+  Glib::ValueBase get_value_at (int col);
+  _WRAP_METHOD_DOCS_ONLY(gda_data_model_iter_get_value_for_field)
+  Glib::ValueBase get_value_for_field (const Glib::ustring& field_name);
 
   _WRAP_PROPERTY("current-row", int)
   _WRAP_PROPERTY("data-model", Glib::RefPtr<DataModel>)

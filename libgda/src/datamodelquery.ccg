@@ -31,13 +31,6 @@ namespace Gnome
 namespace Gda
 {
 
-DataModelQuery::DataModelQuery(const Glib::RefPtr<Gda::Query>& query)
-:
-  _CONSTRUCT("query", Glib::unwrap(query), "dict", gda_object_get_dict(GDA_OBJECT(query->gobj())))
-{
-}
-
-
 } /* namespace Gda */
 
 } /* namespace Gnome */

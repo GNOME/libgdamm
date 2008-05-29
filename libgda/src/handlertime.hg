@@ -19,12 +19,12 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/object.h>
+#include <glibmm/object.h>
 #include <libgdamm/datahandler.h>
 #include <libgda/handlers/gda-handler-time.h>
 
 _DEFS(libgdamm,libgda)
-_PINCLUDE(libgdamm/private/object_p.h)
+_PINCLUDE(glibmm/private/object_p.h)
 
 namespace Gnome
 {
@@ -36,10 +36,10 @@ namespace Gda
  *
  * @ingroup DataHanders
  */
-class HandlerTime : public Object,
+class HandlerTime : public Glib::Object,
                     public DataHandler
 {
-  _CLASS_GOBJECT(HandlerTime, GdaHandlerTime, GDA_HANDLER_TIME, Gda::Object, GdaObject)
+  _CLASS_GOBJECT(HandlerTime, GdaHandlerTime, GDA_HANDLER_TIME, Glib::Object, GObject)
   _IMPLEMENTS_INTERFACE(DataHandler)
 protected:
 

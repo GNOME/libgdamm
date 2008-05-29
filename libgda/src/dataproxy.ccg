@@ -30,7 +30,8 @@ namespace Gda
 
 ValueSList DataProxy::get_values(int proxy_row, const Glib::ArrayHandle<int>& cols_index) const
 {
-  return ValueSList(gda_data_proxy_get_values(const_cast<GdaDataProxy*>(gobj()), proxy_row, const_cast<gint*>(cols_index.data()), cols_index.size()), Glib::OWNERSHIP_SHALLOW);
+  GSList* values = gda_data_proxy_get_values(const_cast<GdaDataProxy*>(gobj()), proxy_row, const_cast<gint*>(cols_index.data()), cols_index.size());
+  ValueSList list(values, Glib::OWNERSHIP_SHALLOW);
 }
 
 } /* namespace Gda */

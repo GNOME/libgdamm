@@ -29,6 +29,22 @@ namespace Gnome
 namespace Gda
 {
 
+Glib::ValueBase DataModelIter::get_value_at (int col)
+{
+  Glib::ValueBase retval;
+  const GValue* value = gda_data_model_iter_get_value_at (gobj(), col);
+  retval.init(value);
+  return retval;
+}
+
+Glib::ValueBase DataModelIter::get_value_for_field (const Glib::ustring& field_name)
+{
+  Glib::ValueBase retval;
+  const GValue* value = gda_data_model_iter_get_value_for_field (gobj(), field_name.c_str());
+  retval.init(value);
+  return retval;
+}
+
 } /* namespace Gda */
 
 } /* namespace Gnome */

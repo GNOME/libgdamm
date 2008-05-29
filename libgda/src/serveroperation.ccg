@@ -30,9 +30,12 @@ namespace Gnome
 namespace Gda
 {
 
-Value ServerOperation::get_value_at(const Glib::ustring& path) const
+Glib::ValueBase ServerOperation::get_value_at(const Glib::ustring& path) const
 {
-  return Gnome::Gda::Value(gda_server_operation_get_value_at(const_cast<GdaServerOperation*>(gobj()), "%s", path.c_str()));
+  Glib::ValueBase retval;
+  const GValue* value = gda_server_operation_get_value_at(const_cast<GdaServerOperation*>(gobj()), "%s", path.c_str());
+  retval.init(value);
+  return retval;
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED

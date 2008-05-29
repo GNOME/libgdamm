@@ -43,8 +43,27 @@ _WRAP_ENUM(DataModelIOFormat, GdaDataModelIOFormat)
 
 typedef GdaValueAttribute ValueAttribute;
 
-typedef Glib::ListHandle<Glib::ValueBase> ValueList;
-typedef Glib::SListHandle<Glib::ValueBase> ValueSList;
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+struct TypeTraitsValueBase
+{
+  typedef Glib::ValueBase   CppType;
+  typedef const GValue*  CType;
+  typedef GValue*        CTypeNonConst;
+
+  static CType to_c_type(const CppType value) {return value.gobj();};
+  static CppType to_cpp_type(CType value) 
+  {
+    Glib::ValueBase base;
+    base.init(value);
+    return base;
+  }
+  static void release_c_type(CType value) {g_free(const_cast<GValue*>(value));};
+};
+#endif
+
+
+typedef Glib::ListHandle<Glib::ValueBase, TypeTraitsValueBase> ValueList;
+typedef Glib::SListHandle<Glib::ValueBase, TypeTraitsValueBase> ValueSList;
 
 /** @defgroup DataModels Data Models
  */

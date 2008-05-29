@@ -20,11 +20,11 @@
  */
 
 #include <glibmm/object.h>
-#include <libgdamm/object.h>
+#include <glibmm/object.h>
 #include <libgdamm/datamodel.h>
 
 _DEFS(libgdamm,libgda)
-_PINCLUDE(libgdamm/private/object_p.h)
+_PINCLUDE(glibmm/private/object_p.h)
 
 namespace Gnome
 {
@@ -51,10 +51,10 @@ namespace Gda
  * @ingroup DataModels
  */
 class DataProxy
- : public Object,
+ : public Glib::Object,
    public DataModel
 {
-  _CLASS_GOBJECT(DataProxy, GdaDataProxy, GDA_DATA_PROXY, Object, GdaObject)
+  _CLASS_GOBJECT(DataProxy, GdaDataProxy, GDA_DATA_PROXY, Glib::Object, GObject)
   _IMPLEMENTS_INTERFACE(DataModel)
 protected:
   _WRAP_CTOR(DataProxy(const Glib::RefPtr<DataModel>& model), gda_data_proxy_new)
@@ -68,8 +68,8 @@ public:
   _WRAP_METHOD(int get_proxied_model_n_rows() const, gda_data_proxy_get_proxied_model_n_rows)
   _WRAP_METHOD(bool is_read_only() const, gda_data_proxy_is_read_only)
 
+  _WRAP_METHOD_DOCS_ONLY(gda_data_proxy_get_values)
   ValueSList get_values(int proxy_row, const Glib::ArrayHandle<int>& cols_index) const;
-  _IGNORE(gda_data_proxy_get_values)
 
   _WRAP_METHOD(ValueAttribute get_value_attributes(int proxy_row, int col) const, gda_data_proxy_get_value_attributes)
   _WRAP_METHOD(void alter_value_attributes(int proxy_row, int col, ValueAttribute alter_flags), gda_data_proxy_alter_value_attributes)
@@ -112,7 +112,7 @@ public:
   _WRAP_SIGNAL(void sample_size_changed(int sample_size), "sample-size-changed")
   _WRAP_SIGNAL(bool pre_changes_applied(int row, int proxied_row), "pre-changes-applied")
   _WRAP_SIGNAL(void post_changes_applied(int row, int proxied_row), "post-changes-applied")
-  _WRAP_SIGNAL(void filter_changed(), "filter-changed")
+  //TODO: _WRAP_SIGNAL(void filter_changed(), "filter-changed")
 };
 
 } // namespace Gda

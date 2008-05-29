@@ -22,13 +22,15 @@
 #include <libgdamm/holder.h>
 
 _DEFS(libgdamm,libgda)
-_PINCLUDE(libgdamm/private/object_p.h)
+_PINCLUDE(glibmm/private/object_p.h)
 
 namespace Gnome
 {
 
 namespace Gda
 {
+
+typedef Glib::SListHandle<Holder> HolderSList;
 
 /** Container for several values
  *
@@ -37,15 +39,20 @@ namespace Gda
 class Set : public Glib::Object
 {
   _CLASS_GOBJECT(Set, GdaSet, GDA_SET, Glib::Object, GObject)
+protected:
+  #m4 _CONVERSION(`const HolderSList&', `GSList*', `$3.data()')
+  _WRAP_CTOR(Set(const HolderSList& holders), gda_set_new)
+
 public:
-  _WRAP_CREATE()
+  _WRAP_CREATE(const HolderSList& holders)
   
   _WRAP_METHOD (Glib::ustring get_spec(), gda_set_get_spec)
-  _WRAP_METHOD (Glib::ValueBase get_holder_value(const Glib::ustring& holder_id), gda_set_get_holder_value)
+  _WRAP_METHOD_DOCS_ONLY(gda_set_get_holder_value)
+  Glib::ValueBase get_holder_value(const Glib::ustring& holder_id);
   // TODO:
   //_WRAP_METHOD (bool set_holder_value())
   
-  _WRAP_METHOD (Glib::RefPtr<Holder> gda_set_get_holder (Glib::ustring holder_id), gda_set_get_holder)
+  _WRAP_METHOD (Glib::RefPtr<Holder> get_holder (const Glib::ustring& holder_id), gda_set_get_holder)
   _WRAP_METHOD (void add_holder (const Glib::RefPtr<Holder>& holder), gda_set_add_holder)
   _WRAP_METHOD (void remove_holder (const Glib::RefPtr<Holder>& holder), gda_set_remove_holder)
 

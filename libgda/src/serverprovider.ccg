@@ -29,6 +29,27 @@ namespace Gnome
 namespace Gda
 {
 
+Glib::ValueBase ServerProvider::string_to_value(const Glib::RefPtr<Connection>& cnc, 
+                                                const Glib::ustring& string, 
+                                                GType prefered_type, 
+                                                Glib::ustring& dbms_type)
+{
+  Glib::ValueBase retval;
+  gchar* dmbs_type_c = NULL;
+  GValue* value = gda_server_provider_string_to_value(gobj(),
+                                                      cnc->gobj(),
+                                                      string.c_str(),
+                                                      prefered_type,
+                                                      &dmbs_type_c);
+  retval.init(value);
+  g_free(value);
+  if (dmbs_type_c)
+  {
+    dbms_type = dmbs_type_c;
+    g_free(dmbs_type_c);
+  }
+  return retval;
+}
 
 } // namespace Gda
 

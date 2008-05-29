@@ -29,9 +29,12 @@ namespace Gnome
 namespace Gda
 {
   
-Value Column::get_default_value() const
+Glib::ValueBase Column::get_default_value() const
 {
-  return Value(gda_column_get_default_value(const_cast<GdaColumn*>(gobj())));
+  const GValue* value = gda_column_get_default_value(const_cast<GdaColumn*>(gobj()));
+  Glib::ValueBase retval;
+  retval.init(value);
+  return retval;
 }
 
 bool Column::equal(const Glib::RefPtr<const Column>& src) const
@@ -52,8 +55,10 @@ bool Column::equal(const Glib::RefPtr<const Column>& src) const
                 get_unique_key() == src->get_unique_key() &&
                 get_references() == src->get_references() &&
                 get_auto_increment() == src->get_auto_increment() &&
-                get_position() == src->get_position() &&
-                get_default_value() == src->get_default_value();
+                get_position() == src->get_position();
+/* FIXME:
+                && get_default_value() == src->get_default_value();
+*/
 
   return result;
 }

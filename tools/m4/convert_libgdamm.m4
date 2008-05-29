@@ -58,9 +58,6 @@ _CONVERSION(`const DataModelIndex&', `const GdaDataModelIndex*', `($3).gobj()')
 _CONVERSION(`const GObject*',`Glib::RefPtr<const Glib::Object>',`Glib::wrap(const_cast<GObject*>($3))')
 _CONVERSION(`const Glib::RefPtr<Glib::Object>&', `const GObject*', `($3)->gobj()')
 
-
-_CONVERSION(`GValue*', `Glib::ValueBase', `Glib::wrap($3)')
-_CONVERSION(`const GValue*', `Glib::ValueBase', `Glib::wrap($3)')
 _CONVERSION(`Glib::ValueBase&', `GValue*', `($3).gobj()')
 _CONVERSION(`const Glib::ValueBase&', `const GValue*', `($3).gobj()')
 

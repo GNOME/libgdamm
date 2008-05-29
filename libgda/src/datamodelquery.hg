@@ -21,13 +21,13 @@
  */
 
 #include <glibmm/object.h>
-#include <libgdamm/object.h>
+#include <glibmm/object.h>
 #include <libgdamm/datamodel.h>
 #include <libgdamm/set.h>
 #include <libgdamm/statement.h>
 
 _DEFS(libgdamm,libgda)
-_PINCLUDE(libgdamm/private/object_p.h)
+_PINCLUDE(glibmm/private/object_p.h)
 
 namespace Gnome
 {
@@ -49,27 +49,22 @@ _WRAP_ENUM(DataModelQueryOptions, GdaDataModelQueryOptions)
  * @ingroup DataModels
  */
 class DataModelQuery
- : public Object,
+ : public Glib::Object,
    public DataModel
 {
-  _CLASS_GOBJECT(DataModelQuery, GdaDataModelQuery, GDA_DATA_MODEL_QUERY, Object, GdaObject)
+  _CLASS_GOBJECT(DataModelQuery, GdaDataModelQuery, GDA_DATA_MODEL_QUERY, Glib::Object, GObject)
   _IMPLEMENTS_INTERFACE(DataModel)
 protected:
 
-  // Hand-coded to also set dict property
-  /** Creates a new DataModel object using the data returned by the execution of the query SELECT query.
-   * @param query A SELECT query.
-   */
-  explicit DataModelQuery(const Glib::RefPtr<Query>& query);
-  _IGNORE(gda_data_model_query_new)
+  _WRAP_CTOR(DataModelQuery(const Glib::RefPtr<Connection>& connection, const Glib::RefPtr<Statement>& query), gda_data_model_query_new)
 
 public:
-  _WRAP_CREATE(Glib::RefPtr<Query>& query)
+  _WRAP_CREATE(const Glib::RefPtr<Connection>& connection, const Glib::RefPtr<Statement>& query)
 
   _WRAP_METHOD(Glib::RefPtr<Set> get_parameter_list(), gda_data_model_query_get_parameter_list, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Set> get_parameter_list() const, gda_data_model_query_get_parameter_list, constversion)
 
-  _WRAP_METHOD(bool query_refresh(), gda_data_model_query_refresh, errthrow)
+  _WRAP_METHOD(bool refresh(), gda_data_model_query_refresh, errthrow)
   _WRAP_METHOD(bool set_modification_query(const Glib::RefPtr<Statement>& query), gda_data_model_query_set_modification_query, errthrow)
   _WRAP_METHOD(bool compute_modification_queries(const Glib::ustring& target, DataModelQueryOptions options), gda_data_model_query_compute_modification_queries, errthrow)
 };

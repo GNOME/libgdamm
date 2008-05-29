@@ -77,8 +77,9 @@ class ServerProvider : public Glib::Object
 
   _WRAP_METHOD(Glib::ustring get_name(), gda_server_provider_get_name)
   _WRAP_METHOD(Glib::RefPtr<SqlParser> create_parser(const Glib::RefPtr<Connection>& cnc), gda_server_provider_create_parser)
-  // TODO:
-  _WRAP_METHOD(Glib::ValueBase string_to_value(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& string, GType prefered_type, gchar** dbms_type), gda_server_provider_string_to_value)
+  
+  _WRAP_METHOD_DOCS_ONLY(gda_server_provider_string_to_value)
+  Glib::ValueBase string_to_value(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& string, GType prefered_type, Glib::ustring& dbms_type);
 
   // These are in a private header, so ignore them
   _IGNORE(gda_server_provider_handler_declare, gda_server_provider_handler_find, 

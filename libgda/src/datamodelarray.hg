@@ -19,10 +19,10 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <glibmm/object.h>
 #include <libgdamm/datamodelrow.h>
 
 _DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
 _PINCLUDE(libgdamm/private/datamodelrow_p.h)
 
 namespace Gnome

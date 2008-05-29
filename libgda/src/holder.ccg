@@ -20,10 +20,31 @@
  */
 
 #include <libgdamm/holder.h>
+#include <libgda/gda-holder.h>
 
 namespace Gnome
 {
 
+namespace Gda
+{
+
+Glib::ValueBase Holder::get_value() const
+{
+  Glib::ValueBase retval;
+  const GValue* value = gda_holder_get_value(gobj());
+  retval.init(value);
+  return retval;
+}
+
+Glib::ValueBase Holder::get_default_value() const
+{
+  Glib::ValueBase retval;
+  const GValue* value = gda_holder_get_default_value(gobj());
+  retval.init(value);
+  return retval;
+}
+
+} /* namespace Gda */
 
 } /* namespace Gnome */
 

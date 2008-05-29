@@ -1,6 +1,6 @@
 // -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
-/* set.cc
+/* datamodelrow.cc
  * 
  * Copyright 2003 libgdamm Development Team
  *
@@ -19,22 +19,13 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/set.h>
-#include <libgda/gda-set.h>
+#include <libgda/gda-data-model-row.h>
 
 namespace Gnome
 {
 
 namespace Gda
 {
-
-Glib::ValueBase Set::get_holder_value(const Glib::ustring& holder_id)
-{
-  Glib::ValueBase retval;
-  const GValue* value = gda_set_get_holder_value(gobj(), holder_id.c_str());
-  retval.init(value);
-  return retval;
-}
 
 } /* namespace Gda */
 

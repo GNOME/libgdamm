@@ -456,6 +456,17 @@
   (construct-only #t)
 )
 
+;; From GdaDataModelRow
+
+(define-property read-only
+  (of-object "GdaDataModelRow")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GdaDataAccessWrapper
 
 (define-property model

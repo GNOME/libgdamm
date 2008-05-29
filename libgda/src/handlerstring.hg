@@ -19,12 +19,12 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/object.h>
+#include <glibmm/object.h>
 #include <libgdamm/datahandler.h>
 #include <libgda/handlers/gda-handler-string.h>
 
 _DEFS(libgdamm,libgda)
-_PINCLUDE(libgdamm/private/object_p.h)
+_PINCLUDE(glibmm/private/object_p.h)
 
 namespace Gnome
 {
@@ -36,10 +36,10 @@ namespace Gda
  * 
  * @ingroup DataHandlers
  */
-class HandlerString : public Object,
+class HandlerString : public Glib::Object,
                       public DataHandler
 {
-  _CLASS_GOBJECT(HandlerString, GdaHandlerString, GDA_HANDLER_STRING, Gda::Object, GdaObject)
+  _CLASS_GOBJECT(HandlerString, GdaHandlerString, GDA_HANDLER_STRING, Glib::Object, GObject)
   _IMPLEMENTS_INTERFACE(DataHandler)
 protected:
 

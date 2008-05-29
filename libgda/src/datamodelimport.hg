@@ -41,7 +41,7 @@ namespace Gda
  * the data is copied in memory, and this is thus not suitable for large data sets. Note that importing from an 
  * already-built XML tree will always result in a random access data model.
  *
- * Various import options can be specified using parameters in a ParameterList object. The available options depend 
+ * Various import options can be specified using parameters in a Set object. The available options depend 
  * on the format of the imported data listed here:
  * - "SEPARATOR" (string, CVS import only): specifies the separator to consider.
  * - "ESCAPE_CHAR" (string, CVS import only): specifies the character used to "escape" the strings contained between two separators.
@@ -57,19 +57,19 @@ class DataModelImport
 {
   _CLASS_GOBJECT(DataModelImport, GdaDataModelImport, GDA_DATA_MODEL_IMPORT, Gda::DataModelRow, GdaDataModelRow)
 protected:
-  DataModelImport(const std::string& filename, bool random_access, const Glib::RefPtr<const ParameterList>& options);
+  DataModelImport(const std::string& filename, bool random_access, const Glib::RefPtr<const Set>& options);
   _IGNORE(gda_data_model_import_new_file)
 
   //Note: data is a null-terminated string, not copied, so the instance must stay alive as long as this model.
-  DataModelImport(const gchar* data, bool random_access, const Glib::RefPtr<const ParameterList>& options);
+  DataModelImport(const gchar* data, bool random_access, const Glib::RefPtr<const Set>& options);
   _IGNORE(gda_data_model_import_new_mem)
 
   explicit DataModelImport(xmlNodePtr node);
   _IGNORE(gda_data_model_import_new_xml_node)
 
 public:
-  _WRAP_CREATE(const std::string& filename, bool random_access, const Glib::RefPtr<const ParameterList>& options)
-  _WRAP_CREATE(const gchar* data, bool random_access, const Glib::RefPtr<const ParameterList>& options)
+  _WRAP_CREATE(const std::string& filename, bool random_access, const Glib::RefPtr<const Set>& options)
+  _WRAP_CREATE(const gchar* data, bool random_access, const Glib::RefPtr<const Set>& options)
   _WRAP_CREATE(xmlNodePtr node)
 
 

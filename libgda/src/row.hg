@@ -77,8 +77,9 @@ public:
   //_WRAP_PROPERTY("values", GList*)
   //_WRAP_PROPERTY("nb_values", int)
 
-  _WRAP_SIGNAL (bool value_to_change (int num, Glib::ValueBase& current, Glib::ValueBase& proposed), "value-to-change")
-  _WRAP_SIGNAL (void value_changed (int num, Glib::ValueBase& current, Glib::ValueBase& proposed), "value-changed")
+  // TODO:
+  //_WRAP_SIGNAL(bool value_to_change(int num, const Glib::ValueBase& current, const Glib::ValueBase& proposed), "value-to-change")
+  //_WRAP_SIGNAL(void value_changed(int num, const Glib::ValueBase& current, const Glib::ValueBase& proposed), "value-changed")
 };
 
 } // namespace Gda
