@@ -40,6 +40,8 @@ _WRAP_ENUM(SqlParserMode, GdaSqlParserMode)
 class SqlParser : public Glib::Object
 {
   _CLASS_GOBJECT(SqlParser, GdaSqlParser, GDA_SQL_PARSER, Glib::Object, GObject)
+protected:
+  _CTOR_DEFAULT()
 public:
   _WRAP_CREATE()
   

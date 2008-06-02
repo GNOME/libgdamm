@@ -21,6 +21,7 @@
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
+_PINCLUDE(libgda/gda-connection.h)
 
 namespace Gnome
 {
@@ -40,6 +41,9 @@ _WRAP_ENUM (StatementModelUsage, GdaStatementModelUsage)
 class Statement : public Glib::Object
 {
   _CLASS_GOBJECT(Statement, GdaStatement, GDA_STATEMENT, Glib::Object, GObject)
+protected:
+  _CTOR_DEFAULT()
+
 public:
   _WRAP_CREATE()
   

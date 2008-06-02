@@ -20,6 +20,8 @@
  */
 
 #include <libgdamm/statement.h>
+#include <libgdamm/connection.h>
+#include <libgda/gda-enum-types.h>
 
 namespace Gnome
 {

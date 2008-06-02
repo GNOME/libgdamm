@@ -87,9 +87,10 @@ public:
 
 #m4 _CONVERSION(`const char*',`const Glib::ustring&',__GCHARP_TO_USTRING)
   _WRAP_SIGNAL(void name_changed(const Glib::ustring& old_name), "name-changed")
-#m4 _CONVERSION(`gint', `GType', ($3)($2))
-#m4 _CONVERSION(`GType', `gint', ($3)($2))
-  _WRAP_SIGNAL(void g_type_changed(GType old_type, GType new_type), "g-type-changed")
+// TODO: 
+//#m4 _CONVERSION(`gint', `GType', ($3)($2))
+//#m4 _CONVERSION(`GType', `gint', ($3)($2))
+//  _WRAP_SIGNAL(void g_type_changed(GType old_type, GType new_type), "g-type-changed")
 
   _WRAP_PROPERTY("id", Glib::ustring)
 };

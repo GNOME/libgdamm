@@ -20,6 +20,7 @@
  */
 
 #include <libgdamm/holder.h>
+#include <libgdamm/statement.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
