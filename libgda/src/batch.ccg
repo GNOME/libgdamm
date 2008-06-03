@@ -20,6 +20,7 @@
  */
 
 #include <libgdamm/batch.h>
+#include <libgda/gda-batch.h>
 
 namespace Gnome
 {

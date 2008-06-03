@@ -31,6 +31,8 @@ namespace Gnome
 namespace Gda
 {
 
+typedef Glib::SListHandle<Glib::RefPtr<const Statement> > StatementSList;
+
 /** Container for several values
  *
  * @ingroup Connection
@@ -38,20 +40,20 @@ namespace Gda
 class Batch : public Glib::Object
 {
   _CLASS_GOBJECT(Batch, GdaBatch, GDA_BATCH, Glib::Object, GObject)
+protected:
+  _CTOR_DEFAULT()
 public:
   _WRAP_CREATE()
   
-  _WRAP_METHOD(void gda_batch_add_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_add_statement)
-  _WRAP_METHOD(void gda_batch_remove_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_remove_statement)
-  _WRAP_METHOD(Glib::ustring gda_batch_serialize(), gda_batch_serialize)
+  _WRAP_METHOD(void add_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_add_statement)
+  _WRAP_METHOD(void remove_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_remove_statement)
+  _WRAP_METHOD(Glib::ustring serialize(), gda_batch_serialize)
 
-  typedef Glib::SListHandle<const Statement> StatementSList;
-  #m4 _CONVERSION(`const GSList*', `StatementSList', __FL2H_SHALLOW)
+  #m4 _CONVERSION(`const GSList*',`StatementSList',`$2((GSList*)$3, Glib::OWNERSHIP_NONE)')
   _WRAP_METHOD(StatementSList get_statements(), gda_batch_get_statements)
 
-  #m4 _CONVERSION(`GObject*',`Glib::RefPtr<Statement>',`Glib::wrap($3)')
-  #m4 _CONVERSION(`Glib::RefPtr<Statement>', `GObject*', G_OBJECT($3.gobj())')
-  _WRAP_SIGNAL(void changed(Glib::RefPtr<Statement> stmt), "changed")
+  // TODO:
+  //_WRAP_SIGNAL(void changed(Glib::RefPtr<Statement> stmt), "changed")
 };
 
 } // namespace Gda

@@ -20,6 +20,7 @@
  */
 
 #include <libgdamm/connection.h>
+#include <libgdamm/metastruct.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -30,6 +31,8 @@ namespace Gnome
 namespace Gda
 {
 
+typedef GdaMetaContext MetaContext;
+
 /** Container for several values
  *
  * @ingroup Connection
@@ -37,13 +40,16 @@ namespace Gda
 class MetaStore : public Glib::Object
 {
   _CLASS_GOBJECT(MetaStore, GdaMetaStore, GDA_META_STORE, Glib::Object, GObject)
+protected:
+  _CTOR_DEFAULT()
+
 public:
   _WRAP_CREATE()
   
   _WRAP_METHOD(int get_version(), gda_meta_store_get_version)
   //TODO: varargs: extract(), modify()
 
-  _WRAP_METHOD(bool modify_with_context (const Glib::RefPtr<MetaContext>& context, const Glib::RefPtr<DataModel>& new_data), gda_meta_store_modify_with_context, errthrow)
+  _WRAP_METHOD(bool modify_with_context (MetaContext* context, const Glib::RefPtr<DataModel>& new_data), gda_meta_store_modify_with_context, errthrow)
   _WRAP_METHOD(Glib::RefPtr<MetaStruct> schema_get_structure(), gda_meta_store_schema_get_structure, errthrow)
 
   //TODO get_atrribute_value()

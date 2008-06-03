@@ -39,6 +39,9 @@ _WRAP_ENUM(MetaStructFeature, GdaMetaStructFeature)
 class MetaStruct : public Glib::Object
 {
   _CLASS_GOBJECT(MetaStruct, GdaMetaStruct, GDA_META_STRUCT, Glib::Object, GObject)
+protected:
+  _WRAP_CTOR(MetaStruct(MetaStructFeature features), gda_meta_struct_new)
+
 public:
   _WRAP_CREATE(MetaStructFeature features)
   

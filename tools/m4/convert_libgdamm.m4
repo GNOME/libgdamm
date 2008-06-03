@@ -1,4 +1,5 @@
 _EQUAL(glong,long)
+_EQUAL(GdaMetaContext*, MetaContext*)
 
 _CONVERSION(`GdaConnectionEvent*',`Glib::RefPtr<ConnectionEvent>',`Glib::wrap($3)')
 _CONVERSION(`const Glib::RefPtr<ConnectionEvent>&', `GdaConnectionEvent*', __CONVERT_REFPTR_TO_P)
@@ -36,7 +37,6 @@ _CONVERSION(`const Glib::RefPtr<const Set>&', `const GdaSet*', __CONVERT_REFPTR_
 _CONVERSION(`const Glib::RefPtr<const Set>&', `GdaSet*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Batch>&', `GdaBatch*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<MetaStore>&', `GdaMetaStore*', __CONVERT_CONST_REFPTR_TO_P)
-_CONVERSION(`const Glib::RefPtr<MetaContext>&', `GdaMetaContext*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<MetaStruct>&', `GdaMetaStruct*', __CONVERT_CONST_REFPTR_TO_P)
 
 _CONVERSION(`const Glib::RefPtr<const Row>&', `const GdaRow*', `($3)->gobj()')

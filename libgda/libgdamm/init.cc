@@ -37,7 +37,7 @@ void init(const Glib::ustring& app_id, const Glib::ustring& version, int nargs, 
 {
   Glib::init(); //Sets up the g type system and the Glib::wrap() table.
   wrap_init(); //Tells the Glib::wrap() table about the libgnomecanvasmm classes.
-  gda_init(app_id.c_str(), version.c_str(), nargs, args);
+  gda_init();
 }
 
 
