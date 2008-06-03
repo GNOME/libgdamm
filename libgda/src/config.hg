@@ -1,0 +1,63 @@
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* config.h
+ *
+ * Copyright 2006 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or(at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <libgdamm/serverprovider.h>
+#include <libgdamm/datamodel.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+/** Configuration — Access/Management of libgda configuration
+ *
+ * @ingroup Configuration
+ */
+class Config : public Glib::Object
+{
+  _CLASS_GOBJECT(Config, GdaConfig, GDA_CONFIG, Glib::Object, GObject)
+protected:
+  _CTOR_DEFAULT;
+public:
+  _WRAP_METHOD(static Glib::RefPtr<Config> get(), gda_config_get, refreturn)
+  
+  _WRAP_METHOD_DOCS_ONLY(gda_config_dsn_needs_authentication)
+  static bool dsn_needs_authentication(const Glib::ustring& dsn_name);
+  _WRAP_METHOD_DOCS_ONLY(gda_config_list_dsn)
+  static Glib::RefPtr<DataModel> list_dsn();
+  _WRAP_METHOD_DOCS_ONLY(gda_config_list_providers)
+  static Glib::RefPtr<DataModel> list_providers();
+  _WRAP_METHOD_DOCS_ONLY(gda_config_get_nb_dsn)
+  static int get_nb_dsn();
+  _WRAP_METHOD_DOCS_ONLY(gda_config_get_dsn_index)
+  static int get_dsn_index(const Glib::ustring& dsn_name);
+  _WRAP_METHOD_DOCS_ONLY(gda_config_can_modify_system_config)
+  static bool can_modify_system_config();
+};
+
+} // namespace Gda
+} // namespace Gnome
+

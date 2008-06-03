@@ -1,0 +1,64 @@
+// -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
+
+/* config.cc
+ * 
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgdamm/config.h>
+#include <libgda/gda-config.h>
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+bool Config::dsn_needs_authentication(const Glib::ustring& dsn_name)
+{
+  return gda_config_dsn_needs_authentication(dsn_name.c_str());
+}
+
+Glib::RefPtr<DataModel> Config::list_dsn()
+{
+  return Glib::wrap(gda_config_list_dsn());
+}
+
+Glib::RefPtr<DataModel> Config::list_providers()
+{
+  return Glib::wrap(gda_config_list_providers());
+}
+
+int Config::get_nb_dsn()
+{
+  return gda_config_get_nb_dsn();
+}
+
+int Config::get_dsn_index(const Glib::ustring& dsn_name)
+{
+  return gda_config_get_dsn_index(dsn_name.c_str());
+}
+
+bool Config::can_modify_system_config()
+{
+  return gda_config_can_modify_system_config();
+}
+
+} // namespace Gda
+
+} /* namespace Gnome */
+

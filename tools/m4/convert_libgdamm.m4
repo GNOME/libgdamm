@@ -22,6 +22,7 @@ _CONVERSION(`GdaDataHandler*',`Glib::RefPtr<DataHandler>',`Glib::wrap($3)')
 _CONVERSION(`GdaSqlParser*',`Glib::RefPtr<SqlParser>',`Glib::wrap($3)')
 _CONVERSION(`GdaBatch*',`Glib::RefPtr<Batch>',`Glib::wrap($3)')
 _CONVERSION(`GdaMetaStruct*',`Glib::RefPtr<MetaStruct>',`Glib::wrap($3)')
+_CONVERSION(`GdaConfig*',`Glib::RefPtr<Config>',`Glib::wrap($3)')
 
 _CONVERSION(`const Glib::RefPtr<DataModel>&', `GdaDataModel*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DataHandler>&', `GdaDataHandler*', __CONVERT_REFPTR_TO_P)
