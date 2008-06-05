@@ -37,6 +37,7 @@ class Connection;
 //_WRAP_ENUM(ClientSpecsType, GdaClientSpecsType)
 _WRAP_ENUM(ServerOperationNodeType, GdaServerOperationNodeType)
 _WRAP_ENUM(ServerOperationNodeStatus, GdaServerOperationNodeStatus)
+_WRAP_ENUM(ServerOperationType, GdaServerOperationType)
 
 /** @defgroup DDL Data definition (DDL) queries
  */

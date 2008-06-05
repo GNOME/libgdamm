@@ -37,9 +37,6 @@ namespace Gda
 
 class Connection;
 
-//_WRAP_ENUM(ClientSpecsType, GdaClientSpecsType)
-_WRAP_ENUM(ServerOperationType, GdaServerOperationType)
-
 /* TODO: Is this appropriate. Investigate how it is used. */
 typedef GdaServerProviderInfo ServerProviderInfo;
 

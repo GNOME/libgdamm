@@ -22,6 +22,7 @@ _CONVERSION(`GdaDataHandler*',`Glib::RefPtr<DataHandler>',`Glib::wrap($3)')
 _CONVERSION(`GdaSqlParser*',`Glib::RefPtr<SqlParser>',`Glib::wrap($3)')
 _CONVERSION(`GdaBatch*',`Glib::RefPtr<Batch>',`Glib::wrap($3)')
 _CONVERSION(`GdaMetaStruct*',`Glib::RefPtr<MetaStruct>',`Glib::wrap($3)')
+_CONVERSION(`GdaMetaStore*',`Glib::RefPtr<MetaStore>',`Glib::wrap($3)')
 _CONVERSION(`GdaConfig*',`Glib::RefPtr<Config>',`Glib::wrap($3)')
 
 _CONVERSION(`const Glib::RefPtr<DataModel>&', `GdaDataModel*', __CONVERT_REFPTR_TO_P)
@@ -100,8 +101,6 @@ _CONV_ENUM(Gda,SqlParserMode)
 _CONV_ENUM(Gda,MetaStructFeature)
 
 # Lists
-_CONVERSION(`const Glib::ListHandle<Value>&',`GList*',`$3.data()')
-_CONVERSION(`GList*',`const Glib::ListHandle<Value>',__FL2H_SHALLOW)
 _CONVERSION(`GSList*',`Glib::SListHandle<Parameter>',__FL2H_SHALLOW)
 _CONVERSION(`const Glib::SListHandle<Parameter>&',`GSList*',`$3.data()')
 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<QueryField> >',__FL2H_SHALLOW)

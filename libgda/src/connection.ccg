@@ -21,6 +21,7 @@
  */
 
 #include <libgdamm/serverprovider.h>
+#include <libgdamm/metastore.h>
 #include <libgda/gda-enum-types.h>
 #include <libgda/gda-connection.h>
 #include <libgda/libgda.h> //For GDA_GENERAL_ERROR
@@ -47,6 +48,54 @@ void Connection::close()
   //gda_connection_close() does an unref, but we don't want that:
   reference();
   gda_connection_close(gobj());
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<Statement>& cmd, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage, Glib::RefPtr<Set>& last_inserted_row)
+#else
+Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<Statement>& cmd, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage, Glib::RefPtr<Set>& last_inserted_row, std::auto_ptr<Glib::Error>& error)
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  GdaSet* lir = 0;
+  Glib::RefPtr<Glib::Object> retval = Glib::wrap(
+    gda_connection_statement_execute(gobj(), cmd->gobj(), params->gobj(), (GdaStatementModelUsage)model_usage, &lir, &gerror));
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+  if (lir)
+  {
+    last_inserted_row = Glib::wrap(lir);
+  }
+  return retval;
+}
+
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd, const Glib::RefPtr<Set>& params, Glib::RefPtr<Set>& last_inserted_row)
+#else
+int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd, const Glib::RefPtr<Set>& params, Glib::RefPtr<Set>& last_inserted_row, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  GdaSet* lir = 0;
+  int retval = gda_connection_statement_execute_non_select(gobj(), cmd->gobj(), params->gobj(), &lir, &gerror);
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+  if (lir)
+  {
+    last_inserted_row = Glib::wrap(lir);
+  }
+  return retval;
 }
 
 } //namespace Gda
