@@ -38,6 +38,7 @@ class Connection;
 _WRAP_ENUM(ServerOperationNodeType, GdaServerOperationNodeType)
 _WRAP_ENUM(ServerOperationNodeStatus, GdaServerOperationNodeStatus)
 _WRAP_ENUM(ServerOperationType, GdaServerOperationType)
+typedef GdaServerOperationNode ServerOperationNode;
 
 /** @defgroup DDL Data definition (DDL) queries
  */
@@ -63,19 +64,26 @@ public:
 #endif // GLIBMM_EXCEPTIONS_ENABLED
 
   _WRAP_METHOD(ServerOperationNodeType get_node_type(const Glib::ustring& path, ServerOperationNodeStatus& status) const, gda_server_operation_get_node_type)
- //_WRAP_METHOD(ServerOperationNodeType get_node_type_v(const Glib::ustring& *path_array),  gda_server_operation_get_node_type_v)
+  _WRAP_METHOD(guint get_sequence_size(const Glib::ustring& path), gda_server_operation_get_sequence_size);
+  _WRAP_METHOD(guint get_sequence_max_size(const Glib::ustring& path), gda_server_operation_get_sequence_max_size);
+  _WRAP_METHOD(guint get_sequence_min_size(const Glib::ustring& path), gda_server_operation_get_sequence_min_size);
+  _WRAP_METHOD(Glib::StringArrayHandle get_sequence_item_names(const Glib::ustring& path), gda_server_operation_get_sequence_item_names);
+  _WRAP_METHOD(Glib::ustring get_sequence_name(const std::string& path), gda_server_operation_get_sequence_name);
 
-  //_WRAP_METHOD(GdaSet* get_node_parameter_list(const Glib::ustring& path) const, gda_server_operation_get_node_plist)
-  //_WRAP_METHOD(GdaSet *gda_server_operation_get_node_plist_v(const Glib::ustring& *path_array)
-
-  //_WRAP_METHOD(GdaParameter* get_node_param(const Glib::ustring& path) const, gda_server_operation_get_node_param)
-  //_WRAP_METHOD(GdaParameter* gda_server_operation_get_node_param_v(const Glib::ustring& *path_array), gda_server_operation_get_node_param_v)
-
-  //_WRAP_METHOD(GdaDataModel* get_node_datamodel(const Glib::ustring& path) const, gda_server_operation_get_node_datamodel, refreturn)
-  //_WRAP_METHOD(GdaDataModel* get_node_datamodel_v(const Glib::ustring& *path_array), gda_server_operation_get_node_datamodel_v, refreturn)
-
-  //_WRAP_METHOD(int get_node_seq_size(const Glib::ustring& path) const, gda_server_operation_get_node_seq_size)
-  //_WRAP_METHOD(int get_node_seq_size_v(const Glib::ustring& path_array) const, gda_server_operation_get_node_seq_size_v)
+  //TODO: get_node_info => varargs
+  _WRAP_METHOD(bool is_valid(const std::string& xml_file), gda_server_operation_is_valid, errthrow)
+  _WRAP_METHOD(bool load_data_from_xml (xmlNodePtr node), gda_server_operation_load_data_from_xml, errthrow)
+  _WRAP_METHOD(xmlNodePtr save_data_to_xml(), gda_server_operation_save_data_to_xml, errthrow)  
+  _WRAP_METHOD(Glib::ustring get_node_path_portion(const Glib::ustring& path), gda_server_operation_get_node_path_portion)
+  _WRAP_METHOD(Glib::ustring get_node_parent(const Glib::ustring& path), gda_server_operation_get_node_parent)
+  _WRAP_METHOD(ServerOperationType get_op_type(), gda_server_operation_get_op_type)
+  
+  _WRAP_METHOD(bool del_item_from_sequence(const std::string& item_path), gda_server_operation_del_item_from_sequence)
+  _WRAP_METHOD(guint add_item_to_sequence(const std::string& item_path), gda_server_operation_add_item_to_sequence)
+  _WRAP_METHOD(Glib::StringArrayHandle get_root_nodes(), gda_server_operation_get_root_nodes);
+  
+  //_WRAP_SIGNAL(void signal_sequence_item_added(const Glib::ustring& arg1, int arg2), "sequence-item-added")
+  //_WRAP_SIGNAL(void signal_sequence_item_remove(const Glib::ustring& arg1, int arg2), "sequence-item-remove")
 
 
  //TODO: vfuncs.

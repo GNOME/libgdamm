@@ -78,9 +78,13 @@ class ServerProvider : public Glib::Object
   _WRAP_METHOD_DOCS_ONLY(gda_server_provider_string_to_value)
   Glib::ValueBase string_to_value(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& string, GType prefered_type, Glib::ustring& dbms_type);
 
+  _WRAP_METHOD(Glib::RefPtr<DataHandler> get_data_handler_default(const Glib::RefPtr<Connection>& cnc, GType type, const Glib::ustring& dbms_type), gda_server_provider_get_data_handler_default)
+  _WRAP_METHOD(std::string find_file (const std::string& inst_dir, const std::string& filename), gda_server_provider_find_file)
+  _WRAP_METHOD(bool provide_operation_default (const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<ServerOperation>& op), gda_server_provider_perform_operation_default, errthrow)
+    
   // These are in a private header, so ignore them
   _IGNORE(gda_server_provider_handler_declare, gda_server_provider_handler_find, 
-          gda_server_provider_interal_get_parser)
+          gda_server_provider_internal_get_parser)
 
  //TODO: vfuncs.
 };

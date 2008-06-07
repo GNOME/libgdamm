@@ -112,7 +112,7 @@ public:
   _WRAP_SIGNAL(void sample_size_changed(int sample_size), "sample-size-changed")
   _WRAP_SIGNAL(bool pre_changes_applied(int row, int proxied_row), "pre-changes-applied")
   _WRAP_SIGNAL(void post_changes_applied(int row, int proxied_row), "post-changes-applied")
-  //TODO: _WRAP_SIGNAL(void filter_changed(), "filter-changed")
+  _WRAP_SIGNAL(void filter_changed(), "filter-changed")
 };
 
 } // namespace Gda

@@ -1,5 +1,6 @@
 _EQUAL(glong,long)
 _EQUAL(GdaMetaContext*, MetaContext*)
+_EQUAL(GdaServerOperationNode*, ServerOperationNode*)
 
 _CONVERSION(`GdaConnectionEvent*',`Glib::RefPtr<ConnectionEvent>',`Glib::wrap($3)')
 _CONVERSION(`const Glib::RefPtr<ConnectionEvent>&', `GdaConnectionEvent*', __CONVERT_REFPTR_TO_P)
@@ -108,7 +109,8 @@ _CONVERSION(`const Glib::SListHandle< Glib::RefPtr<QueryField> >&',`GSList*',`$3
 _CONVERSION(`const GSList*',`Glib::SListHandle<const DictType>',__FL2H_SHALLOW)
 _CONVERSION(`const Glib::SListHandle<DictType>&',`const GSList*',`$3.data()')
 
-
+# Arrays
+_CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3)')
 
 # For signals:
 _CONVERSION(`GdaConnection*',`const Glib::RefPtr<Connection>&',`Glib::wrap($3)')

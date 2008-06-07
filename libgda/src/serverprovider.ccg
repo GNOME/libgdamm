@@ -22,6 +22,8 @@
 
 #include <libgdamm/connection.h>
 #include <libgda/gda-enum-types.h>
+#include <libgda/gda-server-provider.h>
+#include <libgda/gda-server-provider-extra.h>
 
 namespace Gnome
 {
