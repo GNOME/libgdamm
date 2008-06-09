@@ -43,6 +43,7 @@ protected:
   _WRAP_CTOR(Holder (GType type), gda_holder_new)
 public:
   _WRAP_CREATE(GType g_type)
+  _WRAP_METHOD(Glib::RefPtr<Holder> copy(), gda_holder_copy)
   
   _WRAP_METHOD(GType get_g_type() const, gda_holder_get_g_type)
   _WRAP_METHOD(Glib::ustring get_id() const, gda_holder_get_id)

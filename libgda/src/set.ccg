@@ -20,6 +20,7 @@
  */
 
 #include <libgdamm/set.h>
+#include <libgdamm/datamodel.h>
 #include <libgda/gda-set.h>
 
 namespace Gnome

@@ -14,8 +14,8 @@
   (return-type "void")
   (when "last")
   (parameters
-    '("gint" "p0")
-    '("gint" "p1")
+    '("GType" "p0")
+    '("GType" "p1")
   )
 )
 

@@ -44,6 +44,7 @@ protected:
   _CTOR_DEFAULT()
 public:
   _WRAP_CREATE()
+  _WRAP_METHOD(Glib::RefPtr<Batch> copy(), gda_batch_new_copy)  
   
   _WRAP_METHOD(void add_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_add_statement)
   _WRAP_METHOD(void remove_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_remove_statement)
@@ -52,7 +53,7 @@ public:
   #m4 _CONVERSION(`const GSList*',`StatementSList',`$2((GSList*)$3, Glib::OWNERSHIP_NONE)')
   _WRAP_METHOD(StatementSList get_statements(), gda_batch_get_statements)
 
-  // TODO:
+  // FIXME: Use better marshaller in libgda
   //_WRAP_SIGNAL(void changed(Glib::RefPtr<Statement> stmt), "changed")
 };
 

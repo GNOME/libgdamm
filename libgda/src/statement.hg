@@ -19,6 +19,9 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgdamm/set.h>
+#include <libgdamm/holder.h>
+
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
 _PINCLUDE(libgda/gda-connection.h)
@@ -33,6 +36,7 @@ class Connection;
 
 _WRAP_ENUM (SqlStatementType, GdaSqlStatementType)
 _WRAP_ENUM (StatementModelUsage, GdaStatementModelUsage)
+_WRAP_ENUM (StatementSqlFlag, GdaStatementSqlFlag)
 
 /** Container for several values
  *
@@ -46,14 +50,36 @@ protected:
 
 public:
   _WRAP_CREATE()
+  _WRAP_METHOD(Glib::RefPtr<Statement> copy(), gda_statement_copy)
   
   _WRAP_METHOD(Glib::ustring serialize(), gda_statement_serialize)
   _WRAP_METHOD(static Glib::RefPtr<Statement> deserialize(const Glib::ustring& str), gda_statement_deserialize, errthrow)
-  // TODO:
-  //_WRAP_METHOD(bool get_parameters ())
+  
+  _WRAP_METHOD_DOCS_ONLY(gda_statement_get_parameters)
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  bool get_parameters(Glib::RefPtr<Set>& params);
+  #else
+  bool get_parameters(Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error);
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+  
 
-  //to_sql(const Glib::RefPtr<Set>& params); //This is a #define
-  //_WRAP_METHOD(to_sql_extended(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params), gda_statement_to_sql, errthrow)
+  _IGNORE(gda_statement_to_sql_real)
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  Glib::ustring to_sql(const Glib::RefPtr<Set>& params);
+  #else
+  Glib::ustring to_sql(const Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error);
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  typedef Glib::ListHandle< const Glib::RefPtr<Holder> > HolderSList;
+  _WRAP_METHOD_DOCS_ONLY(gda_statement_to_sql_extended)  
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  Glib::ustring to_sql_extended(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
+                                StatementSqlFlag flags, HolderSList& params_used);
+  #else
+  Glib::ustring to_sql_extended(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
+                                StatementSqlFlag flags, HolderSList& params_used,
+                                std::auto_ptr<Glib::Error>& error);
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   _WRAP_METHOD(SqlStatementType get_statement_type(), gda_statement_get_statement_type)
   _WRAP_METHOD(bool is_useless() const, gda_statement_is_useless)

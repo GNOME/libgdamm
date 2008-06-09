@@ -1,6 +1,9 @@
 _EQUAL(glong,long)
 _EQUAL(GdaMetaContext*, MetaContext*)
 _EQUAL(GdaServerOperationNode*, ServerOperationNode*)
+_EQUAL(GdaSetGroup*, SetGroup*)
+_EQUAL(GdaSetSource*, SetSource*)
+_EQUAL(GdaSetNode*, SetNode*)
 
 _CONVERSION(`GdaConnectionEvent*',`Glib::RefPtr<ConnectionEvent>',`Glib::wrap($3)')
 _CONVERSION(`const Glib::RefPtr<ConnectionEvent>&', `GdaConnectionEvent*', __CONVERT_REFPTR_TO_P)
@@ -98,11 +101,13 @@ _CONV_ENUM(Gda,ServerOperationNodeStatus)
 _CONV_ENUM(Gda,ValueAttribute)
 _CONV_ENUM(Gda,StatementModelUsage)
 _CONV_ENUM(Gda,SqlStatementType)
+_CONV_ENUM(Gda,StatementSqlFlag)
 _CONV_ENUM(Gda,SqlParserMode)
 _CONV_ENUM(Gda,MetaStructFeature)
 
 # Lists
 _CONVERSION(`GSList*',`Glib::SListHandle<Parameter>',__FL2H_SHALLOW)
+_CONVERSION(`GSList*',`Glib::SListHandle<Glib::ustring>',__FL2H_SHALLOW)
 _CONVERSION(`const Glib::SListHandle<Parameter>&',`GSList*',`$3.data()')
 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<QueryField> >',__FL2H_SHALLOW)
 _CONVERSION(`const Glib::SListHandle< Glib::RefPtr<QueryField> >&',`GSList*',`$3.data()')

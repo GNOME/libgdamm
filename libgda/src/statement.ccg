@@ -22,10 +22,83 @@
 #include <libgdamm/statement.h>
 #include <libgdamm/connection.h>
 #include <libgda/gda-enum-types.h>
+#include <libgda/gda-holder.h>
 #include <sql-parser/gda-sql-parser-enum-types.h>
 
 namespace Gnome
 {
+
+namespace Gda
+{
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+bool Statement::get_parameters(Glib::RefPtr<Set>& params)
+#else
+bool Statement::get_parameters(Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  GdaSet* set = 0;
+  bool retval = gda_statement_get_parameters(gobj(), &set, &gerror);
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+  if (set)
+  {
+    params = Glib::wrap(set);
+  }
+  return retval;
+}
+  
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::ustring Statement::to_sql(const Glib::RefPtr<Set>& params)
+#else
+Glib::ustring Statement::to_sql(const Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  Glib::ustring retval = gda_statement_to_sql(gobj(), Glib::unwrap(params), &gerror);
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+  return retval;
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::ustring Statement::to_sql_extended(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
+                              StatementSqlFlag flags, HolderSList& params_used)
+#else
+Glib::ustring Statement::to_sql_extended(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
+                              StatementSqlFlag flags, HolderSList& params_used,
+                              std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  GSList* list = 0;
+  Glib::ustring retval = gda_statement_to_sql_extended(gobj(), Glib::unwrap(cnc), Glib::unwrap(params), (GdaStatementSqlFlag) flags, &list, &gerror);
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+  if (list)
+  {
+    // FIXME: Set params_used somehow
+  }
+  return retval;
+}
+
+} // namespace Gda
 
 
 } /* namespace Gnome */

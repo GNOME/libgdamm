@@ -31,6 +31,9 @@ namespace Gda
 {
 
 typedef Glib::SListHandle<Holder> HolderSList;
+typedef GdaSetSource SetSource;
+typedef GdaSetGroup SetGroup;
+typedef GdaSetNode SetNode;
 
 /** Container for several values
  *
@@ -46,24 +49,31 @@ protected:
 public:
   _WRAP_CREATE(const HolderSList& holders)
   
-  _WRAP_METHOD (Glib::ustring get_spec(), gda_set_get_spec)
+  _WRAP_METHOD(Glib::RefPtr<Set> copy(), gda_set_copy)
+
+  _WRAP_METHOD(Glib::ustring get_spec(), gda_set_get_spec)
   _WRAP_METHOD_DOCS_ONLY(gda_set_get_holder_value)
   Glib::ValueBase get_holder_value(const Glib::ustring& holder_id);
   // TODO:
-  //_WRAP_METHOD (bool set_holder_value())
+  //_WRAP_METHOD(bool set_holder_value())
   
-  _WRAP_METHOD (Glib::RefPtr<Holder> get_holder (const Glib::ustring& holder_id), gda_set_get_holder)
-  _WRAP_METHOD (void add_holder (const Glib::RefPtr<Holder>& holder), gda_set_add_holder)
-  _WRAP_METHOD (void remove_holder (const Glib::RefPtr<Holder>& holder), gda_set_remove_holder)
+  _WRAP_METHOD(Glib::RefPtr<Holder> get_holder (const Glib::ustring& holder_id), gda_set_get_holder)
+  _WRAP_METHOD(void add_holder (const Glib::RefPtr<Holder>& holder), gda_set_add_holder)
+  _WRAP_METHOD(void remove_holder (const Glib::RefPtr<Holder>& holder), gda_set_remove_holder)
 
-  _WRAP_METHOD (void merge_with_set (const Glib::RefPtr<Set>& set_to_merge), gda_set_merge_with_set)
+  _WRAP_METHOD(void merge_with_set (const Glib::RefPtr<Set>& set_to_merge), gda_set_merge_with_set)
   
-  _WRAP_METHOD (bool is_valid() const, gda_set_is_valid)
+  _WRAP_METHOD(bool is_valid() const, gda_set_is_valid)
 
-  _WRAP_SIGNAL (void holder_attr_changed (const Glib::RefPtr<Holder>& holder), "holder-attr-changed")
-  _WRAP_SIGNAL (void holder_changed (const Glib::RefPtr<Holder>& holder), "holder-changed")
-  _WRAP_SIGNAL (void holder_plugin_changed (const Glib::RefPtr<Holder>& holder), "holder-plugin-changed")
-  _WRAP_SIGNAL (void public_data_changed (), "public-data-changed")
+  _WRAP_METHOD(SetSource* get_source_for_model (const Glib::RefPtr<DataModel>& model), gda_set_get_source_for_model)
+  _WRAP_METHOD(SetSource* get_source (const Glib::RefPtr<Holder>& param), gda_set_get_source)
+  _WRAP_METHOD(SetGroup* get_group (const Glib::RefPtr<Holder>& param), gda_set_get_group)
+  _WRAP_METHOD(SetNode* get_node (const Glib::RefPtr<Holder>& param), gda_set_get_node)
+
+  _WRAP_SIGNAL(void holder_attr_changed (const Glib::RefPtr<Holder>& holder), "holder-attr-changed")
+  _WRAP_SIGNAL(void holder_changed (const Glib::RefPtr<Holder>& holder), "holder-changed")
+  _WRAP_SIGNAL(void holder_plugin_changed (const Glib::RefPtr<Holder>& holder), "holder-plugin-changed")
+  _WRAP_SIGNAL(void public_data_changed (), "public-data-changed")
 };
 
 } // namespace Gda
