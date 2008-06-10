@@ -22,129 +22,110 @@
 #include <libgdamm.h>
 #include <iostream>
 
+using namespace Gnome;
 
 int main (int argc, char** argv)
 {
-  //Initialize libgdamm:
-  Gnome::Gda::init("libgdamm example", "0.1", argc, argv);
-
-#ifndef GLIBMM_EXCEPTIONS_ENABLED
-  std::auto_ptr<Glib::Error> error;
-#endif // !GLIBMM_EXCEPTIONS_ENABLED
-
-  Glib::RefPtr<Gnome::Gda::Client> gda_client = Gnome::Gda::Client::create();
-  if(gda_client)
+  Gda::init();
+  Glib::RefPtr<Gda::Connection> cnc;
+  try
   {
-    //Get a stored data source:
-    //(Note that you might prefer to just use Gnome::Gda::Client::open_connection_from_string() instead.)
-    const Glib::ustring data_source_name = "datasource_libgdamm_example_simple";
-    Gnome::Gda::DataSourceInfo data_source = Gnome::Gda::Config::find_data_source(data_source_name);
-    if(!data_source)
-    {
-      std::cout << "Creating the DataSource, because it does not exist yet." << std::endl;
-      //Create it if it does not exist already:
-      data_source = Gnome::Gda::DataSourceInfo();
-      data_source.set_name(data_source_name);
-      data_source.set_username("murrayc");
-      data_source.set_password("murraycpw");      
-      data_source.set_description("Data Source for libgdamm simple example.");
-      data_source.set_provider("PostgreSQL");
-      data_source.set_cnc_string("DB_NAME=glom_musiccollection21");
-      
-      Gnome::Gda::Config::save_data_source(data_source);
-    }
-
-    std::cout << " Data source = " << data_source.get_name() << ", User = " << data_source.get_username() << std::endl;
-
-    Glib::RefPtr<Gnome::Gda::Connection> gda_connection;
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
-    try
-    {
-      gda_connection = gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password() );
-    }
-    catch(const Glib::Exception& ex)
-    {
-      std::cerr << "Exception caught: " << ex.what() << std::endl;
-    }
-#else
-    gda_connection = gda_client->open_connection(data_source.get_name(), data_source.get_username(), data_source.get_password(), Gnome::Gda::ConnectionOptions(0), error);
-    if(error.get())
-    {
-      std::cerr << "Exception caught: " << error->what() << std::endl;
-    }
-#endif // GLIBMM_EXCEPTIONS_ENABLED
-    
-    if(!gda_connection)
-      std::cerr << "Error: Could not open connection to " << data_source.get_name();
-    else
-    {
-      //Open database:
-      //gda_connection->change_database("murrayc");
-
-      //Get data from a table:
-      Gnome::Gda::Command command("SELECT * FROM artists");
-
-      Glib::RefPtr<Gnome::Gda::DataModel> data_model;
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
-      try
-      {
-        data_model = gda_connection->execute_select_command(command);
-      }
-      catch(const Glib::Exception& ex)
-      {
-       std::cerr << "Exception caught: " << ex.what() << std::endl;
-      }
-#else
-      data_model = gda_connection->execute_select_command(command, error);
-      if(error.get())
-      {
-        std::cerr << "Exception caught: " << error->what() << std::endl;
-      }
-#endif //GLIBMM_EXCEPTIONS_ENABLED
-
-      if(!data_model)
-      {
-        std::cout << "command execution failed." << std::endl;
-      }
-      else if(data_model) 
-      {
-        int columns =  data_model->get_n_columns();
-        std::cout << "    Number of columns: " << columns << std::endl;
-
-        for(int i = 0; i < columns; ++i)
-        {
-          std::cout << "      column " << i << ": " <<  data_model->get_column_title(i);
-
-          //Find out whether it's the primary key:
-          const Glib::RefPtr<Gnome::Gda::Column> field = data_model->describe_column(i);
-          bool is_primary_key = field->get_primary_key();
-          if(is_primary_key)
-            std:: cout << "  (primary key)";
-
-          std::cout << std::endl;
-        }
-
-        const int rows = data_model->get_n_rows();
-        std::cout << "    Number of rows: " << rows << std::endl;
-
-        for(int i = 0; i < rows; ++i)
-        {
-          std::cout << "      row " << i << ": ";
-
-          for(int col = 0; col < columns; ++col)
-          {
-            Gnome::Gda::Value value_name = data_model->get_value_at(col, i);
-            std::cout << value_name.to_string() << ", ";
-          }
-
-          std::cout << std::endl;   
-        }
-      }
-    }
-  } 
-
+    cnc = Gda::Connection::open_from_string ("SQLite", "DB_DIR=.;DB_NAME=example_db", "",
+                                                                           Gda::CONNECTION_OPTIONS_NONE);
+  }
+  catch (Glib::Error& err)
+  {
+    std::cerr << err.what() << std::endl;
+    return 1;
+  }
+  /* create an SQL parser */
+	Glib::RefPtr<Gda::SqlParser> parser = cnc->create_parser();
+	if (!parser) /* @cnc doe snot provide its own parser => use default one */
+		parser = Gda::SqlParser::create();
+  
   
   return 0;
 }
 
+/*
+ * run a non SELECT command and stops if an error occurs
+ */
+void
+run_sql_non_select (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr<Gda::SqlParser>& parser, const Glib::ustring sql)
+{
 
+	Glib::RefPtr<Gda::Statement> stmt;
+  Glib::ustring remain;
+  try
+  {
+    stmt =  parser->parse_string (sql, remain);
+  }
+  catch (Glib::Error& err)
+  {
+    std::cerr << "Error: " << err.what() << std::endl;
+    return;
+  }
+	if (!remain.empty()) 
+		std::cout << "REMAINS: "<< remain << std::endl;
+
+  int nrows;
+  try
+  {
+    Glib::RefPtr<Gda::Set> params;
+    Glib::RefPtr<Gda::Set> last_inserted_row;    
+    nrows = cnc->statement_execute_non_select (stmt, params, last_inserted_row);
+  }
+  catch (Glib::Error& err)
+  {
+    std::cerr << err.what() << std::endl;
+    return;
+  }
+}
+
+/*
+ * Create a "products" table
+ */
+void
+create_table (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr<Gda::SqlParser>& parser)
+{
+	run_sql_non_select (cnc, parser, "DROP table IF EXISTS products");
+  run_sql_non_select (cnc, parser, "CREATE table products (ref string not null primary key, "
+                                                           "name string not null, price real)");
+	run_sql_non_select (cnc, parser, "INSERT INTO products VALUES ('p1', 'chair', 2.0)");
+	run_sql_non_select (cnc, parser, "INSERT INTO products VALUES ('p2', 'table', 5.0)");
+
+	run_sql_non_select (cnc, parser, "INSERT INTO products VALUES ('p3', 'glass', 1.1)");
+}
+
+/* 
+ * display the contents of the 'products' table 
+ */
+void
+display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr<Gda::SqlParser>& parser)
+{
+	const Glib::ustring sql = "SELECT ref, name, price FROM products";
+  Glib::ustring remain;
+	Glib::RefPtr<Gda::Statement> stmt;
+  try
+  {
+    stmt =  parser->parse_string (sql, remain);
+  }
+  catch (Glib::Error& err)
+  {
+    std::cerr << "Error: " << err.what() << std::endl;
+    return;
+  }
+  Glib::RefPtr<Gda::Set> params;
+	Glib::RefPtr<Gda::DataModel> data_model;
+  try
+  {
+    data_model = cnc->statement_execute_select (stmt, params);
+  }
+  catch (Glib::Error& err)
+  { 
+    std::cout << "Could not get the contents of the 'products' table: " 
+      << err.what() << std::endl;
+    return;
+  }
+  std::cout << data_model->dump_as_string() << std::endl;
+}

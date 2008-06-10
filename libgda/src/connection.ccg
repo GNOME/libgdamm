@@ -43,6 +43,36 @@ Connection::~Connection()
   }
 }
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::RefPtr<Connection> Connection::open_from_string (const Glib::ustring& provider_name,
+                                                       const Glib::ustring& cnc_string,
+                                                       const Glib::ustring& auth_string,
+                                                       ConnectionOptions options)
+#else
+Glib::RefPtr<Connection> Connection::open_from_string (const Glib::ustring& provider_name,
+                                                       const Glib::ustring& cnc_string,
+                                                       const Glib::ustring& auth_string,
+                                                       ConnectionOptions options,
+                                                       std::auto_ptr<Glib::Error>& error)
+#endif
+{
+  GError* gerror = 0;
+  Glib::RefPtr<Connection> retval = Glib::wrap(gda_connection_open_from_string (provider_name.c_str(),
+                                                                                cnc_string.c_str(),
+                                                                                auth_string.c_str(),
+                                                                                (GdaConnectionOptions)options,
+                                                                                &gerror));
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  return retval;
+}
+
 void Connection::close()
 {
   //gda_connection_close() does an unref, but we don't want that:

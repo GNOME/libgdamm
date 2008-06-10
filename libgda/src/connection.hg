@@ -71,6 +71,21 @@ protected:
 public:
   _WRAP_CREATE()
 
+  /* This throws an error which we don't want to do in a constructor */
+  _WRAP_METHOD_DOCS_ONLY(gda_connection_open_from_string)
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  static Glib::RefPtr<Connection> open_from_string (const Glib::ustring& provider_name,
+                                                    const Glib::ustring& cnc_string,
+                                                    const Glib::ustring& auth_string,
+                                                    ConnectionOptions options);
+#else
+  static Glib::RefPtr<Connection> open_from_string (const Glib::ustring& provider_name,
+                                                    const Glib::ustring& cnc_string,
+                                                    const Glib::ustring& auth_string,
+                                                    ConnectionOptions options,
+                                                    std::auto_ptr<Glib::Error>& error);
+#endif
+
   _WRAP_METHOD(bool open(), gda_connection_open, errthrow)
 
   /** Closes the connection to the underlying data source, but first emits the "conn_to_close" signal.
@@ -162,7 +177,8 @@ public:
   //_WRAP_METHOD(Glib::RefPtr<DataModel> get_meta_store_data (...), gda_connection_get_meta_store_data)
   _WRAP_METHOD(Glib::RefPtr<MetaStore> get_meta_store(), gda_connection_get_meta_store);
 
-  _WRAP_METHOD(Glib::RefPtr<Glib::Object> batch_execute(const Glib::RefPtr<Batch>& batch, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage), gda_connection_batch_execute, errthrow)
+  _IGNORE (gda_connection_batch_execute) // has no implementation
+  //_WRAP_METHOD(Glib::RefPtr<Glib::Object> batch_execute(const Glib::RefPtr<Batch>& batch, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage), gda_connection_batch_execute, errthrow)
   _WRAP_METHOD(Glib::RefPtr<ServerOperation> create_operation (ServerOperationType type, const Glib::RefPtr<Set>& options), gda_connection_create_operation, errthrow)
   _WRAP_METHOD(bool perform_operation (const Glib::RefPtr<ServerOperation>& op), gda_connection_perform_operation, errthrow)
 
