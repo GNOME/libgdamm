@@ -54,8 +54,8 @@ public:
   _WRAP_METHOD(Glib::ustring get_spec(), gda_set_get_spec)
   _WRAP_METHOD_DOCS_ONLY(gda_set_get_holder_value)
   Glib::ValueBase get_holder_value(const Glib::ustring& holder_id);
-  // TODO:
-  //_WRAP_METHOD(bool set_holder_value())
+  _WRAP_METHOD_DOCS_ONLY(gda_set_set_holder_value)
+  template<class T> bool set_holder_value(const Glib::ustring& id, T value);
   
   _WRAP_METHOD(Glib::RefPtr<Holder> get_holder (const Glib::ustring& holder_id), gda_set_get_holder)
   _WRAP_METHOD(void add_holder (const Glib::RefPtr<Holder>& holder), gda_set_add_holder)
@@ -74,6 +74,10 @@ public:
   _WRAP_SIGNAL(void holder_changed (const Glib::RefPtr<Holder>& holder), "holder-changed")
   _WRAP_SIGNAL(void holder_plugin_changed (const Glib::RefPtr<Holder>& holder), "holder-plugin-changed")
   _WRAP_SIGNAL(void public_data_changed (), "public-data-changed")
+
+  _WRAP_PROPERTY("description", Glib::ustring)
+  _WRAP_PROPERTY("id", Glib::ustring)
+  _WRAP_PROPERTY("name", Glib::ustring)
 };
 
 } // namespace Gda

@@ -71,8 +71,7 @@ public:
   _WRAP_METHOD(void set_bind (const Glib::RefPtr<Holder>& bind_to), gda_holder_set_bind)
   _WRAP_METHOD(Glib::RefPtr<Holder> get_bind(), gda_holder_get_bind)
 
-  // TODO:
-  /*_WRAP_PROPERTY("description", Glib::ustring)
+  _WRAP_PROPERTY("description", Glib::ustring)
   _WRAP_PROPERTY("full-bind", Glib::RefPtr<Holder>)
   _WRAP_PROPERTY("g-type", gulong)
   _WRAP_PROPERTY("id", Glib::ustring)
@@ -80,9 +79,8 @@ public:
   _WRAP_PROPERTY("not-null", bool)
   _WRAP_PROPERTY("simple-bind", Glib::RefPtr<Holder>)
   _WRAP_PROPERTY("plugin", Glib::ustring)
-  _WRAP_PROPERTY("simple-bind", Glib::RefPtr<Holder>)
   _WRAP_PROPERTY("source-column", int)
-  _WRAP_PROPERTY("source-model", Glib::RefPtr<DataModel)*/
+  _WRAP_PROPERTY("source-model", Glib::RefPtr<DataModel>)
 
   _WRAP_SIGNAL(void changed(), "changed")
   _WRAP_SIGNAL(void source_changed(), "source-changed")

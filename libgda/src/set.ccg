@@ -37,6 +37,11 @@ Glib::ValueBase Set::get_holder_value(const Glib::ustring& holder_id)
   return retval;
 }
 
+template<class T> bool Set::set_holder_value(const Glib::ustring& id, T value)
+{
+  return gda_set_set_holder_value (gobj(), id.c_str(), value);
+}
+
 } /* namespace Gda */
 
 } /* namespace Gnome */

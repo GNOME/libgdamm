@@ -20,6 +20,7 @@
  */
 
 #include <libgdamm/metastruct.h>
+#include <libgdamm/metastore.h>
 #include <libgda/gda-enum-types.h>
 
 namespace Gnome

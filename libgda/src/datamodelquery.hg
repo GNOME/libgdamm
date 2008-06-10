@@ -67,6 +67,12 @@ public:
   _WRAP_METHOD(bool refresh(), gda_data_model_query_refresh, errthrow)
   _WRAP_METHOD(bool set_modification_query(const Glib::RefPtr<Statement>& query), gda_data_model_query_set_modification_query, errthrow)
   _WRAP_METHOD(bool compute_modification_queries(const Glib::ustring& target, DataModelQueryOptions options), gda_data_model_query_compute_modification_queries, errthrow)
+
+  _WRAP_PROPERTY("connection", Glib::RefPtr<Connection>)
+  _WRAP_PROPERTY("delete-query", Glib::RefPtr<Statement>)
+  _WRAP_PROPERTY("insert-query", Glib::RefPtr<Statement>)
+  _WRAP_PROPERTY("update-query", Glib::RefPtr<Statement>)
+  _WRAP_PROPERTY("use-transaction", bool)
 };
 
 } // namespace Gda

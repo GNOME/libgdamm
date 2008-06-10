@@ -106,6 +106,8 @@ public:
 
   _WRAP_PROPERTY("model", Glib::RefPtr<DataModel>)
   _WRAP_PROPERTY("prepend-null-entry", bool)
+  _WRAP_PROPERTY("defer-sync", bool)
+  _WRAP_PROPERTY("sample-size", int)
 
   _WRAP_SIGNAL(void row_delete_changed(int row, bool to_be_deleted), "row-delete-changed")
   _WRAP_SIGNAL(void sample_changed(int sample_start, int sample_end), "sample-changed")

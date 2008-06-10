@@ -33,6 +33,7 @@ namespace Gda
 
 
 class Connection;
+class ServerProvider;
 
 //_WRAP_ENUM(ClientSpecsType, GdaClientSpecsType)
 _WRAP_ENUM(ServerOperationNodeType, GdaServerOperationNodeType)
@@ -82,9 +83,13 @@ public:
   _WRAP_METHOD(guint add_item_to_sequence(const std::string& item_path), gda_server_operation_add_item_to_sequence)
   _WRAP_METHOD(Glib::StringArrayHandle get_root_nodes(), gda_server_operation_get_root_nodes);
   
+  //TODO: marshallers
   //_WRAP_SIGNAL(void signal_sequence_item_added(const Glib::ustring& arg1, int arg2), "sequence-item-added")
   //_WRAP_SIGNAL(void signal_sequence_item_remove(const Glib::ustring& arg1, int arg2), "sequence-item-remove")
 
+  _WRAP_PROPERTY("connection", Glib::RefPtr<Connection>)
+  _WRAP_PROPERTY("op-type", gint)
+  _WRAP_PROPERTY("provider-obj", Glib::RefPtr<ServerProvider>)
 
  //TODO: vfuncs.
 };

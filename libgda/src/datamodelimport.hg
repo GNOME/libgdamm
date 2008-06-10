@@ -21,6 +21,7 @@
 
 #include <glibmm/object.h>
 #include <libgdamm/datamodelrow.h>
+#include <libgdamm/set.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(libgdamm/private/datamodelrow_p.h)
@@ -77,6 +78,13 @@ public:
   _WRAP_METHOD(GSList* get_errors(), gda_data_model_import_get_errors)
 
   _WRAP_METHOD(void clean_errors(), gda_data_model_import_clean_errors)
+
+  _WRAP_PROPERTY("data-string", Glib::ustring)
+  _WRAP_PROPERTY("filename", std::string)
+  _WRAP_PROPERTY("options", Glib::RefPtr<Set>)
+  _WRAP_PROPERTY("random-access", bool)
+  #m4 _EQUAL(gpointer, xmlNodePtr)
+  _WRAP_PROPERTY("xml-node", xmlNodePtr)
 };
 
 } // namespace Gda

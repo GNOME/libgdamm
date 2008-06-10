@@ -215,6 +215,13 @@
   (gtype-id "GDA_TYPE_TRANSACTION_STATUS")
 )
 
+(define-object XaTransaction
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaXaTransaction")
+  (gtype-id "GDA_TYPE_XA_TRANSACTION")
+)
+
 ;; Enumerations and flags ...
 
 (define-enum ClientEvent
@@ -351,6 +358,7 @@
     '("updatable-cursor" "GDA_CONNECTION_FEATURE_UPDATABLE_CURSOR")
     '("users" "GDA_CONNECTION_FEATURE_USERS")
     '("views" "GDA_CONNECTION_FEATURE_VIEWS")
+    '("xa-transactions" "GDA_CONNECTION_FEATURE_XA_TRANSACTIONS")
     '("last" "GDA_CONNECTION_FEATURE_LAST")
   )
 )
@@ -682,7 +690,7 @@
     '("drop-index" "GDA_SERVER_OPERATION_DROP_INDEX")
     '("create-view" "GDA_SERVER_OPERATION_CREATE_VIEW")
     '("drop-view" "GDA_SERVER_OPERATION_DROP_VIEW")
-    '("nb" "GDA_SERVER_OPERATION_NB")
+    '("last" "GDA_SERVER_OPERATION_LAST")
   )
 )
 
@@ -726,6 +734,7 @@
     '("internal-error" "GDA_SERVER_PROVIDER_INTERNAL_ERROR")
     '("busy-error" "GDA_SERVER_PROVIDER_BUSY_ERROR")
     '("non-supported-error" "GDA_SERVER_PROVIDER_NON_SUPPORTED_ERROR")
+    '("server-version-error" "GDA_SERVER_PROVIDER_SERVER_VERSION_ERROR")
   )
 )
 
@@ -808,6 +817,16 @@
   (values
     '("ok" "GDA_TRANSACTION_STATUS_STATE_OK")
     '("failed" "GDA_TRANSACTION_STATUS_STATE_FAILED")
+  )
+)
+
+(define-enum XaTransactionError
+  (in-module "Gda")
+  (c-name "GdaXaTransactionError")
+  (gtype-id "GDA_TYPE_XA_TRANSACTION_ERROR")
+  (values
+    '("already-registered-error" "GDA_XA_TRANSACTION_ALREADY_REGISTERED_ERROR")
+    '("dtp-not-supported-error" "GDA_XA_TRANSACTION_DTP_NOT_SUPPORTED_ERROR")
   )
 )
 
@@ -3866,6 +3885,11 @@
   (return-type "GType")
 )
 
+(define-function gda_xa_transaction_error_get_type
+  (c-name "gda_xa_transaction_error_get_type")
+  (return-type "GType")
+)
+
 
 
 ;; From gda-holder.h
@@ -6134,6 +6158,97 @@
 
 
 
+;; From gda-xa-transaction.h
+
+(define-function gda_xa_transaction_get_type
+  (c-name "gda_xa_transaction_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_xa_transaction_new
+  (c-name "gda_xa_transaction_new")
+  (is-constructor-of "GdaXaTransaction")
+  (return-type "GdaXaTransaction*")
+  (parameters
+    '("guint32" "format")
+    '("const-gchar*" "global_transaction_id")
+  )
+)
+
+(define-method register_connection
+  (of-object "GdaXaTransaction")
+  (c-name "gda_xa_transaction_register_connection")
+  (return-type "gboolean")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "branch")
+    '("GError**" "error")
+  )
+)
+
+(define-method unregister_connection
+  (of-object "GdaXaTransaction")
+  (c-name "gda_xa_transaction_unregister_connection")
+  (return-type "none")
+  (parameters
+    '("GdaConnection*" "cnc")
+  )
+)
+
+(define-method begin
+  (of-object "GdaXaTransaction")
+  (c-name "gda_xa_transaction_begin")
+  (return-type "gboolean")
+  (parameters
+    '("GError**" "error")
+  )
+)
+
+(define-method commit
+  (of-object "GdaXaTransaction")
+  (c-name "gda_xa_transaction_commit")
+  (return-type "gboolean")
+  (parameters
+    '("GSList**" "cnc_to_recover")
+    '("GError**" "error")
+  )
+)
+
+(define-method rollback
+  (of-object "GdaXaTransaction")
+  (c-name "gda_xa_transaction_rollback")
+  (return-type "gboolean")
+  (parameters
+    '("GError**" "error")
+  )
+)
+
+(define-method commit_recovered
+  (of-object "GdaXaTransaction")
+  (c-name "gda_xa_transaction_commit_recovered")
+  (return-type "gboolean")
+  (parameters
+    '("GSList**" "cnc_to_recover")
+    '("GError**" "error")
+  )
+)
+
+(define-method to_string
+  (of-object "GdaXaTransactionId")
+  (c-name "gda_xa_transaction_id_to_string")
+  (return-type "const-gchar*")
+)
+
+(define-function gda_xa_transaction_string_to_id
+  (c-name "gda_xa_transaction_string_to_id")
+  (return-type "GdaXaTransactionId*")
+  (parameters
+    '("const-gchar*" "str")
+  )
+)
+
+
+
 ;; From libgda.h
 
 (define-function gda_init
@@ -6316,6 +6431,55 @@
     '("full" "GDA_SQL_SELECT_JOIN_FULL")
   )
 )
+
+
+;; From gda-sql-parser-enum-types.h
+
+(define-function gda_sql_parser_error_get_type
+  (c-name "gda_sql_parser_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_sql_parser_mode_get_type
+  (c-name "gda_sql_parser_mode_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_sql_parser_flavour_get_type
+  (c-name "gda_sql_parser_flavour_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_sql_error_type_get_type
+  (c-name "gda_sql_error_type_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_sql_statement_type_get_type
+  (c-name "gda_sql_statement_type_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_sql_any_part_type_get_type
+  (c-name "gda_sql_any_part_type_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_sql_statement_compound_type_get_type
+  (c-name "gda_sql_statement_compound_type_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_sql_operator_type_get_type
+  (c-name "gda_sql_operator_type_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_sql_select_join_type_get_type
+  (c-name "gda_sql_select_join_type_get_type")
+  (return-type "GType")
+)
+
 
 
 ;; From gda-sql-parser.h

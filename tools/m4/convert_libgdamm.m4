@@ -1,15 +1,20 @@
 _EQUAL(glong,long)
 _EQUAL(GdaMetaContext*, MetaContext*)
+_EQUAL(GdaMetaDbObject*, MetaDbObject*)
+_EQUAL(GdaMetaTable*, MetaTable*)
+_EQUAL(GdaMetaTableColumn*, MetaTableColumn*)
 _EQUAL(GdaServerOperationNode*, ServerOperationNode*)
 _EQUAL(GdaSetGroup*, SetGroup*)
 _EQUAL(GdaSetSource*, SetSource*)
 _EQUAL(GdaSetNode*, SetNode*)
+
 
 _CONVERSION(`GdaConnectionEvent*',`Glib::RefPtr<ConnectionEvent>',`Glib::wrap($3)')
 _CONVERSION(`const Glib::RefPtr<ConnectionEvent>&', `GdaConnectionEvent*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`GdaDataModel*',`Glib::RefPtr<DataModel>',`Glib::wrap($3)')
 _CONVERSION(`GdaDataModel*',`Glib::RefPtr<const DataModel>',`Glib::wrap($3)')
 _CONVERSION(`GdaDataModelIter*',`Glib::RefPtr<DataModelIter>',`Glib::wrap($3)')
+_CONVERSION(`GdaDataModelArray*',`Glib::RefPtr<DataModelArray>',`Glib::wrap($3)')
 
 _CONVERSION(`GdaConnection*',`Glib::RefPtr<Connection>',`Glib::wrap($3)')
 _CONVERSION(`GdaStatement*',`Glib::RefPtr<Statement>',`Glib::wrap($3)')
@@ -82,6 +87,7 @@ _CONVERSION(`ServerOperationNodeStatus&',`GdaServerOperationNodeStatus*',`(($2) 
 
 _CONV_ENUM(Gda,ConnectionFeature)
 _CONV_ENUM(Gda,ConnectionSchema)
+_CONV_ENUM(Gda,ConnectionOptions)
 _CONV_ENUM(Gda,ClientEvent)
 _CONV_ENUM(Gda,ClientSpecsType)
 _CONV_ENUM(Gda,DataModelAccessFlags)
@@ -104,15 +110,13 @@ _CONV_ENUM(Gda,SqlStatementType)
 _CONV_ENUM(Gda,StatementSqlFlag)
 _CONV_ENUM(Gda,SqlParserMode)
 _CONV_ENUM(Gda,MetaStructFeature)
+_CONV_ENUM(Gda,MetaDbObjectType)
+_CONV_ENUM(Gda,MetaSortType)
+_CONV_ENUM(Gda,MetaGraphInfo)
 
 # Lists
-_CONVERSION(`GSList*',`Glib::SListHandle<Parameter>',__FL2H_SHALLOW)
 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::ustring>',__FL2H_SHALLOW)
-_CONVERSION(`const Glib::SListHandle<Parameter>&',`GSList*',`$3.data()')
-_CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<QueryField> >',__FL2H_SHALLOW)
-_CONVERSION(`const Glib::SListHandle< Glib::RefPtr<QueryField> >&',`GSList*',`$3.data()')
-_CONVERSION(`const GSList*',`Glib::SListHandle<const DictType>',__FL2H_SHALLOW)
-_CONVERSION(`const Glib::SListHandle<DictType>&',`const GSList*',`$3.data()')
+_CONVERSION(`const Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >&',`GList*',`$3.data()')
 
 # Arrays
 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3)')

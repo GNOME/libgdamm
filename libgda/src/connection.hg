@@ -98,16 +98,10 @@ public:
   _WRAP_METHOD(void add_event(const Glib::RefPtr<ConnectionEvent>& event), gda_connection_add_event)
   _WRAP_METHOD(Glib::RefPtr<ConnectionEvent> add_event_string(const Glib::ustring& str), gda_connection_add_event_string)
 
-  //TODO: Use ListHandle, and watch out because the C function frees the input list parameter.
-  //However, this is not high-priority because this is apparently just a convenience function.
-  //You canuse add_event() repeatedly instead.
-  //_WRAP_METHOD(void add_events_list(GList *error_list), gda_connection_add_events_list)
-  _IGNORE(gda_connection_add_events_list)
+  #m4 //Use deep ownership because we own both the list and its elements;
+  _WRAP_METHOD(void add_events_list (const Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >& events_list), gda_connection_add_events_list)
 
   _WRAP_METHOD(void clear_events_list(), gda_connection_clear_events_list)
-
-  #m4 //Use deep ownership because we own both the list and its elements;
-  #m4 _CONVERSION(`GList*',`Glib::ListHandle< Glib::RefPtr<DataModel> >',`$2($3, Glib::OWNERSHIP_SHALLOW)')
 
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_execute)
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
@@ -180,6 +174,13 @@ _CONVERSION(`GdaConnectionEvent*',`const Glib::RefPtr<ConnectionEvent>&',Glib::w
   _WRAP_SIGNAL(void conn_closed(), "conn_closed")
   _WRAP_SIGNAL(void dsn_changed(), "dsn_changed")
   _WRAP_SIGNAL(void transaction_status_changed(), "transaction_status_changed")
+
+  _WRAP_PROPERTY("auth-string", Glib::ustring)
+  _WRAP_PROPERTY("cnc-string", Glib::ustring)
+  _WRAP_PROPERTY("dsn", Glib::ustring)
+  _WRAP_PROPERTY("meta-store", Glib::RefPtr<MetaStore>)
+  _WRAP_PROPERTY("options", ConnectionOptions)
+  _WRAP_PROPERTY("provider-obj", Glib::RefPtr<ServerProvider>)
 };
 
 } // namespace Gda

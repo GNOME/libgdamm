@@ -69,9 +69,11 @@ public:
   _WRAP_METHOD(bool schema_remove_custom_object(const Glib::ustring& obj_name), gda_meta_store_schema_remove_custom_object, errthrow)
   _WRAP_METHOD(Glib::RefPtr<Connection> get_internal_connection(), gda_meta_store_get_internal_connection)
 
-  //TODO Properties
+  // The rest of the properties is Write / Construct Only
+  _WRAP_PROPERTY("cnc", Glib::RefPtr<Connection>)  
 
-  //TODO Signals
+  _WRAP_SIGNAL(void meta_reset(), "meta-reset")
+  // TODO: meta-changed and suggest-update => marshallers
 };
 
 } // namespace Gda
