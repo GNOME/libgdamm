@@ -24,29 +24,6 @@
 
 using namespace Gnome;
 
-int main (int argc, char** argv)
-{
-  Gda::init();
-  Glib::RefPtr<Gda::Connection> cnc;
-  try
-  {
-    cnc = Gda::Connection::open_from_string ("SQLite", "DB_DIR=.;DB_NAME=example_db", "",
-                                                                           Gda::CONNECTION_OPTIONS_NONE);
-  }
-  catch (Glib::Error& err)
-  {
-    std::cerr << err.what() << std::endl;
-    return 1;
-  }
-  /* create an SQL parser */
-	Glib::RefPtr<Gda::SqlParser> parser = cnc->create_parser();
-	if (!parser) /* @cnc doe snot provide its own parser => use default one */
-		parser = Gda::SqlParser::create();
-  
-  
-  return 0;
-}
-
 /*
  * run a non SELECT command and stops if an error occurs
  */
@@ -77,7 +54,7 @@ run_sql_non_select (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr
   }
   catch (Glib::Error& err)
   {
-    std::cerr << err.what() << std::endl;
+    std::cerr << "Error: " << err.what() << std::endl;
     return;
   }
 }
@@ -128,4 +105,29 @@ display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc, const Glib:
     return;
   }
   std::cout << data_model->dump_as_string() << std::endl;
+}
+
+int main (int argc, char** argv)
+{
+  Gda::init();
+  Glib::RefPtr<Gda::Connection> cnc;
+  try
+  {
+    cnc = Gda::Connection::open_from_string ("SQLite", "DB_DIR=.;DB_NAME=example_db", "",
+                                                                           Gda::CONNECTION_OPTIONS_NONE);
+  }
+  catch (Glib::Error& err)
+  {
+    std::cerr << err.what() << std::endl;
+    return 1;
+  }
+  /* create an SQL parser */
+	Glib::RefPtr<Gda::SqlParser> parser = cnc->create_parser();
+	if (!parser) /* @cnc doe snot provide its own parser => use default one */
+		parser = Gda::SqlParser::create();
+  
+  create_table(cnc, parser);
+  display_products_contents(cnc, parser);
+  
+  return 0;
 }

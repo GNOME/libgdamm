@@ -89,7 +89,7 @@ Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<Stat
   GError* gerror = 0;
   GdaSet* lir = 0;
   Glib::RefPtr<Glib::Object> retval = Glib::wrap(
-    gda_connection_statement_execute(gobj(), cmd->gobj(), params->gobj(), (GdaStatementModelUsage)model_usage, &lir, &gerror));
+    gda_connection_statement_execute(gobj(), cmd->gobj(), Glib::unwrap(params), (GdaStatementModelUsage)model_usage, &lir, &gerror));
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
@@ -113,7 +113,7 @@ int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd,
 {
   GError* gerror = 0;
   GdaSet* lir = 0;
-  int retval = gda_connection_statement_execute_non_select(gobj(), cmd->gobj(), params->gobj(), &lir, &gerror);
+  int retval = gda_connection_statement_execute_non_select(gobj(), Glib::unwrap(cmd), Glib::unwrap(params), &lir, &gerror);
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
