@@ -22,6 +22,7 @@
 #include <glibmm/object.h>
 #include <libgdamm/serverprovider.h>
 #include <libgdamm/datamodel.h>
+#include <libgda/gda-config.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -32,6 +33,8 @@ namespace Gnome
 namespace Gda
 {
 
+typedef GdaDataSourceInfo DataSourceInfo;
+  
 /** Configuration — Access/Management of libgda configuration
  *
  * @ingroup Configuration
@@ -59,8 +62,13 @@ public:
 
   _WRAP_PROPERTY("system-file", std::string);
   _WRAP_PROPERTY("user-file", std::string);
-
-  // TODO: Signal -> marshallers
+  
+  #m4 _EQUAL(GdaDataSourceInfo*, DataSourceInfo*)
+  #m4 _CONVERSION(`gpointer',`DataSourceInfo*',`(DataSourceInfo*)($3)')
+  _WRAP_SIGNAL(void dsn_added(DataSourceInfo* info), "dsn-added", no_default_handler)
+  _WRAP_SIGNAL(void dsn_changed(DataSourceInfo* info), "dsn-changed", no_default_handler)
+  _WRAP_SIGNAL(void dsn_removed(DataSourceInfo* info), "dsn-removed", no_default_handler)
+  _WRAP_SIGNAL(void dsn_to_be_removed(DataSourceInfo* info), "dsn-to-be-removed", no_default_handler)    
 };
 
 } // namespace Gda

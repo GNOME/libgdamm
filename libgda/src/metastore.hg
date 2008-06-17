@@ -73,7 +73,10 @@ public:
   _WRAP_PROPERTY("cnc", Glib::RefPtr<Connection>)  
 
   _WRAP_SIGNAL(void meta_reset(), "meta-reset")
-  // TODO: meta-changed and suggest-update => marshallers
+   #m4 _CONVERSION(`gpointer',`MetaContext*',`(MetaContext*)($3)')
+  _WRAP_SIGNAL(gpointer suggest_update(MetaContext*  suggest), "suggest-update", no_default_handler)
+  // Listhandle...
+  // _WRAP_SIGNAL(void meta_changed(Glib::SListHandle<>))
 };
 
 } // namespace Gda

@@ -44,7 +44,7 @@ protected:
   _CTOR_DEFAULT()
 public:
   _WRAP_CREATE()
-  _WRAP_METHOD(Glib::RefPtr<Batch> copy(), gda_batch_new_copy)  
+  _WRAP_METHOD(Glib::RefPtr<Batch> copy(), gda_batch_copy)  
   
   _WRAP_METHOD(void add_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_add_statement)
   _WRAP_METHOD(void remove_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_remove_statement)
@@ -53,8 +53,16 @@ public:
   #m4 _CONVERSION(`const GSList*',`StatementSList',`$2((GSList*)$3, Glib::OWNERSHIP_NONE)')
   _WRAP_METHOD(StatementSList get_statements(), gda_batch_get_statements)
 
+  _WRAP_METHOD_DOCS_ONLY(gda_statement_get_parameters)
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  bool get_parameters(Glib::RefPtr<Set>& params);
+  #else
+  bool get_parameters(Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error);
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+    
   // FIXME: Use better marshaller in libgda
-  //_WRAP_SIGNAL(void changed(Glib::RefPtr<Statement> stmt), "changed")
+  #m4 _CONVERSION(`GObject*',`Glib::RefPtr<Statement>',`Glib::wrap(GDA_STATEMENT($3))')
+  _WRAP_SIGNAL(void changed(Glib::RefPtr<Statement> stmt), "changed", no_default_handler)
 };
 
 } // namespace Gda

@@ -844,9 +844,9 @@
   (return-type "GdaBatch*")
 )
 
-(define-method new_copy
+(define-method copy
   (of-object "GdaBatch")
-  (c-name "gda_batch_new_copy")
+  (c-name "gda_batch_copy")
   (return-type "GdaBatch*")
 )
 
@@ -878,6 +878,16 @@
   (of-object "GdaBatch")
   (c-name "gda_batch_get_statements")
   (return-type "const-GSList*")
+)
+
+(define-method get_parameters
+  (of-object "GdaBatch")
+  (c-name "gda_batch_get_parameters")
+  (return-type "gboolean")
+  (parameters
+    '("GdaSet**" "out_params")
+    '("GError**" "error")
+  )
 )
 
 
@@ -1825,7 +1835,7 @@
 (define-method batch_execute
   (of-object "GdaConnection")
   (c-name "gda_connection_batch_execute")
-  (return-type "GObject*")
+  (return-type "GSList*")
   (parameters
     '("GdaBatch*" "batch")
     '("GdaSet*" "params")
@@ -5159,7 +5169,7 @@
 (define-method add_holder
   (of-object "GdaSet")
   (c-name "gda_set_add_holder")
-  (return-type "none")
+  (return-type "gboolean")
   (parameters
     '("GdaHolder*" "holder")
   )

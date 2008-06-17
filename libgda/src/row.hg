@@ -70,16 +70,14 @@ public:
   _WRAP_METHOD(void set_is_default(int num, bool is_default = true), gda_row_set_is_default)
   _WRAP_METHOD(bool get_is_default(int num) const, gda_row_get_is_default)
 
-  //TODO: Properties.
-
   _WRAP_PROPERTY("model", Glib::RefPtr<DataModel>)
   //These are not sensible for libgdamm:
   //_WRAP_PROPERTY("values", GList*)
   //_WRAP_PROPERTY("nb_values", int)
-
-  // TODO:
-  //_WRAP_SIGNAL(bool value_to_change(int num, const Glib::ValueBase& current, const Glib::ValueBase& proposed), "value-to-change")
-  //_WRAP_SIGNAL(void value_changed(int num, const Glib::ValueBase& current, const Glib::ValueBase& proposed), "value-changed")
+  
+  // TODO: Check how to pass the GValue to this signal    
+  //_WRAP_SIGNAL(bool value_to_change(int num, const Glib::ValueBase& current, const Glib::ValueBase& proposed), "value-to-change", no_default_handler)
+  //_WRAP_SIGNAL(void value_changed(int num, const Glib::ValueBase& current, const Glib::ValueBase& proposed), "value-changed", no_default_handler)
 };
 
 } // namespace Gda
