@@ -7,6 +7,7 @@ _EQUAL(GdaServerOperationNode*, ServerOperationNode*)
 _EQUAL(GdaSetGroup*, SetGroup*)
 _EQUAL(GdaSetSource*, SetSource*)
 _EQUAL(GdaSetNode*, SetNode*)
+_EQUAL(GdaThreaderFunc, ThreaderFunc)
 
 
 _CONVERSION(`GdaConnectionEvent*',`Glib::RefPtr<ConnectionEvent>',`Glib::wrap($3)')
@@ -34,6 +35,7 @@ _CONVERSION(`GdaMetaStruct*',`Glib::RefPtr<MetaStruct>',`Glib::wrap($3)')
 _CONVERSION(`GdaMetaStore*',`Glib::RefPtr<MetaStore>',`Glib::wrap($3)')
 _CONVERSION(`GdaConfig*',`Glib::RefPtr<Config>',`Glib::wrap($3)')
 
+_CONVERSION(`const Glib::RefPtr<BlobOp>&', `GdaBlobOp*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DataModel>&', `GdaDataModel*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DataHandler>&', `GdaDataHandler*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DataModelIter>&', `GdaDataModelIter*', __CONVERT_REFPTR_TO_P)
@@ -113,6 +115,12 @@ _CONV_ENUM(Gda,MetaStructFeature)
 _CONV_ENUM(Gda,MetaDbObjectType)
 _CONV_ENUM(Gda,MetaSortType)
 _CONV_ENUM(Gda,MetaGraphInfo)
+
+# structs
+_CONVERSION(`Blob&',`GdaBlob*',__FR2P)
+_CONVERSION(`GdaBlob*',`Blob', Glib::wrap($3))
+_CONVERSION(`QuarkList&',`GdaQuarkList*',__FR2P)
+_CONVERSION(`GdaQuarkList*',`QuarkList', Glib::wrap($3))
 
 # Lists
 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::ustring>',__FL2H_SHALLOW)
