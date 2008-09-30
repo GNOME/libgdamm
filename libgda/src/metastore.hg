@@ -1,0 +1,84 @@
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* metastore.h
+ *
+ * Copyright 2006 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or(at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgdamm/connection.h>
+#include <libgdamm/metastruct.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+typedef GdaMetaContext MetaContext;
+
+/** Container for several values
+ *
+ * @ingroup Connection
+ */
+class MetaStore : public Glib::Object
+{
+  _CLASS_GOBJECT(MetaStore, GdaMetaStore, GDA_META_STORE, Glib::Object, GObject)
+protected:
+  _WRAP_CTOR(MetaStore(const Glib::ustring& cnc_string), gda_meta_store_new)
+  // TODO: cannot be overloaded, no filename property  
+  //_WRAP_CTOR(MetaStore(const std::string& filename), gda_meta_store_new_with_file)
+
+public:
+  _WRAP_CREATE(const Glib::ustring& cnc_string)
+  
+  _WRAP_METHOD(int get_version(), gda_meta_store_get_version)
+  //TODO: varargs: extract(), modify()
+
+  _WRAP_METHOD(bool modify_with_context (MetaContext* context, const Glib::RefPtr<DataModel>& new_data), gda_meta_store_modify_with_context, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> create_modify_data_model(const Glib::ustring& table_name), gda_meta_store_create_modify_data_model)
+  _WRAP_METHOD(Glib::RefPtr<MetaStruct> schema_get_structure(), gda_meta_store_schema_get_structure, errthrow)
+  _WRAP_METHOD(Glib::SListHandle<Glib::ustring> schema_get_all_tables(), gda_meta_store_schema_get_all_tables)
+  _WRAP_METHOD(Glib::SListHandle<Glib::ustring> schema_get_depend_tables(const Glib::ustring& table_name), gda_meta_store_schema_get_depend_tables)  
+
+  _WRAP_METHOD_DOCS_ONLY(gda_meta_store_get_attribute_value)
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+   bool get_atrribute_value(const Glib::ustring& att_name, Glib::ustring& att_value);
+#else
+   bool get_atrribute_value(const Glib::ustring& att_name, Glib::ustring& att_value, std::auto_ptr<Glib::Error>);
+#endif
+
+  _WRAP_METHOD(bool set_attribute_value(const Glib::ustring& att_name, const Glib::ustring& att_value), gda_meta_store_set_attribute_value, errthrow)
+  _WRAP_METHOD(bool schema_add_custom_object(const Glib::ustring& xml), gda_meta_store_schema_add_custom_object, errthrow)
+  _WRAP_METHOD(bool schema_remove_custom_object(const Glib::ustring& obj_name), gda_meta_store_schema_remove_custom_object, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<Connection> get_internal_connection(), gda_meta_store_get_internal_connection)
+
+  // The rest of the properties is Write / Construct Only
+  _WRAP_PROPERTY("cnc", Glib::RefPtr<Connection>)  
+
+  _WRAP_SIGNAL(void meta_reset(), "meta-reset")
+   #m4 _CONVERSION(`gpointer',`MetaContext*',`(MetaContext*)($3)')
+  _WRAP_SIGNAL(gpointer suggest_update(MetaContext*  suggest), "suggest-update", no_default_handler)
+  // Listhandle...
+  // _WRAP_SIGNAL(void meta_changed(Glib::SListHandle<>))
+};
+
+} // namespace Gda
+} // namespace Gnome
+

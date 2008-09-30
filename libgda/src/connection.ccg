@@ -1,0 +1,135 @@
+/* $Id: connection.ccg,v 1.18 2006/11/30 06:58:55 murrayc Exp $ */
+// -*- C++ -*- // 
+
+/* connection.cc
+ * 
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgdamm/serverprovider.h>
+#include <libgdamm/metastore.h>
+#include <libgda/gda-enum-types.h>
+#include <libgda/gda-connection.h>
+#include <libgda/libgda.h> //For GDA_GENERAL_ERROR
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+Connection::~Connection()
+{
+  //Make sure the connection is closed.
+  //An open connection with no associated connection object could never be closed.
+  if(gobj())
+  {
+    if(is_opened())
+      close();
+  }
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::RefPtr<Connection> Connection::open_from_string (const Glib::ustring& provider_name,
+                                                       const Glib::ustring& cnc_string,
+                                                       const Glib::ustring& auth_string,
+                                                       ConnectionOptions options)
+#else
+Glib::RefPtr<Connection> Connection::open_from_string (const Glib::ustring& provider_name,
+                                                       const Glib::ustring& cnc_string,
+                                                       const Glib::ustring& auth_string,
+                                                       ConnectionOptions options,
+                                                       std::auto_ptr<Glib::Error>& error)
+#endif
+{
+  GError* gerror = 0;
+  Glib::RefPtr<Connection> retval = Glib::wrap(gda_connection_open_from_string (provider_name.c_str(),
+                                                                                cnc_string.c_str(),
+                                                                                auth_string.c_str(),
+                                                                                (GdaConnectionOptions)options,
+                                                                                &gerror));
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  return retval;
+}
+
+void Connection::close()
+{
+  //gda_connection_close() does an unref, but we don't want that:
+  reference();
+  gda_connection_close(gobj());
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<Statement>& cmd, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage, Glib::RefPtr<Set>& last_inserted_row)
+#else
+Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<Statement>& cmd, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage, Glib::RefPtr<Set>& last_inserted_row, std::auto_ptr<Glib::Error>& error)
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  GdaSet* lir = 0;
+  Glib::RefPtr<Glib::Object> retval = Glib::wrap(
+    gda_connection_statement_execute(gobj(), cmd->gobj(), Glib::unwrap(params), (GdaStatementModelUsage)model_usage, &lir, &gerror));
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+  if (lir)
+  {
+    last_inserted_row = Glib::wrap(lir);
+  }
+  return retval;
+}
+
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd, const Glib::RefPtr<Set>& params, Glib::RefPtr<Set>& last_inserted_row)
+#else
+int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd, const Glib::RefPtr<Set>& params, Glib::RefPtr<Set>& last_inserted_row, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  GdaSet* lir = 0;
+  int retval = gda_connection_statement_execute_non_select(gobj(), Glib::unwrap(cmd), Glib::unwrap(params), &lir, &gerror);
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+  if (lir)
+  {
+    last_inserted_row = Glib::wrap(lir);
+  }
+  return retval;
+}
+
+} //namespace Gda
+
+} //namespace Gnome
+
+

@@ -1,0 +1,73 @@
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* metastore.h
+ *
+ * Copyright 2006 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or(at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgda/gda-meta-struct.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+_WRAP_ENUM(MetaStructFeature, GdaMetaStructFeature)
+_WRAP_ENUM(MetaDbObjectType, GdaMetaDbObjectType)
+_WRAP_ENUM(MetaSortType, GdaMetaSortType)
+_WRAP_ENUM(MetaGraphInfo, GdaMetaGraphInfo)
+
+typedef GdaMetaDbObject MetaDbObject;
+typedef GdaMetaTable MetaTable;
+typedef GdaMetaTableColumn MetaTableColumn;
+
+class MetaStore;
+
+/** Container for several values
+ *
+ * @ingroup Connection
+ */
+class MetaStruct : public Glib::Object
+{
+  _CLASS_GOBJECT(MetaStruct, GdaMetaStruct, GDA_META_STRUCT, Glib::Object, GObject)
+protected:
+  _WRAP_CTOR(MetaStruct(MetaStructFeature features), gda_meta_struct_new)
+
+public:
+  _WRAP_CREATE(MetaStructFeature features)
+  
+  _WRAP_METHOD(MetaDbObject* complement (const Glib::RefPtr<MetaStore>& store, MetaDbObjectType type, const Glib::ValueBase& catalog, const Glib::ValueBase& schema, const Glib::ValueBase& name), gda_meta_struct_complement, errthrow)
+  _WRAP_METHOD(bool complement_schema (const Glib::RefPtr<MetaStore>& store, const Glib::ValueBase& catalog, const Glib::ValueBase& schema), gda_meta_struct_complement_schema, errthrow)
+  _WRAP_METHOD(bool complement_default (const Glib::RefPtr<MetaStore>& store), gda_meta_struct_complement_default, errthrow)
+  _IGNORE(gda_meta_struct_complement_depend) // private API
+
+  _WRAP_METHOD(bool sort_db_object (MetaSortType type), gda_meta_struct_sort_db_objects, errthrow)
+  _WRAP_METHOD(MetaDbObject* get_db_object(const Glib::ValueBase& catalog, const Glib::ValueBase& schema, const Glib::ValueBase& name), gda_meta_struct_get_db_object)
+  _WRAP_METHOD(MetaTableColumn* get_table_column(MetaTable* table, const Glib::ValueBase& col_name), gda_meta_struct_get_table_column)
+
+  _WRAP_METHOD(Glib::ustring dump_as_graph(MetaGraphInfo info), gda_meta_struct_dump_as_graph, errthrow)
+
+  _WRAP_PROPERTY("features", guint)
+};
+
+} // namespace Gda
+} // namespace Gnome
+
