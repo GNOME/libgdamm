@@ -1,0 +1,91 @@
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* set.h
+ *
+ * Copyright 2006 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or(at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgdamm/datahandler.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+class DataModel;
+
+/** Container for several values
+ *
+ * @ingroup Connection
+ */
+class Holder : public Glib::Object
+{
+  _CLASS_GOBJECT(Holder, GdaHolder, GDA_HOLDER, Glib::Object, GObject)
+protected:
+  _WRAP_CTOR(Holder (GType type), gda_holder_new)
+public:
+  _WRAP_CREATE(GType g_type)
+  _WRAP_METHOD(Glib::RefPtr<Holder> copy(), gda_holder_copy)
+  
+  _WRAP_METHOD(GType get_g_type() const, gda_holder_get_g_type)
+  _WRAP_METHOD(Glib::ustring get_id() const, gda_holder_get_id)
+  _WRAP_METHOD_DOCS_ONLY(gda_holder_get_value)
+  Glib::ValueBase get_value();
+  _WRAP_METHOD(Glib::ustring get_value_str(const Glib::RefPtr<DataHandler>& dh), gda_holder_get_value_str)
+  _WRAP_METHOD(bool set_value(const Glib::ValueBase& value), gda_holder_set_value)
+  _WRAP_METHOD(bool set_value_str (const Glib::RefPtr<DataHandler>& dh, const Glib::ustring& value), gda_holder_set_value_str)
+  _WRAP_METHOD(bool take_value (Glib::ValueBase& value), gda_holder_take_value)
+
+  _WRAP_METHOD_DOCS_ONLY(gda_holder_get_default_value)
+  Glib::ValueBase get_default_value();
+  _WRAP_METHOD(void set_default_value(const Glib::ValueBase& value), gda_holder_set_default_value)
+  _WRAP_METHOD(bool set_value_to_default(), gda_holder_set_value_to_default)
+  _WRAP_METHOD(bool value_is_default(), gda_holder_value_is_default)
+
+  _WRAP_METHOD(void force_invalid(), gda_holder_force_invalid)
+  _WRAP_METHOD(bool is_valid(), gda_holder_is_valid)
+  _WRAP_METHOD(void set_not_null(bool not_null), gda_holder_set_not_null)
+  _WRAP_METHOD(bool get_not_null(), gda_holder_get_not_null)
+
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_source_model (int& col) const, gda_holder_get_source_model)
+  _WRAP_METHOD(bool set_source_model (const Glib::RefPtr<DataModel>& model, int col), gda_holder_set_source_model, errthrow)
+
+  _WRAP_METHOD(void set_bind (const Glib::RefPtr<Holder>& bind_to), gda_holder_set_bind)
+  _WRAP_METHOD(Glib::RefPtr<Holder> get_bind(), gda_holder_get_bind)
+
+  _WRAP_PROPERTY("description", Glib::ustring)
+  _WRAP_PROPERTY("full-bind", Glib::RefPtr<Holder>)
+  _WRAP_PROPERTY("g-type", gulong)
+  _WRAP_PROPERTY("id", Glib::ustring)
+  _WRAP_PROPERTY("name", Glib::ustring)
+  _WRAP_PROPERTY("not-null", bool)
+  _WRAP_PROPERTY("simple-bind", Glib::RefPtr<Holder>)
+  _WRAP_PROPERTY("plugin", Glib::ustring)
+  _WRAP_PROPERTY("source-column", int)
+  _WRAP_PROPERTY("source-model", Glib::RefPtr<DataModel>)
+
+  _WRAP_SIGNAL(void changed(), "changed")
+  _WRAP_SIGNAL(void source_changed(), "source-changed")
+
+};
+
+} // namespace Gda
+} // namespace Gnome

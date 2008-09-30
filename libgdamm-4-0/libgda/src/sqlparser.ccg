@@ -1,0 +1,85 @@
+// -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
+
+/* sqlparser.cc
+ * 
+ * Copyright 2003 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgdamm/sqlparser.h>
+#include <sql-parser/gda-sql-parser.h>
+#include <sql-parser/gda-sql-parser-enum-types.h>
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::RefPtr<Statement> SqlParser::parse_string(const Glib::ustring& sql, Glib::ustring& remain)
+#else
+Glib::RefPtr<Statement> SqlParser::parse_string(const Glib::ustring& sql, Glib::ustring& remain, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  const gchar* c_remain = 0;
+  Glib::RefPtr<Statement> retvalue = Glib::wrap(gda_sql_parser_parse_string(gobj(), sql.c_str(), &c_remain, &(gerror)));
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  if (c_remain)
+  {
+    remain = c_remain;
+  }
+
+  return retvalue;
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::RefPtr<Batch> SqlParser::parse_string_as_batch(const Glib::ustring& sql, Glib::ustring& remain)
+#else
+Glib::RefPtr<Batch> SqlParser::parse_string_as_batch(const Glib::ustring& sql, Glib::ustring& remain, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  const gchar* c_remain = 0;
+  Glib::RefPtr<Batch> retvalue = Glib::wrap(gda_sql_parser_parse_string_as_batch(gobj(), sql.c_str(), &c_remain, &(gerror)));
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  if (c_remain)
+  {
+    remain = c_remain;
+  }
+
+  return retvalue;
+}
+
+} /* namespace Gda */
+
+} /* namespace Gnome */
+

@@ -1,0 +1,85 @@
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* set.h
+ *
+ * Copyright 2006 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or(at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <libgdamm/holder.h>
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+typedef Glib::SListHandle<Holder> HolderSList;
+typedef GdaSetSource SetSource;
+typedef GdaSetGroup SetGroup;
+typedef GdaSetNode SetNode;
+
+/** Container for several values
+ *
+ * @ingroup Connection
+ */
+class Set : public Glib::Object
+{
+  _CLASS_GOBJECT(Set, GdaSet, GDA_SET, Glib::Object, GObject)
+protected:
+  #m4 _CONVERSION(`const HolderSList&', `GSList*', `$3.data()')
+  _WRAP_CTOR(Set(const HolderSList& holders), gda_set_new)
+
+public:
+  _WRAP_CREATE(const HolderSList& holders)
+  
+  _WRAP_METHOD(Glib::RefPtr<Set> copy(), gda_set_copy)
+
+  _WRAP_METHOD(Glib::ustring get_spec(), gda_set_get_spec)
+  _WRAP_METHOD_DOCS_ONLY(gda_set_get_holder_value)
+  Glib::ValueBase get_holder_value(const Glib::ustring& holder_id);
+  _WRAP_METHOD_DOCS_ONLY(gda_set_set_holder_value)
+  template<class T> bool set_holder_value(const Glib::ustring& id, T value);
+  
+  _WRAP_METHOD(Glib::RefPtr<Holder> get_holder (const Glib::ustring& holder_id), gda_set_get_holder)
+  _WRAP_METHOD(void add_holder (const Glib::RefPtr<Holder>& holder), gda_set_add_holder)
+  _WRAP_METHOD(void remove_holder (const Glib::RefPtr<Holder>& holder), gda_set_remove_holder)
+
+  _WRAP_METHOD(void merge_with_set (const Glib::RefPtr<Set>& set_to_merge), gda_set_merge_with_set)
+  
+  _WRAP_METHOD(bool is_valid() const, gda_set_is_valid)
+
+  _WRAP_METHOD(SetSource* get_source_for_model (const Glib::RefPtr<DataModel>& model), gda_set_get_source_for_model)
+  _WRAP_METHOD(SetSource* get_source (const Glib::RefPtr<Holder>& param), gda_set_get_source)
+  _WRAP_METHOD(SetGroup* get_group (const Glib::RefPtr<Holder>& param), gda_set_get_group)
+  _WRAP_METHOD(SetNode* get_node (const Glib::RefPtr<Holder>& param), gda_set_get_node)
+
+  _WRAP_SIGNAL(void holder_attr_changed (const Glib::RefPtr<Holder>& holder), "holder-attr-changed")
+  _WRAP_SIGNAL(void holder_changed (const Glib::RefPtr<Holder>& holder), "holder-changed")
+  _WRAP_SIGNAL(void holder_plugin_changed (const Glib::RefPtr<Holder>& holder), "holder-plugin-changed")
+  _WRAP_SIGNAL(void public_data_changed (), "public-data-changed")
+
+  _WRAP_PROPERTY("description", Glib::ustring)
+  _WRAP_PROPERTY("id", Glib::ustring)
+  _WRAP_PROPERTY("name", Glib::ustring)
+};
+
+} // namespace Gda
+} // namespace Gnome
+

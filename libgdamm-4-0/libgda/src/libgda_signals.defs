@@ -1,0 +1,1091 @@
+;; From GdaBatch
+
+(define-signal changed
+  (of-object "GdaBatch")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GObject*" "p0")
+  )
+)
+
+;; From GdaColumn
+
+(define-signal name-changed
+  (of-object "GdaColumn")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("const-gchar*" "p0")
+  )
+)
+
+(define-signal g-type-changed
+  (of-object "GdaColumn")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GType" "p0")
+    '("GType" "p1")
+  )
+)
+
+(define-property id
+  (of-object "GdaColumn")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaConfig
+
+(define-signal dsn-changed
+  (of-object "GdaConfig")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal dsn-added
+  (of-object "GdaConfig")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal dsn-to-be-removed
+  (of-object "GdaConfig")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal dsn-removed
+  (of-object "GdaConfig")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-property user-file
+  (of-object "GdaConfig")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property system-file
+  (of-object "GdaConfig")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaConnection
+
+(define-signal error
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GdaConnectionEvent*" "p0")
+  )
+)
+
+(define-signal conn-opened
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal conn-to-close
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal conn-closed
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal dsn-changed
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal transaction-status-changed
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "last")
+)
+
+(define-property dsn
+  (of-object "GdaConnection")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property cnc-string
+  (of-object "GdaConnection")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property provider-obj
+  (of-object "GdaConnection")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property auth-string
+  (of-object "GdaConnection")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property options
+  (of-object "GdaConnection")
+  (prop-type "GParamFlags")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property meta-store
+  (of-object "GdaConnection")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaConnectionEvent
+
+(define-property type
+  (of-object "GdaConnectionEvent")
+  (prop-type "GParamInt")
+  (docs "Connection event type")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDataAccessWrapper
+
+(define-property model
+  (of-object "GdaDataAccessWrapper")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaDataComparator
+
+(define-signal diff-computed
+  (of-object "GdaDataComparator")
+  (return-type "gboolean")
+  (when "last")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-property old-model
+  (of-object "GdaDataComparator")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property new-model
+  (of-object "GdaDataComparator")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDataHandler
+
+;; From GdaDataModelArray
+
+(define-property read-only
+  (of-object "GdaDataModelArray")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property n-columns
+  (of-object "GdaDataModelArray")
+  (prop-type "GParamUInt")
+  (docs "The number of columns in the model")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDataModelBdb
+
+(define-property filename
+  (of-object "GdaDataModelBdb")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property db-name
+  (of-object "GdaDataModelBdb")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaDataModelDir
+
+(define-property basedir
+  (of-object "GdaDataModelDir")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaDataModel
+
+(define-signal reset
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal changed
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal row-inserted
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal row-updated
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal row-removed
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+;; From GdaDataModelImport
+
+(define-property random-access
+  (of-object "GdaDataModelImport")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property filename
+  (of-object "GdaDataModelImport")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property data-string
+  (of-object "GdaDataModelImport")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property xml-node
+  (of-object "GdaDataModelImport")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property options
+  (of-object "GdaDataModelImport")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaDataModelIter
+
+(define-signal row-to-change
+  (of-object "GdaDataModelIter")
+  (return-type "gboolean")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal row-changed
+  (of-object "GdaDataModelIter")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal end-of-data
+  (of-object "GdaDataModelIter")
+  (return-type "void")
+  (when "first")
+)
+
+(define-property id
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property name
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property description
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property holders
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamPointer")
+  (docs "Holders the set should contain")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property data-model
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property current-row
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property forced-model
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property update-model
+  (of-object "GdaDataModelIter")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDataModelQuery
+
+(define-property query
+  (of-object "GdaDataModelQuery")
+  (prop-type "GParamObject")
+  (docs "SELECT Query to be executed to populate the model with data")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property insert-query
+  (of-object "GdaDataModelQuery")
+  (prop-type "GParamObject")
+  (docs "INSERT Query to be executed to add data")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property update-query
+  (of-object "GdaDataModelQuery")
+  (prop-type "GParamObject")
+  (docs "UPDATE Query to be executed to update data")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property delete-query
+  (of-object "GdaDataModelQuery")
+  (prop-type "GParamObject")
+  (docs "DELETE Query to be executed to remove data")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property use-transaction
+  (of-object "GdaDataModelQuery")
+  (prop-type "GParamBoolean")
+  (docs "Run modification statements within a transaction")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property connection
+  (of-object "GdaDataModelQuery")
+  (prop-type "GParamObject")
+  (docs "Connection to use to execute statements")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDataModelRow
+
+(define-property read-only
+  (of-object "GdaDataModelRow")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaDataProxy
+
+(define-signal row-delete-changed
+  (of-object "GdaDataProxy")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gint" "p0")
+    '("gboolean" "p1")
+  )
+)
+
+(define-signal sample-size-changed
+  (of-object "GdaDataProxy")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal sample-changed
+  (of-object "GdaDataProxy")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gint" "p0")
+    '("gint" "p1")
+  )
+)
+
+(define-signal pre-changes-applied
+  (of-object "GdaDataProxy")
+  (return-type "gboolean")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+    '("gint" "p1")
+  )
+)
+
+(define-signal post-changes-applied
+  (of-object "GdaDataProxy")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gint" "p0")
+    '("gint" "p1")
+  )
+)
+
+(define-signal filter-changed
+  (of-object "GdaDataProxy")
+  (return-type "void")
+  (when "first")
+)
+
+(define-property model
+  (of-object "GdaDataProxy")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property prepend-null-entry
+  (of-object "GdaDataProxy")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property defer-sync
+  (of-object "GdaDataProxy")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property sample-size
+  (of-object "GdaDataProxy")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaHolder
+
+(define-signal source-changed
+  (of-object "GdaHolder")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal changed
+  (of-object "GdaHolder")
+  (return-type "void")
+  (when "first")
+)
+
+(define-property id
+  (of-object "GdaHolder")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property name
+  (of-object "GdaHolder")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property description
+  (of-object "GdaHolder")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property plugin
+  (of-object "GdaHolder")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property simple-bind
+  (of-object "GdaHolder")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property full-bind
+  (of-object "GdaHolder")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property source-model
+  (of-object "GdaHolder")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property source-column
+  (of-object "GdaHolder")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property g-type
+  (of-object "GdaHolder")
+  (prop-type "GParamULong")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property not-null
+  (of-object "GdaHolder")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaMetaStore
+
+(define-signal suggest-update
+  (of-object "GdaMetaStore")
+  (return-type "gpointer")
+  (when "last")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal meta-changed
+  (of-object "GdaMetaStore")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal meta-reset
+  (of-object "GdaMetaStore")
+  (return-type "void")
+  (when "first")
+)
+
+(define-property cnc-string
+  (of-object "GdaMetaStore")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property cnc
+  (of-object "GdaMetaStore")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property catalog
+  (of-object "GdaMetaStore")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property schema
+  (of-object "GdaMetaStore")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaMetaStruct
+
+(define-property features
+  (of-object "GdaMetaStruct")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaRow
+
+(define-signal value-changed
+  (of-object "GdaRow")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+    '("GValue*" "p1")
+    '("GValue*" "p2")
+  )
+)
+
+(define-signal value-to-change
+  (of-object "GdaRow")
+  (return-type "gboolean")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+    '("GValue*" "p1")
+    '("GValue*" "p2")
+  )
+)
+
+(define-property model
+  (of-object "GdaRow")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property values
+  (of-object "GdaRow")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property nb-values
+  (of-object "GdaRow")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaServerOperation
+
+(define-signal sequence-item-added
+  (of-object "GdaServerOperation")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("const-gchar*" "p0")
+    '("gint" "p1")
+  )
+)
+
+(define-signal sequence-item-remove
+  (of-object "GdaServerOperation")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("const-gchar*" "p0")
+    '("gint" "p1")
+  )
+)
+
+(define-property connection
+  (of-object "GdaServerOperation")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property provider-obj
+  (of-object "GdaServerOperation")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property op-type
+  (of-object "GdaServerOperation")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property spec-file
+  (of-object "GdaServerOperation")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaServerProvider
+
+;; From GdaSet
+
+(define-signal holder-changed
+  (of-object "GdaSet")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaHolder*" "p0")
+  )
+)
+
+(define-signal holder-plugin-changed
+  (of-object "GdaSet")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaHolder*" "p0")
+  )
+)
+
+(define-signal holder-attr-changed
+  (of-object "GdaSet")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaHolder*" "p0")
+  )
+)
+
+(define-signal public-data-changed
+  (of-object "GdaSet")
+  (return-type "void")
+  (when "first")
+)
+
+(define-property id
+  (of-object "GdaSet")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property name
+  (of-object "GdaSet")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property description
+  (of-object "GdaSet")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property holders
+  (of-object "GdaSet")
+  (prop-type "GParamPointer")
+  (docs "Holders the set should contain")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GdaStatement
+
+(define-signal reset
+  (of-object "GdaStatement")
+  (return-type "void")
+  (when "first")
+)
+
+(define-signal checked
+  (of-object "GdaStatement")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaConnection*" "p0")
+    '("gboolean" "p1")
+  )
+)
+
+(define-property structure
+  (of-object "GdaStatement")
+  (prop-type "GParamPointer")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GdaThreader
+
+(define-signal finished
+  (of-object "GdaThreader")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("guint" "p0")
+    '("gpointer" "p1")
+  )
+)
+
+(define-signal cancelled
+  (of-object "GdaThreader")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("guint" "p0")
+    '("gpointer" "p1")
+  )
+)
+
+;; From GdaTransactionStatus
+
+;; From GdaSqlParser
+
+(define-property tokenizer-flavour
+  (of-object "GdaSqlParser")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property mode
+  (of-object "GdaSqlParser")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property line-error
+  (of-object "GdaSqlParser")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property column-error
+  (of-object "GdaSqlParser")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+

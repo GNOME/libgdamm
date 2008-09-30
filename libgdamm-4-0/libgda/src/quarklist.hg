@@ -1,0 +1,50 @@
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* quarklist.h
+ *
+ * Copyright 2001      Free Software Foundation
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+ 
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+#include <libgda/gda-quark-list.h>
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+class QuarkList
+{
+  _CLASS_BOXEDTYPE(QuarkList, GdaQuarkList, gda_quark_list_new, gda_quark_list_copy, gda_quark_list_free)
+  _IGNORE(gda_blob_get_type, gda_quark_list_new, gda_quark_list_copy, gda_quark_list_free)
+  
+  public:
+    // FIXME: new from string
+    
+   _WRAP_METHOD(void clear(), gda_quark_list_clear)
+   _WRAP_METHOD(void add_from_string (const Glib::ustring& name, bool cleanup), gda_quark_list_add_from_string)
+   _WRAP_METHOD(Glib::ustring find(const Glib::ustring& name), gda_quark_list_find)
+   _WRAP_METHOD(void remove (const Glib::ustring& name), gda_quark_list_remove)
+   // TODO: foreach slot
+};
+
+} // namespace Gda
+
+} // namespace Gnome
