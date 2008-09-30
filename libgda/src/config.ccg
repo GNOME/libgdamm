@@ -48,11 +48,6 @@ int Config::get_nb_dsn()
   return gda_config_get_nb_dsn();
 }
 
-int Config::get_dsn_index(const Glib::ustring& dsn_name)
-{
-  return gda_config_get_dsn_index(dsn_name.c_str());
-}
-
 bool Config::can_modify_system_config()
 {
   return gda_config_can_modify_system_config();

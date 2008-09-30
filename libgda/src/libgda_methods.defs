@@ -14,25 +14,11 @@
   (gtype-id "GDA_TYPE_BLOB_OP")
 )
 
-(define-object Client
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaClient")
-  (gtype-id "GDA_TYPE_CLIENT")
-)
-
 (define-object Column
   (in-module "Gda")
   (parent "GObject")
   (c-name "GdaColumn")
   (gtype-id "GDA_TYPE_COLUMN")
-)
-
-(define-object ColumnIndex
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaColumnIndex")
-  (gtype-id "GDA_TYPE_COLUMN_INDEX")
 )
 
 (define-object Config
@@ -82,6 +68,13 @@
   (gtype-id "GDA_TYPE_DATA_MODEL")
 )
 
+(define-object DataModelArray
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaDataModelArray")
+  (gtype-id "GDA_TYPE_DATA_MODEL_ARRAY")
+)
+
 (define-object DataModelBdb
   (in-module "Gda")
   (parent "GObject")
@@ -110,27 +103,6 @@
   (gtype-id "GDA_TYPE_DATA_MODEL_QUERY")
 )
 
-(define-object DataModelRow
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaDataModelRow")
-  (gtype-id "GDA_TYPE_DATA_MODEL_ROW")
-)
-
-(define-object DataModelHash
-  (in-module "Gda")
-  (parent "GdaDataModelRow")
-  (c-name "GdaDataModelHash")
-  (gtype-id "GDA_TYPE_DATA_MODEL_HASH")
-)
-
-(define-object DataModelArray
-  (in-module "Gda")
-  (parent "GdaDataModelRow")
-  (c-name "GdaDataModelArray")
-  (gtype-id "GDA_TYPE_DATA_MODEL_ARRAY")
-)
-
 (define-object DataProxy
   (in-module "Gda")
   (parent "GObject")
@@ -138,11 +110,24 @@
   (gtype-id "GDA_TYPE_DATA_PROXY")
 )
 
+(define-object DataSelect
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaDataSelect")
+  (gtype-id "GDA_TYPE_DATA_SELECT")
+)
+
 (define-object Holder
   (in-module "Gda")
   (parent "GObject")
   (c-name "GdaHolder")
   (gtype-id "GDA_TYPE_HOLDER")
+)
+
+(define-object Lockable
+  (in-module "Gda")
+  (c-name "GdaLockable")
+  (gtype-id "GDA_TYPE_LOCKABLE")
 )
 
 (define-object MetaStore
@@ -223,40 +208,6 @@
 )
 
 ;; Enumerations and flags ...
-
-(define-enum ClientEvent
-  (in-module "Gda")
-  (c-name "GdaClientEvent")
-  (gtype-id "GDA_TYPE_CLIENT_EVENT")
-  (values
-    '("invalid" "GDA_CLIENT_EVENT_INVALID")
-    '("error" "GDA_CLIENT_EVENT_ERROR")
-    '("connection-opened" "GDA_CLIENT_EVENT_CONNECTION_OPENED")
-    '("connection-closed" "GDA_CLIENT_EVENT_CONNECTION_CLOSED")
-    '("transaction-started" "GDA_CLIENT_EVENT_TRANSACTION_STARTED")
-    '("transaction-committed" "GDA_CLIENT_EVENT_TRANSACTION_COMMITTED")
-    '("transaction-cancelled" "GDA_CLIENT_EVENT_TRANSACTION_CANCELLED")
-  )
-)
-
-(define-enum ClientError
-  (in-module "Gda")
-  (c-name "GdaClientError")
-  (gtype-id "GDA_TYPE_CLIENT_ERROR")
-  (values
-    '("r" "GDA_CLIENT_GENERAL_ERROR")
-  )
-)
-
-(define-enum Sorting
-  (in-module "Gda")
-  (c-name "GdaSorting")
-  (gtype-id "GDA_TYPE_SORTING")
-  (values
-    '("ascending" "GDA_SORTING_ASCENDING")
-    '("descending" "GDA_SORTING_DESCENDING")
-  )
-)
 
 (define-enum ConfigError
   (in-module "Gda")
@@ -465,7 +416,7 @@
   (c-name "GdaDataModelIterError")
   (gtype-id "GDA_TYPE_DATA_MODEL_ITER_ERROR")
   (values
-    '("r" "GDA_DATA_MODEL_ITER_WHAT_ERROR")
+    '("r" "GDA_DATA_MODEL_ITER_COLUMN_OUT_OF_RANGE_ERROR")
   )
 )
 
@@ -474,19 +425,8 @@
   (c-name "GdaDataModelQueryError")
   (gtype-id "GDA_TYPE_DATA_MODEL_QUERY_ERROR")
   (values
-    '("xml-load-error" "GDA_DATA_MODEL_QUERY_XML_LOAD_ERROR")
-    '("compute-modif-statements-error" "GDA_DATA_MODEL_QUERY_COMPUTE_MODIF_STATEMENTS_ERROR")
-    '("modif-statement-error" "GDA_DATA_MODEL_QUERY_MODIF_STATEMENT_ERROR")
+    '("select-statement-error" "GDA_DATA_MODEL_QUERY_SELECT_STATEMENT_ERROR")
     '("connection-error" "GDA_DATA_MODEL_QUERY_CONNECTION_ERROR")
-  )
-)
-
-(define-flags DataModelQueryOptions
-  (in-module "Gda")
-  (c-name "GdaDataModelQueryOptions")
-  (gtype-id "GDA_TYPE_DATA_MODEL_QUERY_OPTIONS")
-  (values
-    '("k" "GDA_DATA_MODEL_QUERY_OPTION_USE_ALL_FIELDS_IF_NO_PK")
   )
 )
 
@@ -586,7 +526,9 @@
   (c-name "GdaHolderError")
   (gtype-id "GDA_TYPE_HOLDER_ERROR")
   (values
-    '("r" "GDA_HOLDER_QUERY_LIMIT_ERROR")
+    '("string-conversion-error" "GDA_HOLDER_STRING_CONVERSION_ERROR")
+    '("value-type-error" "GDA_HOLDER_VALUE_TYPE_ERROR")
+    '("value-null-error" "GDA_HOLDER_VALUE_NULL_ERROR")
   )
 )
 
@@ -595,8 +537,8 @@
   (c-name "GdaMetaStoreError")
   (gtype-id "GDA_TYPE_META_STORE_ERROR")
   (values
-    '("incorrect-schema" "GDA_META_STORE_INCORRECT_SCHEMA")
-    '("unsupported-provider" "GDA_META_STORE_UNSUPPORTED_PROVIDER")
+    '("incorrect-schema-error" "GDA_META_STORE_INCORRECT_SCHEMA_ERROR")
+    '("unsupported-provider-error" "GDA_META_STORE_UNSUPPORTED_PROVIDER_ERROR")
     '("internal-error" "GDA_META_STORE_INTERNAL_ERROR")
     '("meta-context-error" "GDA_META_STORE_META_CONTEXT_ERROR")
     '("modify-contents-error" "GDA_META_STORE_MODIFY_CONTENTS_ERROR")
@@ -735,6 +677,7 @@
     '("busy-error" "GDA_SERVER_PROVIDER_BUSY_ERROR")
     '("non-supported-error" "GDA_SERVER_PROVIDER_NON_SUPPORTED_ERROR")
     '("server-version-error" "GDA_SERVER_PROVIDER_SERVER_VERSION_ERROR")
+    '("data-error" "GDA_SERVER_PROVIDER_DATA_ERROR")
   )
 )
 
@@ -743,7 +686,9 @@
   (c-name "GdaSetError")
   (gtype-id "GDA_TYPE_SET_ERROR")
   (values
-    '("r" "GDA_SET_XML_SPEC_ERROR")
+    '("xml-spec-error" "GDA_SET_XML_SPEC_ERROR")
+    '("holder-not-found-error" "GDA_SET_HOLDER_NOT_FOUND_ERROR")
+    '("invalid-error" "GDA_SET_INVALID_ERROR")
   )
 )
 
@@ -781,6 +726,7 @@
     '("cursor-forward" "GDA_STATEMENT_MODEL_CURSOR_FORWARD")
     '("cursor-backward" "GDA_STATEMENT_MODEL_CURSOR_BACKWARD")
     '("cursor" "GDA_STATEMENT_MODEL_CURSOR")
+    '("allow-noparam" "GDA_STATEMENT_MODEL_ALLOW_NOPARAM")
   )
 )
 
@@ -946,178 +892,6 @@
 
 
 
-;; From gda-client.h
-
-(define-function gda_client_get_type
-  (c-name "gda_client_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_client_new
-  (c-name "gda_client_new")
-  (is-constructor-of "GdaClient")
-  (return-type "GdaClient*")
-)
-
-(define-method open_connection
-  (of-object "GdaClient")
-  (c-name "gda_client_open_connection")
-  (return-type "GdaConnection*")
-  (parameters
-    '("const-gchar*" "dsn")
-    '("const-gchar*" "auth_string")
-    '("GdaConnectionOptions" "options")
-    '("GError**" "error")
-  )
-)
-
-(define-method open_connection_from_string
-  (of-object "GdaClient")
-  (c-name "gda_client_open_connection_from_string")
-  (return-type "GdaConnection*")
-  (parameters
-    '("const-gchar*" "provider_id")
-    '("const-gchar*" "cnc_string")
-    '("const-gchar*" "auth_string")
-    '("GdaConnectionOptions" "options")
-    '("GError**" "error")
-  )
-)
-
-(define-method get_connections
-  (of-object "GdaClient")
-  (c-name "gda_client_get_connections")
-  (return-type "const-GList*")
-)
-
-(define-method find_connection
-  (of-object "GdaClient")
-  (c-name "gda_client_find_connection")
-  (return-type "GdaConnection*")
-  (parameters
-    '("const-gchar*" "dsn")
-    '("const-gchar*" "auth_string")
-  )
-)
-
-(define-method close_all_connections
-  (of-object "GdaClient")
-  (c-name "gda_client_close_all_connections")
-  (return-type "none")
-)
-
-(define-method notify_event
-  (of-object "GdaClient")
-  (c-name "gda_client_notify_event")
-  (return-type "none")
-  (parameters
-    '("GdaConnection*" "cnc")
-    '("GdaClientEvent" "event")
-    '("GdaSet*" "params")
-  )
-)
-
-(define-method notify_error_event
-  (of-object "GdaClient")
-  (c-name "gda_client_notify_error_event")
-  (return-type "none")
-  (parameters
-    '("GdaConnection*" "cnc")
-    '("GdaConnectionEvent*" "error")
-  )
-)
-
-(define-method notify_connection_opened_event
-  (of-object "GdaClient")
-  (c-name "gda_client_notify_connection_opened_event")
-  (return-type "none")
-  (parameters
-    '("GdaConnection*" "cnc")
-  )
-)
-
-(define-method notify_connection_closed_event
-  (of-object "GdaClient")
-  (c-name "gda_client_notify_connection_closed_event")
-  (return-type "none")
-  (parameters
-    '("GdaConnection*" "cnc")
-  )
-)
-
-(define-method prepare_create_database
-  (of-object "GdaClient")
-  (c-name "gda_client_prepare_create_database")
-  (return-type "GdaServerOperation*")
-  (parameters
-    '("const-gchar*" "db_name")
-    '("const-gchar*" "provider")
-  )
-)
-
-(define-method perform_create_database
-  (of-object "GdaClient")
-  (c-name "gda_client_perform_create_database")
-  (return-type "gboolean")
-  (parameters
-    '("GdaServerOperation*" "op")
-    '("GError**" "error")
-  )
-)
-
-(define-method prepare_drop_database
-  (of-object "GdaClient")
-  (c-name "gda_client_prepare_drop_database")
-  (return-type "GdaServerOperation*")
-  (parameters
-    '("const-gchar*" "db_name")
-    '("const-gchar*" "provider")
-  )
-)
-
-(define-method perform_drop_database
-  (of-object "GdaClient")
-  (c-name "gda_client_perform_drop_database")
-  (return-type "gboolean")
-  (parameters
-    '("GdaServerOperation*" "op")
-    '("GError**" "error")
-  )
-)
-
-(define-method begin_transaction
-  (of-object "GdaClient")
-  (c-name "gda_client_begin_transaction")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "name")
-    '("GdaTransactionIsolation" "level")
-    '("GError**" "error")
-  )
-)
-
-(define-method commit_transaction
-  (of-object "GdaClient")
-  (c-name "gda_client_commit_transaction")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "name")
-    '("GError**" "error")
-  )
-)
-
-(define-method rollback_transaction
-  (of-object "GdaClient")
-  (c-name "gda_client_rollback_transaction")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "name")
-    '("GError**" "error")
-  )
-)
-
-
-
 ;; From gda-column.h
 
 (define-function gda_column_get_type
@@ -1152,21 +926,6 @@
   )
 )
 
-(define-method get_defined_size
-  (of-object "GdaColumn")
-  (c-name "gda_column_get_defined_size")
-  (return-type "glong")
-)
-
-(define-method set_defined_size
-  (of-object "GdaColumn")
-  (c-name "gda_column_set_defined_size")
-  (return-type "none")
-  (parameters
-    '("glong" "size")
-  )
-)
-
 (define-method get_name
   (of-object "GdaColumn")
   (c-name "gda_column_get_name")
@@ -1179,51 +938,6 @@
   (return-type "none")
   (parameters
     '("const-gchar*" "name")
-  )
-)
-
-(define-method get_table
-  (of-object "GdaColumn")
-  (c-name "gda_column_get_table")
-  (return-type "const-gchar*")
-)
-
-(define-method set_table
-  (of-object "GdaColumn")
-  (c-name "gda_column_set_table")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "table")
-  )
-)
-
-(define-method get_caption
-  (of-object "GdaColumn")
-  (c-name "gda_column_get_caption")
-  (return-type "const-gchar*")
-)
-
-(define-method set_caption
-  (of-object "GdaColumn")
-  (c-name "gda_column_set_caption")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "caption")
-  )
-)
-
-(define-method get_scale
-  (of-object "GdaColumn")
-  (c-name "gda_column_get_scale")
-  (return-type "glong")
-)
-
-(define-method set_scale
-  (of-object "GdaColumn")
-  (c-name "gda_column_set_scale")
-  (return-type "none")
-  (parameters
-    '("glong" "scale")
   )
 )
 
@@ -1269,51 +983,6 @@
   (return-type "none")
   (parameters
     '("gboolean" "allow")
-  )
-)
-
-(define-method get_primary_key
-  (of-object "GdaColumn")
-  (c-name "gda_column_get_primary_key")
-  (return-type "gboolean")
-)
-
-(define-method set_primary_key
-  (of-object "GdaColumn")
-  (c-name "gda_column_set_primary_key")
-  (return-type "none")
-  (parameters
-    '("gboolean" "pk")
-  )
-)
-
-(define-method get_unique_key
-  (of-object "GdaColumn")
-  (c-name "gda_column_get_unique_key")
-  (return-type "gboolean")
-)
-
-(define-method set_unique_key
-  (of-object "GdaColumn")
-  (c-name "gda_column_set_unique_key")
-  (return-type "none")
-  (parameters
-    '("gboolean" "uk")
-  )
-)
-
-(define-method get_references
-  (of-object "GdaColumn")
-  (c-name "gda_column_get_references")
-  (return-type "const-gchar*")
-)
-
-(define-method set_references
-  (of-object "GdaColumn")
-  (c-name "gda_column_set_references")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "ref")
   )
 )
 
@@ -1364,96 +1033,6 @@
 
 
 
-;; From gda-column-index.h
-
-(define-function gda_column_index_get_type
-  (c-name "gda_column_index_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_column_index_new
-  (c-name "gda_column_index_new")
-  (is-constructor-of "GdaColumnIndex")
-  (return-type "GdaColumnIndex*")
-)
-
-(define-method copy
-  (of-object "GdaColumnIndex")
-  (c-name "gda_column_index_copy")
-  (return-type "GdaColumnIndex*")
-)
-
-(define-method equal
-  (of-object "GdaColumnIndex")
-  (c-name "gda_column_index_equal")
-  (return-type "gboolean")
-  (parameters
-    '("const-GdaColumnIndex*" "rhs")
-  )
-)
-
-(define-method get_column_name
-  (of-object "GdaColumnIndex")
-  (c-name "gda_column_index_get_column_name")
-  (return-type "const-gchar*")
-)
-
-(define-method set_column_name
-  (of-object "GdaColumnIndex")
-  (c-name "gda_column_index_set_column_name")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "column_name")
-  )
-)
-
-(define-method get_defined_size
-  (of-object "GdaColumnIndex")
-  (c-name "gda_column_index_get_defined_size")
-  (return-type "glong")
-)
-
-(define-method set_defined_size
-  (of-object "GdaColumnIndex")
-  (c-name "gda_column_index_set_defined_size")
-  (return-type "none")
-  (parameters
-    '("glong" "size")
-  )
-)
-
-(define-method get_sorting
-  (of-object "GdaColumnIndex")
-  (c-name "gda_column_index_get_sorting")
-  (return-type "GdaSorting")
-)
-
-(define-method set_sorting
-  (of-object "GdaColumnIndex")
-  (c-name "gda_column_index_set_sorting")
-  (return-type "none")
-  (parameters
-    '("GdaSorting" "sorting")
-  )
-)
-
-(define-method get_references
-  (of-object "GdaColumnIndex")
-  (c-name "gda_column_index_get_references")
-  (return-type "const-gchar*")
-)
-
-(define-method set_references
-  (of-object "GdaColumnIndex")
-  (c-name "gda_column_index_set_references")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "ref")
-  )
-)
-
-
-
 ;; From gda-config.h
 
 (define-function gda_config_get_type
@@ -1466,9 +1045,9 @@
   (return-type "GdaConfig*")
 )
 
-(define-function gda_config_get_dsn
-  (c-name "gda_config_get_dsn")
-  (return-type "GdaDataSourceInfo*")
+(define-function gda_config_get_dsn_info
+  (c-name "gda_config_get_dsn_info")
+  (return-type "GdaDsnInfo*")
   (parameters
     '("const-gchar*" "dsn_name")
   )
@@ -1478,7 +1057,7 @@
   (c-name "gda_config_define_dsn")
   (return-type "gboolean")
   (parameters
-    '("const-GdaDataSourceInfo*" "info")
+    '("const-GdaDsnInfo*" "info")
     '("GError**" "error")
   )
 )
@@ -1515,17 +1094,17 @@
   (return-type "gint")
 )
 
-(define-function gda_config_get_dsn_index
-  (c-name "gda_config_get_dsn_index")
+(define-function gda_config_get_dsn_info_index
+  (c-name "gda_config_get_dsn_info_index")
   (return-type "gint")
   (parameters
     '("const-gchar*" "dsn_name")
   )
 )
 
-(define-function gda_config_get_dsn_at_index
-  (c-name "gda_config_get_dsn_at_index")
-  (return-type "GdaDataSourceInfo*")
+(define-function gda_config_get_dsn_info_at_index
+  (c-name "gda_config_get_dsn_info_at_index")
+  (return-type "GdaDsnInfo*")
   (parameters
     '("gint" "index")
   )
@@ -1539,8 +1118,8 @@
   )
 )
 
-(define-function gda_config_get_provider_object
-  (c-name "gda_config_get_provider_object")
+(define-function gda_config_get_provider
+  (c-name "gda_config_get_provider")
   (return-type "GdaServerProvider*")
   (parameters
     '("const-gchar*" "provider_name")
@@ -1726,9 +1305,9 @@
   (return-type "GdaConnectionOptions")
 )
 
-(define-method get_provider_obj
+(define-method get_provider
   (of-object "GdaConnection")
-  (c-name "gda_connection_get_provider_obj")
+  (c-name "gda_connection_get_provider")
   (return-type "GdaServerProvider*")
 )
 
@@ -1765,15 +1344,6 @@
   (return-type "const-gchar*")
 )
 
-(define-method set_dsn
-  (of-object "GdaConnection")
-  (c-name "gda_connection_set_dsn")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "datasource")
-  )
-)
-
 (define-method get_cnc_string
   (of-object "GdaConnection")
   (c-name "gda_connection_get_cnc_string")
@@ -1784,40 +1354,6 @@
   (of-object "GdaConnection")
   (c-name "gda_connection_get_authentication")
   (return-type "const-gchar*")
-)
-
-(define-method add_event
-  (of-object "GdaConnection")
-  (c-name "gda_connection_add_event")
-  (return-type "none")
-  (parameters
-    '("GdaConnectionEvent*" "event")
-  )
-)
-
-(define-method add_event_string
-  (of-object "GdaConnection")
-  (c-name "gda_connection_add_event_string")
-  (return-type "GdaConnectionEvent*")
-  (parameters
-    '("const-gchar*" "str")
-  )
-  (varargs #t)
-)
-
-(define-method add_events_list
-  (of-object "GdaConnection")
-  (c-name "gda_connection_add_events_list")
-  (return-type "none")
-  (parameters
-    '("GList*" "events_list")
-  )
-)
-
-(define-method clear_events_list
-  (of-object "GdaConnection")
-  (c-name "gda_connection_clear_events_list")
-  (return-type "none")
 )
 
 (define-method get_events
@@ -2062,6 +1598,31 @@
   (return-type "gpointer")
 )
 
+(define-method add_event
+  (of-object "GdaConnection")
+  (c-name "gda_connection_add_event")
+  (return-type "none")
+  (parameters
+    '("GdaConnectionEvent*" "event")
+  )
+)
+
+(define-method add_event_string
+  (of-object "GdaConnection")
+  (c-name "gda_connection_add_event_string")
+  (return-type "GdaConnectionEvent*")
+  (parameters
+    '("const-gchar*" "str")
+  )
+  (varargs #t)
+)
+
+(define-method clear_events_list
+  (of-object "GdaConnection")
+  (c-name "gda_connection_clear_events_list")
+  (return-type "none")
+)
+
 (define-method internal_transaction_started
   (of-object "GdaConnection")
   (c-name "gda_connection_internal_transaction_started")
@@ -2145,7 +1706,7 @@
   (return-type "none")
   (parameters
     '("GdaStatement*" "gda_stmt")
-    '("gpointer" "prepared_stmt")
+    '("GdaPStmt*" "prepared_stmt")
   )
 )
 
@@ -2161,16 +1722,10 @@
 (define-method get_prepared_statement
   (of-object "GdaConnection")
   (c-name "gda_connection_get_prepared_statement")
-  (return-type "gpointer")
+  (return-type "GdaPStmt*")
   (parameters
     '("GdaStatement*" "gda_stmt")
   )
-)
-
-(define-method get_meta_store
-  (of-object "GdaConnection")
-  (c-name "gda_connection_get_meta_store")
-  (return-type "GdaMetaStore*")
 )
 
 
@@ -2188,15 +1743,6 @@
   (return-type "GdaDataModel*")
   (parameters
     '("GdaDataModel*" "model")
-  )
-)
-
-(define-method row_exists
-  (of-object "GdaDataAccessWrapper")
-  (c-name "gda_data_access_wrapper_row_exists")
-  (return-type "gboolean")
-  (parameters
-    '("gint" "row")
   )
 )
 
@@ -2375,6 +1921,16 @@
   )
 )
 
+(define-method get_row
+  (of-object "GdaDataModelArray")
+  (c-name "gda_data_model_array_get_row")
+  (return-type "GdaRow*")
+  (parameters
+    '("gint" "row")
+    '("GError**" "error")
+  )
+)
+
 (define-method set_n_columns
   (of-object "GdaDataModelArray")
   (c-name "gda_data_model_array_set_n_columns")
@@ -2494,34 +2050,6 @@
   (return-type "none")
 )
 
-(define-method move_iter_at_row_default
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_move_iter_at_row_default")
-  (return-type "gboolean")
-  (parameters
-    '("GdaDataModelIter*" "iter")
-    '("gint" "row")
-  )
-)
-
-(define-method move_iter_next_default
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_move_iter_next_default")
-  (return-type "gboolean")
-  (parameters
-    '("GdaDataModelIter*" "iter")
-  )
-)
-
-(define-method move_iter_prev_default
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_move_iter_prev_default")
-  (return-type "gboolean")
-  (parameters
-    '("GdaDataModelIter*" "iter")
-  )
-)
-
 
 
 ;; From gda-data-model.h
@@ -2529,12 +2057,6 @@
 (define-function gda_data_model_get_type
   (c-name "gda_data_model_get_type")
   (return-type "GType")
-)
-
-(define-method is_updatable
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_is_updatable")
-  (return-type "gboolean")
 )
 
 (define-method get_access_flags
@@ -2564,9 +2086,9 @@
   )
 )
 
-(define-method get_column_index_by_name
+(define-method get_column_index
   (of-object "GdaDataModel")
-  (c-name "gda_data_model_get_column_index_by_name")
+  (c-name "gda_data_model_get_column_index")
   (return-type "gint")
   (parameters
     '("const-gchar*" "name")
@@ -2618,16 +2140,20 @@
   (parameters
     '("gint" "col")
     '("gint" "row")
+    '("GError**" "error")
   )
 )
 
-(define-method get_value_at_col_name
+(define-method get_typed_value_at
   (of-object "GdaDataModel")
-  (c-name "gda_data_model_get_value_at_col_name")
+  (c-name "gda_data_model_get_typed_value_at")
   (return-type "const-GValue*")
   (parameters
-    '("const-gchar*" "column_name")
+    '("gint" "col")
     '("gint" "row")
+    '("GType" "expected_type")
+    '("gboolean" "nullok")
+    '("GError**" "error")
   )
 )
 
@@ -2814,49 +2340,6 @@
 
 
 
-;; From gda-data-model-hash.h
-
-(define-function gda_data_model_hash_get_type
-  (c-name "gda_data_model_hash_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_data_model_hash_new
-  (c-name "gda_data_model_hash_new")
-  (is-constructor-of "GdaDataModelHash")
-  (return-type "GdaDataModel*")
-  (parameters
-    '("gint" "cols")
-  )
-)
-
-(define-method clear
-  (of-object "GdaDataModelHash")
-  (c-name "gda_data_model_hash_clear")
-  (return-type "none")
-)
-
-(define-method set_n_columns
-  (of-object "GdaDataModelHash")
-  (c-name "gda_data_model_hash_set_n_columns")
-  (return-type "none")
-  (parameters
-    '("gint" "cols")
-  )
-)
-
-(define-method insert_row
-  (of-object "GdaDataModelHash")
-  (c-name "gda_data_model_hash_insert_row")
-  (return-type "none")
-  (parameters
-    '("gint" "rownum")
-    '("GdaRow*" "row")
-  )
-)
-
-
-
 ;; From gda-data-model-import.h
 
 (define-function gda_data_model_import_get_type
@@ -2906,127 +2389,33 @@
 
 
 
-;; From gda-data-model-index.h
+;; From gda-data-model-iter-extra.h
 
-(define-function gda_data_model_index_get_type
-  (c-name "gda_data_model_index_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_data_model_index_new
-  (c-name "gda_data_model_index_new")
-  (is-constructor-of "GdaDataModelIndex")
-  (return-type "GdaDataModelIndex*")
-)
-
-(define-method copy
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_copy")
-  (return-type "GdaDataModelIndex*")
-)
-
-(define-method free
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_free")
-  (return-type "none")
-)
-
-(define-method equal
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_equal")
+(define-method iter_move_at_row_default
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_iter_move_at_row_default")
   (return-type "gboolean")
   (parameters
-    '("const-GdaDataModelIndex*" "rhs")
+    '("GdaDataModelIter*" "iter")
+    '("gint" "row")
   )
 )
 
-(define-method get_name
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_get_name")
-  (return-type "const-gchar*")
-)
-
-(define-method set_name
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_set_name")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "name")
-  )
-)
-
-(define-method get_table_name
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_get_table_name")
-  (return-type "const-gchar*")
-)
-
-(define-method set_table_name
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_set_table_name")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "name")
-  )
-)
-
-(define-method get_primary_key
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_get_primary_key")
+(define-method iter_move_next_default
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_iter_move_next_default")
   (return-type "gboolean")
-)
-
-(define-method set_primary_key
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_set_primary_key")
-  (return-type "none")
   (parameters
-    '("gboolean" "pk")
+    '("GdaDataModelIter*" "iter")
   )
 )
 
-(define-method get_unique_key
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_get_unique_key")
+(define-method iter_move_prev_default
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_iter_move_prev_default")
   (return-type "gboolean")
-)
-
-(define-method set_unique_key
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_set_unique_key")
-  (return-type "none")
   (parameters
-    '("gboolean" "uk")
-  )
-)
-
-(define-method get_references
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_get_references")
-  (return-type "const-gchar*")
-)
-
-(define-method set_references
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_set_references")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "ref")
-  )
-)
-
-(define-method get_column_index_list
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_get_column_index_list")
-  (return-type "GList*")
-)
-
-(define-method set_column_index_list
-  (of-object "GdaDataModelIndex")
-  (c-name "gda_data_model_index_set_column_index_list")
-  (return-type "none")
-  (parameters
-    '("GList*" "col_idx_list")
+    '("GdaDataModelIter*" "iter")
   )
 )
 
@@ -3057,9 +2446,20 @@
   )
 )
 
-(define-method set_at_row
+(define-method set_value_at
   (of-object "GdaDataModelIter")
-  (c-name "gda_data_model_iter_set_at_row")
+  (c-name "gda_data_model_iter_set_value_at")
+  (return-type "gboolean")
+  (parameters
+    '("gint" "col")
+    '("const-GValue*" "value")
+    '("GError**" "error")
+  )
+)
+
+(define-method move_at_row
+  (of-object "GdaDataModelIter")
+  (c-name "gda_data_model_iter_move_at_row")
   (return-type "gboolean")
   (parameters
     '("gint" "row")
@@ -3082,12 +2482,6 @@
   (of-object "GdaDataModelIter")
   (c-name "gda_data_model_iter_get_row")
   (return-type "gint")
-)
-
-(define-method can_be_moved
-  (of-object "GdaDataModelIter")
-  (c-name "gda_data_model_iter_can_be_moved")
-  (return-type "gboolean")
 )
 
 (define-method invalidate_contents
@@ -3138,34 +2532,6 @@
   )
 )
 
-(define-method move_iter_at_row
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_move_iter_at_row")
-  (return-type "gboolean")
-  (parameters
-    '("GdaDataModelIter*" "iter")
-    '("gint" "row")
-  )
-)
-
-(define-method move_iter_next
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_move_iter_next")
-  (return-type "gboolean")
-  (parameters
-    '("GdaDataModelIter*" "iter")
-  )
-)
-
-(define-method move_iter_prev
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_move_iter_prev")
-  (return-type "gboolean")
-  (parameters
-    '("GdaDataModelIter*" "iter")
-  )
-)
-
 
 
 ;; From gda-data-model-query.h
@@ -3178,17 +2544,12 @@
 (define-function gda_data_model_query_new
   (c-name "gda_data_model_query_new")
   (is-constructor-of "GdaDataModelQuery")
-  (return-type "GdaDataModel*")
+  (return-type "GdaDataModelQuery*")
   (parameters
     '("GdaConnection*" "cnc")
     '("GdaStatement*" "select_stmt")
+    '("GdaSet*" "params")
   )
-)
-
-(define-method get_parameter_list
-  (of-object "GdaDataModelQuery")
-  (c-name "gda_data_model_query_get_parameter_list")
-  (return-type "GdaSet*")
 )
 
 (define-method refresh
@@ -3200,9 +2561,38 @@
   )
 )
 
-(define-method set_modification_query
+(define-method set_row_selection_condition
   (of-object "GdaDataModelQuery")
-  (c-name "gda_data_model_query_set_modification_query")
+  (c-name "gda_data_model_query_set_row_selection_condition")
+  (return-type "gboolean")
+  (parameters
+    '("GdaSqlExpr*" "expr")
+    '("GError**" "error")
+  )
+)
+
+(define-method set_row_selection_condition_sql
+  (of-object "GdaDataModelQuery")
+  (c-name "gda_data_model_query_set_row_selection_condition_sql")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "sql_where")
+    '("GError**" "error")
+  )
+)
+
+(define-method compute_row_selection_condition
+  (of-object "GdaDataModelQuery")
+  (c-name "gda_data_model_query_compute_row_selection_condition")
+  (return-type "gboolean")
+  (parameters
+    '("GError**" "error")
+  )
+)
+
+(define-method set_modification_statement
+  (of-object "GdaDataModelQuery")
+  (c-name "gda_data_model_query_set_modification_statement")
   (return-type "gboolean")
   (parameters
     '("GdaStatement*" "mod_stmt")
@@ -3210,32 +2600,21 @@
   )
 )
 
-(define-method compute_modification_queries
+(define-method set_modification_statement_sql
   (of-object "GdaDataModelQuery")
-  (c-name "gda_data_model_query_compute_modification_queries")
+  (c-name "gda_data_model_query_set_modification_statement_sql")
   (return-type "gboolean")
   (parameters
-    '("const-gchar*" "target")
-    '("GdaDataModelQueryOptions" "options")
+    '("const-gchar*" "sql")
     '("GError**" "error")
   )
 )
 
-
-
-;; From gda-data-model-row.h
-
-(define-function gda_data_model_row_get_type
-  (c-name "gda_data_model_row_get_type")
-  (return-type "GType")
-)
-
-(define-method get_row
-  (of-object "GdaDataModelRow")
-  (c-name "gda_data_model_row_get_row")
-  (return-type "GdaRow*")
+(define-method compute_modification_statements
+  (of-object "GdaDataModelQuery")
+  (c-name "gda_data_model_query_compute_modification_statements")
+  (return-type "gboolean")
   (parameters
-    '("gint" "row")
     '("GError**" "error")
   )
 )
@@ -3356,16 +2735,6 @@
   (return-type "gboolean")
   (parameters
     '("gint" "proxy_row")
-  )
-)
-
-(define-method find_row_from_values
-  (of-object "GdaDataProxy")
-  (c-name "gda_data_proxy_find_row_from_values")
-  (return-type "gint")
-  (parameters
-    '("GSList*" "values")
-    '("gint*" "cols_index")
   )
 )
 
@@ -3497,6 +2866,73 @@
   (of-object "GdaDataProxy")
   (c-name "gda_data_proxy_get_filtered_n_rows")
   (return-type "gint")
+)
+
+
+
+;; From gda-data-select.h
+
+(define-function gda_data_select_get_type
+  (c-name "gda_data_select_get_type")
+  (return-type "GType")
+)
+
+(define-method set_row_selection_condition
+  (of-object "GdaDataSelect")
+  (c-name "gda_data_select_set_row_selection_condition")
+  (return-type "gboolean")
+  (parameters
+    '("GdaSqlExpr*" "expr")
+    '("GError**" "error")
+  )
+)
+
+(define-method set_row_selection_condition_sql
+  (of-object "GdaDataSelect")
+  (c-name "gda_data_select_set_row_selection_condition_sql")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "sql_where")
+    '("GError**" "error")
+  )
+)
+
+(define-method compute_row_selection_condition
+  (of-object "GdaDataSelect")
+  (c-name "gda_data_select_compute_row_selection_condition")
+  (return-type "gboolean")
+  (parameters
+    '("GError**" "error")
+  )
+)
+
+(define-method set_modification_statement
+  (of-object "GdaDataSelect")
+  (c-name "gda_data_select_set_modification_statement")
+  (return-type "gboolean")
+  (parameters
+    '("GdaStatement*" "mod_stmt")
+    '("GError**" "error")
+  )
+)
+
+(define-method set_modification_statement_sql
+  (of-object "GdaDataSelect")
+  (c-name "gda_data_select_set_modification_statement_sql")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "sql")
+    '("GError**" "error")
+  )
+)
+
+(define-method compute_modification_statements
+  (of-object "GdaDataSelect")
+  (c-name "gda_data_select_compute_modification_statements")
+  (return-type "gboolean")
+  (parameters
+    '("GError**" "error")
+  )
 )
 
 
@@ -3755,16 +3191,6 @@
   (return-type "GType")
 )
 
-(define-function gda_data_model_query_error_get_type
-  (c-name "gda_data_model_query_error_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_data_model_query_options_get_type
-  (c-name "gda_data_model_query_options_get_type")
-  (return-type "GType")
-)
-
 (define-function gda_data_proxy_error_get_type
   (c-name "gda_data_proxy_error_get_type")
   (return-type "GType")
@@ -3967,6 +3393,7 @@
   (return-type "gboolean")
   (parameters
     '("const-GValue*" "value")
+    '("GError**" "error")
   )
 )
 
@@ -3976,6 +3403,17 @@
   (return-type "gboolean")
   (parameters
     '("GValue*" "value")
+    '("GError**" "error")
+  )
+)
+
+(define-method take_static_value
+  (of-object "GdaHolder")
+  (c-name "gda_holder_take_static_value")
+  (return-type "GValue*")
+  (parameters
+    '("const-GValue*" "value")
+    '("GError**" "error")
   )
 )
 
@@ -3986,6 +3424,7 @@
   (parameters
     '("GdaDataHandler*" "dh")
     '("const-gchar*" "value")
+    '("GError**" "error")
   )
 )
 
@@ -4066,9 +3505,10 @@
 (define-method set_bind
   (of-object "GdaHolder")
   (c-name "gda_holder_set_bind")
-  (return-type "none")
+  (return-type "gboolean")
   (parameters
     '("GdaHolder*" "bind_to")
+    '("GError**" "error")
   )
 )
 
@@ -4076,6 +3516,33 @@
   (of-object "GdaHolder")
   (c-name "gda_holder_get_bind")
   (return-type "GdaHolder*")
+)
+
+
+
+;; From gda-lockable.h
+
+(define-function gda_lockable_get_type
+  (c-name "gda_lockable_get_type")
+  (return-type "GType")
+)
+
+(define-method lock
+  (of-object "GdaLockable")
+  (c-name "gda_lockable_lock")
+  (return-type "none")
+)
+
+(define-method trylock
+  (of-object "GdaLockable")
+  (c-name "gda_lockable_trylock")
+  (return-type "gboolean")
+)
+
+(define-method unlock
+  (of-object "GdaLockable")
+  (c-name "gda_lockable_unlock")
+  (return-type "none")
 )
 
 
@@ -4281,6 +3748,7 @@
   (is-constructor-of "GdaMetaStruct")
   (return-type "GdaMetaStruct*")
   (parameters
+    '("GdaMetaStore*" "store")
     '("GdaMetaStructFeature" "features")
   )
 )
@@ -4290,7 +3758,6 @@
   (c-name "gda_meta_struct_complement")
   (return-type "GdaMetaDbObject*")
   (parameters
-    '("GdaMetaStore*" "store")
     '("GdaMetaDbObjectType" "type")
     '("const-GValue*" "catalog")
     '("const-GValue*" "schema")
@@ -4304,7 +3771,6 @@
   (c-name "gda_meta_struct_complement_schema")
   (return-type "gboolean")
   (parameters
-    '("GdaMetaStore*" "store")
     '("const-GValue*" "catalog")
     '("const-GValue*" "schema")
     '("GError**" "error")
@@ -4316,7 +3782,6 @@
   (c-name "gda_meta_struct_complement_default")
   (return-type "gboolean")
   (parameters
-    '("GdaMetaStore*" "store")
     '("GError**" "error")
   )
 )
@@ -4326,7 +3791,6 @@
   (c-name "gda_meta_struct_complement_depend")
   (return-type "gboolean")
   (parameters
-    '("GdaMetaStore*" "store")
     '("GdaMetaDbObject*" "dbo")
     '("GError**" "error")
   )
@@ -4340,6 +3804,12 @@
     '("GdaMetaSortType" "sort_type")
     '("GError**" "error")
   )
+)
+
+(define-method get_all_db_objects
+  (of-object "GdaMetaStruct")
+  (c-name "gda_meta_struct_get_all_db_objects")
+  (return-type "GSList*")
 )
 
 (define-method get_db_object
@@ -4371,6 +3841,40 @@
     '("GdaMetaGraphInfo" "info")
     '("GError**" "error")
   )
+)
+
+
+
+;; From gda-mutex.h
+
+(define-function gda_mutex_new
+  (c-name "gda_mutex_new")
+  (is-constructor-of "GdaMutex")
+  (return-type "GdaMutex*")
+)
+
+(define-method lock
+  (of-object "GdaMutex")
+  (c-name "gda_mutex_lock")
+  (return-type "none")
+)
+
+(define-method trylock
+  (of-object "GdaMutex")
+  (c-name "gda_mutex_trylock")
+  (return-type "gboolean")
+)
+
+(define-method unlock
+  (of-object "GdaMutex")
+  (c-name "gda_mutex_unlock")
+  (return-type "none")
+)
+
+(define-method free
+  (of-object "GdaMutex")
+  (c-name "gda_mutex_free")
+  (return-type "none")
 )
 
 
@@ -4466,39 +3970,8 @@
   (is-constructor-of "GdaRow")
   (return-type "GdaRow*")
   (parameters
-    '("GdaDataModel*" "model")
     '("gint" "count")
   )
-)
-
-(define-function gda_row_new_from_list
-  (c-name "gda_row_new_from_list")
-  (return-type "GdaRow*")
-  (parameters
-    '("GdaDataModel*" "model")
-    '("const-GList*" "values")
-  )
-)
-
-(define-method copy
-  (of-object "GdaRow")
-  (c-name "gda_row_copy")
-  (return-type "GdaRow*")
-)
-
-(define-method set_model
-  (of-object "GdaRow")
-  (c-name "gda_row_set_model")
-  (return-type "none")
-  (parameters
-    '("GdaDataModel*" "model")
-  )
-)
-
-(define-method get_model
-  (of-object "GdaRow")
-  (c-name "gda_row_get_model")
-  (return-type "GdaDataModel*")
 )
 
 (define-method get_length
@@ -4507,69 +3980,10 @@
   (return-type "gint")
 )
 
-(define-method get_number
-  (of-object "GdaRow")
-  (c-name "gda_row_get_number")
-  (return-type "gint")
-)
-
-(define-method set_number
-  (of-object "GdaRow")
-  (c-name "gda_row_set_number")
-  (return-type "none")
-  (parameters
-    '("gint" "number")
-  )
-)
-
-(define-method get_id
-  (of-object "GdaRow")
-  (c-name "gda_row_get_id")
-  (return-type "const-gchar*")
-)
-
-(define-method set_id
-  (of-object "GdaRow")
-  (c-name "gda_row_set_id")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "id")
-  )
-)
-
 (define-method get_value
   (of-object "GdaRow")
   (c-name "gda_row_get_value")
   (return-type "GValue*")
-  (parameters
-    '("gint" "num")
-  )
-)
-
-(define-method set_value
-  (of-object "GdaRow")
-  (c-name "gda_row_set_value")
-  (return-type "gboolean")
-  (parameters
-    '("gint" "num")
-    '("const-GValue*" "value")
-  )
-)
-
-(define-method set_is_default
-  (of-object "GdaRow")
-  (c-name "gda_row_set_is_default")
-  (return-type "none")
-  (parameters
-    '("gint" "num")
-    '("gboolean" "is_default")
-  )
-)
-
-(define-method get_is_default
-  (of-object "GdaRow")
-  (c-name "gda_row_get_is_default")
-  (return-type "gboolean")
   (parameters
     '("gint" "num")
   )
@@ -4822,6 +4236,15 @@
     '("GdaConnection*" "cnc")
     '("GType" "type")
     '("const-gchar*" "dbms_type")
+  )
+)
+
+(define-function gda_select_alter_select_for_empty
+  (c-name "gda_select_alter_select_for_empty")
+  (return-type "GdaStatement*")
+  (parameters
+    '("GdaStatement*" "stmt")
+    '("GError**" "error")
   )
 )
 
@@ -5143,6 +4566,7 @@
   (c-name "gda_set_set_holder_value")
   (return-type "gboolean")
   (parameters
+    '("GError**" "error")
     '("const-gchar*" "holder_id")
   )
   (varargs #t)
@@ -5197,6 +4621,9 @@
   (of-object "GdaSet")
   (c-name "gda_set_is_valid")
   (return-type "gboolean")
+  (parameters
+    '("GError**" "error")
+  )
 )
 
 (define-method get_node
@@ -5551,7 +4978,7 @@
 
 (define-function gda_utility_data_model_dump_data_to_xml
   (c-name "gda_utility_data_model_dump_data_to_xml")
-  (return-type "none")
+  (return-type "gboolean")
   (parameters
     '("GdaDataModel*" "model")
     '("xmlNodePtr" "parent")
@@ -5565,11 +4992,12 @@
 
 (define-function gda_utility_holder_load_attributes
   (c-name "gda_utility_holder_load_attributes")
-  (return-type "none")
+  (return-type "gboolean")
   (parameters
     '("GdaHolder*" "holder")
     '("xmlNodePtr" "node")
     '("GSList*" "sources")
+    '("GError**" "error")
   )
 )
 
@@ -5586,6 +5014,17 @@
   (return-type "gchar*")
   (parameters
     '("gchar*" "text")
+  )
+)
+
+(define-function gda_compute_unique_table_row_condition
+  (c-name "gda_compute_unique_table_row_condition")
+  (return-type "GdaSqlExpr*")
+  (parameters
+    '("GdaSqlStatementSelect*" "stsel")
+    '("GdaMetaTable*" "mtable")
+    '("gboolean" "require_pk")
+    '("GError**" "error")
   )
 )
 
@@ -5639,6 +5078,33 @@
     '("gchar**" "out_provider")
     '("gchar**" "out_username")
     '("gchar**" "out_password")
+  )
+)
+
+(define-function gda_parse_iso8601_date
+  (c-name "gda_parse_iso8601_date")
+  (return-type "gboolean")
+  (parameters
+    '("GDate*" "gdate")
+    '("const-gchar*" "value")
+  )
+)
+
+(define-function gda_parse_iso8601_time
+  (c-name "gda_parse_iso8601_time")
+  (return-type "gboolean")
+  (parameters
+    '("GdaTime*" "timegda")
+    '("const-gchar*" "value")
+  )
+)
+
+(define-function gda_parse_iso8601_timestamp
+  (c-name "gda_parse_iso8601_timestamp")
+  (return-type "gboolean")
+  (parameters
+    '("GdaTimestamp*" "timestamp")
+    '("const-gchar*" "value")
   )
 )
 
@@ -5937,8 +5403,8 @@
   )
 )
 
-(define-function gda_value_bcompare
-  (c-name "gda_value_bcompare")
+(define-function gda_value_differ
+  (c-name "gda_value_differ")
   (return-type "gint")
   (parameters
     '("const-GValue*" "value1")
@@ -5948,15 +5414,6 @@
 
 (define-function gda_value_compare
   (c-name "gda_value_compare")
-  (return-type "gint")
-  (parameters
-    '("const-GValue*" "value1")
-    '("const-GValue*" "value2")
-  )
-)
-
-(define-function gda_value_compare_ext
-  (c-name "gda_value_compare_ext")
   (return-type "gint")
   (parameters
     '("const-GValue*" "value1")
@@ -6246,7 +5703,7 @@
 (define-method to_string
   (of-object "GdaXaTransactionId")
   (c-name "gda_xa_transaction_id_to_string")
-  (return-type "const-gchar*")
+  (return-type "gchar*")
 )
 
 (define-function gda_xa_transaction_string_to_id
@@ -6264,6 +5721,14 @@
 (define-function gda_init
   (c-name "gda_init")
   (return-type "none")
+)
+
+(define-function gda_get_application_exec_path
+  (c-name "gda_get_application_exec_path")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "app_name")
+  )
 )
 
 
@@ -7606,6 +7071,30 @@
 
 
 ;; From gda-statement-struct-util.h
+
+(define-function gda_sql_identifier_add_quotes
+  (c-name "gda_sql_identifier_add_quotes")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "str")
+  )
+)
+
+(define-function gda_sql_identifier_needs_quotes
+  (c-name "gda_sql_identifier_needs_quotes")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "str")
+  )
+)
+
+(define-function gda_sql_identifier_remove_quotes
+  (c-name "gda_sql_identifier_remove_quotes")
+  (return-type "gchar*")
+  (parameters
+    '("gchar*" "str")
+  )
+)
 
 (define-function gda_sql_value_stringify
   (c-name "gda_sql_value_stringify")

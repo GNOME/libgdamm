@@ -107,14 +107,10 @@ public:
   _WRAP_METHOD(ConnectionOptions get_options() const, gda_connection_get_options)
 
   _WRAP_METHOD(Glib::ustring get_dsn() const, gda_connection_get_dsn)
-  _WRAP_METHOD(bool set_dsn(const Glib::ustring& datasource), gda_connection_set_dsn)
   _WRAP_METHOD(Glib::ustring get_cnc_string() const, gda_connection_get_cnc_string)
 
   _WRAP_METHOD(void add_event(const Glib::RefPtr<ConnectionEvent>& event), gda_connection_add_event)
   _WRAP_METHOD(Glib::RefPtr<ConnectionEvent> add_event_string(const Glib::ustring& str), gda_connection_add_event_string)
-
-  #m4 //Use deep ownership because we own both the list and its elements;
-  _WRAP_METHOD(void add_events_list (const Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >& events_list), gda_connection_add_events_list)
 
   _WRAP_METHOD(void clear_events_list(), gda_connection_clear_events_list)
 
@@ -168,7 +164,6 @@ public:
   _WRAP_METHOD(Glib::RefPtr<SqlParser> create_parser(), gda_connection_create_parser)
 
   _WRAP_METHOD(Glib::ustring get_provider_name() const, gda_connection_get_provider_name)
-  _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider_obj() const, gda_connection_get_provider_obj)
   _WRAP_METHOD(bool update_meta_store (GdaMetaContext* context), gda_connection_update_meta_store, errthrow)
   
   _WRAP_METHOD(bool statement_prepare (const Glib::RefPtr<Statement>& stmt), gda_connection_statement_prepare, errthrow)
@@ -196,7 +191,6 @@ _CONVERSION(`GdaConnectionEvent*',`const Glib::RefPtr<ConnectionEvent>&',Glib::w
   _WRAP_PROPERTY("dsn", Glib::ustring)
   _WRAP_PROPERTY("meta-store", Glib::RefPtr<MetaStore>)
   _WRAP_PROPERTY("options", ConnectionOptions)
-  _WRAP_PROPERTY("provider-obj", Glib::RefPtr<ServerProvider>)
 };
 
 } // namespace Gda

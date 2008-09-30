@@ -55,13 +55,8 @@ public:
   static Glib::RefPtr<DataModel> list_providers();
   _WRAP_METHOD_DOCS_ONLY(gda_config_get_nb_dsn)
   static int get_nb_dsn();
-  _WRAP_METHOD_DOCS_ONLY(gda_config_get_dsn_index)
-  static int get_dsn_index(const Glib::ustring& dsn_name);
   _WRAP_METHOD_DOCS_ONLY(gda_config_can_modify_system_config)
   static bool can_modify_system_config();
-
-  _WRAP_PROPERTY("system-file", std::string);
-  _WRAP_PROPERTY("user-file", std::string);
   
   #m4 _EQUAL(GdaDataSourceInfo*, DataSourceInfo*)
   #m4 _CONVERSION(`gpointer',`DataSourceInfo*',`(DataSourceInfo*)($3)')

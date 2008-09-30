@@ -88,7 +88,6 @@ public:
 
   _WRAP_PROPERTY("connection", Glib::RefPtr<Connection>)
   _WRAP_PROPERTY("op-type", gint)
-  _WRAP_PROPERTY("provider-obj", Glib::RefPtr<ServerProvider>)
 
  //TODO: vfuncs.
 };

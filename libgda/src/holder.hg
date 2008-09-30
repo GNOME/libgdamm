@@ -50,9 +50,9 @@ public:
   _WRAP_METHOD_DOCS_ONLY(gda_holder_get_value)
   Glib::ValueBase get_value();
   _WRAP_METHOD(Glib::ustring get_value_str(const Glib::RefPtr<DataHandler>& dh), gda_holder_get_value_str)
-  _WRAP_METHOD(bool set_value(const Glib::ValueBase& value), gda_holder_set_value)
-  _WRAP_METHOD(bool set_value_str (const Glib::RefPtr<DataHandler>& dh, const Glib::ustring& value), gda_holder_set_value_str)
-  _WRAP_METHOD(bool take_value (Glib::ValueBase& value), gda_holder_take_value)
+  _WRAP_METHOD(bool set_value(const Glib::ValueBase& value), gda_holder_set_value, errthrow)
+  _WRAP_METHOD(bool set_value_str (const Glib::RefPtr<DataHandler>& dh, const Glib::ustring& value), gda_holder_set_value_str, errthrow)
+  _WRAP_METHOD(bool take_value (Glib::ValueBase& value), gda_holder_take_value, errthrow)
 
   _WRAP_METHOD_DOCS_ONLY(gda_holder_get_default_value)
   Glib::ValueBase get_default_value();
@@ -68,7 +68,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<DataModel> get_source_model (int& col) const, gda_holder_get_source_model)
   _WRAP_METHOD(bool set_source_model (const Glib::RefPtr<DataModel>& model, int col), gda_holder_set_source_model, errthrow)
 
-  _WRAP_METHOD(void set_bind (const Glib::RefPtr<Holder>& bind_to), gda_holder_set_bind)
+  _WRAP_METHOD(void set_bind (const Glib::RefPtr<Holder>& bind_to), gda_holder_set_bind, errthrow)
   _WRAP_METHOD(Glib::RefPtr<Holder> get_bind(), gda_holder_get_bind)
 
   _WRAP_PROPERTY("description", Glib::ustring)

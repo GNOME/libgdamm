@@ -63,7 +63,7 @@ public:
 
   _WRAP_METHOD(void merge_with_set (const Glib::RefPtr<Set>& set_to_merge), gda_set_merge_with_set)
   
-  _WRAP_METHOD(bool is_valid() const, gda_set_is_valid)
+  _WRAP_METHOD(bool is_valid() const, gda_set_is_valid, errthrow)
 
   _WRAP_METHOD(SetSource* get_source_for_model (const Glib::RefPtr<DataModel>& model), gda_set_get_source_for_model)
   _WRAP_METHOD(SetSource* get_source (const Glib::RefPtr<Holder>& param), gda_set_get_source)

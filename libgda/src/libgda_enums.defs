@@ -1,38 +1,3 @@
-;; From /usr/include/libgda-4.0/libgda/gda-client.h
-
-(define-enum-extended ClientEvent
-  (in-module "Gda")
-  (c-name "GdaClientEvent")
-  (values
-    '("invalid" "GDA_CLIENT_EVENT_INVALID" "0")
-    '("error" "GDA_CLIENT_EVENT_ERROR" "1")
-    '("connection-opened" "GDA_CLIENT_EVENT_CONNECTION_OPENED" "2")
-    '("connection-closed" "GDA_CLIENT_EVENT_CONNECTION_CLOSED" "3")
-    '("transaction-started" "GDA_CLIENT_EVENT_TRANSACTION_STARTED" "4")
-    '("transaction-committed" "GDA_CLIENT_EVENT_TRANSACTION_COMMITTED" "5")
-    '("transaction-cancelled" "GDA_CLIENT_EVENT_TRANSACTION_CANCELLED" "6")
-  )
-)
-
-(define-enum-extended ClientError
-  (in-module "Gda")
-  (c-name "GdaClientError")
-  (values
-    '("r" "GDA_CLIENT_GENERAL_ERROR" "0")
-  )
-)
-
-;; From /usr/include/libgda-4.0/libgda/gda-column-index.h
-
-(define-enum-extended Sorting
-  (in-module "Gda")
-  (c-name "GdaSorting")
-  (values
-    '("ascending" "GDA_SORTING_ASCENDING" "0")
-    '("descending" "GDA_SORTING_DESCENDING" "1")
-  )
-)
-
 ;; From /usr/include/libgda-4.0/libgda/gda-config.h
 
 (define-enum-extended ConfigError
@@ -238,7 +203,7 @@
   (in-module "Gda")
   (c-name "GdaDataModelIterError")
   (values
-    '("r" "GDA_DATA_MODEL_ITER_WHAT_ERROR" "0")
+    '("r" "GDA_DATA_MODEL_ITER_COLUMN_OUT_OF_RANGE_ERROR" "0")
   )
 )
 
@@ -248,18 +213,8 @@
   (in-module "Gda")
   (c-name "GdaDataModelQueryError")
   (values
-    '("xml-load-error" "GDA_DATA_MODEL_QUERY_XML_LOAD_ERROR" "0")
-    '("compute-modif-statements-error" "GDA_DATA_MODEL_QUERY_COMPUTE_MODIF_STATEMENTS_ERROR" "1")
-    '("modif-statement-error" "GDA_DATA_MODEL_QUERY_MODIF_STATEMENT_ERROR" "2")
-    '("connection-error" "GDA_DATA_MODEL_QUERY_CONNECTION_ERROR" "3")
-  )
-)
-
-(define-flags-extended DataModelQueryOptions
-  (in-module "Gda")
-  (c-name "GdaDataModelQueryOptions")
-  (values
-    '("k" "GDA_DATA_MODEL_QUERY_OPTION_USE_ALL_FIELDS_IF_NO_PK" "1 << 0")
+    '("select-statement-error" "GDA_DATA_MODEL_QUERY_SELECT_STATEMENT_ERROR" "0")
+    '("connection-error" "GDA_DATA_MODEL_QUERY_CONNECTION_ERROR" "1")
   )
 )
 
@@ -359,7 +314,9 @@
   (in-module "Gda")
   (c-name "GdaHolderError")
   (values
-    '("r" "GDA_HOLDER_QUERY_LIMIT_ERROR" "0")
+    '("string-conversion-error" "GDA_HOLDER_STRING_CONVERSION_ERROR" "0")
+    '("value-type-error" "GDA_HOLDER_VALUE_TYPE_ERROR" "1")
+    '("value-null-error" "GDA_HOLDER_VALUE_NULL_ERROR" "2")
   )
 )
 
@@ -369,8 +326,8 @@
   (in-module "Gda")
   (c-name "GdaMetaStoreError")
   (values
-    '("incorrect-schema" "GDA_META_STORE_INCORRECT_SCHEMA" "0")
-    '("unsupported-provider" "GDA_META_STORE_UNSUPPORTED_PROVIDER" "1")
+    '("incorrect-schema-error" "GDA_META_STORE_INCORRECT_SCHEMA_ERROR" "0")
+    '("unsupported-provider-error" "GDA_META_STORE_UNSUPPORTED_PROVIDER_ERROR" "1")
     '("internal-error" "GDA_META_STORE_INTERNAL_ERROR" "2")
     '("meta-context-error" "GDA_META_STORE_META_CONTEXT_ERROR" "3")
     '("modify-contents-error" "GDA_META_STORE_MODIFY_CONTENTS_ERROR" "4")
@@ -505,6 +462,7 @@
     '("busy-error" "GDA_SERVER_PROVIDER_BUSY_ERROR" "7")
     '("non-supported-error" "GDA_SERVER_PROVIDER_NON_SUPPORTED_ERROR" "8")
     '("server-version-error" "GDA_SERVER_PROVIDER_SERVER_VERSION_ERROR" "9")
+    '("data-error" "GDA_SERVER_PROVIDER_DATA_ERROR" "10")
   )
 )
 
@@ -514,7 +472,9 @@
   (in-module "Gda")
   (c-name "GdaSetError")
   (values
-    '("r" "GDA_SET_XML_SPEC_ERROR" "0")
+    '("xml-spec-error" "GDA_SET_XML_SPEC_ERROR" "0")
+    '("holder-not-found-error" "GDA_SET_HOLDER_NOT_FOUND_ERROR" "1")
+    '("invalid-error" "GDA_SET_INVALID_ERROR" "2")
   )
 )
 
@@ -551,6 +511,7 @@
     '("cursor-forward" "GDA_STATEMENT_MODEL_CURSOR_FORWARD" "1 << 1")
     '("cursor-backward" "GDA_STATEMENT_MODEL_CURSOR_BACKWARD" "1 << 2")
     '("cursor" "GDA_STATEMENT_MODEL_CURSOR" "0x2")
+    '("allow-noparam" "GDA_STATEMENT_MODEL_ALLOW_NOPARAM" "1 << 3")
   )
 )
 

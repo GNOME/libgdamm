@@ -25,8 +25,8 @@
   (return-type "void")
   (when "last")
   (parameters
-    '("GType" "p0")
-    '("GType" "p1")
+    '("gint" "p0")
+    '("gint" "p1")
   )
 )
 
@@ -77,7 +77,7 @@
   )
 )
 
-(define-property user-file
+(define-property system-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
   (docs "")
@@ -86,7 +86,7 @@
   (construct-only #f)
 )
 
-(define-property system-file
+(define-property user-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
   (docs "")
@@ -139,7 +139,7 @@
 (define-property dsn
   (of-object "GdaConnection")
   (prop-type "GParamString")
-  (docs "")
+  (docs "DSN to use")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -148,16 +148,16 @@
 (define-property cnc-string
   (of-object "GdaConnection")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Connection string to use")
   (readable #t)
   (writable #t)
   (construct-only #f)
 )
 
-(define-property provider-obj
+(define-property provider
   (of-object "GdaConnection")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Provider to use")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -166,7 +166,7 @@
 (define-property auth-string
   (of-object "GdaConnection")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Authentication string to use")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -175,7 +175,7 @@
 (define-property options
   (of-object "GdaConnection")
   (prop-type "GParamFlags")
-  (docs "")
+  (docs "Options (connection sharing)")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -184,7 +184,16 @@
 (define-property meta-store
   (of-object "GdaConnection")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "GdaMetaStore used by the connection")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property thread-owner
+  (of-object "GdaConnection")
+  (prop-type "GParamPointer")
+  (docs "Unique GThread from which the connection will be available.This should only be modified by the database providers' implementation")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -248,7 +257,7 @@
 (define-property read-only
   (of-object "GdaDataModelArray")
   (prop-type "GParamBoolean")
-  (docs "")
+  (docs "Whether data model can be modified")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -384,15 +393,6 @@
 
 ;; From GdaDataModelIter
 
-(define-signal row-to-change
-  (of-object "GdaDataModelIter")
-  (return-type "gboolean")
-  (when "last")
-  (parameters
-    '("gint" "p0")
-  )
-)
-
 (define-signal row-changed
   (of-object "GdaDataModelIter")
   (return-type "void")
@@ -480,73 +480,6 @@
   (construct-only #f)
 )
 
-;; From GdaDataModelQuery
-
-(define-property query
-  (of-object "GdaDataModelQuery")
-  (prop-type "GParamObject")
-  (docs "SELECT Query to be executed to populate the model with data")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property insert-query
-  (of-object "GdaDataModelQuery")
-  (prop-type "GParamObject")
-  (docs "INSERT Query to be executed to add data")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property update-query
-  (of-object "GdaDataModelQuery")
-  (prop-type "GParamObject")
-  (docs "UPDATE Query to be executed to update data")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property delete-query
-  (of-object "GdaDataModelQuery")
-  (prop-type "GParamObject")
-  (docs "DELETE Query to be executed to remove data")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property use-transaction
-  (of-object "GdaDataModelQuery")
-  (prop-type "GParamBoolean")
-  (docs "Run modification statements within a transaction")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property connection
-  (of-object "GdaDataModelQuery")
-  (prop-type "GParamObject")
-  (docs "Connection to use to execute statements")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GdaDataModelRow
-
-(define-property read-only
-  (of-object "GdaDataModelRow")
-  (prop-type "GParamBoolean")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
 ;; From GdaDataProxy
 
 (define-signal row-delete-changed
@@ -578,9 +511,9 @@
   )
 )
 
-(define-signal pre-changes-applied
+(define-signal validate-row-changes
   (of-object "GdaDataProxy")
-  (return-type "gboolean")
+  (return-type "gpointer")
   (when "last")
   (parameters
     '("gint" "p0")
@@ -588,7 +521,7 @@
   )
 )
 
-(define-signal post-changes-applied
+(define-signal row-changes-applied
   (of-object "GdaDataProxy")
   (return-type "void")
   (when "first")
@@ -652,6 +585,15 @@
   (of-object "GdaHolder")
   (return-type "void")
   (when "first")
+)
+
+(define-signal validate-change
+  (of-object "GdaHolder")
+  (return-type "gpointer")
+  (when "last")
+  (parameters
+    '("gpointer" "p0")
+  )
 )
 
 (define-property id
@@ -732,7 +674,7 @@
   (docs "")
   (readable #t)
   (writable #t)
-  (construct-only #t)
+  (construct-only #f)
 )
 
 (define-property not-null
@@ -773,7 +715,7 @@
 (define-property cnc-string
   (of-object "GdaMetaStore")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Connection string for the internal connection to use")
   (readable #f)
   (writable #t)
   (construct-only #t)
@@ -782,7 +724,7 @@
 (define-property cnc
   (of-object "GdaMetaStore")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Connection object internally used")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -791,7 +733,7 @@
 (define-property catalog
   (of-object "GdaMetaStore")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Catalog in which the database objects will be created")
   (readable #f)
   (writable #t)
   (construct-only #t)
@@ -800,13 +742,22 @@
 (define-property schema
   (of-object "GdaMetaStore")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Schema in which the database objects will be created")
   (readable #f)
   (writable #t)
   (construct-only #t)
 )
 
 ;; From GdaMetaStruct
+
+(define-property meta-store
+  (of-object "GdaMetaStruct")
+  (prop-type "GParamObject")
+  (docs "GdaMetaStore object to fetch information from")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
 
 (define-property features
   (of-object "GdaMetaStruct")
@@ -818,46 +769,6 @@
 )
 
 ;; From GdaRow
-
-(define-signal value-changed
-  (of-object "GdaRow")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("gint" "p0")
-    '("GValue*" "p1")
-    '("GValue*" "p2")
-  )
-)
-
-(define-signal value-to-change
-  (of-object "GdaRow")
-  (return-type "gboolean")
-  (when "last")
-  (parameters
-    '("gint" "p0")
-    '("GValue*" "p1")
-    '("GValue*" "p2")
-  )
-)
-
-(define-property model
-  (of-object "GdaRow")
-  (prop-type "GParamObject")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property values
-  (of-object "GdaRow")
-  (prop-type "GParamPointer")
-  (docs "")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
 
 (define-property nb-values
   (of-object "GdaRow")
@@ -899,7 +810,7 @@
   (construct-only #t)
 )
 
-(define-property provider-obj
+(define-property provider
   (of-object "GdaServerOperation")
   (prop-type "GParamObject")
   (docs "")
@@ -917,7 +828,7 @@
   (construct-only #t)
 )
 
-(define-property spec-file
+(define-property spec-filename
   (of-object "GdaServerOperation")
   (prop-type "GParamString")
   (docs "")
@@ -937,6 +848,22 @@
   (parameters
     '("GdaHolder*" "p0")
   )
+)
+
+(define-signal validate-holder-change
+  (of-object "GdaSet")
+  (return-type "gpointer")
+  (when "last")
+  (parameters
+    '("GdaHolder*" "p0")
+    '("gpointer" "p1")
+  )
+)
+
+(define-signal validate-set
+  (of-object "GdaSet")
+  (return-type "gpointer")
+  (when "last")
 )
 
 (define-signal holder-plugin-changed

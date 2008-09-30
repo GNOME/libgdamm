@@ -82,9 +82,6 @@ public:
   _WRAP_METHOD(bool row_is_deleted(int proxy_row) const, gda_data_proxy_row_is_deleted)
   _WRAP_METHOD(bool row_is_inserted(int proxy_row) const, gda_data_proxy_row_is_inserted)
 
-  #m4 _CONVERSION(`const ValueSList&', `GSList*', `($3).data()')
-  #m4 _CONVERSION(`const Glib::ArrayHandle<int>&', `gint*', `const_cast<gint*>(($3).data())')
-  _WRAP_METHOD(int find_row_from_values(const ValueSList& values, const Glib::ArrayHandle<int>& cols_index) const, gda_data_proxy_find_row_from_values)
   _WRAP_METHOD(void cancel_row_changes(int proxy_row, int col), gda_data_proxy_cancel_row_changes)
   _WRAP_METHOD(void apply_row_changes(int proxy_row), gda_data_proxy_apply_row_changes, errthrow)
   _WRAP_METHOD(bool has_changed() const, gda_data_proxy_has_changed)
@@ -112,8 +109,6 @@ public:
   _WRAP_SIGNAL(void row_delete_changed(int row, bool to_be_deleted), "row-delete-changed")
   _WRAP_SIGNAL(void sample_changed(int sample_start, int sample_end), "sample-changed")
   _WRAP_SIGNAL(void sample_size_changed(int sample_size), "sample-size-changed")
-  _WRAP_SIGNAL(bool pre_changes_applied(int row, int proxied_row), "pre-changes-applied")
-  _WRAP_SIGNAL(void post_changes_applied(int row, int proxied_row), "post-changes-applied")
   _WRAP_SIGNAL(void filter_changed(), "filter-changed")
 };
 

@@ -45,7 +45,6 @@ public:
   _WRAP_CREATE(const Glib::RefPtr<DataModel>& data_model)
 
   _WRAP_METHOD(bool is_valid() const, gda_data_model_iter_is_valid)
-  _WRAP_METHOD(bool set_at_row(int row), gda_data_model_iter_set_at_row)
   _WRAP_METHOD(bool move_next(), gda_data_model_iter_move_next)
   _WRAP_METHOD(bool move_prev(), gda_data_model_iter_move_prev)
   _WRAP_METHOD(int get_row() const, gda_data_model_iter_get_row)
@@ -63,7 +62,6 @@ public:
 
   _WRAP_SIGNAL(void end_of_data(), "end-of-data")
   _WRAP_SIGNAL(void row_changed(int row), "row-changed")
-  _WRAP_SIGNAL(bool row_to_change(int row), "row-to-change")
 };
 
 } // namespace Gda
