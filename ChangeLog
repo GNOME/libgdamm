@@ -1,5 +1,10 @@
 3.0.1:
 
+2008-09-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in: Added square brackets around LIBGDAMM_VERSION 
+	to avoid a autoconf error.
+
 2008-04-08  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/connection.ccg:
