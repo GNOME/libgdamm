@@ -109,7 +109,7 @@ public:
   _WRAP_SIGNAL(void row_delete_changed(int row, bool to_be_deleted), "row-delete-changed")
   _WRAP_SIGNAL(void sample_changed(int sample_start, int sample_end), "sample-changed")
   _WRAP_SIGNAL(void sample_size_changed(int sample_size), "sample-size-changed")
-  _WRAP_SIGNAL(void filter_changed(), "filter-changed")
+  _WRAP_SIGNAL(void filter_changed(), "filter-changed", no_default_handler)
 };
 
 } // namespace Gda

@@ -43,22 +43,13 @@ bool Column::equal(const Glib::RefPtr<const Column>& src) const
     return false;
 
   const bool result = get_title() == src->get_title() &&
-                get_defined_size() == src->get_defined_size() &&
                 get_name() == src->get_name() &&
-                get_table() == src->get_table() &&
-                get_caption() == src->get_caption() &&
-                get_scale() == src->get_scale() &&
                 get_dbms_type() == src->get_dbms_type() &&
                 get_g_type() == src->get_g_type() &&
                 get_allow_null() == src->get_allow_null() &&
-                get_primary_key() == src->get_primary_key() &&
-                get_unique_key() == src->get_unique_key() &&
-                get_references() == src->get_references() &&
                 get_auto_increment() == src->get_auto_increment() &&
                 get_position() == src->get_position();
-/* FIXME:
-                && get_default_value() == src->get_default_value();
-*/
+                // FIXME: get_default_value() == src->get_default_value();
 
   return result;
 }

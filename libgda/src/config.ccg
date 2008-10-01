@@ -28,6 +28,12 @@ namespace Gnome
 namespace Gda
 {
 
+DsnInfo* Config::get_dsn_info (const Glib::ustring& dsn_name)
+{
+  return gda_config_get_dsn_info (dsn_name.c_str()); 
+}
+
+  
 bool Config::dsn_needs_authentication(const Glib::ustring& dsn_name)
 {
   return gda_config_dsn_needs_authentication(dsn_name.c_str());

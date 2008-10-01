@@ -73,7 +73,7 @@ public:
 
 #m4 _CONVERSION(`const char*',`const Glib::ustring&',__GCHARP_TO_USTRING)
   _WRAP_SIGNAL(void name_changed(const Glib::ustring& old_name), "name-changed")
-  _WRAP_SIGNAL(void g_type_changed(int old_type, int new_type), "g-type-changed")
+  _WRAP_SIGNAL(void g_type_changed(int old_type, int new_type), "g-type-changed", no_default_handler)
 
   _WRAP_PROPERTY("id", Glib::ustring)
 };

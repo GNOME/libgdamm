@@ -19,11 +19,10 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libgdamm/datamodelrow.h>
+#include <glibmm/object.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
-_PINCLUDE(libgdamm/private/datamodelrow_p.h)
 
 namespace Gnome
 {
@@ -36,9 +35,9 @@ namespace Gda
  * @ingroup DataModels
  */
 class DataModelArray
- : public DataModelRow
+ : public Glib::Object
 {
-  _CLASS_GOBJECT(DataModelArray, GdaDataModelArray, GDA_DATA_MODEL_ARRAY, Gda::DataModelRow, GdaDataModelRow)
+  _CLASS_GOBJECT(DataModelArray, GdaDataModelArray, GDA_DATA_MODEL_ARRAY, Glib::Object, GObject)
 protected:
   explicit DataModelArray(int cols);
 
