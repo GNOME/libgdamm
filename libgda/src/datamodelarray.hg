@@ -20,6 +20,7 @@
  */
 
 #include <glibmm/object.h>
+#include <libgdamm/row.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -47,6 +48,8 @@ public:
   _WRAP_METHOD(void set_n_columns(int cols), gda_data_model_array_set_n_columns)
   _WRAP_METHOD(void clear(), gda_data_model_array_clear)
 
+  _WRAP_METHOD(Glib::RefPtr<Row> get_row (int row), gda_data_model_array_get_row, errthrow)
+    
   _WRAP_PROPERTY("n-columns", guint);
 };
 

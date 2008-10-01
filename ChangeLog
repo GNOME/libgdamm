@@ -1,5 +1,20 @@
 2008-10-01  Johannes Schmid  <johannes.schmid@openismus.com>
 
+	* libgda/src/column.hg:
+	* libgda/src/connection.hg:
+	* libgda/src/datamodel.ccg:
+	* libgda/src/datamodel.hg:
+	* libgda/src/datamodelarray.hg:
+	* libgda/src/dataproxy.hg:
+	* libgda/src/holder.ccg:
+	* libgda/src/holder.hg:
+	* libgda/src/libgda_signals.defs:
+	* libgda/src/metastruct.hg:
+	* libgda/src/set.hg:
+	Wrapped more missing methods and signals
+
+2008-10-01  Johannes Schmid  <johannes.schmid@openismus.com>
+
 	* libgda/libgdamm.h:
 	* libgda/src/column.ccg:
 	* libgda/src/column.hg:

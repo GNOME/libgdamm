@@ -53,7 +53,12 @@ public:
   _WRAP_METHOD(bool set_value(const Glib::ValueBase& value), gda_holder_set_value, errthrow)
   _WRAP_METHOD(bool set_value_str (const Glib::RefPtr<DataHandler>& dh, const Glib::ustring& value), gda_holder_set_value_str, errthrow)
   _WRAP_METHOD(bool take_value (Glib::ValueBase& value), gda_holder_take_value, errthrow)
-
+  _WRAP_METHOD_DOCS_ONLY(gda_holder_take_static_value)
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  Glib::ValueBase take_statis_value (const Glib::ValueBase& value);
+#else
+  Glib::ValueBase take_statis_value (const Glib::ValueBase& value, std::auto_ptr<Glib::Error>& error);
+#endif
   _WRAP_METHOD_DOCS_ONLY(gda_holder_get_default_value)
   Glib::ValueBase get_default_value();
   _WRAP_METHOD(void set_default_value(const Glib::ValueBase& value), gda_holder_set_default_value)

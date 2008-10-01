@@ -63,6 +63,10 @@ public:
   _WRAP_METHOD(MetaDbObject* get_db_object(const Glib::ValueBase& catalog, const Glib::ValueBase& schema, const Glib::ValueBase& name), gda_meta_struct_get_db_object)
   _WRAP_METHOD(MetaTableColumn* get_table_column(MetaTable* table, const Glib::ValueBase& col_name), gda_meta_struct_get_table_column)
   _WRAP_METHOD(Glib::ustring dump_as_graph(MetaGraphInfo info), gda_meta_struct_dump_as_graph, errthrow)
+  
+  // FIXME: Use C++ type
+  _WRAP_METHOD(GSList* get_all_db_objects(), gda_meta_struct_get_all_db_objects)
+    
   _WRAP_PROPERTY("features", guint)
 };
 

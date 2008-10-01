@@ -110,6 +110,10 @@ public:
   _WRAP_SIGNAL(void sample_changed(int sample_start, int sample_end), "sample-changed")
   _WRAP_SIGNAL(void sample_size_changed(int sample_size), "sample-size-changed")
   _WRAP_SIGNAL(void filter_changed(), "filter-changed", no_default_handler)
+  #m4 _CONVERSION(`gpointer',`Glib::Error*',`Glib::wrap($3)')
+  #m4 _CONVERSION(`Glib::Error*',`gpointer',`(gpointer) $3->gobj()')
+  _WRAP_SIGNAL(Glib::Error* validate_row_changes(int row,  int proxied_row), "validate-row-changes", no_default_handler)
+  _WRAP_SIGNAL(void row_changes_applied(int row,  int proxied_row), "row-changes-applied")
 };
 
 } // namespace Gda
