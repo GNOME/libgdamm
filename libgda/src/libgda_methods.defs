@@ -499,28 +499,6 @@
   )
 )
 
-(define-enum GraphType
-  (in-module "Gda")
-  (c-name "GdaGraphType")
-  (gtype-id "GDA_TYPE_GRAPH_TYPE")
-  (values
-    '("db-relations" "GDA_GRAPH_DB_RELATIONS")
-    '("query-joins" "GDA_GRAPH_QUERY_JOINS")
-    '("modelling" "GDA_GRAPH_MODELLING")
-  )
-)
-
-(define-flags QueryFieldState
-  (in-module "Gda")
-  (c-name "GdaQueryFieldState")
-  (gtype-id "GDA_TYPE_QUERY_FIELD_STATE")
-  (values
-    '("visible" "GDA_ENTITY_FIELD_VISIBLE")
-    '("invisible" "GDA_ENTITY_FIELD_INVISIBLE")
-    '("any" "GDA_ENTITY_FIELD_ANY")
-  )
-)
-
 (define-enum HolderError
   (in-module "Gda")
   (c-name "GdaHolderError")
@@ -777,6 +755,89 @@
 )
 
 
+;; From gda-attributes-manager.h
+
+(define-function gda_attributes_manager_new
+  (c-name "gda_attributes_manager_new")
+  (is-constructor-of "GdaAttributesManager")
+  (return-type "GdaAttributesManager*")
+  (parameters
+    '("gboolean" "for_objects")
+  )
+)
+
+(define-method free
+  (of-object "GdaAttributesManager")
+  (c-name "gda_attributes_manager_free")
+  (return-type "none")
+)
+
+(define-method set
+  (of-object "GdaAttributesManager")
+  (c-name "gda_attributes_manager_set")
+  (return-type "none")
+  (parameters
+    '("gpointer" "ptr")
+    '("const-gchar*" "att_name")
+    '("const-GValue*" "value")
+  )
+)
+
+(define-method set_full
+  (of-object "GdaAttributesManager")
+  (c-name "gda_attributes_manager_set_full")
+  (return-type "none")
+  (parameters
+    '("gpointer" "ptr")
+    '("const-gchar*" "att_name")
+    '("const-GValue*" "value")
+    '("GDestroyNotify" "destroy")
+  )
+)
+
+(define-method get
+  (of-object "GdaAttributesManager")
+  (c-name "gda_attributes_manager_get")
+  (return-type "const-GValue*")
+  (parameters
+    '("gpointer" "ptr")
+    '("const-gchar*" "att_name")
+  )
+)
+
+(define-method copy
+  (of-object "GdaAttributesManager")
+  (c-name "gda_attributes_manager_copy")
+  (return-type "none")
+  (parameters
+    '("gpointer*" "from")
+    '("GdaAttributesManager*" "to_mgr")
+    '("gpointer*" "to")
+  )
+)
+
+(define-method clear
+  (of-object "GdaAttributesManager")
+  (c-name "gda_attributes_manager_clear")
+  (return-type "none")
+  (parameters
+    '("gpointer" "ptr")
+  )
+)
+
+(define-method foreach
+  (of-object "GdaAttributesManager")
+  (c-name "gda_attributes_manager_foreach")
+  (return-type "none")
+  (parameters
+    '("gpointer" "ptr")
+    '("GdaAttributesManagerFunc" "func")
+    '("gpointer" "data")
+  )
+)
+
+
+
 ;; From gda-batch.h
 
 (define-function gda_batch_get_type
@@ -911,15 +972,15 @@
   (return-type "GdaColumn*")
 )
 
-(define-method get_title
+(define-method get_description
   (of-object "GdaColumn")
-  (c-name "gda_column_get_title")
+  (c-name "gda_column_get_description")
   (return-type "const-gchar*")
 )
 
-(define-method set_title
+(define-method set_description
   (of-object "GdaColumn")
-  (c-name "gda_column_set_title")
+  (c-name "gda_column_set_description")
   (return-type "none")
   (parameters
     '("const-gchar*" "title")
@@ -1028,6 +1089,25 @@
   (return-type "none")
   (parameters
     '("const-GValue*" "default_value")
+  )
+)
+
+(define-method get_attribute
+  (of-object "GdaColumn")
+  (c-name "gda_column_get_attribute")
+  (return-type "const-GValue*")
+  (parameters
+    '("const-gchar*" "attribute")
+  )
+)
+
+(define-method set_attribute
+  (of-object "GdaColumn")
+  (c-name "gda_column_set_attribute")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "attribute")
+    '("const-GValue*" "value")
   )
 )
 
@@ -1576,6 +1656,17 @@
     '("gint" "nb_filters")
   )
   (varargs #t)
+)
+
+(define-method get_meta_store_data_v
+  (of-object "GdaConnection")
+  (c-name "gda_connection_get_meta_store_data_v")
+  (return-type "GdaDataModel*")
+  (parameters
+    '("GdaConnectionMetaType" "meta_type")
+    '("GList*" "filters")
+    '("GError**" "error")
+  )
 )
 
 
@@ -3216,16 +3307,6 @@
   (return-type "GType")
 )
 
-(define-function gda_graph_type_get_type
-  (c-name "gda_graph_type_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_query_field_state_get_type
-  (c-name "gda_query_field_state_get_type")
-  (return-type "GType")
-)
-
 (define-function gda_holder_error_get_type
   (c-name "gda_holder_error_get_type")
   (return-type "GType")
@@ -3413,6 +3494,7 @@
   (return-type "GValue*")
   (parameters
     '("const-GValue*" "value")
+    '("gboolean*" "value_changed")
     '("GError**" "error")
   )
 )
@@ -3516,6 +3598,25 @@
   (of-object "GdaHolder")
   (c-name "gda_holder_get_bind")
   (return-type "GdaHolder*")
+)
+
+(define-method get_attribute
+  (of-object "GdaHolder")
+  (c-name "gda_holder_get_attribute")
+  (return-type "const-GValue*")
+  (parameters
+    '("const-gchar*" "attribute")
+  )
+)
+
+(define-method set_attribute
+  (of-object "GdaHolder")
+  (c-name "gda_holder_set_attribute")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "attribute")
+    '("const-GValue*" "value")
+  )
 )
 
 
@@ -3737,6 +3838,35 @@
 
 
 ;; From gda-meta-struct.h
+
+(define-method get_attribute
+  (of-object "GdaMetaTableColumn")
+  (c-name "gda_meta_table_column_get_attribute")
+  (return-type "const-GValue*")
+  (parameters
+    '("const-gchar*" "att_name")
+  )
+)
+
+(define-method set_attribute
+  (of-object "GdaMetaTableColumn")
+  (c-name "gda_meta_table_column_set_attribute")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "att_name")
+    '("const-GValue*" "value")
+  )
+)
+
+(define-method foreach_attribute
+  (of-object "GdaMetaTableColumn")
+  (c-name "gda_meta_table_column_foreach_attribute")
+  (return-type "none")
+  (parameters
+    '("GdaAttributesManagerFunc" "func")
+    '("gpointer" "data")
+  )
+)
 
 (define-function gda_meta_struct_get_type
   (c-name "gda_meta_struct_get_type")
@@ -4553,12 +4683,6 @@
     '("xmlNodePtr" "xml_spec")
     '("GError**" "error")
   )
-)
-
-(define-method get_spec
-  (of-object "GdaSet")
-  (c-name "gda_set_get_spec")
-  (return-type "gchar*")
 )
 
 (define-method set_holder_value

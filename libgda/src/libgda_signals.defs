@@ -587,6 +587,16 @@
   (when "first")
 )
 
+(define-signal attribute-changed
+  (of-object "GdaHolder")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("const-gchar*" "p0")
+    '("gpointer" "p1")
+  )
+)
+
 (define-signal validate-change
   (of-object "GdaHolder")
   (return-type "gpointer")
@@ -615,15 +625,6 @@
 )
 
 (define-property description
-  (of-object "GdaHolder")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property plugin
   (of-object "GdaHolder")
   (prop-type "GParamString")
   (docs "")
@@ -670,7 +671,7 @@
 
 (define-property g-type
   (of-object "GdaHolder")
-  (prop-type "GParamULong")
+  (prop-type "GParamGType")
   (docs "")
   (readable #t)
   (writable #t)
@@ -866,21 +867,14 @@
   (when "last")
 )
 
-(define-signal holder-plugin-changed
-  (of-object "GdaSet")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaHolder*" "p0")
-  )
-)
-
 (define-signal holder-attr-changed
   (of-object "GdaSet")
   (return-type "void")
   (when "first")
   (parameters
     '("GdaHolder*" "p0")
+    '("const-gchar*" "p1")
+    '("gpointer" "p2")
   )
 )
 

@@ -55,9 +55,9 @@ public:
   _WRAP_METHOD(bool take_value (Glib::ValueBase& value), gda_holder_take_value, errthrow)
   _WRAP_METHOD_DOCS_ONLY(gda_holder_take_static_value)
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  Glib::ValueBase take_statis_value (const Glib::ValueBase& value);
+  Glib::ValueBase take_static_value (const Glib::ValueBase& value, bool& value_changed);
 #else
-  Glib::ValueBase take_statis_value (const Glib::ValueBase& value, std::auto_ptr<Glib::Error>& error);
+  Glib::ValueBase take_static_value (const Glib::ValueBase& value, bool& value_changed, std::auto_ptr<Glib::Error>& error);
 #endif
   _WRAP_METHOD_DOCS_ONLY(gda_holder_get_default_value)
   Glib::ValueBase get_default_value();

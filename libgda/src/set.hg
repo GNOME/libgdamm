@@ -51,7 +51,6 @@ public:
   
   _WRAP_METHOD(Glib::RefPtr<Set> copy(), gda_set_copy)
 
-  _WRAP_METHOD(Glib::ustring get_spec(), gda_set_get_spec)
   _WRAP_METHOD_DOCS_ONLY(gda_set_get_holder_value)
   Glib::ValueBase get_holder_value(const Glib::ustring& holder_id);
   _WRAP_METHOD_DOCS_ONLY(gda_set_set_holder_value)
@@ -70,9 +69,8 @@ public:
   _WRAP_METHOD(SetGroup* get_group (const Glib::RefPtr<Holder>& param), gda_set_get_group)
   _WRAP_METHOD(SetNode* get_node (const Glib::RefPtr<Holder>& param), gda_set_get_node)
 
-  _WRAP_SIGNAL(void holder_attr_changed (const Glib::RefPtr<Holder>& holder), "holder-attr-changed")
+  // FIXME: _WRAP_SIGNAL(void holder_attr_changed (const Glib::RefPtr<Holder>& holder, const Glib::ustring& attr_name, const Glib::ValueBase& value), "holder-attr-changed")
   _WRAP_SIGNAL(void holder_changed (const Glib::RefPtr<Holder>& holder), "holder-changed")
-  _WRAP_SIGNAL(void holder_plugin_changed (const Glib::RefPtr<Holder>& holder), "holder-plugin-changed")
   _WRAP_SIGNAL(void public_data_changed (), "public-data-changed")
   #m4 _CONVERSION(`gpointer',`Glib::Error*',`Glib::wrap($3)')
   #m4 _CONVERSION(`Glib::Error*',`gpointer',`(gpointer) $3->gobj()')

@@ -42,7 +42,7 @@ bool Column::equal(const Glib::RefPtr<const Column>& src) const
   if(!src)
     return false;
 
-  const bool result = get_title() == src->get_title() &&
+  const bool result = get_description() == src->get_description() &&
                 get_name() == src->get_name() &&
                 get_dbms_type() == src->get_dbms_type() &&
                 get_g_type() == src->get_g_type() &&

@@ -30,16 +30,16 @@ namespace Gda
 {
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-Glib::ValueBase Holder::take_statis_value (const Glib::ValueBase& value)
+Glib::ValueBase Holder::take_static_value (const Glib::ValueBase& value, bool& value_changed)
 #else
-Glib::ValueBase Holder::take_statis_value (const Glib::ValueBase& value, std::auto_ptr<Glib::Error>& error)
+Glib::ValueBase Holder::take_static_value (const Glib::ValueBase& value, bool& value_changed, std::auto_ptr<Glib::Error>& error)
 #endif
 {
   GError* gerror = 0;
   Glib::ValueBase retval;
   const GValue* cvalue;
   //Note that the function does not return a new value, so we should not free it:
-  cvalue = gda_holder_take_static_value(gobj(), value.gobj(), &gerror);
+  cvalue = gda_holder_take_static_value(gobj(), value.gobj(), (gboolean*)&value_changed, &gerror);
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);

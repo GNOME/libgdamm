@@ -1,6 +1,17 @@
+2008-10-07  Johannes Schmid  <jschmid@openismus.com> 
+
+	* libgda/src/column.ccg:
+	* libgda/src/column.hg:
+	* libgda/src/holder.ccg:
+	* libgda/src/holder.hg:
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/libgda_signals.defs:
+	* libgda/src/set.hg:
+	Fixed build due to several API changes in libgda
+
 2008-10-07  Murray Cumming  <murrayc@murrayc.com>
 
-	* configure.in: Adde [] around LIBGDAMM_VERSION with AC_SUBST 
+	* configure.in: Added [] around LIBGDAMM_VERSION with AC_SUBST 
 	to avoid an odd error.
 
 2008-10-01  Johannes Schmid  <johannes.schmid@openismus.com>
