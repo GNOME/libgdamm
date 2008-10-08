@@ -112,9 +112,20 @@ AC_CHECK_PROGS(PERL, perl5 perl)
 #########################################################################
 #  Dependancy checks
 #########################################################################
-PKG_CHECK_MODULES(LIBGDAMM, glibmm-2.4 >= 2.12.8 libgda-4.0 >= 3.99.3)
+LIBGDA_REQUIRED=3.99.5
+PKG_CHECK_MODULES(LIBGDAMM, glibmm-2.4 >= 2.12.8 libgda-4.0 >= $LIBGDA_REQUIRED)
 AC_SUBST(LIBGDAMM_CFLAGS)
 AC_SUBST(LIBGDAMM_LIBS)
+
+PKG_CHECK_MODULES(LIBGDAMM_BDB, libgda-bdb-4.0 >= $LIBGDA_REQUIRED,
+                [have_bdb="yes"],
+                [have_bdb="no"])
+
+if test x$have_bdb = xyes; then
+  LIBGDAMM_CFLAGS="$LIBGDAMM_CFLAGS -DHAVE_BDB"
+fi
+
+AM_CONDITIONAL(HAVE_BDB, [test x$have_bdb = xyes])
 
 GLIBMM_PREFIX=`pkg-config --variable=prefix glibmm-2.4`
 GMM_PROCDIR=$GLIBMM_PREFIX/lib/glibmm-2.4/proc

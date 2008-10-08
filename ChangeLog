@@ -1,3 +1,9 @@
+2008-10-08  Johannes Schmid  <jschmid@openismus.com>
+
+	* configure.in:
+	* tools/extra_defs_gen/generate_defs_gda.cc:
+	Fix build when libgda-bdb-4.0 is not installed
+
 2008-10-07  Johannes Schmid  <jschmid@openismus.com> 
 
 	* libgda/src/column.ccg:

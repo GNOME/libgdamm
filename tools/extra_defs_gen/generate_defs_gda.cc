@@ -22,7 +22,6 @@
 #include "glibmm_generate_extra_defs/generate_extra_defs.h"
 #include <libgda/libgda.h>
 #include <sql-parser/gda-sql-parser.h>
-//#include <libgda/gda-server-recordset-model.h>
 
 int main (int argc, char *argv[])
 {
@@ -37,8 +36,10 @@ int main (int argc, char *argv[])
     << get_defs (GDA_TYPE_DATA_ACCESS_WRAPPER)
     << get_defs (GDA_TYPE_DATA_COMPARATOR)
     << get_defs (GDA_TYPE_DATA_HANDLER) 
-    << get_defs (GDA_TYPE_DATA_MODEL_ARRAY) 
-    << get_defs (GDA_TYPE_DATA_MODEL_BDB) 
+    << get_defs (GDA_TYPE_DATA_MODEL_ARRAY)
+#ifdef HAVE_BDB
+    << get_defs (GDA_TYPE_DATA_MODEL_BDB)
+#endif
     << get_defs (GDA_TYPE_DATA_MODEL_DIR)
     << get_defs (GDA_TYPE_DATA_MODEL) 
     << get_defs (GDA_TYPE_DATA_MODEL_IMPORT) 
