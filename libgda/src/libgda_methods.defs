@@ -209,6 +209,22 @@
 
 ;; Enumerations and flags ...
 
+(define-enum PrefixDir
+  (in-module "Gda")
+  (c-name "GdaPrefixDir")
+  (gtype-id "GDA_TYPE_PREFIX_DIR")
+  (values
+    '("no-dir" "GDA_NO_DIR")
+    '("bin-dir" "GDA_BIN_DIR")
+    '("sbin-dir" "GDA_SBIN_DIR")
+    '("data-dir" "GDA_DATA_DIR")
+    '("locale-dir" "GDA_LOCALE_DIR")
+    '("lib-dir" "GDA_LIB_DIR")
+    '("libexec-dir" "GDA_LIBEXEC_DIR")
+    '("etc-dir" "GDA_ETC_DIR")
+  )
+)
+
 (define-enum ConfigError
   (in-module "Gda")
   (c-name "GdaConfigError")
@@ -763,6 +779,8 @@
   (return-type "GdaAttributesManager*")
   (parameters
     '("gboolean" "for_objects")
+    '("GdaAttributesManagerSignal" "signal_func")
+    '("gpointer" "signal_data")
   )
 )
 
@@ -895,6 +913,24 @@
     '("GdaSet**" "out_params")
     '("GError**" "error")
   )
+)
+
+
+
+;; From gda-binreloc.h
+
+(define-function gda_gbr_init
+  (c-name "gda_gbr_init")
+  (return-type "none")
+)
+
+(define-function gda_gbr_get_file_path
+  (c-name "gda_gbr_get_file_path")
+  (return-type "gchar*")
+  (parameters
+    '("GdaPrefixDir" "where")
+  )
+  (varargs #t)
 )
 
 
@@ -2101,12 +2137,6 @@
 
 
 ;; From gda-data-model-extra.h
-
-(define-method signal_emit_changed
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_signal_emit_changed")
-  (return-type "none")
-)
 
 (define-method row_inserted
   (of-object "GdaDataModel")
@@ -4825,15 +4855,6 @@
   (of-object "GdaStatement")
   (c-name "gda_statement_serialize")
   (return-type "gchar*")
-)
-
-(define-function gda_statement_deserialize
-  (c-name "gda_statement_deserialize")
-  (return-type "GdaStatement*")
-  (parameters
-    '("const-gchar*" "str")
-    '("GError**" "error")
-  )
 )
 
 (define-method get_parameters

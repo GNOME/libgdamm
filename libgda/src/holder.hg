@@ -59,6 +59,12 @@ public:
 #else
   Glib::ValueBase take_static_value (const Glib::ValueBase& value, bool& value_changed, std::auto_ptr<Glib::Error>& error);
 #endif
+  _WRAP_METHOD(void set_attribute (const Glib::ustring& attribute, const Glib::ValueBase& value), gda_holder_set_attribute);
+  _WRAP_METHOD_DOCS_ONLY(gda_holder_get_attribute);
+  Glib::ValueBase get_attribute(Glib::ustring& attribute) const;
+
+  
+  
   _WRAP_METHOD_DOCS_ONLY(gda_holder_get_default_value)
   Glib::ValueBase get_default_value();
   _WRAP_METHOD(void set_default_value(const Glib::ValueBase& value), gda_holder_set_default_value)
@@ -83,7 +89,6 @@ public:
   _WRAP_PROPERTY("name", Glib::ustring)
   _WRAP_PROPERTY("not-null", bool)
   _WRAP_PROPERTY("simple-bind", Glib::RefPtr<Holder>)
-  _WRAP_PROPERTY("plugin", Glib::ustring)
   _WRAP_PROPERTY("source-column", int)
   _WRAP_PROPERTY("source-model", Glib::RefPtr<DataModel>)
 

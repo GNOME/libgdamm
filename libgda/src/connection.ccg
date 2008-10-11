@@ -128,6 +128,34 @@ int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd,
   return retval;
 }
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<Statement>& statement, const Glib::RefPtr<Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used)
+#else
+Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<Statement>& statement, const Glib::RefPtr<Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  GSList* params_usedc = NULL;
+  Glib::ustring retvalue = Glib::convert_return_gchar_ptr_to_ustring(gda_connection_statement_to_sql(gobj(), Glib::unwrap(statement), Glib::unwrap(params), ((GdaStatementSqlFlag)(flags)), &params_usedc, &(gerror)));
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  Glib::SListHandle< Glib::RefPtr<Holder> > params_usedcpp(params_usedc, Glib::OWNERSHIP_SHALLOW);
+  for (Glib::SListHandle< Glib::RefPtr<Holder> >::const_iterator i = params_usedcpp.begin();
+       i != params_usedcpp.end(); i++)
+  {
+    params_used.push_back(*i);
+  }
+  
+  return retvalue;
+
+}
+
 } //namespace Gda
 
 } //namespace Gnome

@@ -28,6 +28,14 @@ namespace Gnome
 
 namespace Gda
 {
+
+Glib::ValueBase Column::get_attribute(Glib::ustring& attribute) const
+{
+  const GValue* value = gda_column_get_attribute(const_cast<GdaColumn*>(gobj()), attribute.c_str());
+  Glib::ValueBase retval;
+  retval.init(value);
+  return retval;
+}
   
 Glib::ValueBase Column::get_default_value() const
 {

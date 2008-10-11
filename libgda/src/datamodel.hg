@@ -216,7 +216,6 @@ public:
   _WRAP_METHOD(void row_updated(int row), gda_data_model_row_updated)
   _WRAP_METHOD(void row_removed(int row), gda_data_model_row_removed)
   */
-  _WRAP_METHOD(void signal_emit_changed(), gda_data_model_signal_emit_changed)
 
   _WRAP_METHOD(void set_column_name (int col, const Glib::ustring& name), gda_data_model_set_column_name)
   _WRAP_METHOD(Glib::ustring get_column_name (int col), gda_data_model_get_column_name)      

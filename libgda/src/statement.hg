@@ -53,7 +53,6 @@ public:
   _WRAP_METHOD(Glib::RefPtr<Statement> copy(), gda_statement_copy)
   
   _WRAP_METHOD(Glib::ustring serialize(), gda_statement_serialize)
-  _WRAP_METHOD(static Glib::RefPtr<Statement> deserialize(const Glib::ustring& str), gda_statement_deserialize, errthrow)
   
   _WRAP_METHOD_DOCS_ONLY(gda_statement_get_parameters)
   #ifdef GLIBMM_EXCEPTIONS_ENABLED

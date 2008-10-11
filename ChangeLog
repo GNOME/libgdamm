@@ -1,3 +1,36 @@
+2008-10-11  Johannes Schmid  <jschmid@openismus.com>
+
+	* configure.in: Require libgda 3.99.6
+	* libgda/src/column.ccg:
+	* libgda/src/column.hg:
+	Wrapped set/get_attribte()
+	
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg:
+	Wrapped statement_to_sql() and get_meta_store_data()
+
+	* libgda/src/datamodel.hg:
+	Removed non-existing property
+	* libgda/src/holder.ccg:
+	* libgda/src/holder.hg:
+	Wrapped set/get_attribte()
+
+	* libgda/src/quarklist.ccg:
+	* libgda/src/quarklist.hg:
+	Wrapped foreach()
+	
+	* libgda/src/libgda_enums.defs:
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/libgda_others.defs:
+	* libgda/src/libgda_signals.defs:
+	Regenerated for new API version
+
+	* libgda/src/statement.hg:
+	Removed gda_statement_deserialize() (no longer in libgda)
+
+	* tools/m4/convert_libgdamm.m4:
+	Added some new conversions
+
 2008-10-08  Johannes Schmid  <jschmid@openismus.com>
 
 	* configure.in:

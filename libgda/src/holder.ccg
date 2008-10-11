@@ -67,6 +67,14 @@ Glib::ValueBase Holder::get_default_value()
   return retval;
 }
 
+Glib::ValueBase Holder::get_attribute(Glib::ustring& attribute) const
+{
+  const GValue* value = gda_holder_get_attribute(const_cast<GdaHolder*>(gobj()), attribute.c_str());
+  Glib::ValueBase retval;
+  retval.init(value);
+  return retval;
+}
+
 } /* namespace Gda */
 
 } /* namespace Gnome */

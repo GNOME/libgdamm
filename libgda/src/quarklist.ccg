@@ -21,11 +21,40 @@
  
 #include <libgda/gda-quark-list.h>
 
+namespace
+{
+static void quarklist_foreach_callback(gpointer ckey, gpointer cvalue, void* data)
+{
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  try
+  {
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+    Gnome::Gda::QuarkList::ForeachSlot& slot = *static_cast<Gnome::Gda::QuarkList::ForeachSlot*>(data);
+    Glib::ustring key(static_cast<gchar*>(ckey));
+    Glib::ustring value(static_cast<gchar*>(cvalue));
+
+    slot(key, value);
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  }
+  catch(...)
+  {
+    Glib::exception_handlers_invoke();
+  }
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+} 
+}
+
 namespace Gnome
 {
 
 namespace Gda
+{  
+
+void QuarkList::foreach(const QuarkList::ForeachSlot& slot)
 {
+  ForeachSlot slot_copy (slot);
+  gda_quark_list_foreach(gobj(), &quarklist_foreach_callback, &slot_copy);
+}
 
 } // namespace Gda
 

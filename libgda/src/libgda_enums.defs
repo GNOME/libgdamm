@@ -1,3 +1,20 @@
+;; From /usr/include/libgda-4.0/libgda/gda-binreloc.h
+
+(define-enum-extended PrefixDir
+  (in-module "Gda")
+  (c-name "GdaPrefixDir")
+  (values
+    '("no-dir" "GDA_NO_DIR" "0")
+    '("bin-dir" "GDA_BIN_DIR" "1")
+    '("sbin-dir" "GDA_SBIN_DIR" "2")
+    '("data-dir" "GDA_DATA_DIR" "3")
+    '("locale-dir" "GDA_LOCALE_DIR" "4")
+    '("lib-dir" "GDA_LIB_DIR" "5")
+    '("libexec-dir" "GDA_LIBEXEC_DIR" "6")
+    '("etc-dir" "GDA_ETC_DIR" "7")
+  )
+)
+
 ;; From /usr/include/libgda-4.0/libgda/gda-config.h
 
 (define-enum-extended ConfigError
@@ -285,26 +302,6 @@
     '("has-value-orig" "GDA_VALUE_ATTR_HAS_VALUE_ORIG" "1 << 7")
     '("no-modif" "GDA_VALUE_ATTR_NO_MODIF" "1 << 8")
     '("unused" "GDA_VALUE_ATTR_UNUSED" "1 << 9")
-  )
-)
-
-(define-enum-extended GraphType
-  (in-module "Gda")
-  (c-name "GdaGraphType")
-  (values
-    '("db-relations" "GDA_GRAPH_DB_RELATIONS" "0")
-    '("query-joins" "GDA_GRAPH_QUERY_JOINS" "1")
-    '("modelling" "GDA_GRAPH_MODELLING" "2")
-  )
-)
-
-(define-flags-extended QueryFieldState
-  (in-module "Gda")
-  (c-name "GdaQueryFieldState")
-  (values
-    '("visible" "GDA_ENTITY_FIELD_VISIBLE" "1 << 0")
-    '("invisible" "GDA_ENTITY_FIELD_INVISIBLE" "1 << 1")
-    '("any" "GDA_ENTITY_FIELD_ANY" "0x1")
   )
 )
 
