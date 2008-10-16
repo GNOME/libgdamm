@@ -1,3 +1,24 @@
+2008-10-16  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/libgdamm/Makefile.am:
+	* libgda/libgdamm/value_tools.h:
+	Added some inline methods for GValue conversions
+	
+	* libgda/src/Makefile_list_of_hg.am_fragment:	
+	* libgda/src/error.*
+	Wrapped GdaError boxed type
+
+	* libgda/src/dataproxy.hg:
+	* libgda/src/set.hg:
+	* libgda/src/holder.hg
+	Fixed some signals
+
+	* libgda/src/libgda_signals.defs:
+	Edited by hand to fix some wrongly detected signals
+	
+	* tools/m4/convert_libgdamm.m4:
+	Added some new conversions for GError and GdaError
+
 2008-10-11  Johannes Schmid  <jschmid@openismus.com>
 
 	* configure.in: Require libgda 3.99.6

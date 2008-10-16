@@ -20,6 +20,7 @@
  */
 
 #include <libgdamm/datahandler.h>
+#include <libgdamm/error.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -94,7 +95,10 @@ public:
 
   _WRAP_SIGNAL(void changed(), "changed")
   _WRAP_SIGNAL(void source_changed(), "source-changed")
+  _WRAP_SIGNAL(Error validate_change(Glib::ValueBase value), "validate-change", no_default_handler)
+  _WRAP_SIGNAL(void attribute_changed (Glib::ustring attr_name, Glib::ValueBase value), "attribute-changed", no_default_handler)
 
+		
 };
 
 } // namespace Gda

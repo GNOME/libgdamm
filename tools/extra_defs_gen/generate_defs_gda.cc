@@ -42,7 +42,7 @@ int main (int argc, char *argv[])
 #endif
     << get_defs (GDA_TYPE_DATA_MODEL_DIR)
     << get_defs (GDA_TYPE_DATA_MODEL) 
-    << get_defs (GDA_TYPE_DATA_MODEL_IMPORT) 
+    << get_defs (GDA_TYPE_DATA_MODEL_IMPORT)
     << get_defs (GDA_TYPE_DATA_MODEL_ITER) 
     << get_defs (GDA_TYPE_DATA_PROXY) 
     << get_defs (GDA_TYPE_HOLDER)

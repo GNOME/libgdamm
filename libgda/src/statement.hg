@@ -80,7 +80,7 @@ public:
                                 std::auto_ptr<Glib::Error>& error);
   #endif //GLIBMM_EXCEPTIONS_ENABLED
 
-  _WRAP_METHOD(SqlStatementType get_statement_type(), gda_statement_get_statement_type)
+	_WRAP_METHOD(SqlStatementType get_statement_type(), gda_statement_get_statement_type)
   _WRAP_METHOD(bool is_useless() const, gda_statement_is_useless)
   _WRAP_METHOD(bool check_structure() const, gda_statement_check_structure, errthrow)
   _WRAP_METHOD(bool check_validity(const Glib::RefPtr<Connection>& cnc) const, gda_statement_check_validity, errthrow)

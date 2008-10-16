@@ -20,9 +20,12 @@
  */
 
 #include <libgdamm/holder.h>
+#include <libgdamm/value_tools.h>
+#include <libgdamm/error.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
+_PINCLUDE(libgda/gda-error.h)
 
 namespace Gnome
 {
@@ -68,14 +71,12 @@ public:
   _WRAP_METHOD(SetSource* get_source (const Glib::RefPtr<Holder>& param), gda_set_get_source)
   _WRAP_METHOD(SetGroup* get_group (const Glib::RefPtr<Holder>& param), gda_set_get_group)
   _WRAP_METHOD(SetNode* get_node (const Glib::RefPtr<Holder>& param), gda_set_get_node)
-
+		
   _WRAP_SIGNAL(void holder_changed (const Glib::RefPtr<Holder>& holder), "holder-changed")
   _WRAP_SIGNAL(void public_data_changed (), "public-data-changed")
-  #m4 _CONVERSION(`gpointer',`Glib::Error*',`Glib::wrap($3)')
-  #m4 _CONVERSION(`Glib::Error*',`gpointer',`(gpointer) $3->gobj()')
-  _WRAP_SIGNAL(Glib::Error* validate_set(), "validate-set", no_default_handler)
-//  _WRAP_SIGNAL(Glib::Error* validate_holder_change(const Glib::RefPtr<Holder>& holder,Glib::ValueBase value), "validate-holder-change", no_default_handler)
-//  _WRAP_SIGNAL(void holder_attr_changed (const Glib::RefPtr<Set>& set, const Glib::RefPtr<Holder>& holder, const Glib::ustring& attr_name, const Glib::ValueBase& value), "holder-attr-changed", no_default_handler)
+  _WRAP_SIGNAL(Error validate_set(), "validate-set", no_default_handler)
+  _WRAP_SIGNAL(Error validate_holder_change(const Glib::RefPtr<Holder>& holder, Glib::ValueBase value), "validate-holder-change", no_default_handler)
+  _WRAP_SIGNAL(void holder_attr_changed (const Glib::RefPtr<Holder>& holder, Glib::ustring attr_name, Glib::ValueBase value), "holder-attr-changed", no_default_handler)
      
   _WRAP_PROPERTY("description", Glib::ustring)
   _WRAP_PROPERTY("id", Glib::ustring)

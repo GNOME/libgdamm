@@ -77,7 +77,7 @@
   )
 )
 
-(define-property system-filename
+(define-property user-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
   (docs "")
@@ -86,7 +86,7 @@
   (construct-only #f)
 )
 
-(define-property user-filename
+(define-property system-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
   (docs "")
@@ -513,7 +513,7 @@
 
 (define-signal validate-row-changes
   (of-object "GdaDataProxy")
-  (return-type "gpointer")
+  (return-type "GError*")
   (when "last")
   (parameters
     '("gint" "p0")
@@ -587,12 +587,22 @@
   (when "first")
 )
 
+(define-signal attribute-changed
+  (of-object "GdaHolder")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("const-gchar*" "p0")
+    '("GValue*" "p1")
+  )
+)
+
 (define-signal validate-change
   (of-object "GdaHolder")
-  (return-type "gpointer")
+  (return-type "GError*")
   (when "last")
   (parameters
-    '("gpointer" "p0")
+    '("GValue*" "p0")
   )
 )
 
@@ -843,27 +853,18 @@
 
 (define-signal validate-holder-change
   (of-object "GdaSet")
-  (return-type "gpointer")
+  (return-type "GError*")
   (when "last")
   (parameters
     '("GdaHolder*" "p0")
-    '("gpointer" "p1")
+    '("GValue*" "p1")
   )
 )
 
 (define-signal validate-set
   (of-object "GdaSet")
-  (return-type "gpointer")
+  (return-type "GError*")
   (when "last")
-)
-
-(define-signal holder-plugin-changed
-  (of-object "GdaSet")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("GdaHolder*" "p0")
-  )
 )
 
 (define-signal holder-attr-changed
@@ -872,6 +873,8 @@
   (when "first")
   (parameters
     '("GdaHolder*" "p0")
+    '("const-gchar*" "p1")
+    '("GValue*" "p2")
   )
 )
 
