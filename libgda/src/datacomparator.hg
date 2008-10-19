@@ -1,0 +1,62 @@
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* datacomparator.h
+ *
+ * Copyright 2006 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or(at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+#include <libgdamm/datamodel.h>
+#include <libgda/gda-data-comparator.h>
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+typedef GdaDiff Diff;
+	
+/** FIXME
+ *
+ * @ingroup DataHandlers
+ */
+class DataComparator : public Glib::Object
+{
+  _CLASS_GOBJECT(DataComparator, GdaDataComparator, GDA_DATA_COMPARATOR, Glib::Object, GObject)
+protected:
+  _WRAP_CTOR(DataComparator (const Glib::RefPtr<DataModel>& old_model, const Glib::RefPtr<DataModel>& new_model), gda_data_comparator_new)
+public:
+  _WRAP_CREATE(const Glib::RefPtr<DataModel>& old_model, const Glib::RefPtr<DataModel>& new_model)
+
+  _WRAP_METHOD(void set_key_for_columns (const Glib::ArrayHandle<int>& col_numbers, int nb_cols), gda_data_comparator_set_key_columns)
+  _WRAP_METHOD(bool compute_diff(), gda_data_comparator_compute_diff, errthrow)
+  _WRAP_METHOD(int get_n_diffs(), gda_data_comparator_get_n_diffs)
+  _WRAP_METHOD(const Diff* get_diff(int pos), gda_data_comparator_get_diff)
+		
+  _WRAP_PROPERTY("old-model", Glib::RefPtr<DataModel>)
+  _WRAP_PROPERTY("new-model", Glib::RefPtr<DataModel>)
+
+#m4 _CONVERSION(`gpointer',`Diff*',`(Diff*)($3)')
+#m4 _CONVERSION(`Diff*',`gpointer',`(gpointer)($3)')
+    _WRAP_SIGNAL(bool diff_computed(Diff* diff), "diff-computed", no_default_handler)
+};
+
+} // namespace Gda
+} // namespace Gnome

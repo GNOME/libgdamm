@@ -1,3 +1,12 @@
+2008-10-19  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/datacomparator.ccg:
+	* libgda/src/datacomparator.hg:
+	* tools/m4/convert_libgdamm.m4:
+	
+	Wrapped GdaDataComparator
+
 2008-10-16  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/libgdamm/Makefile.am:

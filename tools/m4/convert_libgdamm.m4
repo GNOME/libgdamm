@@ -8,6 +8,8 @@ _EQUAL(GdaSetGroup*, SetGroup*)
 _EQUAL(GdaSetSource*, SetSource*)
 _EQUAL(GdaSetNode*, SetNode*)
 _EQUAL(GdaThreaderFunc, ThreaderFunc)
+_EQUAL(GdaDiff*, Diff*)
+_EQUAL(const GdaDiff*, const Diff*)
 
 
 _CONVERSION(`GdaConnectionEvent*',`Glib::RefPtr<ConnectionEvent>',`Glib::wrap($3)')
@@ -137,6 +139,8 @@ _CONVERSION(`const Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >&',`GList*',
 
 # Arrays
 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3)')
+_CONVERSION(`const Glib::ArrayHandle<int>&',`gint*', `(gint*)$3.data()')
+
 
 # For signals:
 _CONVERSION(`GdaConnection*',`const Glib::RefPtr<Connection>&',`Glib::wrap($3)')
