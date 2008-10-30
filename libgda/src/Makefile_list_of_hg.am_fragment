@@ -12,7 +12,8 @@ files_hg = connection.hg connectionevent.hg \
      serverprovider.hg serveroperation.hg transactionstatus.hg \
      set.hg row.hg column.hg holder.hg statement.hg sqlparser.hg \
      batch.hg metastore.hg metastruct.hg config.hg threader.hg \
-     blobop.hg blob.hg quarklist.hg error.hg datacomparator.hg
+     blobop.hg blob.hg quarklist.hg error.hg datacomparator.hg \
+     dataaccesswrapper.hg
 
 
 

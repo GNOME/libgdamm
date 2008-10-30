@@ -1,5 +1,13 @@
 2008-10-30  Johannes Schmid  <jschmid@openismus.com>
 
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/dataaccesswrapper.ccg:
+	* libgda/src/dataaccesswrapper.hg:
+	
+	Wrapped GdaDataAccessWrapper
+
+2008-10-30  Johannes Schmid  <jschmid@openismus.com>
+
 	* libgda/libgdamm/value_tools.h:
 	* libgda/src/libgda_methods.defs:
 	* libgda/src/serverprovider.hg:
