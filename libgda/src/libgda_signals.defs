@@ -513,7 +513,7 @@
 
 (define-signal validate-row-changes
   (of-object "GdaDataProxy")
-  (return-type "GError*")
+  (return-type "GdaError*")
   (when "last")
   (parameters
     '("gint" "p0")
@@ -573,6 +573,98 @@
   (construct-only #f)
 )
 
+;; From GdaDataSelect
+
+(define-property connection
+  (of-object "GdaDataSelect")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property prepared-stmt
+  (of-object "GdaDataSelect")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property model-usage
+  (of-object "GdaDataSelect")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property store-all-rows
+  (of-object "GdaDataSelect")
+  (prop-type "GParamBoolean")
+  (docs "Tells if model has analysed all the rows")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property exec-params
+  (of-object "GdaDataSelect")
+  (prop-type "GParamObject")
+  (docs "GdaSet used when the SELECT statement was executed")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property insert-stmt
+  (of-object "GdaDataSelect")
+  (prop-type "GParamObject")
+  (docs "INSERT Statement to be executed to add data")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property update-stmt
+  (of-object "GdaDataSelect")
+  (prop-type "GParamObject")
+  (docs "UPDATE Statement to be executed to update data")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property delete-stmt
+  (of-object "GdaDataSelect")
+  (prop-type "GParamObject")
+  (docs "DELETE Statement to be executed to remove data")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property select-stmt
+  (of-object "GdaDataSelect")
+  (prop-type "GParamObject")
+  (docs "SELECT statement which was executed to yield to the data model")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property auto-reset
+  (of-object "GdaDataSelect")
+  (prop-type "GParamBoolean")
+  (docs "Automatically re-run the SELECT statement if any parameter has chanegd since it was first executed")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GdaHolder
 
 (define-signal source-changed
@@ -599,7 +691,7 @@
 
 (define-signal validate-change
   (of-object "GdaHolder")
-  (return-type "GError*")
+  (return-type "GdaError*")
   (when "last")
   (parameters
     '("GValue*" "p0")
@@ -853,7 +945,7 @@
 
 (define-signal validate-holder-change
   (of-object "GdaSet")
-  (return-type "GError*")
+  (return-type "GdaError*")
   (when "last")
   (parameters
     '("GdaHolder*" "p0")
@@ -863,7 +955,7 @@
 
 (define-signal validate-set
   (of-object "GdaSet")
-  (return-type "GError*")
+  (return-type "GdaError*")
   (when "last")
 )
 

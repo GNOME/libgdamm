@@ -1,5 +1,14 @@
 2008-10-30  Johannes Schmid  <jschmid@openismus.com>
 
+	* libgda/src/error.hg:
+	Don't put typedef in generated file but in hg instead...
+	
+	* libgda/src/libgda_signals.defs:
+	* tools/extra_defs_gen/generate_defs_gda.cc:
+	Regenerated signals/properties
+
+2008-10-30  Johannes Schmid  <jschmid@openismus.com>
+
 	* libgda/src/Makefile_list_of_hg.am_fragment:
 	* libgda/src/dataaccesswrapper.ccg:
 	* libgda/src/dataaccesswrapper.hg:
