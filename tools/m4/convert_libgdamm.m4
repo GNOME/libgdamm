@@ -139,7 +139,7 @@ _CONVERSION(`const Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >&',`GList*',
 
 # Arrays
 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3)')
-_CONVERSION(`const Glib::ArrayHandle<int>&',`gint*', `(gint*)$3.data()')
+_CONVERSION(`const Glib::ArrayHandle<int>&',`const gint*', `$3.data()')
 
 
 # For signals:

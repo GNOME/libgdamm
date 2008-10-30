@@ -41,3 +41,4 @@ inline Glib::ValueBase gvalue_to_valuebase (const GValue* value)
 } // namespace Gnome
 
 #endif // VALUE_TOOLS_H
+

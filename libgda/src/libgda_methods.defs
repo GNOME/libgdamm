@@ -686,16 +686,6 @@
   )
 )
 
-(define-flags SetHint
-  (in-module "Gda")
-  (c-name "GdaSetHint")
-  (gtype-id "GDA_TYPE_SET_HINT")
-  (values
-    '("read-only" "GDA_SET_HOLDER_READ_ONLY")
-    '("hide" "GDA_SET_HOLDER_HIDE")
-  )
-)
-
 (define-enum StatementError
   (in-module "Gda")
   (c-name "GdaStatementError")
@@ -1897,7 +1887,7 @@
   (c-name "gda_data_comparator_set_key_columns")
   (return-type "none")
   (parameters
-    '("gint*" "col_numbers")
+    '("const-gint*" "col_numbers")
     '("gint" "nb_cols")
   )
 )
@@ -3056,6 +3046,15 @@
   )
 )
 
+(define-method compute_columns_attributes
+  (of-object "GdaDataSelect")
+  (c-name "gda_data_select_compute_columns_attributes")
+  (return-type "gboolean")
+  (parameters
+    '("GError**" "error")
+  )
+)
+
 
 
 ;; From gda-debug-macros.h
@@ -3382,11 +3381,6 @@
   (return-type "GType")
 )
 
-(define-function gda_set_hint_get_type
-  (c-name "gda_set_hint_get_type")
-  (return-type "GType")
-)
-
 (define-function gda_server_operation_type_get_type
   (c-name "gda_server_operation_type_get_type")
   (return-type "GType")
@@ -3434,6 +3428,15 @@
 
 (define-function gda_xa_transaction_error_get_type
   (c-name "gda_xa_transaction_error_get_type")
+  (return-type "GType")
+)
+
+
+
+;; From gda-error.h
+
+(define-function gda_error_get_type
+  (c-name "gda_error_get_type")
   (return-type "GType")
 )
 
@@ -4534,9 +4537,9 @@
   )
 )
 
-(define-method get_data_handler_gtype
+(define-method get_data_handler_g_type
   (of-object "GdaServerProvider")
-  (c-name "gda_server_provider_get_data_handler_gtype")
+  (c-name "gda_server_provider_get_data_handler_g_type")
   (return-type "GdaDataHandler*")
   (parameters
     '("GdaConnection*" "cnc")
