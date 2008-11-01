@@ -1,3 +1,37 @@
+2008-11-01  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/libgdamm/Makefile.am:
+	* libgda/libgdamm/value_tools.h (deleted):
+	* libgda/libgdamm/value.h (added):
+	* libgda/libgdamm/value.cc (added):	
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/connection.hg:
+	* libgda/src/datahandler.ccg:
+	* libgda/src/datahandler.hg:
+	* libgda/src/datamodel.ccg:
+	* libgda/src/datamodel.hg:
+	* libgda/src/datamodeliter.ccg:
+	* libgda/src/datamodeliter.hg:
+	* libgda/src/holder.ccg:
+	* libgda/src/holder.hg:
+	* libgda/src/libgda_signals.defs:
+	* libgda/src/set.ccg:
+	* libgda/src/set.hg:
+	* libgda/src/xatransaction.ccg:
+	* libgda/src/xatransaction.hg:
+	* tools/extra_defs_gen/generate_defs_gda.cc:
+	* tools/m4/convert_libgdamm.m4:
+	
+	Readded GdaValue and converted classes to use it
+
+2008-10-30  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/libgda_signals.defs:
+	* libgda/src/xatransaction.ccg:
+	* libgda/src/xatransaction.hg:
+	* tools/extra_defs_gen/generate_defs_gda.cc:
+
 2008-10-30  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/Makefile_list_of_hg.am_fragment:

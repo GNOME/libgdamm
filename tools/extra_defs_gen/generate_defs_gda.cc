@@ -56,6 +56,7 @@ int main (int argc, char *argv[])
     << get_defs (GDA_TYPE_STATEMENT)
     << get_defs (GDA_TYPE_THREADER)
     << get_defs (GDA_TYPE_TRANSACTION_STATUS)
+    << get_defs (GDA_TYPE_XA_TRANSACTION)
     << get_defs (GDA_TYPE_SQL_PARSER)
     << std::endl;
     return 0;

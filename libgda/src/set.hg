@@ -20,8 +20,8 @@
  */
 
 #include <libgdamm/holder.h>
-#include <libgdamm/value_tools.h>
 #include <libgdamm/error.h>
+#include <libgdamm/value.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -54,8 +54,7 @@ public:
   
   _WRAP_METHOD(Glib::RefPtr<Set> copy(), gda_set_copy)
 
-  _WRAP_METHOD_DOCS_ONLY(gda_set_get_holder_value)
-  Glib::ValueBase get_holder_value(const Glib::ustring& holder_id);
+  _WRAP_METHOD (Value get_holder_value(const Glib::ustring& holder_id), gda_set_get_holder_value);
   _WRAP_METHOD_DOCS_ONLY(gda_set_set_holder_value)
   template<class T> bool set_holder_value(const Glib::ustring& id, T value);
   
@@ -75,8 +74,8 @@ public:
   _WRAP_SIGNAL(void holder_changed (const Glib::RefPtr<Holder>& holder), "holder-changed")
   _WRAP_SIGNAL(void public_data_changed (), "public-data-changed")
   _WRAP_SIGNAL(Error validate_set(), "validate-set", no_default_handler)
-  _WRAP_SIGNAL(Error validate_holder_change(const Glib::RefPtr<Holder>& holder, Glib::ValueBase value), "validate-holder-change", no_default_handler)
-  _WRAP_SIGNAL(void holder_attr_changed (const Glib::RefPtr<Holder>& holder, Glib::ustring attr_name, Glib::ValueBase value), "holder-attr-changed", no_default_handler)
+  _WRAP_SIGNAL(Error validate_holder_change(const Glib::RefPtr<Holder>& holder, Value value), "validate-holder-change", no_default_handler)
+  _WRAP_SIGNAL(void holder_attr_changed (const Glib::RefPtr<Holder>& holder, Glib::ustring attr_name, Value value), "holder-attr-changed", no_default_handler)
      
   _WRAP_PROPERTY("description", Glib::ustring)
   _WRAP_PROPERTY("id", Glib::ustring)

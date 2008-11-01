@@ -80,7 +80,7 @@ create_table (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr<Gda::
 void
 display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr<Gda::SqlParser>& parser)
 {
-	const Glib::ustring sql = "SELECT ref, name, price FROM products";
+  const Glib::ustring sql = "SELECT ref, name, price FROM products";
   Glib::ustring remain;
 	Glib::RefPtr<Gda::Statement> stmt;
   try
@@ -93,7 +93,7 @@ display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc, const Glib:
     return;
   }
   Glib::RefPtr<Gda::Set> params;
-	Glib::RefPtr<Gda::DataModel> data_model;
+  Glib::RefPtr<Gda::DataModel> data_model;
   try
   {
     data_model = cnc->statement_execute_select (stmt, params);

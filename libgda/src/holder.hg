@@ -21,6 +21,7 @@
 
 #include <libgdamm/datahandler.h>
 #include <libgdamm/error.h>
+#include <libgdamm/value.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -48,27 +49,17 @@ public:
   
   _WRAP_METHOD(GType get_g_type() const, gda_holder_get_g_type)
   _WRAP_METHOD(Glib::ustring get_id() const, gda_holder_get_id)
-  _WRAP_METHOD_DOCS_ONLY(gda_holder_get_value)
-  Glib::ValueBase get_value();
+  _WRAP_METHOD(Value get_value(), gda_holder_get_value)
   _WRAP_METHOD(Glib::ustring get_value_str(const Glib::RefPtr<DataHandler>& dh), gda_holder_get_value_str)
-  _WRAP_METHOD(bool set_value(const Glib::ValueBase& value), gda_holder_set_value, errthrow)
+  _WRAP_METHOD(bool set_value(const Value& value), gda_holder_set_value, errthrow)
   _WRAP_METHOD(bool set_value_str (const Glib::RefPtr<DataHandler>& dh, const Glib::ustring& value), gda_holder_set_value_str, errthrow)
-  _WRAP_METHOD(bool take_value (Glib::ValueBase& value), gda_holder_take_value, errthrow)
-  _WRAP_METHOD_DOCS_ONLY(gda_holder_take_static_value)
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
-  Glib::ValueBase take_static_value (const Glib::ValueBase& value, bool& value_changed);
-#else
-  Glib::ValueBase take_static_value (const Glib::ValueBase& value, bool& value_changed, std::auto_ptr<Glib::Error>& error);
-#endif
-  _WRAP_METHOD(void set_attribute (const Glib::ustring& attribute, const Glib::ValueBase& value), gda_holder_set_attribute);
-  _WRAP_METHOD_DOCS_ONLY(gda_holder_get_attribute);
-  Glib::ValueBase get_attribute(Glib::ustring& attribute) const;
-
+  _WRAP_METHOD(bool take_value (Value value), gda_holder_take_value, errthrow)
+  _WRAP_METHOD(Value take_static_value (const Value& value, bool& value_changed), gda_holder_take_static_value, errthrow)
+  _WRAP_METHOD(void set_attribute (const Glib::ustring& attribute, const Value& value), gda_holder_set_attribute);
+  _WRAP_METHOD(Value get_attribute(const Glib::ustring& attribute) const, gda_holder_get_attribute); 
   
-  
-  _WRAP_METHOD_DOCS_ONLY(gda_holder_get_default_value)
-  Glib::ValueBase get_default_value();
-  _WRAP_METHOD(void set_default_value(const Glib::ValueBase& value), gda_holder_set_default_value)
+  _WRAP_METHOD(Value get_default_value(), gda_holder_get_default_value)
+  _WRAP_METHOD(void set_default_value(const Value& value), gda_holder_set_default_value)
   _WRAP_METHOD(bool set_value_to_default(), gda_holder_set_value_to_default)
   _WRAP_METHOD(bool value_is_default(), gda_holder_value_is_default)
 
@@ -95,8 +86,8 @@ public:
 
   _WRAP_SIGNAL(void changed(), "changed")
   _WRAP_SIGNAL(void source_changed(), "source-changed")
-  _WRAP_SIGNAL(Error validate_change(Glib::ValueBase value), "validate-change", no_default_handler)
-  _WRAP_SIGNAL(void attribute_changed (Glib::ustring attr_name, Glib::ValueBase value), "attribute-changed", no_default_handler)
+  _WRAP_SIGNAL(Error validate_change(Value value), "validate-change", no_default_handler)
+  _WRAP_SIGNAL(void attribute_changed (Glib::ustring attr_name, Value value), "attribute-changed", no_default_handler)
 
 		
 };

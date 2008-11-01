@@ -77,7 +77,7 @@
   )
 )
 
-(define-property user-filename
+(define-property system-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
   (docs "")
@@ -86,7 +86,7 @@
   (construct-only #f)
 )
 
-(define-property system-filename
+(define-property user-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
   (docs "")
@@ -1062,6 +1062,26 @@
 )
 
 ;; From GdaTransactionStatus
+
+;; From GdaXaTransaction
+
+(define-property format-id
+  (of-object "GdaXaTransaction")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property transaction-id
+  (of-object "GdaXaTransaction")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
 
 ;; From GdaSqlParser
 

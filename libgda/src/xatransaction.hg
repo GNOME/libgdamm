@@ -1,0 +1,67 @@
+// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+
+/* xatransaction.h
+ *
+ * Copyright 2006 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or(at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+_DEFS(libgdamm,libgda)
+_PINCLUDE(glibmm/private/object_p.h)
+
+#include <libgdamm/connection.h>
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+class XaTransaction : public Glib::Object
+{
+  _CLASS_GOBJECT(XaTransaction, GdaXaTransaction, GDA_XA_TRANSACTION, Glib::Object, GObject)
+protected:
+  _WRAP_CTOR(XaTransaction(guint32 format_id, const Glib::ustring& transaction_id), gda_xa_transaction_new)
+public:
+  _WRAP_CREATE(guint32 format_id, const Glib::ustring& transaction_id)
+  
+  _WRAP_METHOD(bool register_connection (const Glib::RefPtr<Connection>& cnc, const Glib::ustring& branch), gda_xa_transaction_register_connection, errthrow)
+  _WRAP_METHOD(void unregister_connection (const Glib::RefPtr<Connection>& cnc), gda_xa_transaction_unregister_connection)
+
+  _WRAP_METHOD(bool begin(), gda_xa_transaction_begin, errthrow)
+  _WRAP_METHOD(bool rollback(), gda_xa_transaction_rollback, errthrow)
+  typedef std::list<Glib::RefPtr<const Connection> > ConnectionList;
+  _WRAP_METHOD_DOCS_ONLY (gda_xa_transaction_commit)  
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  bool commit(ConnectionList& cncs_to_recover);
+  #else
+  bool commit(ConnectionList& cncs_to_recover, std::auto_ptr<Glib::Error>& error);
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  _WRAP_METHOD_DOCS_ONLY (gda_xa_transaction_commit_recovered)  
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  bool commit_recovered(ConnectionList& cncs_to_recover);
+  #else
+  bool commit_recovered(ConnectionList& cncs_to_recover, std::auto_ptr<Glib::Error>& error);
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+  
+  _WRAP_PROPERTY("transaction-id", Glib::ustring)
+  _WRAP_PROPERTY("format-id", uint)
+};
+
+} // namespace Gda
+} // namespace Gnome
+

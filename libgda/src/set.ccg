@@ -29,14 +29,6 @@ namespace Gnome
 namespace Gda
 {
 
-Glib::ValueBase Set::get_holder_value(const Glib::ustring& holder_id)
-{
-  Glib::ValueBase retval;
-  const GValue* value = gda_set_get_holder_value(gobj(), holder_id.c_str());
-  retval.init(value);
-  return retval;
-}
-
 template<class T> bool Set::set_holder_value(const Glib::ustring& id, T value)
 {
   return gda_set_set_holder_value (gobj(), id.c_str(), value);

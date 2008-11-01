@@ -11,8 +11,8 @@ sublib_cflags		= $(LIBGDAMM_CFLAGS)
 sublib_topdir = libgda
 
 
-files_extra_h	= init.h wrap_init.h value_tools.h
-files_extra_cc = init.cc
+files_extra_h	= init.h wrap_init.h value.h
+files_extra_cc = init.cc value.cc
 
 include $(top_srcdir)/build_shared/Makefile_build_gensrc.am_fragment
 

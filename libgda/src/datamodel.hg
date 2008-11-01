@@ -23,6 +23,7 @@
 #include <glibmm/object.h>
 #include <libgdamm/datamodeliter.h>
 #include <libgdamm/column.h>
+#include <libgdamm/value.h>
 #include <libgda/gda-data-model.h>
 
 _DEFS(libgdamm,libgda)
@@ -43,27 +44,8 @@ _WRAP_ENUM(DataModelIOFormat, GdaDataModelIOFormat)
 
 typedef GdaValueAttribute ValueAttribute;
 
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
-struct TypeTraitsValueBase
-{
-  typedef Glib::ValueBase   CppType;
-  typedef const GValue*  CType;
-  typedef GValue*        CTypeNonConst;
-
-  static CType to_c_type(const CppType value) {return value.gobj();};
-  static CppType to_cpp_type(CType value) 
-  {
-    Glib::ValueBase base;
-    base.init(value);
-    return base;
-  }
-  static void release_c_type(CType value) {g_free(const_cast<GValue*>(value));};
-};
-#endif
-
-
-typedef Glib::ListHandle<Glib::ValueBase, TypeTraitsValueBase> ValueList;
-typedef Glib::SListHandle<Glib::ValueBase, TypeTraitsValueBase> ValueSList;
+typedef Glib::ListHandle<Value, ValueTraits> ValueList;
+typedef Glib::SListHandle<Value, ValueTraits> ValueSList;
 
 /** @defgroup DataModels Data Models
  */
@@ -117,18 +99,8 @@ public:
   _WRAP_METHOD(Glib::ustring get_column_title(int col) const, gda_data_model_get_column_title)
   _WRAP_METHOD(void set_column_title(int col, const Glib::ustring& title), gda_data_model_set_column_title)
 
-  _WRAP_METHOD_DOCS_ONLY(gda_data_model_get_value_at)
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
-  Glib::ValueBase get_value_at(int col, int row) const;
-#else
-  Glib::ValueBase get_value_at(int col, int row, std::auto_ptr<Glib::Error>& error) const;
-#endif
-  _WRAP_METHOD_DOCS_ONLY (gda_data_model_get_typed_value_at);
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
-  Glib::ValueBase get_typed_value_at (int col, int row, GType expected_type, bool nullok) const;
-#else
-  Glib::ValueBase get_typed_value_at (int col, int row, GType expected_type, bool nullok, std::auto_ptr<Glib::Error>& error) const;
-#endif  
+  _WRAP_METHOD(Value get_value_at(int col, int row) const, gda_data_model_get_value_at, errthrow);
+  _WRAP_METHOD(Value get_typed_value_at (int col, int row, GType expected_type, bool nullok) const, gda_data_model_get_typed_value_at, errthrow);
   _WRAP_METHOD(ValueAttribute get_attributes_at(int col, int row), gda_data_model_get_attributes_at)
 
   _WRAP_METHOD(Glib::RefPtr<DataModelIter> create_iter(), gda_data_model_create_iter)
@@ -136,7 +108,7 @@ public:
   //Ignore private functions:
   _IGNORE(gda_data_model_move_iter_at_row, gda_data_model_move_iter_next, gda_data_model_move_iter_prev)
 
-  _WRAP_METHOD(bool set_value_at(int col, int row, const Glib::ValueBase& value), gda_data_model_set_value_at, errthrow)
+  _WRAP_METHOD(bool set_value_at(int col, int row, const Value& value), gda_data_model_set_value_at, errthrow)
 
   #m4 _CONVERSION(`const ValueList&',`const GList*',`$3.data()')
   #m4 _CONVERSION(`const ValueList&',`GList*',`$3.data()')
@@ -155,7 +127,7 @@ public:
   #m4 _CONVERSION(`const ValueSList&', `GSList*', `$3.data()')
   _WRAP_METHOD(int get_row_from_values(const ValueSList& values, const Glib::ArrayHandle<int>& cols_index), gda_data_model_get_row_from_values)
 
-  _WRAP_METHOD(void send_hint(DataModelHint hint, const Glib::ValueBase& hint_value), gda_data_model_send_hint)
+  _WRAP_METHOD(void send_hint(DataModelHint hint, const Value& hint_value), gda_data_model_send_hint)
 
 
   /** Exports data contained in @a model to the a string; the format is specified using the @a format argument.

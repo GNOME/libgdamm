@@ -11,6 +11,7 @@ _EQUAL(GdaThreaderFunc, ThreaderFunc)
 _EQUAL(GdaDiff*, Diff*)
 _EQUAL(const GdaDiff*, const Diff*)
 
+_CONVERSION(`bool&',`gboolean*',`(gboolean*)(&($3))')
 
 _CONVERSION(`GdaConnectionEvent*',`Glib::RefPtr<ConnectionEvent>',`Glib::wrap($3)')
 _CONVERSION(`const Glib::RefPtr<ConnectionEvent>&', `GdaConnectionEvent*', __CONVERT_REFPTR_TO_P)
@@ -74,11 +75,6 @@ _CONVERSION(`const DataModelIndex&', `const GdaDataModelIndex*', `($3).gobj()')
 _CONVERSION(`const GObject*',`Glib::RefPtr<const Glib::Object>',`Glib::wrap(const_cast<GObject*>($3))')
 _CONVERSION(`const Glib::RefPtr<Glib::Object>&', `const GObject*', `($3)->gobj()')
 
-_CONVERSION(`Glib::ValueBase&', `GValue*', `($3).gobj()')
-_CONVERSION(`Glib::ValueBase', `GValue*', `($3).gobj()')
-_CONVERSION(`const Glib::ValueBase&', `const GValue*', `($3).gobj()')
-_CONVERSION(`GValue*', `Glib::ValueBase', `gvalue_to_valuebase($3)')
-
 _CONVERSION(`GdaRow*', `const Glib::RefPtr<Row>',  `Glib::wrap($3)')
 _CONVERSION(`GdaRow*', `const Glib::RefPtr<const Row>',  `Glib::wrap($3)')
 
@@ -140,6 +136,13 @@ _CONVERSION(`const Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >&',`GList*',
 # Arrays
 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3)')
 _CONVERSION(`const Glib::ArrayHandle<int>&',`const gint*', `$3.data()')
+
+# Value
+_CONVERSION(`const Value&', `GValue*', `const_cast<GValue*>(($3).gobj())')
+_CONVERSION(`const Value&', `const GValue*', `($3).gobj()')
+_CONVERSION(`Value', `GValue*', `($3).gobj()')
+_CONVERSION(`GValue*', `Value', `$2($3)')
+_CONVERSION(`const GValue*', `Value', `$2($3)')
 
 
 # For signals:
