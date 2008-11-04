@@ -33,28 +33,29 @@ void
 run_sql_non_select (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr<Gda::SqlParser>& parser, const Glib::ustring sql)
 {
 
-	Glib::RefPtr<Gda::Statement> stmt;
+  Glib::RefPtr<Gda::Statement> stmt;
   Glib::ustring remain;
   try
   {
     stmt =  parser->parse_string (sql, remain);
   }
-  catch (Glib::Error& err)
+  catch(const Glib::Error& err)
   {
     std::cerr << "Error: " << err.what() << std::endl;
     return;
   }
-	if (!remain.empty()) 
-		std::cout << "REMAINS: "<< remain << std::endl;
 
-  int nrows;
+  if(!remain.empty()) 
+    std::cout << "REMAINS: "<< remain << std::endl;
+
+  int nrows = 0;
   try
   {
     Glib::RefPtr<Gda::Set> params;
     Glib::RefPtr<Gda::Set> last_inserted_row;    
     nrows = cnc->statement_execute_non_select (stmt, params, last_inserted_row);
   }
-  catch (Glib::Error& err)
+  catch(const Glib::Error& err)
   {
     std::cerr << "Error: " << err.what() << std::endl;
     return;
@@ -65,15 +66,15 @@ run_sql_non_select (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr
  * Create a "products" table
  */
 void
-create_table (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr<Gda::SqlParser>& parser)
+create_table(const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr<Gda::SqlParser>& parser)
 {
-	run_sql_non_select (cnc, parser, "DROP table IF EXISTS products");
+  run_sql_non_select (cnc, parser, "DROP table IF EXISTS products");
   run_sql_non_select (cnc, parser, "CREATE table products (ref string not null primary key, "
                                                            "name string not null, price real)");
-	run_sql_non_select (cnc, parser, "INSERT INTO products VALUES ('p1', 'chair', 2.0)");
-	run_sql_non_select (cnc, parser, "INSERT INTO products VALUES ('p2', 'table', 5.0)");
+  run_sql_non_select (cnc, parser, "INSERT INTO products VALUES ('p1', 'chair', 2.0)");
+  run_sql_non_select (cnc, parser, "INSERT INTO products VALUES ('p2', 'table', 5.0)");
 
-	run_sql_non_select (cnc, parser, "INSERT INTO products VALUES ('p3', 'glass', 1.1)");
+  run_sql_non_select (cnc, parser, "INSERT INTO products VALUES ('p3', 'glass', 1.1)");
 }
 
 /* 
@@ -84,44 +85,47 @@ display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc, const Glib:
 {
   const Glib::ustring sql = "SELECT ref, name, price FROM products";
   Glib::ustring remain;
-	Glib::RefPtr<Gda::Statement> stmt;
+  Glib::RefPtr<Gda::Statement> stmt;
   try
   {
     stmt =  parser->parse_string (sql, remain);
   }
-  catch (Glib::Error& err)
+  catch(const Glib::Error& err)
   {
     std::cerr << "Error: " << err.what() << std::endl;
     return;
   }
+
   Glib::RefPtr<Gda::Set> params;
   Glib::RefPtr<Gda::DataModel> data_model;
   try
   {
-		//data_model = cnc->statement_execute_select (stmt, params);
-		// C equivalent to above call (more or less what libgdamm does internally):
-		// This returns a non-Null model
-		GdaDataModel* model = gda_connection_statement_execute_select(cnc->gobj(), Glib::unwrap(stmt), Glib::unwrap(params), NULL);
-		if (model == NULL)
-		{
-			std::cout << "GdaDataModel == NULL" << std::endl;
-		}
-		g_message ("Type: %s", G_OBJECT_TYPE_NAME (model));
-		// This return 0 instead of a Gda::DataModel object
-		data_model = Glib::wrap(model);
-		if (!data_model)
-		{
-			std::cout << "Gda::DataModel == 0" << std::endl;
-			return;
-		}
+    //data_model = cnc->statement_execute_select (stmt, params);
+    // C equivalent to above call (more or less what libgdamm does internally):
+    // This returns a non-Null model
+    GdaDataModel* model = gda_connection_statement_execute_select(cnc->gobj(), Glib::unwrap(stmt), Glib::unwrap(params), NULL);
+    if(model == NULL)
+    {
+      std::cout << "GdaDataModel == NULL" << std::endl;
+    }
+
+    g_message ("Type: %s", G_OBJECT_TYPE_NAME (model));
+    // This return 0 instead of a Gda::DataModel object
+    data_model = Glib::wrap(model);
+    if(!data_model)
+    {
+      std::cout << "Gda::DataModel == 0" << std::endl;
+      return;
+    }
   }
-  catch (Glib::Error& err)
+  catch(const Glib::Error& err)
   { 
     std::cout << "Could not get the contents of the 'products' table: " 
       << err.what() << std::endl;
     return;
   }
-	std::cout << data_model->dump_as_string() << std::endl;
+
+  std::cout << data_model->dump_as_string() << std::endl;
 }
 
 int main (int argc, char** argv)
@@ -133,15 +137,16 @@ int main (int argc, char** argv)
     cnc = Gda::Connection::open_from_string ("SQLite", "DB_DIR=.;DB_NAME=example_db", "",
                                                                            Gda::CONNECTION_OPTIONS_NONE);
   }
-  catch (Glib::Error& err)
+  catch(const Glib::Error& err)
   {
     std::cerr << err.what() << std::endl;
     return 1;
   }
+
   /* create an SQL parser */
-	Glib::RefPtr<Gda::SqlParser> parser = cnc->create_parser();
-	if (!parser) /* @cnc doe snot provide its own parser => use default one */
-		parser = Gda::SqlParser::create();
+  Glib::RefPtr<Gda::SqlParser> parser = cnc->create_parser();
+  if(!parser) /* @cnc doe snot provide its own parser => use default one */
+    parser = Gda::SqlParser::create();
   
   create_table(cnc, parser);
   display_products_contents(cnc, parser);
