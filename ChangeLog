@@ -1,3 +1,13 @@
+2008-11-05  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/dataaccesswrapper.hg:
+	* libgda/src/datacomparator.hg:
+	* libgda/src/datamodelarray.hg:
+	* libgda/src/datamodelimport.hg:
+	* libgda/src/dataselect.hg: Derive from DataModel and 
+	use _IMPLEMENTS_INTERFACE() so that dynamic_cast<> works 
+	when using wrap() on one of these C types.
+
 2008-11-04  Johannes Schmid  <jschmid@openismus.com>
 
 	* examples/simple/main.cc:

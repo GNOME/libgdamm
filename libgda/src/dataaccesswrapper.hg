@@ -37,11 +37,15 @@ namespace Gda
  *
  * @ingroup Connection
  */
-class DataAccessWrapper : public Glib::Object
+class DataAccessWrapper
+ : public Glib::Object,
+   public DataModel
 {
   _CLASS_GOBJECT(DataAccessWrapper, GdaDataAccessWrapper, GDA_DATA_ACCESS_WRAPPER, Glib::Object, GObject)
+  _IMPLEMENTS_INTERFACE(DataModel)
 protected:
   _WRAP_CTOR(DataAccessWrapper(const Glib::RefPtr<DataModel>& model), gda_data_access_wrapper_new)
+
 public:
   _WRAP_CREATE(const Glib::RefPtr<DataModel>& model)
   

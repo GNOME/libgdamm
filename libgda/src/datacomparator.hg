@@ -37,11 +37,15 @@ typedef GdaDiff Diff;
  *
  * @ingroup DataHandlers
  */
-class DataComparator : public Glib::Object
+class DataComparator
+ : public Glib::Object,
+   public DataModel
 {
   _CLASS_GOBJECT(DataComparator, GdaDataComparator, GDA_DATA_COMPARATOR, Glib::Object, GObject)
+  _IMPLEMENTS_INTERFACE(DataModel)
 protected:
   _WRAP_CTOR(DataComparator (const Glib::RefPtr<DataModel>& old_model, const Glib::RefPtr<DataModel>& new_model), gda_data_comparator_new)
+
 public:
   _WRAP_CREATE(const Glib::RefPtr<DataModel>& old_model, const Glib::RefPtr<DataModel>& new_model)
 

@@ -37,9 +37,12 @@ namespace Gda
  *
  * @ingroup Connection
  */
-class DataSelect : public Glib::Object
+class DataSelect
+ : public Glib::Object,
+   public DataModel
 {
   _CLASS_GOBJECT(DataSelect, GdaDataSelect, GDA_DATA_SELECT, Glib::Object, GObject)
+  _IMPLEMENTS_INTERFACE(DataModel)
 public:
   _WRAP_METHOD (bool set_row_selection_condition_sql (const Glib::ustring& sql_where), gda_data_select_set_row_selection_condition_sql, errthrow)
   // This is internal only

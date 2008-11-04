@@ -20,6 +20,7 @@
  */
 
 #include <glibmm/object.h>
+#include <libgdamm/datamodel.h>
 #include <libgdamm/row.h>
 
 _DEFS(libgdamm,libgda)
@@ -36,9 +37,11 @@ namespace Gda
  * @ingroup DataModels
  */
 class DataModelArray
- : public Glib::Object
+ : public Glib::Object,
+   public DataModel
 {
   _CLASS_GOBJECT(DataModelArray, GdaDataModelArray, GDA_DATA_MODEL_ARRAY, Glib::Object, GObject)
+  _IMPLEMENTS_INTERFACE(DataModel)
 protected:
   explicit DataModelArray(int cols);
 
