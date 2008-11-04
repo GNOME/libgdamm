@@ -22,6 +22,8 @@
 #include <libgdamm.h>
 #include <iostream>
 
+#include <sql-parser/gda-sql-parser.h>
+
 using namespace Gnome;
 
 /*
@@ -96,7 +98,22 @@ display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc, const Glib:
   Glib::RefPtr<Gda::DataModel> data_model;
   try
   {
-    data_model = cnc->statement_execute_select (stmt, params);
+		//data_model = cnc->statement_execute_select (stmt, params);
+		// C equivalent to above call (more or less what libgdamm does internally):
+		// This returns a non-Null model
+		GdaDataModel* model = gda_connection_statement_execute_select(cnc->gobj(), Glib::unwrap(stmt), Glib::unwrap(params), NULL);
+		if (model == NULL)
+		{
+			std::cout << "GdaDataModel == NULL" << std::endl;
+		}
+		g_message ("Type: %s", G_OBJECT_TYPE_NAME (model));
+		// This return 0 instead of a Gda::DataModel object
+		data_model = Glib::wrap(model);
+		if (!data_model)
+		{
+			std::cout << "Gda::DataModel == 0" << std::endl;
+			return;
+		}
   }
   catch (Glib::Error& err)
   { 
@@ -104,7 +121,7 @@ display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc, const Glib:
       << err.what() << std::endl;
     return;
   }
-  std::cout << data_model->dump_as_string() << std::endl;
+	std::cout << data_model->dump_as_string() << std::endl;
 }
 
 int main (int argc, char** argv)
