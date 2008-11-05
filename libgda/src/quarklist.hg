@@ -44,7 +44,7 @@ class QuarkList
    
   /** For instance, 
    * void on_foreach(Gtk::Widget* widget);
-   */
+   */      
   typedef sigc::slot<void, Glib::ustring, Glib::ustring> ForeachSlot;
   _WRAP_METHOD_DOCS_ONLY(gda_quark_list_foreach)
   void foreach(const ForeachSlot& slot);

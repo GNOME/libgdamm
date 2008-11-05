@@ -38,7 +38,24 @@ _WRAP_ENUM (SqlStatementType, GdaSqlStatementType)
 _WRAP_ENUM (StatementModelUsage, GdaStatementModelUsage)
 _WRAP_ENUM (StatementSqlFlag, GdaStatementSqlFlag)
 
-/** Container for several values
+/** Single SQL statement
+ *
+ *  The Gda::Statement represents a single SQL statement (multiple statements 
+ * can be groupped in a GdaBatch object).
+ *
+ * A Gda::Statement can either be built "manually" by building a Gda::SqlStatement
+ * structure, or from an SQL statement using a Gda::SqlParser object.
+ * A GdaConnection can use a GdaStatement to:
+ *
+ *  * prepare it for a future execution, the preparation step involves converting the 
+ *     GdaStatement object into a structure used by the database's own API, see 
+ *     Gda::Connection::statement_prepare()
+ *  * execute it using Gda::Connection::statement_execute_select() if it is known
+ *     that the statement is a selection statement, Gda::Connection::statement_execute_non_select() 
+ *     if it is not a selection statement, or Gda::Connection::statement_execute()
+ *     when the type of expected result is unknown.
+ * Note that it is possible to use the same Gda::Statement object at the same time 
+ * with several Gda::Connection objects. 
  *
  * @ingroup Connection
  */

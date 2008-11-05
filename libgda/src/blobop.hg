@@ -33,6 +33,8 @@ class Blob;
 /** Blobs handling. 
  * This object is a base class for individual database providers which support BLOB types.
  * It supports operations to read and write data in a BLOB.
+ *
+ * @ingroup DataHandlers
  */
 class BlobOp : public Glib::Object
 {

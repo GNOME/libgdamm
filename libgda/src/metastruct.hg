@@ -41,7 +41,22 @@ typedef GdaMetaTableColumn MetaTableColumn;
 
 class MetaStore;
 
-/** Container for several values
+/** In memory representation of some database objects
+ *
+ * The Gda::MetaStruct object reads data from a Gda::MetaStore object and creates 
+ * an easy to use in memory representation for some database objects. For example
+ * one can easily analyse the columns of a table (or its foreign keys) using a 
+ * Gda::MetaStruct.
+ * When created, the new Gda::MetaStruct object is empty (it does not have any 
+ * information about any database object). Information about database objects is 
+ * computed upon request using the gda_meta_struct_complement() method. Information 
+ * about individual database objects is represented by GdaMetaDbObject structures, 
+ * which can be obtained using get_db_object() or get_all_db_objects().
+ * 
+ * Note that the Gda::MetaDbObject structures may change or may be removed or 
+ * replaced by others, so it not advised to keep pointers to these structures: 
+ * pointers to these structures should be considered valid as long as 
+ * complement() and other similar functions have not been called. 
  *
  * @ingroup Connection
  */

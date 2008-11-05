@@ -33,9 +33,13 @@ namespace Gda
 
 typedef Glib::SListHandle<Glib::RefPtr<const Statement> > StatementSList;
 
-/** Container for several values
+/** Multiple SQL statements groupped
  *
- * @ingroup Connection
+ * The Gda::Batch object represents one or more SQL statements (as Gda::Statement objects) in a single object.
+ * A Gda::Batch can either be built "manually" by assembling together several Gda::Statement objects, or from an 
+ * SQL string using a Gda::SqlParser object.
+ *
+ * @ingroup DataHandlers
  */
 class Batch : public Glib::Object
 {

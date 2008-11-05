@@ -34,6 +34,11 @@ namespace Gda
 
 /** An implementation of DataModel based on an array.
  *
+ * The Gda::DataModelArray object is a data model which internally uses a GArray to index all its rows (represented as Gda::Row objects).
+ * In this data model, all the data is stored in memory, which can be a memory limitation if the number of rows is huge.
+ * This type of data model is easy to use to store some temporary data, and has a random access mode (any value can be accessed at 
+ * any time without the need for an iterator). 
+ *
  * @ingroup DataModels
  */
 class DataModelArray

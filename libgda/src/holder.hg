@@ -34,9 +34,12 @@ namespace Gda
 
 class DataModel;
 
-/** Container for several values
+/** Container for a single Gda::Value
  *
- * @ingroup Connection
+ * The GdaHolder is a container for a single Gda::Value value. It also specifies 
+ * various attributes of the contained value (default value, ...)
+ *
+ * @ingroup DataHandlers
  */
 class Holder : public Glib::Object
 {

@@ -31,6 +31,17 @@ namespace Gnome
 namespace Gda
 {
 
+/** Row for a Gda::DataModelArray object
+ *
+ * The GdaDataModelArray object uses GdaRow to store each row of data. 
+ * Each GdaRow has the same number of GValue values (equal to the number of 
+ * columns of the data model).
+ * 
+ * As a side note, the GdaRow object is also used internally by the implementation
+ * of the data models returned when executing a SELECT statement.
+ * 
+ * @ingroup DataHandlers
+ */
 class Row : public Glib::Object
 {
 protected:

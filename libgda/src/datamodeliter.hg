@@ -34,7 +34,35 @@ namespace Gda
 
 _WRAP_GERROR(DataModelIterError, GdaDataModelIterError, GDA_DATA_MODEL_ITER_ERROR)
 
-// TODO
+/** Data model iterator
+  *
+  * A Gda::DataModelIter object is used to iterate through the rows of a Gda::DataModel. 
+  * If the data model is accessible in a random access way then any number of Gda::DataModelIter 
+  * objects can be created on the same data model, and if the data model only supports a cursor 
+  * based access then only one Gda::DataModelIter can be created. In any case creating a 
+  * Gda::DataModelIter should be done using the create_iter() method. 
+  *
+  * When a Gda::DataModelIter is valid (that is when it points to an existing row in the data model it iterates through), 
+  * the individual values (corresponding to each column of the data model, at the pointer row) 
+  * can be accessed using the get_value_at() or 
+  * get_value_for_field() methods (or in the same way Gda::Set's values are 
+  * accessed as Gda::DataModelIter inherits the Gda::Set).
+  *
+  * Right after being created, a Gda::DataModelIter is invalid (does not point to any row of its data model).
+  * To read the first row of the data model, use the move_next() method. 
+  * Calling this method several times will move the iterator forward, up to when the data model has 
+  * no more rows and the Gda::DataModelIter will be declared invalid (and move_next() 
+  * has returned FALSE). Note that at this point, the number of rows in the data model will be known.
+  *
+  * If the data model supports it, a Gda::DataModelIter can be moved backwards using the 
+  * move_prev() method. However if the iterator is invalid, moving backwards will 
+  * not be possible (on the contrary to move_next() which moves to the first row).
+  *
+  * The move_at_row() method, if the iterator can be moved both forward and backwards,
+  * can move the iterator to a specific row (sometimes faster than moving it forward or backwards a number of times).
+  *
+  * @ingroup DataModels
+  */
 class DataModelIter
  : public Set
 {

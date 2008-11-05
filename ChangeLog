@@ -1,3 +1,29 @@
+2008-11-05  Johannes Schmid  <jschmid@openismus.com>
+
+	* examples/simple/main.cc:
+	Remove debugging code
+	
+	* libgda/src/batch.hg:
+	* libgda/src/blobop.hg:
+	* libgda/src/dataaccesswrapper.hg:
+	* libgda/src/datamodelarray.hg:
+	* libgda/src/datamodeliter.hg:
+	* libgda/src/dataselect.hg:
+	* libgda/src/error.hg:
+	* libgda/src/holder.hg:
+	* libgda/src/libgda_docs.xml:
+	* libgda/src/metastore.hg:
+	* libgda/src/metastruct.hg:
+	* libgda/src/row.hg:
+	* libgda/src/serveroperation.hg:
+	* libgda/src/serverprovider.hg:
+	* libgda/src/set.hg:
+	* libgda/src/sqlparser.hg:
+	* libgda/src/statement.hg:
+	* libgda/src/threader.hg:
+	* libgda/src/xatransaction.hg:
+	Added class documentation (and regenerated docs). Still needs some cleanup.
+
 2008-11-05  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/dataaccesswrapper.hg:

@@ -33,7 +33,20 @@ namespace Gda
 
 typedef GdaMetaContext MetaContext;
 
-/** Container for several values
+/** Dictionary object
+ *
+ * Previous versions of Libgda relied on an XML based file to store dictionary 
+ * information, such as the database's schema (tables, views, etc) and various 
+ * other information. The problems were that it was difficult for an application
+ * to integrate its own data into the dictionary and that there were some 
+ * performances problems as the XML file needed to be parsed (and converted into 
+ * its own in-memory structure) before any data could be read out of it.
+ *
+ * The new dictionary now relies on a database structure to store its data 
+ * (see the database schema section for a detailled description). The actual 
+ * database can be a single file (using an SQLite database), an entirely in 
+ * memory database (also using an SQLite database), or a more conventional backend 
+ * such as a PostgreSQL database for a shared dictionary on a server. 
  *
  * @ingroup Connection
  */

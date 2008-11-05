@@ -40,7 +40,13 @@ typedef GdaSetNode SetNode;
 
 /** Container for several values
  *
- * @ingroup Connection
+ * The Gda::Set object is a container for several values (as Gda::Holder objects), 
+ * which also offers different classifications of the group of GdaHolder values 
+ * (see get_node(), get_source() or get_group()).
+ * It is possible to control the values a Gda::Holder can have in the Gda::Set by 
+ * connecting to the signal_before_holder_change() signal.
+ * 
+ * @ingroup DataHandlers
  */
 class Set : public Glib::Object
 {

@@ -40,7 +40,14 @@ class Connection;
 /* TODO: Is this appropriate. Investigate how it is used. */
 typedef GdaServerProviderInfo ServerProviderInfo;
 
-//TODO:
+/** Base class for all the DBMS providers
+  *
+  * The GdaServerProvider class is a virtual class which all the DBMS providers
+  * must inherit, and implement its virtual mathods.
+  *
+  * @ingroup Connections
+  */
+
 class ServerProvider : public Glib::Object
 {
   _CLASS_GOBJECT(ServerProvider, GdaServerProvider, GDA_SERVER_PROVIDER, Glib::Object, GObject)

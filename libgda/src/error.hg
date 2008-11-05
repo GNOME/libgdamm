@@ -32,6 +32,9 @@ namespace Gda
 	
 /** This objects is the boxed type of a Glib::Error
  *
+ * This is used to pass Glib::Error savely through signals. You can use
+ * the gerror() method to access the underlying Glib::Error.
+ * 
  * @ingroup DataHandlers
  */
 class Error

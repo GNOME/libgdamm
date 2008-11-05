@@ -35,7 +35,7 @@ namespace Gda
  * The Gda::DataAccessWrapper object simply wraps around another Gda::DataModel data model 
  * object and allows data to be accessed in a random way while remaining memory efficient as much as possible.
  *
- * @ingroup Connection
+ * @ingroup DataModels
  */
 class DataAccessWrapper
  : public Glib::Object,

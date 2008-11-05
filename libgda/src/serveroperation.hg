@@ -46,6 +46,10 @@ typedef GdaServerOperationNode ServerOperationNode;
 
 /** Handles any DDL query in an abstract way.
  *
+ * Basically this object is just a named data store: it can store named values, 
+ * the values being organized hirarchically. A value can be read from its path
+ * (similar to a Unix file path) using the get_value_at() method.
+ * 
  * @ingroup DDL
  */
 class ServerOperation : public Glib::Object

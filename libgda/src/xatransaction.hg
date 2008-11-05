@@ -30,6 +30,11 @@ namespace Gnome
 namespace Gda
 {
 
+/** Distributed transaction manager
+  *
+  * @ingroup Connections
+  */
+  
 class XaTransaction : public Glib::Object
 {
   _CLASS_GOBJECT(XaTransaction, GdaXaTransaction, GDA_XA_TRANSACTION, Glib::Object, GObject)
