@@ -30,6 +30,12 @@ namespace Gnome
 namespace Gda
 {
 
+/** Quark lists (lists of KEY=VALUE's)
+  *
+  * Parameter lists are used primary in the parsing and creation of connection strings.
+  *
+  * @ingroup DataHandlers
+  */
 class QuarkList
 {
   _CLASS_BOXEDTYPE(QuarkList, GdaQuarkList, gda_quark_list_new, gda_quark_list_copy, gda_quark_list_free)

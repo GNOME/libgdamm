@@ -47,10 +47,10 @@ _WRAP_ENUM (StatementSqlFlag, GdaStatementSqlFlag)
  * structure, or from an SQL statement using a Gda::SqlParser object.
  * A GdaConnection can use a GdaStatement to:
  *
- *  * prepare it for a future execution, the preparation step involves converting the 
+ *  - prepare it for a future execution, the preparation step involves converting the 
  *     GdaStatement object into a structure used by the database's own API, see 
  *     Gda::Connection::statement_prepare()
- *  * execute it using Gda::Connection::statement_execute_select() if it is known
+ *  - execute it using Gda::Connection::statement_execute_select() if it is known
  *     that the statement is a selection statement, Gda::Connection::statement_execute_non_select() 
  *     if it is not a selection statement, or Gda::Connection::statement_execute()
  *     when the type of expected result is unknown.

@@ -51,11 +51,11 @@ _WRAP_ENUM(SqlParserMode, GdaSqlParserMode)
  * for the next statement in the string to parse (and create a STATEMENT_UNKNOWN statement).
  * 
  * The Gda::SqlParser object parses and analyses SQL statements and reports the 
- *following statement types:
+ * following statement types:
  *
- * * SELECT (and COMPOUND select), INSERT, UPDATE and DELETE SQL statements should be completely parsed.
+ * - SELECT (and COMPOUND select), INSERT, UPDATE and DELETE SQL statements should be completely parsed.
  *
- * * Transaction related statements (corresponding to the BEGIN, COMMIT, 
+ * - Transaction related statements (corresponding to the BEGIN, COMMIT, 
  *   ROLLBACK, SAVEPOINT, ROLLBACK SAVEPOINT and DELETE SAVEPOINT) are parsed and a 
  *   minimalist structure is created to extract some information (that structure is not enough per-se to re-create the complete SQL statement).
  *
@@ -73,8 +73,8 @@ _WRAP_ENUM(SqlParserMode, GdaSqlParserMode)
  * providers if the Gda::SqlParser is created using Gda::ServerProvider::create_parser() 
  * but for portability reasons it's better to avoid them):
  *
- * * ##NAME[::TYPE[::NULL]]: for a variable named NAME with the optional type TYPE (which can be a GType name or a custom database type name), and with the optional "::NULL" to instruct that the variable can be NULL.
- * * ## \/* name:NAME [type:TYPE] [nullok:[TRUE|FALSE]] [descr:DESCR] *\/ for a variable named NAME with the optional type TYPE (which can be a GType name or a custom database type name), with the optional "nullok" attribute and an optional description DESCR. Note that the NAME, TYPE and DESCR literals here must be quoted (simple or double quotes) if they include non alphanumeric characters, and that there must always be at least a space between the ## and the \/* ... *\/.
+ * - ##NAME[::TYPE[::NULL]]: for a variable named NAME with the optional type TYPE (which can be a GType name or a custom database type name), and with the optional "::NULL" to instruct that the variable can be NULL.
+ * - ## \/* name:NAME [type:TYPE] [nullok:[TRUE|FALSE]] [descr:DESCR] *\/ for a variable named NAME with the optional type TYPE (which can be a GType name or a custom database type name), with the optional "nullok" attribute and an optional description DESCR. Note that the NAME, TYPE and DESCR literals here must be quoted (simple or double quotes) if they include non alphanumeric characters, and that there must always be at least a space between the ## and the \/* ... *\/.
  *
  * @ingroup Connection
  */

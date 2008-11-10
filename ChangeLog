@@ -1,3 +1,11 @@
+2008-11-10  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/datacomparator.hg:
+	* libgda/src/quarklist.hg:
+	* libgda/src/sqlparser.hg:
+	* libgda/src/statement.hg:
+	More documentation fixes
+
 2008-11-05  Johannes Schmid  <jschmid@openismus.com>
 
 	* examples/simple/main.cc:

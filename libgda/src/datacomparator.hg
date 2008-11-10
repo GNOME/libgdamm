@@ -33,7 +33,23 @@ namespace Gda
 
 typedef GdaDiff Diff;
 	
-/** FIXME
+/** Simple data model's contents comparison
+ *
+ * The GdaDataComparator is a simple object which takes two GdaDataModel objects
+ * and compare them. Actual comparison is performed when the 
+ * compute_diff() is called; for each difference found, the diff-computed signal
+ * is emitted (any user installed signal handler which returns FALSE stops 
+ * the computing process).
+ *
+ * After the differences have been computed, they can each be accessed using 
+ * gda_data_comparator_get_diff(), the number of differences found being 
+ * returned by gda_data_comparator_get_n_diffs().
+ * There are some limitations to this object:
+ * <ul>
+ *   <li>The data models compared must have the same number and type of columns</li>
+ *   <li>The comparison is done column-for-column: one cannot omit columns in the comparison,
+ * nor compare columns with different positions</li>
+ * </ul>
  *
  * @ingroup DataHandlers
  */
