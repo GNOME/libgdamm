@@ -1,3 +1,8 @@
+3.99.0: (unstable)
+
+This is the first release in the 4.x release cycle based on libgda-4.0. It features
+a big API and ABI change. See the libgda 4.0 manual for porting details
+
 3.0.0: (stable)
 
 * DictConstraint: Removed fkey_set_fields().

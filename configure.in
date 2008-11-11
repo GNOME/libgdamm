@@ -112,7 +112,7 @@ AC_CHECK_PROGS(PERL, perl5 perl)
 #########################################################################
 #  Dependancy checks
 #########################################################################
-LIBGDA_REQUIRED=3.99.6
+LIBGDA_REQUIRED=3.99.7
 PKG_CHECK_MODULES(LIBGDAMM, glibmm-2.4 >= 2.12.8 libgda-4.0 >= $LIBGDA_REQUIRED)
 AC_SUBST(LIBGDAMM_CFLAGS)
 AC_SUBST(LIBGDAMM_LIBS)

@@ -1,3 +1,11 @@
+3.99.9:
+
+2008-11-11  Johannes Schmid  <jschmid@openismus.com>
+
+	* NEWS: Updated
+	* configure.in:
+	Require libgda 3.99.7
+
 2008-11-11  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/batch.ccg:
