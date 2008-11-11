@@ -67,7 +67,7 @@ public:
   // This is internal only
   _IGNORE (gda_data_select_set_row_selection_condition)
   _WRAP_METHOD (void compute_row_selection_condition (), gda_data_select_compute_row_selection_condition, errthrow)
-  _WRAP_METHOD (void set_modification_statement (const Glib::RefPtr<Statement>& stmt), gda_data_select_set_modification_statement, errthrow)
+  _WRAP_METHOD (void set_modification_statement (const Glib::RefPtr<Statement>& mod_stmt), gda_data_select_set_modification_statement, errthrow)
   _WRAP_METHOD (void set_modification_statement_sql (const Glib::ustring& sql), gda_data_select_set_modification_statement_sql, errthrow)
   _WRAP_METHOD (void compute_modification_statements (), gda_data_select_compute_modification_statements, errthrow)
   _WRAP_METHOD (void compute_columns_attributes (), gda_data_select_compute_columns_attributes, errthrow)

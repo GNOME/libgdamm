@@ -29,9 +29,9 @@ namespace Gda
 {
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-bool Batch::get_parameters(Glib::RefPtr<Set>& params)
+bool Batch::get_parameters(Glib::RefPtr<Set>& out_params)
 #else
-bool Batch::get_parameters(Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error)
+bool Batch::get_parameters(Glib::RefPtr<Set>& out_params, std::auto_ptr<Glib::Error>& error)
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
@@ -46,7 +46,7 @@ bool Batch::get_parameters(Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>
 #endif //GLIBMM_EXCEPTIONS_ENABLED
   if (set)
   {
-    params = Glib::wrap(set);
+    out_params = Glib::wrap(set);
   }
   return retval;
 }

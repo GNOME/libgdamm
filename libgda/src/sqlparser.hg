@@ -73,8 +73,16 @@ _WRAP_ENUM(SqlParserMode, GdaSqlParserMode)
  * providers if the Gda::SqlParser is created using Gda::ServerProvider::create_parser() 
  * but for portability reasons it's better to avoid them):
  *
- * - ##NAME[::TYPE[::NULL]]: for a variable named NAME with the optional type TYPE (which can be a GType name or a custom database type name), and with the optional "::NULL" to instruct that the variable can be NULL.
- * - ## \/* name:NAME [type:TYPE] [nullok:[TRUE|FALSE]] [descr:DESCR] *\/ for a variable named NAME with the optional type TYPE (which can be a GType name or a custom database type name), with the optional "nullok" attribute and an optional description DESCR. Note that the NAME, TYPE and DESCR literals here must be quoted (simple or double quotes) if they include non alphanumeric characters, and that there must always be at least a space between the ## and the \/* ... *\/.
+ * - ##NAME[::TYPE[::NULL]]: for a variable named NAME with the optional type TYPE 
+ * (which can be a GType name or a custom database type name), and with the 
+ * optional "::NULL" to instruct that the variable can be NULL.
+ * - ## \/* name:NAME [type:TYPE] [nullok:[TRUE|FALSE]] [descr:DESCR] *\/ 
+ * for a variable named NAME with the optional type TYPE (which can be a GType 
+ * name or a custom database type name), with the optional "nullok" attribute 
+ * and an optional description DESCR. Note that the NAME, TYPE and DESCR literals here 
+ * must be quoted (simple or double quotes) if they include non alphanumeric 
+ * characters, and that there must always be at least a space between the 
+ * ## and the \/* ... *\/.
  *
  * @ingroup Connection
  */

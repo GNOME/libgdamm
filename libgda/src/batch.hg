@@ -59,9 +59,9 @@ public:
 
   _WRAP_METHOD_DOCS_ONLY(gda_statement_get_parameters)
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  bool get_parameters(Glib::RefPtr<Set>& params);
+  bool get_parameters(Glib::RefPtr<Set>& out_params);
   #else
-  bool get_parameters(Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error);
+  bool get_parameters(Glib::RefPtr<Set>& out_params, std::auto_ptr<Glib::Error>& error);
   #endif //GLIBMM_EXCEPTIONS_ENABLED
     
   // FIXME: Use better marshaller in libgda

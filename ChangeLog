@@ -1,3 +1,20 @@
+2008-11-11  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/batch.ccg:
+	* libgda/src/batch.hg:
+	* libgda/src/column.hg:
+	* libgda/src/connection.hg:
+	* libgda/src/dataselect.hg:
+	* libgda/src/metastore.hg:
+	* libgda/src/metastruct.hg:
+	* libgda/src/quarklist.hg:
+	* libgda/src/serveroperation.hg:
+	* libgda/src/set.hg:
+	* libgda/src/sqlparser.hg:
+	* libgda/src/statement.hg:
+	* libgda/src/xatransaction.hg:
+	Fixed most obvious doxygen warnings
+
 2008-11-10  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/datacomparator.hg:

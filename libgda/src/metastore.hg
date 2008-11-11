@@ -78,7 +78,7 @@ public:
 #endif
 
   _WRAP_METHOD(bool set_attribute_value(const Glib::ustring& att_name, const Glib::ustring& att_value), gda_meta_store_set_attribute_value, errthrow)
-  _WRAP_METHOD(bool schema_add_custom_object(const Glib::ustring& xml), gda_meta_store_schema_add_custom_object, errthrow)
+  _WRAP_METHOD(bool schema_add_custom_object(const Glib::ustring& xml_description), gda_meta_store_schema_add_custom_object, errthrow)
   _WRAP_METHOD(bool schema_remove_custom_object(const Glib::ustring& obj_name), gda_meta_store_schema_remove_custom_object, errthrow)
   _WRAP_METHOD(Glib::RefPtr<Connection> get_internal_connection(), gda_meta_store_get_internal_connection)
 

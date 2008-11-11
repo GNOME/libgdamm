@@ -51,16 +51,16 @@ public:
   typedef std::list<Glib::RefPtr<const Connection> > ConnectionList;
   _WRAP_METHOD_DOCS_ONLY (gda_xa_transaction_commit)  
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  bool commit(ConnectionList& cncs_to_recover);
+  bool commit(ConnectionList& cnc_to_recover);
   #else
-  bool commit(ConnectionList& cncs_to_recover, std::auto_ptr<Glib::Error>& error);
+  bool commit(ConnectionList& cnc_to_recover, std::auto_ptr<Glib::Error>& error);
   #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   _WRAP_METHOD_DOCS_ONLY (gda_xa_transaction_commit_recovered)  
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  bool commit_recovered(ConnectionList& cncs_to_recover);
+  bool commit_recovered(ConnectionList& cnc_to_recover);
   #else
-  bool commit_recovered(ConnectionList& cncs_to_recover, std::auto_ptr<Glib::Error>& error);
+  bool commit_recovered(ConnectionList& cnc_to_recover, std::auto_ptr<Glib::Error>& error);
   #endif //GLIBMM_EXCEPTIONS_ENABLED
   
   _WRAP_PROPERTY("transaction-id", Glib::ustring)

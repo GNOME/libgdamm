@@ -62,7 +62,7 @@ public:
 
   _WRAP_METHOD (Value get_holder_value(const Glib::ustring& holder_id), gda_set_get_holder_value);
   _WRAP_METHOD_DOCS_ONLY(gda_set_set_holder_value)
-  template<class T> bool set_holder_value(const Glib::ustring& id, T value);
+  template<class T> bool set_holder_value(const Glib::ustring& holder_id, T value);
   
   _WRAP_METHOD(Glib::RefPtr<Holder> get_holder (const Glib::ustring& holder_id), gda_set_get_holder)
   _WRAP_METHOD(void add_holder (const Glib::RefPtr<Holder>& holder), gda_set_add_holder)
@@ -73,9 +73,9 @@ public:
   _WRAP_METHOD(bool is_valid() const, gda_set_is_valid, errthrow)
 
   _WRAP_METHOD(SetSource* get_source_for_model (const Glib::RefPtr<DataModel>& model), gda_set_get_source_for_model)
-  _WRAP_METHOD(SetSource* get_source (const Glib::RefPtr<Holder>& param), gda_set_get_source)
-  _WRAP_METHOD(SetGroup* get_group (const Glib::RefPtr<Holder>& param), gda_set_get_group)
-  _WRAP_METHOD(SetNode* get_node (const Glib::RefPtr<Holder>& param), gda_set_get_node)
+  _WRAP_METHOD(SetSource* get_source (const Glib::RefPtr<Holder>& holder), gda_set_get_source)
+  _WRAP_METHOD(SetGroup* get_group (const Glib::RefPtr<Holder>& holder), gda_set_get_group)
+  _WRAP_METHOD(SetNode* get_node (const Glib::RefPtr<Holder>& holder), gda_set_get_node)
 		
   _WRAP_SIGNAL(void holder_changed (const Glib::RefPtr<Holder>& holder), "holder-changed")
   _WRAP_SIGNAL(void public_data_changed (), "public-data-changed")
