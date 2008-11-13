@@ -34,9 +34,6 @@ namespace Gda
 {
 
 typedef Glib::SListHandle<Holder> HolderSList;
-typedef GdaSetSource SetSource;
-typedef GdaSetGroup SetGroup;
-typedef GdaSetNode SetNode;
 
 /** Container for several values
  *
@@ -71,12 +68,15 @@ public:
   _WRAP_METHOD(void merge_with_set (const Glib::RefPtr<Set>& set_to_merge), gda_set_merge_with_set)
   
   _WRAP_METHOD(bool is_valid() const, gda_set_is_valid, errthrow)
-
+  
+  /* these don't seem to be very useful */
+  _IGNORE(gda_set_get_source_model, gda_set_get_source, gda_source_get_group, gda_source_get_node)
+/*
   _WRAP_METHOD(SetSource* get_source_for_model (const Glib::RefPtr<DataModel>& model), gda_set_get_source_for_model)
   _WRAP_METHOD(SetSource* get_source (const Glib::RefPtr<Holder>& holder), gda_set_get_source)
   _WRAP_METHOD(SetGroup* get_group (const Glib::RefPtr<Holder>& holder), gda_set_get_group)
   _WRAP_METHOD(SetNode* get_node (const Glib::RefPtr<Holder>& holder), gda_set_get_node)
-		
+*/		
   _WRAP_SIGNAL(void holder_changed (const Glib::RefPtr<Holder>& holder), "holder-changed")
   _WRAP_SIGNAL(void public_data_changed (), "public-data-changed")
   _WRAP_SIGNAL(Error validate_set(), "validate-set", no_default_handler)

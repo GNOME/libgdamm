@@ -20,9 +20,8 @@
 
 
 #include <libgdamm.h>
+#include <libgdamm/config.h>
 #include <iostream>
-
-#include <sql-parser/gda-sql-parser.h>
 
 using namespace Gnome;
 

@@ -28,8 +28,6 @@
 #include <libgdamm/serveroperation.h>
 #include <libgdamm/value.h>
 
-#include <libgda/gda-meta-store.h>
-
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
 
@@ -165,7 +163,8 @@ public:
   _WRAP_METHOD(Glib::RefPtr<SqlParser> create_parser(), gda_connection_create_parser)
 
   _WRAP_METHOD(Glib::ustring get_provider_name() const, gda_connection_get_provider_name)
-  _WRAP_METHOD(bool update_meta_store (GdaMetaContext* context), gda_connection_update_meta_store, errthrow)
+  _IGNORE(gda_connection_update_meta_store)
+  //_WRAP_METHOD(bool update_meta_store (MetaContext* context), gda_connection_update_meta_store, errthrow)
   
   _WRAP_METHOD(bool statement_prepare (const Glib::RefPtr<Statement>& stmt), gda_connection_statement_prepare, errthrow)
 

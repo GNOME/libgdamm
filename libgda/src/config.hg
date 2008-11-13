@@ -32,8 +32,6 @@ namespace Gnome
 
 namespace Gda
 {
-#m4 _EQUAL(GdaDsnInfo*, DsnInfo*)
-typedef GdaDsnInfo DsnInfo;
   
 /** Configuration — Access/Management of libgda configuration
  *
@@ -47,8 +45,8 @@ protected:
 public:
   _WRAP_METHOD(static Glib::RefPtr<Config> get(), gda_config_get, refreturn)
   
-  _WRAP_METHOD_DOCS_ONLY(gda_config_get_dsn_info);
-  static DsnInfo* get_dsn_info (const Glib::ustring& dsn_name);
+  _WRAP_METHOD_DOCS_ONLY(gda_config_get_dsn_info)
+  static GdaDsnInfo* get_dsn_info (const Glib::ustring& dsn_name);
     
   _WRAP_METHOD_DOCS_ONLY(gda_config_dsn_needs_authentication)
   static bool dsn_needs_authentication(const Glib::ustring& dsn_name);
@@ -61,12 +59,11 @@ public:
   _WRAP_METHOD_DOCS_ONLY(gda_config_can_modify_system_config)
   static bool can_modify_system_config();
   
-  #m4 _CONVERSION(`gpointer',`DsnInfo*',`(DsnInfo*)($3)')
-  _WRAP_SIGNAL(void dsn_added(DsnInfo* info), "dsn-added", no_default_handler)
-  _WRAP_SIGNAL(void dsn_changed(DsnInfo* info), "dsn-changed", no_default_handler)
-  _WRAP_SIGNAL(void dsn_removed(DsnInfo* info), "dsn-removed", no_default_handler)
-  _WRAP_SIGNAL(void dsn_to_be_removed(DsnInfo* info), "dsn-to-be-removed", no_default_handler)
-    
+  #m4 _CONVERSION(`gpointer',`GdaDsnInfo*',`(GdaDsnInfo*)($3)')
+  _WRAP_SIGNAL(void dsn_added(GdaDsnInfo* info), "dsn-added", no_default_handler)
+  _WRAP_SIGNAL(void dsn_changed(GdaDsnInfo* info), "dsn-changed", no_default_handler)
+  _WRAP_SIGNAL(void dsn_removed(GdaDsnInfo* info), "dsn-removed", no_default_handler)
+  _WRAP_SIGNAL(void dsn_to_be_removed(GdaDsnInfo* info), "dsn-to-be-removed", no_default_handler)
   _WRAP_PROPERTY("system-filename", Glib::ustring);
   _WRAP_PROPERTY("user-filename", Glib::ustring);
 };

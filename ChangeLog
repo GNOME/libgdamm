@@ -1,3 +1,17 @@
+2008-11-13  Johannes Schmid  <jhs@gnome.org>
+
+	* libgda/libgdamm.h:
+	Add missing files
+	* libgda/src/config.ccg:
+	* libgda/src/config.hg:
+	* libgda/src/connection.hg:
+	* libgda/src/metastore.hg:
+	* libgda/src/metastruct.hg:
+	* libgda/src/set.hg:
+	* libgda/src/sqlparser.hg:
+	Disabled some methods that cause problems and may not be of any use.
+	Fixed some build errors and sileced a warning
+
 3.99.9:
 
 2008-11-11  Johannes Schmid  <jschmid@openismus.com>

@@ -34,26 +34,33 @@ extern const int libgdamm_micro_version;
 
 #include <libgdamm/init.h>
 #include <libgdamm/batch.h>
+#include <libgdamm/blobop.h>
 #include <libgdamm/column.h>
 #include <libgdamm/config.h>
 #include <libgdamm/connection.h>
 #include <libgdamm/connectionevent.h>
+#include <libgdamm/dataaccesswrapper.h>
+#include <libgdamm/datacomparator.h>
 #include <libgdamm/datahandler.h>
 #include <libgdamm/datamodel.h>
 #include <libgdamm/datamodelarray.h>
 #include <libgdamm/datamodelimport.h>
 #include <libgdamm/datamodeliter.h>
 #include <libgdamm/dataproxy.h>
+#include <libgdamm/dataselect.h>
 #include <libgdamm/error.h>
 #include <libgdamm/holder.h>
 #include <libgdamm/metastore.h>
 #include <libgdamm/metastruct.h>
+#include <libgdamm/quarklist.h>
 #include <libgdamm/row.h>
 #include <libgdamm/serveroperation.h>
 #include <libgdamm/serverprovider.h>
 #include <libgdamm/set.h>
 #include <libgdamm/sqlparser.h>
 #include <libgdamm/statement.h>
+#include <libgdamm/threader.h>
 #include <libgdamm/transactionstatus.h>
+#include <libgdamm/xatransaction.h>
 
 #endif /* #ifndef LIBGDAMM_H */

@@ -28,7 +28,7 @@ namespace Gnome
 namespace Gda
 {
 
-DsnInfo* Config::get_dsn_info (const Glib::ustring& dsn_name)
+GdaDsnInfo* Config::get_dsn_info (const Glib::ustring& dsn_name)
 {
   return gda_config_get_dsn_info (dsn_name.c_str()); 
 }

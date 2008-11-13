@@ -31,8 +31,6 @@ namespace Gnome
 namespace Gda
 {
 
-typedef GdaMetaContext MetaContext;
-
 /** Dictionary object
  *
  * Previous versions of Libgda relied on an XML based file to store dictionary 
@@ -63,8 +61,9 @@ public:
   
   _WRAP_METHOD(int get_version(), gda_meta_store_get_version)
   //TODO: varargs: extract(), modify()
-
-  _WRAP_METHOD(bool modify_with_context (MetaContext* context, const Glib::RefPtr<DataModel>& new_data), gda_meta_store_modify_with_context, errthrow)
+  
+  _IGNORE (gda_meta_store_modify_with_context)
+  //_WRAP_METHOD(bool modify_with_context (MetaContext* context, const Glib::RefPtr<DataModel>& new_data), gda_meta_store_modify_with_context, errthrow)
   _WRAP_METHOD(Glib::RefPtr<DataModel> create_modify_data_model(const Glib::ustring& table_name), gda_meta_store_create_modify_data_model)
   _WRAP_METHOD(Glib::RefPtr<MetaStruct> schema_get_structure(), gda_meta_store_schema_get_structure, errthrow)
   _WRAP_METHOD(Glib::SListHandle<Glib::ustring> schema_get_all_tables(), gda_meta_store_schema_get_all_tables)
@@ -86,8 +85,9 @@ public:
   _WRAP_PROPERTY("cnc", Glib::RefPtr<Connection>)  
 
   _WRAP_SIGNAL(void meta_reset(), "meta-reset")
-   #m4 _CONVERSION(`gpointer',`MetaContext*',`(MetaContext*)($3)')
-  _WRAP_SIGNAL(gpointer suggest_update(MetaContext*  suggest), "suggest-update", no_default_handler)
+  // TODO: do we need this?
+  //#m4 _CONVERSION(`gpointer',`MetaContext*',`(MetaContext*)($3)')
+  //_WRAP_SIGNAL(gpointer suggest_update(MetaContext*  suggest), "suggest-update", no_default_handler)
   // Listhandle...
   // _WRAP_SIGNAL(void meta_changed(Glib::SListHandle<>))
 };
