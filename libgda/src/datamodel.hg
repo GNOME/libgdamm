@@ -44,13 +44,10 @@ _WRAP_ENUM(DataModelIOFormat, GdaDataModelIOFormat)
 
 typedef GdaValueAttribute ValueAttribute;
 
-typedef Glib::ListHandle<Value, ValueTraits> ValueList;
-typedef Glib::SListHandle<Value, ValueTraits> ValueSList;
-
 /** @defgroup DataModels Data Models
  */
 
-/** Abstract DataModel (Base class for all DataModels)
+/** Abstract DataModel (Base class for all DataModels).
  *
  * A DataModel represents an array of values organized in rows and columns. 
  * All the data in the same column have the same type, and all the data in each row have the same semantic meaning. 
@@ -100,7 +97,7 @@ public:
   _WRAP_METHOD(void set_column_title(int col, const Glib::ustring& title), gda_data_model_set_column_title)
 
   _WRAP_METHOD(Value get_value_at(int col, int row) const, gda_data_model_get_value_at, errthrow);
-  _WRAP_METHOD(Value get_typed_value_at (int col, int row, GType expected_type, bool nullok) const, gda_data_model_get_typed_value_at, errthrow);
+  _WRAP_METHOD(Value get_typed_value_at(int col, int row, GType expected_type, bool nullok) const, gda_data_model_get_typed_value_at, errthrow);
   _WRAP_METHOD(ValueAttribute get_attributes_at(int col, int row), gda_data_model_get_attributes_at)
 
   _WRAP_METHOD(Glib::RefPtr<DataModelIter> create_iter(), gda_data_model_create_iter)
@@ -109,6 +106,9 @@ public:
   _IGNORE(gda_data_model_move_iter_at_row, gda_data_model_move_iter_next, gda_data_model_move_iter_prev)
 
   _WRAP_METHOD(bool set_value_at(int col, int row, const Value& value), gda_data_model_set_value_at, errthrow)
+
+  typedef Glib::ListHandle<Value, ValueTraits> ValueList;
+  typedef Glib::SListHandle<Value, ValueTraits> ValueSList;
 
   #m4 _CONVERSION(`const ValueList&',`const GList*',`$3.data()')
   #m4 _CONVERSION(`const ValueList&',`GList*',`$3.data()')
@@ -143,8 +143,8 @@ public:
    * @param options List of options for the export.
    * @result The string.
    */
-  _IGNORE(gda_data_model_export_to_string)
   Glib::ustring export_to_string(DataModelIOFormat format, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<Set>& options);
+  _IGNORE(gda_data_model_export_to_string)
     
   /** Exports data contained in @a model to the @a file; the format is specified using the @a format argument.
    *
@@ -167,6 +167,7 @@ public:
 #endif
   _IGNORE(gda_data_model_export_to_file)
 
+  //TODO: Avoid use of C GHashTable? 
   _WRAP_METHOD(bool import_from_model(const Glib::RefPtr<DataModel>& from,  bool overwrite, GHashTable *cols_trans), gda_data_model_import_from_model, errthrow)
   _WRAP_METHOD(bool import_from_string(const Glib::ustring& string, GHashTable *cols_trans, const Glib::RefPtr<const Set>& options), gda_data_model_import_from_string, errthrow)
   _WRAP_METHOD(bool import_from_file(const std::string& file, GHashTable *cols_trans, const Glib::RefPtr<const Set>& options), gda_data_model_import_from_file, errthrow)
@@ -181,7 +182,7 @@ public:
 
   //These are from gda-datamodel-extra.h:
   //TODO: Are these meant to be public API?
-  //See http://bugzilla.gnome.org/show_bug.cgi?id=513543
+  //See http://bugzilla.gnome.org/show_bug.cgi?id=513543 (wrong bug number? murrayc)
   /* Let's assume not. It's safer to add them later if necessary:
   _WRAP_METHOD(void signal_emit_changed(), gda_data_model_signal_emit_changed)
   _WRAP_METHOD(void row_inserted(int row), gda_data_model_row_inserted)
@@ -189,13 +190,13 @@ public:
   _WRAP_METHOD(void row_removed(int row), gda_data_model_row_removed)
   */
 
-  _WRAP_METHOD(void set_column_name (int col, const Glib::ustring& name), gda_data_model_set_column_name)
-  _WRAP_METHOD(Glib::ustring get_column_name (int col), gda_data_model_get_column_name)      
+  _WRAP_METHOD(void set_column_name(int col, const Glib::ustring& name), gda_data_model_set_column_name)
+  _WRAP_METHOD(Glib::ustring get_column_name(int col) const, gda_data_model_get_column_name)      
   
   // It is a bit strange that those are int GdaDataModel and not in GdaDataModelIter
-  _WRAP_METHOD(bool iter_move_next_default (const Glib::RefPtr<DataModelIter>& iter), gda_data_model_iter_move_next_default)
-  _WRAP_METHOD(bool iter_move_prev_default (const Glib::RefPtr<DataModelIter>& iter), gda_data_model_iter_move_prev_default)    
-  _WRAP_METHOD(bool iter_move_at_row_default (const Glib::RefPtr<DataModelIter>& iter, int row), gda_data_model_iter_move_at_row_default)    
+  _WRAP_METHOD(bool iter_move_next_default(const Glib::RefPtr<DataModelIter>& iter), gda_data_model_iter_move_next_default)
+  _WRAP_METHOD(bool iter_move_prev_default(const Glib::RefPtr<DataModelIter>& iter), gda_data_model_iter_move_prev_default)    
+  _WRAP_METHOD(bool iter_move_at_row_default(const Glib::RefPtr<DataModelIter>& iter, int row), gda_data_model_iter_move_at_row_default)    
     
   //These are in a private header. Ignore them:
   _IGNORE(gda_data_model_changed, gda_data_model_row_inserted, gda_data_model_row_updated, gda_data_model_row_removed, 

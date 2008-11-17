@@ -43,7 +43,7 @@ class Blob
   
   public:
     _WRAP_METHOD(void set_op(const Glib::RefPtr<BlobOp>& op), gda_blob_set_op)
-    _WRAP_METHOD(Glib::ustring to_string(guint maxlen), gda_blob_to_string)
+    _WRAP_METHOD(Glib::ustring to_string(guint maxlen = 0) const, gda_blob_to_string)
 };
 
 } // namespace Gda

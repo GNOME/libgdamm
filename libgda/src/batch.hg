@@ -31,9 +31,7 @@ namespace Gnome
 namespace Gda
 {
 
-typedef Glib::SListHandle<Glib::RefPtr<const Statement> > StatementSList;
-
-/** Multiple SQL statements groupped
+/** Multiple SQL statements grouped together.
  *
  * The Gda::Batch object represents one or more SQL statements (as Gda::Statement objects) in a single object.
  * A Gda::Batch can either be built "manually" by assembling together several Gda::Statement objects, or from an 
@@ -52,10 +50,13 @@ public:
   
   _WRAP_METHOD(void add_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_add_statement)
   _WRAP_METHOD(void remove_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_remove_statement)
-  _WRAP_METHOD(Glib::ustring serialize(), gda_batch_serialize)
+  _WRAP_METHOD(Glib::ustring serialize() const, gda_batch_serialize)
 
+  typedef Glib::SListHandle<Glib::RefPtr<const Statement> > StatementSList;
+
+  //There is no non-const override for this, because the C function returns const items.
   #m4 _CONVERSION(`const GSList*',`StatementSList',`$2((GSList*)$3, Glib::OWNERSHIP_NONE)')
-  _WRAP_METHOD(StatementSList get_statements(), gda_batch_get_statements)
+  _WRAP_METHOD(StatementSList get_statements() const, gda_batch_get_statements)
 
   _WRAP_METHOD_DOCS_ONLY(gda_statement_get_parameters)
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
@@ -64,7 +65,7 @@ public:
   bool get_parameters(Glib::RefPtr<Set>& out_params, std::auto_ptr<Glib::Error>& error);
   #endif //GLIBMM_EXCEPTIONS_ENABLED
     
-  // FIXME: Use better marshaller in libgda
+  // FIXME: Use better marshaller in libgda. TODO: Bug number?
   #m4 _CONVERSION(`GObject*',`Glib::RefPtr<Statement>',`Glib::wrap(GDA_STATEMENT($3))')
   _WRAP_SIGNAL(void changed(Glib::RefPtr<Statement> stmt), "changed", no_default_handler)
 };

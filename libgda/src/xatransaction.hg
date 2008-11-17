@@ -30,11 +30,11 @@ namespace Gnome
 namespace Gda
 {
 
-/** Distributed transaction manager
+//TODO: Convert the full C documentation to here.
+/** Distributed transaction manager.
   *
   * @ingroup Connections
   */
-  
 class XaTransaction : public Glib::Object
 {
   _CLASS_GOBJECT(XaTransaction, GdaXaTransaction, GDA_XA_TRANSACTION, Glib::Object, GObject)
@@ -43,13 +43,15 @@ protected:
 public:
   _WRAP_CREATE(guint32 format_id, const Glib::ustring& transaction_id)
   
-  _WRAP_METHOD(bool register_connection (const Glib::RefPtr<Connection>& cnc, const Glib::ustring& branch), gda_xa_transaction_register_connection, errthrow)
-  _WRAP_METHOD(void unregister_connection (const Glib::RefPtr<Connection>& cnc), gda_xa_transaction_unregister_connection)
+  _WRAP_METHOD(bool register_connection(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& branch), gda_xa_transaction_register_connection, errthrow)
+  _WRAP_METHOD(void unregister_connection(const Glib::RefPtr<Connection>& cnc), gda_xa_transaction_unregister_connection)
 
   _WRAP_METHOD(bool begin(), gda_xa_transaction_begin, errthrow)
   _WRAP_METHOD(bool rollback(), gda_xa_transaction_rollback, errthrow)
+
   typedef std::list<Glib::RefPtr<const Connection> > ConnectionList;
-  _WRAP_METHOD_DOCS_ONLY (gda_xa_transaction_commit)  
+
+  _WRAP_METHOD_DOCS_ONLY(gda_xa_transaction_commit)  
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   bool commit(ConnectionList& cnc_to_recover);
   #else

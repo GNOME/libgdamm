@@ -27,9 +27,9 @@ namespace Gnome
 namespace Gda
 {
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-bool MetaStore::get_atrribute_value(const Glib::ustring& att_name, Glib::ustring& att_value)
+bool MetaStore::get_attribute_value(const Glib::ustring& att_name, Glib::ustring& att_value)
 #else
-bool MetaStore::get_atrribute_value(const Glib::ustring& att_name, Glib::ustring& att_value, std::auto_ptr<Glib::Error>)
+bool MetaStore::get_attribute_value(const Glib::ustring& att_name, Glib::ustring& att_value, std::auto_ptr<Glib::Error>)
 #endif
 {
   GError* gerror = 0;

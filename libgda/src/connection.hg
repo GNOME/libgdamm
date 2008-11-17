@@ -166,7 +166,7 @@ public:
   _IGNORE(gda_connection_update_meta_store)
   //_WRAP_METHOD(bool update_meta_store (MetaContext* context), gda_connection_update_meta_store, errthrow)
   
-  _WRAP_METHOD(bool statement_prepare (const Glib::RefPtr<Statement>& stmt), gda_connection_statement_prepare, errthrow)
+  _WRAP_METHOD(bool statement_prepare(const Glib::RefPtr<Statement>& stmt), gda_connection_statement_prepare, errthrow)
 
   _IGNORE(gda_connection_get_meta_store_data)
   #m4 _CONVERSION(`const Glib::ListHandle< Glib::RefPtr<Holder> >&',`GList*',`$3.data()')
@@ -179,6 +179,7 @@ public:
   _WRAP_METHOD(bool perform_operation (const Glib::RefPtr<ServerOperation>& op), gda_connection_perform_operation, errthrow)
 
   _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider(), gda_connection_get_provider)
+  _WRAP_METHOD(Glib::RefPtr<const ServerProvider> get_provider() const, gda_connection_get_provider)
    
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_to_sql)
   #ifdef GLIBMM_EXCEPTIONS_ENABLED

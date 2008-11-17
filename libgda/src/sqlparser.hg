@@ -33,11 +33,12 @@ namespace Gda
 
 _WRAP_ENUM(SqlParserMode, GdaSqlParserMode)
 
-// This is a hack to avoid a stupid gcc warning for a correctly escaped comment
+// This is a hack to avoid a stupid gcc warning for a correctly escaped comment.
 #if defined __GNUC__
 #pragma GCC system_header
 #endif
-/** SQL parser
+
+/** SQL parser.
  *
  * The Gda::SqlParser is an object dedicated to creating Gda::Statement and 
  * Gda::Batch objects from SQL strings. The actual contents of the parsed 
@@ -98,22 +99,21 @@ protected:
 public:
   _WRAP_CREATE()
   
+  //TODO: Should these be const?
   _WRAP_METHOD_DOCS_ONLY(gda_sql_parser_parse_string)
   Glib::RefPtr<Statement> parse_string(const Glib::ustring& sql, Glib::ustring& remain);
+
   _WRAP_METHOD_DOCS_ONLY(gda_sql_parser_parse_string_as_batch)
   Glib::RefPtr<Batch> parse_string_as_batch(const Glib::ustring& sql, Glib::ustring& remain);
 
   _WRAP_METHOD(Glib::RefPtr<Batch> parse_file_as_batch(const std::string& filename), gda_sql_parser_parse_file_as_batch, errthrow)
 
   _IGNORE(gda_sql_parser_set_overflow_error, gda_sql_parser_set_syntax_error)
-
-  //TODO:
-#if 0  
-  _WPAP_PROPERTY("column-error", int)
-  _WPAP_PROPERTY("line-error", int)
-  _WPAP_PROPERTY("mode", int)
-  _WPAP_PROPERTY("tokenizer-flavour", int)
-#endif
+ 
+  _WRAP_PROPERTY("column-error", int)
+  _WRAP_PROPERTY("line-error", int)
+  _WRAP_PROPERTY("mode", int)
+  _WRAP_PROPERTY("tokenizer-flavour", int)
 
 };
 

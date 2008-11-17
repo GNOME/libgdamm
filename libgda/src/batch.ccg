@@ -22,11 +22,16 @@
 #include <libgdamm/batch.h>
 #include <libgda/gda-batch.h>
 
+
 namespace Gnome
 {
 
 namespace Gda
 {
+
+//Fix compilation of our generated code:
+typedef Batch::StatementSList StatementSList;
+
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool Batch::get_parameters(Glib::RefPtr<Set>& out_params)

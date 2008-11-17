@@ -30,7 +30,7 @@ namespace Gnome
 namespace Gda
 {
 	
-/** This objects is the boxed type of a Glib::Error
+/** This objects is the boxed type of a Glib::Error.
  *
  * This is used to pass Glib::Error savely through signals. You can use
  * the gerror() method to access the underlying Glib::Error.
@@ -41,8 +41,11 @@ class Error
 {
   _CLASS_BOXEDTYPE(Error, GError, NONE, g_error_copy, g_error_free)
   
-  public:
-		inline Glib::Error gerror() {return Glib::Error(gobj(), false);};
+public:
+  inline Glib::Error gerror()
+  {
+    return Glib::Error(gobj(), false);
+  };
 };
 
 } // namespace Gda

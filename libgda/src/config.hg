@@ -33,7 +33,7 @@ namespace Gnome
 namespace Gda
 {
   
-/** Configuration — Access/Management of libgda configuration
+/** Configuration — Access/Management of libgda configuration.
  *
  * @ingroup Configuration
  */
@@ -64,6 +64,7 @@ public:
   _WRAP_SIGNAL(void dsn_changed(GdaDsnInfo* info), "dsn-changed", no_default_handler)
   _WRAP_SIGNAL(void dsn_removed(GdaDsnInfo* info), "dsn-removed", no_default_handler)
   _WRAP_SIGNAL(void dsn_to_be_removed(GdaDsnInfo* info), "dsn-to-be-removed", no_default_handler)
+
   _WRAP_PROPERTY("system-filename", Glib::ustring);
   _WRAP_PROPERTY("user-filename", Glib::ustring);
 };

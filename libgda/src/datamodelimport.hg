@@ -34,6 +34,7 @@ namespace Gda
 
 
 /** Importing data from a string or a file.
+ *
  * This data model imports data from a string or a file. The data can either be in a CSV (comma separated values) 
  * format or in an XML format as described by the libgda-array.dtd DTD (It is also possible to import 
  * data from an already-build XML tree validated against that DTD).
@@ -71,6 +72,7 @@ protected:
   _IGNORE(gda_data_model_import_new_xml_node)
 
 public:
+  //TODO: Documentation:
   _WRAP_CREATE(const std::string& filename, bool random_access, const Glib::RefPtr<const Set>& options)
   _WRAP_CREATE(const gchar* data, bool random_access, const Glib::RefPtr<const Set>& options)
   _WRAP_CREATE(xmlNodePtr node)

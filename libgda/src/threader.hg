@@ -32,7 +32,7 @@ namespace Gda
 
 typedef GdaThreaderFunc ThreaderFunc;
 
-/** FIXME
+/** TODO. See http://bugzilla.gnome.org/show_bug.cgi?id=561175
  *
  * @ingroup Connection
  */
@@ -46,10 +46,10 @@ public:
   _WRAP_CREATE()
   
   _WRAP_METHOD(guint start_thread(GThreadFunc func, gpointer func_arg, ThreaderFunc ok_callback, ThreaderFunc cancel_callback), gda_threader_start_thread, errthrow)
-  _WRAP_METHOD(void cancel (guint job_id), gda_threader_cancel)
+  _WRAP_METHOD(void cancel(guint job_id), gda_threader_cancel)
   
-  _WRAP_SIGNAL(void cancelled (guint arg1, gpointer arg2), "cancelled")
-  _WRAP_SIGNAL(void finished (guint arg1, gpointer arg2), "finished")
+  _WRAP_SIGNAL(void cancelled(guint arg1, gpointer arg2), "cancelled")
+  _WRAP_SIGNAL(void finished(guint arg1, gpointer arg2), "finished")
 
 };
 

@@ -30,12 +30,13 @@ namespace Gnome
 namespace Gda
 {
 
-/** Quark lists (lists of KEY=VALUE's)
-  *
-  * Parameter lists are used primary in the parsing and creation of connection strings.
-  *
-  * @ingroup DataHandlers
-  */
+//TODO: Documentation: See http://bugzilla.gnome.org/show_bug.cgi?id=561173
+/** Quark lists (lists of KEY=VALUE's).
+ *
+ * Parameter lists are used primarily in the parsing and creation of connection strings.
+ *
+ * @ingroup DataHandlers
+ */
 class QuarkList
 {
   _CLASS_BOXEDTYPE(QuarkList, GdaQuarkList, gda_quark_list_new, gda_quark_list_copy, gda_quark_list_free)
@@ -44,9 +45,9 @@ class QuarkList
   public:
     
   _WRAP_METHOD(void clear(), gda_quark_list_clear)
-  _WRAP_METHOD(void add_from_string (const Glib::ustring& name, bool cleanup), gda_quark_list_add_from_string)
-  _WRAP_METHOD(Glib::ustring find(const Glib::ustring& name), gda_quark_list_find)
-  _WRAP_METHOD(void remove (const Glib::ustring& name), gda_quark_list_remove)
+  _WRAP_METHOD(void add_from_string(const Glib::ustring& name, bool cleanup), gda_quark_list_add_from_string)
+  _WRAP_METHOD(Glib::ustring find(const Glib::ustring& name) const, gda_quark_list_find)
+  _WRAP_METHOD(void remove(const Glib::ustring& name), gda_quark_list_remove)
    
   /** For instance, 
    * void on_foreach(Gtk::Widget* widget);

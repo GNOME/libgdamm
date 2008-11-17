@@ -33,13 +33,13 @@ namespace Gnome
 namespace Gda
 {
 
-typedef Glib::SListHandle<Holder> HolderSList;
 
-/** Container for several values
+/** Container for several values.
  *
  * The Gda::Set object is a container for several values (as Gda::Holder objects), 
  * which also offers different classifications of the group of GdaHolder values 
  * (see get_node(), get_source() or get_group()).
+ *
  * It is possible to control the values a Gda::Holder can have in the Gda::Set by 
  * connecting to the signal_before_holder_change() signal.
  * 
@@ -49,6 +49,8 @@ class Set : public Glib::Object
 {
   _CLASS_GOBJECT(Set, GdaSet, GDA_SET, Glib::Object, GObject)
 protected:
+  typedef Glib::SListHandle<Holder> HolderSList;
+
   #m4 _CONVERSION(`const HolderSList&', `GSList*', `$3.data()')
   _WRAP_CTOR(Set(const HolderSList& holders), gda_set_new)
 
@@ -57,15 +59,18 @@ public:
   
   _WRAP_METHOD(Glib::RefPtr<Set> copy(), gda_set_copy)
 
-  _WRAP_METHOD (Value get_holder_value(const Glib::ustring& holder_id), gda_set_get_holder_value);
+  _WRAP_METHOD(Value get_holder_value(const Glib::ustring& holder_id) const, gda_set_get_holder_value);
+
   _WRAP_METHOD_DOCS_ONLY(gda_set_set_holder_value)
   template<class T> bool set_holder_value(const Glib::ustring& holder_id, T value);
   
-  _WRAP_METHOD(Glib::RefPtr<Holder> get_holder (const Glib::ustring& holder_id), gda_set_get_holder)
-  _WRAP_METHOD(void add_holder (const Glib::RefPtr<Holder>& holder), gda_set_add_holder)
-  _WRAP_METHOD(void remove_holder (const Glib::RefPtr<Holder>& holder), gda_set_remove_holder)
+  _WRAP_METHOD(Glib::RefPtr<Holder> get_holder(const Glib::ustring& holder_id), gda_set_get_holder)
+  _WRAP_METHOD(Glib::RefPtr<const Holder> get_holder(const Glib::ustring& holder_id) const, gda_set_get_holder)
 
-  _WRAP_METHOD(void merge_with_set (const Glib::RefPtr<Set>& set_to_merge), gda_set_merge_with_set)
+  _WRAP_METHOD(void add_holder(const Glib::RefPtr<Holder>& holder), gda_set_add_holder)
+  _WRAP_METHOD(void remove_holder(const Glib::RefPtr<Holder>& holder), gda_set_remove_holder)
+
+  _WRAP_METHOD(void merge_with_set(const Glib::RefPtr<Set>& set_to_merge), gda_set_merge_with_set)
   
   _WRAP_METHOD(bool is_valid() const, gda_set_is_valid, errthrow)
   
@@ -77,11 +82,15 @@ public:
   _WRAP_METHOD(SetGroup* get_group (const Glib::RefPtr<Holder>& holder), gda_set_get_group)
   _WRAP_METHOD(SetNode* get_node (const Glib::RefPtr<Holder>& holder), gda_set_get_node)
 */		
-  _WRAP_SIGNAL(void holder_changed (const Glib::RefPtr<Holder>& holder), "holder-changed")
-  _WRAP_SIGNAL(void public_data_changed (), "public-data-changed")
+
+//The m4 conversion is here because it is only for signals:
+#m4 _CONVERSION(`GdaHolder*',`const Glib::RefPtr<Holder>&',`Glib::wrap($3, true /* take_copy */)')
+
+  _WRAP_SIGNAL(void holder_changed(const Glib::RefPtr<Holder>& holder), "holder-changed")
+  _WRAP_SIGNAL(void public_data_changed(), "public-data-changed")
   _WRAP_SIGNAL(Error validate_set(), "validate-set", no_default_handler)
   _WRAP_SIGNAL(Error validate_holder_change(const Glib::RefPtr<Holder>& holder, Value value), "validate-holder-change", no_default_handler)
-  _WRAP_SIGNAL(void holder_attr_changed (const Glib::RefPtr<Holder>& holder, Glib::ustring attr_name, Value value), "holder-attr-changed", no_default_handler)
+  _WRAP_SIGNAL(void holder_attr_changed(const Glib::RefPtr<Holder>& holder, Glib::ustring attr_name, Value value), "holder-attr-changed", no_default_handler)
      
   _WRAP_PROPERTY("description", Glib::ustring)
   _WRAP_PROPERTY("id", Glib::ustring)

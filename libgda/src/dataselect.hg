@@ -32,7 +32,7 @@ namespace Gnome
 namespace Gda
 {
 
-/** Data models returned by the execution of a SELECT statement
+/** Data models returned by the execution of a SELECT statement.
  *
  * This data model implements the Gda::DataModel interface and is the required 
  * base object when database providers implement a data model returned when a 
@@ -63,14 +63,14 @@ class DataSelect
   _CLASS_GOBJECT(DataSelect, GdaDataSelect, GDA_DATA_SELECT, Glib::Object, GObject)
   _IMPLEMENTS_INTERFACE(DataModel)
 public:
-  _WRAP_METHOD (bool set_row_selection_condition_sql (const Glib::ustring& sql_where), gda_data_select_set_row_selection_condition_sql, errthrow)
+  _WRAP_METHOD(bool set_row_selection_condition_sql(const Glib::ustring& sql_where), gda_data_select_set_row_selection_condition_sql, errthrow)
   // This is internal only
   _IGNORE (gda_data_select_set_row_selection_condition)
-  _WRAP_METHOD (void compute_row_selection_condition (), gda_data_select_compute_row_selection_condition, errthrow)
-  _WRAP_METHOD (void set_modification_statement (const Glib::RefPtr<Statement>& mod_stmt), gda_data_select_set_modification_statement, errthrow)
-  _WRAP_METHOD (void set_modification_statement_sql (const Glib::ustring& sql), gda_data_select_set_modification_statement_sql, errthrow)
-  _WRAP_METHOD (void compute_modification_statements (), gda_data_select_compute_modification_statements, errthrow)
-  _WRAP_METHOD (void compute_columns_attributes (), gda_data_select_compute_columns_attributes, errthrow)
+  _WRAP_METHOD(void compute_row_selection_condition(), gda_data_select_compute_row_selection_condition, errthrow)
+  _WRAP_METHOD(void set_modification_statement(const Glib::RefPtr<Statement>& mod_stmt), gda_data_select_set_modification_statement, errthrow)
+  _WRAP_METHOD(void set_modification_statement_sql(const Glib::ustring& sql), gda_data_select_set_modification_statement_sql, errthrow)
+  _WRAP_METHOD(void compute_modification_statements(), gda_data_select_compute_modification_statements, errthrow)
+  _WRAP_METHOD(void compute_columns_attributes(), gda_data_select_compute_columns_attributes, errthrow)
 
   _WRAP_PROPERTY("auto-reset", bool)
   _WRAP_PROPERTY("store-all-rows", bool)

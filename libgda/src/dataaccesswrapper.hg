@@ -30,7 +30,7 @@ namespace Gnome
 namespace Gda
 {
 
-/** Offers a random access on top of a cursor-only access data model
+/** Offers random access on top of a cursor-only access data model.
  *
  * The Gda::DataAccessWrapper object simply wraps around another Gda::DataModel data model 
  * object and allows data to be accessed in a random way while remaining memory efficient as much as possible.

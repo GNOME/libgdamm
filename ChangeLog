@@ -1,3 +1,40 @@
+2008-11-17  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/batch.ccg:
+	* libgda/src/batch.hg:
+	* libgda/src/blob.hg:
+	* libgda/src/column.hg:
+	* libgda/src/config.hg:
+	* libgda/src/connection.hg:
+	* libgda/src/connectionevent.hg:
+	* libgda/src/dataaccesswrapper.hg:
+	* libgda/src/datacomparator.hg:
+	* libgda/src/datamodel.hg:
+	* libgda/src/datamodelarray.hg:
+	* libgda/src/datamodelimport.hg:
+	* libgda/src/datamodeliter.hg:
+	* libgda/src/dataselect.hg:
+	* libgda/src/error.hg:
+	* libgda/src/holder.hg:
+	* libgda/src/metastore.ccg:
+	* libgda/src/metastore.hg:
+	* libgda/src/metastruct.hg:
+	* libgda/src/quarklist.hg:
+	* libgda/src/row.hg:
+	* libgda/src/serveroperation.hg:
+	* libgda/src/serverprovider.ccg:
+	* libgda/src/serverprovider.hg:
+	* libgda/src/set.hg:
+	* libgda/src/sqlparser.hg:
+	* libgda/src/statement.hg:
+	* libgda/src/threader.hg:
+	* libgda/src/xatransaction.hg:
+	* tools/m4/convert_libgdamm.m4:
+	Several const corrections.
+	Moved typedefs into classes.
+	Moved signal conversions into .hg files and added the extra ref.
+	Put fullstop at end of all doxygen first sentences.
+
 2008-11-13  Johannes Schmid  <jhs@gnome.org>
 
 	* libgda/libgdamm.h:

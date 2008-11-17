@@ -38,10 +38,10 @@ _WRAP_ENUM (SqlStatementType, GdaSqlStatementType)
 _WRAP_ENUM (StatementModelUsage, GdaStatementModelUsage)
 _WRAP_ENUM (StatementSqlFlag, GdaStatementSqlFlag)
 
-/** Single SQL statement
+/** Single SQL statement.
  *
- *  The Gda::Statement represents a single SQL statement (multiple statements 
- * can be groupped in a GdaBatch object).
+ * The Gda::Statement represents a single SQL statement (multiple statements 
+ * can be grouped in a Batch object).
  *
  * A Gda::Statement can either be built "manually" by building a Gda::SqlStatement
  * structure, or from an SQL statement using a Gda::SqlParser object.
@@ -67,10 +67,11 @@ protected:
 
 public:
   _WRAP_CREATE()
-  _WRAP_METHOD(Glib::RefPtr<Statement> copy(), gda_statement_copy)
+  _WRAP_METHOD(Glib::RefPtr<Statement> copy() const, gda_statement_copy)
   
-  _WRAP_METHOD(Glib::ustring serialize(), gda_statement_serialize)
+  _WRAP_METHOD(Glib::ustring serialize() const, gda_statement_serialize)
   
+  //TODO: Should this be const?
   _WRAP_METHOD_DOCS_ONLY(gda_statement_get_parameters)
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   bool get_parameters(Glib::RefPtr<Set>& out_params);
@@ -79,14 +80,16 @@ public:
   #endif //GLIBMM_EXCEPTIONS_ENABLED
   
 
-  _IGNORE(gda_statement_to_sql_real)
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::ustring to_sql(const Glib::RefPtr<Set>& params);
   #else
   Glib::ustring to_sql(const Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error);
   #endif //GLIBMM_EXCEPTIONS_ENABLED
+  _IGNORE(gda_statement_to_sql_real)
 
   typedef Glib::ListHandle< const Glib::RefPtr<Holder> > HolderSList;
+
+  //TODO: Should this be const?
   _WRAP_METHOD_DOCS_ONLY(gda_statement_to_sql_extended)  
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::ustring to_sql_extended(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
@@ -97,13 +100,17 @@ public:
                                 std::auto_ptr<Glib::Error>& error);
   #endif //GLIBMM_EXCEPTIONS_ENABLED
 
-	_WRAP_METHOD(SqlStatementType get_statement_type(), gda_statement_get_statement_type)
+  _WRAP_METHOD(SqlStatementType get_statement_type() const, gda_statement_get_statement_type)
   _WRAP_METHOD(bool is_useless() const, gda_statement_is_useless)
   _WRAP_METHOD(bool check_structure() const, gda_statement_check_structure, errthrow)
   _WRAP_METHOD(bool check_validity(const Glib::RefPtr<Connection>& cnc) const, gda_statement_check_validity, errthrow)
   _WRAP_METHOD(bool normalize(const Glib::RefPtr<Connection>& cnc), gda_statement_normalize, errthrow)
   
+  //TODO: Use a real GType in libgda?
   _WRAP_PROPERTY("structure", gpointer)
+
+  //The m4 conversion is here because it is only for signals:
+#m4 _CONVERSION(`GdaConnection*',`const Glib::RefPtr<Connection>&',`Glib::wrap($3, true)')
 
   _WRAP_SIGNAL(void checked(const Glib::RefPtr<Connection>& cnc, bool valid), "checked")
   _WRAP_SIGNAL(void reset(), "reset")

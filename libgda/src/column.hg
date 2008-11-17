@@ -70,6 +70,7 @@ public:
   _WRAP_METHOD(gint get_position() const, gda_column_get_position)
   _WRAP_METHOD(void set_position(gint position), gda_column_set_position)
 
+   //TODO: Documentation.
    Glib::ValueBase get_default_value() const;
   _IGNORE(gda_column_get_default_value)
   

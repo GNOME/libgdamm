@@ -31,7 +31,7 @@ namespace Gnome
 namespace Gda
 {
 
-/** Dictionary object
+/** Dictionary object.
  *
  * Previous versions of Libgda relied on an XML based file to store dictionary 
  * information, such as the database's schema (tables, views, etc) and various 
@@ -59,7 +59,7 @@ protected:
 public:
   _WRAP_CREATE(const Glib::ustring& cnc_string)
   
-  _WRAP_METHOD(int get_version(), gda_meta_store_get_version)
+  _WRAP_METHOD(int get_version() const, gda_meta_store_get_version)
   //TODO: varargs: extract(), modify()
   
   _IGNORE (gda_meta_store_modify_with_context)
@@ -71,15 +71,17 @@ public:
 
   _WRAP_METHOD_DOCS_ONLY(gda_meta_store_get_attribute_value)
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-   bool get_atrribute_value(const Glib::ustring& att_name, Glib::ustring& att_value);
+   bool get_attribute_value(const Glib::ustring& att_name, Glib::ustring& att_value);
 #else
-   bool get_atrribute_value(const Glib::ustring& att_name, Glib::ustring& att_value, std::auto_ptr<Glib::Error>);
+   bool get_attribute_value(const Glib::ustring& att_name, Glib::ustring& att_value, std::auto_ptr<Glib::Error>);
 #endif
 
   _WRAP_METHOD(bool set_attribute_value(const Glib::ustring& att_name, const Glib::ustring& att_value), gda_meta_store_set_attribute_value, errthrow)
   _WRAP_METHOD(bool schema_add_custom_object(const Glib::ustring& xml_description), gda_meta_store_schema_add_custom_object, errthrow)
   _WRAP_METHOD(bool schema_remove_custom_object(const Glib::ustring& obj_name), gda_meta_store_schema_remove_custom_object, errthrow)
+
   _WRAP_METHOD(Glib::RefPtr<Connection> get_internal_connection(), gda_meta_store_get_internal_connection)
+  _WRAP_METHOD(Glib::RefPtr<const Connection> get_internal_connection() const, gda_meta_store_get_internal_connection)
 
   // The rest of the properties is Write / Construct Only
   _WRAP_PROPERTY("cnc", Glib::RefPtr<Connection>)  

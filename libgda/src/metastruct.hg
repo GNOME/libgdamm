@@ -37,12 +37,13 @@ _WRAP_ENUM(MetaGraphInfo, GdaMetaGraphInfo)
 
 class MetaStore;
 
-/** In memory representation of some database objects
+/** In memory representation of some database objects.
  *
  * The Gda::MetaStruct object reads data from a Gda::MetaStore object and creates 
  * an easy to use in memory representation for some database objects. For example
  * one can easily analyse the columns of a table (or its foreign keys) using a 
  * Gda::MetaStruct.
+ *
  * When created, the new Gda::MetaStruct object is empty (it does not have any 
  * information about any database object). Information about database objects is 
  * computed upon request using the gda_meta_struct_complement() method. Information 
@@ -65,13 +66,16 @@ protected:
 public:
   _WRAP_CREATE(const Glib::RefPtr<MetaStore>& store, MetaStructFeature features)
   
-  _WRAP_METHOD(GdaMetaDbObject* complement (MetaDbObjectType type, const Glib::ValueBase& catalog, const Glib::ValueBase& schema, const Glib::ValueBase& name), gda_meta_struct_complement, errthrow)
-  _WRAP_METHOD(bool complement_schema (const Glib::ValueBase& catalog, const Glib::ValueBase& schema), gda_meta_struct_complement_schema, errthrow)
-  _WRAP_METHOD(bool complement_default (), gda_meta_struct_complement_default, errthrow)
+  //TODO: Wrap GdaMetaDbObject?
+  _WRAP_METHOD(GdaMetaDbObject* complement(MetaDbObjectType type, const Glib::ValueBase& catalog, const Glib::ValueBase& schema, const Glib::ValueBase& name), gda_meta_struct_complement, errthrow)
+  _WRAP_METHOD(bool complement_schema(const Glib::ValueBase& catalog, const Glib::ValueBase& schema), gda_meta_struct_complement_schema, errthrow)
+  _WRAP_METHOD(bool complement_default(), gda_meta_struct_complement_default, errthrow)
   _IGNORE(gda_meta_struct_complement_depend) // private API   
 
-  _WRAP_METHOD(bool sort_db_object (MetaSortType sort_type), gda_meta_struct_sort_db_objects, errthrow)
+  _WRAP_METHOD(bool sort_db_object(MetaSortType sort_type), gda_meta_struct_sort_db_objects, errthrow)
     _WRAP_METHOD(GdaMetaDbObject* get_db_object(const Glib::ValueBase& catalog, const Glib::ValueBase& schema, const Glib::ValueBase& name), gda_meta_struct_get_db_object)
+
+  //TODO: Wrap GdaMetaDbObject??
   _WRAP_METHOD(GdaMetaTableColumn* get_table_column(GdaMetaTable* table, const Glib::ValueBase& col_name), gda_meta_struct_get_table_column)
   _WRAP_METHOD(Glib::ustring dump_as_graph(MetaGraphInfo info), gda_meta_struct_dump_as_graph, errthrow)
   
