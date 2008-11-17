@@ -66,7 +66,7 @@ class ServerProvider : public Glib::Object
   _WRAP_METHOD(bool supports_feature(const Glib::RefPtr<Connection>& cnc, ConnectionFeature feature) const, gda_server_provider_supports_feature)
 
 
-  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Glib::RefPtr<Connection>& cnc, const Glib::ValueBase& from) const, gda_server_provider_value_to_sql_string)
+  _WRAP_METHOD(Glib::ustring value_to_sql_string(const Glib::RefPtr<Connection>& cnc, const Value& from) const, gda_server_provider_value_to_sql_string)
 
   _WRAP_METHOD(Glib::ustring escape_string(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& str) const, gda_server_provider_escape_string)
   _WRAP_METHOD(Glib::ustring unescape_string(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& str) const, gda_server_provider_unescape_string)
@@ -85,7 +85,7 @@ class ServerProvider : public Glib::Object
   _WRAP_METHOD_DOCS_ONLY(gda_server_provider_string_to_value)
 
   //TODO: ValueBase can't be used as a return type.
-  Glib::ValueBase string_to_value(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& string, GType prefered_type, Glib::ustring& dbms_type) const;
+  Value string_to_value(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& string, GType prefered_type, Glib::ustring& dbms_type) const;
 
   _WRAP_METHOD(Glib::RefPtr<DataHandler> get_data_handler_default(const Glib::RefPtr<Connection>& cnc, GType type, const Glib::ustring& dbms_type), gda_server_provider_get_data_handler_default)
 

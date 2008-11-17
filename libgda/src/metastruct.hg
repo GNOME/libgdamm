@@ -19,6 +19,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgdamm/value.h>
 #include <libgda/gda-meta-struct.h>
 
 _DEFS(libgdamm,libgda)
@@ -37,7 +38,7 @@ _WRAP_ENUM(MetaGraphInfo, GdaMetaGraphInfo)
 
 class MetaStore;
 
-/** In memory representation of some database objects.
+/** In-memory representation of some database objects.
  *
  * The Gda::MetaStruct object reads data from a Gda::MetaStore object and creates 
  * an easy to use in memory representation for some database objects. For example
@@ -67,16 +68,16 @@ public:
   _WRAP_CREATE(const Glib::RefPtr<MetaStore>& store, MetaStructFeature features)
   
   //TODO: Wrap GdaMetaDbObject?
-  _WRAP_METHOD(GdaMetaDbObject* complement(MetaDbObjectType type, const Glib::ValueBase& catalog, const Glib::ValueBase& schema, const Glib::ValueBase& name), gda_meta_struct_complement, errthrow)
-  _WRAP_METHOD(bool complement_schema(const Glib::ValueBase& catalog, const Glib::ValueBase& schema), gda_meta_struct_complement_schema, errthrow)
+  _WRAP_METHOD(GdaMetaDbObject* complement(MetaDbObjectType type, const Value& catalog, const Value& schema, const Value& name), gda_meta_struct_complement, errthrow)
+  _WRAP_METHOD(bool complement_schema(const Value& catalog, const Value& schema), gda_meta_struct_complement_schema, errthrow)
   _WRAP_METHOD(bool complement_default(), gda_meta_struct_complement_default, errthrow)
   _IGNORE(gda_meta_struct_complement_depend) // private API   
 
   _WRAP_METHOD(bool sort_db_object(MetaSortType sort_type), gda_meta_struct_sort_db_objects, errthrow)
-    _WRAP_METHOD(GdaMetaDbObject* get_db_object(const Glib::ValueBase& catalog, const Glib::ValueBase& schema, const Glib::ValueBase& name), gda_meta_struct_get_db_object)
+    _WRAP_METHOD(GdaMetaDbObject* get_db_object(const Value& catalog, const Value& schema, const Value& name), gda_meta_struct_get_db_object)
 
   //TODO: Wrap GdaMetaDbObject??
-  _WRAP_METHOD(GdaMetaTableColumn* get_table_column(GdaMetaTable* table, const Glib::ValueBase& col_name), gda_meta_struct_get_table_column)
+  _WRAP_METHOD(GdaMetaTableColumn* get_table_column(GdaMetaTable* table, const Value& col_name), gda_meta_struct_get_table_column)
   _WRAP_METHOD(Glib::ustring dump_as_graph(MetaGraphInfo info), gda_meta_struct_dump_as_graph, errthrow)
   
   // FIXME: Use C++ type

@@ -20,6 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgdamm/value.h>
 #include <glibmm/object.h>
 
 _DEFS(libgdamm,libgda)
@@ -52,7 +53,7 @@ protected:
 public:
   _WRAP_CREATE(int count)
 
-  Glib::ValueBase get_value(int num) const;
+  Value get_value(int num) const;
 };
 
 } // namespace Gda

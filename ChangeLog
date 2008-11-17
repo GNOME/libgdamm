@@ -1,5 +1,19 @@
 2008-11-17  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/column.ccg:
+	* libgda/src/column.hg:
+	* libgda/src/metastruct.hg:
+	* libgda/src/row.ccg:
+	* libgda/src/row.hg:
+	* libgda/src/serveroperation.ccg:
+	* libgda/src/serveroperation.hg:
+	* libgda/src/serverprovider.ccg:
+	* libgda/src/serverprovider.hg: Use Gnome::Gda::Value instead of 
+	Glib::ValueBase, as it was in libgdamm-3.0. ValueBase particularly 
+	cannot be used as a return type.
+
+2008-11-17  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/batch.ccg:
 	* libgda/src/batch.hg:
 	* libgda/src/blob.hg:

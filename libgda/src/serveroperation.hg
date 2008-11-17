@@ -20,6 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgdamm/value.h>
 #include <libgda/gda-server-provider.h>
 
 _DEFS(libgdamm,libgda)
@@ -59,7 +60,7 @@ class ServerOperation : public Glib::Object
 public:
   // The C version of these take varargs for some reason.
   _WRAP_METHOD_DOCS_ONLY(gda_server_operation_get_value_at)
-  Glib::ValueBase get_value_at(const Glib::ustring& path_format) const;
+  Value get_value_at(const Glib::ustring& path_format) const;
 
   _WRAP_METHOD_DOCS_ONLY(gda_server_operation_set_value_at)
 #ifdef GLIBMM_EXCEPTIONS_ENABLED

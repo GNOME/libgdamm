@@ -20,6 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgdamm/value.h>
 #include <libgdamm/transactionstatus.h>
 #include <glibmm/object.h>
 
@@ -52,9 +53,9 @@ public:
   _WRAP_METHOD(Glib::ustring get_description() const, gda_column_get_description)
   _WRAP_METHOD(void set_description(const Glib::ustring& title), gda_column_set_description)
 
-  _WRAP_METHOD(void set_attribute (const Glib::ustring& attribute, const Glib::ValueBase& value), gda_column_set_attribute);
+  _WRAP_METHOD(void set_attribute (const Glib::ustring& attribute, const Value& value), gda_column_set_attribute);
   _WRAP_METHOD_DOCS_ONLY(gda_column_get_attribute);
-  Glib::ValueBase get_attribute(Glib::ustring& attribute) const;
+  Value get_attribute(Glib::ustring& attribute) const;
     
   _WRAP_METHOD(Glib::ustring get_name() const, gda_column_get_name)
   _WRAP_METHOD(void set_name(const Glib::ustring& name), gda_column_set_name)
@@ -71,10 +72,10 @@ public:
   _WRAP_METHOD(void set_position(gint position), gda_column_set_position)
 
    //TODO: Documentation.
-   Glib::ValueBase get_default_value() const;
+   Value get_default_value() const;
   _IGNORE(gda_column_get_default_value)
   
-  _WRAP_METHOD(void set_default_value(const Glib::ValueBase& default_value), gda_column_set_default_value)
+  _WRAP_METHOD(void set_default_value(const Value& default_value), gda_column_set_default_value)
 
 #m4 _CONVERSION(`const char*',`const Glib::ustring&',__GCHARP_TO_USTRING)
   _WRAP_SIGNAL(void name_changed(const Glib::ustring& old_name), "name-changed")
