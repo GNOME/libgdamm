@@ -76,7 +76,7 @@ public:
   static Glib::RefPtr<Connection> open_from_string (const Glib::ustring& provider_name,
                                                     const Glib::ustring& cnc_string,
                                                     const Glib::ustring& auth_string,
-                                                    ConnectionOptions options);
+                                                    ConnectionOptions options = CONNECTION_OPTIONS_NONE);
 #else
   static Glib::RefPtr<Connection> open_from_string (const Glib::ustring& provider_name,
                                                     const Glib::ustring& cnc_string,

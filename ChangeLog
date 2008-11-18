@@ -1,5 +1,15 @@
 2008-11-18  Johannes Schmid  <jschmid@openismus.com>
 
+	* examples/simple/main.cc:
+	Use more simplified API
+	
+	* libgda/src/connection.hg:
+	Added default arguments
+	* libgda/src/datamodeliter.hg:
+	Wrapped missing methods
+
+2008-11-18  Johannes Schmid  <jschmid@openismus.com>
+
 	* libgda/src/batch.hg:
 	* libgda/src/column.hg:
 	* libgda/src/connection.ccg:

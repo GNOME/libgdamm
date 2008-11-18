@@ -35,7 +35,7 @@ run_sql_non_select (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr
   Glib::ustring remain;
   try
   {
-    stmt =  parser->parse_string (sql, remain);
+    stmt =  parser->parse_string (sql);
   }
   catch(const Glib::Error& err)
   {
@@ -80,11 +80,10 @@ void
 display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr<Gda::SqlParser>& parser)
 {
   const Glib::ustring sql = "SELECT ref, name, price FROM products";
-  Glib::ustring remain;
   Glib::RefPtr<Gda::Statement> stmt;
   try
   {
-    stmt =  parser->parse_string (sql, remain);
+    stmt =  parser->parse_string (sql);
   }
   catch(const Glib::Error& err)
   {
