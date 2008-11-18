@@ -20,7 +20,6 @@
 
 
 #include <libgdamm.h>
-#include <libgdamm/config.h>
 #include <iostream>
 
 using namespace Gnome;
@@ -49,10 +48,8 @@ run_sql_non_select (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr
 
   int nrows = 0;
   try
-  {
-    Glib::RefPtr<Gda::Set> params;
-    Glib::RefPtr<Gda::Set> last_inserted_row;    
-    nrows = cnc->statement_execute_non_select (stmt, params, last_inserted_row);
+  {  
+    nrows = cnc->statement_execute_non_select (stmt);
   }
   catch(const Glib::Error& err)
   {
@@ -94,12 +91,10 @@ display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc, const Glib:
     std::cerr << "Error: " << err.what() << std::endl;
     return;
   }
-
-  Glib::RefPtr<Gda::Set> params;
   Glib::RefPtr<Gda::DataModel> data_model;
   try
   {
-    data_model = cnc->statement_execute_select (stmt, params);
+    data_model = cnc->statement_execute_select (stmt);
   }
   catch(const Glib::Error& err)
   { 

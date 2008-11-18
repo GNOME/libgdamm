@@ -33,6 +33,16 @@ namespace Gnome
 namespace Gda
 {
 
+
+/* possible predefined attribute names for gda_holder_get_attribute() or gda_column_get_attribute() */
+// Keep in sync with libgda
+const std::string ATTRIBUTE_DESCRIPTION = "__gda_attr_descr"; /* G_TYPE_STRING */
+const std::string ATTRIBUTE_NAME = "__gda_attr_name"; /* G_TYPE_STRING */
+const std::string ATTRIBUTE_NUMERIC_PRECISION = "__gda_attr_numeric_precision"; /* G_TYPE_INT */
+const std::string ATTRIBUTE_NUMERIC_SCALE = "__gda_attr_numeric_scale"; /* G_TYPE_INT */
+const std::string ATTRIBUTE_AUTO_INCREMENT = "__gda_attr_autoinc"; /* G_TYPE_BOOLEAN */
+const std::string ATTRIBUTE_IS_DEFAULT = "__gda_attr_is_default"; /* G_TYPE_BOOLEAN */
+
 /** Management of DataModel column attributes.
  *
  * @ingroup DataHandlers

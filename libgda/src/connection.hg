@@ -119,9 +119,15 @@ public:
 #else
   Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage, Glib::RefPtr<Set>& last_insert_row, std::auto_ptr<Glib::Error>& error);
 #endif // GLIBMM_EXCEPTIONS_ENABLED
-
-  _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params), gda_connection_statement_execute_select, errthrow)
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage);
+#else
+  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
   
+  _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params), gda_connection_statement_execute_select, errthrow)
+  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt);
+    
   #m4 _CONVERSION(`const Glib::ArrayHandle<GType>&', `GType*', `const_cast<GType*>(($3).data())')
   _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select_full(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage, const Glib::ArrayHandle<GType>& col_types), gda_connection_statement_execute_select_full, errthrow)
   _IGNORE (gda_connection_statement_execute_select_fullv)
@@ -132,7 +138,11 @@ public:
 #else
   int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, Glib::RefPtr<Set>& last_insert_row, std::auto_ptr<Glib::Error>& error);
 #endif //GLIBMM_EXCEPTIONS_ENABLED  
-
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt);
+#else
+  int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt, std::auto_ptr<Glib::Error>& error);
+#endif //GLIBMM_EXCEPTIONS_ENABLED  
   //Note that we do not add a non-const version of this because the documentation says that it should not be modified:
   _WRAP_METHOD(Glib::RefPtr<const TransactionStatus> get_transaction_status() const, gda_connection_get_transaction_status, errthrow, refreturn)
 

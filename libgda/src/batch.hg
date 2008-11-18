@@ -1,6 +1,6 @@
 // -*- C++ -*- // this is for the .hg, I realize gensig puts one in
 
-/* set.h
+/* batch.h
  *
  * Copyright 2006 libgdamm Development Team
  *

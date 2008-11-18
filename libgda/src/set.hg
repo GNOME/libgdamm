@@ -55,7 +55,7 @@ protected:
   _WRAP_CTOR(Set(const HolderSList& holders), gda_set_new)
 
 public:
-  _WRAP_CREATE(const HolderSList& holders)
+  _WRAP_CREATE(const HolderSList& holders = std::list< Glib::RefPtr<Holder> >())
   
   _WRAP_METHOD(Glib::RefPtr<Set> copy(), gda_set_copy)
 

@@ -1,3 +1,18 @@
+2008-11-18  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/batch.hg:
+	* libgda/src/column.hg:
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg:
+	* libgda/src/set.hg:
+	* libgda/src/sqlparser.ccg:
+	* libgda/src/sqlparser.hg:
+	Added some custom methods and default arguments to honer the fact
+	that libgda allows to pass "NULL" for several arguments
+
+	* examples/simple/main.cc:
+	Used new methods.
+
 2008-11-17  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/column.ccg:
