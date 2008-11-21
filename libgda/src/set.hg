@@ -49,7 +49,7 @@ class Set : public Glib::Object
 {
   _CLASS_GOBJECT(Set, GdaSet, GDA_SET, Glib::Object, GObject)
 protected:
-  typedef Glib::SListHandle<Holder> HolderSList;
+  typedef Glib::SListHandle< Glib::RefPtr<Holder> > HolderSList;
 
   #m4 _CONVERSION(`const HolderSList&', `GSList*', `$3.data()')
   _WRAP_CTOR(Set(const HolderSList& holders), gda_set_new)

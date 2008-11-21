@@ -1,3 +1,8 @@
+2008-11-21  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/set.hg:
+	Corrected constructor default argument
+
 2008-11-18  Johannes Schmid  <jschmid@openismus.com>
 
 	* examples/simple/main.cc:
