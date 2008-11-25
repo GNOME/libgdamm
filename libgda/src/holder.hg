@@ -45,9 +45,9 @@ class Holder : public Glib::Object
 {
   _CLASS_GOBJECT(Holder, GdaHolder, GDA_HOLDER, Glib::Object, GObject)
 protected:
-  _WRAP_CTOR(Holder (GType type), gda_holder_new)
+  Holder(GType g_type, const Glib::ustring& id);    
 public:
-  _WRAP_CREATE(GType g_type)
+  _WRAP_CREATE(GType g_type, const Glib::ustring& id)
   _WRAP_METHOD(Glib::RefPtr<Holder> copy(), gda_holder_copy)
   
   _WRAP_METHOD(GType get_g_type() const, gda_holder_get_g_type)

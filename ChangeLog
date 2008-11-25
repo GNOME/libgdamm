@@ -1,3 +1,9 @@
+2008-11-25  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/holder.ccg:
+	* libgda/src/holder.hg:
+	Write custom constructor for Gda::Holder because the autgenerated did not work
+
 2008-11-21  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/set.hg:
