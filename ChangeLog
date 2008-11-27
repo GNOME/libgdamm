@@ -1,3 +1,8 @@
+2008-11-27  Johannes Schmid  <jschmid@openimus.com>
+
+	* libgda/src/holder.ccg:
+	Use _CONSTRUCT macro instead of hard-coding everything
+
 2008-11-25  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/holder.ccg:
