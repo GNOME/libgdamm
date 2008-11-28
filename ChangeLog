@@ -1,3 +1,11 @@
+2008-11-28  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/column.ccg:
+	* libgda/src/column.hg:
+	* libgda/src/row.ccg:
+	* libgda/src/row.hg:
+	Fixed some Value methods that were still using Glib::Value
+
 2008-11-27  Johannes Schmid  <jschmid@openimus.com>
 
 	* libgda/src/holder.ccg:

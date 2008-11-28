@@ -29,22 +29,6 @@ namespace Gnome
 namespace Gda
 {
 
-Value Column::get_attribute(Glib::ustring& attribute) const
-{
-  const GValue* value = gda_column_get_attribute(const_cast<GdaColumn*>(gobj()), attribute.c_str());
-  Value retval;
-  retval.init(value);
-  return retval;
-}
-  
-Value Column::get_default_value() const
-{
-  const GValue* value = gda_column_get_default_value(const_cast<GdaColumn*>(gobj()));
-  Value retval;
-  retval.init(value);
-  return retval;
-}
-
 bool Column::equal(const Glib::RefPtr<const Column>& src) const
 {
   if(!src)

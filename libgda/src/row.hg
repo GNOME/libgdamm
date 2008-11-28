@@ -53,7 +53,7 @@ protected:
 public:
   _WRAP_CREATE(int count)
 
-  Value get_value(int num) const;
+  _WRAP_METHOD(Value get_value(int num), gda_row_get_value);
 };
 
 } // namespace Gda

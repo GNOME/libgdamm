@@ -33,14 +33,6 @@ namespace Gnome
 namespace Gda
 {
 
-Value Row::get_value(int num) const
-{
-  Value retval;
-  const GValue* value = gda_row_get_value(const_cast<GdaRow*>(gobj()), num);
-  retval.init(value);
-  return retval;
-}
-
 } // namespace Gda
 
 } // namespace Gnome
