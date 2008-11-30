@@ -1,3 +1,12 @@
+2008-11-30  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/column.hg:
+	Make get_default_value() const
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg:
+	Added wrapper for update_meta_store(). (It omits the optional GdaMetaStore
+	because I think you will most likely never need it)
+
 2008-11-28  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/column.ccg:

@@ -198,6 +198,25 @@ Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<
   return statement_execute_select (stmt, set);
 }
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+bool Connection::update_meta_store()
+#else
+bool Connection::update_meta_store(std::auto_ptr<Glib::Error>& err)
+#endif
+{
+  GError* gerror = 0;
+  bool retvalue = gda_connection_update_meta_store(gobj(), &(gerror));
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+  
+  return retvalue;  
+}
+
 } //namespace Gda
 
 } //namespace Gnome
