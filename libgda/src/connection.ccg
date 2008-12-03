@@ -205,7 +205,7 @@ bool Connection::update_meta_store(std::auto_ptr<Glib::Error>& err)
 #endif
 {
   GError* gerror = 0;
-  bool retvalue = gda_connection_update_meta_store(gobj(), &(gerror));
+  bool retvalue = gda_connection_update_meta_store(gobj(), 0, &gerror);
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
@@ -220,5 +220,3 @@ bool Connection::update_meta_store(std::auto_ptr<Glib::Error>& err)
 } //namespace Gda
 
 } //namespace Gnome
-
-

@@ -175,6 +175,7 @@ public:
   _WRAP_METHOD(Glib::ustring get_provider_name() const, gda_connection_get_provider_name)
   _WRAP_METHOD_DOCS_ONLY(gda_connection_update_meta_store)
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  // TODO: Are we sure we don't need the MetaContext parameter?
   bool update_meta_store();
 #else
   bool update_meta_store(std::auto_ptr<Glib::Error>& err);
