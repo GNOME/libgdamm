@@ -1,3 +1,9 @@
+2008-12-07  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg:
+	Added helper methods to use sql directly instead of Gda::Statement
+
 2008-12-03  Daniel Elstner  <danielk@openismus.com>
 
 	* libgda/src/connection.ccg (update_meta_store): For now pass 0

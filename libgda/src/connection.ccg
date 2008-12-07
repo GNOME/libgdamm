@@ -25,6 +25,7 @@
 #include <libgda/gda-enum-types.h>
 #include <libgda/gda-connection.h>
 #include <libgda/libgda.h> //For GDA_GENERAL_ERROR
+#include <iostream>
 
 namespace Gnome
 {
@@ -124,6 +125,31 @@ Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<Stat
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::ustring& sql, StatementModelUsage model_usage)
+#else
+Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::ustring& sql, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error)
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+{
+  Glib::RefPtr<SqlParser> parser = create_parser();
+  if (parser)
+  {
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+    Glib::RefPtr<Statement> stmt = parser->parse_string(sql);
+    if (!stmt)
+      return Glib::RefPtr<Object>(0);
+    return statement_execute (stmt, model_usage);
+#else
+    Glib::RefPtr<Statement> stmt = parser->parse_string(sql, error);
+    if (error || !stmt)
+      return Glib::RefPtr<Object>(0);
+    return statement_execute (stmt, model_usage, error);
+#endif
+  }
+  std::cerr << "Gda::Connection::statement_execute(): Couldn't create parser" << std::endl;
+  return Glib::RefPtr<Object>(0);
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd, const Glib::RefPtr<Set>& params, Glib::RefPtr<Set>& last_inserted_row)
 #else
 int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd, const Glib::RefPtr<Set>& params, Glib::RefPtr<Set>& last_inserted_row, std::auto_ptr<Glib::Error>& error)
@@ -165,6 +191,31 @@ int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd,
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
+int Connection::statement_execute_non_select(const Glib::ustring& sql)
+#else
+int Connection::statement_execute_non_select(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& error)
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+{
+  Glib::RefPtr<SqlParser> parser = create_parser();
+  if (parser)
+  {
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+    Glib::RefPtr<Statement> stmt = parser->parse_string(sql);
+    if (!stmt)
+      return 0;
+    return statement_execute_non_select(stmt);
+#else
+    Glib::RefPtr<Statement> stmt = parser->parse_string(sql, error);
+    if (error || !stmt)
+      return 0;
+    return statement_execute_non_select(stmt, error);
+#endif
+  }
+  std::cerr << "Gda::Connection::statement_execute(): Couldn't create parser" << std::endl;
+  return 0;
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<Statement>& statement, const Glib::RefPtr<Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used)
 #else
 Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<Statement>& statement, const Glib::RefPtr<Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used, std::auto_ptr<Glib::Error>& error)
@@ -192,10 +243,43 @@ Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<Statement>& statem
 
 }
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<Statement>& stmt)
+#else
+Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<Statement>& stmt, std::auto_ptr<Glib::Error>& error)
+#endif
 {
   Glib::RefPtr<Set> set;
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   return statement_execute_select (stmt, set);
+#else
+  return statement_execute_select (stmt, set, error);
+#endif
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring& sql)
+#else
+Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& error)
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+{
+  Glib::RefPtr<SqlParser> parser = create_parser();
+  if (parser)
+  {
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+    Glib::RefPtr<Statement> stmt = parser->parse_string(sql);
+    if (!stmt)
+      return Glib::RefPtr<DataModel>(0);
+    return statement_execute_select (stmt);
+#else
+    Glib::RefPtr<Statement> stmt = parser->parse_string(sql, error);
+    if (error || !stmt)
+      return Glib::RefPtr<DataModel>(0);
+    return statement_execute_select (stmt, error);
+#endif
+  }
+  std::cerr << "Gda::Connection::statement_execute(): Couldn't create parser" << std::endl;
+  return Glib::RefPtr<DataModel>(0);
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
