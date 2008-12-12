@@ -248,7 +248,7 @@ struct ValueTraits
   static CType to_c_type(const CppType& obj) { return obj.gobj(); }
   static CType to_c_type(const CType& obj) { return obj; }
   static CppType to_cpp_type(const CType& obj) { return CppType(obj); }
-  static void release_c_type(const CType& obj) {}
+  static void release_c_type(const CType& /*obj*/) {}
 };
 #endif
 

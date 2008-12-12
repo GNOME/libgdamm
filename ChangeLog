@@ -1,3 +1,9 @@
+2008-12-12  Deng Xiyue <manphiz@gmail.com>
+
+	* libgda/libgdamm/value.h: commented out an unused parameter to
+	silence	a warning.  Patch by Norbert Kiesel <nkiesel@tbdnetworks.com>.
+	bug #554484.
+ 
 2008-12-12  Murray Cumming  <murrayc@murrayc.com>
 
 	* tools/m4/convert_libgdamm.m4:
