@@ -35,9 +35,13 @@ _CONVERSION(`GdaServerOperation*',`Glib::RefPtr<ServerOperation>',`Glib::wrap($3
 _CONVERSION(`GdaServerOperation*',`Glib::RefPtr<const ServerOperation>',`Glib::wrap($3)')
 _CONVERSION(`GdaDataHandler*',`Glib::RefPtr<DataHandler>',`Glib::wrap($3)')
 _CONVERSION(`GdaSqlParser*',`Glib::RefPtr<SqlParser>',`Glib::wrap($3)')
+_CONVERSION(`GdaSqlParser*',`Glib::RefPtr<const SqlParser>',`Glib::wrap($3)')
 _CONVERSION(`GdaBatch*',`Glib::RefPtr<Batch>',`Glib::wrap($3)')
+_CONVERSION(`GdaBatch*',`Glib::RefPtr<const Batch>',`Glib::wrap($3)')
 _CONVERSION(`GdaMetaStruct*',`Glib::RefPtr<MetaStruct>',`Glib::wrap($3)')
+_CONVERSION(`GdaMetaStruct*',`Glib::RefPtr<const MetaStruct>',`Glib::wrap($3)')
 _CONVERSION(`GdaMetaStore*',`Glib::RefPtr<MetaStore>',`Glib::wrap($3)')
+_CONVERSION(`GdaMetaStore*',`Glib::RefPtr<const MetaStore>',`Glib::wrap($3)')
 _CONVERSION(`GdaConfig*',`Glib::RefPtr<Config>',`Glib::wrap($3)')
 
 _CONVERSION(`const Glib::RefPtr<BlobOp>&', `GdaBlobOp*', __CONVERT_REFPTR_TO_P)

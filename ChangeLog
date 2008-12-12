@@ -1,3 +1,9 @@
+2008-12-12  Murray Cumming  <murrayc@murrayc.com>
+
+	* tools/m4/convert_libgdamm.m4:
+	* libgda/src/connection.[hg|ccg]: Added a get_meta_store_data() 
+	method overload with no filters parameter. 
+
 2008-12-07  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/connection.ccg:
