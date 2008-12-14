@@ -251,23 +251,24 @@ Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<Statement>& statem
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<Statement>& stmt)
+Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage)
 #else
-Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<Statement>& stmt, std::auto_ptr<Glib::Error>& error)
+Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage. std::auto_ptr<Glib::Error>& error)
 #endif
 {
   Glib::RefPtr<Set> set;
+  std::list<GType> types;
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  return statement_execute_select(stmt, set);
+  return statement_execute_select(stmt, set, model_usage, types);
 #else
-  return statement_execute_select((stmt, set, error);
+  return statement_execute_select((stmt, set, model_usage, types, error);
 #endif
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring& sql)
+Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring& sql, StatementModelUsage model_usage)
 #else
-Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& error)
+Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring& sql, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error)
 #endif // GLIBMM_EXCEPTIONS_ENABLED
 {
   Glib::RefPtr<SqlParser> parser = create_parser();
@@ -278,13 +279,13 @@ Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring
     if(!stmt)
       return Glib::RefPtr<DataModel>(0);
 
-    return statement_execute_select(stmt);
+    return statement_execute_select(stmt, model_usage);
 #else
     Glib::RefPtr<Statement> stmt = parser->parse_string(sql, error);
     if(error || !stmt)
       return Glib::RefPtr<DataModel>(0);
 
-    return statement_execute_select(stmt, error);
+    return statement_execute_select(stmt, model_usage, error);
 #endif
   }
 

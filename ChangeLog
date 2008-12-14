@@ -1,3 +1,11 @@
+2008-12-14  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg: statement_execute_select(): Add a 
+	StatementModelUsage parameter, with a default value, so we can 
+	specify a cursor model.
+	statement_execute_select_full(): Rename to statement_execute_select().
+
 2008-12-12  Deng Xiyue <manphiz@gmail.com>
 
 	* libgda/libgdamm/value.h: commented out an unused parameter to
