@@ -58,8 +58,12 @@ public:
   _WRAP_METHOD(bool set_value_str(const Glib::RefPtr<DataHandler>& dh, const Glib::ustring& value), gda_holder_set_value_str, errthrow)
   _WRAP_METHOD(bool take_value(const Value& value), gda_holder_take_value, errthrow)
   _WRAP_METHOD(Value take_static_value (const Value& value, bool& value_changed), gda_holder_take_static_value, errthrow)
-  _WRAP_METHOD(void set_attribute(const Glib::ustring& attribute, const Value& value), gda_holder_set_attribute);
-  _WRAP_METHOD(Value get_attribute(const Glib::ustring& attribute) const, gda_holder_get_attribute); 
+
+  void set_attribute(const Glib::ustring& attribute, const Value& value);
+
+  //TODO: gda_holder_set_attribute() has stupid memory management: _WRAP_METHOD(void set_attribute(const Glib::ustring& attribute, const Value& value), gda_holder_set_attribute)
+
+  _WRAP_METHOD(Value get_attribute(const Glib::ustring& attribute) const, gda_holder_get_attribute) 
   
   _WRAP_METHOD(Value get_default_value() const, gda_holder_get_default_value)
   _WRAP_METHOD(void set_default_value(const Value& value), gda_holder_set_default_value)

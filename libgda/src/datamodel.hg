@@ -88,7 +88,7 @@ public:
   _WRAP_METHOD(int get_n_rows() const, gda_data_model_get_n_rows)
   _WRAP_METHOD(int get_n_columns() const, gda_data_model_get_n_columns)
 
-  _WRAP_METHOD(int get_column_index(const Glib::ustring& name), gda_data_model_get_column_index);
+  _WRAP_METHOD(int get_column_index(const Glib::ustring& name), gda_data_model_get_column_index)
     
   _WRAP_METHOD(Glib::RefPtr<Column> describe_column(int col), gda_data_model_describe_column, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Column> describe_column(int col) const, gda_data_model_describe_column, refreturn, constversion)
@@ -96,8 +96,8 @@ public:
   _WRAP_METHOD(Glib::ustring get_column_title(int col) const, gda_data_model_get_column_title)
   _WRAP_METHOD(void set_column_title(int col, const Glib::ustring& title), gda_data_model_set_column_title)
 
-  _WRAP_METHOD(Value get_value_at(int col, int row) const, gda_data_model_get_value_at, errthrow);
-  _WRAP_METHOD(Value get_typed_value_at(int col, int row, GType expected_type, bool nullok) const, gda_data_model_get_typed_value_at, errthrow);
+  _WRAP_METHOD(Value get_value_at(int col, int row) const, gda_data_model_get_value_at, errthrow)
+  _WRAP_METHOD(Value get_typed_value_at(int col, int row, GType expected_type, bool nullok) const, gda_data_model_get_typed_value_at, errthrow)
   _WRAP_METHOD(ValueAttribute get_attributes_at(int col, int row), gda_data_model_get_attributes_at)
 
   _WRAP_METHOD(Glib::RefPtr<DataModelIter> create_iter(), gda_data_model_create_iter)

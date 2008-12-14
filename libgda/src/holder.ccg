@@ -34,6 +34,15 @@ Holder::Holder (GType g_type, const Glib::ustring& id)
 {
 
 }
+
+void Holder::set_attribute(const Glib::ustring& attribute, const Value& value)
+{
+  //gda_holder_set_attribute() has stupid memory management.
+  //Leaking is the only way to make sure that the string stays alive.
+  //TODO: Fix gda_holder_set_attribute().
+  gchar* dup = g_strdup(attribute.c_str());
+  gda_holder_set_attribute(gobj(), dup, (value).gobj()); 
+}
   
 } /* namespace Gda */
 

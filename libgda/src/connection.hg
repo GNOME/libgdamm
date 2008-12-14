@@ -142,7 +142,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select_full(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage, const Glib::ArrayHandle<GType>& col_types), gda_connection_statement_execute_select_full, errthrow)
   _IGNORE(gda_connection_statement_execute_select_fullv)
   
-  _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_execute_non_select);
+  _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_execute_non_select)
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, Glib::RefPtr<Set>& last_insert_row);
@@ -211,8 +211,8 @@ public:
   Glib::RefPtr<DataModel> Connection::get_meta_store_data(ConnectionMetaType meta_type, std::auto_ptr<Glib::Error>& error);
   #endif //GLIBMM_EXCEPTIONS_ENABLED
 
-  _WRAP_METHOD(Glib::RefPtr<MetaStore> get_meta_store(), gda_connection_get_meta_store);
-  _WRAP_METHOD(Glib::RefPtr<const MetaStore> get_meta_store() const, gda_connection_get_meta_store, consversion);
+  _WRAP_METHOD(Glib::RefPtr<MetaStore> get_meta_store(), gda_connection_get_meta_store)
+  _WRAP_METHOD(Glib::RefPtr<const MetaStore> get_meta_store() const, gda_connection_get_meta_store, consversion)
 
   #m4 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<Glib::Object> >',`$2((GSList*)$3, Glib::OWNERSHIP_SHALLOW)')
   _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<Glib::Object> > batch_execute(const Glib::RefPtr<Batch>& batch, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage), gda_connection_batch_execute, errthrow)
