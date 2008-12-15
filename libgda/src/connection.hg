@@ -131,15 +131,15 @@ public:
   _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params), gda_connection_statement_execute_select, errthrow)
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt);
-  Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql);
+  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage = STATEMENT_MODEL_RANDOM_ACCESS);
+  Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, StatementModelUsage model_usage = STATEMENT_MODEL_RANDOM_ACCESS);
 #else
-  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt, std::auto_ptr<Glib::Error>& error);
+  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& error);
-#endif  
+#endif
 
   #m4 _CONVERSION(`const Glib::ArrayHandle<GType>&', `GType*', `const_cast<GType*>(($3).data())')
-  _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select_full(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage, const Glib::ArrayHandle<GType>& col_types), gda_connection_statement_execute_select_full, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage, const Glib::ArrayHandle<GType>& col_types), gda_connection_statement_execute_select_full, errthrow)
   _IGNORE(gda_connection_statement_execute_select_fullv)
   
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_execute_non_select)
@@ -154,8 +154,9 @@ public:
   int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt);
 #else
   int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt, std::auto_ptr<Glib::Error>& error);
-#endif //GLIBMM_EXCEPTIONS_ENABLED  
-  _WRAP_METHOD(int statement_execute_non_select(const Glib::ustring& sql), gda_execute_non_select_command, errthrow);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  _WRAP_METHOD(int statement_execute_non_select(const Glib::ustring& sql), gda_execute_non_select_command, errthrow)
   
   //Note that we do not add a non-const version of this because the documentation says that it should not be modified:
   _WRAP_METHOD(Glib::RefPtr<const TransactionStatus> get_transaction_status() const, gda_connection_get_transaction_status, errthrow, refreturn)

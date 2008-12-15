@@ -46,16 +46,20 @@ public:
   _WRAP_METHOD(static Glib::RefPtr<Config> get(), gda_config_get, refreturn)
   
   _WRAP_METHOD_DOCS_ONLY(gda_config_get_dsn_info)
-  static GdaDsnInfo* get_dsn_info (const Glib::ustring& dsn_name);
+  static GdaDsnInfo* get_dsn_info(const Glib::ustring& dsn_name);
     
   _WRAP_METHOD_DOCS_ONLY(gda_config_dsn_needs_authentication)
   static bool dsn_needs_authentication(const Glib::ustring& dsn_name);
+
   _WRAP_METHOD_DOCS_ONLY(gda_config_list_dsn)
   static Glib::RefPtr<DataModel> list_dsn();
+
   _WRAP_METHOD_DOCS_ONLY(gda_config_list_providers)
   static Glib::RefPtr<DataModel> list_providers();
+
   _WRAP_METHOD_DOCS_ONLY(gda_config_get_nb_dsn)
   static int get_nb_dsn();
+
   _WRAP_METHOD_DOCS_ONLY(gda_config_can_modify_system_config)
   static bool can_modify_system_config();
   
@@ -65,8 +69,8 @@ public:
   _WRAP_SIGNAL(void dsn_removed(GdaDsnInfo* info), "dsn-removed", no_default_handler)
   _WRAP_SIGNAL(void dsn_to_be_removed(GdaDsnInfo* info), "dsn-to-be-removed", no_default_handler)
 
-  _WRAP_PROPERTY("system-filename", Glib::ustring);
-  _WRAP_PROPERTY("user-filename", Glib::ustring);
+  _WRAP_PROPERTY("system-filename", Glib::ustring)
+  _WRAP_PROPERTY("user-filename", Glib::ustring)
 };
 
 } // namespace Gda

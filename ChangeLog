@@ -1,3 +1,14 @@
+2008-12-15  Murray Cumming  <murrayc@murrayc.com>
+
+	Re-committed this, calling the C function directly to avoid a non-NULL 
+	col_types parameter:
+
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg: statement_execute_select(): Add a 
+	StatementModelUsage parameter, with a default value, so we can 
+	specify a cursor model.
+	statement_execute_select_full(): Rename to statement_execute_select().
+
 2008-12-15  Johannes Schmid  <jschmid@openismus.com>
 
 	* configure.in:

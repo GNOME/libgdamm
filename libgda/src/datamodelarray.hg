@@ -59,7 +59,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<Row> get_row(int row), gda_data_model_array_get_row, errthrow)
   _WRAP_METHOD(Glib::RefPtr<const Row> get_row(int row) const, gda_data_model_array_get_row, errthrow)
     
-  _WRAP_PROPERTY("n-columns", guint);
+  _WRAP_PROPERTY("n-columns", guint)
 };
 
 } // namespace Gda
