@@ -1,5 +1,16 @@
 2008-12-15  Johannes Schmid  <jschmid@openismus.com>
 
+	* configure.in:
+	* examples/Makefile.am:
+	* examples/config/Makefile.am:
+	* examples/config/main.cc:
+	Added a tiny example to list the available providers
+	
+	* libgda/src/connection.ccg:
+	Some leftover from previous changes...
+
+2008-12-15  Johannes Schmid  <jschmid@openismus.com>
+
 	* libgda/src/connection.ccg:
 	* libgda/src/connection.hg:
 	Use gda_execute_non_select_command() instead of hardcoding

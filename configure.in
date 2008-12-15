@@ -195,5 +195,6 @@ AC_OUTPUT([
 
   examples/Makefile
     examples/simple/Makefile
+  examples/config/Makefile
 ])
 
