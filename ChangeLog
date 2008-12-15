@@ -1,3 +1,9 @@
+2008-12-15  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg: Reverted my last change because it is 
+	causing weird column-index warnings in Glom. I will try again. 
+
 2008-12-14  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/connection.ccg:
