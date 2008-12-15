@@ -58,6 +58,33 @@ class ServerOperation : public Glib::Object
   _CLASS_GOBJECT(ServerOperation, GdaServerOperation, GDA_SERVER_OPERATION, Glib::Object, GObject)
 
 public:
+  // These are from gda-easy but they fit in here best
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  static Glib::RefPtr<ServerOperation> prepare_create_database(const Glib::ustring& provider,
+                                                               const Glib::ustring& db_name);
+#else
+  static Glib::RefPtr<ServerOperation> prepare_create_database(const Glib::ustring& provider,
+                                                               const Glib::ustring& db_name,
+                                                               std::auto_ptr<Glib::Error>& error);
+#endif    
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  static Glib::RefPtr<ServerOperation> prepare_drop_database(const Glib::ustring& provider,
+                                                             const Glib::ustring& db_name);
+#else
+  static Glib::RefPtr<ServerOperation> prepare_drop_database(const Glib::ustring& provider,
+                                                             const Glib::ustring& db_name,
+                                                             std::auto_ptr<Glib::Error>& error);
+#endif 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  bool perform_drop_database(const Glib::ustring& provider);
+  bool perform_create_database(const Glib::ustring& provider);
+#else
+  bool perform_drop_database(const Glib::ustring& provider,
+                             std::auto_ptr<Glib::Error>& error);
+  bool perform_create_database(const Glib::ustring& provider,
+                               std::auto_ptr<Glib::Error>& error);
+#endif 
+
   // The C version of these take varargs for some reason.
   _WRAP_METHOD_DOCS_ONLY(gda_server_operation_get_value_at)
   Value get_value_at(const Glib::ustring& path_format) const;

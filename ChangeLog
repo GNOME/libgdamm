@@ -1,3 +1,14 @@
+2008-12-15  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg:
+	Use gda_execute_non_select_command() instead of hardcoding
+	
+	* libgda/src/serveroperation.ccg:
+	* libgda/src/serveroperation.hg:
+	Add gda_perform_create/drop_database and gda_prepare_create/drop_database from
+	gda-easy
+
 2008-12-15  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/connection.ccg:

@@ -22,6 +22,7 @@
 
 #include <libgda/gda-server-operation.h>
 #include <libgda/gda-enum-types.h>
+#include <libgda/gda-easy.h>
 #include <libgdamm/connection.h>
 
 namespace Gnome
@@ -30,13 +31,97 @@ namespace Gnome
 namespace Gda
 {
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::RefPtr<ServerOperation> ServerOperation::prepare_create_database(const Glib::ustring& provider,
+                                                                       const Glib::ustring& db_name)
+#else
+Glib::RefPtr<ServerOperation> ServerOperation::prepare_create_database(const Glib::ustring& provider,
+                                                                       const Glib::ustring& db_name,
+                                                                       std::auto_ptr<Glib::Error>& error)
+#endif
+{
+  GError* gerror = 0;
+  Glib::RefPtr<ServerOperation> op = 
+    Glib::wrap(gda_prepare_create_database(provider.c_str(), db_name.c_str(), &gerror));
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror) ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror) error = ::Glib::Error::throw_exception(gerror);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+  
+  return op;   
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::RefPtr<ServerOperation> ServerOperation::prepare_drop_database(const Glib::ustring& provider,
+                                                                     const Glib::ustring& db_name)
+#else
+Glib::RefPtr<ServerOperation> ServerOperation::prepare_drop_database(const Glib::ustring& provider,
+                                                                     const Glib::ustring& db_name,
+                                                                     std::auto_ptr<Glib::Error>& error)
+#endif
+{
+  GError* gerror = 0;
+  Glib::RefPtr<ServerOperation> op = 
+    Glib::wrap(gda_prepare_drop_database(provider.c_str(), db_name.c_str(), &gerror));
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror) ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror) error = ::Glib::Error::throw_exception(gerror);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+  
+  return op;   
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+bool ServerOperation::perform_drop_database(const Glib::ustring& provider)
+#else
+bool ServerOperation::perform_drop_database(const Glib::ustring& provider,
+                                            std::auto_ptr<Glib::Error>& error)
+#endif
+{
+  GError* gerror = 0;
+  bool retval = 
+    static_cast<bool>(gda_perform_drop_database(provider.c_str(), gobj(), &gerror));
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror) ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror) error = ::Glib::Error::throw_exception(gerror);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+  
+  return retval;
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+bool ServerOperation::perform_create_database(const Glib::ustring& provider)
+#else
+bool ServerOperation::perform_create_database(const Glib::ustring& provider,
+                                              std::auto_ptr<Glib::Error>& error)
+#endif
+{
+  GError* gerror = 0;
+  bool retval = 
+    static_cast<bool>(gda_perform_create_database(provider.c_str(), gobj(), &gerror));
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror) ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror) error = ::Glib::Error::throw_exception(gerror);
+#endif // GLIBMM_EXCEPTIONS_ENABLED
+  
+  return retval;
+}
+
 Value ServerOperation::get_value_at(const Glib::ustring& path) const
 {
   Value retval;
   const GValue* value = gda_server_operation_get_value_at(const_cast<GdaServerOperation*>(gobj()), "%s", path.c_str());
   retval.init(value);
   return retval;
-}
+}  
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 void ServerOperation::set_value_at(const Glib::ustring& path, const Glib::ustring& value)
