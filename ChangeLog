@@ -1,5 +1,12 @@
 2008-12-17  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/column.hg:
+	* libgda/src/holder.ccg: Use *set_attribute_static() for now jus t
+	to fix the build with latest libgda, though the true fix is not yet 
+	clear.
+
+2008-12-17  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/datamodel.hg:
 	* libgda/src/datamodeliter.hg:
 	* libgda/src/libgda_docs.xml:

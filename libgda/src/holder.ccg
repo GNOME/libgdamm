@@ -1,4 +1,4 @@
-// -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
+s// -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
 /* holder.cc
  * 
@@ -41,7 +41,7 @@ void Holder::set_attribute(const Glib::ustring& attribute, const Value& value)
   //Leaking is the only way to make sure that the string stays alive.
   //TODO: Fix gda_holder_set_attribute().
   gchar* dup = g_strdup(attribute.c_str());
-  gda_holder_set_attribute(gobj(), dup, (value).gobj()); 
+  gda_holder_set_attribute_static(gobj(), dup, (value).gobj()); 
 }
   
 } /* namespace Gda */
