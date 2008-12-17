@@ -52,6 +52,7 @@ class ServerProvider : public Glib::Object
 {
   _CLASS_GOBJECT(ServerProvider, GdaServerProvider, GDA_SERVER_PROVIDER, Glib::Object, GObject)
 
+public:
   _WRAP_METHOD(Glib::ustring get_version() const, gda_server_provider_get_version)
 
   _WRAP_METHOD(Glib::ustring get_server_version(const Glib::RefPtr<Connection>& cnc) const, gda_server_provider_get_server_version)
@@ -98,6 +99,7 @@ class ServerProvider : public Glib::Object
   _IGNORE(gda_server_provider_handler_declare, gda_server_provider_handler_find, 
           gda_server_provider_internal_get_parser)
 
+protected:
  //TODO: vfuncs.
 };
 

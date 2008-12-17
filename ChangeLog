@@ -1,3 +1,11 @@
+2008-12-17  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/holder.ccg: Removed an extra 's' character that made the
+	build fail. This has probably been committed accidentally.
+
+	* libgda/src/serverprovider.hg: Made all available methods public,
+	instead of private, so they can actually be used.
+
 2008-12-17  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/column.hg:
