@@ -1,3 +1,11 @@
+2008-12-17  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/datamodel.hg:
+	* libgda/src/datamodeliter.hg:
+	* libgda/src/libgda_docs.xml:
+	* libgda/src/libgda_methods.defs: Change move_at to move_to 
+	as in libgda.
+
 2008-12-15  Murray Cumming  <murrayc@murrayc.com>
 
 	Re-committed this, calling the C function directly to avoid a non-NULL 

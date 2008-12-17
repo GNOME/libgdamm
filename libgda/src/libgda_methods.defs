@@ -2502,9 +2502,9 @@
 
 ;; From gda-data-model-iter-extra.h
 
-(define-method iter_move_at_row_default
+(define-method iter_move_to_row_default
   (of-object "GdaDataModel")
-  (c-name "gda_data_model_iter_move_at_row_default")
+  (c-name "gda_data_model_iter_move_to_row_default")
   (return-type "gboolean")
   (parameters
     '("GdaDataModelIter*" "iter")
@@ -2568,9 +2568,9 @@
   )
 )
 
-(define-method move_at_row
+(define-method move_to_row
   (of-object "GdaDataModelIter")
-  (c-name "gda_data_model_iter_move_at_row")
+  (c-name "gda_data_model_iter_move_to_row")
   (return-type "gboolean")
   (parameters
     '("gint" "row")

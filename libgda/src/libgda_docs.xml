@@ -56,7 +56,7 @@ is not respected, then some unexpected results may occur.
 </return>
 </function>
 
-<function name="gda_data_model_iter_move_at_row">
+<function name="gda_data_model_iter_move_to_row">
 <description>
 Synchronizes the values of the parameters in @iter with the values at the @row row.
 
@@ -4604,7 +4604,7 @@ Creates a new iterator object #GdaDataModelIter object which can be used to iter
 rows in @model.
 
 The row the returned #GdaDataModelIter represents is undefined. For models which can be accessed 
-randomly the correspoding row can be set using gda_data_model_iter_move_at_row(), 
+randomly the correspoding row can be set using gda_data_model_iter_move_to_row(), 
 and for models which are accessible sequentially only then the first row will be
 fetched using gda_data_model_iter_move_next().
 
@@ -8233,7 +8233,7 @@ Creates a new #GdaSqlOperation structure initated with the values stored in @ope
 </return>
 </function>
 
-<function name="gda_data_model_iter_move_at_row_default">
+<function name="gda_data_model_iter_move_to_row_default">
 <description>
 
 </description>

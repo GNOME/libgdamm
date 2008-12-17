@@ -58,7 +58,7 @@ _WRAP_GERROR(DataModelIterError, GdaDataModelIterError, GDA_DATA_MODEL_ITER_ERRO
  * move_prev() method. However if the iterator is invalid, moving backwards will 
  * not be possible (on the contrary to move_next() which moves to the first row).
  *
- * The move_at_row() method, if the iterator can be moved both forward and backwards,
+ * The move_to_row() method, if the iterator can be moved both forward and backwards,
  * can move the iterator to a specific row (sometimes faster than moving it forward or backwards a number of times).
  *
  * @ingroup DataModels
@@ -76,7 +76,7 @@ public:
   _WRAP_METHOD(bool is_valid() const, gda_data_model_iter_is_valid)
   _WRAP_METHOD(bool move_next(), gda_data_model_iter_move_next)
   _WRAP_METHOD(bool move_prev(), gda_data_model_iter_move_prev)
-  _WRAP_METHOD(bool move_at_row(int row), gda_data_model_iter_move_at_row)
+  _WRAP_METHOD(bool move_to_row(int row), gda_data_model_iter_move_to_row)
   _WRAP_METHOD(int get_row() const, gda_data_model_iter_get_row)
   _WRAP_METHOD(void invalidate_contents(), gda_data_model_iter_invalidate_contents)
     
