@@ -1,3 +1,8 @@
+2008-12-18  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/serverprovider.hg: Wrap the GdaServerProviderError 
+	GError/Exception.
+
 2008-12-17  Yaakov Selkowitz  <yselkowitz@users.sourceforge.net>
 
 	* libgda/libgdamm/private/Makefile.am: (private_includedir):

@@ -34,16 +34,18 @@ namespace Gnome
 namespace Gda
 {
 
+_WRAP_GERROR(ServerProviderError, GdaServerProviderError, GDA_SERVER_PROVIDER_ERROR)
 
 class Connection;
 
 /* TODO: Is this appropriate. Investigate how it is used. */
 typedef GdaServerProviderInfo ServerProviderInfo;
 
+
 /** Base class for all the DBMS providers.
   *
   * The ServerProvider class is an abstract class which all the DBMS providers
-  * must inherit, and implement its virtual mathods.
+  * must inherit, and implement its virtual methods.
   *
   * @ingroup Connections
   */
@@ -76,7 +78,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<const DataHandler> get_data_handler_dbms(const Glib::RefPtr<Connection>& cnc,  const Glib::ustring& for_type) const, gda_server_provider_get_data_handler_dbms, constversion)
 
   _WRAP_METHOD(Glib::RefPtr<DataHandler> get_data_handler_g_type(const Glib::RefPtr<Connection>& cnc, GType for_type), gda_server_provider_get_data_handler_g_type, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<const DataHandler> get_data_handler_gtype(const Glib::RefPtr<Connection>& cnc, GType for_type) const, gda_server_provider_get_data_handler_gtype, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const DataHandler> get_data_handler_g_type(const Glib::RefPtr<Connection>& cnc, GType for_type) const, gda_server_provider_get_data_handler_g_type, refreturn, constversion)
 
   _WRAP_METHOD(Glib::ustring get_default_dbms_type(const Glib::RefPtr<Connection>& cnc, GType type) const, gda_server_provider_get_default_dbms_type)
 
