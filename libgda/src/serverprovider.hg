@@ -21,7 +21,7 @@
  */
 
 #include <libgdamm/statement.h>
-#include <libgdamm/connection.h>
+//#include <libgdamm/connection.h>
 #include <libgdamm/serveroperation.h>
 #include <libgdamm/datahandler.h>
 
@@ -36,7 +36,10 @@ namespace Gda
 
 _WRAP_GERROR(ServerProviderError, GdaServerProviderError, GDA_SERVER_PROVIDER_ERROR)
 
+_WRAP_ENUM(ConnectionFeature, GdaConnectionFeature)
+
 class Connection;
+class SqlParser;
 
 /* TODO: Is this appropriate. Investigate how it is used. */
 typedef GdaServerProviderInfo ServerProviderInfo;

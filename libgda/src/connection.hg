@@ -26,6 +26,7 @@
 #include <libgdamm/statement.h>
 #include <libgdamm/sqlparser.h>
 #include <libgdamm/serveroperation.h>
+#include <libgdamm/serverprovider.h> //For ServerProviderError, sometimes thrown by *execute*().
 #include <libgdamm/value.h>
 
 _DEFS(libgdamm,libgda)
@@ -45,7 +46,6 @@ typedef GdaServerProviderInfo ServerProviderInfo;
  */
 _WRAP_GERROR(ConnectionError, GdaConnectionError, GDA_CONNECTION_ERROR)
 
-_WRAP_ENUM(ConnectionFeature, GdaConnectionFeature)
 _WRAP_ENUM(ConnectionSchema, GdaConnectionSchema)
 _WRAP_ENUM(ConnectionOptions, GdaConnectionOptions)
 _WRAP_ENUM(ConnectionMetaType, GdaConnectionMetaType)

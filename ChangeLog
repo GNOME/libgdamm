@@ -1,5 +1,13 @@
 2008-12-18  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/connection.hg: Include serverprovider.h, because 
+	the *execute* methods may throw ServerProviderError, though that is not 
+	documented. See bug #565019.
+	* libgda/src/serverprovider.[hg|ccg]: Do not include connection.h, 
+	because that would be circular.
+
+2008-12-18  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/serverprovider.hg: Wrap the GdaServerProviderError 
 	GError/Exception.
 
