@@ -191,12 +191,21 @@ public:
 
   _WRAP_METHOD_DOCS_ONLY(gda_connection_update_meta_store)
 
+  // This updated the full meta store, we have some more convience methods to
+  // only update a portion of the store
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  // TODO: Are we sure we don't need the MetaContext parameter?
   bool update_meta_store();
+  bool update_meta_store(const Glib::ustring& id);
+  bool update_meta_store_tables();
+  bool update_meta_store_types();
 #else
   bool update_meta_store(std::auto_ptr<Glib::Error>& err);
+  bool update_meta_store(const Glib::ustring& id, std::auto_ptr<Glib::Error>& err);
+  bool update_meta_store_tables(std::auto_ptr<Glib::Error>& err);
+  bool update_meta_store_types();
 #endif
+
+  
   
   _WRAP_METHOD(bool statement_prepare(const Glib::RefPtr<Statement>& stmt), gda_connection_statement_prepare, errthrow)
 

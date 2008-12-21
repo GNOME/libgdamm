@@ -1,3 +1,14 @@
+2008-12-21  Johannes Schmid  <jhs@gnome.org>
+
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg:
+	Added some more detailed update_meta_store() methods that speed up the update
+	when only a part of the information is needed.
+	
+	* libgda/src/datamodel.hg:
+	* libgda/src/datamodeliter.hg:
+	Fixed build with latest libgda
+
 2008-12-18  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/connection.hg: Include serverprovider.h, because 

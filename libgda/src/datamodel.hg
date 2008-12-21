@@ -196,7 +196,7 @@ public:
   // It is a bit strange that those are int GdaDataModel and not in GdaDataModelIter
   _WRAP_METHOD(bool iter_move_next_default(const Glib::RefPtr<DataModelIter>& iter), gda_data_model_iter_move_next_default)
   _WRAP_METHOD(bool iter_move_prev_default(const Glib::RefPtr<DataModelIter>& iter), gda_data_model_iter_move_prev_default)    
-  _WRAP_METHOD(bool iter_move_to_row_default(const Glib::RefPtr<DataModelIter>& iter, int row), gda_data_model_iter_move_to_row_default)    
+  _WRAP_METHOD(bool iter_move_at_row_default(const Glib::RefPtr<DataModelIter>& iter, int row), gda_data_model_iter_move_at_row_default)    
     
   //These are in a private header. Ignore them:
   _IGNORE(gda_data_model_changed, gda_data_model_row_inserted, gda_data_model_row_updated, gda_data_model_row_removed, 

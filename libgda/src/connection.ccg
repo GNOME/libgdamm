@@ -305,6 +305,44 @@ bool Connection::update_meta_store(std::auto_ptr<Glib::Error>& err)
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
+bool Connection::update_meta_store(const Glib::ustring& id)
+#else
+bool Connection::update_meta_store(const Glib::ustring& id, std::auto_ptr<Glib::Error>& err)
+#endif
+{
+  GError* gerror = 0;
+  GdaMetaContext mcontext = {id.c_str(), 1, NULL, NULL};
+  const bool retvalue = gda_connection_update_meta_store(gobj(), mcontext, &gerror);
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+  
+  return retvalue;  
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+bool Connection::update_meta_store_tables()
+#else
+bool Connection::update_meta_store_tables(std::auto_ptr<Glib::Error>& err)
+#endif
+{
+  return update_meta_store("_tables");
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+bool Connection::update_meta_store_types()
+#else
+bool Connection::update_meta_store_types(std::auto_ptr<Glib::Error>& err)
+#endif
+{
+  return update_meta_store("_all_types");
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::RefPtr<DataModel> Connection::get_meta_store_data(ConnectionMetaType meta_type)
 #else
 Glib::RefPtr<DataModel> Connection::get_meta_store_data(ConnectionMetaType meta_type, std::auto_ptr<Glib::Error>& error)
