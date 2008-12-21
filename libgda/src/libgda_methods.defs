@@ -96,13 +96,6 @@
   (gtype-id "GDA_TYPE_DATA_MODEL_IMPORT")
 )
 
-(define-object DataModelQuery
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaDataModelQuery")
-  (gtype-id "GDA_TYPE_DATA_MODEL_QUERY")
-)
-
 (define-object DataProxy
   (in-module "Gda")
   (parent "GObject")
@@ -436,16 +429,6 @@
   )
 )
 
-(define-enum DataModelQueryError
-  (in-module "Gda")
-  (c-name "GdaDataModelQueryError")
-  (gtype-id "GDA_TYPE_DATA_MODEL_QUERY_ERROR")
-  (values
-    '("select-statement-error" "GDA_DATA_MODEL_QUERY_SELECT_STATEMENT_ERROR")
-    '("connection-error" "GDA_DATA_MODEL_QUERY_CONNECTION_ERROR")
-  )
-)
-
 (define-enum DataProxyError
   (in-module "Gda")
   (c-name "GdaDataProxyError")
@@ -475,10 +458,12 @@
   (c-name "GdaEasyCreateTableFlag")
   (gtype-id "GDA_TYPE_EASY_CREATE_TABLE_FLAG")
   (values
+    '("nothing-flag" "GDA_EASY_CREATE_TABLE_NOTHING_FLAG")
     '("pkey-flag" "GDA_EASY_CREATE_TABLE_PKEY_FLAG")
     '("not-null-flag" "GDA_EASY_CREATE_TABLE_NOT_NULL_FLAG")
     '("unique-flag" "GDA_EASY_CREATE_TABLE_UNIQUE_FLAG")
     '("autoinc-flag" "GDA_EASY_CREATE_TABLE_AUTOINC_FLAG")
+    '("fkey-flag" "GDA_EASY_CREATE_TABLE_FKEY_FLAG")
     '("pkey-autoinc-flag" "GDA_EASY_CREATE_TABLE_PKEY_AUTOINC_FLAG")
   )
 )
@@ -1134,6 +1119,7 @@
   (parameters
     '("const-gchar*" "attribute")
     '("const-GValue*" "value")
+    '("GDestroyNotify" "destroy")
   )
 )
 
@@ -2645,93 +2631,6 @@
 
 
 
-;; From gda-data-model-query.h
-
-(define-function gda_data_model_query_get_type
-  (c-name "gda_data_model_query_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_data_model_query_new
-  (c-name "gda_data_model_query_new")
-  (is-constructor-of "GdaDataModelQuery")
-  (return-type "GdaDataModelQuery*")
-  (parameters
-    '("GdaConnection*" "cnc")
-    '("GdaStatement*" "select_stmt")
-    '("GdaSet*" "params")
-  )
-)
-
-(define-method refresh
-  (of-object "GdaDataModelQuery")
-  (c-name "gda_data_model_query_refresh")
-  (return-type "gboolean")
-  (parameters
-    '("GError**" "error")
-  )
-)
-
-(define-method set_row_selection_condition
-  (of-object "GdaDataModelQuery")
-  (c-name "gda_data_model_query_set_row_selection_condition")
-  (return-type "gboolean")
-  (parameters
-    '("GdaSqlExpr*" "expr")
-    '("GError**" "error")
-  )
-)
-
-(define-method set_row_selection_condition_sql
-  (of-object "GdaDataModelQuery")
-  (c-name "gda_data_model_query_set_row_selection_condition_sql")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "sql_where")
-    '("GError**" "error")
-  )
-)
-
-(define-method compute_row_selection_condition
-  (of-object "GdaDataModelQuery")
-  (c-name "gda_data_model_query_compute_row_selection_condition")
-  (return-type "gboolean")
-  (parameters
-    '("GError**" "error")
-  )
-)
-
-(define-method set_modification_statement
-  (of-object "GdaDataModelQuery")
-  (c-name "gda_data_model_query_set_modification_statement")
-  (return-type "gboolean")
-  (parameters
-    '("GdaStatement*" "mod_stmt")
-    '("GError**" "error")
-  )
-)
-
-(define-method set_modification_statement_sql
-  (of-object "GdaDataModelQuery")
-  (c-name "gda_data_model_query_set_modification_statement_sql")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "sql")
-    '("GError**" "error")
-  )
-)
-
-(define-method compute_modification_statements
-  (of-object "GdaDataModelQuery")
-  (c-name "gda_data_model_query_compute_modification_statements")
-  (return-type "gboolean")
-  (parameters
-    '("GError**" "error")
-  )
-)
-
-
-
 ;; From gda-data-proxy.h
 
 (define-function gda_data_proxy_get_type
@@ -3055,6 +2954,12 @@
   )
 )
 
+(define-method get_connection
+  (of-object "GdaDataSelect")
+  (c-name "gda_data_select_get_connection")
+  (return-type "GdaConnection*")
+)
+
 
 
 ;; From gda-debug-macros.h
@@ -3109,6 +3014,7 @@
   (c-name "gda_perform_create_database")
   (return-type "gboolean")
   (parameters
+    '("const-gchar*" "provider")
     '("GdaServerOperation*" "op")
     '("GError**" "error")
   )
@@ -3128,6 +3034,7 @@
   (c-name "gda_perform_drop_database")
   (return-type "gboolean")
   (parameters
+    '("const-gchar*" "provider")
     '("GdaServerOperation*" "op")
     '("GError**" "error")
   )
@@ -3649,6 +3556,7 @@
   (parameters
     '("const-gchar*" "attribute")
     '("const-GValue*" "value")
+    '("GDestroyNotify" "destroy")
   )
 )
 
@@ -3888,6 +3796,7 @@
   (parameters
     '("const-gchar*" "att_name")
     '("const-GValue*" "value")
+    '("GDestroyNotify" "destroy")
   )
 )
 
@@ -3943,6 +3852,15 @@
 (define-method complement_default
   (of-object "GdaMetaStruct")
   (c-name "gda_meta_struct_complement_default")
+  (return-type "gboolean")
+  (parameters
+    '("GError**" "error")
+  )
+)
+
+(define-method complement_all
+  (of-object "GdaMetaStruct")
+  (c-name "gda_meta_struct_complement_all")
   (return-type "gboolean")
   (parameters
     '("GError**" "error")
@@ -4564,7 +4482,7 @@
   (parameters
     '("GdaConnection*" "cnc")
     '("const-gchar*" "string")
-    '("GType" "prefered_type")
+    '("GType" "preferred_type")
     '("gchar**" "dbms_type")
   )
 )
@@ -5284,6 +5202,14 @@
   (parameters
     '("const-guchar*" "val")
     '("glong" "size")
+  )
+)
+
+(define-function gda_value_new_blob_from_file
+  (c-name "gda_value_new_blob_from_file")
+  (return-type "GValue*")
+  (parameters
+    '("const-gchar*" "filename")
   )
 )
 

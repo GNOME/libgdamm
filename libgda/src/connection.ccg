@@ -311,8 +311,8 @@ bool Connection::update_meta_store(const Glib::ustring& id, std::auto_ptr<Glib::
 #endif
 {
   GError* gerror = 0;
-  GdaMetaContext mcontext = {id.c_str(), 1, NULL, NULL};
-  const bool retvalue = gda_connection_update_meta_store(gobj(), mcontext, &gerror);
+  GdaMetaContext mcontext = {const_cast<gchar*>(id.c_str()), 1, NULL, NULL};
+  const bool retvalue = gda_connection_update_meta_store(gobj(), &mcontext, &gerror);
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);

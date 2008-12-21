@@ -1,4 +1,14 @@
-2008-12-21  Johannes Schmid  <jhs@gnome.org>
+2008-12-21  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/connection.ccg:
+	* libgda/src/libgda_methods.defs:
+	Regenerated devs and fixed build
+
+	* libgda/src/datamodel.hg:
+	* libgda/src/datamodeliter.hg:
+	Revert last change - it was wrong
+
+2008-12-21  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/connection.ccg:
 	* libgda/src/connection.hg:
