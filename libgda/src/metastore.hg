@@ -60,8 +60,12 @@ public:
   _WRAP_CREATE(const Glib::ustring& cnc_string)
   
   _WRAP_METHOD(int get_version() const, gda_meta_store_get_version)
-  //TODO: varargs: extract(), modify()
-  
+  _WRAP_METHOD_DOCS_ONLY (gda_meta_store_extract);
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  Glib::RefPtr<DataModel> extract(const Glib::ustring& sql);
+#else
+  Glib::RefPtr<DataModel> extract(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& err);
+#endif  
   _IGNORE (gda_meta_store_modify_with_context)
   //_WRAP_METHOD(bool modify_with_context (MetaContext* context, const Glib::RefPtr<DataModel>& new_data), gda_meta_store_modify_with_context, errthrow)
   _WRAP_METHOD(Glib::RefPtr<DataModel> create_modify_data_model(const Glib::ustring& table_name), gda_meta_store_create_modify_data_model)

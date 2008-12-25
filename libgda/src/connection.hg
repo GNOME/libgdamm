@@ -189,23 +189,41 @@ public:
 
   _WRAP_METHOD(Glib::ustring get_provider_name() const, gda_connection_get_provider_name)
 
-  _WRAP_METHOD_DOCS_ONLY(gda_connection_update_meta_store)
-
   // This updated the full meta store, we have some more convience methods to
   // only update a portion of the store
+  _IGNORE(gda_connection_update_meta_store)
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  /** Update the full meta store information.
+   * 
+   * Note that this may take some time for big databases
+   * @return <tt>true</tt> if no error occurred.
+   */
   bool update_meta_store();
+  /** Update the meta store information @a id
+   * 
+   * This can speed up the update of the meta store if you only need a 
+   * specific information
+   * @param id An id for the information to update (see http://library.gnome.org/devel/libgda/unstable/information_schema.html)
+   * @return <tt>true</tt> if no error occurred.
+   */
   bool update_meta_store(const Glib::ustring& id);
-  bool update_meta_store_tables();
-  bool update_meta_store_types();
 #else
   bool update_meta_store(std::auto_ptr<Glib::Error>& err);
   bool update_meta_store(const Glib::ustring& id, std::auto_ptr<Glib::Error>& err);
-  bool update_meta_store_tables(std::auto_ptr<Glib::Error>& err);
-  bool update_meta_store_types();
 #endif
 
-  
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  /** Update the meta store information for the table named @a table_name
+   * 
+   * This can speed up the update of the meta store if you only need the information
+   * for a specific table
+   * @param table_name Name of the table where the information is needed
+   * @return <tt>true</tt> if no error occurred.
+   */
+  bool update_meta_store_table(const Glib::ustring& table_name);
+#else
+  bool update_meta_store_table(const Glib::ustring& table_name, std::auto_ptr<Glib::Error>& err);
+#endif
   
   _WRAP_METHOD(bool statement_prepare(const Glib::RefPtr<Statement>& stmt), gda_connection_statement_prepare, errthrow)
 
@@ -220,8 +238,8 @@ public:
   Glib::RefPtr<DataModel> Connection::get_meta_store_data(ConnectionMetaType meta_type, std::auto_ptr<Glib::Error>& error);
   #endif //GLIBMM_EXCEPTIONS_ENABLED
 
-  _WRAP_METHOD(Glib::RefPtr<MetaStore> get_meta_store(), gda_connection_get_meta_store)
-  _WRAP_METHOD(Glib::RefPtr<const MetaStore> get_meta_store() const, gda_connection_get_meta_store, consversion)
+  _WRAP_METHOD(Glib::RefPtr<MetaStore> get_meta_store(), gda_connection_get_meta_store, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const MetaStore> get_meta_store() const, gda_connection_get_meta_store, constversion)
 
   #m4 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<Glib::Object> >',`$2((GSList*)$3, Glib::OWNERSHIP_SHALLOW)')
   _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<Glib::Object> > batch_execute(const Glib::RefPtr<Batch>& batch, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage), gda_connection_batch_execute, errthrow)

@@ -1,3 +1,16 @@
+2008-12-25  Johannes  <jschmid@openismus.com>
+
+	* examples/simple/main.cc:
+	Added some meta store example though I am not quite sure yet what information
+	would be a good example here
+	
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg:
+	* libgda/src/metastore.ccg:
+	* libgda/src/metastore.hg:
+	Added several methods to update specific meta store informations and fixed
+	a refreturn
+
 2008-12-21  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/connection.ccg:

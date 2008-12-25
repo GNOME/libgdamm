@@ -77,23 +77,13 @@ create_table(const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr<Gda::S
  * display the contents of the 'products' table 
  */
 void
-display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr<Gda::SqlParser>& parser)
+display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc)
 {
   const Glib::ustring sql = "SELECT ref, name, price FROM products";
-  Glib::RefPtr<Gda::Statement> stmt;
-  try
-  {
-    stmt =  parser->parse_string (sql);
-  }
-  catch(const Glib::Error& err)
-  {
-    std::cerr << "Error: " << err.what() << std::endl;
-    return;
-  }
   Glib::RefPtr<Gda::DataModel> data_model;
   try
   {
-    data_model = cnc->statement_execute_select (stmt);
+    data_model = cnc->statement_execute_select (sql);
   }
   catch(const Glib::Error& err)
   { 
@@ -101,8 +91,31 @@ display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc, const Glib:
       << err.what() << std::endl;
     return;
   }
+  std::cout << data_model->dump_as_string() << std::endl;	
+}
 
-  std::cout << data_model->dump_as_string() << std::endl;
+void display_meta_store(Glib::RefPtr<Gda::Connection>& cnc)
+{
+  Glib::RefPtr<Gda::DataModel> model;
+  try
+  {
+    // Update the meta store
+    cnc->update_meta_store_table("products");
+    
+    // Receive meta store data
+    Glib::RefPtr<Gda::MetaStore> store = 
+          cnc->get_meta_store();
+    model =
+      store->extract("SELECT * FROM _tables");
+    
+  }
+  catch (const Glib::Error& err)
+  {
+     std::cout << "display meta store failed: " 
+      << err.what() << std::endl;
+    return;
+  }
+  std::cout << model->dump_as_string() << std::endl;
 }
 
 int main (int argc, char** argv)
@@ -126,7 +139,8 @@ int main (int argc, char** argv)
     parser = Gda::SqlParser::create();
   
   create_table(cnc, parser);
-  display_products_contents(cnc, parser);
+  display_products_contents(cnc);
+  display_meta_store(cnc);
   
   return 0;
 }
