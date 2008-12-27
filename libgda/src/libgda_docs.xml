@@ -32,30 +32,6 @@ Creates a new string description of the ORDER BY clausure used in a SELECT state
 </return>
 </function>
 
-<function name="gda_quark_list_new_from_string">
-<description>
-Creates a new #GdaQuarkList given a string.
-
-@string must be a semi-colon separated list of &quot;&amp;lt;key&amp;gt;=&amp;lt;value&amp;gt;&quot; strings (for example
-&quot;DB_NAME=notes;USERNAME=alfred&quot;). Each key and value must respect the RFC 1738 recommendations: the
-&amp;lt;constant&amp;gt;&amp;lt;&amp;gt;&amp;quot;#%{}|\^~[]&amp;apos;`;/?:@=&amp;amp;&amp;lt;/constant&amp;gt; and space characters are replaced by 
-&amp;lt;constant&amp;gt;&amp;quot;%%ab&amp;quot;&amp;lt;/constant&amp;gt; where
-&amp;lt;constant&amp;gt;ab&amp;lt;/constant&amp;gt; is the hexadecimal number corresponding to the character (for example the
-&quot;DB_NAME=notes;USERNAME=al%%20fred&quot; string will specify a username as &quot;al fred&quot;). If this formalism
-is not respected, then some unexpected results may occur.
-
-
-</description>
-<parameters>
-<parameter name="string">
-<parameter_description> a string.
-</parameter_description>
-</parameter>
-</parameters>
-<return> the newly created #GdaQuarkList.
-</return>
-</function>
-
 <function name="gda_connection_get_prepared_statement">
 <description>
 Retreives a pointer to an object representing a prepared statement for @gda_stmt within @cnc. The

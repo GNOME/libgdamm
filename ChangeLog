@@ -1,5 +1,10 @@
 2008-12-27  Johannes Schmid <jschmid@openismus.com>
 
+	* libgda/src/libgda_docs.xml:
+	Regenerated from latest gda (and slightly edited to fix build)
+
+2008-12-27  Johannes Schmid <jschmid@openismus.com>
+
 	* docs/reference/Doxyfile.in:
 	Fixed some doxygen warnings
 	
