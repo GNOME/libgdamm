@@ -1,4 +1,16 @@
-2008-12-25  Johannes  <jschmid@openismus.com>
+2008-12-27  Johannes Schmid <jschmid@openismus.com>
+
+	* docs/reference/Doxyfile.in:
+	Fixed some doxygen warnings
+	
+	* libgda/src/libgda_docs.xml:
+	Updated documentation
+	
+	* libgda/src/metastore.ccg:
+	* libgda/src/quarklist.hg:
+	Fixed build
+
+2008-12-25  Johannes Schmid <jschmid@openismus.com>
 
 	* examples/simple/main.cc:
 	Added some meta store example though I am not quite sure yet what information

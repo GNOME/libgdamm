@@ -34,7 +34,7 @@ Glib::RefPtr<DataModel> MetaStore::extract(const Glib::ustring& sql, std::auto_p
 #endif
 {
   GError* gerror = 0;
-  bool retval = gda_meta_store_extract(gobj(), sql.c_str(), &gerror);
+  Glib::RefPtr<DataModel> retval = Glib::wrap(gda_meta_store_extract(gobj(), sql.c_str(), &gerror));
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);

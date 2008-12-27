@@ -56,32 +56,6 @@ is not respected, then some unexpected results may occur.
 </return>
 </function>
 
-<function name="gda_data_model_iter_move_to_row">
-<description>
-Synchronizes the values of the parameters in @iter with the values at the @row row.
-
-If @row is not a valid row, then the returned value is FALSE, and the &quot;current-row&quot;
-property is set to -1 (which means that gda_data_model_iter_is_valid() would return FALSE)
-
-If any other error occurred then the returned value is FALSE, but the &quot;current-row&quot;
-property is set to the @row row.
-
-
-</description>
-<parameters>
-<parameter name="iter">
-<parameter_description> a #GdaDataModelIter object
-</parameter_description>
-</parameter>
-<parameter name="row">
-<parameter_description> the row to set @iter to
-</parameter_description>
-</parameter>
-</parameters>
-<return> TRUE if no error occurred
-</return>
-</function>
-
 <function name="gda_connection_get_prepared_statement">
 <description>
 Retreives a pointer to an object representing a prepared statement for @gda_stmt within @cnc. The
@@ -331,20 +305,6 @@ can also be used in hash tables as a #GEqualFunc.
 </return>
 </function>
 
-<function name="gda_connection_event_get_source">
-<description>
-
-</description>
-<parameters>
-<parameter name="event">
-<parameter_description> a #GdaConnectionEvent.
-</parameter_description>
-</parameter>
-</parameters>
-<return> @event&apos;s source. 
-</return>
-</function>
-
 <function name="gda_data_proxy_get_value_attributes">
 <description>
 Get the attributes of the value stored at (proxy_row, col) in @proxy, which
@@ -370,24 +330,17 @@ is an ORed value of #GdaValueAttribute flags
 </return>
 </function>
 
-<function name="gda_holder_get_value_str">
+<function name="gda_connection_event_get_source">
 <description>
-Same functionality as gda_holder_get_value() except that it returns the value as a string
-(the conversion is done using @dh if not %NULL, or the default data handler otherwise).
-
 
 </description>
 <parameters>
-<parameter name="holder">
-<parameter_description> a #GdaHolder object
-</parameter_description>
-</parameter>
-<parameter name="dh">
-<parameter_description> a #GdaDataHandler to use, or %NULL
+<parameter name="event">
+<parameter_description> a #GdaConnectionEvent.
 </parameter_description>
 </parameter>
 </parameters>
-<return> the value, or %NULL
+<return> @event&apos;s source. 
 </return>
 </function>
 
@@ -446,19 +399,19 @@ connections registered with @xa_trans.
 <return></return>
 </function>
 
-<function name="gda_sql_operation_new">
+<function name="gda_holder_get_bind">
 <description>
-Creates a new #GdaSqlOperation structure and sets its parent to @parent.
+Get the holder which makes @holder change its value when the holder&apos;s value is changed.
 
 
 </description>
 <parameters>
-<parameter name="parent">
-<parameter_description> a #GdaSqlExpr structure
+<parameter name="holder">
+<parameter_description> a #GdaHolder
 </parameter_description>
 </parameter>
 </parameters>
-<return> a new #GdaSqlOperation structure.
+<return> the #GdaHolder or %NULL
 </return>
 </function>
 
@@ -682,50 +635,47 @@ provided. For example for a simple string, this would return a new value contain
 </return>
 </function>
 
-<function name="gda_data_comparator_get_diff">
+<function name="gda_vconnection_hub_foreach">
 <description>
-Get a pointer to the #GdaDiff structure representing the difference which number is @pos
-
+Call @func for each #GdaConnection represented in @hub.
 
 </description>
 <parameters>
-<parameter name="comp">
-<parameter_description> a #GdaDataComparator object
+<parameter name="hub">
+<parameter_description> a #GdaVconnectionHub connection
 </parameter_description>
 </parameter>
-<parameter name="pos">
-<parameter_description> the requested difference number (starting at 0)
+<parameter name="func">
+<parameter_description> a #GdaVConnectionDataModelFunc function pointer
+</parameter_description>
+</parameter>
+<parameter name="data">
+<parameter_description> data to pass to @cunc calls
 </parameter_description>
 </parameter>
 </parameters>
-<return> a pointer to a #GdaDiff, or %NULL if @pos is invalid
-</return>
+<return></return>
 </function>
 
-<function name="gda_data_model_append_values">
+<function name="gda_config_list_dsn">
 <description>
-Appends a row to the given data model. If any value in @values is actually %NULL, then 
-it is considered as a default value.
+Get a #GdaDataModel representing all the configured DSN, and keeping itself up to date with
+the changes in the declared DSN.
+
+The returned data model is composed of the following columns:
+&amp;lt;itemizedlist&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;DSN name&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;Provider name&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;Description&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;Connection string&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;Username if it exists&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;/itemizedlist&amp;gt;
 
 
 </description>
 <parameters>
-<parameter name="model">
-<parameter_description> a #GdaDataModel object.
-</parameter_description>
-</parameter>
-<parameter name="values">
-<parameter_description> #GList of #GValue* representing the row to add.  The
-length must match model&apos;s column count.  These #GValue
-are value-copied (the user is still responsible for freeing them).
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> a place to store errors, or %NULL
-</parameter_description>
-</parameter>
 </parameters>
-<return> the number of the added row, or -1 if an error occurred
+<return> a new #GdaDataModel
 </return>
 </function>
 
@@ -834,21 +784,6 @@ Get a string version of @type
 </parameters>
 <return> a non %NULL string (do not free or modify)
 </return>
-</function>
-
-<function name="gda_connection_close">
-<description>
-Closes the connection to the underlying data source, but first emits the 
-&quot;conn-to-close&quot; signal.
-
-</description>
-<parameters>
-<parameter name="cnc">
-<parameter_description> a #GdaConnection object.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
 </function>
 
 <function name="gda_mutex_lock">
@@ -1008,6 +943,22 @@ Sets a value in @iter, at the column specified by @col
 </return>
 </function>
 
+<function name="gda_server_provider_get_version">
+<description>
+Get the version of the provider.
+
+
+</description>
+<parameters>
+<parameter name="provider">
+<parameter_description> a #GdaServerProvider object.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a string containing the version identification.
+</return>
+</function>
+
 <function name="gda_server_provider_blob_list_for_delete">
 <description>
 Create a SELECT query from a DELETE query which lists all the BLOB fields in the
@@ -1132,34 +1083,6 @@ Create a new #GdaMetaStore object.
 </parameter>
 </parameters>
 <return> the newly created object, or %NULL if an error occurred
-</return>
-</function>
-
-<function name="gda_batch_get_parameters">
-<description>
-Get a new #GdaSet object which groups all the execution parameters
-which @batch needs for all the statements it includes.
-This new object is returned though @out_params.
-
-Note that if @batch does not need any parameter, then @out_params is set to %NULL.
-
-
-</description>
-<parameters>
-<parameter name="batch">
-<parameter_description> a #GdaBatch object
-</parameter_description>
-</parameter>
-<parameter name="out_params">
-<parameter_description> a place to store a new #GdaSet object, or %NULL
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> a place to store errors, or %NULL
-</parameter_description>
-</parameter>
-</parameters>
-<return> TRUE if no error occurred.
 </return>
 </function>
 
@@ -1873,20 +1796,6 @@ using g_free();
 </return>
 </function>
 
-<function name="gda_mutex_new">
-<description>
-Creates a new #GdaMutex.
-
-Note: Unlike g_mutex_new(), this function will return %NULL if g_thread_init() has not been called yet.
-
-
-</description>
-<parameters>
-</parameters>
-<return> a new #GdaMutex
-</return>
-</function>
-
 <function name="gda_value_new_binary">
 <description>
 Makes a new #GValue of type #GDA_TYPE_BINARY with value @val.
@@ -1925,28 +1834,18 @@ Informs @pstmt that it corresponds to the preparation of the @stmt statement
 <return></return>
 </function>
 
-<function name="gda_meta_store_schema_get_depend_tables">
+<function name="gda_sql_operator_from_string">
 <description>
-
-Get an ordered list of the tables @store knows about on which the @table_name table depends (recursively). 
-The tables are ordered in a way that tables dependencies
-are respected: if table B has a foreign key on table A, then table A will be listed before table B in the returned
-list.
-
+Returns: #GdaSqlOperatorType
 
 </description>
 <parameters>
-<parameter name="store">
-<parameter_description> a #GdaMetaStore object
-</parameter_description>
-</parameter>
-<parameter name="table_name">
-<parameter_description> the name of the table for which all the dependencies must be listed
+<parameter name="op">
+<parameter_description> a #GdaSqlOperation structure
 </parameter_description>
 </parameter>
 </parameters>
-<return> a new list of tables names (as gchar*), the list must be freed when no longer needed, 
-but the strings present in the list must not be modified.
+<return> #GdaSqlOperatorType
 </return>
 </function>
 
@@ -1965,6 +1864,27 @@ but the strings present in the list must not be modified.
 </parameter>
 </parameters>
 <return> the minimum number of items in the sequence at @path, or 0 if @path is not a sequence node
+</return>
+</function>
+
+<function name="gda_meta_struct_complement_all">
+<description>
+This method is similar to gda_meta_struct_complement() and gda_meta_struct_complement_default()
+but creates #GdaMetaDbObject for all the database object.
+
+
+</description>
+<parameters>
+<parameter name="mstruct">
+<parameter_description> a #GdaMetaStruct object
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a place to store errors, or %NULL
+</parameter_description>
+</parameter>
+</parameters>
+<return> TRUE if no error occurred
 </return>
 </function>
 
@@ -2385,20 +2305,17 @@ occurence of &quot;&apos;&quot; with &quot;&apos;&apos;&quot; and &quot;\&quot; 
 <return></return>
 </function>
 
-<function name="gda_data_model_import_new_xml_node">
+<function name="gda_mutex_new">
 <description>
-Creates a new #GdaDataModel and loads the data in @node. The resulting data model
-can be accessed in a random way.
+Creates a new #GdaMutex.
+
+Note: Unlike g_mutex_new(), this function will return %NULL if g_thread_init() has not been called yet.
 
 
 </description>
 <parameters>
-<parameter name="node">
-<parameter_description> an XML node corresponding to a &amp;lt;data-array&amp;gt; tag
-</parameter_description>
-</parameter>
 </parameters>
-<return> a pointer to the newly created #GdaDataModel.
+<return> a new #GdaMutex
 </return>
 </function>
 
@@ -2419,37 +2336,27 @@ and optionaly a &amp;lt;password&amp;gt; are specified, they are ignored.
 </return>
 </function>
 
-<function name="gda_batch_new">
+<function name="gda_config_get_provider_info">
 <description>
-Creates a new #GdaBatch object
+Get some information about the a database provider (adaptator) named 
+@provider_name
 
 
 </description>
 <parameters>
+<parameter name="provider_name">
+<parameter_description>
+</parameter_description>
+</parameter>
 </parameters>
-<return> the new object
+<return> a pointer to read-only #GdaProviderInfo structure, or %NULL if not found
 </return>
 </function>
 
-<function name="gda_holder_set_value">
+<function name="gda_holder_get_value_str">
 <description>
-Sets the value within the holder. If @holder is an alias for another
-holder, then the value is also set for that other holder.
-
-On success, the action of any call to gda_holder_force_invalid() is cancelled
-as soon as this method is called (even if @holder&apos;s value does not actually change)
-
-If the value is not different from the one already contained within @holder,
-then @holder is not changed and no signal is emitted.
-
-Note1: the @value argument is treated the same way if it is %NULL or if it is a #GDA_TYPE_NULL value
-
-Note2: if @holder can&apos;t accept the @value value, then this method returns FALSE, and @holder will be left
-in an invalid state.
-
-Note3: before the change is accepted by @holder, the &quot;validate-change&quot; signal will be emitted (the value
-of which can prevent the change from happening) which can be connected to to have a greater control
-of which values @holder can have, or implement some business rules.
+Same functionality as gda_holder_get_value() except that it returns the value as a string
+(the conversion is done using @dh if not %NULL, or the default data handler otherwise).
 
 
 </description>
@@ -2458,16 +2365,12 @@ of which values @holder can have, or implement some business rules.
 <parameter_description> a #GdaHolder object
 </parameter_description>
 </parameter>
-<parameter name="value">
-<parameter_description> a value to set the holder to, or %NULL
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> a place to store errors, or %NULL
+<parameter name="dh">
+<parameter_description> a #GdaDataHandler to use, or %NULL
 </parameter_description>
 </parameter>
 </parameters>
-<return> TRUE if value has been set
+<return> the value, or %NULL
 </return>
 </function>
 
@@ -2587,6 +2490,31 @@ updated followed by the new @GValue to set, finished by %NULL
 </return>
 </function>
 
+<function name="gda_data_select_set_row_selection_condition">
+<description>
+Offers the same features as gda_data_select_set_row_selection_condition_sql() but using a #GdaSqlExpr
+structure instead of an SQL syntax.
+
+
+</description>
+<parameters>
+<parameter name="model">
+<parameter_description> a #GdaDataSelect data model
+</parameter_description>
+</parameter>
+<parameter name="expr">
+<parameter_description> a #GdaSqlExpr expression
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a place to store errors, or %NULL
+</parameter_description>
+</parameter>
+</parameters>
+<return> TRUE if no error occurred
+</return>
+</function>
+
 <function name="gda_data_proxy_get_filtered_n_rows">
 <description>
 Get the total number of filtered rows in @proxy if a filter has been applied. As new rows
@@ -2679,24 +2607,19 @@ default value, the precision and scale for numeric values.
 </return>
 </function>
 
-<function name="gda_set_get_source">
+<function name="gda_sql_select_target_copy">
 <description>
-Finds a #GdaSetSource which contains the #GdaDataModel restricting the possible values of
-@holder, don&apos;t modify the returned structure.
+Creates a new #GdaSqlSelectTarget structure initated with the values stored in @target.
 
 
 </description>
 <parameters>
-<parameter name="set">
-<parameter_description> a #GdaSet object
-</parameter_description>
-</parameter>
-<parameter name="holder">
-<parameter_description> a #GdaHolder object
+<parameter name="target">
+<parameter_description> a #GdaSqlSelectTarget structure to be copied
 </parameter_description>
 </parameter>
 </parameters>
-<return> a #GdaSetSource or %NULL
+<return> a new #GdaSqlSelectTarget structure.
 </return>
 </function>
 
@@ -2814,20 +2737,45 @@ of gda_xa_transaction_id_to_string().
 </return>
 </function>
 
-<function name="gda_alphanum_to_text">
+<function name="gda_holder_set_attribute">
 <description>
-Does the opposite of gda_text_to_alphanum(), in the same string 
+Set the value associated to a named attribute. The @attribute string is &apos;stolen&apos; by this method, and
+the memory it uses will be freed using the @destroy function when no longer needed (if @destroy is %NULL,
+then the string will not be freed at all).
 
+Attributes can have any name, but Libgda proposes some default names, 
+see &amp;lt;link linkend=&quot;libgda-40-Attributes-manager.synopsis&quot;&amp;gt;this section&amp;lt;/link&amp;gt;.
+
+For example one would use it as:
+
+&amp;lt;code&amp;gt;
+gda_holder_set_attribute (holder, g_strdup (my_attribute), g_free, my_value);
+gda_holder_set_attribute (holder, GDA_ATTRIBUTE_NAME, NULL, my_value);
+&amp;lt;/code&amp;gt;
+
+If there is already an attribute named @attribute set, then its value is replaced with the new value (@value is
+copied), except if @value is %NULL, in which case the attribute is removed.
 
 </description>
 <parameters>
-<parameter name="text">
-<parameter_description>
+<parameter name="holder">
+<parameter_description> a #GdaHolder
+</parameter_description>
+</parameter>
+<parameter name="attribute">
+<parameter_description> attribute name
+</parameter_description>
+</parameter>
+<parameter name="value">
+<parameter_description> a #GValue, or %NULL
+</parameter_description>
+</parameter>
+<parameter name="destroy">
+<parameter_description> a function to be called when @attribute is not needed anymore, or %NULL
 </parameter_description>
 </parameter>
 </parameters>
-<return> @text if conversion succedded or %NULL if an error occurred
-</return>
+<return></return>
 </function>
 
 <function name="gda_attributes_manager_free">
@@ -2927,25 +2875,6 @@ data model.
 </parameter>
 <parameter name="position">
 <parameter_description> the wanted position of the column in the containing data model.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_connection_del_prepared_statement">
-<description>
-Removes any prepared statement associated to @gda_stmt in @cnc: this undoes what
-gda_connection_add_prepared_statement() does.
-
-</description>
-<parameters>
-<parameter name="cnc">
-<parameter_description> a #GdaConnection object
-</parameter_description>
-</parameter>
-<parameter name="gda_stmt">
-<parameter_description> a #GdaStatement object
 </parameter_description>
 </parameter>
 </parameters>
@@ -3124,6 +3053,31 @@ create an entry in the hash table with a negative value.
 </return>
 </function>
 
+<function name="gda_meta_store_schema_get_depend_tables">
+<description>
+
+Get an ordered list of the tables @store knows about on which the @table_name table depends (recursively). 
+The tables are ordered in a way that tables dependencies
+are respected: if table B has a foreign key on table A, then table A will be listed before table B in the returned
+list.
+
+
+</description>
+<parameters>
+<parameter name="store">
+<parameter_description> a #GdaMetaStore object
+</parameter_description>
+</parameter>
+<parameter name="table_name">
+<parameter_description> the name of the table for which all the dependencies must be listed
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new list of tables names (as gchar*), the list must be freed when no longer needed, 
+but the strings present in the list must not be modified.
+</return>
+</function>
+
 <function name="gda_sql_select_from_take_new_target">
 <description>
 Append @target to the targets in the FROM clausure and set @target&apos;s parent to
@@ -3154,15 +3108,6 @@ given connection.
 <parameter_description> a #GdaConnection object.
 </parameter_description>
 </parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_data_model_iter_move_prev_default">
-<description>
-
-</description>
-<parameters>
 </parameters>
 <return></return>
 </function>
@@ -3356,6 +3301,22 @@ the return value is also %NULL.
 </return>
 </function>
 
+<function name="gda_holder_value_is_default">
+<description>
+Tells if @holder&apos;s current value is the default one.
+
+
+</description>
+<parameters>
+<parameter name="holder">
+<parameter_description> a #GdaHolder object
+</parameter_description>
+</parameter>
+</parameters>
+<return> TRUE if @holder @holder&apos;s current value is the default one
+</return>
+</function>
+
 <function name="gda_sql_select_join_serialize">
 <description>
 Creates a new string description of the join used in a SELECT statement.
@@ -3387,9 +3348,11 @@ Creates a new string description of the join used in a SELECT statement.
 Associates an attribute named @att_name to @ptr, with the value @value. Any previous association is replaced by
 this one, and if @value is %NULL then the association is removed.
 
-Note: @att_name is *not* copied, so it should be a static string, or a string which exists as long as @mgr exists (or,
-in case @ptr is an object, as long as that object exists). Libgda provides several predefined names for common attributes,
+Note: @att_name is *not* copied, so it should be a string which exists as long as @mgr exists.
+Libgda provides several predefined names for common attributes,
 see &amp;lt;link linkend=&quot;libgda-40-Attributes-manager.synopsis&quot;&amp;gt;this section&amp;lt;/link&amp;gt;.
+
+If @att_name needs to be freed when not used anymore, then use gda_attributes_manager_set_full().
 
 </description>
 <parameters>
@@ -3402,7 +3365,7 @@ see &amp;lt;link linkend=&quot;libgda-40-Attributes-manager.synopsis&quot;&amp;g
 </parameter_description>
 </parameter>
 <parameter name="att_name">
-<parameter_description> an attribute&apos;s name, as a *static* string
+<parameter_description> an attribute&apos;s name
 </parameter_description>
 </parameter>
 <parameter name="value">
@@ -3429,38 +3392,46 @@ Creates a new #GdaSqlCase structure initated with the values stored in @sc.
 </return>
 </function>
 
-<function name="gda_log_message">
+<function name="gda_data_comparator_set_key_columns">
 <description>
-Logs the given message in the GDA log file.
+Defines the columns which will be used as a key when searching data. This is not mandatory but
+will speed things up as less data will be processed.
 
 </description>
 <parameters>
-<parameter name="format">
-<parameter_description> format string (see the printf(3) documentation).
+<parameter name="comp">
+<parameter_description> a #GdaDataComparator object
 </parameter_description>
 </parameter>
-<parameter name="Varargs">
-<parameter_description> arguments to insert in the message.
+<parameter name="nb_cols">
+<parameter_description> the size of the @col_numbers array
+</parameter_description>
+</parameter>
+<parameter name="col_numbers">
+<parameter_description> a array of @nb_cols values
 </parameter_description>
 </parameter>
 </parameters>
 <return></return>
 </function>
 
-<function name="gda_data_proxy_get_sample_end">
+<function name="gda_handler_time_get_no_locale_str_from_value">
 <description>
-Get the row number of the last row to be displayed.
-
+Retunrs: a new string representing @value without taking the current
+locele into account
 
 </description>
 <parameters>
-<parameter name="proxy">
-<parameter_description> a #GdaDataProxy object
+<parameter name="hdl">
+<parameter_description> a #GdaHandlerTime object
+</parameter_description>
+</parameter>
+<parameter name="value">
+<parameter_description> a GValue value
 </parameter_description>
 </parameter>
 </parameters>
-<return> the number of the last row being displayed.
-</return>
+<return></return>
 </function>
 
 <function name="gda_connection_event_set_source">
@@ -3656,24 +3627,24 @@ provider being used does not support it.
 <return></return>
 </function>
 
-<function name="gda_sql_field_take_name">
+<function name="gda_config_remove_dsn">
 <description>
-Sets the field&apos;s name using the string holded by @value. When call, @value is freed using
-#gda_value_free().
+Add or update a DSN from the definition in @info
 
 
 </description>
 <parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlField structure
+<parameter name="dsn_name">
+<parameter_description> the name of the DSN to remove
 </parameter_description>
 </parameter>
-<parameter name="value">
-<parameter_description> a #GValue holding a string to take from
+<parameter name="error">
+<parameter_description> a place to store errors, or %NULL
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> TRUE if no error occurred
+</return>
 </function>
 
 <function name="gda_sql_field_copy">
@@ -3692,18 +3663,19 @@ Creates a new GdaSqlField structure initated with the values stored in @field.
 </return>
 </function>
 
-<function name="gda_value_get_geometric_point">
+<function name="gda_sql_expr_free">
 <description>
+Frees a #GdaSqlExpr structure and its members.
+
 
 </description>
 <parameters>
-<parameter name="value">
-<parameter_description> a #GValue whose value we want to get.
+<parameter name="expr">
+<parameter_description> a #GdaSqlExpr to be freed.
 </parameter_description>
 </parameter>
 </parameters>
-<return> the value stored in @value.
-</return>
+<return></return>
 </function>
 
 <function name="gda_rfc1738_encode">
@@ -3725,23 +3697,18 @@ Encodes @string using the RFC 1738 recommendations: the
 </return>
 </function>
 
-<function name="gda_config_get_dsn_info">
+<function name="gda_sql_operation_operator_to_string">
 <description>
-Get information about the DSN named @dsn_name. 
-
-@dsn_name&apos;s format is &quot;[&amp;lt;username&amp;gt;[:&amp;lt;password&amp;gt;]@]&amp;lt;DSN&amp;gt;&quot; (if &amp;lt;username&amp;gt;
-and optionaly &amp;lt;password&amp;gt; are provided, they are ignored). Also see the gda_dsn_split() utility
-function.
-
+Returns: a string with the operator&apos;s name or NULL in case @op is invalid.
 
 </description>
 <parameters>
-<parameter name="dsn_name">
-<parameter_description> the name of the DSN to look for
+<parameter name="op">
+<parameter_description> a #GdaSqlOperation structure
 </parameter_description>
 </parameter>
 </parameters>
-<return> a a pointer to read-only #GdaDsnInfo structure, or %NULL if not found
+<return> a string with the operator&apos;s name or NULL in case @op is invalid.
 </return>
 </function>
 
@@ -3802,18 +3769,25 @@ allows to fetch the resteictions.
 </return>
 </function>
 
-<function name="gda_data_model_thaw">
+<function name="gda_set_get_source">
 <description>
-Re-enables notifications of changes on the given data model.
+Finds a #GdaSetSource which contains the #GdaDataModel restricting the possible values of
+@holder, don&apos;t modify the returned structure.
+
 
 </description>
 <parameters>
-<parameter name="model">
-<parameter_description> a #GdaDataModel object.
+<parameter name="set">
+<parameter_description> a #GdaSet object
+</parameter_description>
+</parameter>
+<parameter name="holder">
+<parameter_description> a #GdaHolder object
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> a #GdaSetSource or %NULL
+</return>
 </function>
 
 <function name="gda_data_model_iter_invalidate_contents">
@@ -3994,43 +3968,6 @@ To remove the chunking of the data to display, simply pass @sample_size the 0 va
 <return></return>
 </function>
 
-<function name="gda_sql_operation_serialize">
-<description>
-Creates a new string representing an operator. You need to free the returned string
-using g_free();
-
-
-</description>
-<parameters>
-<parameter name="operation">
-<parameter_description> a #GdaSqlOperation structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string with the description of the operator or &quot;null&quot; in case @operation is invalid.
-</return>
-</function>
-
-<function name="gda_sql_function_take_name">
-<description>
-Sets the function&apos;s arguments to point to @args, then sets the
-list&apos;s data elements&apos; parent to @function.
-
-
-</description>
-<parameters>
-<parameter name="function">
-<parameter_description> a #GdaSqlFunction structure
-</parameter_description>
-</parameter>
-<parameter name="args">
-<parameter_description> a #GSList to take from
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
 <function name="gda_handler_time_new">
 <description>
 Creates a data handler for time values
@@ -4057,19 +3994,19 @@ Creates a data handler for time values
 </return>
 </function>
 
-<function name="gda_value_to_xml">
+<function name="gda_data_proxy_get_filter_expr">
 <description>
-Serializes the given #GValue to an XML node string.
+Get the current filter expression used by @proxy.
 
 
 </description>
 <parameters>
-<parameter name="value">
-<parameter_description> a #GValue.
+<parameter name="proxy">
+<parameter_description> a #GdaDataProxy object
 </parameter_description>
 </parameter>
 </parameters>
-<return> the XML node. Once not needed anymore, you should free it.
+<return> the current filter expression or %NULL if no filter has been set
 </return>
 </function>
 
@@ -4151,25 +4088,70 @@ independent.
 </return>
 </function>
 
-<function name="gda_config_list_dsn">
+<function name="gda_data_model_append_values">
 <description>
-Get a #GdaDataModel representing all the configured DSN, and keeping itself up to date with
-the changes in the declared DSN.
-
-The returned data model is composed of the following columns:
-&amp;lt;itemizedlist&amp;gt;
-&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;DSN name&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
-&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;Provider name&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
-&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;Description&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
-&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;Connection string&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
-&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;Username if it exists&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
-&amp;lt;/itemizedlist&amp;gt;
+Appends a row to the given data model. If any value in @values is actually %NULL, then 
+it is considered as a default value.
 
 
 </description>
 <parameters>
+<parameter name="model">
+<parameter_description> a #GdaDataModel object.
+</parameter_description>
+</parameter>
+<parameter name="values">
+<parameter_description> #GList of #GValue* representing the row to add.  The
+length must match model&apos;s column count.  These #GValue
+are value-copied (the user is still responsible for freeing them).
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a place to store errors, or %NULL
+</parameter_description>
+</parameter>
 </parameters>
-<return> a new #GdaDataModel
+<return> the number of the added row, or -1 if an error occurred
+</return>
+</function>
+
+<function name="gda_holder_set_value">
+<description>
+Sets the value within the holder. If @holder is an alias for another
+holder, then the value is also set for that other holder.
+
+On success, the action of any call to gda_holder_force_invalid() is cancelled
+as soon as this method is called (even if @holder&apos;s value does not actually change)
+
+If the value is not different from the one already contained within @holder,
+then @holder is not changed and no signal is emitted.
+
+Note1: the @value argument is treated the same way if it is %NULL or if it is a #GDA_TYPE_NULL value
+
+Note2: if @holder can&apos;t accept the @value value, then this method returns FALSE, and @holder will be left
+in an invalid state.
+
+Note3: before the change is accepted by @holder, the &quot;validate-change&quot; signal will be emitted (the value
+of which can prevent the change from happening) which can be connected to to have a greater control
+of which values @holder can have, or implement some business rules.
+
+
+</description>
+<parameters>
+<parameter name="holder">
+<parameter_description> a #GdaHolder object
+</parameter_description>
+</parameter>
+<parameter name="value">
+<parameter_description> a value to set the holder to, or %NULL
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a place to store errors, or %NULL
+</parameter_description>
+</parameter>
+</parameters>
+<return> TRUE if value has been set
 </return>
 </function>
 
@@ -4237,6 +4219,36 @@ function won&apos;t work correctly.
 <parameters>
 </parameters>
 <return></return>
+</function>
+
+<function name="gda_data_handler_get_value_from_sql">
+<description>
+Creates a new GValue which represents the SQL value given as argument. This is
+the opposite of the function gda_data_handler_get_sql_from_value(). The type argument
+is used to determine the real data type requested for the returned value.
+
+If the sql string is NULL, then the returned GValue is of type GDA_TYPE_NULL;
+if the sql string does not correspond to a valid SQL string for the requested type, then
+NULL is returned.
+
+
+</description>
+<parameters>
+<parameter name="dh">
+<parameter_description> an object which implements the #GdaDataHandler interface
+</parameter_description>
+</parameter>
+<parameter name="sql">
+<parameter_description>
+</parameter_description>
+</parameter>
+<parameter name="type">
+<parameter_description> 
+</parameter_description>
+</parameter>
+</parameters>
+<return> the new GValue or NULL on error
+</return>
 </function>
 
 <function name="gda_value_set_from_string">
@@ -4386,10 +4398,10 @@ which can be uniquely identified as @catalog.@schema.@name.
 
 If @catalog is not %NULL, then @schema should not be %NULL.
 
-If @catalog is %NULL and @schema is not %NULL, then the database object will be the one which is
+If both @catalog and @schema are %NULL, then the database object will be the one which is
 &quot;visible&quot; by default (that is which can be accessed only by its short @name name).
 
-If both @catalog and @schema are %NULL, then the database object will be the one which 
+If @catalog is %NULL and @schema is not %NULL, then the database object will be the one which 
 can be accessed by its @schema.@name name.
 
 Important note: @catalog, @schema and @name must respect the following convention:
@@ -4544,20 +4556,15 @@ followed by its @GValue to set in the insert operation, finished by %NULL
 </return>
 </function>
 
-<function name="gda_config_get_provider_info">
+<function name="gda_batch_new">
 <description>
-Get some information about the a database provider (adaptator) named 
-@provider_name
+Creates a new #GdaBatch object
 
 
 </description>
 <parameters>
-<parameter name="provider_name">
-<parameter_description>
-</parameter_description>
-</parameter>
 </parameters>
-<return> a pointer to read-only #GdaProviderInfo structure, or %NULL if not found
+<return> the new object
 </return>
 </function>
 
@@ -4604,7 +4611,7 @@ Creates a new iterator object #GdaDataModelIter object which can be used to iter
 rows in @model.
 
 The row the returned #GdaDataModelIter represents is undefined. For models which can be accessed 
-randomly the correspoding row can be set using gda_data_model_iter_move_to_row(), 
+randomly the corresponding row can be set using gda_data_model_iter_move_to_row(), 
 and for models which are accessible sequentially only then the first row will be
 fetched using gda_data_model_iter_move_next().
 
@@ -4741,40 +4748,46 @@ the returned username and password strings are correclty decoded.
 <return></return>
 </function>
 
-<function name="gda_holder_value_is_default">
+<function name="gda_data_comparator_new">
 <description>
-Tells if @holder&apos;s current value is the default one.
+Creates a new comparator to compute the differences from @old_model to @new_model: if one applies
+all the computed differences (as #GdaDiff structures) to @old_model, the resulting data model
+should have the same contents as @new_model.
 
 
 </description>
 <parameters>
-<parameter name="holder">
-<parameter_description> a #GdaHolder object
+<parameter name="old_model">
+<parameter_description> Data model to which the modifications should be applied
+</parameter_description>
+</parameter>
+<parameter name="new_model">
+<parameter_description> Target data model.
 </parameter_description>
 </parameter>
 </parameters>
-<return> TRUE if @holder @holder&apos;s current value is the default one
+<return> a new #GdaDataComparator object
 </return>
 </function>
 
-<function name="gda_config_remove_dsn">
+<function name="gda_sql_field_take_name">
 <description>
-Add or update a DSN from the definition in @info
+Sets the field&apos;s name using the string holded by @value. When call, @value is freed using
+#gda_value_free().
 
 
 </description>
 <parameters>
-<parameter name="dsn_name">
-<parameter_description> the name of the DSN to remove
+<parameter name="field">
+<parameter_description> a #GdaSqlField structure
 </parameter_description>
 </parameter>
-<parameter name="error">
-<parameter_description> a place to store errors, or %NULL
+<parameter name="value">
+<parameter_description> a #GValue holding a string to take from
 </parameter_description>
 </parameter>
 </parameters>
-<return> TRUE if no error occurred
-</return>
+<return></return>
 </function>
 
 <function name="gda_data_model_get_column_name">
@@ -4875,19 +4888,19 @@ This method is just a wrapper around the gda_text_to_alphanum() function.
 </return>
 </function>
 
-<function name="gda_data_proxy_get_filter_expr">
+<function name="gda_value_to_xml">
 <description>
-Get the current filter expression used by @proxy.
+Serializes the given #GValue to an XML node string.
 
 
 </description>
 <parameters>
-<parameter name="proxy">
-<parameter_description> a #GdaDataProxy object
+<parameter name="value">
+<parameter_description> a #GValue.
 </parameter_description>
 </parameter>
 </parameters>
-<return> the current filter expression or %NULL if no filter has been set
+<return> the XML node. Once not needed anymore, you should free it.
 </return>
 </function>
 
@@ -4920,47 +4933,20 @@ Tells if @provider supports the @type of operation on the @cnc connection, using
 </return>
 </function>
 
-<function name="gda_connection_event_set_gda_code">
+<function name="gda_sql_identifier_add_quotes">
 <description>
-Sets @event&apos;s gda code: that code is standardized by the libgda
-library. If you want to specify the corresponding provider specific code,
-use gda_connection_event_get_code() or gda_connection_event_get_sqlstate() instead.
-
-This function should not be called directly
-
-</description>
-<parameters>
-<parameter name="event">
-<parameter_description> a #GdaConnectionEvent
-</parameter_description>
-</parameter>
-<parameter name="code">
-<parameter_description> a code
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_data_comparator_new">
-<description>
-Creates a new comparator to compute the differences from @old_model to @new_model: if one applies
-all the computed differences (as #GdaDiff structures) to @old_model, the resulting data model
-should have the same contents as @new_model.
+Add double quotes around the @str identifier. Use the gda_sql_identifier_needs_quotes()
+function to tell if an identifier needs to be quoted.
 
 
 </description>
 <parameters>
-<parameter name="old_model">
-<parameter_description> Data model to which the modifications should be applied
-</parameter_description>
-</parameter>
-<parameter name="new_model">
-<parameter_description> Target data model.
+<parameter name="str">
+<parameter_description> an SQL identifier
 </parameter_description>
 </parameter>
 </parameters>
-<return> a new #GdaDataComparator object
+<return> a new string
 </return>
 </function>
 
@@ -5374,21 +5360,6 @@ Within any instance of @hub, there can be only one added connection where @ns is
 </return>
 </function>
 
-<function name="gda_sql_expr_free">
-<description>
-Frees a #GdaSqlExpr structure and its members.
-
-
-</description>
-<parameters>
-<parameter name="expr">
-<parameter_description> a #GdaSqlExpr to be freed.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
 <function name="gda_data_proxy_get_sample_size">
 <description>
 Get the size of each chunk of data displayed at a time.
@@ -5561,7 +5532,7 @@ Performs the reverse of gda_blob_to_string().
 
 <function name="gda_value_new_blob">
 <description>
-Makes a new #GValue of type #GDA_TYPE_BLOB with value @val.
+Makes a new #GValue of type #GDA_TYPE_BLOB with the data contained by @val.
 
 
 </description>
@@ -5597,7 +5568,7 @@ Get wether the holder can be NULL or not
 
 <function name="gda_blob_op_read">
 <description>
-Reads a chunk of bytes from the BLOB into @blob.
+Reads a chunk of bytes from the BLOB accessible through @op into @blob.
 
 
 </description>
@@ -5715,22 +5686,17 @@ Creates a data handler for binary values
 <return></return>
 </function>
 
-<function name="gda_connection_get_transaction_status">
+<function name="gda_g_type_to_string">
 <description>
-Get the status of @cnc regarding transactions. The returned object should not be modified
-or destroyed; however it may be modified or destroyed by the connection itself.
-
-If %NULL is returned, then no transaction has been associated with @cnc
-
 
 </description>
 <parameters>
-<parameter name="cnc">
-<parameter_description> a #GdaConnection object
+<parameter name="type">
+<parameter_description> Type to convert from.
 </parameter_description>
 </parameter>
 </parameters>
-<return> a #GdaTransactionStatus object, or %NULL
+<return> the string representing the given #GType.
 </return>
 </function>
 
@@ -5828,33 +5794,6 @@ is of type GDA_TYPE_NULL, the returned string is NULL.
 </return>
 </function>
 
-<function name="gda_connection_add_event_string">
-<description>
-Adds a new error to the given connection object. This is just a convenience
-function that simply creates a #GdaConnectionEvent and then calls
-#gda_server_connection_add_error.
-
-
-</description>
-<parameters>
-<parameter name="cnc">
-<parameter_description> a #GdaConnection object.
-</parameter_description>
-</parameter>
-<parameter name="str">
-<parameter_description> a format string (see the printf(3) documentation).
-</parameter_description>
-</parameter>
-<parameter name="Varargs">
-<parameter_description> the arguments to insert in the error message.
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaConnectionEvent object, however the caller does not hold a reference to the returned
-object, and if need be the caller must call g_object_ref() on it.
-</return>
-</function>
-
 <function name="gda_data_access_wrapper_get_type">
 <description>
 
@@ -5862,6 +5801,20 @@ object, and if need be the caller must call g_object_ref() on it.
 <parameters>
 </parameters>
 <return> the #GType of GdaDataAccessWrapper.
+</return>
+</function>
+
+<function name="gda_value_get_geometric_point">
+<description>
+
+</description>
+<parameters>
+<parameter name="value">
+<parameter_description> a #GValue whose value we want to get.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the value stored in @value.
 </return>
 </function>
 
@@ -5887,14 +5840,26 @@ Get the GType handled by the GdaDataHandler, at the given position (starting at 
 
 <function name="gda_column_set_attribute">
 <description>
-Set the value associated to a named attribute.
+Set the value associated to a named attribute. The @attribute string is &apos;stolen&apos; by this method, and
+the memory it uses will be freed using the @destroy function when no longer needed (if @destroy is %NULL,
+then the string will not be freed at all).
 
-Attributes can have any name, but Libgda proposes some default names, see &amp;lt;link linkend=&quot;libgda-40-Attributes-manager.synopsis&quot;&amp;gt;this section&amp;lt;/link&amp;gt;.
-If there is already an attribute named @attribute set, then its value is replaced with the new @value, 
-except if @value is %NULL, in which case the attribute is removed.
+Attributes can have any name, but Libgda proposes some default names, 
+see &amp;lt;link linkend=&quot;libgda-40-Attributes-manager.synopsis&quot;&amp;gt;this section&amp;lt;/link&amp;gt;.
 
-Warning: @sttribute should be a static string (no copy of it is made), so the string should exist as long as the @column
-object exists.
+If there is already an attribute named @attribute set, then its value is replaced with the new value (@value is
+copied), except if @value is %NULL, in which case the attribute is removed.
+
+For example one would use it as:
+
+&amp;lt;code&amp;gt;
+gda_column_set_attribute (holder, g_strdup (my_attribute), g_free, my_value);
+gda_column_set_attribute (holder, GDA_ATTRIBUTE_NAME, NULL, my_value);
+&amp;lt;/code&amp;gt;
+
+Note: this method does not modify in any way the contents of the data model for which @column is a column (nor
+does it modify the table definition of the tables used by a SELECT statement is the model was created from a
+SELECT statement).
 
 </description>
 <parameters>
@@ -5908,6 +5873,10 @@ object exists.
 </parameter>
 <parameter name="value">
 <parameter_description> a #GValue, or %NULL
+</parameter_description>
+</parameter>
+<parameter name="destroy">
+<parameter_description> a function to be called when @attribute is not needed anymore, or %NULL
 </parameter_description>
 </parameter>
 </parameters>
@@ -6124,7 +6093,7 @@ Creates a string representing the contents of @batch.
 Retrieves the data stored in the given position (identified by
 the @col and @row parameters) on a data model.
 
-This is the main function for accessing data in a model which allow random access to its data.
+This is the main function for accessing data in a model which allows random access to its data.
 To access data in a data model using a cursor, use a #GdaDataModelIter object, obtained using
 gda_data_model_create_iter().
 
@@ -6297,21 +6266,55 @@ of @dbo.
 </return>
 </function>
 
-<function name="gda_lockable_unlock">
+<function name="gda_prepare_create_table">
 <description>
-Unlocks @lockable. This method should not be called if the current does not already holds a lock on @lockable (having
-used gda_lockable_lock() or gda_lockable_trylock()).
+Add more arguments if the flag needs then: 
 
-This function can be used even if g_thread_init() has not yet been called, and, in that case, will do nothing.
+GDA_EASY_CREATE_TABLE_FKEY_FLAG:
+&amp;lt;itemizedlist&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;string with the table&apos;s name referenced&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;an integer with the number pairs &quot;local_field&quot;, &quot;referenced_field&quot; 
+used in the reference&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;Pairs of &quot;local_field&quot;, &quot;referenced_field&quot; to use, must match
+the number specified above.&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;a string with the action for ON DELETE; can be: &quot;RESTRICT&quot;, &quot;CASCADE&quot;, 
+&quot;NO ACTION&quot;, &quot;SET NULL&quot; and &quot;SET DEFAULT&quot;. Example: &quot;ON UPDATE CASCADE&quot;.&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;a string with the action for ON UPDATE (see above).&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;/itemizedlist&amp;gt; 
+
+Create a #GdaServerOperation object using an opened connection, taking three 
+arguments, a colum&apos;s name the column&apos;s GType and #GdaEasyCreateTableFlag 
+flag, you need to finish the list using NULL.
+
+You&apos;ll be able to modify the #GdaServerOperation object to add custom options
+to the operation. When finish call #gda_perform_create_table 
+or #gda_server_operation_perform_operation
+in order to execute the operation.
+
 
 </description>
 <parameters>
-<parameter name="lockable">
-<parameter_description> a #GdaLockable object.
+<parameter name="cnc">
+<parameter_description> an opened connection
+</parameter_description>
+</parameter>
+<parameter name="table_name">
+<parameter_description>
+@num_columns
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a place to store errors, or %NULL
+</parameter_description>
+</parameter>
+<parameter name="Varargs">
+<parameter_description> group of three arguments for column&apos;s name, column&apos;s #GType 
+and a #GdaEasyCreateTableFlag flag, finished with NULL
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> a #GdaServerOperation if no errors; NULL and set @error otherwise
+</return>
 </function>
 
 <function name="gda_data_proxy_get_proxied_model_n_rows">
@@ -6401,19 +6404,75 @@ This is just a convenient function to perform a drop a table operation.
 </return>
 </function>
 
-<function name="gda_data_model_dir_get_errors">
+<function name="gda_meta_store_schema_add_custom_object">
 <description>
-Get the list of errors which have occurred while using @model
+The internal database used by @store can be &apos;augmented&apos; with some user-defined database objects
+(such as tables or views). This method allows one to add a new database object.
+
+If the internal database already contains the object, then:
+&amp;lt;itemizedlist&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;if the object is equal to the provided description then TRUE is returned&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;if the object exists but differs from the provided description, then FALSE is returned,
+with the GDA_META_STORE_SCHEMA_OBJECT_CONFLICT_ERROR error code&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;/itemizedlist&amp;gt;
+
+The @xml_description defines the table of view&apos;s definition, for example:
+&amp;lt;programlisting&amp;gt;&amp;lt;![CDATA[&amp;lt;table name=&quot;mytable&quot;&amp;gt;
+    &amp;lt;column name=&quot;id&quot; pkey=&quot;TRUE&quot;/&amp;gt;
+    &amp;lt;column name=&quot;value&quot;/&amp;gt;
+&amp;lt;/table&amp;gt;]]&amp;gt;&amp;lt;/programlisting&amp;gt;
+
+The partial DTD for this XML description of the object to add is the following (the top node must be
+a &amp;lt;table&amp;gt; or a &amp;lt;view&amp;gt;):
+&amp;lt;programlisting&amp;gt;&amp;lt;![CDATA[&amp;lt;!ELEMENT table (column*,check*,fkey*,unique*)&amp;gt;
+&amp;lt;!ATTLIST table
+          name NMTOKEN #REQUIRED&amp;gt;
+
+&amp;lt;!ELEMENT column EMPTY&amp;gt;
+&amp;lt;!ATTLIST column
+          name NMTOKEN #REQUIRED
+          type CDATA #IMPLIED
+          pkey (TRUE|FALSE) #IMPLIED
+          autoinc (TRUE|FALSE) #IMPLIED
+          nullok (TRUE|FALSE) #IMPLIED&amp;gt;
+
+&amp;lt;!ELEMENT check (#PCDATA)&amp;gt;
+
+&amp;lt;!ELEMENT fkey (part+)&amp;gt;
+&amp;lt;!ATTLIST fkey
+          ref_table NMTOKEN #REQUIRED&amp;gt;
+
+&amp;lt;!ELEMENT part EMPTY&amp;gt;
+&amp;lt;!ATTLIST part
+          column NMTOKEN #IMPLIED
+          ref_column NMTOKEN #IMPLIED&amp;gt;
+
+&amp;lt;!ELEMENT unique (column*)&amp;gt;
+
+&amp;lt;!ELEMENT view (definition)&amp;gt;
+&amp;lt;!ATTLIST view
+          name NMTOKEN #REQUIRED
+          descr CDATA #IMPLIED&amp;gt;
+
+&amp;lt;!ELEMENT definition (#PCDATA)&amp;gt;]]&amp;gt;&amp;lt;/programlisting&amp;gt;
 
 
 </description>
 <parameters>
-<parameter name="model">
-<parameter_description> a #GdaDataModelDir object
+<parameter name="store">
+<parameter_description> a #GdaMetaStore object
+</parameter_description>
+</parameter>
+<parameter name="xml_description">
+<parameter_description> an XML description of the table or view to add to @store
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a place to store errors, or %NULL
 </parameter_description>
 </parameter>
 </parameters>
-<return> a read-only list of #GError pointers, or %NULL if no error has occurred
+<return> TRUE if the new object has sucessfully been added
 </return>
 </function>
 
@@ -6504,19 +6563,20 @@ this function @alias is freed.
 <return></return>
 </function>
 
-<function name="gda_server_provider_get_version">
+<function name="gda_data_model_import_new_xml_node">
 <description>
-Get the version of the provider.
+Creates a new #GdaDataModel and loads the data in @node. The resulting data model
+can be accessed in a random way.
 
 
 </description>
 <parameters>
-<parameter name="provider">
-<parameter_description> a #GdaServerProvider object.
+<parameter name="node">
+<parameter_description> an XML node corresponding to a &amp;lt;data-array&amp;gt; tag
 </parameter_description>
 </parameter>
 </parameters>
-<return> a string containing the version identification.
+<return> a pointer to the newly created #GdaDataModel.
 </return>
 </function>
 
@@ -6687,13 +6747,13 @@ instead of the current user locale.
 <description>
 Use @provider to create a new #GValue from a single string representation. 
 
-The @prefered_type can optionally ask @provider to return a #GValue of the requested type 
+The @preferred_type can optionally ask @provider to return a #GValue of the requested type 
 (but if such a value can&apos;t be created from @string, then %NULL is returned); 
 pass G_TYPE_INVALID if any returned type is acceptable.
 
 The returned value is either a new #GValue or %NULL in the following cases:
-- @string cannot be converted to @prefered_type type
-- the provider does not handle @prefered_type
+- @string cannot be converted to @preferred_type type
+- the provider does not handle @preferred_type
 - the provider could not make a #GValue from @string
 
 
@@ -6711,7 +6771,7 @@ The returned value is either a new #GValue or %NULL in the following cases:
 <parameter_description> the SQL string to convert to a value
 </parameter_description>
 </parameter>
-<parameter name="prefered_type">
+<parameter name="preferred_type">
 <parameter_description> a #GType, or G_TYPE_INVALID
 </parameter_description>
 </parameter>
@@ -6864,25 +6924,6 @@ occurs, then it is possible that not all the changes to all the rows have been a
 </parameters>
 <return> TRUE if no error occurred
 </return>
-</function>
-
-<function name="gda_xa_transaction_unregister_connection">
-<description>
-Unregisters @cnc to be used by @xa_trans to create a distributed transaction. This is
-the opposite of gda_xa_transaction_register_connection().
-
-</description>
-<parameters>
-<parameter name="xa_trans">
-<parameter_description> a #GdaXaTransaction object
-</parameter_description>
-</parameter>
-<parameter name="cnc">
-<parameter_description> the connection to add to @xa_trans
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
 </function>
 
 <function name="gda_connection_statement_execute_select">
@@ -7110,17 +7151,16 @@ Get a pointer to the #GdaServerProvider object used to access the database
 </return>
 </function>
 
-<function name="gda_data_proxy_is_read_only">
+<function name="gda_vprovider_hub_new">
 <description>
+Creates a new GdaVirtualProvider object which allows one to 
+add and remove GdaDataModel objects as tables within a connection
+
 
 </description>
 <parameters>
-<parameter name="proxy">
-<parameter_description> a #GdaDataProxy object
-</parameter_description>
-</parameter>
 </parameters>
-<return> TRUE if the proxied data model is itself read-only
+<return> a new #GdaVirtualProvider object.
 </return>
 </function>
 
@@ -7144,25 +7184,25 @@ Sets @event&apos;s SQL state.
 <return></return>
 </function>
 
-<function name="gda_binary_to_string">
+<function name="gda_meta_struct_new">
 <description>
-Converts all the non printable characters of bin-&amp;gt;data into the \xxx representation
-where xxx is the octal representation of the byte, and the &apos;\&apos; (backslash) character
-is converted to &quot;\\&quot;.
+Creates a new #GdaMetaStruct object. The @features specifies the extra features which will also be computed:
+the more features, the more time it takes to run. Features such as table&apos;s columns, each column&apos;s attributes, etc
+are not optional and will always be computed.
 
 
 </description>
 <parameters>
-<parameter name="bin">
-<parameter_description> a correctly filled @GdaBinary structure
+<parameter name="store">
+<parameter_description> a #GdaMetaStore from which the new #GdaMetaStruct object will fetch information
 </parameter_description>
 </parameter>
-<parameter name="maxlen">
-<parameter_description> a maximum len used to truncate, or 0 for no maximum length
+<parameter name="features">
+<parameter_description> the kind of extra information the new #GdaMetaStruct object will compute
 </parameter_description>
 </parameter>
 </parameters>
-<return> a new string from @bin
+<return> the newly created #GdaMetaStruct object
 </return>
 </function>
 
@@ -7180,23 +7220,26 @@ is converted to &quot;\\&quot;.
 </return>
 </function>
 
-<function name="gda_connection_event_set_event_type">
+<function name="_gda_meta_store_begin_data_reset">
 <description>
-Sets @event&apos;s severity (from a simple notice to a fatal event)
-This function should not be called directly.
+Sets @store in a mode where only the modifications completely overriding a table
+will be allowed, where no detailled modifications report is made and where the &quot;suggest-update&quot;
+signal is not emitted.
+
 
 </description>
 <parameters>
-<parameter name="event">
-<parameter_description> a #GdaConnectionEvent object
+<parameter name="store">
+<parameter_description> a #GdaMetaStore object
 </parameter_description>
 </parameter>
-<parameter name="type">
-<parameter_description> the severity of the event
+<parameter name="error">
+<parameter_description> a place to store errors, or %NULL
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> TRUE if no error occurred
+</return>
 </function>
 
 <function name="gda_holder_get_default_value">
@@ -7316,7 +7359,7 @@ strings.
 <function name="gda_attributes_manager_set_full">
 <description>
 Does the same as gda_attributes_manager_set() except that @destroy is called when @att_name needs
-to be freed
+to be freed.
 
 </description>
 <parameters>
@@ -7329,7 +7372,7 @@ to be freed
 </parameter_description>
 </parameter>
 <parameter name="att_name">
-<parameter_description> an attribute&apos;s name, as a *static* string
+<parameter_description> an attribute&apos;s name
 </parameter_description>
 </parameter>
 <parameter name="value">
@@ -7389,7 +7432,7 @@ Attributes can have any name, but Libgda proposes some default names, see &amp;l
 If there is already an attribute named @attribute set, then its value is replaced with the new @value, 
 except if @value is %NULL, in which case the attribute is removed.
 
-Warning: @sttribute should be a static string (no copy of it is made), so the string should exist as long as the @column
+Warning: @attribute should be a static string (no copy of it is made), so the string should exist as long as the @column
 object exists.
 
 </description>
@@ -7475,14 +7518,19 @@ data source, or %NULL if an error occurred
 </return>
 </function>
 
-<function name="gda_data_select_get_type">
+<function name="gda_connection_close">
 <description>
+Closes the connection to the underlying data source, but first emits the 
+&quot;conn-to-close&quot; signal.
 
 </description>
 <parameters>
+<parameter name="cnc">
+<parameter_description> a #GdaConnection object.
+</parameter_description>
+</parameter>
 </parameters>
-<return> the #GType of GdaDataSelect.
-</return>
+<return></return>
 </function>
 
 <function name="gda_init">
@@ -7538,26 +7586,23 @@ using g_free();
 </return>
 </function>
 
-<function name="_gda_meta_store_begin_data_reset">
+<function name="gda_connection_event_set_event_type">
 <description>
-Sets @store in a mode where only the modifications completely overriding a table
-will be allowed, where no detailled modifications report is made and where the &quot;suggest-update&quot;
-signal is not emitted.
-
+Sets @event&apos;s severity (from a simple notice to a fatal event)
+This function should not be called directly.
 
 </description>
 <parameters>
-<parameter name="store">
-<parameter_description> a #GdaMetaStore object
+<parameter name="event">
+<parameter_description> a #GdaConnectionEvent object
 </parameter_description>
 </parameter>
-<parameter name="error">
-<parameter_description> a place to store errors, or %NULL
+<parameter name="type">
+<parameter_description> the severity of the event
 </parameter_description>
 </parameter>
 </parameters>
-<return> TRUE if no error occurred
-</return>
+<return></return>
 </function>
 
 <function name="gda_row_get_value">
@@ -7619,18 +7664,18 @@ Performs the reverse of gda_binary_to_string().
 </return>
 </function>
 
-<function name="gda_column_get_description">
+<function name="gda_mutex_free">
 <description>
+Destroys @m.
 
 </description>
 <parameters>
-<parameter name="column">
-<parameter_description> a #GdaColumn.
+<parameter name="m">
+<parameter_description> a #GdaMutex
 </parameter_description>
 </parameter>
 </parameters>
-<return> the column&apos;s description, in any
-</return>
+<return></return>
 </function>
 
 <function name="gda_connection_create_parser">
@@ -7671,6 +7716,20 @@ Accepted date format is &quot;YYYY-MM-DD&quot;.
 </parameter>
 </parameters>
 <return> TRUE if no error occurred
+</return>
+</function>
+
+<function name="gda_column_get_description">
+<description>
+
+</description>
+<parameters>
+<parameter name="column">
+<parameter_description> a #GdaColumn.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the column&apos;s description, in any
 </return>
 </function>
 
@@ -7767,6 +7826,30 @@ Do the reverse of gda_default_escape_string(): transforms any &quot;\&apos;&quot
 </return>
 </function>
 
+<function name="gda_server_provider_unescape_string">
+<description>
+Unescapes @str for use within an SQL command. This is the exact opposite of gda_server_provider_escape_string().
+
+
+</description>
+<parameters>
+<parameter name="provider">
+<parameter_description> a server provider.
+</parameter_description>
+</parameter>
+<parameter name="cnc">
+<parameter_description> a #GdaConnection object, or %NULL
+</parameter_description>
+</parameter>
+<parameter name="str">
+<parameter_description> a string to escape
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new string
+</return>
+</function>
+
 <function name="gda_meta_store_new_with_file">
 <description>
 Create a new #GdaMetaStore object using @file_name as its internal
@@ -7815,10 +7898,9 @@ Frees a #GdaSqlTable structure and its members.
 <return></return>
 </function>
 
-<function name="gda_data_select_set_row_selection_condition">
+<function name="gda_data_select_get_stored_row">
 <description>
-Offers the same features as gda_data_select_set_row_selection_condition_sql() but using a #GdaSqlExpr
-structure instead of an SQL syntax.
+Get the #GdaRow object stored within @model at row @rownum (without taking care of removed rows)
 
 
 </description>
@@ -7827,16 +7909,12 @@ structure instead of an SQL syntax.
 <parameter_description> a #GdaDataSelect data model
 </parameter_description>
 </parameter>
-<parameter name="expr">
-<parameter_description> a #GdaSqlExpr expression
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> a place to store errors, or %NULL
+<parameter name="rownum">
+<parameter_description> &quot;external&quot; advertized row number
 </parameter_description>
 </parameter>
 </parameters>
-<return> TRUE if no error occurred
+<return> the requested #GdaRow, or %NULL if not found
 </return>
 </function>
 
@@ -7919,27 +7997,30 @@ value.
 </return>
 </function>
 
-<function name="gda_server_provider_get_data_handler_g_type">
+<function name="gda_connection_add_event_string">
 <description>
-Find a #GdaDataHandler object to manipulate data of type @for_type. The returned object must not be modified.
+Adds a new error to the given connection object. This is just a convenience
+function that simply creates a #GdaConnectionEvent and then calls
+#gda_server_connection_add_error.
 
 
 </description>
 <parameters>
-<parameter name="provider">
-<parameter_description> a server provider.
-</parameter_description>
-</parameter>
 <parameter name="cnc">
-<parameter_description> a #GdaConnection object, or %NULL
+<parameter_description> a #GdaConnection object.
 </parameter_description>
 </parameter>
-<parameter name="for_type">
-<parameter_description> a #GType
+<parameter name="str">
+<parameter_description> a format string (see the printf(3) documentation).
+</parameter_description>
+</parameter>
+<parameter name="Varargs">
+<parameter_description> the arguments to insert in the error message.
 </parameter_description>
 </parameter>
 </parameters>
-<return> a #GdaDataHandler, or %NULL if the provider does not support the requested @for_type data type 
+<return> a new #GdaConnectionEvent object, however the caller does not hold a reference to the returned
+object, and if need be the caller must call g_object_ref() on it.
 </return>
 </function>
 
@@ -7987,45 +8068,59 @@ Get the index (starting at 0) of the DSN named @dsn_name
 </return>
 </function>
 
-<function name="gda_server_provider_unescape_string">
+<function name="gda_connection_rollback_transaction">
 <description>
-Unescapes @str for use within an SQL command. This is the exact opposite of gda_server_provider_escape_string().
+Rollbacks the given transaction. This means that all changes
+made to the underlying data source since the last call to
+#gda_connection_begin_transaction() or #gda_connection_commit_transaction()
+will be discarded.
 
 
 </description>
 <parameters>
-<parameter name="provider">
-<parameter_description> a server provider.
-</parameter_description>
-</parameter>
 <parameter name="cnc">
-<parameter_description> a #GdaConnection object, or %NULL
+<parameter_description> a #GdaConnection object.
 </parameter_description>
 </parameter>
-<parameter name="str">
-<parameter_description> a string to escape
+<parameter name="name">
+<parameter_description> the name of the transation to commit, or %NULL
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a place to store errors, or %NULL
 </parameter_description>
 </parameter>
 </parameters>
-<return> a new string
+<return> %TRUE if the operation was successful, %FALSE otherwise.
 </return>
 </function>
 
-<function name="gda_server_operation_del_node_from_sequence">
+<function name="gda_value_compare">
 <description>
+Compares two values of the same type, with the exception that a value of any type can be
+compared to a GDA_TYPE_NULL value, specifically:
+&amp;lt;itemizedlist&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;if @value1 and @value2 are both GDA_TYPE_NULL values then the returned value is 0&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;if @value1 is a GDA_TYPE_NULL value and @value2 is of another type then the returned value is -1&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;if @value1 is of another type and @value2 is a GDA_TYPE_NULL value then the returned value is 1&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;in all other cases, @value1 and @value2 must be of the same type and their values are compared&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
+&amp;lt;/itemizedlist&amp;gt;
+
 
 </description>
 <parameters>
-<parameter name="op">
-<parameter_description> a #GdaServerOperation object
+<parameter name="value1">
+<parameter_description> a #GValue to compare (not %NULL)
 </parameter_description>
 </parameter>
-<parameter name="item_path">
-<parameter_description> the path to the sequence&apos;s item to remove (like &quot;/SEQ_NAME/5&quot; for instance)
+<parameter name="value2">
+<parameter_description> the other #GValue to be compared to @value1 (not %NULL)
 </parameter_description>
 </parameter>
 </parameters>
-<return> TRUE if the specified node has been removed from the sequence
+<return> if both values have the same type, returns 0 if both contain
+the same value, an integer less than 0 if @value1 is less than @value2 or
+an integer greater than 0 if @value1 is greater than @value2.
 </return>
 </function>
 
@@ -8050,21 +8145,6 @@ Orders by the @col column
 </parameter>
 </parameters>
 <return> TRUE if no error occurred
-</return>
-</function>
-
-<function name="gda_sql_operation_operator_to_string">
-<description>
-Returns: a string with the operator&apos;s name or NULL in case @op is invalid.
-
-</description>
-<parameters>
-<parameter name="op">
-<parameter_description> a #GdaSqlOperation structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a string with the operator&apos;s name or NULL in case @op is invalid.
 </return>
 </function>
 
@@ -8111,22 +8191,20 @@ if it was not possible to try to compute a completions list, then %NULL is retur
 </return>
 </function>
 
-<function name="gda_holder_set_not_null">
+<function name="gda_sql_select_from_serialize">
 <description>
-Sets if the holder can have a NULL value. If @not_null is TRUE, then that won&apos;t be allowed
+Creates a new string description of the FROM clausure used in a SELECT statement.
+
 
 </description>
 <parameters>
-<parameter name="holder">
-<parameter_description> a #GdaHolder object
-</parameter_description>
-</parameter>
-<parameter name="not_null">
-<parameter_description>
+<parameter name="from">
+<parameter_description> a #GdaSqlSelectFrom structure
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> a new string with the description of the FROM or &quot;null&quot; in case @from is invalid.
+</return>
 </function>
 
 <function name="gda_value_set_numeric">
@@ -8233,15 +8311,6 @@ Creates a new #GdaSqlOperation structure initated with the values stored in @ope
 </return>
 </function>
 
-<function name="gda_data_model_iter_move_to_row_default">
-<description>
-
-</description>
-<parameters>
-</parameters>
-<return></return>
-</function>
-
 <function name="gda_value_set_blob">
 <description>
 Stores @val into @value.
@@ -8338,37 +8407,43 @@ NULL is returned.
 </return>
 </function>
 
-<function name="gda_data_model_iter_get_value_for_field">
+<function name="gda_data_model_row_removed">
 <description>
-Get the value stored at the column @field_name in @iter
+Emits the &apos;row_removed&apos; and &apos;changed&apos; signal on @model.
 
+This method should only be used by #GdaDataModel implementations to 
+signal that a row has been removed
 
 </description>
 <parameters>
-<parameter name="iter">
-<parameter_description> a #GdaDataModelIter object
+<parameter name="model">
+<parameter_description> a #GdaDataModel object.
 </parameter_description>
 </parameter>
-<parameter name="field_name">
-<parameter_description> the requested column name
+<parameter name="row">
+<parameter_description> row number.
 </parameter_description>
 </parameter>
 </parameters>
-<return> the #GValue, or %NULL
-</return>
+<return></return>
 </function>
 
-<function name="gda_g_type_to_string">
+<function name="gda_connection_get_transaction_status">
 <description>
+Get the status of @cnc regarding transactions. The returned object should not be modified
+or destroyed; however it may be modified or destroyed by the connection itself.
+
+If %NULL is returned, then no transaction has been associated with @cnc
+
 
 </description>
 <parameters>
-<parameter name="type">
-<parameter_description> Type to convert from.
+<parameter name="cnc">
+<parameter_description> a #GdaConnection object
 </parameter_description>
 </parameter>
 </parameters>
-<return> the string representing the given #GType.
+<return> a #GdaTransactionStatus object, or %NULL
 </return>
 </function>
 
@@ -8420,19 +8495,19 @@ specifications
 <return></return>
 </function>
 
-<function name="gda_holder_get_bind">
+<function name="gda_sql_operation_new">
 <description>
-Get the holder which makes @holder change its value when the holder&apos;s value is changed.
+Creates a new #GdaSqlOperation structure and sets its parent to @parent.
 
 
 </description>
 <parameters>
-<parameter name="holder">
-<parameter_description> a #GdaHolder
+<parameter name="parent">
+<parameter_description> a #GdaSqlExpr structure
 </parameter_description>
 </parameter>
 </parameters>
-<return> the #GdaHolder or %NULL
+<return> a new #GdaSqlOperation structure.
 </return>
 </function>
 
@@ -8482,26 +8557,24 @@ only if @model can only be accessed using cursor based method.
 </return>
 </function>
 
-<function name="gda_vconnection_hub_foreach">
+<function name="gda_data_comparator_get_diff">
 <description>
-Call @func for each #GdaConnection represented in @hub.
+Get a pointer to the #GdaDiff structure representing the difference which number is @pos
+
 
 </description>
 <parameters>
-<parameter name="hub">
-<parameter_description> a #GdaVconnectionHub connection
+<parameter name="comp">
+<parameter_description> a #GdaDataComparator object
 </parameter_description>
 </parameter>
-<parameter name="func">
-<parameter_description> a #GdaVConnectionDataModelFunc function pointer
-</parameter_description>
-</parameter>
-<parameter name="data">
-<parameter_description> data to pass to @cunc calls
+<parameter name="pos">
+<parameter_description> the requested difference number (starting at 0)
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> a pointer to a #GdaDiff, or %NULL if @pos is invalid
+</return>
 </function>
 
 <function name="gda_data_model_append_row">
@@ -8728,21 +8801,6 @@ set opaque @data, you&apos;ll have to do it yourself.
 <return></return>
 </function>
 
-<function name="gda_sql_operator_from_string">
-<description>
-Returns: #GdaSqlOperatorType
-
-</description>
-<parameters>
-<parameter name="op">
-<parameter_description> a #GdaSqlOperation structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> #GdaSqlOperatorType
-</return>
-</function>
-
 <function name="gda_sql_select_join_copy">
 <description>
 Creates a new #GdaSqlSelectJoin structure initated with the values stored in @join.
@@ -8851,10 +8909,6 @@ containing data model.
 
 <function name="gda_blob_op_get_length">
 <description>
-Opens an existing BLOB. The BLOB must be initialized by
-#gda_connection_create_blob or obtained from a #GValue.
-FIXME: gda_connection_create_blob() no longer exists.
-
 
 </description>
 <parameters>
@@ -8868,23 +8922,18 @@ provider should have added an error (a #GdaConnectionEvent) to the connection.
 </return>
 </function>
 
-<function name="gda_data_comparator_set_key_columns">
+<function name="gda_log_message">
 <description>
-Defines the columns which will be used as a key when searching data. This is not mandatory but
-will speed things up as less data will be processed.
+Logs the given message in the GDA log file.
 
 </description>
 <parameters>
-<parameter name="comp">
-<parameter_description> a #GdaDataComparator object
+<parameter name="format">
+<parameter_description> format string (see the printf(3) documentation).
 </parameter_description>
 </parameter>
-<parameter name="nb_cols">
-<parameter_description> the size of the @col_numbers array
-</parameter_description>
-</parameter>
-<parameter name="col_numbers">
-<parameter_description> a array of @nb_cols values
+<parameter name="Varargs">
+<parameter_description> arguments to insert in the message.
 </parameter_description>
 </parameter>
 </parameters>
@@ -9057,43 +9106,58 @@ Reset the list of errors which have occurred while using @model
 <return></return>
 </function>
 
-<function name="gda_data_select_get_stored_row">
+<function name="gda_data_model_bdb_new">
 <description>
-Get the #GdaRow object stored within @model at row @rownum (without taking care of removed rows)
+Creates a new #GdaDataModel object to access the contents of the Berkeley DB file @file,
+for the database @db_name if not %NULL
 
 
 </description>
 <parameters>
-<parameter name="model">
-<parameter_description> a #GdaDataSelect data model
+<parameter name="filename">
+<parameter_description>
 </parameter_description>
 </parameter>
-<parameter name="rownum">
-<parameter_description> &quot;external&quot; advertized row number
+<parameter name="db_name">
+<parameter_description> the name of the database within @filename, or %NULL
 </parameter_description>
 </parameter>
 </parameters>
-<return> the requested #GdaRow, or %NULL if not found
+<return> a new #GdaDataModel
 </return>
 </function>
 
-<function name="gda_handler_time_get_no_locale_str_from_value">
+<function name="gda_sql_operation_serialize">
 <description>
-Retunrs: a new string representing @value without taking the current
-locele into account
+Creates a new string representing an operator. You need to free the returned string
+using g_free();
+
 
 </description>
 <parameters>
-<parameter name="hdl">
-<parameter_description> a #GdaHandlerTime object
-</parameter_description>
-</parameter>
-<parameter name="value">
-<parameter_description> a GValue value
+<parameter name="operation">
+<parameter_description> a #GdaSqlOperation structure
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> a new string with the description of the operator or &quot;null&quot; in case @operation is invalid.
+</return>
+</function>
+
+<function name="gda_data_proxy_get_sample_end">
+<description>
+Get the row number of the last row to be displayed.
+
+
+</description>
+<parameters>
+<parameter name="proxy">
+<parameter_description> a #GdaDataProxy object
+</parameter_description>
+</parameter>
+</parameters>
+<return> the number of the last row being displayed.
+</return>
 </function>
 
 <function name="gda_meta_store_get_version">
@@ -9398,19 +9462,19 @@ Remove the &quot;to be deleted&quot; mark at the row @proxy_row, if it existed.
 <return></return>
 </function>
 
-<function name="gda_column_get_allow_null">
+<function name="gda_sql_select_field_copy">
 <description>
-Gets the &apos;allow null&apos; flag of the given column.
+Creates a new #GdaSqlSelectField structure initated with the values stored in @field.
 
 
 </description>
 <parameters>
-<parameter name="column">
-<parameter_description> a #GdaColumn.
+<parameter name="field">
+<parameter_description> a #GdaSqlSelectField structure to be copied
 </parameter_description>
 </parameter>
 </parameters>
-<return> whether the given column allows null values or not (%TRUE or %FALSE).
+<return> a new #GdaSqlSelectField structure.
 </return>
 </function>
 
@@ -9430,31 +9494,33 @@ Get the number of GType types the GdaDataHandler can handle correctly
 </return>
 </function>
 
-<function name="gda_vprovider_hub_new">
+<function name="gda_data_proxy_is_read_only">
 <description>
-Creates a new GdaVirtualProvider object which allows one to 
-add and remove GdaDataModel objects as tables within a connection
-
 
 </description>
 <parameters>
+<parameter name="proxy">
+<parameter_description> a #GdaDataProxy object
+</parameter_description>
+</parameter>
 </parameters>
-<return> a new #GdaVirtualProvider object.
+<return> TRUE if the proxied data model is itself read-only
 </return>
 </function>
 
-<function name="gda_column_set_g_type">
+<function name="gda_connection_del_prepared_statement">
 <description>
-Sets the type of @column to @type.
+Removes any prepared statement associated to @gda_stmt in @cnc: this undoes what
+gda_connection_add_prepared_statement() does.
 
 </description>
 <parameters>
-<parameter name="column">
-<parameter_description> a #GdaColumn.
+<parameter name="cnc">
+<parameter_description> a #GdaConnection object
 </parameter_description>
 </parameter>
-<parameter name="type">
-<parameter_description> the new type of @column.
+<parameter name="gda_stmt">
+<parameter_description> a #GdaStatement object
 </parameter_description>
 </parameter>
 </parameters>
@@ -9485,18 +9551,18 @@ Sets the type of @column to @type.
 </return>
 </function>
 
-<function name="gda_column_get_auto_increment">
+<function name="gda_sql_statement_check_clean">
 <description>
+Cleans any data set by a previous call to gda_sql_statement_check_validity().
 
 </description>
 <parameters>
-<parameter name="column">
-<parameter_description> a #GdaColumn.
+<parameter name="stmt">
+<parameter_description> a pinter to a #GdaSqlStatement structure
 </parameter_description>
 </parameter>
 </parameters>
-<return> whether the given column is an auto incremented one (%TRUE or %FALSE).
-</return>
+<return></return>
 </function>
 
 <function name="gda_data_model_export_to_file">
@@ -9583,6 +9649,20 @@ for g_strdup_printf())
 </parameters>
 <return> a constant #GValue if a value has been defined, or %NULL if the value is undefined or
 if the @path is not defined or @path does not hold any value.
+</return>
+</function>
+
+<function name="gda_column_get_auto_increment">
+<description>
+
+</description>
+<parameters>
+<parameter name="column">
+<parameter_description> a #GdaColumn.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether the given column is an auto incremented one (%TRUE or %FALSE).
 </return>
 </function>
 
@@ -9673,6 +9753,30 @@ Retreive the code associated to @event.
 </return>
 </function>
 
+<function name="gda_server_provider_get_data_handler_g_type">
+<description>
+Find a #GdaDataHandler object to manipulate data of type @for_type. The returned object must not be modified.
+
+
+</description>
+<parameters>
+<parameter name="provider">
+<parameter_description> a server provider.
+</parameter_description>
+</parameter>
+<parameter name="cnc">
+<parameter_description> a #GdaConnection object, or %NULL
+</parameter_description>
+</parameter>
+<parameter name="for_type">
+<parameter_description> a #GType
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GdaDataHandler, or %NULL if the provider does not support the requested @for_type data type 
+</return>
+</function>
+
 <function name="gda_sql_select_order_new">
 <description>
 Creates a new #GdaSqlSelectOrder structure and sets its parent to @parent.
@@ -9689,25 +9793,24 @@ Creates a new #GdaSqlSelectOrder structure and sets its parent to @parent.
 </return>
 </function>
 
-<function name="gda_data_model_row_removed">
+<function name="gda_data_model_iter_get_value_for_field">
 <description>
-Emits the &apos;row_removed&apos; and &apos;changed&apos; signal on @model.
+Get the value stored at the column @field_name in @iter
 
-This method should only be used by #GdaDataModel implementations to 
-signal that a row has been removed
 
 </description>
 <parameters>
-<parameter name="model">
-<parameter_description> a #GdaDataModel object.
+<parameter name="iter">
+<parameter_description> a #GdaDataModelIter object
 </parameter_description>
 </parameter>
-<parameter name="row">
-<parameter_description> row number.
+<parameter name="field_name">
+<parameter_description> the requested column name
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> the #GValue, or %NULL
+</return>
 </function>
 
 <function name="gda_data_proxy_get_proxied_model_row">
@@ -9728,6 +9831,24 @@ Get the @proxy&apos;s proxied model row corresponding to @proxy_row
 </parameters>
 <return> the proxied model&apos;s row, or -1 if @proxy row which only exists @proxy
 </return>
+</function>
+
+<function name="gda_column_set_g_type">
+<description>
+Sets the type of @column to @type.
+
+</description>
+<parameters>
+<parameter name="column">
+<parameter_description> a #GdaColumn.
+</parameter_description>
+</parameter>
+<parameter name="type">
+<parameter_description> the new type of @column.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="gda_data_proxy_append">
@@ -9812,96 +9933,28 @@ Commits the modified data in the proxy back into the #GdaDataModel.
 </return>
 </function>
 
-<function name="gda_data_model_bdb_new">
+<function name="gda_data_model_iter_move_prev_default">
 <description>
-Creates a new #GdaDataModel object to access the contents of the Berkeley DB file @file,
-for the database @db_name if not %NULL
-
 
 </description>
 <parameters>
-<parameter name="filename">
-<parameter_description>
-</parameter_description>
-</parameter>
-<parameter name="db_name">
-<parameter_description> the name of the database within @filename, or %NULL
-</parameter_description>
-</parameter>
 </parameters>
-<return> a new #GdaDataModel
-</return>
+<return></return>
 </function>
 
-<function name="gda_meta_store_schema_add_custom_object">
+<function name="gda_data_model_dir_get_errors">
 <description>
-The internal database used by @store can be &apos;augmented&apos; with some user-defined database objects
-(such as tables or views). This method allows one to add a new database object.
-
-If the internal database already contains the object, then:
-&amp;lt;itemizedlist&amp;gt;
-&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;if the object is equal to the provided description then TRUE is returned&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
-&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;if the object exists but differs from the provided description, then FALSE is returned,
-with the GDA_META_STORE_SCHEMA_OBJECT_CONFLICT_ERROR error code&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
-&amp;lt;/itemizedlist&amp;gt;
-
-The @xml_description defines the table of view&apos;s definition, for example:
-&amp;lt;programlisting&amp;gt;&amp;lt;![CDATA[&amp;lt;table name=&quot;mytable&quot;&amp;gt;
-    &amp;lt;column name=&quot;id&quot; pkey=&quot;TRUE&quot;/&amp;gt;
-    &amp;lt;column name=&quot;value&quot;/&amp;gt;
-&amp;lt;/table&amp;gt;]]&amp;gt;&amp;lt;/programlisting&amp;gt;
-
-The partial DTD for this XML description of the object to add is the following (the top node must be
-a &amp;lt;table&amp;gt; or a &amp;lt;view&amp;gt;):
-&amp;lt;programlisting&amp;gt;&amp;lt;![CDATA[&amp;lt;!ELEMENT table (column*,check*,fkey*,unique*)&amp;gt;
-&amp;lt;!ATTLIST table
-          name NMTOKEN #REQUIRED&amp;gt;
-
-&amp;lt;!ELEMENT column EMPTY&amp;gt;
-&amp;lt;!ATTLIST column
-          name NMTOKEN #REQUIRED
-          type CDATA #IMPLIED
-          pkey (TRUE|FALSE) #IMPLIED
-          autoinc (TRUE|FALSE) #IMPLIED
-          nullok (TRUE|FALSE) #IMPLIED&amp;gt;
-
-&amp;lt;!ELEMENT check (#PCDATA)&amp;gt;
-
-&amp;lt;!ELEMENT fkey (part+)&amp;gt;
-&amp;lt;!ATTLIST fkey
-          ref_table NMTOKEN #REQUIRED&amp;gt;
-
-&amp;lt;!ELEMENT part EMPTY&amp;gt;
-&amp;lt;!ATTLIST part
-          column NMTOKEN #IMPLIED
-          ref_column NMTOKEN #IMPLIED&amp;gt;
-
-&amp;lt;!ELEMENT unique (column*)&amp;gt;
-
-&amp;lt;!ELEMENT view (definition)&amp;gt;
-&amp;lt;!ATTLIST view
-          name NMTOKEN #REQUIRED
-          descr CDATA #IMPLIED&amp;gt;
-
-&amp;lt;!ELEMENT definition (#PCDATA)&amp;gt;]]&amp;gt;&amp;lt;/programlisting&amp;gt;
+Get the list of errors which have occurred while using @model
 
 
 </description>
 <parameters>
-<parameter name="store">
-<parameter_description> a #GdaMetaStore object
-</parameter_description>
-</parameter>
-<parameter name="xml_description">
-<parameter_description> an XML description of the table or view to add to @store
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> a place to store errors, or %NULL
+<parameter name="model">
+<parameter_description> a #GdaDataModelDir object
 </parameter_description>
 </parameter>
 </parameters>
-<return> TRUE if the new object has sucessfully been added
+<return> a read-only list of #GError pointers, or %NULL if no error has occurred
 </return>
 </function>
 
@@ -9931,6 +9984,24 @@ reference it has on @prepared_stmt.
 <return></return>
 </function>
 
+<function name="gda_data_proxy_set_sample_start">
+<description>
+Sets the number of the first row to be displayed.
+
+</description>
+<parameters>
+<parameter name="proxy">
+<parameter_description> a #GdaDataProxy object
+</parameter_description>
+</parameter>
+<parameter name="sample_start">
+<parameter_description> the number of the first row to be displayed
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gda_value_get_time">
 <description>
 
@@ -9942,6 +10013,32 @@ reference it has on @prepared_stmt.
 </parameter>
 </parameters>
 <return> the value stored in @value.
+</return>
+</function>
+
+<function name="gda_data_model_iter_move_to_row">
+<description>
+Synchronizes the values of the parameters in @iter with the values at the @row row.
+
+If @row is not a valid row, then the returned value is FALSE, and the &quot;current-row&quot;
+property is set to -1 (which means that gda_data_model_iter_is_valid() would return FALSE)
+
+If any other error occurred then the returned value is FALSE, but the &quot;current-row&quot;
+property is set to the @row row.
+
+
+</description>
+<parameters>
+<parameter name="iter">
+<parameter_description> a #GdaDataModelIter object
+</parameter_description>
+</parameter>
+<parameter name="row">
+<parameter_description> the row to set @iter to
+</parameter_description>
+</parameter>
+</parameters>
+<return> TRUE if no error occurred
 </return>
 </function>
 
@@ -10096,23 +10193,6 @@ See gda_connection_statement_execute() form more information about @last_insert_
 </parameter>
 </parameters>
 <return> the number of rows affected (&amp;gt;=0) or -1 or -2 
-</return>
-</function>
-
-<function name="gda_sql_identifier_add_quotes">
-<description>
-Add double quotes around the @str identifier. Use the gda_sql_identifier_needs_quotes()
-function to tell if an identifier needs to be quoted.
-
-
-</description>
-<parameters>
-<parameter name="str">
-<parameter_description> an SQL identifier
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string
 </return>
 </function>
 
@@ -10401,23 +10481,19 @@ the operation; to actually perform the operation, use gda_server_provider_perfor
 </return>
 </function>
 
-<function name="gda_server_provider_get_server_version">
+<function name="gda_sql_select_join_type_to_string">
 <description>
-Get the version of the database to which the connection is opened.
+Creates a new string representing the join type.
 
 
 </description>
 <parameters>
-<parameter name="provider">
-<parameter_description> a #GdaServerProvider object.
-</parameter_description>
-</parameter>
-<parameter name="cnc">
-<parameter_description> a #GdaConnection object
+<parameter name="type">
+<parameter_description> a #GdaSqlSelectJoinType structure to be copied
 </parameter_description>
 </parameter>
 </parameters>
-<return> a (read only) string, or %NULL if an error occurred
+<return> a string representing the Join type.
 </return>
 </function>
 
@@ -10562,33 +10638,23 @@ Frees a #GdaSqlCase structure and its members.
 <return></return>
 </function>
 
-<function name="gda_data_handler_get_value_from_sql">
+<function name="gda_config_get_dsn_info">
 <description>
-Creates a new GValue which represents the SQL value given as argument. This is
-the opposite of the function gda_data_handler_get_sql_from_value(). The type argument
-is used to determine the real data type requested for the returned value.
+Get information about the DSN named @dsn_name. 
 
-If the sql string is NULL, then the returned GValue is of type GDA_TYPE_NULL;
-if the sql string does not correspond to a valid SQL string for the requested type, then
-NULL is returned.
+@dsn_name&apos;s format is &quot;[&amp;lt;username&amp;gt;[:&amp;lt;password&amp;gt;]@]&amp;lt;DSN&amp;gt;&quot; (if &amp;lt;username&amp;gt;
+and optionaly &amp;lt;password&amp;gt; are provided, they are ignored). Also see the gda_dsn_split() utility
+function.
 
 
 </description>
 <parameters>
-<parameter name="dh">
-<parameter_description> an object which implements the #GdaDataHandler interface
-</parameter_description>
-</parameter>
-<parameter name="sql">
-<parameter_description>
-</parameter_description>
-</parameter>
-<parameter name="type">
-<parameter_description> 
+<parameter name="dsn_name">
+<parameter_description> the name of the DSN to look for
 </parameter_description>
 </parameter>
 </parameters>
-<return> the new GValue or NULL on error
+<return> a a pointer to read-only #GdaDsnInfo structure, or %NULL if not found
 </return>
 </function>
 
@@ -10673,22 +10739,23 @@ Tries to open the connection.
 </return>
 </function>
 
-<function name="gda_connection_rollback_transaction">
+<function name="gda_batch_get_parameters">
 <description>
-Rollbacks the given transaction. This means that all changes
-made to the underlying data source since the last call to
-#gda_connection_begin_transaction() or #gda_connection_commit_transaction()
-will be discarded.
+Get a new #GdaSet object which groups all the execution parameters
+which @batch needs for all the statements it includes.
+This new object is returned though @out_params.
+
+Note that if @batch does not need any parameter, then @out_params is set to %NULL.
 
 
 </description>
 <parameters>
-<parameter name="cnc">
-<parameter_description> a #GdaConnection object.
+<parameter name="batch">
+<parameter_description> a #GdaBatch object
 </parameter_description>
 </parameter>
-<parameter name="name">
-<parameter_description> the name of the transation to commit, or %NULL
+<parameter name="out_params">
+<parameter_description> a place to store a new #GdaSet object, or %NULL
 </parameter_description>
 </parameter>
 <parameter name="error">
@@ -10696,7 +10763,7 @@ will be discarded.
 </parameter_description>
 </parameter>
 </parameters>
-<return> %TRUE if the operation was successful, %FALSE otherwise.
+<return> TRUE if no error occurred.
 </return>
 </function>
 
@@ -10940,33 +11007,20 @@ Return: a new #GdaDataModel if succesfull, NULL otherwise
 <return></return>
 </function>
 
-<function name="gda_holder_set_attribute">
+<function name="gda_alphanum_to_text">
 <description>
-Set the value associated to a named attribute.
+Does the opposite of gda_text_to_alphanum(), in the same string 
 
-Attributes can have any name, but Libgda proposes some default names, see &amp;lt;link linkend=&quot;libgda-40-Attributes-manager.synopsis&quot;&amp;gt;this section&amp;lt;/link&amp;gt;.
-If there is already an attribute named @attribute set, then its value is replaced with the new @value, 
-except if @value is %NULL, in which case the attribute is removed.
-
-Warning: @sttribute should be a static string (no copy of it is made), so the string should exist as long as the @holder
-object exists.
 
 </description>
 <parameters>
-<parameter name="holder">
-<parameter_description> a #GdaHolder
-</parameter_description>
-</parameter>
-<parameter name="attribute">
-<parameter_description> attribute name as a static string
-</parameter_description>
-</parameter>
-<parameter name="value">
-<parameter_description> a #GValue, or %NULL
+<parameter name="text">
+<parameter_description>
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> @text if conversion succedded or %NULL if an error occurred
+</return>
 </function>
 
 <function name="GdaMetaStore">
@@ -11059,6 +11113,20 @@ contained in the @col column of the @model data model.
 </return>
 </function>
 
+<function name="gda_data_model_thaw">
+<description>
+Re-enables notifications of changes on the given data model.
+
+</description>
+<parameters>
+<parameter name="model">
+<parameter_description> a #GdaDataModel object.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gda_server_operation_get_node_info">
 <description>
 Get information about the node identified by @path. The returned #GdaServerOperationNode structure can be 
@@ -11104,32 +11172,21 @@ Offers the same feature as gda_data_select_set_modification_statement() but usin
 </return>
 </function>
 
-<function name="gda_value_compare">
+<function name="gda_server_operation_del_node_from_sequence">
 <description>
-Compares two values of the same type, with the exception that a value of any type can be
-compared to a GDA_TYPE_NULL value, specifically:
-&amp;lt;itemizedlist&amp;gt;
-&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;if @value1 and @value2 are both GDA_TYPE_NULL values then the returned value is 0&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
-&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;if @value1 is a GDA_TYPE_NULL value and @value2 is of another type then the returned value is -1&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
-&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;if @value1 is of another type and @value2 is a GDA_TYPE_NULL value then the returned value is 1&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
-&amp;lt;listitem&amp;gt;&amp;lt;para&amp;gt;in all other cases, @value1 and @value2 must be of the same type and their values are compared&amp;lt;/para&amp;gt;&amp;lt;/listitem&amp;gt;
-&amp;lt;/itemizedlist&amp;gt;
-
 
 </description>
 <parameters>
-<parameter name="value1">
-<parameter_description> a #GValue to compare (not %NULL)
+<parameter name="op">
+<parameter_description> a #GdaServerOperation object
 </parameter_description>
 </parameter>
-<parameter name="value2">
-<parameter_description> the other #GValue to be compared to @value1 (not %NULL)
+<parameter name="item_path">
+<parameter_description> the path to the sequence&apos;s item to remove (like &quot;/SEQ_NAME/5&quot; for instance)
 </parameter_description>
 </parameter>
 </parameters>
-<return> if both values have the same type, returns 0 if both contain
-the same value, an integer less than 0 if @value1 is less than @value2 or
-an integer greater than 0 if @value1 is greater than @value2.
+<return> TRUE if the specified node has been removed from the sequence
 </return>
 </function>
 
@@ -11155,20 +11212,6 @@ Delete the SAVEPOINT named @name when not used anymore.
 </parameters>
 <return> TRUE if no error occurred
 </return>
-</function>
-
-<function name="gda_sql_statement_check_clean">
-<description>
-Cleans any data set by a previous call to gda_sql_statement_check_validity().
-
-</description>
-<parameters>
-<parameter name="stmt">
-<parameter_description> a pinter to a #GdaSqlStatement structure
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
 </function>
 
 <function name="gda_handler_numerical_new">
@@ -11201,6 +11244,27 @@ Copies @src&apos;s data to @dest
 <return></return>
 </function>
 
+<function name="gda_quark_list_find">
+<description>
+Searches for the value identified by @name in the given #GdaQuarkList.
+
+
+</description>
+<parameters>
+<parameter name="qlist">
+<parameter_description> a #GdaQuarkList.
+</parameter_description>
+</parameter>
+<parameter name="name">
+<parameter_description> the name of the value to search for.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the value associated with the given key if found, or %NULL
+if not found.
+</return>
+</function>
+
 <function name="gda_column_set_name">
 <description>
 Sets the name of @column to @name.
@@ -11217,22 +11281,6 @@ Sets the name of @column to @name.
 </parameter>
 </parameters>
 <return></return>
-</function>
-
-<function name="gda_sql_select_field_copy">
-<description>
-Creates a new #GdaSqlSelectField structure initated with the values stored in @field.
-
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlSelectField structure to be copied
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlSelectField structure.
-</return>
 </function>
 
 <function name="gda_data_proxy_row_is_inserted">
@@ -11315,6 +11363,16 @@ Remove all the tables in @hub representing @cnc&apos;s tables.
 </parameter>
 </parameters>
 <return> TRUE if no error occurred
+</return>
+</function>
+
+<function name="gda_data_select_get_type">
+<description>
+
+</description>
+<parameters>
+</parameters>
+<return> the #GType of GdaDataSelect.
 </return>
 </function>
 
@@ -11487,20 +11545,22 @@ Deallocates all memory associated to the given #GdaBlob.
 <return></return>
 </function>
 
-<function name="gda_sql_select_from_serialize">
+<function name="gda_holder_set_not_null">
 <description>
-Creates a new string description of the FROM clausure used in a SELECT statement.
-
+Sets if the holder can have a NULL value. If @not_null is TRUE, then that won&apos;t be allowed
 
 </description>
 <parameters>
-<parameter name="from">
-<parameter_description> a #GdaSqlSelectFrom structure
+<parameter name="holder">
+<parameter_description> a #GdaHolder object
+</parameter_description>
+</parameter>
+<parameter name="not_null">
+<parameter_description>
 </parameter_description>
 </parameter>
 </parameters>
-<return> a new string with the description of the FROM or &quot;null&quot; in case @from is invalid.
-</return>
+<return></return>
 </function>
 
 <function name="gda_holder_new">
@@ -11697,33 +11757,23 @@ Get the complete path to the parent of the node defined by @path
 </return>
 </function>
 
-<function name="gda_connection_get_meta_store_data_v">
+<function name="gda_xa_transaction_unregister_connection">
 <description>
-see #gda_connection_get_meta_store_data
-
+Unregisters @cnc to be used by @xa_trans to create a distributed transaction. This is
+the opposite of gda_xa_transaction_register_connection().
 
 </description>
 <parameters>
+<parameter name="xa_trans">
+<parameter_description> a #GdaXaTransaction object
+</parameter_description>
+</parameter>
 <parameter name="cnc">
-<parameter_description> a #GdaConnection object.
-</parameter_description>
-</parameter>
-<parameter name="meta_type">
-<parameter_description> describes which data to get.
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> a place to store errors, or %NULL
-</parameter_description>
-</parameter>
-<parameter name="filters">
-<parameter_description> a GList of GdaHolders
+<parameter_description> the connection to add to @xa_trans
 </parameter_description>
 </parameter>
 </parameters>
-<return> a #GdaDataModel containing the data required. The caller is responsible
-for freeing the returned model using g_object_unref().
-</return>
+<return></return>
 </function>
 
 <function name="gda_server_operation_get_sequence_name">
@@ -11820,25 +11870,25 @@ if @schema is %NULL then any schema will be used (if @schema is %NULL then catal
 </return>
 </function>
 
-<function name="gda_meta_struct_new">
+<function name="gda_binary_to_string">
 <description>
-Creates a new #GdaMetaStruct object. The @features specifies the extra features which will also be computed:
-the more features, the more time it takes to run. Features such as table&apos;s columns, each column&apos;s attributes, etc
-are not optional and will always be computed.
+Converts all the non printable characters of bin-&amp;gt;data into the \xxx representation
+where xxx is the octal representation of the byte, and the &apos;\&apos; (backslash) character
+is converted to &quot;\\&quot;.
 
 
 </description>
 <parameters>
-<parameter name="store">
-<parameter_description> a #GdaMetaStore from which the new #GdaMetaStruct object will fetch information
+<parameter name="bin">
+<parameter_description> a correctly filled @GdaBinary structure
 </parameter_description>
 </parameter>
-<parameter name="features">
-<parameter_description> the kind of extra information the new #GdaMetaStruct object will compute
+<parameter name="maxlen">
+<parameter_description> a maximum len used to truncate, or 0 for no maximum length
 </parameter_description>
 </parameter>
 </parameters>
-<return> the newly created #GdaMetaStruct object
+<return> a new string from @bin
 </return>
 </function>
 
@@ -11889,7 +11939,7 @@ tables, views, and other database objects.
 
 Note: it&apos;s up to the caller to make sure the information contained within @cnc&apos;s associated #GdaMetaStore
 is up to date using gda_connection_update_meta_store() (it can become outdated if the database&apos;s schema
-is accessed from outside of Libgda).
+is modified).
 
 For more information about the returned data model&apos;s attributes, or about the @meta_type and @... filter arguments,
 see &amp;lt;link linkend=&quot;GdaConnectionMetaTypeHead&quot;&amp;gt;this description&amp;lt;/link&amp;gt;.
@@ -12241,28 +12291,18 @@ gda_data_select_set_modification_statement().
 </return>
 </function>
 
-<function name="gda_mutex_free">
-<description>
-Destroys @m.
-
-</description>
-<parameters>
-<parameter name="m">
-<parameter_description> a #GdaMutex
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
 <function name="gda_perform_create_database">
 <description>
-Creates a new database using the specifications in @op, which must have been obtained using
-gda_prepare_create_database ()
+Creates a new database using the specifications in @op. @op can be obtained using
+gda_server_provider_create_operation(), or gda_prepare_create_database().
 
 
 </description>
 <parameters>
+<parameter name="provider">
+<parameter_description> the database provider to use, or %NULL if @op has been created using gda_prepare_create_database()
+</parameter_description>
+</parameter>
 <parameter name="op">
 <parameter_description> a #GdaServerOperation object obtained using gda_prepare_create_database()
 </parameter_description>
@@ -12299,40 +12339,49 @@ set opaque @data, you&apos;ll have to do it yourself.
 <return></return>
 </function>
 
-<function name="gda_prepare_create_table">
+<function name="gda_lockable_unlock">
 <description>
-Create a #GdaServerOperation object using an opened connection, taking three 
-arguments, a colum&apos;s name the column&apos;s GType and #GdaEasyCreateTableFlag 
-flag, you need to finish the list using NULL.
+Unlocks @lockable. This method should not be called if the current does not already holds a lock on @lockable (having
+used gda_lockable_lock() or gda_lockable_trylock()).
 
-You&apos;ll be able to modify the #GdaServerOperation object to add custom options
-to the operation. When finish call #gda_perform_create_table 
-or #gda_server_operation_perform_operation
-in order to execute the operation.
+This function can be used even if g_thread_init() has not yet been called, and, in that case, will do nothing.
+
+</description>
+<parameters>
+<parameter name="lockable">
+<parameter_description> a #GdaLockable object.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gda_connection_get_meta_store_data_v">
+<description>
+see #gda_connection_get_meta_store_data
 
 
 </description>
 <parameters>
 <parameter name="cnc">
-<parameter_description> an opened connection
+<parameter_description> a #GdaConnection object.
 </parameter_description>
 </parameter>
-<parameter name="table_name">
-<parameter_description>
-@num_columns
+<parameter name="meta_type">
+<parameter_description> describes which data to get.
 </parameter_description>
 </parameter>
 <parameter name="error">
 <parameter_description> a place to store errors, or %NULL
 </parameter_description>
 </parameter>
-<parameter name="Varargs">
-<parameter_description> group of three arguments for column&apos;s name, column&apos;s #GType 
-and a #GdaEasyCreateTableFlag flag, finished with NULL
+<parameter name="filters">
+<parameter_description> a GList of GdaHolders
 </parameter_description>
 </parameter>
 </parameters>
-<return> a #GdaServerOperation if no errors; NULL and set @error otherwise
+<return> a #GdaDataModel containing the data required. The caller is responsible
+for freeing the returned model using g_object_unref().
 </return>
 </function>
 
@@ -12384,22 +12433,6 @@ of @copy into @value, which must already be allocated.
 </return>
 </function>
 
-<function name="gda_sql_select_target_copy">
-<description>
-Creates a new #GdaSqlSelectTarget structure initated with the values stored in @target.
-
-
-</description>
-<parameters>
-<parameter name="target">
-<parameter_description> a #GdaSqlSelectTarget structure to be copied
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlSelectTarget structure.
-</return>
-</function>
-
 <function name="gda_log_enable">
 <description>
 Enables GDA logs.
@@ -12410,20 +12443,11 @@ Enables GDA logs.
 <return></return>
 </function>
 
-<function name="gda_data_proxy_set_sample_start">
+<function name="gda_data_model_iter_move_to_row_default">
 <description>
-Sets the number of the first row to be displayed.
 
 </description>
 <parameters>
-<parameter name="proxy">
-<parameter_description> a #GdaDataProxy object
-</parameter_description>
-</parameter>
-<parameter name="sample_start">
-<parameter_description> the number of the first row to be displayed
-</parameter_description>
-</parameter>
 </parameters>
 <return></return>
 </function>
@@ -12503,19 +12527,39 @@ Deallocates all memory associated to a #GValue.
 <return></return>
 </function>
 
-<function name="gda_sql_select_join_type_to_string">
+<function name="gda_column_get_allow_null">
 <description>
-Creates a new string representing the join type.
+Gets the &apos;allow null&apos; flag of the given column.
 
 
 </description>
 <parameters>
-<parameter name="type">
-<parameter_description> a #GdaSqlSelectJoinType structure to be copied
+<parameter name="column">
+<parameter_description> a #GdaColumn.
 </parameter_description>
 </parameter>
 </parameters>
-<return> a string representing the Join type.
+<return> whether the given column allows null values or not (%TRUE or %FALSE).
+</return>
+</function>
+
+<function name="gda_server_provider_get_server_version">
+<description>
+Get the version of the database to which the connection is opened.
+
+
+</description>
+<parameters>
+<parameter name="provider">
+<parameter_description> a #GdaServerProvider object.
+</parameter_description>
+</parameter>
+<parameter name="cnc">
+<parameter_description> a #GdaConnection object
+</parameter_description>
+</parameter>
+</parameters>
+<return> a (read only) string, or %NULL if an error occurred
 </return>
 </function>
 
@@ -12566,6 +12610,31 @@ Get the list of errors which @model has to report. The returned list is a list o
 </parameter>
 </parameters>
 <return> the list of errors (which must not be modified), or %NULL
+</return>
+</function>
+
+<function name="gda_perform_drop_database">
+<description>
+Destroys an existing database using the specifications in @op.  @op can be obtained using
+gda_server_provider_create_operation(), or gda_prepare_drop_database().
+
+
+</description>
+<parameters>
+<parameter name="provider">
+<parameter_description> the database provider to use, or %NULL if @op has been created using gda_prepare_drop_database()
+</parameter_description>
+</parameter>
+<parameter name="op">
+<parameter_description> a #GdaServerOperation object obtained using gda_prepare_drop_database()
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a place to store en error, or %NULL
+</parameter_description>
+</parameter>
+</parameters>
+<return> TRUE if no error occurred and the database has been destroyed
 </return>
 </function>
 
@@ -12636,7 +12705,8 @@ Get the type of operation @op is for
 
 <function name="gda_meta_struct_complement_default">
 <description>
-This method is similar to gda_meta_struct_complement() but creates #GdaMetaDbObject for all the
+This method is similar to gda_meta_struct_complement() and gda_meta_struct_complement_all()
+but creates #GdaMetaDbObject for all the
 database object which are useable using only their short name (that is which do not need to be prefixed by 
 the schema in which they are to be used).
 
@@ -12716,25 +12786,24 @@ Copy constructor
 </return>
 </function>
 
-<function name="gda_perform_drop_database">
+<function name="gda_sql_function_take_name">
 <description>
-Destroys an existing database using the specifications in @op,  which must have been obtained using
-gda_prepare_drop_database ()
+Sets the function&apos;s arguments to point to @args, then sets the
+list&apos;s data elements&apos; parent to @function.
 
 
 </description>
 <parameters>
-<parameter name="op">
-<parameter_description> a #GdaServerOperation object obtained using gda_prepare_drop_database()
+<parameter name="function">
+<parameter_description> a #GdaSqlFunction structure
 </parameter_description>
 </parameter>
-<parameter name="error">
-<parameter_description> a place to store en error, or %NULL
+<parameter name="args">
+<parameter_description> a #GSList to take from
 </parameter_description>
 </parameter>
 </parameters>
-<return> TRUE if no error occurred and the database has been destroyed
-</return>
+<return></return>
 </function>
 
 <function name="gda_data_model_export_to_string">
@@ -12779,1256 +12848,22 @@ gda_data_model_export_to_file() documentation for more information about the @op
 </return>
 </function>
 
-<function name="gda_quark_list_find">
+<function name="gda_connection_event_set_gda_code">
 <description>
-Searches for the value identified by @name in the given #GdaQuarkList.
+Sets @event&apos;s gda code: that code is standardized by the libgda
+library. If you want to specify the corresponding provider specific code,
+use gda_connection_event_get_code() or gda_connection_event_get_sqlstate() instead.
 
+This function should not be called directly
 
 </description>
 <parameters>
-<parameter name="qlist">
-<parameter_description> a #GdaQuarkList.
+<parameter name="event">
+<parameter_description> a #GdaConnectionEvent
 </parameter_description>
 </parameter>
-<parameter name="name">
-<parameter_description> the name of the value to search for.
-</parameter_description>
-</parameter>
-</parameters>
-<return> the value associated with the given key if found, or %NULL
-if not found.
-</return>
-</function>
-
-<function name="gda_sql_table_copy">
-<description>
-Creates a new #GdaSqlTable structure initated with the values stored in @table.
-
-
-</description>
-<parameters>
-<parameter name="table">
-<parameter_description> a #GdaSqlTable structure to be copied
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlTable structure.
-</return>
-</function>
-
-<function name="gda_sql_select_field_new">
-<description>
-Creates a new #GdaSqlSelectField structure and sets its parent to @parent. A
-#GdaSqlSelectField is any expression in SELECT statements before the FROM clausure.
-
-
-</description>
-<parameters>
-<parameter name="parent">
-<parameter_description> a #GdaSqlStatementSelect structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlSelectField structure.
-</return>
-</function>
-
-<function name="gda_sql_select_join_new">
-<description>
-Creates a new #GdaSqlSelectJoin structure and sets its parent to @parent.
-
-
-</description>
-<parameters>
-<parameter name="parent">
-<parameter_description> a #GdaSqlSelectFrom
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlSelectJoin structure
-</return>
-</function>
-
-<function name="gda_sql_parser_parse_file_as_batch">
-<description>
-Parse @filename&apos;s contents and creates a #GdaBatch object which contains all the
-#GdaStatement objects created while parsing (one object per SQL statement).
-
-@filename&apos;s contents are parsed and #GdaStatement objects are created as long as no error is found. If an error is found 
-at some point, then the parsing stops, @error may be set and %NULL is returned
-
-if @sql is %NULL, then the returned #GdaBatch object will contain no statement.
-
-
-</description>
-<parameters>
-<parameter name="parser">
-<parameter_description> a #GdaSqlParser object
-</parameter_description>
-</parameter>
-<parameter name="filename">
-<parameter_description> name of the file to parse
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> location to store error, or %NULL
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaBatch object, or %NULL if an error occurred
-</return>
-</function>
-
-<function name="gda_sql_select_order_free">
-<description>
-Frees a #GdaSqlSelectOrder structure and its members.
-
-</description>
-<parameters>
-<parameter name="order">
-<parameter_description> a #GdaSqlSelectOrder structure to be freed
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_table_serialize">
-<description>
-Creates a new string representing a table. You need to free the returned string
-using g_free();
-
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlTable structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string with the name of the field or &quot;null&quot; in case @table is invalid.
-</return>
-</function>
-
-<function name="gda_sql_function_copy">
-<description>
-Creates a new #GdaSqlFunction structure initated with the values stored in @function.
-
-
-</description>
-<parameters>
-<parameter name="function">
-<parameter_description> a #GdaSqlFunction structure to be copied
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlFunction structure.
-</return>
-</function>
-
-<function name="gda_sql_operation_free">
-<description>
-Frees a #GdaSqlOperation structure and its members.
-
-</description>
-<parameters>
-<parameter name="operation">
-<parameter_description> a #GdaSqlOperation structure to be freed
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_select_target_serialize">
-<description>
-Creates a new string representing a target used in a SELECT statement
-after the FROM clausure.
-
-
-</description>
-<parameters>
-<parameter name="target">
-<parameter_description> a #GdaSqlSelectTarget structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string with the description of the expression or &quot;null&quot; in case @field is invalid.
-</return>
-</function>
-
-<function name="gda_sql_function_serialize">
-<description>
-Creates a new string representing a function. You need to free the returned string
-using g_free();
-
-
-</description>
-<parameters>
-<parameter name="function">
-<parameter_description> a #GdaSqlFunction structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string with the description of the function or &quot;null&quot; in case @function is invalid.
-</return>
-</function>
-
-<function name="gda_sql_select_order_serialize">
-<description>
-Creates a new string description of the ORDER BY clausure used in a SELECT statement.
-
-
-</description>
-<parameters>
-<parameter name="order">
-<parameter_description> a #GdaSqlSelectOrder structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string with the description of the ORDER BY or &quot;null&quot; in case @order is invalid.
-</return>
-</function>
-
-<function name="gda_sql_field_take_name">
-<description>
-Sets the field&apos;s name using the string holded by @value. When call, @value is freed using
-#gda_value_free().
-
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlField structure
-</parameter_description>
-</parameter>
-<parameter name="value">
-<parameter_description> a #GValue holding a string to take from
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_select_join_copy">
-<description>
-Creates a new #GdaSqlSelectJoin structure initated with the values stored in @join.
-
-
-</description>
-<parameters>
-<parameter name="join">
-<parameter_description> a #GdaSqlSelectJoin structure to be copied
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlSelectJoin structure.
-</return>
-</function>
-
-<function name="gda_sql_parser_parse_string_as_batch">
-<description>
-Parse @sql and creates a #GdaBatch object which contains all the #GdaStatement objects created while parsing (one object
-per SQL statement). Empty statements (composed of spaces only) do not appear in the resulting object.
-
-@sql is parsed and #GdaStatement objects are created as long as no error is found in @sql. If an error is found 
-at some point, then the parsing stops and @remain may contain a non %NULL pointer, @error may be set, and %NULL
-is returned.
-
-if @sql is %NULL, then the returned #GdaBatch object will contain no statement.
-
-
-</description>
-<parameters>
-<parameter name="parser">
-<parameter_description> a #GdaSqlParser object
-</parameter_description>
-</parameter>
-<parameter name="sql">
-<parameter_description> the SQL string to parse
-</parameter_description>
-</parameter>
-<parameter name="remain">
-<parameter_description> location to store a pointer to remaining part of @sql in case an error occurred while parsing @sql, or %NULL
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> location to store error, or %NULL
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaBatch object, or %NULL if an error occurred
-</return>
-</function>
-
-<function name="gda_sql_parser_new">
-<description>
-Creates a new #GdaSqlParser object
-
-
-</description>
-<parameters>
-</parameters>
-<return> the new object
-</return>
-</function>
-
-<function name="gda_sql_table_take_name">
-<description>
-Sets the table&apos;s name using the string holded by @value. When call, @value is freed using
-#gda_value_free().
-
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlTable structure
-</parameter_description>
-</parameter>
-<parameter name="value">
-<parameter_description> a #GValue holding a string to take from
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_identifier_needs_quotes">
-<description>
-Tells if @str needs to be quoted before using it in an SQL statement. To actually add quotes,
-use gda_sql_identifier_add_quotes().
-
-
-</description>
-<parameters>
-<parameter name="str">
-<parameter_description> an SQL identifier
-</parameter_description>
-</parameter>
-</parameters>
-<return> TRUE if @str needs some quotes
-</return>
-</function>
-
-<function name="gda_sql_statement_normalize">
-<description>
-&quot;Normalizes&quot; (in place) some parts of @stmt, which means @stmt may be modified.
-At the moment any &quot;*&quot; field in a SELECT statement will be replaced by one
-#GdaSqlSelectField structure for each field in the referenced table.
-
-
-</description>
-<parameters>
-<parameter name="stmt">
-<parameter_description> a pointer to a #GdaSqlStatement structure
-</parameter_description>
-</parameter>
-<parameter name="cnc">
-<parameter_description> a #GdaConnection object, or %NULL
-</parameter_description>
-</parameter>
-</parameters>
-<return> TRUE if no error occurred
-</return>
-</function>
-
-<function name="gda_sql_statement_check_structure">
-<description>
-Checks for any error in @stmt&apos;s structure to make sure the statement is valid
-(for example a SELECT statement must at least return a column, a DELETE statement must specify which table
-is targetted).
-
-
-</description>
-<parameters>
-<parameter name="stmt">
-<parameter_description> a #GdaSqlStatement pointer
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> a place to store errors, or %NULL
-</parameter_description>
-</parameter>
-</parameters>
-<return> TRUE if no error occurred
-</return>
-</function>
-
-<function name="gda_sql_select_target_take_table_alias">
-<description>
-Sets the target alias (AS) to the string holded by @alias; after call
-this function @alias is freed.
-
-</description>
-<parameters>
-<parameter name="target">
-<parameter_description> a #GdaSqlSelectTarget structure
-</parameter_description>
-</parameter>
-<parameter name="alias">
-<parameter_description> a #GValue holding the alias string to take from
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_statement_check_clean">
-<description>
-Cleans any data set by a previous call to gda_sql_statement_check_validity().
-
-</description>
-<parameters>
-<parameter name="stmt">
-<parameter_description> a pinter to a #GdaSqlStatement structure
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_identifier_remove_quotes">
-<description>
-Prepares @str to be compared:
-- if surrounded by double quotes, then just remove the quotes
-- otherwise convert to lower case
-
-WARNING: @str must NOT be a composed identifier (&amp;lt;part1&amp;gt;.&quot;&amp;lt;part2&amp;gt;&quot; for example)
-
-
-</description>
-<parameters>
-<parameter name="str">
-<parameter_description> a quoted string
-</parameter_description>
-</parameter>
-</parameters>
-<return> @str
-</return>
-</function>
-
-<function name="gda_sql_select_from_take_new_join">
-<description>
-Append @join to the joins in the FROM clausure and set @join&apos;s parent to
-@from; after call this function @from owns @join then you must not free it.
-
-</description>
-<parameters>
-<parameter name="from">
-<parameter_description> a #GdaSqlSelectFrom structure
-</parameter_description>
-</parameter>
-<parameter name="join">
-<parameter_description> a #GdaSqlSelectJoin to take from
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_select_from_new">
-<description>
-Creates a new #GdaSqlSelectFrom structure and sets its parent to @parent.
-
-
-</description>
-<parameters>
-<parameter name="parent">
-<parameter_description> a #GdaSqlStatementSelect
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlSelectFrom structure
-</return>
-</function>
-
-<function name="gda_sql_expr_take_select">
-<description>
-Sets the expression&apos;s parent to the #GdaSqlStatementSelect holded by @stmt. After
-calling this function @stmt is freed.
-
-
-</description>
-<parameters>
-<parameter name="expr">
-<parameter_description> a #GdaSqlExpr structure
-</parameter_description>
-</parameter>
-<parameter name="stmt">
-<parameter_description> a #GdaSqlStatement holding the #GdaSqlStatementSelect to take from
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_identifier_add_quotes">
-<description>
-Add double quotes around the @str identifier. Use the gda_sql_identifier_needs_quotes()
-function to tell if an identifier needs to be quoted.
-
-
-</description>
-<parameters>
-<parameter name="str">
-<parameter_description> an SQL identifier
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string
-</return>
-</function>
-
-<function name="gda_sql_select_field_free">
-<description>
-Frees a #GdaSqlSelectField structure and its members.
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlSelectField structure to be freed
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_select_order_copy">
-<description>
-Creates a new #GdaSqlSelectOrder structure initated with the values stored in @order.
-
-
-</description>
-<parameters>
-<parameter name="order">
-<parameter_description> a #GdaSqlSelectOrder structure to be copied
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlSelectOrder structure.
-</return>
-</function>
-
-<function name="gda_sql_expr_copy">
-<description>
-Creates a new #GdaSqlExpr structure initated with the values stored in @expr.
-
-
-</description>
-<parameters>
-<parameter name="expr">
-<parameter_description> a #GdaSqlExpr
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlExpr structure.
-</return>
-</function>
-
-<function name="gda_sql_case_free">
-<description>
-Frees a #GdaSqlCase structure and its members.
-
-</description>
-<parameters>
-<parameter name="sc">
-<parameter_description> a #GdaSqlCase structure to be freed
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_select_from_serialize">
-<description>
-Creates a new string description of the FROM clausure used in a SELECT statement.
-
-
-</description>
-<parameters>
-<parameter name="from">
-<parameter_description> a #GdaSqlSelectFrom structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string with the description of the FROM or &quot;null&quot; in case @from is invalid.
-</return>
-</function>
-
-<function name="gda_sql_select_order_new">
-<description>
-Creates a new #GdaSqlSelectOrder structure and sets its parent to @parent.
-
-
-</description>
-<parameters>
-<parameter name="parent">
-<parameter_description> a #GdaSqlStatementSelect
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlSelectOrder structure
-</return>
-</function>
-
-<function name="gda_sql_select_field_serialize">
-<description>
-Creates a new string representing an expresion used as field in a SELECT statement
-before the FROM clausure.
-
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlSelectField structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string with the description of the expression or &quot;null&quot; in case @field is invalid.
-</return>
-</function>
-
-<function name="gda_sql_select_join_serialize">
-<description>
-Creates a new string description of the join used in a SELECT statement.
-
-
-</description>
-<parameters>
-<parameter name="join">
-<parameter_description> a #GdaSqlSelectJoin structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string with the description of the join or &quot;null&quot; in case @join is invalid.
-</return>
-</function>
-
-<function name="gda_sql_case_new">
-<description>
-Creates a new #GdaSqlCase structure and sets its parent to @parent.
-
-
-</description>
-<parameters>
-<parameter name="parent">
-<parameter_description> a #GdaSqlExpr structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlCase structure.
-</return>
-</function>
-
-<function name="gda_sql_field_serialize">
-<description>
-Creates a new string representing a field. You need to free the returned string
-using g_free();
-
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlField structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string with the name of the field or &quot;null&quot; in case @field is invalid.
-</return>
-</function>
-
-<function name="gda_sql_case_copy">
-<description>
-Creates a new #GdaSqlCase structure initated with the values stored in @sc.
-
-
-</description>
-<parameters>
-<parameter name="sc">
-<parameter_description> a #GdaSqlCase structure to be copied
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlCase structure.
-</return>
-</function>
-
-<function name="gda_sql_operation_copy">
-<description>
-Creates a new #GdaSqlOperation structure initated with the values stored in @operation.
-
-
-</description>
-<parameters>
-<parameter name="operation">
-<parameter_description> a #GdaSqlOperation structure to be copied
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlOperation structure.
-</return>
-</function>
-
-<function name="gda_sql_case_serialize">
-<description>
-Creates a new string representing a CASE clausure. You need to free the returned string
-using g_free();
-
-
-</description>
-<parameters>
-<parameter name="sc">
-<parameter_description> a #GdaSqlCase structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string with the description of the CASE clausure or &quot;null&quot; in case @sc is invalid.
-</return>
-</function>
-
-<function name="gda_sql_select_target_free">
-<description>
-Frees a #GdaSqlSelectTarget structure and its members.
-
-</description>
-<parameters>
-<parameter name="target">
-<parameter_description> a #GdaSqlSelectTarget structure to be freed
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_operation_serialize">
-<description>
-Creates a new string representing an operator. You need to free the returned string
-using g_free();
-
-
-</description>
-<parameters>
-<parameter name="operation">
-<parameter_description> a #GdaSqlOperation structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string with the description of the operator or &quot;null&quot; in case @operation is invalid.
-</return>
-</function>
-
-<function name="gda_sql_select_target_copy">
-<description>
-Creates a new #GdaSqlSelectTarget structure initated with the values stored in @target.
-
-
-</description>
-<parameters>
-<parameter name="target">
-<parameter_description> a #GdaSqlSelectTarget structure to be copied
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlSelectTarget structure.
-</return>
-</function>
-
-<function name="gda_sql_select_join_type_to_string">
-<description>
-Creates a new string representing the join type.
-
-
-</description>
-<parameters>
-<parameter name="type">
-<parameter_description> a #GdaSqlSelectJoinType structure to be copied
-</parameter_description>
-</parameter>
-</parameters>
-<return> a string representing the Join type.
-</return>
-</function>
-
-<function name="gda_sql_select_join_free">
-<description>
-Frees a #GdaSqlSelectJoin structure and its members.
-
-</description>
-<parameters>
-<parameter name="join">
-<parameter_description> a #GdaSqlSelectJoin structure to be freed
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_operator_from_string">
-<description>
-Returns: #GdaSqlOperatorType
-
-</description>
-<parameters>
-<parameter name="op">
-<parameter_description> a #GdaSqlOperation structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> #GdaSqlOperatorType
-</return>
-</function>
-
-<function name="gda_sql_select_field_take_alias">
-<description>
-Sets the &apos;as&apos; field&apos;s string in the #GdaSqlSelectField structure. @alias is freed
-after call this function.
-
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlSelectField structure
-</parameter_description>
-</parameter>
-<parameter name="alias">
-<parameter_description> a #GValue to take from
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_function_take_name">
-<description>
-Sets the function&apos;s arguments to point to @args, then sets the
-list&apos;s data elements&apos; parent to @function.
-
-
-</description>
-<parameters>
-<parameter name="function">
-<parameter_description> a #GdaSqlFunction structure
-</parameter_description>
-</parameter>
-<parameter name="args">
-<parameter_description> a #GSList to take from
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_statement_check_validity">
-<description>
-If @cnc is not %NULL, then checks that all the database objects referenced in the statement actually
-exist in the connection&apos;s database (for example the table being updated in a UPDATE statement must exist in the
-connection&apos;s database for the check to succeed). This method fills the @stmt-&amp;gt;validity_meta_struct attribute.
-
-If @cnc is %NULL, then remove any information from a previous call to this method stored in @stmt. In this case,
-the @stmt-&amp;gt;validity_meta_struct attribute is cleared.
-
-Also note that some parts of @stmt may be modified: for example leading and trailing spaces in aliases or
-objects names will be removed.
-
-
-</description>
-<parameters>
-<parameter name="stmt">
-<parameter_description> a #GdaSqlStatement pointer
-</parameter_description>
-</parameter>
-<parameter name="cnc">
-<parameter_description> a #GdaConnection object, or %NULL
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> a place to store errors, or %NULL
-</parameter_description>
-</parameter>
-</parameters>
-<return> TRUE if no error occurred
-</return>
-</function>
-
-<function name="gda_sql_select_field_copy">
-<description>
-Creates a new #GdaSqlSelectField structure initated with the values stored in @field.
-
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlSelectField structure to be copied
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlSelectField structure.
-</return>
-</function>
-
-<function name="gda_sql_expr_new">
-<description>
-Creates a new #GdaSqlField structure, using @parent as its parent part.
-
-
-</description>
-<parameters>
-<parameter name="parent">
-<parameter_description> a #GdaSqlStatementInsert, #GdaSqlStatementUpdate, #GdaSqlSelectField, #GdaSqlSelectTarget, #GdaSqlOperation
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlField structure.
-</return>
-</function>
-
-<function name="gda_sql_select_from_free">
-<description>
-Frees a #GdaSqlSelectFrom structure and its members.
-
-</description>
-<parameters>
-<parameter name="from">
-<parameter_description> a #GdaSqlSelectFrom structure to be freed
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_select_from_copy">
-<description>
-Creates a new #GdaSqlSelectFrom structure initated with the values stored in @from.
-
-
-</description>
-<parameters>
-<parameter name="from">
-<parameter_description> a #GdaSqlSelectFrom structure to be copied
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlSelectFrom structure.
-</return>
-</function>
-
-<function name="gda_sql_select_target_take_table_name">
-<description>
-Sets the target to be a SELECT subquery setting target&apos;s expression to use
-@stmt; after call this function the target owns @stmt, then you must not free it.
-
-</description>
-<parameters>
-<parameter name="target">
-<parameter_description> a #GdaSqlSelectTarget structure
-</parameter_description>
-</parameter>
-<parameter name="stmt">
-<parameter_description> a #GValue to take from
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_field_free">
-<description>
-Frees a #GdaSqlField structure and its members.
-
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlField to be freed.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_operation_new">
-<description>
-Creates a new #GdaSqlOperation structure and sets its parent to @parent.
-
-
-</description>
-<parameters>
-<parameter name="parent">
-<parameter_description> a #GdaSqlExpr structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlOperation structure.
-</return>
-</function>
-
-<function name="gda_sql_field_new">
-<description>
-Creates a new #GdaSqlField structure, using @parent as its parent part.
-
-
-</description>
-<parameters>
-<parameter name="parent">
-<parameter_description> a #GdaSqlStatementSelect, #GdaSqlStatementInsert, #GdaSqlStatementDelete, #GdaSqlStatementUpdate
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlField structure.
-</return>
-</function>
-
-<function name="gda_sql_expr_serialize">
-<description>
-Creates a new string representing a field. You need to free the returned string
-using g_free();
-
-
-</description>
-<parameters>
-<parameter name="expr">
-<parameter_description> a #GdaSqlExpr structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new string with the name of the field or &quot;null&quot; in case @expr is invalid.
-</return>
-</function>
-
-<function name="gda_sql_field_copy">
-<description>
-Creates a new GdaSqlField structure initated with the values stored in @field.
-
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlAnyPart
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlField structure.
-</return>
-</function>
-
-<function name="gda_sql_expr_free">
-<description>
-Frees a #GdaSqlExpr structure and its members.
-
-
-</description>
-<parameters>
-<parameter name="expr">
-<parameter_description> a #GdaSqlExpr to be freed.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_parser_parse_string">
-<description>
-Parses @sql and creates a #GdaStatement statement from the first SQL statement contained in @sql: if @sql
-contains more than one statement, then the remaining part of the string is not parsed at all, and @remain (if
-not %NULL) will point at the first non parsed character.
-
-
-</description>
-<parameters>
-<parameter name="parser">
-<parameter_description> a #GdaSqlParser object
-</parameter_description>
-</parameter>
-<parameter name="sql">
-<parameter_description> the SQL string to parse
-</parameter_description>
-</parameter>
-<parameter name="remain">
-<parameter_description> location to store a pointer to remaining part of @sql in case @sql has multiple statement, or %NULL
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> location to store error, or %NULL
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaStatement object, or %NULL if an error occurred
-</return>
-</function>
-
-<function name="gda_sql_select_field_take_expr">
-<description>
-Sets the expression field in the #GdaSqlSelectField structure to point to @expr
-and modify it to sets its parent to @field.
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlSelectField structure
-</parameter_description>
-</parameter>
-<parameter name="expr">
-<parameter_description> a #GdaSqlExpr to take from
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_select_target_new">
-<description>
-Creates a new #GdaSqlSelectTarget structure and sets its parent to @parent. A
-#GdaSqlSelectTarget is the table in a SELECT statement.
-
-
-</description>
-<parameters>
-<parameter name="parent">
-<parameter_description> a #GdaSqlSelectFrom
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlSelectTarget structure.
-</return>
-</function>
-
-<function name="gda_sql_function_free">
-<description>
-Frees a #GdaSqlFunction structure and its members.
-
-</description>
-<parameters>
-<parameter name="function">
-<parameter_description> a #GdaSqlFunction structure to be freed
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_operation_operator_to_string">
-<description>
-Returns: a string with the operator&apos;s name or NULL in case @op is invalid.
-
-</description>
-<parameters>
-<parameter name="op">
-<parameter_description> a #GdaSqlOperation structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a string with the operator&apos;s name or NULL in case @op is invalid.
-</return>
-</function>
-
-<function name="gda_sql_table_free">
-<description>
-Frees a #GdaSqlTable structure and its members.
-
-</description>
-<parameters>
-<parameter name="table">
-<parameter_description> a #GdaSqlTable structure to be freed
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_any_part_foreach">
-<description>
-Calls a function for each element of a #GdaSqlAnyPart node
-
-
-</description>
-<parameters>
-<parameter name="node">
-<parameter_description> the stat node
-</parameter_description>
-</parameter>
-<parameter name="func">
-<parameter_description> function to call for each sub node
-</parameter_description>
-</parameter>
-<parameter name="data">
-<parameter_description> data to pass to @func each time it is called
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> a place to store errors, or %NULL (is also passed to @func)
-</parameter_description>
-</parameter>
-</parameters>
-<return> TRUE if @func has been called for any sub node of @node and always returned TRUE, or FALSE
-otherwise.
-</return>
-</function>
-
-<function name="gda_sql_select_field_take_star_value">
-<description>
-Sets the expression field&apos;s value in the #GdaSqlSelectField structure to point to @value;
-after this @field is the owner of @value.
-
-
-</description>
-<parameters>
-<parameter name="field">
-<parameter_description> a #GdaSqlSelectField structure
-</parameter_description>
-</parameter>
-<parameter name="value">
-<parameter_description> a #GValue to take from
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gda_sql_function_new">
-<description>
-Creates a new #GdaSqlFunction structure initated.
-
-
-</description>
-<parameters>
-<parameter name="parent">
-<parameter_description> a #GdaSqlExpr structure
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlFunction structure.
-</return>
-</function>
-
-<function name="gda_sql_table_new">
-<description>
-Creates a new #GdaSqlTable structure, using @parent as its parent part.
-
-
-</description>
-<parameters>
-<parameter name="parent">
-<parameter_description> a #GdaSqlStatementSelect, #GdaSqlStatementInsert, #GdaSqlStatementDelete, #GdaSqlStatementUpdate
-</parameter_description>
-</parameter>
-</parameters>
-<return> a new #GdaSqlTable structure.
-</return>
-</function>
-
-<function name="gda_sql_select_from_take_new_target">
-<description>
-Append @target to the targets in the FROM clausure and set @target&apos;s parent to
-@from; after call this function @from owns @target then you must not free it.
-
-</description>
-<parameters>
-<parameter name="from">
-<parameter_description> a #GdaSqlSelectFrom structure
-</parameter_description>
-</parameter>
-<parameter name="target">
-<parameter_description> a #GdaSqlSelectTarget to take from
+<parameter name="code">
+<parameter_description> a code
 </parameter_description>
 </parameter>
 </parameters>
