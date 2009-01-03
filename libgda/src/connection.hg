@@ -75,7 +75,7 @@ public:
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   static Glib::RefPtr<Connection> open_from_string(const Glib::ustring& provider_name,
                                                     const Glib::ustring& cnc_string,
-                                                    const Glib::ustring& auth_string,
+                                                    const Glib::ustring& auth_string = Glib::ustring(),
                                                     ConnectionOptions options = CONNECTION_OPTIONS_NONE);
 #else
   static Glib::RefPtr<Connection> open_from_string(const Glib::ustring& provider_name,

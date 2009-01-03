@@ -1,3 +1,18 @@
+2009-01-03  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/connection.hg: open_from_string(): Make the auth_string 
+	parameter optional because it is not always needed, for instance with 
+	sqlite.
+
+	* libgda/src/datamodelarray.ccg:
+	* libgda/src/datamodelarray.hg: Added set_column_g_type().
+
+	* libgda/src/column.ccg:
+	* libgda/src/column.hg:
+	* libgda/src/holder.ccg: set_attribute():  Specify a callback to 
+	destroy the provided string, because libgda has stupid memory management 
+	for that.
+
 2008-12-27  Johannes Schmid <jschmid@openismus.com>
 
 	* libgda/src/libgda_docs.xml:

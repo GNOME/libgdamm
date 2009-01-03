@@ -36,6 +36,7 @@ namespace Gda
 
 /* possible predefined attribute names for gda_holder_get_attribute() or gda_column_get_attribute() */
 // Keep in sync with libgda
+// TODO: How/When/Why are these used? Where are they documented? murrayc.
 const std::string ATTRIBUTE_DESCRIPTION = "__gda_attr_descr"; /* G_TYPE_STRING */
 const std::string ATTRIBUTE_NAME = "__gda_attr_name"; /* G_TYPE_STRING */
 const std::string ATTRIBUTE_NUMERIC_PRECISION = "__gda_attr_numeric_precision"; /* G_TYPE_INT */
@@ -63,7 +64,7 @@ public:
   _WRAP_METHOD(Glib::ustring get_description() const, gda_column_get_description)
   _WRAP_METHOD(void set_description(const Glib::ustring& title), gda_column_set_description)
 
-  _WRAP_METHOD(void set_attribute(const Glib::ustring& attribute, const Value& value), gda_column_set_attribute_static)
+  void set_attribute(const Glib::ustring& attribute, const Value& value);
   _WRAP_METHOD(Value get_attribute(const Glib::ustring& attribute) const, gda_column_get_attribute)
     
   _WRAP_METHOD(Glib::ustring get_name() const, gda_column_get_name)

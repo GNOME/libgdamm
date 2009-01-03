@@ -33,6 +33,12 @@ DataModelArray::DataModelArray(int cols)
 {
 }
 
+void DataModelArray::set_column_g_type(int col, GType type)
+{
+  //This is based on the code in gda_data_model_array_new_with_g_type():
+  gda_column_set_g_type (gda_data_model_describe_column (GDA_DATA_MODEL(gobj()), col), type);
+}
+
 } /* namespace Gda */
 
 } /* namespace Gnome */

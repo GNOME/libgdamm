@@ -53,6 +53,10 @@ protected:
 public:
   _WRAP_CREATE(int cols)
 
+  //This is an equivalent for gda_data_model_array_new_with_g_types().
+  void set_column_g_type(int col, GType type);
+  _IGNORE(gda_data_model_array_new_with_g_types);
+
   _WRAP_METHOD(void set_n_columns(int cols), gda_data_model_array_set_n_columns)
   _WRAP_METHOD(void clear(), gda_data_model_array_clear)
 
