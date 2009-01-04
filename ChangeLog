@@ -1,3 +1,14 @@
+2009-01-04  Johannes Schmid <jschmid@openismus.com>
+
+	* libgda/src/dataselect.ccg:
+	* libgda/src/dataselect.hg:
+	* libgda/src/holder.hg:
+	* libgda/src/metastore.ccg:
+	* libgda/src/metastore.hg:
+	* libgda/src/metastruct.hg:
+	* libgda/src/row.hg:
+	Wrapped various missing methods
+
 2009-01-03  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/connection.hg: open_from_string(): Make the auth_string 

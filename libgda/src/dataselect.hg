@@ -72,6 +72,8 @@ public:
   _WRAP_METHOD(void compute_modification_statements(), gda_data_select_compute_modification_statements, errthrow)
   _WRAP_METHOD(void compute_columns_attributes(), gda_data_select_compute_columns_attributes, errthrow)
 
+  _WRAP_METHOD(Glib::RefPtr<Connection> get_connection(), gda_data_select_get_connection)
+
   _WRAP_PROPERTY("auto-reset", bool)
   _WRAP_PROPERTY("store-all-rows", bool)
   _WRAP_PROPERTY("connection", Glib::RefPtr<Connection>)

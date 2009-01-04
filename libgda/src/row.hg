@@ -54,6 +54,7 @@ public:
   _WRAP_CREATE(int count)
 
   _WRAP_METHOD(Value get_value(int num), gda_row_get_value)
+  _WRAP_METHOD(int get_length(), gda_row_get_length)
 };
 
 } // namespace Gda

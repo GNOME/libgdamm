@@ -50,6 +50,8 @@ namespace Gda
  */
 class MetaStore : public Glib::Object
 {
+  typedef GdaMetaContext MetaContext;
+  
   _CLASS_GOBJECT(MetaStore, GdaMetaStore, GDA_META_STORE, Glib::Object, GObject)
 protected:
   _WRAP_CTOR(MetaStore(const Glib::ustring& cnc_string), gda_meta_store_new)
@@ -66,8 +68,15 @@ public:
 #else
   Glib::RefPtr<DataModel> extract(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& err);
 #endif  
-  _IGNORE (gda_meta_store_modify_with_context)
-  //_WRAP_METHOD(bool modify_with_context (MetaContext* context, const Glib::RefPtr<DataModel>& new_data), gda_meta_store_modify_with_context, errthrow)
+  _WRAP_METHOD_DOCS_ONLY (gda_meta_store_modify)
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  bool modify(const Glib::ustring& sql, const Glib::RefPtr<DataModel>& data_model, const Glib::ustring& condition);
+#else
+  bool modify(const Glib::ustring& sql, const Glib::RefPtr<DataModel>& data_model, const Glib::ustring& condition, std::auto_ptr<Glib::Error>& err);
+#endif
+   
+  _WRAP_METHOD(bool modify_with_context (MetaContext* context, const Glib::RefPtr<DataModel>& new_data), gda_meta_store_modify_with_context, errthrow)
+
   _WRAP_METHOD(Glib::RefPtr<DataModel> create_modify_data_model(const Glib::ustring& table_name), gda_meta_store_create_modify_data_model)
   _WRAP_METHOD(Glib::RefPtr<MetaStruct> schema_get_structure(), gda_meta_store_schema_get_structure, errthrow)
   _WRAP_METHOD(Glib::SListHandle<Glib::ustring> schema_get_all_tables(), gda_meta_store_schema_get_all_tables)
