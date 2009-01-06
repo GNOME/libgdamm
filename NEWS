@@ -1,3 +1,9 @@
+3.99.7: (unstable)
+
+* Completed most of the API of libgda v4
+* Many bug-fixes, references fixes and misc changes
+* New examples for meta data and configuration
+
 3.99.0: (unstable)
 
 This is the first release in the 4.x release cycle based on libgda-4.0. It features

@@ -1,3 +1,11 @@
+3.99.7:
+
+2009-01-04  Johannes Schmid <jschmid@openismus.com>
+
+	* libgda/src/column.hg: Added a _IGNORE for set_attribute()
+	* configure.in: Bumped version to 3.99.7 (synced with libgda)
+	* NEWS: Updated
+
 2009-01-04  Johannes Schmid <jschmid@openismus.com>
 
 	* libgda/src/dataselect.ccg:
