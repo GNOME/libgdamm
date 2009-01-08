@@ -1,3 +1,8 @@
+2009-01-08  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/connection.hg: Take an additional reference in
+	get_provider(), so we don't free a reference we don't own.
+
 3.99.7:
 
 2009-01-04  Johannes Schmid <jschmid@openismus.com>

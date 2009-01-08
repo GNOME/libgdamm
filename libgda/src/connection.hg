@@ -246,8 +246,8 @@ public:
   _WRAP_METHOD(Glib::RefPtr<ServerOperation> create_operation(ServerOperationType type, const Glib::RefPtr<Set>& options), gda_connection_create_operation, errthrow)
   _WRAP_METHOD(bool perform_operation(const Glib::RefPtr<ServerOperation>& op), gda_connection_perform_operation, errthrow)
 
-  _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider(), gda_connection_get_provider)
-  _WRAP_METHOD(Glib::RefPtr<const ServerProvider> get_provider() const, gda_connection_get_provider)
+  _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider(), gda_connection_get_provider, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const ServerProvider> get_provider() const, gda_connection_get_provider, refreturn)
    
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_to_sql)
 
