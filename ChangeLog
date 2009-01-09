@@ -1,3 +1,8 @@
+2009-01-09  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/connection.ccg:
+	Fix update_meta_store_table()
+
 2009-01-08  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/connection.hg: Take an additional reference in
