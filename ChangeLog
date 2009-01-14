@@ -1,3 +1,8 @@
+2009-01-14  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/connection.ccg (update_meta_store_table): Don't leak the
+	GValue or other dynamically allocated resources.
+
 2009-01-09  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/connection.ccg:
