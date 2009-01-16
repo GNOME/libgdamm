@@ -1,3 +1,13 @@
+3.99.8:
+
+2009-01-16  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/libgdamm.h:
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* tools/extra_defs_gen/generate_defs_gda.cc:
+	* libgda/src/threader.[hg|ccg]: Removed Threader because GdaThreader 
+	was removed from libgda.
+
 2009-01-14  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/connection.ccg (update_meta_store_table): Don't leak the

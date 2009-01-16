@@ -1,3 +1,8 @@
+3.99.8: (unstable)
+
+* Connection::update_meta_store_table(): Make this actually work.
+  (Johannes Schmid, Armin Burgmeier)
+
 3.99.7: (unstable)
 
 * Completed most of the API of libgda v4
