@@ -277,13 +277,9 @@
     '("dsn-not-found-error" "GDA_CONNECTION_DSN_NOT_FOUND_ERROR")
     '("provider-not-found-error" "GDA_CONNECTION_PROVIDER_NOT_FOUND_ERROR")
     '("provider-error" "GDA_CONNECTION_PROVIDER_ERROR")
-    '("conn-open-error" "GDA_CONNECTION_CONN_OPEN_ERROR")
-    '("do-query-error" "GDA_CONNECTION_DO_QUERY_ERROR")
-    '("nonexist-dsn-error" "GDA_CONNECTION_NONEXIST_DSN_ERROR")
     '("no-cnc-spec-error" "GDA_CONNECTION_NO_CNC_SPEC_ERROR")
     '("no-provider-spec-error" "GDA_CONNECTION_NO_PROVIDER_SPEC_ERROR")
     '("open-error" "GDA_CONNECTION_OPEN_ERROR")
-    '("execute-command-error" "GDA_CONNECTION_EXECUTE_COMMAND_ERROR")
     '("statement-type-error" "GDA_CONNECTION_STATEMENT_TYPE_ERROR")
   )
 )
@@ -417,6 +413,23 @@
   (values
     '("data-array-xml" "GDA_DATA_MODEL_IO_DATA_ARRAY_XML")
     '("text-separated" "GDA_DATA_MODEL_IO_TEXT_SEPARATED")
+  )
+)
+
+(define-enum DataModelError
+  (in-module "Gda")
+  (c-name "GdaDataModelError")
+  (gtype-id "GDA_TYPE_DATA_MODEL_ERROR")
+  (values
+    '("row-out-of-range-error" "GDA_DATA_MODEL_ROW_OUT_OF_RANGE_ERROR")
+    '("column-out-of-range-error" "GDA_DATA_MODEL_COLUMN_OUT_OF_RANGE_ERROR")
+    '("values-list-error" "GDA_DATA_MODEL_VALUES_LIST_ERROR")
+    '("value-type-error" "GDA_DATA_MODEL_VALUE_TYPE_ERROR")
+    '("row-not-found-error" "GDA_DATA_MODEL_ROW_NOT_FOUND_ERROR")
+    '("access-error" "GDA_DATA_MODEL_ACCESS_ERROR")
+    '("feature-non-supported-error" "GDA_DATA_MODEL_FEATURE_NON_SUPPORTED_ERROR")
+    '("file-exist-error" "GDA_DATA_MODEL_FILE_EXIST_ERROR")
+    '("xml-format-error" "GDA_DATA_MODEL_XML_FORMAT_ERROR")
   )
 )
 
@@ -2606,19 +2619,6 @@
 
 ;; From gda-data-model-private.h
 
-(define-method to_xml_node
-  (of-object "GdaDataModel")
-  (c-name "gda_data_model_to_xml_node")
-  (return-type "xmlNodePtr")
-  (parameters
-    '("const-gint*" "cols")
-    '("gint" "nb_cols")
-    '("const-gint*" "rows")
-    '("gint" "nb_rows")
-    '("const-gchar*" "name")
-  )
-)
-
 (define-method add_data_from_xml_node
   (of-object "GdaDataModel")
   (c-name "gda_data_model_add_data_from_xml_node")
@@ -3084,45 +3084,20 @@
   (return-type "gboolean")
   (parameters
     '("GdaConnection*" "cnc")
-    '("const-gchar*" "table_name")
+    '("const-gchar*" "table")
     '("GError**" "error")
   )
   (varargs #t)
 )
 
-(define-function gda_insert_row_into_table_from_string
-  (c-name "gda_insert_row_into_table_from_string")
+(define-function gda_update_row_in_table
+  (c-name "gda_update_row_in_table")
   (return-type "gboolean")
   (parameters
     '("GdaConnection*" "cnc")
-    '("const-gchar*" "table_name")
-    '("GError**" "error")
-  )
-  (varargs #t)
-)
-
-(define-function gda_update_value_in_table
-  (c-name "gda_update_value_in_table")
-  (return-type "gboolean")
-  (parameters
-    '("GdaConnection*" "cnc")
-    '("const-gchar*" "table_name")
-    '("const-gchar*" "search_for_column")
-    '("const-GValue*" "condition")
-    '("const-gchar*" "column_name")
-    '("const-GValue*" "new_value")
-    '("GError**" "error")
-  )
-)
-
-(define-function gda_update_values_in_table
-  (c-name "gda_update_values_in_table")
-  (return-type "gboolean")
-  (parameters
-    '("GdaConnection*" "cnc")
-    '("const-gchar*" "table_name")
+    '("const-gchar*" "table")
     '("const-gchar*" "condition_column_name")
-    '("const-GValue*" "condition")
+    '("GValue*" "condition_value")
     '("GError**" "error")
   )
   (varargs #t)
@@ -3133,9 +3108,9 @@
   (return-type "gboolean")
   (parameters
     '("GdaConnection*" "cnc")
-    '("const-gchar*" "table_name")
+    '("const-gchar*" "table")
     '("const-gchar*" "condition_column_name")
-    '("const-GValue*" "condition")
+    '("GValue*" "condition_value")
     '("GError**" "error")
   )
 )
@@ -3210,6 +3185,11 @@
 
 (define-function gda_data_model_io_format_get_type
   (c-name "gda_data_model_io_format_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_model_error_get_type
+  (c-name "gda_data_model_error_get_type")
   (return-type "GType")
 )
 
@@ -5056,6 +5036,15 @@
   )
 )
 
+(define-function gda_utility_data_model_find_column_description
+  (c-name "gda_utility_data_model_find_column_description")
+  (return-type "const-gchar*")
+  (parameters
+    '("GdaDataSelect*" "model")
+    '("const-gchar*" "field_name")
+  )
+)
+
 (define-function gda_utility_holder_load_attributes
   (c-name "gda_utility_holder_load_attributes")
   (return-type "gboolean")
@@ -5104,6 +5093,15 @@
     '("GdaStatement**" "insert_stmt")
     '("GdaStatement**" "update_stmt")
     '("GdaStatement**" "delete_stmt")
+    '("GError**" "error")
+  )
+)
+
+(define-function gda_compute_select_statement_from_update
+  (c-name "gda_compute_select_statement_from_update")
+  (return-type "GdaSqlStatement*")
+  (parameters
+    '("GdaStatement*" "update_stmt")
     '("GError**" "error")
   )
 )

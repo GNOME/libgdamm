@@ -76,14 +76,10 @@
     '("dsn-not-found-error" "GDA_CONNECTION_DSN_NOT_FOUND_ERROR" "0")
     '("provider-not-found-error" "GDA_CONNECTION_PROVIDER_NOT_FOUND_ERROR" "1")
     '("provider-error" "GDA_CONNECTION_PROVIDER_ERROR" "2")
-    '("conn-open-error" "GDA_CONNECTION_CONN_OPEN_ERROR" "3")
-    '("do-query-error" "GDA_CONNECTION_DO_QUERY_ERROR" "4")
-    '("nonexist-dsn-error" "GDA_CONNECTION_NONEXIST_DSN_ERROR" "5")
-    '("no-cnc-spec-error" "GDA_CONNECTION_NO_CNC_SPEC_ERROR" "6")
-    '("no-provider-spec-error" "GDA_CONNECTION_NO_PROVIDER_SPEC_ERROR" "7")
-    '("open-error" "GDA_CONNECTION_OPEN_ERROR" "8")
-    '("execute-command-error" "GDA_CONNECTION_EXECUTE_COMMAND_ERROR" "9")
-    '("statement-type-error" "GDA_CONNECTION_STATEMENT_TYPE_ERROR" "10")
+    '("no-cnc-spec-error" "GDA_CONNECTION_NO_CNC_SPEC_ERROR" "3")
+    '("no-provider-spec-error" "GDA_CONNECTION_NO_PROVIDER_SPEC_ERROR" "4")
+    '("open-error" "GDA_CONNECTION_OPEN_ERROR" "5")
+    '("statement-type-error" "GDA_CONNECTION_STATEMENT_TYPE_ERROR" "6")
   )
 )
 
@@ -214,6 +210,22 @@
   )
 )
 
+(define-enum-extended DataModelError
+  (in-module "Gda")
+  (c-name "GdaDataModelError")
+  (values
+    '("row-out-of-range-error" "GDA_DATA_MODEL_ROW_OUT_OF_RANGE_ERROR" "0")
+    '("column-out-of-range-error" "GDA_DATA_MODEL_COLUMN_OUT_OF_RANGE_ERROR" "1")
+    '("values-list-error" "GDA_DATA_MODEL_VALUES_LIST_ERROR" "2")
+    '("value-type-error" "GDA_DATA_MODEL_VALUE_TYPE_ERROR" "3")
+    '("row-not-found-error" "GDA_DATA_MODEL_ROW_NOT_FOUND_ERROR" "4")
+    '("access-error" "GDA_DATA_MODEL_ACCESS_ERROR" "5")
+    '("feature-non-supported-error" "GDA_DATA_MODEL_FEATURE_NON_SUPPORTED_ERROR" "6")
+    '("file-exist-error" "GDA_DATA_MODEL_FILE_EXIST_ERROR" "7")
+    '("xml-format-error" "GDA_DATA_MODEL_XML_FORMAT_ERROR" "8")
+  )
+)
+
 ;; From /usr/include/libgda-4.0/libgda/gda-data-model-iter.h
 
 (define-enum-extended DataModelIterError
@@ -221,17 +233,6 @@
   (c-name "GdaDataModelIterError")
   (values
     '("r" "GDA_DATA_MODEL_ITER_COLUMN_OUT_OF_RANGE_ERROR" "0")
-  )
-)
-
-;; From /usr/include/libgda-4.0/libgda/gda-data-model-query.h
-
-(define-enum-extended DataModelQueryError
-  (in-module "Gda")
-  (c-name "GdaDataModelQueryError")
-  (values
-    '("select-statement-error" "GDA_DATA_MODEL_QUERY_SELECT_STATEMENT_ERROR" "0")
-    '("connection-error" "GDA_DATA_MODEL_QUERY_CONNECTION_ERROR" "1")
   )
 )
 
@@ -265,11 +266,13 @@
   (in-module "Gda")
   (c-name "GdaEasyCreateTableFlag")
   (values
-    '("pkey-flag" "GDA_EASY_CREATE_TABLE_PKEY_FLAG" "1 << 0")
-    '("not-null-flag" "GDA_EASY_CREATE_TABLE_NOT_NULL_FLAG" "1 << 1")
-    '("unique-flag" "GDA_EASY_CREATE_TABLE_UNIQUE_FLAG" "1 << 2")
-    '("autoinc-flag" "GDA_EASY_CREATE_TABLE_AUTOINC_FLAG" "1 << 3")
-    '("pkey-autoinc-flag" "GDA_EASY_CREATE_TABLE_PKEY_AUTOINC_FLAG" "0x1")
+    '("nothing-flag" "GDA_EASY_CREATE_TABLE_NOTHING_FLAG" "1 << 0")
+    '("pkey-flag" "GDA_EASY_CREATE_TABLE_PKEY_FLAG" "1 << 1")
+    '("not-null-flag" "GDA_EASY_CREATE_TABLE_NOT_NULL_FLAG" "1 << 2")
+    '("unique-flag" "GDA_EASY_CREATE_TABLE_UNIQUE_FLAG" "1 << 3")
+    '("autoinc-flag" "GDA_EASY_CREATE_TABLE_AUTOINC_FLAG" "1 << 4")
+    '("fkey-flag" "GDA_EASY_CREATE_TABLE_FKEY_FLAG" "1 << 5")
+    '("pkey-autoinc-flag" "GDA_EASY_CREATE_TABLE_PKEY_AUTOINC_FLAG" "0x2")
   )
 )
 
@@ -472,15 +475,6 @@
     '("xml-spec-error" "GDA_SET_XML_SPEC_ERROR" "0")
     '("holder-not-found-error" "GDA_SET_HOLDER_NOT_FOUND_ERROR" "1")
     '("invalid-error" "GDA_SET_INVALID_ERROR" "2")
-  )
-)
-
-(define-flags-extended SetHint
-  (in-module "Gda")
-  (c-name "GdaSetHint")
-  (values
-    '("read-only" "GDA_SET_HOLDER_READ_ONLY" "1 << 0")
-    '("hide" "GDA_SET_HOLDER_HIDE" "1 << 1")
   )
 )
 

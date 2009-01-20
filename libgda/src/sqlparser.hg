@@ -32,7 +32,8 @@ namespace Gda
 {
 
 _WRAP_ENUM(SqlParserMode, GdaSqlParserMode)
-
+_WRAP_GERROR(SqlParserError, GdaSqlParserError, GDA_SQL_PARSER_ERROR)
+		
 // This is a hack to avoid a stupid gcc warning for a correctly escaped comment.
 #if defined __GNUC__
 #pragma GCC system_header

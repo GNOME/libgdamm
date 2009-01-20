@@ -77,7 +77,7 @@
   )
 )
 
-(define-property system-filename
+(define-property user-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
   (docs "")
@@ -86,7 +86,7 @@
   (construct-only #f)
 )
 
-(define-property user-filename
+(define-property system-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
   (docs "")
@@ -1037,28 +1037,6 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
-)
-
-;; From GdaThreader
-
-(define-signal finished
-  (of-object "GdaThreader")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("guint" "p0")
-    '("gpointer" "p1")
-  )
-)
-
-(define-signal cancelled
-  (of-object "GdaThreader")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("guint" "p0")
-    '("gpointer" "p1")
-  )
 )
 
 ;; From GdaTransactionStatus

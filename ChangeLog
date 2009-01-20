@@ -1,3 +1,14 @@
+2009-01-20  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/libgda_enums.defs:
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/libgda_signals.defs:
+	Regenerated
+	
+	* libgda/src/sqlparser.hg:
+	* tools/m4/convert_libgdamm.m4:
+	Wrap GdaSqlParserError
+
 3.99.8:
 
 2009-01-16  Murray Cumming  <murrayc@murrayc.com>
