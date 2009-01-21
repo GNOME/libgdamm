@@ -34,6 +34,8 @@ namespace Gda
 
 class DataModel;
 
+_WRAP_GERROR(HolderError, GdaHolderError, GDA_HOLDER_ERROR) 
+
 /** Container for a single Gda::Value.
  *
  * The GdaHolder is a container for a single Gda::Value value. It also specifies 

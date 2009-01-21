@@ -38,6 +38,8 @@ _WRAP_ENUM(SqlStatementType, GdaSqlStatementType)
 _WRAP_ENUM(StatementModelUsage, GdaStatementModelUsage)
 _WRAP_ENUM(StatementSqlFlag, GdaStatementSqlFlag)
 
+_WRAP_GERROR(StatementError, GdaStatementError, GDA_STATEMENT_ERROR) 
+    
 /** Single SQL statement.
  *
  * The Gda::Statement represents a single SQL statement (multiple statements 
