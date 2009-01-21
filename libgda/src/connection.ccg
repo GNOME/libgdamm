@@ -183,6 +183,26 @@ int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd,
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
+int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd, const Glib::RefPtr<Set>& params)
+#else
+int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd, const Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  const int retval = gda_connection_statement_execute_non_select(gobj(), Glib::unwrap(cmd), Glib::unwrap(params), 0, &gerror);
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  return retval;
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd)
 #else
 int Connection::statement_execute_non_select(const Glib::RefPtr<Statement>& cmd, std::auto_ptr<Glib::Error>& error)

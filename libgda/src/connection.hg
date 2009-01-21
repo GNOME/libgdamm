@@ -151,11 +151,17 @@ public:
 #endif //GLIBMM_EXCEPTIONS_ENABLED  
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params);
+#else
+  int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt,  const Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt);
 #else
   int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt, std::auto_ptr<Glib::Error>& error);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
-
+  
   _WRAP_METHOD(int statement_execute_non_select(const Glib::ustring& sql), gda_execute_non_select_command, errthrow)
   
   //Note that we do not add a non-const version of this because the documentation says that it should not be modified:

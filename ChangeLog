@@ -1,5 +1,15 @@
 2009-01-21  Johannes Schmid  <jschmid@openismus.com>
 
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg:
+	Created version with last_inserted_row of statement_execute_non_select()
+	
+	* libgda/src/statement.ccg:
+	Take a copy of the GdaSet in get_parameters() because we get a reference
+	problem otherwise
+
+2009-01-21  Johannes Schmid  <jschmid@openismus.com>
+
 	* libgda/src/holder.ccg:
 	* libgda/src/holder.hg:
 	* libgda/src/statement.hg:
