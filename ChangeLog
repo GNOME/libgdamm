@@ -1,3 +1,10 @@
+2009-01-22  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/statement.ccg:
+	* libgda/src/statement.hg: Rename to_sql_extended() to to_sql().
+	Use Glib::convert_return_gchar_ptr_to_ustring() instead of leaking the 
+	string. Added an overload with no arguments. Made them all const.
+
 2009-01-22  Johannes Schmid <jschmid@openismus.com>
 
 	* libgda/src/set.hg(get_holder):

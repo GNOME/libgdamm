@@ -73,33 +73,41 @@ public:
   
   _WRAP_METHOD(Glib::ustring serialize() const, gda_statement_serialize)
   
-  //TODO: Should this be const?
+  //TODO: Should this be const? Probably not, because the caller could change Set. murrayc.
   _WRAP_METHOD_DOCS_ONLY(gda_statement_get_parameters)
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   bool get_parameters(Glib::RefPtr<Set>& out_params);
   #else
   bool get_parameters(Glib::RefPtr<Set>& out_params, std::auto_ptr<Glib::Error>& error);
   #endif //GLIBMM_EXCEPTIONS_ENABLED
+  _IGNORE(gda_statement_get_parameters)
   
-
+  //TODO: Documentation:
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  Glib::ustring to_sql(const Glib::RefPtr<Set>& params);
+  Glib::ustring to_sql() const;
   #else
-  Glib::ustring to_sql(const Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error);
+  Glib::ustring to_sql(std::auto_ptr<Glib::Error>& error) const;
   #endif //GLIBMM_EXCEPTIONS_ENABLED
-  _IGNORE(gda_statement_to_sql_real)
+
+  //TODO: Documentation:
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  Glib::ustring to_sql(const Glib::RefPtr<Set>& params) const;
+  #else
+  Glib::ustring to_sql(const Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error) const;
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+  _IGNORE(gda_statement_to_sql)
 
   typedef Glib::ListHandle< const Glib::RefPtr<Holder> > HolderSList;
 
-  //TODO: Should this be const?
+  //TODO: Add an overload without the params?
   _WRAP_METHOD_DOCS_ONLY(gda_statement_to_sql_extended)  
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  Glib::ustring to_sql_extended(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
-                                StatementSqlFlag flags, HolderSList& params_used);
+  Glib::ustring to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
+                                StatementSqlFlag flags, const HolderSList& params_used) const;
   #else
-  Glib::ustring to_sql_extended(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
-                                StatementSqlFlag flags, HolderSList& params_used,
-                                std::auto_ptr<Glib::Error>& error);
+  Glib::ustring to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
+                                StatementSqlFlag flags, const HolderSList& params_used,
+                                std::auto_ptr<Glib::Error>& error) const;
   #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   _WRAP_METHOD(SqlStatementType get_statement_type() const, gda_statement_get_statement_type)
