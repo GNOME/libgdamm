@@ -64,8 +64,8 @@ public:
   _WRAP_METHOD_DOCS_ONLY(gda_set_set_holder_value)
   template<class T> bool set_holder_value(const Glib::ustring& holder_id, T value);
   
-  _WRAP_METHOD(Glib::RefPtr<Holder> get_holder(const Glib::ustring& holder_id), gda_set_get_holder)
-  _WRAP_METHOD(Glib::RefPtr<const Holder> get_holder(const Glib::ustring& holder_id) const, gda_set_get_holder)
+  _WRAP_METHOD(Glib::RefPtr<Holder> get_holder(const Glib::ustring& holder_id), gda_set_get_holder, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Holder> get_holder(const Glib::ustring& holder_id) const, gda_set_get_holder, refreturn)
 
   _WRAP_METHOD(void add_holder(const Glib::RefPtr<Holder>& holder), gda_set_add_holder)
   _WRAP_METHOD(void remove_holder(const Glib::RefPtr<Holder>& holder), gda_set_remove_holder)

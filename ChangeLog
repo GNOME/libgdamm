@@ -1,3 +1,9 @@
+2009-01-22  Johannes Schmid <jschmid@openismus.com>
+
+	* libgda/src/set.hg(get_holder):
+	* libgda/src/statement.ccg (get_parameters()):
+	Fixed more reference problems
+
 2009-01-21  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/connection.ccg:

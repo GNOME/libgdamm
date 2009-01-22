@@ -49,7 +49,8 @@ bool Statement::get_parameters(Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Er
 #endif //GLIBMM_EXCEPTIONS_ENABLED
   if (set)
   {
-    params = Glib::wrap(set, true);
+    params = Glib::wrap(set);
+    params->reference();
   }
   return retval;
 }
