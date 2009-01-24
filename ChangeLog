@@ -1,3 +1,8 @@
+2009-01-24  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/holder.hg: copy(): Make this const.
+	get_bind(): Use refreturn and add a const overload.
+
 2009-01-22  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/statement.ccg:

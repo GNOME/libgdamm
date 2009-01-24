@@ -50,7 +50,7 @@ protected:
   Holder(GType g_type, const Glib::ustring& id);    
 public:
   _WRAP_CREATE(GType g_type, const Glib::ustring& id)
-  _WRAP_METHOD(Glib::RefPtr<Holder> copy(), gda_holder_copy)
+  _WRAP_METHOD(Glib::RefPtr<Holder> copy() const, gda_holder_copy)
   
   _WRAP_METHOD(GType get_g_type() const, gda_holder_get_g_type)
   _WRAP_METHOD(Glib::ustring get_id() const, gda_holder_get_id)
@@ -83,7 +83,8 @@ public:
   _WRAP_METHOD(bool set_source_model(const Glib::RefPtr<DataModel>& model, int col), gda_holder_set_source_model, errthrow)
 
   _WRAP_METHOD(void set_bind(const Glib::RefPtr<Holder>& bind_to), gda_holder_set_bind, errthrow)
-  _WRAP_METHOD(Glib::RefPtr<Holder> get_bind(), gda_holder_get_bind)
+  _WRAP_METHOD(Glib::RefPtr<Holder> get_bind(), gda_holder_get_bind, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Holder> get_bind() const, gda_holder_get_bind, refreturn, constversion)
 
   _WRAP_PROPERTY("description", Glib::ustring)
   _WRAP_PROPERTY("full-bind", Glib::RefPtr<Holder>)
