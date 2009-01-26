@@ -1,3 +1,8 @@
+2009-01-26  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/holder.hg: set_value(): Renamed to set_value_as_value().
+	Added a templated set_value() method, to simplify application code.
+
 2009-01-26  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/set.ccg:
