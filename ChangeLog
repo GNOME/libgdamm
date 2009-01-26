@@ -1,3 +1,9 @@
+2009-01-26  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/set.ccg:
+	* libgda/src/set.hg:
+	Added add_holder(id, value) as convenience shortcut
+
 2009-01-24  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/holder.hg: copy(): Make this const.

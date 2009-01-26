@@ -68,6 +68,15 @@ public:
   _WRAP_METHOD(Glib::RefPtr<const Holder> get_holder(const Glib::ustring& holder_id) const, gda_set_get_holder, refreturn)
 
   _WRAP_METHOD(void add_holder(const Glib::RefPtr<Holder>& holder), gda_set_add_holder)
+  
+  /** Add a holder
+   * 
+   * Convenience method to add a holder with value
+   * @param id Name of the holder
+   * @param value Value of the holder
+   */
+  void add_holder (const Glib::ustring& id, const Gda::Value& value);
+  
   _WRAP_METHOD(void remove_holder(const Glib::RefPtr<Holder>& holder), gda_set_remove_holder)
 
   _WRAP_METHOD(void merge_with_set(const Glib::RefPtr<Set>& set_to_merge), gda_set_merge_with_set)

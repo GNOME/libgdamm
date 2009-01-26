@@ -34,6 +34,13 @@ template<class T> bool Set::set_holder_value(const Glib::ustring& id, T value)
   return gda_set_set_holder_value (gobj(), id.c_str(), value);
 }
 
+void Set::add_holder (const Glib::ustring& id, const Gda::Value& value)
+{
+  Glib::RefPtr<Holder> holder = Holder::create(value.get_value_type(), id);
+  holder->set_value(value);
+  add_holder(holder);
+}
+
 } /* namespace Gda */
 
 } /* namespace Gnome */
