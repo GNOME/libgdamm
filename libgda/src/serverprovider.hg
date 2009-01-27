@@ -66,6 +66,25 @@ public:
   _WRAP_METHOD(bool supports_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type, const Glib::RefPtr<Set>& options) const, gda_server_provider_supports_operation)
 
   _WRAP_METHOD(Glib::RefPtr<ServerOperation> create_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type, const Glib::RefPtr<Set>& options), gda_server_provider_create_operation, errthrow)
+  
+  /** Creates a new Gda::ServerOperation object which can be modified in order to perform the @a type type of
+   * action. The @a options can contain:
+   * &lt;itemizedlist&gt;
+   * &lt;listitem&gt;named values which ID is a path in the resulting GdaServerOperation object, to initialize some value&lt;/listitem&gt;
+   * &lt;listitem&gt;named values which may change the contents of the GdaServerOperation, see this section for more information&lt;/listitem&gt;
+   * &lt;/itemizedlist&gt;
+   * @param cnc A Gda::Connection object which will be used to perform an action, or <tt>0</tt>.
+   * @param type The type of operation requested.
+   * @return A new Gda::ServerOperation object, or <tt>0</tt> in the provider does not support the @a type type
+   * of operation or if an error occurred.
+   */
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  Glib::RefPtr<ServerOperation> create_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type);
+#else
+  Glib::RefPtr<ServerOperation> create_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type, std::auto_ptr<Glib::Error>& error);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+
   _WRAP_METHOD(Glib::ustring render_operation(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<ServerOperation>& op), gda_server_provider_render_operation, errthrow)
   _WRAP_METHOD(bool perform_operation(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<ServerOperation>& op), gda_server_provider_perform_operation, errthrow)
 

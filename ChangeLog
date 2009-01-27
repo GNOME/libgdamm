@@ -1,3 +1,9 @@
+2009-01-27  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/serverprovider.ccg:
+	* libgda/src/serverprovider.hg: Add a create_operation() overload that 
+	takes no parameters.
+
 2009-01-27  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/holder.hg (set_value):

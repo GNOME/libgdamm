@@ -57,6 +57,27 @@ Value ServerProvider::string_to_value(const Glib::RefPtr<Connection>& cnc,
   return retval;
 }
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+Glib::RefPtr<ServerOperation> ServerProvider::create_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type)
+#else
+Glib::RefPtr<ServerOperation> ServerProvider::create_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  GError* gerror = 0;
+  Glib::RefPtr<ServerOperation> retvalue = Glib::wrap(gda_server_provider_create_operation(gobj(), Glib::unwrap(cnc), ((GdaServerOperationType)(type)), 0, &(gerror)));
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  return retvalue;
+}
+
+
+
 } // namespace Gda
 
 } // namespace Gnome
