@@ -118,7 +118,7 @@ template <class ValueType> inline
 bool Holder::set_value(const ValueType& value)
 {
   Gnome::Gda::Value gdavalue(value);
-  return this->set_value(value);
+  return this->set_value_as_value(gdavalue);
 }
 #endif //DOXYGEN_SHOULD_SKIP_THIS
 

@@ -1,3 +1,8 @@
+2009-01-27  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/holder.hg (set_value):
+	Don't call set_value() recursively
+
 2009-01-24  Deng Xiyue  <manphiz@gmail.com>
 
 	* Change license header to mention Lesser General Public License
