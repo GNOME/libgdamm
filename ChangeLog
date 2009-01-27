@@ -1,3 +1,9 @@
+2009-01-24  Deng Xiyue  <manphiz@gmail.com>
+
+	* Change license header to mention Lesser General Public License
+	version 2.1 instead of Library General Public License, to be
+	consistent with COPYING.
+
 2009-01-26  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/holder.hg: set_value(): Renamed to set_value_as_value().
