@@ -1,8 +1,13 @@
 2009-01-27  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgda/src/serverprovider.ccg:
-	* libgda/src/serverprovider.hg: Add a create_operation() overload that 
-	takes no parameters.
+	* libgda/src/set.[hg|ccg]: Rename add_holder(string, value) to 
+	add_holder_as_value(). Added a templated add_holder(string, T), to 
+	make application code less annoying.
+
+2009-01-27  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/serverprovider.[hg|ccg]: Add a create_operation() overload 
+	that takes no parameters.
 
 2009-01-27  Johannes Schmid  <jschmid@openismus.com>
 

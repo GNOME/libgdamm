@@ -76,7 +76,16 @@ public:
    * @param id Name of the holder
    * @param value Value of the holder
    */
-  void add_holder (const Glib::ustring& id, const Gda::Value& value);
+  void add_holder_as_value(const Glib::ustring& id, const Gda::Value& value);
+
+  /** Add a holder
+   * 
+   * Convenience method to add a holder with value
+   * @param id Name of the holder
+   * @param value Value of the holder
+   */
+  template <class ValueType>
+  void add_holder(const Glib::ustring& id, const ValueType& value);
   
   _WRAP_METHOD(void remove_holder(const Glib::RefPtr<Holder>& holder), gda_set_remove_holder)
 
@@ -106,6 +115,17 @@ public:
   _WRAP_PROPERTY("id", Glib::ustring)
   _WRAP_PROPERTY("name", Glib::ustring)
 };
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+template <class ValueType> inline
+void Set::add_holder(const Glib::ustring& id, const ValueType& value)
+{
+  Gnome::Gda::Value gdavalue(value);
+  Glib::RefPtr<Holder> holder = Holder::create(gdavalue.get_value_type(), id);
+  holder->set_value(value);
+  this->add_holder(holder);
+}
+#endif //DOXYGEN_SHOULD_SKIP_THIS
 
 } // namespace Gda
 } // namespace Gnome

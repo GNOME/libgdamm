@@ -63,7 +63,7 @@ public:
   _WRAP_METHOD(bool set_value_as_value(const Value& value), gda_holder_set_value, errthrow)
 
   //TODO: Documentation:
-  template<class ValueType>
+  template <class ValueType>
   bool set_value(const ValueType& value);
 
 
