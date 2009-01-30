@@ -1,3 +1,9 @@
+2009-01-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/libgda_methods.defs: Regenerated.
+	* libgda/src/datahandler.hg: Removed get_nb_g_types() and 
+	get_g_type_index() because the C functions were removed from libgda.
+
 2009-01-27  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/set.[hg|ccg]: Rename add_holder(string, value) to 
