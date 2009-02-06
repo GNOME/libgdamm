@@ -55,7 +55,7 @@ namespace Gda
  */
 class DataHandler : public Glib::Interface
 {
-  _CLASS_INTERFACE(DataHandler, GdaDataHandler, GDA_DATA_HANDLER, GdaDataHandlerClass)
+  _CLASS_INTERFACE(DataHandler, GdaDataHandler, GDA_DATA_HANDLER, GdaDataHandlerIface)
 public:
 
   _WRAP_METHOD(Glib::ustring get_sql_from_value(const Value& value) const, gda_data_handler_get_sql_from_value)
