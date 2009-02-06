@@ -1,5 +1,10 @@
 2009-02-06  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/libgda_signals.defs: Regenerated.
+
+2009-02-06  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/datahandler.hg:
 	* libgda/src/datamodel.hg: DataHandlerClass and DataModelClass were 
 	renamed to DataHandlerIface and DataModelIface in libgda. Adapted to 

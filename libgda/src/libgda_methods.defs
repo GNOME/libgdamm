@@ -89,6 +89,13 @@
   (gtype-id "GDA_TYPE_DATA_MODEL_DIR")
 )
 
+(define-object DataModelDsnList
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaDataModelDsnList")
+  (gtype-id "GDA_TYPE_DATA_MODEL_DSN_LIST")
+)
+
 (define-object DataModelImport
   (in-module "Gda")
   (parent "GObject")
@@ -194,22 +201,6 @@
 )
 
 ;; Enumerations and flags ...
-
-(define-enum PrefixDir
-  (in-module "Gda")
-  (c-name "GdaPrefixDir")
-  (gtype-id "GDA_TYPE_PREFIX_DIR")
-  (values
-    '("no-dir" "GDA_NO_DIR")
-    '("bin-dir" "GDA_BIN_DIR")
-    '("sbin-dir" "GDA_SBIN_DIR")
-    '("data-dir" "GDA_DATA_DIR")
-    '("locale-dir" "GDA_LOCALE_DIR")
-    '("lib-dir" "GDA_LIB_DIR")
-    '("libexec-dir" "GDA_LIBEXEC_DIR")
-    '("etc-dir" "GDA_ETC_DIR")
-  )
-)
 
 (define-enum ConfigError
   (in-module "Gda")
@@ -445,6 +436,19 @@
     '("read-only-value" "GDA_DATA_PROXY_READ_ONLY_VALUE")
     '("read-only-row" "GDA_DATA_PROXY_READ_ONLY_ROW")
     '("filter-error" "GDA_DATA_PROXY_FILTER_ERROR")
+  )
+)
+
+(define-enum Type
+  (in-module "Mod")
+  (c-name "ModType")
+  (gtype-id "MOD_TYPE_TYPE")
+  (values
+    '("first-query" "FIRST_QUERY")
+    '("ins-query" "INS_QUERY")
+    '("upd-query" "UPD_QUERY")
+    '("del-query" "DEL_QUERY")
+    '("nb-queries" "NB_QUERIES")
   )
 )
 
@@ -894,24 +898,6 @@
     '("GdaSet**" "out_params")
     '("GError**" "error")
   )
-)
-
-
-
-;; From gda-binreloc.h
-
-(define-function gda_gbr_init
-  (c-name "gda_gbr_init")
-  (return-type "none")
-)
-
-(define-function gda_gbr_get_file_path
-  (c-name "gda_gbr_get_file_path")
-  (return-type "gchar*")
-  (parameters
-    '("GdaPrefixDir" "where")
-  )
-  (varargs #t)
 )
 
 
@@ -1839,6 +1825,10 @@
 
 
 
+;; From gda-custom-marshal.h
+
+
+
 ;; From gda-data-access-wrapper.h
 
 (define-function gda_data_access_wrapper_get_type
@@ -2099,6 +2089,15 @@
   (of-object "GdaDataModelDir")
   (c-name "gda_data_model_dir_clean_errors")
   (return-type "none")
+)
+
+
+
+;; From gda-data-model-dsn-list.h
+
+(define-function gda_data_model_dsn_list_get_type
+  (c-name "gda_data_model_dsn_list_get_type")
+  (return-type "GType")
 )
 
 
@@ -2858,6 +2857,10 @@
 
 
 
+;; From gda-data-select-extra.h
+
+
+
 ;; From gda-data-select.h
 
 (define-function gda_data_select_get_type
@@ -3614,6 +3617,10 @@
 
 
 
+;; From gda-meta-store-extra.h
+
+
+
 ;; From gda-meta-store.h
 
 (define-function gda_meta_store_get_type
@@ -3904,6 +3911,32 @@
   (return-type "gchar*")
   (parameters
     '("GdaMetaGraphInfo" "info")
+    '("GError**" "error")
+  )
+)
+
+
+
+;; From gda-meta-struct-private.h
+
+(define-method add_db_object
+  (of-object "GdaMetaStruct")
+  (c-name "gda_meta_struct_add_db_object")
+  (return-type "GdaMetaDbObject*")
+  (parameters
+    '("GdaMetaDbObject*" "dbo")
+    '("GError**" "error")
+  )
+)
+
+(define-method load_from_xml_file
+  (of-object "GdaMetaStruct")
+  (c-name "gda_meta_struct_load_from_xml_file")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "catalog")
+    '("const-gchar*" "schema")
+    '("const-gchar*" "xml_spec_file")
     '("GError**" "error")
   )
 )

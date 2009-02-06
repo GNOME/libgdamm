@@ -33,7 +33,7 @@
 (define-property id
   (of-object "GdaColumn")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Column's Id (warning: the column's ID is not guaranteed to be unique in a GdaDataModel)")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -80,7 +80,7 @@
 (define-property user-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
-  (docs "")
+  (docs "File to use for per-user DSN list")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -89,7 +89,7 @@
 (define-property system-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
-  (docs "")
+  (docs "File to use for system-wide DSN list")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -215,7 +215,7 @@
 (define-property model
   (of-object "GdaDataAccessWrapper")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Data model being wrapped")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -272,32 +272,12 @@
   (construct-only #f)
 )
 
-;; From GdaDataModelBdb
-
-(define-property filename
-  (of-object "GdaDataModelBdb")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property db-name
-  (of-object "GdaDataModelBdb")
-  (prop-type "GParamString")
-  (docs "")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
 ;; From GdaDataModelDir
 
 (define-property basedir
   (of-object "GdaDataModelDir")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Base directory")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -349,7 +329,7 @@
 (define-property random-access
   (of-object "GdaDataModelImport")
   (prop-type "GParamBoolean")
-  (docs "")
+  (docs "Random access to the data model is possible")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -358,7 +338,7 @@
 (define-property filename
   (of-object "GdaDataModelImport")
   (prop-type "GParamString")
-  (docs "")
+  (docs "File to import")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -367,7 +347,7 @@
 (define-property data-string
   (of-object "GdaDataModelImport")
   (prop-type "GParamString")
-  (docs "")
+  (docs "String to import")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -376,7 +356,7 @@
 (define-property xml-node
   (of-object "GdaDataModelImport")
   (prop-type "GParamPointer")
-  (docs "")
+  (docs "XML node to import from")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -385,7 +365,7 @@
 (define-property options
   (of-object "GdaDataModelImport")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Options to configure the import")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -411,7 +391,7 @@
 (define-property id
   (of-object "GdaDataModelIter")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Id")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -420,7 +400,7 @@
 (define-property name
   (of-object "GdaDataModelIter")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Name")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -429,7 +409,7 @@
 (define-property description
   (of-object "GdaDataModelIter")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Description")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -438,7 +418,7 @@
 (define-property holders
   (of-object "GdaDataModelIter")
   (prop-type "GParamPointer")
-  (docs "Holders the set should contain")
+  (docs "GdaHolder objects the set should contain")
   (readable #f)
   (writable #t)
   (construct-only #t)
@@ -447,7 +427,7 @@
 (define-property data-model
   (of-object "GdaDataModelIter")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Data model for which the iter is for")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -456,7 +436,7 @@
 (define-property current-row
   (of-object "GdaDataModelIter")
   (prop-type "GParamInt")
-  (docs "")
+  (docs "Current represented row in the data model")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -465,7 +445,7 @@
 (define-property forced-model
   (of-object "GdaDataModelIter")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Overrides the data model the iter is attached to (reserved for internal usage)")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -540,7 +520,7 @@
 (define-property model
   (of-object "GdaDataProxy")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Proxied data model")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -549,7 +529,7 @@
 (define-property prepend-null-entry
   (of-object "GdaDataProxy")
   (prop-type "GParamBoolean")
-  (docs "")
+  (docs "Tells if a row composed of NULL values is inserted as the proxy's first row")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -558,7 +538,7 @@
 (define-property defer-sync
   (of-object "GdaDataProxy")
   (prop-type "GParamBoolean")
-  (docs "")
+  (docs "Tells if changes to the sample of rows displayed is done in background in several steps or if it's done in one step.")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -567,7 +547,7 @@
 (define-property sample-size
   (of-object "GdaDataProxy")
   (prop-type "GParamInt")
-  (docs "")
+  (docs "Number of rows which the proxy will contain at any time, like a sliding window on the proxied data model")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -578,7 +558,7 @@
 (define-property connection
   (of-object "GdaDataSelect")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Connection from which this data model is created")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -587,7 +567,7 @@
 (define-property prepared-stmt
   (of-object "GdaDataSelect")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Associated prepared statement (for internal usage)")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -596,7 +576,7 @@
 (define-property model-usage
   (of-object "GdaDataSelect")
   (prop-type "GParamUInt")
-  (docs "")
+  (docs "Determines how the data model may be used")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -701,7 +681,7 @@
 (define-property id
   (of-object "GdaHolder")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Holder's ID")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -710,7 +690,7 @@
 (define-property name
   (of-object "GdaHolder")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Holder's name")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -719,7 +699,7 @@
 (define-property description
   (of-object "GdaHolder")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Holder's description")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -728,7 +708,7 @@
 (define-property simple-bind
   (of-object "GdaHolder")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Make value holder follow other GdaHolder's changes")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -737,7 +717,7 @@
 (define-property full-bind
   (of-object "GdaHolder")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Make value holder follow other GdaHolder's changes and the other way around")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -746,7 +726,7 @@
 (define-property source-model
   (of-object "GdaHolder")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Data model among which the holder's value should be")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -755,7 +735,7 @@
 (define-property source-column
   (of-object "GdaHolder")
   (prop-type "GParamInt")
-  (docs "")
+  (docs "Column number to use in coordination with the source-model property")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -764,7 +744,7 @@
 (define-property g-type
   (of-object "GdaHolder")
   (prop-type "GParamGType")
-  (docs "")
+  (docs "Holder's GType")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -773,7 +753,7 @@
 (define-property not-null
   (of-object "GdaHolder")
   (prop-type "GParamBoolean")
-  (docs "")
+  (docs "Can the value holder be NULL?")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -866,7 +846,7 @@
 (define-property nb-values
   (of-object "GdaRow")
   (prop-type "GParamInt")
-  (docs "")
+  (docs "Number of values in the row")
   (readable #f)
   (writable #t)
   (construct-only #f)
@@ -897,7 +877,7 @@
 (define-property connection
   (of-object "GdaServerOperation")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Connection to use")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -906,7 +886,7 @@
 (define-property provider
   (of-object "GdaServerOperation")
   (prop-type "GParamObject")
-  (docs "")
+  (docs "Database provider which created the object")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -915,7 +895,7 @@
 (define-property op-type
   (of-object "GdaServerOperation")
   (prop-type "GParamInt")
-  (docs "")
+  (docs "Type of operation to be done")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -924,7 +904,7 @@
 (define-property spec-filename
   (of-object "GdaServerOperation")
   (prop-type "GParamString")
-  (docs "")
+  (docs "XML file which contains the object's data structure")
   (readable #f)
   (writable #t)
   (construct-only #t)
@@ -979,7 +959,7 @@
 (define-property id
   (of-object "GdaSet")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Id")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -988,7 +968,7 @@
 (define-property name
   (of-object "GdaSet")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Name")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -997,7 +977,7 @@
 (define-property description
   (of-object "GdaSet")
   (prop-type "GParamString")
-  (docs "")
+  (docs "Description")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -1006,7 +986,7 @@
 (define-property holders
   (of-object "GdaSet")
   (prop-type "GParamPointer")
-  (docs "Holders the set should contain")
+  (docs "GdaHolder objects the set should contain")
   (readable #f)
   (writable #t)
   (construct-only #t)
