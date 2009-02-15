@@ -1,3 +1,33 @@
+3.99.11: (unstable)
+
+* Builds with the latest libgda-4.0 (3.99.11).
+* Connection: statement_execute_non_select(): Added overload with 
+  last_inserted_row parameter.
+  (Johannes Schmid)
+* DataHandler: Removed get_nb_g_types() and get_g_type_index().
+* Holder:
+  - copy(): Make this const.
+  - get_bind(): Use refreturn and add a const overload.
+  - set_value(): Renamed to set_value_as_value(). Added a templated set_value().
+  (Murray Cumming)
+  - Added add_holder(id, value) as convenience shortcut.
+  - get_holder(), get_parameters(): Correct reference-counting.
+  - Added HolderError exception.
+  (Johannes Schmid)
+* Set: Renamed add_holder(string, value) to add_holder_as_value().
+  Added a templated add_holder(string, T).
+* ServerProvider: Added a create_operation() overload that takes no parameters.
+  (Murray Cumming)
+* SqlParser: Added SqlParserError exception.
+  (Johannes Schmid)
+* Statement:
+  - Rename to_sql_extended() to to_sql(), and don't leak the string.
+  Made all to_sql() overloads const.
+  (Murray Cumming)
+  - get_parameters(): Corrected reference counting.
+  - Added StatmentError exception.
+  (Johannes Schmid)
+
 3.99.8: (unstable)
 
 * Connection::update_meta_store_table(): Make this actually work.
