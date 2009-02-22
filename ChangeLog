@@ -1,3 +1,8 @@
+2009-02-22  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/datamodelarray.hg:
+	* libgda/src/metastore.hg: Removed extra ;s to avoid warnings.
+
 3.99.11:
 
 2009-02-06  Murray Cumming  <murrayc@murrayc.com>

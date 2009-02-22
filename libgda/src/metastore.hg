@@ -62,7 +62,7 @@ public:
   _WRAP_CREATE(const Glib::ustring& cnc_string)
   
   _WRAP_METHOD(int get_version() const, gda_meta_store_get_version)
-  _WRAP_METHOD_DOCS_ONLY (gda_meta_store_extract);
+  _WRAP_METHOD_DOCS_ONLY (gda_meta_store_extract)
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::RefPtr<DataModel> extract(const Glib::ustring& sql);
 #else
