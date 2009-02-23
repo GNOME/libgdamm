@@ -127,8 +127,8 @@ fi
 
 AM_CONDITIONAL(HAVE_BDB, [test x$have_bdb = xyes])
 
-GLIBMM_PREFIX=`pkg-config --variable=prefix glibmm-2.4`
-GMM_PROCDIR=$GLIBMM_PREFIX/lib/glibmm-2.4/proc
+GLIBMM_LIBDIR=`pkg-config --variable=libdir glibmm-2.4`
+GMM_PROCDIR=$GLIBMM_LIBDIR/glibmm-2.4/proc
 AC_SUBST(GMM_PROCDIR)
 GMM_PROC=$GMM_PROCDIR/gmmproc
 AC_SUBST(GMM_PROC)

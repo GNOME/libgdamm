@@ -1,3 +1,7 @@
+2009-02-23  David King  <davidk@openismus.com>
+
+	* configure.in: Fix broken logic for location of gmmproc binary.
+
 2009-02-22  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/datamodelarray.hg:
