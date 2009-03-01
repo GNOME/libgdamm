@@ -17,7 +17,7 @@
 #We use pushdef here because we can't use shell variables before AC_INIT, but we want to use a variable with AC_INIT:
 pushdef([LIBGDAMM_MAJOR_VERSION],     [3])
 pushdef([LIBGDAMM_MINOR_VERSION],     [99])
-pushdef([LIBGDAMM_MICRO_VERSION],     [11])
+pushdef([LIBGDAMM_MICRO_VERSION],     [12])
 pushdef([LIBGDAMM_EXTRA_VERSION],     [])
 pushdef([LIBGDAMM_VERSION], LIBGDAMM_MAJOR_VERSION.LIBGDAMM_MINOR_VERSION.LIBGDAMM_MICRO_VERSION[]LIBGDAMM_EXTRA_VERSION)
 AC_INIT([libgdamm], LIBGDAMM_VERSION, [gtkmm-list@gnome.org])

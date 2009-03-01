@@ -1,3 +1,10 @@
+3.99.12: (unstable)
+
+* Build: Fix the build from svn on some 64-bit systems.
+  (David King)
+* Remove extra ;s to avoid compiler warnings.
+  (Murray Cumming)
+
 3.99.11: (unstable)
 
 * Builds with the latest libgda-4.0 (3.99.11).

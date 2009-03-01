@@ -1,3 +1,5 @@
+3.99.2:
+
 2009-02-23  David King  <davidk@openismus.com>
 
 	* configure.in: Fix broken logic for location of gmmproc binary.
