@@ -1,3 +1,8 @@
+2009-03-02  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/xatransaction.hg: Changed type of "format-id" property
+	from uint to guint, to fix the build on Windows.
+
 3.99.2:
 
 2009-02-23  David King  <davidk@openismus.com>
