@@ -64,7 +64,7 @@ public:
 //We can't have this constructor because guint64 and unsigned int are the same on 64-bit systems:
 //explicit Value(gint64 val);
 // explicit Value(guint64 val);
-   static Value create_as_uint64(guint64 val);
+  static Value create_as_uint64(guint64 val);
   
   explicit Value(const guchar* val, long size); 
 
