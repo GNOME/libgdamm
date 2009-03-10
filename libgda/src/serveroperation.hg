@@ -96,6 +96,7 @@ public:
   void set_value_at(const Glib::ustring& path_format, const Glib::ustring& value, std::auto_ptr<Glib::Error>& error);
 #endif // GLIBMM_EXCEPTIONS_ENABLED
 
+  //TODO: See http://bugzilla.gnome.org/show_bug.cgi?id=574742
   _WRAP_METHOD(ServerOperationNodeType get_node_type(const Glib::ustring& path, ServerOperationNodeStatus& status) const, gda_server_operation_get_node_type)
   _WRAP_METHOD(guint get_sequence_size(const Glib::ustring& path) const, gda_server_operation_get_sequence_size)
   _WRAP_METHOD(guint get_sequence_max_size(const Glib::ustring& path) const, gda_server_operation_get_sequence_max_size)

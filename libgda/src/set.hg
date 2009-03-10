@@ -93,7 +93,8 @@ public:
   
   _WRAP_METHOD(bool is_valid() const, gda_set_is_valid, errthrow)
   
-  /* these don't seem to be very useful */
+  /* TODO: These don't seem to be very useful */
+  //See http://bugzilla.gnome.org/show_bug.cgi?id=574742
   _IGNORE(gda_set_get_source_model, gda_set_get_source, gda_source_get_group, gda_source_get_node)
 /*
   _WRAP_METHOD(SetSource* get_source_for_model (const Glib::RefPtr<DataModel>& model), gda_set_get_source_for_model)

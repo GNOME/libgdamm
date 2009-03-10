@@ -116,6 +116,8 @@ public:
   _WRAP_METHOD(bool check_validity(const Glib::RefPtr<Connection>& cnc) const, gda_statement_check_validity, errthrow)
   _WRAP_METHOD(bool normalize(const Glib::RefPtr<Connection>& cnc), gda_statement_normalize, errthrow)
   
+  //TODO: gda_statement_to_sql_real() : See http://bugzilla.gnome.org/show_bug.cgi?id=574738
+  
   //TODO: Use a real GType in libgda?
   _WRAP_PROPERTY("structure", gpointer)
 

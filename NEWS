@@ -1,3 +1,7 @@
+3.99.13: (unstable)
+
+* Windows build fix. (Armin Burgmeier)
+
 3.99.12: (unstable)
 
 * Build: Fix the build from svn on some 64-bit systems.

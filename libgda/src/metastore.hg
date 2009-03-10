@@ -101,6 +101,7 @@ public:
 
   _WRAP_SIGNAL(void meta_reset(), "meta-reset")
   // TODO: do we need this?
+  // See http://bugzilla.gnome.org/show_bug.cgi?id=574736
   //#m4 _CONVERSION(`gpointer',`MetaContext*',`(MetaContext*)($3)')
   //_WRAP_SIGNAL(gpointer suggest_update(MetaContext*  suggest), "suggest-update", no_default_handler)
   // Listhandle...

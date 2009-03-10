@@ -1,3 +1,14 @@
+3.99.13:
+
+2009-03-10  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/metastore.hg:
+	* libgda/src/metastruct.hg:
+	* libgda/src/serveroperation.hg:
+	* libgda/src/set.hg:
+	* libgda/src/statement.hg: Added TODO comments about bugs that I filed 
+	about unclear libgda API.
+	
 2009-03-02  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/xatransaction.hg: Changed type of "format-id" property
