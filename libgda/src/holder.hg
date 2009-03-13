@@ -1,4 +1,4 @@
-// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+// -*- C++ -*- //
 
 /* set.h
  *
@@ -20,7 +20,6 @@
  */
 
 #include <libgdamm/datahandler.h>
-#include <libgdamm/error.h>
 #include <libgdamm/value.h>
 
 _DEFS(libgdamm,libgda)
@@ -108,8 +107,14 @@ public:
 
   _WRAP_SIGNAL(void changed(), "changed")
   _WRAP_SIGNAL(void source_changed(), "source-changed")
-  _WRAP_SIGNAL(Error validate_change(Value value), "validate-change", no_default_handler)
-  _WRAP_SIGNAL(void attribute_changed (Glib::ustring attr_name, Value value), "attribute-changed", no_default_handler)
+  
+#m4 _CONVERSION(`GValue*',`const Value&',`Value($3)')
+#m4 _CONVERSION(`GError*', `Glib::Error*', `Glib::wrap($3)')
+#m4 _CONVERSION(`Glib::Error', `GError*', `($3).gobj()')
+  _WRAP_SIGNAL(Glib::Error validate_change(const Value& value), "validate-change", no_default_handler)
+  
+#m4 _CONVERSION(`const char*',`const Glib::ustring&',__GCHARP_TO_USTRING)
+  _WRAP_SIGNAL(void attribute_changed(const Glib::ustring& attr_name, const Value& value), "attribute-changed", no_default_handler)
 
 };
 

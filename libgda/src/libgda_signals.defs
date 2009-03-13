@@ -493,7 +493,7 @@
 
 (define-signal validate-row-changes
   (of-object "GdaDataProxy")
-  (return-type "GdaError*")
+  (return-type "GError*")
   (when "last")
   (parameters
     '("gint" "p0")
@@ -671,7 +671,7 @@
 
 (define-signal validate-change
   (of-object "GdaHolder")
-  (return-type "GdaError*")
+  (return-type "GError*")
   (when "last")
   (parameters
     '("GValue*" "p0")
@@ -925,7 +925,7 @@
 
 (define-signal validate-holder-change
   (of-object "GdaSet")
-  (return-type "GdaError*")
+  (return-type "GError*")
   (when "last")
   (parameters
     '("GdaHolder*" "p0")
@@ -935,7 +935,7 @@
 
 (define-signal validate-set
   (of-object "GdaSet")
-  (return-type "GdaError*")
+  (return-type "GError*")
   (when "last")
 )
 

@@ -1,5 +1,5 @@
 /* $Id: transactionstatus.hg,v 1.2 2006/12/23 09:34:17 murrayc Exp $ */
-// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+// -*- C++ -*- //
 
 /* transactionstatus.h
  * 

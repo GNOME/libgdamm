@@ -1,5 +1,5 @@
 /* $Id: serveroperation.hg,v 1.2 2006/11/08 00:52:25 murrayc Exp $ */
-// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+// -*- C++ -*- //
 
 /* serveroperation.h
  *

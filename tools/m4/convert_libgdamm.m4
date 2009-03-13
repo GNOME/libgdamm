@@ -75,8 +75,6 @@ _CONVERSION(`GdaColumn*',`Glib::RefPtr<const Column>',`Glib::wrap($3)')
 _CONVERSION(`const Glib::RefPtr<Column>&', `GdaColumn*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Column>&', `const GdaColumn*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const Column>&', `const GdaColumn*', __CONVERT_REFPTR_TO_P)
-_CONVERSION(`Error*', `GdaError*', `($3).gobj()')
-_CONVERSION(`GdaError*', `Error*', `Glib::wrap($3)')
 
 _CONVERSION(`GdaColumnIndex*',`Glib::RefPtr<ColumnIndex>',`Glib::wrap($3)')
 
@@ -87,11 +85,6 @@ _CONVERSION(`const Glib::RefPtr<Glib::Object>&', `const GObject*', `($3)->gobj()
 
 _CONVERSION(`GdaRow*', `const Glib::RefPtr<Row>',  `Glib::wrap($3)')
 _CONVERSION(`GdaRow*', `const Glib::RefPtr<const Row>',  `Glib::wrap($3)')
-
-_CONVERSION(`GdaError*', `Error',  `Glib::wrap($3)')
-_CONVERSION(`Error', `GdaError*', `(GdaError*)($3).gobj()')
-_CONVERSION(`Error', `GError*', `($3).gobj()')
-
 
 _CONVERSION(`const int*','const-gint*',`$3')
 

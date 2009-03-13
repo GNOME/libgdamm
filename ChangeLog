@@ -1,3 +1,19 @@
+2009-03-13  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/Makefile_list_of_hg.am_fragment:
+	* libgda/src/error.ccg:
+	* libgda/src/error.hg: Removed these because the corresponding C header is 
+	now not installed by libgda. This is better anyway.
+	* libgda/src/libgda_signals.defs: Hand-corrected mentions of GdaError to 
+	GError.
+	* tools/m4/convert_libgdamm.m4: Move signal-specific Value and Error 
+	conversions out of here.
+
+	* libgda/src/dataproxy.hg:
+	* libgda/src/holder.hg:
+	* libgda/src/set.hg: Use Glib::Error instead of Gda::Error.
+	Make Value and ustring string parameters const references.
+
 3.99.13:
 
 2009-03-10  Murray Cumming  <murrayc@murrayc.com>

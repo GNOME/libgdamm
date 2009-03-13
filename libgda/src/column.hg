@@ -1,5 +1,5 @@
 /* $Id: column.hg,v 1.14 2006/11/30 06:58:55 murrayc Exp $ */
-// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+// -*- C++ -*- //
 
 /* modelcolumnattributes.h
  *

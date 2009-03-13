@@ -1,4 +1,4 @@
-// -*- C++ -*- // this is for the .hg, I realize gensig puts one in
+// -*- C++ -*- //
 
 /* set.h
  *
@@ -20,12 +20,10 @@
  */
 
 #include <libgdamm/holder.h>
-#include <libgdamm/error.h>
 #include <libgdamm/value.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
-_PINCLUDE(libgda/gda-error.h)
 
 namespace Gnome
 {
@@ -108,9 +106,16 @@ public:
 
   _WRAP_SIGNAL(void holder_changed(const Glib::RefPtr<Holder>& holder), "holder-changed")
   _WRAP_SIGNAL(void public_data_changed(), "public-data-changed")
-  _WRAP_SIGNAL(Error validate_set(), "validate-set", no_default_handler)
-  _WRAP_SIGNAL(Error validate_holder_change(const Glib::RefPtr<Holder>& holder, Value value), "validate-holder-change", no_default_handler)
-  _WRAP_SIGNAL(void holder_attr_changed(const Glib::RefPtr<Holder>& holder, Glib::ustring attr_name, Value value), "holder-attr-changed", no_default_handler)
+  
+#m4 _CONVERSION(`GError*', `Glib::Error*', `Glib::wrap($3)')
+#m4 _CONVERSION(`Glib::Error', `GError*', `($3).gobj()')
+  _WRAP_SIGNAL(Glib::Error validate_set(), "validate-set", no_default_handler)
+  
+#m4 _CONVERSION(`GValue*',`const Value&',`Value($3)')
+  _WRAP_SIGNAL(Glib::Error validate_holder_change(const Glib::RefPtr<Holder>& holder, const Value& value), "validate-holder-change", no_default_handler)
+  
+#m4 _CONVERSION(`const char*',`const Glib::ustring&',__GCHARP_TO_USTRING)
+  _WRAP_SIGNAL(void holder_attr_changed(const Glib::RefPtr<Holder>& holder, const Glib::ustring& attr_name, Value value), "holder-attr-changed", no_default_handler)
      
   _WRAP_PROPERTY("description", Glib::ustring)
   _WRAP_PROPERTY("id", Glib::ustring)
