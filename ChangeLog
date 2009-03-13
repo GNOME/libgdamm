@@ -1,5 +1,9 @@
 2009-03-13  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/libgdamm.h: Remove the include of libgdamm/error.h.
+
+2009-03-13  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/src/Makefile_list_of_hg.am_fragment:
 	* libgda/src/error.ccg:
 	* libgda/src/error.hg: Removed these because the corresponding C header is 

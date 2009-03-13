@@ -48,7 +48,6 @@ extern const int libgdamm_micro_version;
 #include <libgdamm/datamodeliter.h>
 #include <libgdamm/dataproxy.h>
 #include <libgdamm/dataselect.h>
-#include <libgdamm/error.h>
 #include <libgdamm/holder.h>
 #include <libgdamm/metastore.h>
 #include <libgdamm/metastruct.h>
