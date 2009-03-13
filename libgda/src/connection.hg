@@ -246,6 +246,30 @@ public:
 #else
   bool update_meta_store_table(const Glib::ustring& table_name, std::auto_ptr<Glib::Error>& err);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  /** Update the meta store information for the table names.
+   * 
+   * This can speed up the update of the meta store if you only need the list of table names.
+   *
+   * @return <tt>true</tt> if no error occurred.
+   */
+  bool update_meta_store_table_names();
+#else
+  bool update_meta_store_table_names(std::auto_ptr<Glib::Error>& err);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  /** Update the meta store information for the data types.
+   * 
+   * This can speed up the update of the meta store if you only need the data types.
+   *
+   * @return <tt>true</tt> if no error occurred.
+   */
+  bool update_meta_store_data_types();
+#else
+  bool update_meta_store_data_types(std::auto_ptr<Glib::Error>& err);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
   
   _WRAP_METHOD(bool statement_prepare(const Glib::RefPtr<Statement>& stmt), gda_connection_statement_prepare, errthrow)
 

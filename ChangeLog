@@ -1,5 +1,10 @@
 2009-03-13  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/src/connection.[hg|ccg]: Added update_meta_store_data_types() and 
+	update_meta_store_table_names().
+
+2009-03-13  Murray Cumming  <murrayc@murrayc.com>
+
 	* libgda/libgdamm.h: Remove the include of libgdamm/error.h.
 
 2009-03-13  Murray Cumming  <murrayc@murrayc.com>

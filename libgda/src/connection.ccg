@@ -378,9 +378,51 @@ bool Connection::update_meta_store_table(const Glib::ustring& table_name, std::a
 
   GdaMetaContext mcontext = {(gchar*)"_tables", 1, column_names, column_values };
   GError* gerror = 0;
-  bool retval = gda_connection_update_meta_store(gobj(), &mcontext, &gerror);
+  const bool retval = gda_connection_update_meta_store(gobj(), &mcontext, &gerror);
 
   g_value_unset(&table_name_value);
+  
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+  
+  return retval;
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+bool Connection::update_meta_store_table_names()
+#else
+bool Connection::update_meta_store_table_names(std::auto_ptr<Glib::Error>& err)
+#endif
+{
+  GdaMetaContext mcontext = {(gchar*)"_tables", 0, 0, 0 };
+  GError* gerror = 0;
+  const bool retval = gda_connection_update_meta_store(gobj(), &mcontext, &gerror);
+  
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+#else
+  if(gerror)
+    error = ::Glib::Error::throw_exception(gerror);
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+  
+  return retval;
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+bool Connection::update_meta_store_data_types()
+#else
+bool Connection::update_meta_store_data_types(std::auto_ptr<Glib::Error>& err)
+#endif
+{
+  GdaMetaContext mcontext = {(gchar*)"_builtin_data_types", 0, 0, 0 };
+  GError* gerror = 0;
+  const bool retval = gda_connection_update_meta_store(gobj(), &mcontext, &gerror);
   
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
