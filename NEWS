@@ -1,3 +1,10 @@
+3.99.14: (unstable)
+
+* Connection: Added update_meta_store_data_types() and 
+  update_meta_store_table_names().
+* Fixed the build with the latest libgda (4.0.0) release.
+  (Murray Cumming)
+
 3.99.13: (unstable)
 
 * Windows build fix. (Armin Burgmeier)

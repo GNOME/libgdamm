@@ -1,3 +1,5 @@
+3.99.14:
+
 2009-03-13  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/connection.[hg|ccg]: Added update_meta_store_data_types() and 
