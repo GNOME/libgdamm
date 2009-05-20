@@ -240,11 +240,13 @@ public:
    * This can speed up the update of the meta store if you only need the information
    * for a specific table
    * @param table_name Name of the table where the information is needed
+   * @param schema_name Name of the schema @table_name is in, or "" to update
+   * all tables with the given name.
    * @return <tt>true</tt> if no error occurred.
    */
-  bool update_meta_store_table(const Glib::ustring& table_name);
+  bool update_meta_store_table(const Glib::ustring& table_name, const Glib::ustring& schema_name = Glib::ustring());
 #else
-  bool update_meta_store_table(const Glib::ustring& table_name, std::auto_ptr<Glib::Error>& err);
+  bool update_meta_store_table(const Glib::ustring& table_name, const Glib::ustring& schema_name, std::auto_ptr<Glib::Error>& err);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
@@ -252,11 +254,18 @@ public:
    * 
    * This can speed up the update of the meta store if you only need the list of table names.
    *
+   * @param schema_name Name of the schema whose tables to update, or "" to
+   * update all tables. For example, for postgresql this function takes a
+   * considerable amount of time when doing this. If you don't need
+   * information about internal postgresql tables, then you can speed up the
+   * process by only updating the tables for the "public" schema.
+   * Unfortunately, schema names are not common between different database
+   * systems.
    * @return <tt>true</tt> if no error occurred.
    */
-  bool update_meta_store_table_names();
+  bool update_meta_store_table_names(const Glib::ustring& schema_name = Glib::ustring());
 #else
-  bool update_meta_store_table_names(std::auto_ptr<Glib::Error>& err);
+  bool update_meta_store_table_names(const Glib::ustring& schema_name, std::auto_ptr<Glib::Error>& err);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED

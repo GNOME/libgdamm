@@ -1,3 +1,9 @@
+2009-05-20  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/connection.hg:
+	* libgda/src/connection.ccg: Added a schema_name parameter for
+	update_meta_store_table_names() and update_meta_store_table().
+
 2009-05-18  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/dataproxy.ccg: get_values(): Actually return the result, 

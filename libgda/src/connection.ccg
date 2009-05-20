@@ -364,23 +364,28 @@ Glib::RefPtr<DataModel> Connection::get_meta_store_data(ConnectionMetaType meta_
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-bool Connection::update_meta_store_table(const Glib::ustring& table_name)
+bool Connection::update_meta_store_table(const Glib::ustring& table_name, const Glib::ustring& schema_name)
 #else
-bool Connection::update_meta_store_table(const Glib::ustring& table_name, std::auto_ptr<Glib::Error>& err)
+bool Connection::update_meta_store_table(const Glib::ustring& table_name, const Glib::ustring& schema_name, std::auto_ptr<Glib::Error>& err)
 #endif
 {
   GValue table_name_value = { 0 };
   g_value_init(&table_name_value, G_TYPE_STRING);
   g_value_set_static_string(&table_name_value, table_name.c_str());
 
-  gchar* column_names[] = { (gchar*)"table_name" };
-  GValue* column_values[] = { &table_name_value };
+  GValue table_schema_value = { 0 };
+  g_value_init(&table_schema_value, G_TYPE_STRING);
+  g_value_set_static_string(&table_schema_value, schema_name.c_str());
 
-  GdaMetaContext mcontext = {(gchar*)"_tables", 1, column_names, column_values };
+  gchar* column_names[] = { (gchar*)"table_name" , (gchar*)"table_schema"};
+  GValue* column_values[] = { &table_name_value, &table_schema_value };
+
+  GdaMetaContext mcontext = {(gchar*)"_tables", schema_name.empty() ? 1 : 2, column_names, column_values };
   GError* gerror = 0;
   const bool retval = gda_connection_update_meta_store(gobj(), &mcontext, &gerror);
 
   g_value_unset(&table_name_value);
+  g_value_unset(&table_schema_value);
   
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
@@ -394,15 +399,24 @@ bool Connection::update_meta_store_table(const Glib::ustring& table_name, std::a
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-bool Connection::update_meta_store_table_names()
+bool Connection::update_meta_store_table_names(const Glib::ustring& schema_name)
 #else
-bool Connection::update_meta_store_table_names(std::auto_ptr<Glib::Error>& err)
+bool Connection::update_meta_store_table_names(const Glib::ustring& schema_name, std::auto_ptr<Glib::Error>& err)
 #endif
 {
-  GdaMetaContext mcontext = {(gchar*)"_tables", 0, 0, 0 };
+  GValue table_schema_value = { 0 };
+  g_value_init(&table_schema_value, G_TYPE_STRING);
+  g_value_set_static_string(&table_schema_value, schema_name.c_str());
+
+  gchar* column_names[] = { (gchar*)"table_schema"};
+  GValue* column_values[] = { &table_schema_value };
+
+  GdaMetaContext mcontext = {(gchar*)"_tables", schema_name.empty() ? 0 : 1, column_names, column_values };
   GError* gerror = 0;
   const bool retval = gda_connection_update_meta_store(gobj(), &mcontext, &gerror);
-  
+
+  g_value_unset(&table_schema_value);
+
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
