@@ -1,3 +1,13 @@
+3.99.15: (unstable)
+
+* Connection: update_meta_store_table_names() and update_meta_store_table().
+  Added an optional schema_name parameter, allowing Glom to use this hack to 
+  increase performance.
+  (Armin Burgmeier)
+* DataProxy::get_values(): Actually return the result, fixing a compiler 
+  warning. Bug #582997 (Vincent Untz).
+  (Murray Cumming)
+	
 3.99.14: (unstable)
 
 * Connection: Added update_meta_store_data_types() and 
