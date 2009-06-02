@@ -241,7 +241,10 @@ public:
    * for a specific table
    * @param table_name Name of the table where the information is needed
    * @param schema_name Name of the schema @table_name is in, or "" to update
-   * all tables with the given name.
+   * all tables with the given name. As with update_meta_store_table_names(),
+   * specifying a non-empty schema_name speeds up the operation, just not as
+   * significantly as with update_meta_store_table_names() because the
+   * operation itself is already pretty quick.
    * @return <tt>true</tt> if no error occurred.
    */
   bool update_meta_store_table(const Glib::ustring& table_name, const Glib::ustring& schema_name = Glib::ustring());

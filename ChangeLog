@@ -1,3 +1,8 @@
+2009-06-02  Armin Burgmeier  <armin@openismus.com>
+
+	* libgda/src/connection.hg: Improved the documentation for the
+	schema_name parameter for update_meta_store_table().
+
 3.99.15:
 
 2009-05-20  Armin Burgmeier  <armin@openismus.com>
