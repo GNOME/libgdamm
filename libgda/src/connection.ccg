@@ -141,7 +141,7 @@ Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::ustring& sq
     stmt = parser->parse_string(sql);
 #else
     stmt = parser->parse_string(sql, error);
-    if(error)
+    if(error.get())
       return Glib::RefPtr<Glib::Object>();
 #endif
   }
@@ -253,7 +253,7 @@ Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<Statement>& statem
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage)
 #else
-Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage. std::auto_ptr<Glib::Error>& error)
+Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error)
 #endif
 {
   GError* gerror = 0;
@@ -283,7 +283,7 @@ Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring
     stmt = parser->parse_string(sql);
 #else
     stmt = parser->parse_string(sql, error);
-    if(error
+    if(error.get())
       return Glib::RefPtr<DataModel>();
 #endif
   }
@@ -308,7 +308,7 @@ Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool Connection::update_meta_store()
 #else
-bool Connection::update_meta_store(std::auto_ptr<Glib::Error>& err)
+bool Connection::update_meta_store(std::auto_ptr<Glib::Error>& error)
 #endif
 {
   GError* gerror = 0;
@@ -327,7 +327,7 @@ bool Connection::update_meta_store(std::auto_ptr<Glib::Error>& err)
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool Connection::update_meta_store(const Glib::ustring& id)
 #else
-bool Connection::update_meta_store(const Glib::ustring& id, std::auto_ptr<Glib::Error>& err)
+bool Connection::update_meta_store(const Glib::ustring& id, std::auto_ptr<Glib::Error>& error)
 #endif
 {
   GError* gerror = 0;
@@ -366,7 +366,7 @@ Glib::RefPtr<DataModel> Connection::get_meta_store_data(ConnectionMetaType meta_
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool Connection::update_meta_store_table(const Glib::ustring& table_name, const Glib::ustring& schema_name)
 #else
-bool Connection::update_meta_store_table(const Glib::ustring& table_name, const Glib::ustring& schema_name, std::auto_ptr<Glib::Error>& err)
+bool Connection::update_meta_store_table(const Glib::ustring& table_name, const Glib::ustring& schema_name, std::auto_ptr<Glib::Error>& error)
 #endif
 {
   GValue table_name_value = { 0 };
@@ -401,7 +401,7 @@ bool Connection::update_meta_store_table(const Glib::ustring& table_name, const 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool Connection::update_meta_store_table_names(const Glib::ustring& schema_name)
 #else
-bool Connection::update_meta_store_table_names(const Glib::ustring& schema_name, std::auto_ptr<Glib::Error>& err)
+bool Connection::update_meta_store_table_names(const Glib::ustring& schema_name, std::auto_ptr<Glib::Error>& error)
 #endif
 {
   GValue table_schema_value = { 0 };
@@ -431,7 +431,7 @@ bool Connection::update_meta_store_table_names(const Glib::ustring& schema_name,
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool Connection::update_meta_store_data_types()
 #else
-bool Connection::update_meta_store_data_types(std::auto_ptr<Glib::Error>& err)
+bool Connection::update_meta_store_data_types(std::auto_ptr<Glib::Error>& error)
 #endif
 {
   GdaMetaContext mcontext = {(gchar*)"_builtin_data_types", 0, 0, 0 };

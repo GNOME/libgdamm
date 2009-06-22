@@ -62,9 +62,13 @@ public:
   _WRAP_METHOD(bool set_value_as_value(const Value& value), gda_holder_set_value, errthrow)
 
   //TODO: Documentation:
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   template <class ValueType>
   bool set_value(const ValueType& value);
-
+#else
+  template <class ValueType>
+  bool set_value(const ValueType& value, std::auto_ptr<Glib::Error>& error);
+#endif
 
   _WRAP_METHOD(bool set_value_str(const Glib::RefPtr<DataHandler>& dh, const Glib::ustring& value), gda_holder_set_value_str, errthrow)
   _WRAP_METHOD(bool take_value(const Value& value), gda_holder_take_value, errthrow)
@@ -119,12 +123,21 @@ public:
 };
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 template <class ValueType> inline
 bool Holder::set_value(const ValueType& value)
 {
   Gnome::Gda::Value gdavalue(value);
   return this->set_value_as_value(gdavalue);
 }
+#else
+template <class ValueType> inline
+bool Holder::set_value(const ValueType& value, std::auto_ptr<Glib::Error>& error)
+{
+  Gnome::Gda::Value gdavalue(value);
+  return this->set_value_as_value(gdavalue, error);
+}
+#endif
 #endif //DOXYGEN_SHOULD_SKIP_THIS
 
 } // namespace Gda

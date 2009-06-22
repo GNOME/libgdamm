@@ -30,7 +30,7 @@ namespace Gda
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::RefPtr<DataModel> MetaStore::extract(const Glib::ustring& sql)
 #else
-Glib::RefPtr<DataModel> MetaStore::extract(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& err)
+Glib::RefPtr<DataModel> MetaStore::extract(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& error)
 #endif
 {
   GError* gerror = 0;
@@ -49,7 +49,7 @@ Glib::RefPtr<DataModel> MetaStore::extract(const Glib::ustring& sql, std::auto_p
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool MetaStore::modify(const Glib::ustring& sql, const Glib::RefPtr<DataModel>& data_model, const Glib::ustring& condition)
 #else
-bool MetaStore::modify(const Glib::ustring& sql, const Glib::RefPtr<DataModel>& data_model, const Glib::ustring& condition, std::auto_ptr<Glib::Error>& err)
+bool MetaStore::modify(const Glib::ustring& sql, const Glib::RefPtr<DataModel>& data_model, const Glib::ustring& condition, std::auto_ptr<Glib::Error>& error)
 #endif
 {
   GError* gerror = 0;
@@ -68,7 +68,7 @@ bool MetaStore::modify(const Glib::ustring& sql, const Glib::RefPtr<DataModel>& 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool MetaStore::get_attribute_value(const Glib::ustring& att_name, Glib::ustring& att_value)
 #else
-bool MetaStore::get_attribute_value(const Glib::ustring& att_name, Glib::ustring& att_value, std::auto_ptr<Glib::Error>)
+bool MetaStore::get_attribute_value(const Glib::ustring& att_name, Glib::ustring& att_value, std::auto_ptr<Glib::Error> error)
 #endif
 {
   GError* gerror = 0;

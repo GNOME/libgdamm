@@ -47,7 +47,7 @@ PACKAGE=libgdamm
 dnl Initialize automake stuff
 # Initialize automake stuff
 # tar-ustar asks it to use a sensible tar format that can handle long filenames.
-AM_INIT_AUTOMAKE([1.9 tar-ustar])
+AM_INIT_AUTOMAKE([1.8])
 
 dnl Specify a configuration file (no autoheader)
 AM_CONFIG_HEADER(libgda/libgdammconfig.h)

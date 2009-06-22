@@ -143,7 +143,7 @@ public:
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, StatementModelUsage model_usage = STATEMENT_MODEL_RANDOM_ACCESS);
 #else
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
-  Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& error);
+  Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
 #endif
 
   #m4 _CONVERSION(`const Glib::ArrayHandle<GType>&', `GType*', `const_cast<GType*>(($3).data())')
@@ -293,7 +293,7 @@ public:
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::RefPtr<DataModel> get_meta_store_data(ConnectionMetaType meta_type);
   #else
-  Glib::RefPtr<DataModel> Connection::get_meta_store_data(ConnectionMetaType meta_type, std::auto_ptr<Glib::Error>& error);
+  Glib::RefPtr<DataModel> get_meta_store_data(ConnectionMetaType meta_type, std::auto_ptr<Glib::Error>& error);
   #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   _WRAP_METHOD(Glib::RefPtr<MetaStore> get_meta_store(), gda_connection_get_meta_store, refreturn)

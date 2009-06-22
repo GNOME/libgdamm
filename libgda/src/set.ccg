@@ -35,10 +35,18 @@ bool Set::set_holder_value(const Glib::ustring& id, T value)
   return gda_set_set_holder_value (gobj(), id.c_str(), value);
 }
 
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 void Set::add_holder_as_value(const Glib::ustring& id, const Gda::Value& value)
+#else
+void Set::add_holder_as_value(const Glib::ustring& id, const Gda::Value& value, std::auto_ptr<Glib::Error>& error)
+#endif
 {
   Glib::RefPtr<Holder> holder = Holder::create(value.get_value_type(), id);
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   holder->set_value(value);
+#else
+  holder->set_value(value, error);
+#endif
   add_holder(holder);
 }
 

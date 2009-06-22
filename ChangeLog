@@ -1,3 +1,14 @@
+2009-06-22  Johannes Schmid  <jschmid@openismus.com>
+	
+	* libgda/src/connection.ccg:
+	* libgda/src/connection.hg:
+	* libgda/src/holder.hg:
+	* libgda/src/metastore.ccg:
+	* libgda/src/set.hg:
+	* libgda/src/set.ccg:
+	Fixed builds problems on maemo due to --fno-exceptions and
+	GLIBMM_EXCEPTIONS_ENABLED
+
 2009-06-02  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/connection.hg: Improved the documentation for the

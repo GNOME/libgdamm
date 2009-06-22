@@ -74,8 +74,11 @@ public:
    * @param id Name of the holder
    * @param value Value of the holder
    */
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   void add_holder_as_value(const Glib::ustring& id, const Gda::Value& value);
-
+#else
+  void add_holder_as_value(const Glib::ustring& id, const Gda::Value& value, std::auto_ptr<Glib::Error>& error);
+#endif
   /** Add a holder
    * 
    * Convenience method to add a holder with value
