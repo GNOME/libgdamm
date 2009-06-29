@@ -1,3 +1,8 @@
+3.99.16: (unstable)
+
+* Build fixes for meamo (allow --fno-exceptions and !GLIBMM_EXCEPTIONS_ENABLED)
+  (Johannes Schmid)
+
 3.99.15: (unstable)
 
 * Connection: update_meta_store_table_names() and update_meta_store_table().

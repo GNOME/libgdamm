@@ -101,7 +101,7 @@ display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc)
 {
   const Glib::ustring sql = "SELECT ref, name, price FROM products";
   Glib::RefPtr<Gda::DataModel> data_model;
-#ifdef GLIBMM_EXCEPTIOMS_ENABLED
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {
     data_model = cnc->statement_execute_select (sql);
