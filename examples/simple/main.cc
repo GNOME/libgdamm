@@ -33,6 +33,7 @@ run_sql_non_select (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr
 
   Glib::RefPtr<Gda::Statement> stmt;
   Glib::ustring remain;
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {
     stmt =  parser->parse_string (sql);
@@ -42,11 +43,21 @@ run_sql_non_select (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr
     std::cerr << "Error: " << err.what() << std::endl;
     return;
   }
+#else
+  std::auto_ptr<Glib::Error> error;
+  stmt = parser->parse_string (sql, error);
+  if (error.get())
+  {
+    std::cerr << "Error: " << error->what() << std::endl;
+    return;
+  }
+#endif
 
   if(!remain.empty()) 
     std::cout << "REMAINS: "<< remain << std::endl;
 
   int nrows = 0;
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {  
     nrows = cnc->statement_execute_non_select (stmt);
@@ -56,6 +67,15 @@ run_sql_non_select (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr
     std::cerr << "Error: " << err.what() << std::endl;
     return;
   }
+#else
+  nrows = cnc->statement_execute_non_select (stmt, error);
+  if (error.get())
+  {
+    std::cerr << "Error: " << error->what() << std::endl;
+    return;
+  }
+#endif
+
 }
 
 /*
@@ -81,6 +101,7 @@ display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc)
 {
   const Glib::ustring sql = "SELECT ref, name, price FROM products";
   Glib::RefPtr<Gda::DataModel> data_model;
+#ifdef GLIBMM_EXCEPTIOMS_ENABLED
   try
   {
     data_model = cnc->statement_execute_select (sql);
@@ -91,12 +112,23 @@ display_products_contents (const Glib::RefPtr<Gda::Connection>& cnc)
       << err.what() << std::endl;
     return;
   }
+#else
+  std::auto_ptr<Glib::Error> error;
+  data_model = cnc->statement_execute_select(sql, Gda::STATEMENT_MODEL_RANDOM_ACCESS, error);
+  if (error.get())
+  {
+    std::cout << "Could not get the contents of the 'products' table: " 
+      << error->what() << std::endl;
+    return;
+  }
+#endif
   std::cout << data_model->dump_as_string() << std::endl;	
 }
 
 void display_meta_store(Glib::RefPtr<Gda::Connection>& cnc)
 {
   Glib::RefPtr<Gda::DataModel> model;
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {
     // Update the meta store
@@ -115,6 +147,26 @@ void display_meta_store(Glib::RefPtr<Gda::Connection>& cnc)
       << err.what() << std::endl;
     return;
   }
+#else
+  std::auto_ptr<Glib::Error> error;
+  // Update the meta store
+  cnc->update_meta_store_table("products", Glib::ustring(), error);
+  if (error.get())
+  {
+    std::cerr << "Update meta store failed: " << error->what() << std::endl;
+    return;
+  } 
+  // Receive meta store data
+  Glib::RefPtr<Gda::MetaStore> store = 
+        cnc->get_meta_store();
+  model =
+    store->extract("SELECT * FROM _tables", error);
+  if (error.get())
+  {
+    std::cerr << "Meta store extract failed: " << error->what() << std::endl;
+    return;
+  }
+#endif
   std::cout << model->dump_as_string() << std::endl;
 }
 
@@ -122,6 +174,7 @@ int main (int argc, char** argv)
 {
   Gda::init();
   Glib::RefPtr<Gda::Connection> cnc;
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {
     cnc = Gda::Connection::open_from_string ("SQLite", "DB_DIR=.;DB_NAME=example_db", "",
@@ -132,6 +185,16 @@ int main (int argc, char** argv)
     std::cerr << err.what() << std::endl;
     return 1;
   }
+#else
+  std::auto_ptr<Glib::Error> error;
+  cnc = Gda::Connection::open_from_string ("SQLite", "DB_DIR=.;DB_NAME=example_db", "",
+                                           Gda::CONNECTION_OPTIONS_NONE, error);
+  if (error.get())
+  {
+    std::cerr << error->what() << std::endl;
+    return 1; 
+  }
+#endif
 
   /* create an SQL parser */
   Glib::RefPtr<Gda::SqlParser> parser = cnc->create_parser();

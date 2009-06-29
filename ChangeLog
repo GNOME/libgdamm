@@ -1,3 +1,8 @@
+2009-06-29  Johannes Schmid  <jschmid@openismus.com>
+
+  * examples/simple/main.cc:
+  Fixed build without exceptions
+
 2009-06-22  Johannes Schmid  <jschmid@openismus.com>
 	
 	* libgda/src/connection.ccg:
