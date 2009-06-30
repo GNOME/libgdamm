@@ -1,3 +1,12 @@
+2009-06-30  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix per-table meta-store retrieval for table names with capital letters.
+
+	* libgda/src/connection.ccg: update_meta_store_table(): 
+	Quote the table name so it works with capital letters, spaces, etc.
+	Vivien Malerba stated on the mailing list that this is necessary.
+	I am not convinced that this function works at all anyway though.
+
 3.99.16:
 
 2009-06-29  Johannes Schmid  <jschmid@openismus.com>
