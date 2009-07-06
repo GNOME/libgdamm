@@ -1,3 +1,11 @@
+2009-07-06  Murray Cumming  <murrayc@murrayc.com>
+
+	Added MetaStoreError.
+
+	* libgda/src/libgda_enums.defs: Regenerated with enums.pl
+	* libgda/src/metastore.[hg|ccg]: Wrapper GdaMetaStoreError which is 
+	now thrown by something - not sure what yet.
+
 2009-06-30  Murray Cumming  <murrayc@murrayc.com>
 
 	Fix per-table meta-store retrieval for table names with capital letters.

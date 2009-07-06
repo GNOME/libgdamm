@@ -31,6 +31,8 @@ namespace Gnome
 namespace Gda
 {
 
+_WRAP_GERROR(MetaStoreError, GdaMetaStoreError, GDA_META_STORE_ERROR)
+
 /** Dictionary object.
  *
  * Previous versions of Libgda relied on an XML based file to store dictionary 

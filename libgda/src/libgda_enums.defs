@@ -1,21 +1,4 @@
-;; From /usr/include/libgda-4.0/libgda/gda-binreloc.h
-
-(define-enum-extended PrefixDir
-  (in-module "Gda")
-  (c-name "GdaPrefixDir")
-  (values
-    '("no-dir" "GDA_NO_DIR" "0")
-    '("bin-dir" "GDA_BIN_DIR" "1")
-    '("sbin-dir" "GDA_SBIN_DIR" "2")
-    '("data-dir" "GDA_DATA_DIR" "3")
-    '("locale-dir" "GDA_LOCALE_DIR" "4")
-    '("lib-dir" "GDA_LIB_DIR" "5")
-    '("libexec-dir" "GDA_LIBEXEC_DIR" "6")
-    '("etc-dir" "GDA_ETC_DIR" "7")
-  )
-)
-
-;; From /usr/include/libgda-4.0/libgda/gda-config.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-config.h
 
 (define-enum-extended ConfigError
   (in-module "Gda")
@@ -28,7 +11,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-connection-event.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-connection-event.h
 
 (define-enum-extended ConnectionEventType
   (in-module "Gda")
@@ -67,7 +50,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-connection.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-connection.h
 
 (define-enum-extended ConnectionError
   (in-module "Gda")
@@ -80,6 +63,9 @@
     '("no-provider-spec-error" "GDA_CONNECTION_NO_PROVIDER_SPEC_ERROR" "4")
     '("open-error" "GDA_CONNECTION_OPEN_ERROR" "5")
     '("statement-type-error" "GDA_CONNECTION_STATEMENT_TYPE_ERROR" "6")
+    '("cant-lock-error" "GDA_CONNECTION_CANT_LOCK_ERROR" "7")
+    '("task-not-found-error" "GDA_CONNECTION_TASK_NOT_FOUND_ERROR" "8")
+    '("unsupported-threads-error" "GDA_CONNECTION_UNSUPPORTED_THREADS_ERROR" "9")
   )
 )
 
@@ -89,6 +75,7 @@
   (values
     '("none" "GDA_CONNECTION_OPTIONS_NONE" "0")
     '("read-only" "GDA_CONNECTION_OPTIONS_READ_ONLY" "1 << 0")
+    '("thread-safe" "GDA_CONNECTION_OPTIONS_THREAD_SAFE" "1 << 1")
   )
 )
 
@@ -151,7 +138,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-data-comparator.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-data-comparator.h
 
 (define-enum-extended DataComparatorError
   (in-module "Gda")
@@ -174,7 +161,18 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-data-model.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-data-meta-wrapper.h
+
+(define-enum-extended DataMetaWrapperMode
+  (in-module "Gda")
+  (c-name "GdaDataMetaWrapperMode")
+  (values
+    '("lc" "GDA_DATA_META_WRAPPER_MODE_LC" "0")
+    '("uc" "GDA_DATA_META_WRAPPER_MODE_UC" "1")
+  )
+)
+
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-data-model.h
 
 (define-flags-extended DataModelAccessFlags
   (in-module "Gda")
@@ -226,7 +224,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-data-model-iter.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-data-model-iter.h
 
 (define-enum-extended DataModelIterError
   (in-module "Gda")
@@ -236,7 +234,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-data-proxy.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-data-proxy.h
 
 (define-enum-extended DataProxyError
   (in-module "Gda")
@@ -250,7 +248,21 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-easy.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-data-select-extra.h
+
+(define-enum-extended ModType
+  (in-module "Gda")
+  (c-name "ModType")
+  (values
+    '("first-query" "FIRST_QUERY" "0")
+    '("ins-query" "INS_QUERY" "0")
+    '("upd-query" "UPD_QUERY" "1")
+    '("del-query" "DEL_QUERY" "2")
+    '("nb-queries" "NB_QUERIES" "3")
+  )
+)
+
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-easy.h
 
 (define-enum-extended EasyError
   (in-module "Gda")
@@ -276,7 +288,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-enums.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-enums.h
 
 (define-enum-extended TransactionIsolation
   (in-module "Gda")
@@ -308,7 +320,16 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-holder.h
+(define-flags-extended SqlIdentifierStyle
+  (in-module "Gda")
+  (c-name "GdaSqlIdentifierStyle")
+  (values
+    '("lower-case" "GDA_SQL_IDENTIFIERS_LOWER_CASE" "1 << 0")
+    '("upper-case" "GDA_SQL_IDENTIFIERS_UPPER_CASE" "1 << 1")
+  )
+)
+
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-holder.h
 
 (define-enum-extended HolderError
   (in-module "Gda")
@@ -320,7 +341,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-meta-store.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-meta-store.h
 
 (define-enum-extended MetaStoreError
   (in-module "Gda")
@@ -351,7 +372,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-meta-struct.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-meta-struct.h
 
 (define-enum-extended MetaStructError
   (in-module "Gda")
@@ -401,7 +422,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-server-operation.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-server-operation.h
 
 (define-enum-extended ServerOperationType
   (in-module "Gda")
@@ -446,7 +467,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-server-provider.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-server-provider.h
 
 (define-enum-extended ServerProviderError
   (in-module "Gda")
@@ -466,7 +487,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-set.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-set.h
 
 (define-enum-extended SetError
   (in-module "Gda")
@@ -478,7 +499,18 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-statement.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-sql-builder.h
+
+(define-enum-extended SqlBuilderError
+  (in-module "Gda")
+  (c-name "GdaSqlBuilderError")
+  (values
+    '("wrong-type-error" "GDA_SQL_BUILDER_WRONG_TYPE_ERROR" "0")
+    '("misuse-error" "GDA_SQL_BUILDER_MISUSE_ERROR" "1")
+  )
+)
+
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-statement.h
 
 (define-enum-extended StatementError
   (in-module "Gda")
@@ -510,6 +542,7 @@
   (in-module "Gda")
   (c-name "GdaStatementSqlFlag")
   (values
+    '("params-as-values" "GDA_STATEMENT_SQL_PARAMS_AS_VALUES" "0")
     '("pretty" "GDA_STATEMENT_SQL_PRETTY" "1 << 0")
     '("params-long" "GDA_STATEMENT_SQL_PARAMS_LONG" "1 << 1")
     '("params-short" "GDA_STATEMENT_SQL_PARAMS_SHORT" "1 << 2")
@@ -520,7 +553,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-transaction-status.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-transaction-status.h
 
 (define-enum-extended TransactionStatusEventType
   (in-module "Gda")
@@ -541,7 +574,37 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/libgda/gda-xa-transaction.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-tree.h
+
+(define-enum-extended TreeError
+  (in-module "Gda")
+  (c-name "GdaTreeError")
+  (values
+    '("r" "GDA_TREE_UNKNOWN_ERROR" "0")
+  )
+)
+
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-tree-manager.h
+
+(define-enum-extended TreeManagerError
+  (in-module "Gda")
+  (c-name "GdaTreeManagerError")
+  (values
+    '("r" "GDA_TREE_MANAGER_UNKNOWN_ERROR" "0")
+  )
+)
+
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-tree-node.h
+
+(define-enum-extended TreeNodeError
+  (in-module "Gda")
+  (c-name "GdaTreeNodeError")
+  (values
+    '("r" "GDA_TREE_NODE_UNKNOWN_ERROR" "0")
+  )
+)
+
+;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-xa-transaction.h
 
 (define-enum-extended XaTransactionError
   (in-module "Gda")
@@ -552,7 +615,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/sql-parser/gda-sql-parser.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/sql-parser/gda-sql-parser.h
 
 (define-enum-extended SqlParserError
   (in-module "Gda")
@@ -585,7 +648,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/sql-parser/gda-statement-struct-compound.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/sql-parser/gda-statement-struct-compound.h
 
 (define-enum-extended SqlStatementCompoundType
   (in-module "Gda")
@@ -600,7 +663,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/sql-parser/gda-statement-struct-decl.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/sql-parser/gda-statement-struct-decl.h
 
 (define-enum-extended SqlErrorType
   (in-module "Gda")
@@ -663,7 +726,7 @@
   )
 )
 
-;; From /usr/include/libgda-4.0/sql-parser/gda-statement-struct-parts.h
+;; From /home/murrayc/checkout/gnome/libgda/libgda/sql-parser/gda-statement-struct-parts.h
 
 (define-enum-extended SqlOperatorType
   (in-module "Gda")
