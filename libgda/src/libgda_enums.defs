@@ -63,9 +63,6 @@
     '("no-provider-spec-error" "GDA_CONNECTION_NO_PROVIDER_SPEC_ERROR" "4")
     '("open-error" "GDA_CONNECTION_OPEN_ERROR" "5")
     '("statement-type-error" "GDA_CONNECTION_STATEMENT_TYPE_ERROR" "6")
-    '("cant-lock-error" "GDA_CONNECTION_CANT_LOCK_ERROR" "7")
-    '("task-not-found-error" "GDA_CONNECTION_TASK_NOT_FOUND_ERROR" "8")
-    '("unsupported-threads-error" "GDA_CONNECTION_UNSUPPORTED_THREADS_ERROR" "9")
   )
 )
 
@@ -75,7 +72,7 @@
   (values
     '("none" "GDA_CONNECTION_OPTIONS_NONE" "0")
     '("read-only" "GDA_CONNECTION_OPTIONS_READ_ONLY" "1 << 0")
-    '("thread-safe" "GDA_CONNECTION_OPTIONS_THREAD_SAFE" "1 << 1")
+    '("sql-identifiers-case-sensitive" "GDA_CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE" "1 << 1")
   )
 )
 
@@ -499,17 +496,6 @@
   )
 )
 
-;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-sql-builder.h
-
-(define-enum-extended SqlBuilderError
-  (in-module "Gda")
-  (c-name "GdaSqlBuilderError")
-  (values
-    '("wrong-type-error" "GDA_SQL_BUILDER_WRONG_TYPE_ERROR" "0")
-    '("misuse-error" "GDA_SQL_BUILDER_MISUSE_ERROR" "1")
-  )
-)
-
 ;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-statement.h
 
 (define-enum-extended StatementError
@@ -542,7 +528,6 @@
   (in-module "Gda")
   (c-name "GdaStatementSqlFlag")
   (values
-    '("params-as-values" "GDA_STATEMENT_SQL_PARAMS_AS_VALUES" "0")
     '("pretty" "GDA_STATEMENT_SQL_PRETTY" "1 << 0")
     '("params-long" "GDA_STATEMENT_SQL_PARAMS_LONG" "1 << 1")
     '("params-short" "GDA_STATEMENT_SQL_PARAMS_SHORT" "1 << 2")
@@ -571,36 +556,6 @@
   (values
     '("ok" "GDA_TRANSACTION_STATUS_STATE_OK" "0")
     '("failed" "GDA_TRANSACTION_STATUS_STATE_FAILED" "1")
-  )
-)
-
-;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-tree.h
-
-(define-enum-extended TreeError
-  (in-module "Gda")
-  (c-name "GdaTreeError")
-  (values
-    '("r" "GDA_TREE_UNKNOWN_ERROR" "0")
-  )
-)
-
-;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-tree-manager.h
-
-(define-enum-extended TreeManagerError
-  (in-module "Gda")
-  (c-name "GdaTreeManagerError")
-  (values
-    '("r" "GDA_TREE_MANAGER_UNKNOWN_ERROR" "0")
-  )
-)
-
-;; From /home/murrayc/checkout/gnome/libgda/libgda/gda-tree-node.h
-
-(define-enum-extended TreeNodeError
-  (in-module "Gda")
-  (c-name "GdaTreeNodeError")
-  (values
-    '("r" "GDA_TREE_NODE_UNKNOWN_ERROR" "0")
   )
 )
 
