@@ -370,17 +370,15 @@ bool Connection::update_meta_store_table(const Glib::ustring& table_name, const 
 bool Connection::update_meta_store_table(const Glib::ustring& table_name, const Glib::ustring& schema_name, std::auto_ptr<Glib::Error>& error)
 #endif
 {
-  // This ridiculous function, with the obscure parameters, is needed to make sure that 
+  // This function is needed to make sure that 
   // the GdaMetaStore really gets the meta data for the table we specified, even if 
   // the table name contains upper-case characters or spaces. murrayc.
-  //gchar* table_name_quoted = gda_sql_identifier_quote(table_name.c_str(), gobj(), NULL,
-  //  TRUE /* meta-store convention */, 
-  //  TRUE /* force_quotes - Yes, the really_do_what_i_say() function has a really_really_do_what_i_say parameter. */ );
+  gchar* table_name_quoted = gda_meta_store_sql_identifier_quote (table_name.c_str(), gobj());
   //std::cout << "Connection::update_meta_store_table(): table_name_quoted=" << table_name_quoted << std::endl;
   
   GValue table_name_value = { 0 };
   g_value_init(&table_name_value, G_TYPE_STRING);
-  g_value_set_static_string(&table_name_value, table_name.c_str());
+  g_value_set_static_string(&table_name_value, table_name_quoted);
 
   GValue table_schema_value = { 0 };
   g_value_init(&table_schema_value, G_TYPE_STRING);
@@ -397,7 +395,7 @@ bool Connection::update_meta_store_table(const Glib::ustring& table_name, const 
   g_value_unset(&table_name_value);
   g_value_unset(&table_schema_value);
   
-  //g_free(table_name_quoted);
+  g_free(table_name_quoted);
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
