@@ -131,7 +131,12 @@ void Set::add_holder(const Glib::ustring& id, const ValueType& value)
 {
   Gnome::Gda::Value gdavalue(value);
   Glib::RefPtr<Holder> holder = Holder::create(gdavalue.get_value_type(), id);
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
   holder->set_value(value);
+#else
+  std::auto_ptr<Glib::Error> error;
+  holder->set_value(value, error);
+#endif
   this->add_holder(holder);
 }
 #endif //DOXYGEN_SHOULD_SKIP_THIS
