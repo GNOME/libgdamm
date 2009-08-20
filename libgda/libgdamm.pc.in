@@ -1,0 +1,19 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+datarootdir=@datarootdir@
+datadir=@datadir@
+includedir=@includedir@
+
+docdir=${datarootdir}/doc/@LIBGDAMM_MODULE_NAME@
+doxytagfile=${docdir}/reference/@LIBGDAMM_MODULE_NAME@.tag
+htmlrefdir=${docdir}/reference/html
+htmlrefpub=http://www.gtkmm.org/docs/@LIBGDAMM_MODULE_NAME@/docs/reference/html/
+
+Name: libgdamm
+Description: C++ binding for libgda
+Version: @PACKAGE_VERSION@
+URL: http://www.gtkmm.org/
+Requires: @LIBGDAMM_MODULES@
+Libs: -L${libdir} -lgdamm-@LIBGDAMM_API_VERSION@
+Cflags: -I${includedir}/@LIBGDAMM_MODULE_NAME@  -I${libdir}/@LIBGDAMM_MODULE_NAME@/include

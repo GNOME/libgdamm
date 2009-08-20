@@ -1,0 +1,10 @@
+doxytagfile=${pc_top_builddir}/docs/reference/@LIBGDAMM_MODULE_NAME@.tag
+htmlrefpub=http://www.gtkmm.org/docs/@LIBGDAMM_MODULE_NAME@/docs/reference/html/
+
+Name: libgdamm
+Description: C++ binding for libgda, not installed
+Version: @PACKAGE_VERSION@
+URL: http://www.gtkmm.org/
+Requires: @LIBGDAMM_MODULES@
+Libs: ${pc_top_builddir}/${pcfiledir}/libgdamm/libgdamm-@LIBGDAMM_API_VERSION@.la
+Cflags: -I${pc_top_builddir}/${pcfiledir} -I${pc_top_builddir}/${pcfiledir}/@srcdir@

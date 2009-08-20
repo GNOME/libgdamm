@@ -1,5 +1,17 @@
 2009-08-20  Daniel Elstner  <danielk@openismus.com>
 
+	Overhaul pkg-config metadata files
+
+	* libgda/libgdamm.pc.in: Rename file from libgda/libgdamm-4.0.pc.in.
+	Rewrite to make use of more substitutions.  Provide the location of
+	the reference documentation as well as the Doxygen tag file.
+	* libgda/libgdamm-uninstalled.pc.in: New file for uninstalled use.
+	* configure.ac (AC_CONFIG_FILES): Remove API version from input
+	filenames and substitute ${LIBGDAMM_MODULE_NAME} into the output
+	filenames.  List new input file libgda/libgdamm-uninstalled.pc.in.
+
+2009-08-20  Daniel Elstner  <danielk@openismus.com>
+
 	Transition to mm-common documentation build
 
 	* configure.ac (AC_CONFIG_FILES): Remove docs/reference/Makefile.am

@@ -59,20 +59,15 @@ MM_ARG_WITH_TAGFILE_DOC([libstdc++.tag], [mm-common-libstdc++])
 MM_ARG_WITH_TAGFILE_DOC([libsigc++-2.0.tag], [sigc++-2.0])
 MM_ARG_WITH_TAGFILE_DOC([glibmm-2.4.tag], [glibmm-2.4])
 
-AC_CONFIG_FILES([
-  Makefile
-
-  libgda/libgdamm-4.0.pc
-  libgda/src/Makefile
-  libgda/libgdamm/Makefile
-
-  tools/Makefile
-
-  docs/Makefile
-  docs/reference/Doxyfile
-
-  examples/Makefile
-    examples/simple/Makefile
-  examples/config/Makefile
-])
+AC_CONFIG_FILES([Makefile
+                 tools/Makefile
+                 libgda/${LIBGDAMM_MODULE_NAME}.pc:libgda/libgdamm.pc.in
+                 libgda/${LIBGDAMM_MODULE_NAME}-uninstalled.pc:libgda/libgdamm-uninstalled.pc.in
+                 libgda/src/Makefile
+                 libgda/libgdamm/Makefile
+                 docs/Makefile
+                 docs/reference/Doxyfile
+                 examples/Makefile
+                 examples/simple/Makefile
+                 examples/config/Makefile])
 AC_OUTPUT
