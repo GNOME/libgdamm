@@ -1,23 +1,31 @@
-## Copyright (c) 2001
-## The libgdamm development team.
+## Copyright (c) 2009  Openismus GmbH  <http://www.openismus.com/>
+##
+## This file is part of libgdamm.
+##
+## libgdamm is free software: you can redistribute it and/or modify it
+## under the terms of the GNU Lesser General Public License as published
+## by the Free Software Foundation, either version 2.1 of the License,
+## or (at your option) any later version.
+##
+## libgdamm is distributed in the hope that it will be useful, but
+## WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+## See the GNU Lesser General Public License for more details.
+##
+## You should have received a copy of the GNU Lesser General Public License
+## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS			= private
+lib_LTLIBRARIES = libgdamm-@LIBGDAMM_API_VERSION@.la
 
-sublib_name		= libgdamm
-sublib_libname = libgdamm-4.0
-sublib_libversion = $(LIBGDAMM_SO_VERSION)
-sublib_namespace	= Gda
-sublib_cflags		= $(LIBGDAMM_CFLAGS)
-sublib_topdir = libgda
+include $(srcdir)/../src/filelist.am
+include $(srcdir)/filelist.am
+include $(top_srcdir)/build/compile-binding.am
 
+local_cppflags = $(binding_includes) $(binding_cppflags) -DLIBGDAMM_BUILD=1
 
-files_extra_h	= init.h wrap_init.h value.h
-files_extra_cc = init.cc value.cc
+AM_CPPFLAGS = $(local_cppflags) $(LIBGDAMM_CFLAGS)
+AM_CXXFLAGS = $(LIBGDAMM_WXXFLAGS)
 
-include $(top_srcdir)/build_shared/Makefile_build_gensrc.am_fragment
-
-lib_LTLIBRARIES			= libgdamm-4.0.la
-libgdamm_4_0_la_SOURCES	= $(files_all_cc)
-libgdamm_4_0_la_LDFLAGS	= $(common_ldflags)
-libgdamm_4_0_la_LIBADD	= $(LIBGDAMM_LIBS)
-
+libgdamm_@LIBGDAMM_API_VERSION@_la_SOURCES = $(binding_sources)
+libgdamm_@LIBGDAMM_API_VERSION@_la_LDFLAGS = -no-undefined -version-info $(LIBGDAMM_SO_VERSION)
+libgdamm_@LIBGDAMM_API_VERSION@_la_LIBADD  = $(LIBGDAMM_LIBS)

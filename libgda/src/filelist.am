@@ -1,0 +1,46 @@
+## This file is part of libgdamm.
+
+files_defs =			\
+	libgda.defs		\
+	libgda_enums.defs	\
+	libgda_methods.defs	\
+	libgda_others.defs	\
+	libgda_signals.defs	\
+	libgda_docs.xml		\
+	libgda_docs_override.xml
+
+files_hg =			\
+	batch.hg		\
+	blob.hg			\
+	blobop.hg		\
+	column.hg		\
+	config.hg		\
+	connection.hg		\
+	connectionevent.hg	\
+	dataaccesswrapper.hg	\
+	datacomparator.hg	\
+	datahandler.hg		\
+	datamodel.hg		\
+	datamodelarray.hg	\
+	datamodelimport.hg	\
+	datamodeliter.hg	\
+	dataproxy.hg		\
+	dataselect.hg		\
+	handlerbin.hg		\
+	handlerboolean.hg	\
+	handlernumerical.hg	\
+	handlerstring.hg	\
+	handlertime.hg		\
+	handlertype.hg		\
+	holder.hg		\
+	metastore.hg		\
+	metastruct.hg		\
+	quarklist.hg		\
+	row.hg			\
+	serveroperation.hg	\
+	serverprovider.hg	\
+	set.hg			\
+	sqlparser.hg		\
+	statement.hg		\
+	transactionstatus.hg	\
+	xatransaction.hg

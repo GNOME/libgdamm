@@ -1,5 +1,32 @@
 2009-08-20  Daniel Elstner  <danielk@openismus.com>
 
+	Convert tools/ and libgda/ to new infrastructure
+
+	* Makefile.am (SUBDIRS): Skip the libgda/ subdirectory and recurse
+	directly into libgda/src/ and libgda/libgdamm/.
+	(EXTRA_DIST): Remove the old build_shared/ include files.
+	* configure.ac (AC_CONFIG_FILES): Remove files libgda/Makefile.am,
+	libgda/libgdamm/private/Makefile.am, tools/m4/Makefile.am and
+	tools/extra_defs_gen/Makefile.am from the list of output files.
+	(GTHREAD_CFLAGS): Remove substitution again, as libgda-4.0 itself
+	already pulls in gthread-2.0.
+	* libgda/src/filelist.am: Rename Makefile_list_of_hg.am_fragment
+	and adapt to new mm-common Automake include files.
+	* libgda/libgdamm/filelist.am: New file, defining the list of
+	source code files to compile.
+	* libgda/libgdamm/private/Makefile.am: Delete obsolete file.
+	* libgda/src/Makefile.am: Rewrite to use new mm-common build
+	infrastructure.
+	* libgda/libgdamm/Makefile.am: ditto,
+	* tools/Makefile.am: ditto.
+	* tools/m4/filelist.am: Rename Makefile_list_of_sources.am_fragment
+	and adapt to new mm-common Automake include files.
+	* tools/m4/Makefile.am: Delete obsolete file.
+	* tools/extra_defs_gen/Makefile.am: ditto.
+	* build_shared/*.am_fragment: Delete obsolete build support files.
+
+2009-08-20  Daniel Elstner  <danielk@openismus.com>
+
 	Begin transition to mm-common build system
 
 	* autogen.sh: Replace with minimal version using mm-common-prepare

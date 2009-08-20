@@ -24,6 +24,9 @@ AC_CONFIG_AUX_DIR([build])
 AC_CONFIG_MACRO_DIR([build])
 AC_CONFIG_HEADERS([build/config.h libgda/libgdammconfig.h])
 
+MM_PREREQ([0.6])
+MM_INIT_MODULE([libgdamm-4.0])
+
 # http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
 AC_SUBST([LIBGDAMM_SO_VERSION], [11:0:0])
 
@@ -44,27 +47,27 @@ AS_IF([test "x$libgdamm_have_bdb" = xyes],
       [AC_DEFINE([HAVE_BDB], [1], [Define if the libgda-bdb plugin is available.])])
 AM_CONDITIONAL([HAVE_BDB], [test "x$libgdamm_have_bdb" = xyes])
 
-MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
 MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.4])
 
-# Temporary dummies
-AC_SUBST([GMM_PROCDIR], ['$(GMMPROC_DIR)'])
-AC_SUBST([GMM_PROC], ['$(GMMPROC_DIR)/gmmproc'])
+AC_LANG([C++])
+MM_ARG_ENABLE_WARNINGS([LIBGDAMM_WXXFLAGS],
+                       [-Wall],
+                       [-pedantic -Wall -Wextra],
+                       [G GDA])
+
+MM_ARG_ENABLE_DOCUMENTATION
+
+# Temporary dummy
 AM_CONDITIONAL([BUILD_REFERENCE], [false])
-AM_CONDITIONAL([PLATFORM_WIN32], [false])
 
 AC_CONFIG_FILES([
   Makefile
 
-  libgda/Makefile
   libgda/libgdamm-4.0.pc
   libgda/src/Makefile
   libgda/libgdamm/Makefile
-  libgda/libgdamm/private/Makefile
 
   tools/Makefile
-    tools/extra_defs_gen/Makefile
-    tools/m4/Makefile
 
   docs/Makefile
   docs/reference/Makefile

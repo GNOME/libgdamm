@@ -1,12 +1,24 @@
-## Copyright (c) 2001
-## The libgdamm development team.
+## Copyright (c) 2009  Openismus GmbH  <http://www.openismus.com/>
+##
+## This file is part of libgdamm.
+##
+## libgdamm is free software: you can redistribute it and/or modify it
+## under the terms of the GNU Lesser General Public License as published
+## by the Free Software Foundation, either version 2.1 of the License,
+## or (at your option) any later version.
+##
+## libgdamm is distributed in the hope that it will be useful, but
+## WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+## See the GNU Lesser General Public License for more details.
+##
+## You should have received a copy of the GNU Lesser General Public License
+## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-sublib_name	= libgdamm
-sublib_namespace = Gda
-sublib_parentdir = libgdamm
-files_defs	= libgda.defs libgda_methods.defs libgda_signals.defs \
-                  libgda_enums.defs libgda_others.defs libgda_docs.xml \
-                  libgda_docs_override.xml
+binding_name    = libgdamm
+wrap_init_flags = --namespace=Gnome --namespace=Gda --parent_dir=libgdamm
+codegen_srcdir  = $(top_srcdir)/tools
 
-include $(top_srcdir)/build_shared/Makefile_gensrc.am_fragment
-
+include $(srcdir)/filelist.am
+include $(top_srcdir)/tools/m4/filelist.am
+include $(top_srcdir)/build/generate-binding.am
