@@ -1,3 +1,19 @@
+2009-08-20  Daniel Elstner  <danielk@openismus.com>
+
+	Begin transition to mm-common build system
+
+	* autogen.sh: Replace with minimal version using mm-common-prepare
+	and autoreconf.
+	* configure.ac: Rename file from configure.in.  Remove a lot of old
+	cruft and clean up the remaining bits.  Make use of mm-common macros.
+	Insert temporary dummy conditionals to keep the module buildable.
+	* Makefile.am (ACLOCAL_AMFLAGS): Set to help autoreconf do its work.
+	(SUBDIRS): Remove scripts/ subdirectory.
+	(DIST_SUBDIRS): Remove.
+	* scripts/Makefile.am: Delete obsolete build file.
+	* scripts/macros.m4: Delete obsolete Autoconf macro file.
+	* build/: New directory for auxiliary build files.
+
 2009-07-30  Johannes Schmid <jschmid@openismus.com>
 
 	* libgda/src/set.hg: Fix add_holder() template to work with 
