@@ -65,9 +65,7 @@ AC_CONFIG_FILES([Makefile
                  libgda/${LIBGDAMM_MODULE_NAME}-uninstalled.pc:libgda/libgdamm-uninstalled.pc.in
                  libgda/src/Makefile
                  libgda/libgdamm/Makefile
-                 docs/Makefile
-                 docs/reference/Doxyfile
                  examples/Makefile
-                 examples/simple/Makefile
-                 examples/config/Makefile])
+                 docs/Makefile
+                 docs/reference/Doxyfile])
 AC_OUTPUT
