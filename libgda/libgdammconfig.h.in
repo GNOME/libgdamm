@@ -1,13 +1,15 @@
 #ifndef _LIBGDAMM_CONFIG_H
-#define _LIBGDAMM_CONFIG_H 1
+#define _LIBGDAMM_CONFIG_H
 
-#include "glibmmconfig.h"
+#include <glibmmconfig.h>
 
-/* version numbers */
+/* Major version number of libgdamm. */
 #undef LIBGDAMM_MAJOR_VERSION
-#undef LIBGDAMM_MINOR_VERSION
+
+/* Micro version number of libgdamm. */
 #undef LIBGDAMM_MICRO_VERSION
-#undef LIBGDAMM_VERSION
 
-#endif /* _LIBGDAMM_CONFIG_H */
+/* Minor version number of libgdamm. */
+#undef LIBGDAMM_MINOR_VERSION
 
+#endif /* !_LIBGDAMM_CONFIG_H */

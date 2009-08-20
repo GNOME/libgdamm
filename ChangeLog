@@ -1,5 +1,12 @@
 2009-08-20  Daniel Elstner  <danielk@openismus.com>
 
+	Clean up libgdammconfig.h.in template
+
+	* libgda/libgdammconfig.h.in: Copy #undef statements including
+	comments from the generated build/config.h header file.
+
+2009-08-20  Daniel Elstner  <danielk@openismus.com>
+
 	Make libgda-bdb conditional compilation work
 
 	* configure.ac (HAVE_LIBGDA_BDB): Rename preprocessor define from
