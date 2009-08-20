@@ -1,5 +1,15 @@
 2009-08-20  Daniel Elstner  <danielk@openismus.com>
 
+	Make libgda-bdb conditional compilation work
+
+	* configure.ac (HAVE_LIBGDA_BDB): Rename preprocessor define from
+	HAVE_BDB to a more recognizable name.
+	* tools/extra_defs_gen/generate_defs_gda.cc: Include build/config.h
+	configuration header for the HAVE_LIBGDA_BDB macro definition.
+	(main): Change to the new macro name.
+
+2009-08-20  Daniel Elstner  <danielk@openismus.com>
+
 	Build examples non-recursively
 
 	* examples/Makefile.am: Rewrite based on non-recursive make, and

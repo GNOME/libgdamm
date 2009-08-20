@@ -1,5 +1,3 @@
-/* $Id$ */
-
 /* generate_defs_gda.h
  *
  * Copyright (C) 2001 The Free Software Foundation
@@ -19,44 +17,45 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include "glibmm_generate_extra_defs/generate_extra_defs.h"
+#include <build/config.h>
+#include <glibmm_generate_extra_defs/generate_extra_defs.h>
 #include <libgda/libgda.h>
 #include <sql-parser/gda-sql-parser.h>
 
-int main (int argc, char *argv[])
+int main(int, char**)
 {
-    gda_init();
+  gda_init();
 
-    std::cout 
-    << get_defs (GDA_TYPE_BATCH)
-    << get_defs (GDA_TYPE_COLUMN)
-    << get_defs (GDA_TYPE_CONFIG)
-    << get_defs (GDA_TYPE_CONNECTION) 
-    << get_defs (GDA_TYPE_CONNECTION_EVENT)
-    << get_defs (GDA_TYPE_DATA_ACCESS_WRAPPER)
-    << get_defs (GDA_TYPE_DATA_COMPARATOR)
-    << get_defs (GDA_TYPE_DATA_HANDLER) 
-    << get_defs (GDA_TYPE_DATA_MODEL_ARRAY)
-#ifdef HAVE_BDB
-    << get_defs (GDA_TYPE_DATA_MODEL_BDB)
+  std::cout 
+    << get_defs(GDA_TYPE_BATCH)
+    << get_defs(GDA_TYPE_COLUMN)
+    << get_defs(GDA_TYPE_CONFIG)
+    << get_defs(GDA_TYPE_CONNECTION) 
+    << get_defs(GDA_TYPE_CONNECTION_EVENT)
+    << get_defs(GDA_TYPE_DATA_ACCESS_WRAPPER)
+    << get_defs(GDA_TYPE_DATA_COMPARATOR)
+    << get_defs(GDA_TYPE_DATA_HANDLER) 
+    << get_defs(GDA_TYPE_DATA_MODEL_ARRAY)
+#ifdef HAVE_LIBGDA_BDB
+    << get_defs(GDA_TYPE_DATA_MODEL_BDB)
 #endif
-    << get_defs (GDA_TYPE_DATA_MODEL_DIR)
-    << get_defs (GDA_TYPE_DATA_MODEL) 
-    << get_defs (GDA_TYPE_DATA_MODEL_IMPORT)
-    << get_defs (GDA_TYPE_DATA_MODEL_ITER) 
-    << get_defs (GDA_TYPE_DATA_PROXY)
-    << get_defs (GDA_TYPE_DATA_SELECT)    
-    << get_defs (GDA_TYPE_HOLDER)
-    << get_defs (GDA_TYPE_META_STORE)
-    << get_defs (GDA_TYPE_META_STRUCT)
-    << get_defs (GDA_TYPE_ROW) 
-    << get_defs (GDA_TYPE_SERVER_OPERATION) 
-    << get_defs (GDA_TYPE_SERVER_PROVIDER)
-    << get_defs (GDA_TYPE_SET)
-    << get_defs (GDA_TYPE_STATEMENT)
-    << get_defs (GDA_TYPE_TRANSACTION_STATUS)
-    << get_defs (GDA_TYPE_XA_TRANSACTION)
-    << get_defs (GDA_TYPE_SQL_PARSER)
-    << std::endl;
-    return 0;
+    << get_defs(GDA_TYPE_DATA_MODEL_DIR)
+    << get_defs(GDA_TYPE_DATA_MODEL) 
+    << get_defs(GDA_TYPE_DATA_MODEL_IMPORT)
+    << get_defs(GDA_TYPE_DATA_MODEL_ITER) 
+    << get_defs(GDA_TYPE_DATA_PROXY)
+    << get_defs(GDA_TYPE_DATA_SELECT)    
+    << get_defs(GDA_TYPE_HOLDER)
+    << get_defs(GDA_TYPE_META_STORE)
+    << get_defs(GDA_TYPE_META_STRUCT)
+    << get_defs(GDA_TYPE_ROW) 
+    << get_defs(GDA_TYPE_SERVER_OPERATION) 
+    << get_defs(GDA_TYPE_SERVER_PROVIDER)
+    << get_defs(GDA_TYPE_SET)
+    << get_defs(GDA_TYPE_STATEMENT)
+    << get_defs(GDA_TYPE_TRANSACTION_STATUS)
+    << get_defs(GDA_TYPE_XA_TRANSACTION)
+    << get_defs(GDA_TYPE_SQL_PARSER);
+
+  return 0;
 }

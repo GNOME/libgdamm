@@ -44,7 +44,7 @@ PKG_CHECK_MODULES([LIBGDAMM], [$LIBGDAMM_MODULES])
 
 PKG_CHECK_EXISTS([libgda-bdb-4.0], [libgdamm_have_bdb=yes], [libgdamm_have_bdb=no])
 AS_IF([test "x$libgdamm_have_bdb" = xyes],
-      [AC_DEFINE([HAVE_BDB], [1], [Define if the libgda-bdb plugin is available.])])
+      [AC_DEFINE([HAVE_LIBGDA_BDB], [1], [Define if the libgda-bdb plugin is available.])])
 
 MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.4])
 
