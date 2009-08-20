@@ -1,5 +1,11 @@
 2009-08-20  Daniel Elstner  <danielk@openismus.com>
 
+	Distribute examples/README.txt
+
+	* examples/Makefile.am (dist_noinst_DATA): List README.txt.
+
+2009-08-20  Daniel Elstner  <danielk@openismus.com>
+
 	Fix build with fatal warnings enabled
 
 	* configure.ac (LIBGDAMM_WXXFLAGS): Pass the option

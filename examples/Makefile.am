@@ -17,6 +17,8 @@
 
 AUTOMAKE_OPTIONS = subdir-objects
 
+dist_noinst_DATA = README.txt
+
 check_PROGRAMS = config/example simple/example
 
 libgdamm_includes = -I$(top_builddir)/libgda $(if $(srcdir:.=),-I$(top_srcdir)/libgda)
