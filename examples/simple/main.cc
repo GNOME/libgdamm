@@ -170,7 +170,7 @@ void display_meta_store(Glib::RefPtr<Gda::Connection>& cnc)
   std::cout << model->dump_as_string() << std::endl;
 }
 
-int main (int argc, char** argv)
+int main (int, char**)
 {
   Gda::init();
   Glib::RefPtr<Gda::Connection> cnc;

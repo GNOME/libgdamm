@@ -197,17 +197,23 @@ bool Value::operator!=(const Value& src) const
 
 
 Value::Value()
+:
+  Glib::ValueBase()
 {
   //Creates a null. TODO: Is this really equivalent to gda_value_new_null()?
 }
 
 Value::Value(const Value& src)
+:
+  Glib::ValueBase()
 {
   if(G_IS_VALUE(src.gobj()))
     init(src.gobj());
 }
 
 Value::Value(const GValue* castitem)
+:
+  Glib::ValueBase()
 {
   if(G_IS_VALUE(castitem))
     init(castitem);

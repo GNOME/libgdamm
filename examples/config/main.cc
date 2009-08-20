@@ -24,7 +24,7 @@
 
 using namespace Gnome;
 
-int main (int argc, char** argv)
+int main(int, char**)
 {
   Gda::init();
   

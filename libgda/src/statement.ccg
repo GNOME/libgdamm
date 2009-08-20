@@ -101,10 +101,10 @@ Glib::ustring Statement::to_sql(const Glib::RefPtr<Set>& params, std::auto_ptr<G
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::ustring Statement::to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
-                              StatementSqlFlag flags, const HolderSList& params_used) const
+                              StatementSqlFlag flags, const HolderSList&) const
 #else
 Glib::ustring Statement::to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
-                              StatementSqlFlag flags, const HolderSList& params_used,
+                              StatementSqlFlag flags, const HolderSList&,
                               std::auto_ptr<Glib::Error>& error) const
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 {
@@ -123,6 +123,7 @@ Glib::ustring Statement::to_sql(const Glib::RefPtr<Connection>& cnc, const Glib:
   if (list)
   {
     // FIXME: Set params_used somehow
+    // Nope, no way.  The wrapper prototype is just broken.  --danielk
   }
   return retval;
 }

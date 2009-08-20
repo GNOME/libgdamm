@@ -1,5 +1,27 @@
 2009-08-20  Daniel Elstner  <danielk@openismus.com>
 
+	Fix build with fatal warnings enabled
+
+	* configure.ac (LIBGDAMM_WXXFLAGS): Pass the option
+	-Wno-missing-field-initializers at warning level max and above,
+	in order to get the GValue initializations to pass.
+	* libgda/src/statement.ccg (Statement::to_sql): Remove name of
+	unused 'params_used' parameter.  Extend the FIXME comment to say
+	that it cannot be fixed since the wrapper prototype is broken.
+	* libgda/src/sqlparser.hg: Remove the #pragma GCC system_header
+	directive, which had apparently been put here for the insane
+	reason to suppress a warning about /* occurring in a /* ... */
+	comment.  Instead, avoid the problem by inserting dummy Doxygen
+	commands.
+	* libgda/libgdamm/value.cc (Value::Value): Explicitly call the
+	inherited Glib::ValueBase default constructor to avoid a warning.
+	However, the entire thing is conceptually broken beyond belief
+	anyway.
+	* examples/{config,simple}/main.cc (main): Remove names of unused
+	parameters.
+
+2009-08-20  Daniel Elstner  <danielk@openismus.com>
+
 	Clean up libgdammconfig.h.in template
 
 	* libgda/libgdammconfig.h.in: Copy #undef statements including
