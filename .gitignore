@@ -17,6 +17,9 @@ stamp-h?
 /libtool
 /libgdamm-*.tar.*
 /docs/reference/Doxyfile
+/docs/reference/doxygen.log
+/docs/reference/libgdamm-*.devhelp2
+/docs/reference/libgdamm-*.tag
 /docs/reference/html/
 /examples/*/example
 /libgda/libgdamm-*.pc

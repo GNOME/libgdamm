@@ -23,7 +23,12 @@ src_subdirs = tools libgda/src
 else
 src_subdirs =
 endif
-SUBDIRS = $(src_subdirs) libgda/libgdamm examples docs
+if ENABLE_DOCUMENTATION
+doc_subdirs = docs
+else
+doc_subdirs =
+endif
+SUBDIRS = $(src_subdirs) libgda/libgdamm examples $(doc_subdirs)
 
 libgdamm_includedir = $(includedir)/$(LIBGDAMM_MODULE_NAME)
 libgdamm_include_HEADERS = libgda/libgdamm.h

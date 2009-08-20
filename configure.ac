@@ -45,7 +45,6 @@ PKG_CHECK_MODULES([LIBGDAMM], [$LIBGDAMM_MODULES])
 PKG_CHECK_EXISTS([libgda-bdb-4.0], [libgdamm_have_bdb=yes], [libgdamm_have_bdb=no])
 AS_IF([test "x$libgdamm_have_bdb" = xyes],
       [AC_DEFINE([HAVE_BDB], [1], [Define if the libgda-bdb plugin is available.])])
-AM_CONDITIONAL([HAVE_BDB], [test "x$libgdamm_have_bdb" = xyes])
 
 MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.4])
 
@@ -56,9 +55,9 @@ MM_ARG_ENABLE_WARNINGS([LIBGDAMM_WXXFLAGS],
                        [G GDA])
 
 MM_ARG_ENABLE_DOCUMENTATION
-
-# Temporary dummy
-AM_CONDITIONAL([BUILD_REFERENCE], [false])
+MM_ARG_WITH_TAGFILE_DOC([libstdc++.tag], [mm-common-libstdc++])
+MM_ARG_WITH_TAGFILE_DOC([libsigc++-2.0.tag], [sigc++-2.0])
+MM_ARG_WITH_TAGFILE_DOC([glibmm-2.4.tag], [glibmm-2.4])
 
 AC_CONFIG_FILES([
   Makefile
@@ -70,8 +69,7 @@ AC_CONFIG_FILES([
   tools/Makefile
 
   docs/Makefile
-  docs/reference/Makefile
-    docs/reference/Doxyfile
+  docs/reference/Doxyfile
 
   examples/Makefile
     examples/simple/Makefile
