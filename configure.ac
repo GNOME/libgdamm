@@ -15,7 +15,7 @@
 ## You should have received a copy of the GNU Lesser General Public License
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-AC_INIT([libgdamm], [3.99.16], [http://bugzilla.gnome.org/enter_bug.cgi?product=libgdamm],
+AC_INIT([libgdamm], [3.99.17], [http://bugzilla.gnome.org/enter_bug.cgi?product=libgdamm],
         [libgdamm], [http://www.gtkmm.org/])
 AC_PREREQ([2.59])
 
@@ -28,7 +28,7 @@ MM_PREREQ([0.6])
 MM_INIT_MODULE([libgdamm-4.0])
 
 # http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
-AC_SUBST([LIBGDAMM_SO_VERSION], [11:0:0])
+AC_SUBST([LIBGDAMM_SO_VERSION], [12:0:0])
 
 AM_INIT_AUTOMAKE([1.9 -Wno-portability dist-bzip2 no-define nostdinc tar-pax])
 AM_MAINTAINER_MODE
@@ -39,7 +39,7 @@ AC_DISABLE_STATIC
 AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
 
-AC_SUBST([LIBGDAMM_MODULES], ['glibmm-2.4 >= 2.12.8 libgda-4.0 >= 4.0.0'])
+AC_SUBST([LIBGDAMM_MODULES], ['glibmm-2.4 >= 2.12.8 libgda-4.0 >= 4.0.3'])
 PKG_CHECK_MODULES([LIBGDAMM], [$LIBGDAMM_MODULES])
 
 PKG_CHECK_EXISTS([libgda-bdb-4.0], [libgdamm_have_bdb=yes], [libgdamm_have_bdb=no])

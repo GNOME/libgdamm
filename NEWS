@@ -1,3 +1,18 @@
+3.99.17: (unstable)
+
+* Connection:
+  * Added the CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE which avoids 
+  exposing backend-specific case and quoting weirdness to applications.
+  * update_meta_store_table():
+  Use gda_meta_store_sql_identifier_quote() as mentioned in bug #589607, 
+  to make this work even with uppercase characters.
+* MetaStore: Can now thow a MetaStoreError exception.
+  (Murray Cumming)
+* Use the mm-common build system.
+  (Daniel Elstner)
+* Build: Fix the build when exceptions are disabled.
+  (Johannes Schmid)
+
 3.99.16: (unstable)
 
 * Build fixes for meamo (allow --fno-exceptions and !GLIBMM_EXCEPTIONS_ENABLED)
