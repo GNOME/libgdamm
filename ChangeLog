@@ -1,3 +1,8 @@
+2009-08-27  Murray Cumming  <murrayc@murrayc-desktop>
+
+	* docs/reference/Doxyfile.in: Set COLLABORATION_GRAPH back to YES, 
+	so we get hierarchy diagrams again.
+
 2009-08-27  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/connection.ccg: Removed stupid retval=1 debug output.
