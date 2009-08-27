@@ -390,7 +390,6 @@ bool Connection::update_meta_store_table(const Glib::ustring& table_name, const 
   GdaMetaContext mcontext = {(gchar*)"_tables", schema_name.empty() ? 1 : 2, column_names, column_values };
   GError* gerror = 0;
   const bool retval = gda_connection_update_meta_store(gobj(), &mcontext, &gerror);
-  std::cout << "  retval=" << retval << std::endl;
 
   g_value_unset(&table_name_value);
   g_value_unset(&table_schema_value);
