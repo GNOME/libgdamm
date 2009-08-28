@@ -1,5 +1,14 @@
 2009-08-28  Daniel Elstner  <danielk@openismus.com>
 
+	Bump version to 3.99.17.1 and update news
+
+	* configure.ac (AC_INIT): Increment version to libgdamm 3.99.17.1.
+	(MM_PREREQ): Require mm-common 0.7.1.
+	(AM_INIT_AUTOMAKE): Use check-news option.
+	* NEWS: Write news entry for the libgdamm 3.99.17.1 release.
+
+2009-08-28  Daniel Elstner  <danielk@openismus.com>
+
 	Use mm-common CSS and drop HTML header/footer
 
 	* docs/reference/Doxyfile.in (HTML_HEADER), (HTML_HEADER): Assign

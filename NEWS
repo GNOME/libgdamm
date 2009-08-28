@@ -1,3 +1,10 @@
+3.99.17.1: (unstable)
+
+* Reenable the per-class hierarchy graphs in the reference documentation.
+  (Murray Cumming)
+* Drop the custom HTML header and footer, and use the shared doxygen.css
+  file from mm-common. (Daniel Elstner)
+
 3.99.17: (unstable)
 
 * Connection:

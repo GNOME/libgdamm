@@ -15,7 +15,7 @@
 ## You should have received a copy of the GNU Lesser General Public License
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-AC_INIT([libgdamm], [3.99.17], [http://bugzilla.gnome.org/enter_bug.cgi?product=libgdamm],
+AC_INIT([libgdamm], [3.99.17.1], [http://bugzilla.gnome.org/enter_bug.cgi?product=libgdamm],
         [libgdamm], [http://www.gtkmm.org/])
 AC_PREREQ([2.59])
 
@@ -24,13 +24,13 @@ AC_CONFIG_AUX_DIR([build])
 AC_CONFIG_MACRO_DIR([build])
 AC_CONFIG_HEADERS([build/config.h libgda/libgdammconfig.h])
 
-MM_PREREQ([0.6])
+MM_PREREQ([0.7.1])
 MM_INIT_MODULE([libgdamm-4.0])
 
 # http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
 AC_SUBST([LIBGDAMM_SO_VERSION], [12:0:0])
 
-AM_INIT_AUTOMAKE([1.9 -Wno-portability dist-bzip2 no-define nostdinc tar-pax])
+AM_INIT_AUTOMAKE([1.9 -Wno-portability check-news dist-bzip2 no-define nostdinc tar-pax])
 AM_MAINTAINER_MODE
 AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 
