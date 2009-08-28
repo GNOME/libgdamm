@@ -1,3 +1,17 @@
+2009-08-28  Daniel Elstner  <danielk@openismus.com>
+
+	Use mm-common CSS and drop HTML header/footer
+
+	* docs/reference/Doxyfile.in (HTML_HEADER), (HTML_HEADER): Assign
+	the empty string.
+	(HTML_STYLESHEET): Assign location of the mm-common style sheet.
+	(SORT_GROUP_NAMES): Enable for consistency.
+	(PROJECT_NUMBER): Substitute @PACKAGE_VERSION@ instead of the API
+	version.  It does look nicer and is probably more helpful.
+	* docs/Makefile.am (htmlrefpub): Remove variable override, now
+	that the documentation is hosted on library.gnome.org.
+	(dist_noinst_DATA): Remove HTML header and footer fragments.
+
 2009-08-27  Murray Cumming  <murrayc@murrayc-desktop>
 
 	* docs/reference/Doxyfile.in: Set COLLABORATION_GRAPH back to YES, 

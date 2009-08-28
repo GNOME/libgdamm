@@ -23,12 +23,4 @@ libgdamm_files_h = $(files_built_h) $(filter-out wrap_init.h,$(files_extra_h))
 book_name = $(LIBGDAMM_MODULE_NAME)
 doc_input = $(addprefix $(top_srcdir)/libgda/libgdamm/,$(libgdamm_files_h))
 
-# Override the web location to use the old-style path with redundant
-# directory components.
-htmlrefpub = http://www.gtkmm.org/docs/$(book_name)/docs/reference/html/
-
 include $(top_srcdir)/build/doc-reference.am
-
-dist_noinst_DATA +=				\
-	reference/libgdamm_header.html_fragment	\
-	reference/libgdamm_footer.html_fragment
