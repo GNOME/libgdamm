@@ -1,5 +1,12 @@
 2009-08-28  Daniel Elstner  <danielk@openismus.com>
 
+	Fix documentation location in pkg-config files
+
+	* libgdamm/libgdamm{,-uninstalled}.pc.in (htmlrefpub): Point to
+	library.gnome.org.
+
+2009-08-28  Daniel Elstner  <danielk@openismus.com>
+
 	Bump version to 3.99.17.1 and update news
 
 	* configure.ac (AC_INIT): Increment version to libgdamm 3.99.17.1.
