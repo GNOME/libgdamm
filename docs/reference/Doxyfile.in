@@ -117,6 +117,7 @@ EXCLUDE_SYMBOLS        = _* \
                          char_traits \
                          internal \
                          pair \
+                         sigc \
                          unary_function
 EXAMPLE_PATH           = "@abs_top_srcdir@/examples"
 EXAMPLE_PATTERNS       = *.cc \

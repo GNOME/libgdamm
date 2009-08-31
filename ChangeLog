@@ -1,3 +1,10 @@
+2009-08-31  Daniel Elstner  <danielk@openismus.com>
+
+	Make Doxygen ignore namespace sigc
+
+	* docs/reference/Doxyfile.in (EXCLUDE_SYMBOLS): Add "sigc" to the
+	list of symbols to ignore.
+
 2009-08-28  Daniel Elstner  <danielk@openismus.com>
 
 	Fix documentation location in pkg-config files
