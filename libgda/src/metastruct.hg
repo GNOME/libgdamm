@@ -31,6 +31,10 @@ namespace Gnome
 namespace Gda
 {
 
+/** Exception class for Gda MetaStruct errors.
+ */
+_WRAP_GERROR(MetaStructError, GdaMetaStructError, GDA_META_STRUCT_ERROR)
+
 _WRAP_ENUM(MetaStructFeature, GdaMetaStructFeature)
 _WRAP_ENUM(MetaDbObjectType, GdaMetaDbObjectType)
 _WRAP_ENUM(MetaSortType, GdaMetaSortType)

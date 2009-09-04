@@ -1,3 +1,7 @@
+2009-09-04  Murray Cumming  <murrayc@murrayc.com>
+
+	* libgda/src/metastruct.hg: Added the MetaStructError exception.
+
 2009-08-31  Daniel Elstner  <danielk@openismus.com>
 
 	Make Doxygen ignore namespace sigc
