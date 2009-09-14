@@ -1,5 +1,11 @@
 2009-09-14  Daniel Elstner  <danielk@openismus.com>
 
+	Enable verbose output of autoreconf
+
+	* autogen.sh: Pass the --verbose option to autoreconf.
+
+2009-09-14  Daniel Elstner  <danielk@openismus.com>
+
 	Update Doxygen configuration for Doxygen 1.6.1
 
 	* docs/reference/Doxyfile.in: Update configuration file for
