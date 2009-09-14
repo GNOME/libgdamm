@@ -1,4 +1,4 @@
-# Doxyfile 1.5.8
+# Doxyfile 1.6.1
 # @configure_input@
 
 #---------------------------------------------------------------------------
@@ -75,6 +75,7 @@ SHOW_INCLUDE_FILES     = NO
 INLINE_INFO            = YES
 SORT_MEMBER_DOCS       = YES
 SORT_BRIEF_DOCS        = NO
+SORT_MEMBERS_CTORS_1ST = YES
 SORT_GROUP_NAMES       = YES
 SORT_BY_SCOPE_NAME     = YES
 GENERATE_TODOLIST      = NO
@@ -117,7 +118,6 @@ EXCLUDE_SYMBOLS        = _* \
                          char_traits \
                          internal \
                          pair \
-                         sigc \
                          unary_function
 EXAMPLE_PATH           = "@abs_top_srcdir@/examples"
 EXAMPLE_PATTERNS       = *.cc \
@@ -176,8 +176,10 @@ QHG_LOCATION           =
 DISABLE_INDEX          = NO
 ENUM_VALUES_PER_LINE   = 1
 GENERATE_TREEVIEW      = NONE
+USE_INLINE_TREES       = NO
 TREEVIEW_WIDTH         = 250
 FORMULA_FONTSIZE       = 10
+SEARCHENGINE           = NO
 #---------------------------------------------------------------------------
 # configuration options related to the LaTeX output
 #---------------------------------------------------------------------------
@@ -193,6 +195,7 @@ PDF_HYPERLINKS         = YES
 USE_PDFLATEX           = YES
 LATEX_BATCHMODE        = NO
 LATEX_HIDE_INDICES     = NO
+LATEX_SOURCE_CODE      = NO
 #---------------------------------------------------------------------------
 # configuration options related to the RTF output
 #---------------------------------------------------------------------------
@@ -289,7 +292,3 @@ DOT_TRANSPARENT        = NO
 DOT_MULTI_TARGETS      = YES
 GENERATE_LEGEND        = YES
 DOT_CLEANUP            = YES
-#---------------------------------------------------------------------------
-# Options related to the search engine
-#---------------------------------------------------------------------------
-SEARCHENGINE           = NO

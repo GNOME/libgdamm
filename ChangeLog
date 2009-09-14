@@ -1,3 +1,14 @@
+2009-09-14  Daniel Elstner  <danielk@openismus.com>
+
+	Update Doxygen configuration for Doxygen 1.6.1
+
+	* docs/reference/Doxyfile.in: Update configuration file for
+	Doxygen 1.6.1.
+	(EXCLUDE_SYMBOLS): Remove "sigc" again from the list of excluded
+	symbols.  With a recent build of libsigc++, this should no longer
+	be necessary.
+	(SORT_MEMBERS_CTORS_1ST): Set option to YES.
+
 2009-09-04  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/metastruct.hg: Added the MetaStructError exception.
