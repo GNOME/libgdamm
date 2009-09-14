@@ -1,3 +1,8 @@
+3.99.18: (unstable)
+
+* MetaStruct: Add the MetaStructError exception, thrown by some methods.
+  (Murray Cumming)
+
 3.99.17.1: (unstable)
 
 * Reenable the per-class hierarchy graphs in the reference documentation.
