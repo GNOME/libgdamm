@@ -41,6 +41,7 @@ files_hg =			\
 	serverprovider.hg	\
 	set.hg			\
 	sqlparser.hg		\
+	sqlbuilder.hg   \
 	statement.hg		\
 	transactionstatus.hg	\
 	xatransaction.hg

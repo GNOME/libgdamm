@@ -1,5 +1,17 @@
 2009-09-24  Johannes Schmid <jschmid@openismus.com>
 
+  * libgda/src/filelist.am: 
+  Added sqlbuilder.hg/ccg
+  
+  * libgda/src/sqlbuilder.hg:
+  * libgda/src/sqlbuilder.ccg:
+  Wrapped GdaSqlBuilder class
+  
+  * tools/m4/convert_libgdamm.m4:
+  Added two new enums for GdaSqlBuilder
+
+2009-09-24  Johannes Schmid <jschmid@openismus.com>
+
 	* libgda/src/libgda_enums.defs:
 	* libgda/src/libgda_methods.defs:
 	* libgda/src/libgda_signals.defs:

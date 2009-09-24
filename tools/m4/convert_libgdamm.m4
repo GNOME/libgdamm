@@ -126,6 +126,8 @@ _CONV_ENUM(Gda,MetaSortType)
 _CONV_ENUM(Gda,MetaGraphInfo)
 _CONV_ENUM(Gda,StatementSqlFlag)
 _CONV_ENUM(Gda,SqlParserError)
+_CONV_ENUM(Gda,SqlOperatorType)
+_CONV_ENUM(Gda,SqlSelectJoinType)
 
 # structs
 _CONVERSION(`Blob&',`GdaBlob*',__FR2P)
