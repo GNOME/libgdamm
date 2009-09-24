@@ -55,7 +55,8 @@ int main(int, char**)
     << get_defs(GDA_TYPE_STATEMENT)
     << get_defs(GDA_TYPE_TRANSACTION_STATUS)
     << get_defs(GDA_TYPE_XA_TRANSACTION)
-    << get_defs(GDA_TYPE_SQL_PARSER);
+    << get_defs(GDA_TYPE_SQL_PARSER)
+    << get_defs(GDA_TYPE_SQL_BUILDER);
 
   return 0;
 }

@@ -199,6 +199,24 @@
   (construct-only #f)
 )
 
+(define-property is-wrapper
+  (of-object "GdaConnection")
+  (prop-type "GParamBoolean")
+  (docs "Tells if the connection acts as a thread wrapper around another connection, making it completely thread safe")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property monitor-wrapped-in-mainloop
+  (of-object "GdaConnection")
+  (prop-type "GParamBoolean")
+  (docs "Make the connection set up a monitoring function in the mainloop to monitor the wrapped connection")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GdaConnectionEvent
 
 (define-property type
@@ -270,6 +288,26 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+)
+
+;; From GdaDataModelBdb
+
+(define-property filename
+  (of-object "GdaDataModelBdb")
+  (prop-type "GParamString")
+  (docs "DB file")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property db-name
+  (of-object "GdaDataModelBdb")
+  (prop-type "GParamString")
+  (docs "Name of the database")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
 )
 
 ;; From GdaDataModelDir
@@ -585,7 +623,7 @@
 (define-property store-all-rows
   (of-object "GdaDataSelect")
   (prop-type "GParamBoolean")
-  (docs "Tells if model has analysed all the rows")
+  (docs "Tells if model has analyzed all the rows")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -763,10 +801,10 @@
 
 (define-signal suggest-update
   (of-object "GdaMetaStore")
-  (return-type "gpointer")
+  (return-type "GError*")
   (when "last")
   (parameters
-    '("gpointer" "p0")
+    '("GdaMetaContext" "p0")
   )
 )
 
@@ -775,7 +813,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("gpointer" "p0")
+    '("GdaSList" "p0")
   )
 )
 
@@ -1079,4 +1117,5 @@
   (construct-only #f)
 )
 
+;; From GdaSqlBuilder
 

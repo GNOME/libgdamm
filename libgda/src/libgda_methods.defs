@@ -62,13 +62,6 @@
   (gtype-id "GDA_TYPE_DATA_HANDLER")
 )
 
-(define-object DataMetaWrapper
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaDataMetaWrapper")
-  (gtype-id "GDA_TYPE_DATA_META_WRAPPER")
-)
-
 (define-object DataModel
   (in-module "Gda")
   (c-name "GdaDataModel")
@@ -94,13 +87,6 @@
   (parent "GObject")
   (c-name "GdaDataModelDir")
   (gtype-id "GDA_TYPE_DATA_MODEL_DIR")
-)
-
-(define-object DataModelDsnList
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaDataModelDsnList")
-  (gtype-id "GDA_TYPE_DATA_MODEL_DSN_LIST")
 )
 
 (define-object DataModelImport
@@ -200,18 +186,18 @@
   (gtype-id "GDA_TYPE_SQL_BUILDER")
 )
 
-(define-object SqlParser
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaSqlParser")
-  (gtype-id "GDA_TYPE_SQL_PARSER")
-)
-
 (define-object Statement
   (in-module "Gda")
   (parent "GObject")
   (c-name "GdaStatement")
   (gtype-id "GDA_TYPE_STATEMENT")
+)
+
+(define-object Threader
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaThreader")
+  (gtype-id "GDA_TYPE_THREADER")
 )
 
 (define-object TransactionStatus
@@ -285,6 +271,22 @@
 )
 
 ;; Enumerations and flags ...
+
+(define-enum PrefixDir
+  (in-module "Gda")
+  (c-name "GdaPrefixDir")
+  (gtype-id "GDA_TYPE_PREFIX_DIR")
+  (values
+    '("no-dir" "GDA_NO_DIR")
+    '("bin-dir" "GDA_BIN_DIR")
+    '("sbin-dir" "GDA_SBIN_DIR")
+    '("data-dir" "GDA_DATA_DIR")
+    '("locale-dir" "GDA_LOCALE_DIR")
+    '("lib-dir" "GDA_LIB_DIR")
+    '("libexec-dir" "GDA_LIBEXEC_DIR")
+    '("etc-dir" "GDA_ETC_DIR")
+  )
+)
 
 (define-enum ConfigError
   (in-module "Gda")
@@ -362,6 +364,7 @@
   (values
     '("none" "GDA_CONNECTION_OPTIONS_NONE")
     '("read-only" "GDA_CONNECTION_OPTIONS_READ_ONLY")
+    '("sql-identifiers-case-sensitive" "GDA_CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE")
     '("thread-safe" "GDA_CONNECTION_OPTIONS_THREAD_SAFE")
   )
 )
@@ -451,16 +454,6 @@
   )
 )
 
-(define-enum DataMetaWrapperMode
-  (in-module "Gda")
-  (c-name "GdaDataMetaWrapperMode")
-  (gtype-id "GDA_TYPE_DATA_META_WRAPPER_MODE")
-  (values
-    '("lc" "GDA_DATA_META_WRAPPER_MODE_LC")
-    '("uc" "GDA_DATA_META_WRAPPER_MODE_UC")
-  )
-)
-
 (define-flags DataModelAccessFlags
   (in-module "Gda")
   (c-name "GdaDataModelAccessFlags")
@@ -534,19 +527,6 @@
     '("read-only-value" "GDA_DATA_PROXY_READ_ONLY_VALUE")
     '("read-only-row" "GDA_DATA_PROXY_READ_ONLY_ROW")
     '("filter-error" "GDA_DATA_PROXY_FILTER_ERROR")
-  )
-)
-
-(define-enum Type
-  (in-module "Mod")
-  (c-name "ModType")
-  (gtype-id "MOD_TYPE_TYPE")
-  (values
-    '("first-query" "FIRST_QUERY")
-    '("ins-query" "INS_QUERY")
-    '("upd-query" "UPD_QUERY")
-    '("del-query" "DEL_QUERY")
-    '("nb-queries" "NB_QUERIES")
   )
 )
 
@@ -729,6 +709,8 @@
     '("drop-index" "GDA_SERVER_OPERATION_DROP_INDEX")
     '("create-view" "GDA_SERVER_OPERATION_CREATE_VIEW")
     '("drop-view" "GDA_SERVER_OPERATION_DROP_VIEW")
+    '("comment-table" "GDA_SERVER_OPERATION_COMMENT_TABLE")
+    '("comment-column" "GDA_SERVER_OPERATION_COMMENT_COLUMN")
     '("last" "GDA_SERVER_OPERATION_LAST")
   )
 )
@@ -901,170 +883,6 @@
   )
 )
 
-(define-enum SqlParserError
-  (in-module "Gda")
-  (c-name "GdaSqlParserError")
-  (gtype-id "GDA_TYPE_SQL_PARSER_ERROR")
-  (values
-    '("syntax-error" "GDA_SQL_PARSER_SYNTAX_ERROR")
-    '("overflow-error" "GDA_SQL_PARSER_OVERFLOW_ERROR")
-    '("empty-sql-error" "GDA_SQL_PARSER_EMPTY_SQL_ERROR")
-  )
-)
-
-(define-enum SqlParserMode
-  (in-module "Gda")
-  (c-name "GdaSqlParserMode")
-  (gtype-id "GDA_TYPE_SQL_PARSER_MODE")
-  (values
-    '("parse" "GDA_SQL_PARSER_MODE_PARSE")
-    '("delimit" "GDA_SQL_PARSER_MODE_DELIMIT")
-  )
-)
-
-(define-enum SqlParserFlavour
-  (in-module "Gda")
-  (c-name "GdaSqlParserFlavour")
-  (gtype-id "GDA_TYPE_SQL_PARSER_FLAVOUR")
-  (values
-    '("standard" "GDA_SQL_PARSER_FLAVOUR_STANDARD")
-    '("sqlite" "GDA_SQL_PARSER_FLAVOUR_SQLITE")
-    '("mysql" "GDA_SQL_PARSER_FLAVOUR_MYSQL")
-    '("oracle" "GDA_SQL_PARSER_FLAVOUR_ORACLE")
-    '("postgresql" "GDA_SQL_PARSER_FLAVOUR_POSTGRESQL")
-  )
-)
-
-(define-enum SqlStatementCompoundType
-  (in-module "Gda")
-  (c-name "GdaSqlStatementCompoundType")
-  (gtype-id "GDA_TYPE_SQL_STATEMENT_COMPOUND_TYPE")
-  (values
-    '("union" "GDA_SQL_STATEMENT_COMPOUND_UNION")
-    '("union-all" "GDA_SQL_STATEMENT_COMPOUND_UNION_ALL")
-    '("intersect" "GDA_SQL_STATEMENT_COMPOUND_INTERSECT")
-    '("intersect-all" "GDA_SQL_STATEMENT_COMPOUND_INTERSECT_ALL")
-    '("except" "GDA_SQL_STATEMENT_COMPOUND_EXCEPT")
-    '("except-all" "GDA_SQL_STATEMENT_COMPOUND_EXCEPT_ALL")
-  )
-)
-
-(define-enum SqlErrorType
-  (in-module "Gda")
-  (c-name "GdaSqlErrorType")
-  (gtype-id "GDA_TYPE_SQL_ERROR_TYPE")
-  (values
-    '("structure-contents-error" "GDA_SQL_STRUCTURE_CONTENTS_ERROR")
-    '("malformed-identifier-error" "GDA_SQL_MALFORMED_IDENTIFIER_ERROR")
-    '("missing-identifier-error" "GDA_SQL_MISSING_IDENTIFIER_ERROR")
-    '("validation-error" "GDA_SQL_VALIDATION_ERROR")
-  )
-)
-
-(define-enum SqlStatementType
-  (in-module "Gda")
-  (c-name "GdaSqlStatementType")
-  (gtype-id "GDA_TYPE_SQL_STATEMENT_TYPE")
-  (values
-    '("select" "GDA_SQL_STATEMENT_SELECT")
-    '("insert" "GDA_SQL_STATEMENT_INSERT")
-    '("update" "GDA_SQL_STATEMENT_UPDATE")
-    '("delete" "GDA_SQL_STATEMENT_DELETE")
-    '("compound" "GDA_SQL_STATEMENT_COMPOUND")
-    '("begin" "GDA_SQL_STATEMENT_BEGIN")
-    '("rollback" "GDA_SQL_STATEMENT_ROLLBACK")
-    '("commit" "GDA_SQL_STATEMENT_COMMIT")
-    '("savepoint" "GDA_SQL_STATEMENT_SAVEPOINT")
-    '("rollback-savepoint" "GDA_SQL_STATEMENT_ROLLBACK_SAVEPOINT")
-    '("delete-savepoint" "GDA_SQL_STATEMENT_DELETE_SAVEPOINT")
-    '("unknown" "GDA_SQL_STATEMENT_UNKNOWN")
-    '("none" "GDA_SQL_STATEMENT_NONE")
-  )
-)
-
-(define-enum SqlAnyPartType
-  (in-module "Gda")
-  (c-name "GdaSqlAnyPartType")
-  (gtype-id "GDA_TYPE_SQL_ANY_PART_TYPE")
-  (values
-    '("stmt-select" "GDA_SQL_ANY_STMT_SELECT")
-    '("stmt-insert" "GDA_SQL_ANY_STMT_INSERT")
-    '("stmt-update" "GDA_SQL_ANY_STMT_UPDATE")
-    '("stmt-delete" "GDA_SQL_ANY_STMT_DELETE")
-    '("stmt-compound" "GDA_SQL_ANY_STMT_COMPOUND")
-    '("stmt-begin" "GDA_SQL_ANY_STMT_BEGIN")
-    '("stmt-rollback" "GDA_SQL_ANY_STMT_ROLLBACK")
-    '("stmt-commit" "GDA_SQL_ANY_STMT_COMMIT")
-    '("stmt-savepoint" "GDA_SQL_ANY_STMT_SAVEPOINT")
-    '("stmt-rollback-savepoint" "GDA_SQL_ANY_STMT_ROLLBACK_SAVEPOINT")
-    '("stmt-delete-savepoint" "GDA_SQL_ANY_STMT_DELETE_SAVEPOINT")
-    '("stmt-unknown" "GDA_SQL_ANY_STMT_UNKNOWN")
-    '("expr" "GDA_SQL_ANY_EXPR")
-    '("sql-field" "GDA_SQL_ANY_SQL_FIELD")
-    '("sql-table" "GDA_SQL_ANY_SQL_TABLE")
-    '("sql-function" "GDA_SQL_ANY_SQL_FUNCTION")
-    '("sql-operation" "GDA_SQL_ANY_SQL_OPERATION")
-    '("sql-case" "GDA_SQL_ANY_SQL_CASE")
-    '("sql-select-field" "GDA_SQL_ANY_SQL_SELECT_FIELD")
-    '("sql-select-target" "GDA_SQL_ANY_SQL_SELECT_TARGET")
-    '("sql-select-join" "GDA_SQL_ANY_SQL_SELECT_JOIN")
-    '("sql-select-from" "GDA_SQL_ANY_SQL_SELECT_FROM")
-    '("sql-select-order" "GDA_SQL_ANY_SQL_SELECT_ORDER")
-  )
-)
-
-(define-enum SqlOperatorType
-  (in-module "Gda")
-  (c-name "GdaSqlOperatorType")
-  (gtype-id "GDA_TYPE_SQL_OPERATOR_TYPE")
-  (values
-    '("and" "GDA_SQL_OPERATOR_TYPE_AND")
-    '("or" "GDA_SQL_OPERATOR_TYPE_OR")
-    '("eq" "GDA_SQL_OPERATOR_TYPE_EQ")
-    '("is" "GDA_SQL_OPERATOR_TYPE_IS")
-    '("like" "GDA_SQL_OPERATOR_TYPE_LIKE")
-    '("between" "GDA_SQL_OPERATOR_TYPE_BETWEEN")
-    '("gt" "GDA_SQL_OPERATOR_TYPE_GT")
-    '("lt" "GDA_SQL_OPERATOR_TYPE_LT")
-    '("geq" "GDA_SQL_OPERATOR_TYPE_GEQ")
-    '("leq" "GDA_SQL_OPERATOR_TYPE_LEQ")
-    '("diff" "GDA_SQL_OPERATOR_TYPE_DIFF")
-    '("regexp" "GDA_SQL_OPERATOR_TYPE_REGEXP")
-    '("regexp-ci" "GDA_SQL_OPERATOR_TYPE_REGEXP_CI")
-    '("not-regexp" "GDA_SQL_OPERATOR_TYPE_NOT_REGEXP")
-    '("not-regexp-ci" "GDA_SQL_OPERATOR_TYPE_NOT_REGEXP_CI")
-    '("similar" "GDA_SQL_OPERATOR_TYPE_SIMILAR")
-    '("isnull" "GDA_SQL_OPERATOR_TYPE_ISNULL")
-    '("isnotnull" "GDA_SQL_OPERATOR_TYPE_ISNOTNULL")
-    '("not" "GDA_SQL_OPERATOR_TYPE_NOT")
-    '("in" "GDA_SQL_OPERATOR_TYPE_IN")
-    '("notin" "GDA_SQL_OPERATOR_TYPE_NOTIN")
-    '("concat" "GDA_SQL_OPERATOR_TYPE_CONCAT")
-    '("plus" "GDA_SQL_OPERATOR_TYPE_PLUS")
-    '("minus" "GDA_SQL_OPERATOR_TYPE_MINUS")
-    '("star" "GDA_SQL_OPERATOR_TYPE_STAR")
-    '("div" "GDA_SQL_OPERATOR_TYPE_DIV")
-    '("rem" "GDA_SQL_OPERATOR_TYPE_REM")
-    '("bitand" "GDA_SQL_OPERATOR_TYPE_BITAND")
-    '("bitor" "GDA_SQL_OPERATOR_TYPE_BITOR")
-    '("bitnot" "GDA_SQL_OPERATOR_TYPE_BITNOT")
-  )
-)
-
-(define-enum SqlSelectJoinType
-  (in-module "Gda")
-  (c-name "GdaSqlSelectJoinType")
-  (gtype-id "GDA_TYPE_SQL_SELECT_JOIN_TYPE")
-  (values
-    '("cross" "GDA_SQL_SELECT_JOIN_CROSS")
-    '("natural" "GDA_SQL_SELECT_JOIN_NATURAL")
-    '("inner" "GDA_SQL_SELECT_JOIN_INNER")
-    '("left" "GDA_SQL_SELECT_JOIN_LEFT")
-    '("right" "GDA_SQL_SELECT_JOIN_RIGHT")
-    '("full" "GDA_SQL_SELECT_JOIN_FULL")
-  )
-)
-
 
 ;; From gda-attributes-manager.h
 
@@ -1208,6 +1026,24 @@
     '("GdaSet**" "out_params")
     '("GError**" "error")
   )
+)
+
+
+
+;; From gda-binreloc.h
+
+(define-function gda_gbr_init
+  (c-name "gda_gbr_init")
+  (return-type "none")
+)
+
+(define-function gda_gbr_get_file_path
+  (c-name "gda_gbr_get_file_path")
+  (return-type "gchar*")
+  (parameters
+    '("GdaPrefixDir" "where")
+  )
+  (varargs #t)
 )
 
 
@@ -1774,6 +1610,15 @@
   )
 )
 
+(define-method quote_sql_identifier
+  (of-object "GdaConnection")
+  (c-name "gda_connection_quote_sql_identifier")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "id")
+  )
+)
+
 (define-method statement_to_sql
   (of-object "GdaConnection")
   (c-name "gda_connection_statement_to_sql")
@@ -2033,10 +1878,6 @@
 
 
 
-;; From gda-connection-internal.h
-
-
-
 ;; From gda-connection-private.h
 
 (define-method internal_set_provider_data
@@ -2187,14 +2028,6 @@
 
 
 
-;; From gda-connection-sqlite.h
-
-
-
-;; From gda-custom-marshal.h
-
-
-
 ;; From gda-data-access-wrapper.h
 
 (define-function gda_data_access_wrapper_get_type
@@ -2337,10 +2170,6 @@
 
 
 
-;; From gda-data-meta-wrapper.h
-
-
-
 ;; From gda-data-model-array.h
 
 (define-function gda_data_model_array_get_type
@@ -2459,15 +2288,6 @@
   (of-object "GdaDataModelDir")
   (c-name "gda_data_model_dir_clean_errors")
   (return-type "none")
-)
-
-
-
-;; From gda-data-model-dsn-list.h
-
-(define-function gda_data_model_dsn_list_get_type
-  (c-name "gda_data_model_dsn_list_get_type")
-  (return-type "GType")
 )
 
 
@@ -3227,10 +3047,6 @@
 
 
 
-;; From gda-data-select-extra.h
-
-
-
 ;; From gda-data-select.h
 
 (define-function gda_data_select_get_type
@@ -3722,6 +3538,15 @@
 
 
 
+;; From gda-error.h
+
+(define-function gda_error_get_type
+  (c-name "gda_error_get_type")
+  (return-type "GType")
+)
+
+
+
 ;; From gda-holder.h
 
 (define-function gda_holder_get_type
@@ -4003,10 +3828,6 @@
 
 
 
-;; From gda-meta-store-extra.h
-
-
-
 ;; From gda-meta-store.h
 
 (define-function gda_meta_store_get_type
@@ -4041,6 +3862,15 @@
   (of-object "GdaMetaStore")
   (c-name "gda_meta_store_get_internal_connection")
   (return-type "GdaConnection*")
+)
+
+(define-function gda_meta_store_sql_identifier_quote
+  (c-name "gda_meta_store_sql_identifier_quote")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "id")
+    '("GdaConnection*" "cnc")
+  )
 )
 
 (define-method extract
@@ -4093,6 +3923,15 @@
   (return-type "none")
   (parameters
     '("GdaSqlIdentifierStyle" "style")
+  )
+)
+
+(define-method set_reserved_keywords_func
+  (of-object "GdaMetaStore")
+  (c-name "gda_meta_store_set_reserved_keywords_func")
+  (return-type "none")
+  (parameters
+    '("GdaSqlReservedKeywordsFunc" "func")
   )
 )
 
@@ -4306,32 +4145,6 @@
   (return-type "gchar*")
   (parameters
     '("GdaMetaGraphInfo" "info")
-    '("GError**" "error")
-  )
-)
-
-
-
-;; From gda-meta-struct-private.h
-
-(define-method add_db_object
-  (of-object "GdaMetaStruct")
-  (c-name "gda_meta_struct_add_db_object")
-  (return-type "GdaMetaDbObject*")
-  (parameters
-    '("GdaMetaDbObject*" "dbo")
-    '("GError**" "error")
-  )
-)
-
-(define-method load_from_xml_file
-  (of-object "GdaMetaStruct")
-  (c-name "gda_meta_struct_load_from_xml_file")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "catalog")
-    '("const-gchar*" "schema")
-    '("const-gchar*" "xml_spec_file")
     '("GError**" "error")
   )
 )
@@ -4597,6 +4410,18 @@
   (varargs #t)
 )
 
+(define-method get_sql_identifier_at
+  (of-object "GdaServerOperation")
+  (c-name "gda_server_operation_get_sql_identifier_at")
+  (return-type "gchar*")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("GdaServerProvider*" "prov")
+    '("const-gchar*" "path_format")
+  )
+  (varargs #t)
+)
+
 (define-method set_value_at
   (of-object "GdaServerOperation")
   (c-name "gda_server_operation_set_value_at")
@@ -4734,10 +4559,6 @@
     '("GError**" "error")
   )
 )
-
-
-
-;; From gda-server-operation-private.h
 
 
 
@@ -5208,9 +5029,9 @@
   )
 )
 
-(define-method literal
+(define-method ident
   (of-object "GdaSqlBuilder")
-  (c-name "gda_sql_builder_literal")
+  (c-name "gda_sql_builder_ident")
   (return-type "guint")
   (parameters
     '("guint" "id")
@@ -5255,6 +5076,18 @@
   )
 )
 
+(define-method cond_v
+  (of-object "GdaSqlBuilder")
+  (c-name "gda_sql_builder_cond_v")
+  (return-type "guint")
+  (parameters
+    '("guint" "id")
+    '("GdaSqlOperatorType" "op")
+    '("guint*" "op_ids")
+    '("gint" "op_ids_size")
+  )
+)
+
 (define-method select_add_target
   (of-object "GdaSqlBuilder")
   (c-name "gda_sql_builder_select_add_target")
@@ -5286,6 +5119,17 @@
   (parameters
     '("guint" "join_id")
     '("const-gchar*" "field_name")
+  )
+)
+
+(define-method select_order_by
+  (of-object "GdaSqlBuilder")
+  (c-name "gda_sql_builder_select_order_by")
+  (return-type "none")
+  (parameters
+    '("guint" "expr_id")
+    '("gboolean" "asc")
+    '("const-gchar*" "collation_name")
   )
 )
 
@@ -5419,6 +5263,43 @@
   (parameters
     '("GdaConnection*" "cnc")
     '("GError**" "error")
+  )
+)
+
+
+
+;; From gda-threader.h
+
+(define-function gda_threader_get_type
+  (c-name "gda_threader_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_threader_new
+  (c-name "gda_threader_new")
+  (is-constructor-of "GdaThreader")
+  (return-type "GObject*")
+)
+
+(define-method start_thread
+  (of-object "GdaThreader")
+  (c-name "gda_threader_start_thread")
+  (return-type "guint")
+  (parameters
+    '("GThreadFunc" "func")
+    '("gpointer" "func_arg")
+    '("GdaThreaderFunc" "ok_callback")
+    '("GdaThreaderFunc" "cancel_callback")
+    '("GError**" "error")
+  )
+)
+
+(define-method cancel
+  (of-object "GdaThreader")
+  (c-name "gda_threader_cancel")
+  (return-type "none")
+  (parameters
+    '("guint" "job_id")
   )
 )
 
@@ -5860,10 +5741,6 @@
 
 
 
-;; From gda-types.h
-
-
-
 ;; From gda-util.h
 
 (define-function gda_g_type_to_string
@@ -5931,6 +5808,18 @@
   (return-type "gchar**")
   (parameters
     '("const-gchar*" "id")
+  )
+)
+
+(define-function gda_sql_identifier_quote
+  (c-name "gda_sql_identifier_quote")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "id")
+    '("GdaConnection*" "cnc")
+    '("GdaServerProvider*" "prov")
+    '("gboolean" "meta_store_convention")
+    '("gboolean" "force_quotes")
   )
 )
 
@@ -6708,6 +6597,380 @@
 
 
 
+;; From libgda.h
+
+(define-function gda_init
+  (c-name "gda_init")
+  (return-type "none")
+)
+
+(define-function gda_get_application_exec_path
+  (c-name "gda_get_application_exec_path")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "app_name")
+  )
+)
+
+
+;; -*- scheme -*-
+; object definitions ...
+(define-object ReportDocument
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaReportDocument")
+  (gtype-id "GDA_TYPE_REPORT_DOCUMENT")
+)
+
+(define-object ReportDocbookDocument
+  (in-module "Gda")
+  (parent "GdaReportDocument")
+  (c-name "GdaReportDocbookDocument")
+  (gtype-id "GDA_TYPE_REPORT_DOCBOOK_DOCUMENT")
+)
+
+(define-object ReportEngine
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaReportEngine")
+  (gtype-id "GDA_TYPE_REPORT_ENGINE")
+)
+
+(define-object ReportRmlDocument
+  (in-module "Gda")
+  (parent "GdaReportDocument")
+  (c-name "GdaReportRmlDocument")
+  (gtype-id "GDA_TYPE_REPORT_RML_DOCUMENT")
+)
+
+;; Enumerations and flags ...
+
+
+;; From gda-report-docbook-document.h
+
+(define-function gda_report_docbook_document_get_type
+  (c-name "gda_report_docbook_document_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_report_docbook_document_new
+  (c-name "gda_report_docbook_document_new")
+  (is-constructor-of "GdaReportDocbookDocument")
+  (return-type "GdaReportDocument*")
+  (parameters
+    '("GdaReportEngine*" "engine")
+  )
+)
+
+
+
+;; From gda-report-document.h
+
+(define-function gda_report_document_get_type
+  (c-name "gda_report_document_get_type")
+  (return-type "GType")
+)
+
+(define-method set_template
+  (of-object "GdaReportDocument")
+  (c-name "gda_report_document_set_template")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "file")
+  )
+)
+
+(define-method run_as_html
+  (of-object "GdaReportDocument")
+  (c-name "gda_report_document_run_as_html")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "filename")
+    '("GError**" "error")
+  )
+)
+
+(define-method run_as_pdf
+  (of-object "GdaReportDocument")
+  (c-name "gda_report_document_run_as_pdf")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "filename")
+    '("GError**" "error")
+  )
+)
+
+
+
+;; From gda-report-engine.h
+
+(define-function gda_report_engine_get_type
+  (c-name "gda_report_engine_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_report_engine_new
+  (c-name "gda_report_engine_new")
+  (is-constructor-of "GdaReportEngine")
+  (return-type "GdaReportEngine*")
+  (parameters
+    '("xmlNodePtr" "spec_node")
+  )
+)
+
+(define-function gda_report_engine_new_from_string
+  (c-name "gda_report_engine_new_from_string")
+  (return-type "GdaReportEngine*")
+  (parameters
+    '("const-gchar*" "spec_string")
+  )
+)
+
+(define-function gda_report_engine_new_from_file
+  (c-name "gda_report_engine_new_from_file")
+  (return-type "GdaReportEngine*")
+  (parameters
+    '("const-gchar*" "spec_file_name")
+  )
+)
+
+(define-method declare_object
+  (of-object "GdaReportEngine")
+  (c-name "gda_report_engine_declare_object")
+  (return-type "none")
+  (parameters
+    '("GObject*" "object")
+    '("const-gchar*" "obj_name")
+  )
+)
+
+(define-method find_declared_object
+  (of-object "GdaReportEngine")
+  (c-name "gda_report_engine_find_declared_object")
+  (return-type "GObject*")
+  (parameters
+    '("GType" "obj_type")
+    '("const-gchar*" "obj_name")
+  )
+)
+
+(define-method run_as_node
+  (of-object "GdaReportEngine")
+  (c-name "gda_report_engine_run_as_node")
+  (return-type "xmlNodePtr")
+  (parameters
+    '("GError**" "error")
+  )
+)
+
+(define-method run_as_doc
+  (of-object "GdaReportEngine")
+  (c-name "gda_report_engine_run_as_doc")
+  (return-type "xmlDocPtr")
+  (parameters
+    '("GError**" "error")
+  )
+)
+
+
+
+;; From gda-report-rml-document.h
+
+(define-function gda_report_rml_document_get_type
+  (c-name "gda_report_rml_document_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_report_rml_document_new
+  (c-name "gda_report_rml_document_new")
+  (is-constructor-of "GdaReportRmlDocument")
+  (return-type "GdaReportDocument*")
+  (parameters
+    '("GdaReportEngine*" "engine")
+  )
+)
+
+
+
+;; From libgda-report.h
+
+
+;; -*- scheme -*-
+; object definitions ...
+(define-object SqlParser
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaSqlParser")
+  (gtype-id "GDA_TYPE_SQL_PARSER")
+)
+
+;; Enumerations and flags ...
+
+(define-enum SqlParserError
+  (in-module "Gda")
+  (c-name "GdaSqlParserError")
+  (gtype-id "GDA_TYPE_SQL_PARSER_ERROR")
+  (values
+    '("syntax-error" "GDA_SQL_PARSER_SYNTAX_ERROR")
+    '("overflow-error" "GDA_SQL_PARSER_OVERFLOW_ERROR")
+    '("empty-sql-error" "GDA_SQL_PARSER_EMPTY_SQL_ERROR")
+  )
+)
+
+(define-enum SqlParserMode
+  (in-module "Gda")
+  (c-name "GdaSqlParserMode")
+  (gtype-id "GDA_TYPE_SQL_PARSER_MODE")
+  (values
+    '("parse" "GDA_SQL_PARSER_MODE_PARSE")
+    '("delimit" "GDA_SQL_PARSER_MODE_DELIMIT")
+  )
+)
+
+(define-enum SqlParserFlavour
+  (in-module "Gda")
+  (c-name "GdaSqlParserFlavour")
+  (gtype-id "GDA_TYPE_SQL_PARSER_FLAVOUR")
+  (values
+    '("standard" "GDA_SQL_PARSER_FLAVOUR_STANDARD")
+    '("sqlite" "GDA_SQL_PARSER_FLAVOUR_SQLITE")
+    '("mysql" "GDA_SQL_PARSER_FLAVOUR_MYSQL")
+    '("oracle" "GDA_SQL_PARSER_FLAVOUR_ORACLE")
+    '("postgresql" "GDA_SQL_PARSER_FLAVOUR_POSTGRESQL")
+  )
+)
+
+(define-enum SqlStatementCompoundType
+  (in-module "Gda")
+  (c-name "GdaSqlStatementCompoundType")
+  (gtype-id "GDA_TYPE_SQL_STATEMENT_COMPOUND_TYPE")
+  (values
+    '("union" "GDA_SQL_STATEMENT_COMPOUND_UNION")
+    '("union-all" "GDA_SQL_STATEMENT_COMPOUND_UNION_ALL")
+    '("intersect" "GDA_SQL_STATEMENT_COMPOUND_INTERSECT")
+    '("intersect-all" "GDA_SQL_STATEMENT_COMPOUND_INTERSECT_ALL")
+    '("except" "GDA_SQL_STATEMENT_COMPOUND_EXCEPT")
+    '("except-all" "GDA_SQL_STATEMENT_COMPOUND_EXCEPT_ALL")
+  )
+)
+
+(define-enum SqlErrorType
+  (in-module "Gda")
+  (c-name "GdaSqlErrorType")
+  (gtype-id "GDA_TYPE_SQL_ERROR_TYPE")
+  (values
+    '("structure-contents-error" "GDA_SQL_STRUCTURE_CONTENTS_ERROR")
+    '("malformed-identifier-error" "GDA_SQL_MALFORMED_IDENTIFIER_ERROR")
+    '("missing-identifier-error" "GDA_SQL_MISSING_IDENTIFIER_ERROR")
+    '("validation-error" "GDA_SQL_VALIDATION_ERROR")
+  )
+)
+
+(define-enum SqlStatementType
+  (in-module "Gda")
+  (c-name "GdaSqlStatementType")
+  (gtype-id "GDA_TYPE_SQL_STATEMENT_TYPE")
+  (values
+    '("select" "GDA_SQL_STATEMENT_SELECT")
+    '("insert" "GDA_SQL_STATEMENT_INSERT")
+    '("update" "GDA_SQL_STATEMENT_UPDATE")
+    '("delete" "GDA_SQL_STATEMENT_DELETE")
+    '("compound" "GDA_SQL_STATEMENT_COMPOUND")
+    '("begin" "GDA_SQL_STATEMENT_BEGIN")
+    '("rollback" "GDA_SQL_STATEMENT_ROLLBACK")
+    '("commit" "GDA_SQL_STATEMENT_COMMIT")
+    '("savepoint" "GDA_SQL_STATEMENT_SAVEPOINT")
+    '("rollback-savepoint" "GDA_SQL_STATEMENT_ROLLBACK_SAVEPOINT")
+    '("delete-savepoint" "GDA_SQL_STATEMENT_DELETE_SAVEPOINT")
+    '("unknown" "GDA_SQL_STATEMENT_UNKNOWN")
+    '("none" "GDA_SQL_STATEMENT_NONE")
+  )
+)
+
+(define-enum SqlAnyPartType
+  (in-module "Gda")
+  (c-name "GdaSqlAnyPartType")
+  (gtype-id "GDA_TYPE_SQL_ANY_PART_TYPE")
+  (values
+    '("stmt-select" "GDA_SQL_ANY_STMT_SELECT")
+    '("stmt-insert" "GDA_SQL_ANY_STMT_INSERT")
+    '("stmt-update" "GDA_SQL_ANY_STMT_UPDATE")
+    '("stmt-delete" "GDA_SQL_ANY_STMT_DELETE")
+    '("stmt-compound" "GDA_SQL_ANY_STMT_COMPOUND")
+    '("stmt-begin" "GDA_SQL_ANY_STMT_BEGIN")
+    '("stmt-rollback" "GDA_SQL_ANY_STMT_ROLLBACK")
+    '("stmt-commit" "GDA_SQL_ANY_STMT_COMMIT")
+    '("stmt-savepoint" "GDA_SQL_ANY_STMT_SAVEPOINT")
+    '("stmt-rollback-savepoint" "GDA_SQL_ANY_STMT_ROLLBACK_SAVEPOINT")
+    '("stmt-delete-savepoint" "GDA_SQL_ANY_STMT_DELETE_SAVEPOINT")
+    '("stmt-unknown" "GDA_SQL_ANY_STMT_UNKNOWN")
+    '("expr" "GDA_SQL_ANY_EXPR")
+    '("sql-field" "GDA_SQL_ANY_SQL_FIELD")
+    '("sql-table" "GDA_SQL_ANY_SQL_TABLE")
+    '("sql-function" "GDA_SQL_ANY_SQL_FUNCTION")
+    '("sql-operation" "GDA_SQL_ANY_SQL_OPERATION")
+    '("sql-case" "GDA_SQL_ANY_SQL_CASE")
+    '("sql-select-field" "GDA_SQL_ANY_SQL_SELECT_FIELD")
+    '("sql-select-target" "GDA_SQL_ANY_SQL_SELECT_TARGET")
+    '("sql-select-join" "GDA_SQL_ANY_SQL_SELECT_JOIN")
+    '("sql-select-from" "GDA_SQL_ANY_SQL_SELECT_FROM")
+    '("sql-select-order" "GDA_SQL_ANY_SQL_SELECT_ORDER")
+  )
+)
+
+(define-enum SqlOperatorType
+  (in-module "Gda")
+  (c-name "GdaSqlOperatorType")
+  (gtype-id "GDA_TYPE_SQL_OPERATOR_TYPE")
+  (values
+    '("and" "GDA_SQL_OPERATOR_TYPE_AND")
+    '("or" "GDA_SQL_OPERATOR_TYPE_OR")
+    '("eq" "GDA_SQL_OPERATOR_TYPE_EQ")
+    '("is" "GDA_SQL_OPERATOR_TYPE_IS")
+    '("like" "GDA_SQL_OPERATOR_TYPE_LIKE")
+    '("between" "GDA_SQL_OPERATOR_TYPE_BETWEEN")
+    '("gt" "GDA_SQL_OPERATOR_TYPE_GT")
+    '("lt" "GDA_SQL_OPERATOR_TYPE_LT")
+    '("geq" "GDA_SQL_OPERATOR_TYPE_GEQ")
+    '("leq" "GDA_SQL_OPERATOR_TYPE_LEQ")
+    '("diff" "GDA_SQL_OPERATOR_TYPE_DIFF")
+    '("regexp" "GDA_SQL_OPERATOR_TYPE_REGEXP")
+    '("regexp-ci" "GDA_SQL_OPERATOR_TYPE_REGEXP_CI")
+    '("not-regexp" "GDA_SQL_OPERATOR_TYPE_NOT_REGEXP")
+    '("not-regexp-ci" "GDA_SQL_OPERATOR_TYPE_NOT_REGEXP_CI")
+    '("similar" "GDA_SQL_OPERATOR_TYPE_SIMILAR")
+    '("isnull" "GDA_SQL_OPERATOR_TYPE_ISNULL")
+    '("isnotnull" "GDA_SQL_OPERATOR_TYPE_ISNOTNULL")
+    '("not" "GDA_SQL_OPERATOR_TYPE_NOT")
+    '("in" "GDA_SQL_OPERATOR_TYPE_IN")
+    '("notin" "GDA_SQL_OPERATOR_TYPE_NOTIN")
+    '("concat" "GDA_SQL_OPERATOR_TYPE_CONCAT")
+    '("plus" "GDA_SQL_OPERATOR_TYPE_PLUS")
+    '("minus" "GDA_SQL_OPERATOR_TYPE_MINUS")
+    '("star" "GDA_SQL_OPERATOR_TYPE_STAR")
+    '("div" "GDA_SQL_OPERATOR_TYPE_DIV")
+    '("rem" "GDA_SQL_OPERATOR_TYPE_REM")
+    '("bitand" "GDA_SQL_OPERATOR_TYPE_BITAND")
+    '("bitor" "GDA_SQL_OPERATOR_TYPE_BITOR")
+    '("bitnot" "GDA_SQL_OPERATOR_TYPE_BITNOT")
+  )
+)
+
+(define-enum SqlSelectJoinType
+  (in-module "Gda")
+  (c-name "GdaSqlSelectJoinType")
+  (gtype-id "GDA_TYPE_SQL_SELECT_JOIN_TYPE")
+  (values
+    '("cross" "GDA_SQL_SELECT_JOIN_CROSS")
+    '("natural" "GDA_SQL_SELECT_JOIN_NATURAL")
+    '("inner" "GDA_SQL_SELECT_JOIN_INNER")
+    '("left" "GDA_SQL_SELECT_JOIN_LEFT")
+    '("right" "GDA_SQL_SELECT_JOIN_RIGHT")
+    '("full" "GDA_SQL_SELECT_JOIN_FULL")
+  )
+)
+
+
 ;; From gda-sql-parser-enum-types.h
 
 (define-function gda_sql_parser_error_get_type
@@ -6813,10 +7076,6 @@
   (c-name "gda_sql_parser_set_overflow_error")
   (return-type "none")
 )
-
-
-
-;; From gda-sql-parser-private.h
 
 
 
@@ -7745,6 +8004,1151 @@
   (return-type "gchar*")
   (parameters
     '("const-GValue*" "value")
+  )
+)
+
+
+;; -*- scheme -*-
+; object definitions ...
+(define-object BasicForm
+  (in-module "Gdaui")
+  (parent "GtkVBox")
+  (c-name "GdauiBasicForm")
+  (gtype-id "GDAUI_TYPE_BASIC_FORM")
+)
+
+(define-object Combo
+  (in-module "Gdaui")
+  (parent "GtkComboBox")
+  (c-name "GdauiCombo")
+  (gtype-id "GDAUI_TYPE_COMBO")
+)
+
+(define-object DataEntry
+  (in-module "Gdaui")
+  (c-name "GdauiDataEntry")
+  (gtype-id "GDAUI_TYPE_DATA_ENTRY")
+)
+
+(define-object DataStore
+  (in-module "Gdaui")
+  (parent "GObject")
+  (c-name "GdauiDataStore")
+  (gtype-id "GDAUI_TYPE_DATA_STORE")
+)
+
+(define-object DataWidget
+  (in-module "Gdaui")
+  (c-name "GdauiDataWidget")
+  (gtype-id "GDAUI_TYPE_DATA_WIDGET")
+)
+
+(define-object DataWidgetFilter
+  (in-module "Gdaui")
+  (parent "GtkVBox")
+  (c-name "GdauiDataWidgetFilter")
+  (gtype-id "GDAUI_TYPE_DATA_WIDGET_FILTER")
+)
+
+(define-object DataWidgetInfo
+  (in-module "Gdaui")
+  (parent "GtkHBox")
+  (c-name "GdauiDataWidgetInfo")
+  (gtype-id "GDAUI_TYPE_DATA_WIDGET_INFO")
+)
+
+(define-object Form
+  (in-module "Gdaui")
+  (parent "GtkVBox")
+  (c-name "GdauiForm")
+  (gtype-id "GDAUI_TYPE_FORM")
+)
+
+(define-object Grid
+  (in-module "Gdaui")
+  (parent "GtkVBox")
+  (c-name "GdauiGrid")
+  (gtype-id "GDAUI_TYPE_GRID")
+)
+
+(define-object Login
+  (in-module "Gdaui")
+  (parent "GtkVBox")
+  (c-name "GdauiLogin")
+  (gtype-id "GDAUI_TYPE_LOGIN")
+)
+
+(define-object ProviderSelector
+  (in-module "Gdaui")
+  (parent "GdauiCombo")
+  (c-name "GdauiProviderSelector")
+  (gtype-id "GDAUI_TYPE_PROVIDER_SELECTOR")
+)
+
+(define-object RawForm
+  (in-module "Gdaui")
+  (parent "GdauiBasicForm")
+  (c-name "GdauiRawForm")
+  (gtype-id "GDAUI_TYPE_RAW_FORM")
+)
+
+(define-object RawGrid
+  (in-module "Gdaui")
+  (parent "GtkTreeView")
+  (c-name "GdauiRawGrid")
+  (gtype-id "GDAUI_TYPE_RAW_GRID")
+)
+
+(define-object ServerOperation
+  (in-module "Gdaui")
+  (parent "GtkVBox")
+  (c-name "GdauiServerOperation")
+  (gtype-id "GDAUI_TYPE_SERVER_OPERATION")
+)
+
+(define-object Set
+  (in-module "Gdaui")
+  (parent "GObject")
+  (c-name "GdauiSet")
+  (gtype-id "GDAUI_TYPE_SET")
+)
+
+(define-object TreeStore
+  (in-module "Gdaui")
+  (parent "GObject")
+  (c-name "GdauiTreeStore")
+  (gtype-id "GDAUI_TYPE_TREE_STORE")
+)
+
+;; Enumerations and flags ...
+
+(define-enum DataWidgetWriteMode
+  (in-module "Gdaui")
+  (c-name "GdauiDataWidgetWriteMode")
+  (gtype-id "GDAUI_TYPE_DATA_WIDGET_WRITE_MODE")
+  (values
+    '("demand" "GDAUI_DATA_WIDGET_WRITE_ON_DEMAND")
+    '("row-change" "GDAUI_DATA_WIDGET_WRITE_ON_ROW_CHANGE")
+    '("value-activated" "GDAUI_DATA_WIDGET_WRITE_ON_VALUE_ACTIVATED")
+    '("value-change" "GDAUI_DATA_WIDGET_WRITE_ON_VALUE_CHANGE")
+  )
+)
+
+(define-flags DataWidgetInfoFlag
+  (in-module "Gdaui")
+  (c-name "GdauiDataWidgetInfoFlag")
+  (gtype-id "GDAUI_TYPE_DATA_WIDGET_INFO_FLAG")
+  (values
+    '("none" "GDAUI_DATA_WIDGET_INFO_NONE")
+    '("current-row" "GDAUI_DATA_WIDGET_INFO_CURRENT_ROW")
+    '("row-modify-buttons" "GDAUI_DATA_WIDGET_INFO_ROW_MODIFY_BUTTONS")
+    '("row-move-buttons" "GDAUI_DATA_WIDGET_INFO_ROW_MOVE_BUTTONS")
+    '("chunck-change-buttons" "GDAUI_DATA_WIDGET_INFO_CHUNCK_CHANGE_BUTTONS")
+    '("no-filter" "GDAUI_DATA_WIDGET_INFO_NO_FILTER")
+  )
+)
+
+(define-flags ActionMode
+  (in-module "Gdaui")
+  (c-name "GdauiActionMode")
+  (gtype-id "GDAUI_TYPE_ACTION_MODE")
+  (values
+    '("navigation-arrows" "GDAUI_ACTION_NAVIGATION_ARROWS")
+    '("navigation-scroll" "GDAUI_ACTION_NAVIGATION_SCROLL")
+    '("modif-auto-commit" "GDAUI_ACTION_MODIF_AUTO_COMMIT")
+    '("modif-commit-immediate" "GDAUI_ACTION_MODIF_COMMIT_IMMEDIATE")
+    '("ask-confirm-update" "GDAUI_ACTION_ASK_CONFIRM_UPDATE")
+    '("ask-confirm-delete" "GDAUI_ACTION_ASK_CONFIRM_DELETE")
+    '("ask-confirm-insert" "GDAUI_ACTION_ASK_CONFIRM_INSERT")
+    '("report-error" "GDAUI_ACTION_REPORT_ERROR")
+  )
+)
+
+(define-enum Action
+  (in-module "Gdaui")
+  (c-name "GdauiAction")
+  (gtype-id "GDAUI_TYPE_ACTION")
+  (values
+    '("new-data" "GDAUI_ACTION_NEW_DATA")
+    '("write-modified-data" "GDAUI_ACTION_WRITE_MODIFIED_DATA")
+    '("delete-selected-data" "GDAUI_ACTION_DELETE_SELECTED_DATA")
+    '("undelete-selected-data" "GDAUI_ACTION_UNDELETE_SELECTED_DATA")
+    '("reset-data" "GDAUI_ACTION_RESET_DATA")
+    '("move-first-record" "GDAUI_ACTION_MOVE_FIRST_RECORD")
+    '("move-prev-record" "GDAUI_ACTION_MOVE_PREV_RECORD")
+    '("move-next-record" "GDAUI_ACTION_MOVE_NEXT_RECORD")
+    '("move-last-record" "GDAUI_ACTION_MOVE_LAST_RECORD")
+    '("move-first-chunck" "GDAUI_ACTION_MOVE_FIRST_CHUNCK")
+    '("move-prev-chunck" "GDAUI_ACTION_MOVE_PREV_CHUNCK")
+    '("move-next-chunck" "GDAUI_ACTION_MOVE_NEXT_CHUNCK")
+    '("move-last-chunck" "GDAUI_ACTION_MOVE_LAST_CHUNCK")
+  )
+)
+
+(define-flags LoginMode
+  (in-module "Gdaui")
+  (c-name "GdauiLoginMode")
+  (gtype-id "GDAUI_TYPE_LOGIN_MODE")
+  (values
+    '("enable-control-centre-mode" "GDA_UI_LOGIN_ENABLE_CONTROL_CENTRE_MODE")
+    '("hide-dsn-selection-mode" "GDA_UI_LOGIN_HIDE_DSN_SELECTION_MODE")
+    '("hide-direct-connection-mode" "GDA_UI_LOGIN_HIDE_DIRECT_CONNECTION_MODE")
+  )
+)
+
+
+;; From gdaui-basic-form.h
+
+(define-function gdaui_basic_form_get_type
+  (c-name "gdaui_basic_form_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_basic_form_new
+  (c-name "gdaui_basic_form_new")
+  (is-constructor-of "GdauiBasicForm")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdaSet*" "data_set")
+  )
+)
+
+(define-function gdaui_basic_form_new_custom
+  (c-name "gdaui_basic_form_new_custom")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdaSet*" "data_set")
+    '("const-gchar*" "glade_file")
+    '("const-gchar*" "root_element")
+    '("const-gchar*" "form_prefix")
+  )
+)
+
+(define-function gdaui_basic_form_new_in_dialog
+  (c-name "gdaui_basic_form_new_in_dialog")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdaSet*" "data_set")
+    '("GtkWindow*" "parent")
+    '("const-gchar*" "title")
+    '("const-gchar*" "header")
+  )
+)
+
+(define-method get_data_set
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_get_data_set")
+  (return-type "GdaSet*")
+)
+
+(define-method is_valid
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_is_valid")
+  (return-type "gboolean")
+)
+
+(define-method has_been_changed
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_has_been_changed")
+  (return-type "gboolean")
+)
+
+(define-method reset
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_reset")
+  (return-type "none")
+)
+
+(define-method set_current_as_orig
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_set_current_as_orig")
+  (return-type "none")
+)
+
+(define-method show_entry_actions
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_show_entry_actions")
+  (return-type "none")
+  (parameters
+    '("gboolean" "show_actions")
+  )
+)
+
+(define-method entry_show
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_entry_show")
+  (return-type "none")
+  (parameters
+    '("GdaHolder*" "param")
+    '("gboolean" "show")
+  )
+)
+
+(define-method entry_grab_focus
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_entry_grab_focus")
+  (return-type "none")
+  (parameters
+    '("GdaHolder*" "param")
+  )
+)
+
+(define-method entry_set_editable
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_entry_set_editable")
+  (return-type "none")
+  (parameters
+    '("GdaHolder*" "param")
+    '("gboolean" "editable")
+  )
+)
+
+(define-method set_entries_auto_default
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_set_entries_auto_default")
+  (return-type "none")
+  (parameters
+    '("gboolean" "auto_default")
+  )
+)
+
+(define-method set_entries_default
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_set_entries_default")
+  (return-type "none")
+)
+
+(define-method get_entry_widget
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_get_entry_widget")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdaHolder*" "param")
+  )
+)
+
+(define-method get_label_widget
+  (of-object "GdauiBasicForm")
+  (c-name "gdaui_basic_form_get_label_widget")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdaHolder*" "param")
+  )
+)
+
+
+
+;; From gdaui-combo.h
+
+(define-function gdaui_combo_get_type
+  (c-name "gdaui_combo_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_combo_new
+  (c-name "gdaui_combo_new")
+  (is-constructor-of "GdauiCombo")
+  (return-type "GtkWidget*")
+)
+
+(define-function gdaui_combo_new_with_model
+  (c-name "gdaui_combo_new_with_model")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdaDataModel*" "model")
+    '("gint" "n_cols")
+    '("gint*" "cols_index")
+  )
+)
+
+(define-method set_model
+  (of-object "GdauiCombo")
+  (c-name "gdaui_combo_set_model")
+  (return-type "none")
+  (parameters
+    '("GdaDataModel*" "model")
+    '("gint" "n_cols")
+    '("gint*" "cols_index")
+  )
+)
+
+(define-method get_model
+  (of-object "GdauiCombo")
+  (c-name "gdaui_combo_get_model")
+  (return-type "GdaDataModel*")
+)
+
+(define-method add_undef_choice
+  (of-object "GdauiCombo")
+  (c-name "gdaui_combo_add_undef_choice")
+  (return-type "none")
+  (parameters
+    '("gboolean" "add_undef_choice")
+  )
+)
+
+(define-method set_values
+  (of-object "GdauiCombo")
+  (c-name "gdaui_combo_set_values")
+  (return-type "gboolean")
+  (parameters
+    '("const-GSList*" "values")
+  )
+)
+
+(define-method get_values
+  (of-object "GdauiCombo")
+  (c-name "gdaui_combo_get_values")
+  (return-type "GSList*")
+)
+
+(define-method undef_selected
+  (of-object "GdauiCombo")
+  (c-name "gdaui_combo_undef_selected")
+  (return-type "gboolean")
+)
+
+(define-method set_values_ext
+  (of-object "GdauiCombo")
+  (c-name "gdaui_combo_set_values_ext")
+  (return-type "gboolean")
+  (parameters
+    '("const-GSList*" "values")
+    '("gint*" "cols_index")
+  )
+)
+
+(define-method get_values_ext
+  (of-object "GdauiCombo")
+  (c-name "gdaui_combo_get_values_ext")
+  (return-type "GSList*")
+  (parameters
+    '("gint" "n_cols")
+    '("gint*" "cols_index")
+  )
+)
+
+
+
+;; From gdaui-data-entry.h
+
+(define-function gdaui_data_entry_get_type
+  (c-name "gdaui_data_entry_get_type")
+  (return-type "GType")
+)
+
+(define-method set_value_type
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_set_value_type")
+  (return-type "none")
+  (parameters
+    '("GType" "type")
+  )
+)
+
+(define-method get_value_type
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_get_value_type")
+  (return-type "GType")
+)
+
+(define-method set_value
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_set_value")
+  (return-type "none")
+  (parameters
+    '("const-GValue*" "value")
+  )
+)
+
+(define-method get_value
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_get_value")
+  (return-type "GValue*")
+)
+
+(define-method content_is_valid
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_content_is_valid")
+  (return-type "gboolean")
+  (parameters
+    '("GError**" "error")
+  )
+)
+
+(define-method set_original_value
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_set_original_value")
+  (return-type "none")
+  (parameters
+    '("const-GValue*" "value")
+  )
+)
+
+(define-method get_original_value
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_get_original_value")
+  (return-type "const-GValue*")
+)
+
+(define-method reset
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_reset")
+  (return-type "none")
+)
+
+(define-method set_value_default
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_set_value_default")
+  (return-type "none")
+  (parameters
+    '("const-GValue*" "value")
+  )
+)
+
+(define-method set_attributes
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_set_attributes")
+  (return-type "none")
+  (parameters
+    '("GdaValueAttribute" "attrs")
+    '("GdaValueAttribute" "mask")
+  )
+)
+
+(define-method get_attributes
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_get_attributes")
+  (return-type "GdaValueAttribute")
+)
+
+(define-method get_handler
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_get_handler")
+  (return-type "GdaDataHandler*")
+)
+
+(define-method expand_in_layout
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_expand_in_layout")
+  (return-type "gboolean")
+)
+
+(define-method set_editable
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_set_editable")
+  (return-type "none")
+  (parameters
+    '("gboolean" "editable")
+  )
+)
+
+(define-method grab_focus
+  (of-object "GdauiDataEntry")
+  (c-name "gdaui_data_entry_grab_focus")
+  (return-type "none")
+)
+
+
+
+;; From gdaui-data-store.h
+
+(define-function gdaui_data_store_get_type
+  (c-name "gdaui_data_store_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_data_store_new
+  (c-name "gdaui_data_store_new")
+  (is-constructor-of "GdauiDataStore")
+  (return-type "GtkTreeModel*")
+  (parameters
+    '("GdaDataModel*" "model")
+  )
+)
+
+(define-method get_proxy
+  (of-object "GdauiDataStore")
+  (c-name "gdaui_data_store_get_proxy")
+  (return-type "GdaDataProxy*")
+)
+
+(define-method get_row_from_iter
+  (of-object "GdauiDataStore")
+  (c-name "gdaui_data_store_get_row_from_iter")
+  (return-type "gint")
+  (parameters
+    '("GtkTreeIter*" "iter")
+  )
+)
+
+(define-method get_iter_from_values
+  (of-object "GdauiDataStore")
+  (c-name "gdaui_data_store_get_iter_from_values")
+  (return-type "gboolean")
+  (parameters
+    '("GtkTreeIter*" "iter")
+    '("GSList*" "values")
+    '("gint*" "cols_index")
+  )
+)
+
+(define-method set_value
+  (of-object "GdauiDataStore")
+  (c-name "gdaui_data_store_set_value")
+  (return-type "gboolean")
+  (parameters
+    '("GtkTreeIter*" "iter")
+    '("gint" "col")
+    '("const-GValue*" "value")
+  )
+)
+
+(define-method delete
+  (of-object "GdauiDataStore")
+  (c-name "gdaui_data_store_delete")
+  (return-type "none")
+  (parameters
+    '("GtkTreeIter*" "iter")
+  )
+)
+
+(define-method undelete
+  (of-object "GdauiDataStore")
+  (c-name "gdaui_data_store_undelete")
+  (return-type "none")
+  (parameters
+    '("GtkTreeIter*" "iter")
+  )
+)
+
+(define-method append
+  (of-object "GdauiDataStore")
+  (c-name "gdaui_data_store_append")
+  (return-type "gboolean")
+  (parameters
+    '("GtkTreeIter*" "iter")
+  )
+)
+
+
+
+;; From gdaui-data-widget-filter.h
+
+(define-function gdaui_data_widget_filter_get_type
+  (c-name "gdaui_data_widget_filter_get_type")
+  (return-type "GType")
+)
+
+(define-method filter_new
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_filter_new")
+  (return-type "GtkWidget*")
+)
+
+
+
+;; From gdaui-data-widget.h
+
+(define-function gdaui_data_widget_get_type
+  (c-name "gdaui_data_widget_get_type")
+  (return-type "GType")
+)
+
+(define-method get_proxy
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_get_proxy")
+  (return-type "GdaDataProxy*")
+)
+
+(define-method get_actions_group
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_get_actions_group")
+  (return-type "GtkActionGroup*")
+)
+
+(define-method perform_action
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_perform_action")
+  (return-type "none")
+  (parameters
+    '("GdauiAction" "action")
+  )
+)
+
+(define-method column_show
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_column_show")
+  (return-type "none")
+  (parameters
+    '("gint" "column")
+  )
+)
+
+(define-method column_hide
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_column_hide")
+  (return-type "none")
+  (parameters
+    '("gint" "column")
+  )
+)
+
+(define-method column_set_editable
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_column_set_editable")
+  (return-type "none")
+  (parameters
+    '("gint" "column")
+    '("gboolean" "editable")
+  )
+)
+
+(define-method column_show_actions
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_column_show_actions")
+  (return-type "none")
+  (parameters
+    '("gint" "column")
+    '("gboolean" "show_actions")
+  )
+)
+
+(define-method get_gda_model
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_get_gda_model")
+  (return-type "GdaDataModel*")
+)
+
+(define-method set_gda_model
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_set_gda_model")
+  (return-type "none")
+  (parameters
+    '("GdaDataModel*" "model")
+  )
+)
+
+(define-method get_current_data
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_get_current_data")
+  (return-type "GdaDataModelIter*")
+)
+
+(define-method set_write_mode
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_set_write_mode")
+  (return-type "gboolean")
+  (parameters
+    '("GdauiDataWidgetWriteMode" "mode")
+  )
+)
+
+(define-method get_write_mode
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_get_write_mode")
+  (return-type "GdauiDataWidgetWriteMode")
+)
+
+(define-method set_data_layout_from_file
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_set_data_layout_from_file")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "file_name")
+    '("const-gchar*" "parent_table")
+  )
+)
+
+
+
+;; From gdaui-data-widget-info.h
+
+(define-function gdaui_data_widget_info_get_type
+  (c-name "gdaui_data_widget_info_get_type")
+  (return-type "GType")
+)
+
+(define-method info_new
+  (of-object "GdauiDataWidget")
+  (c-name "gdaui_data_widget_info_new")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdauiDataWidgetInfoFlag" "flags")
+  )
+)
+
+
+
+;; From gdaui-decl.h
+
+
+
+;; From gdaui-easy.h
+
+(define-function gdaui_new_data_entry
+  (c-name "gdaui_new_data_entry")
+  (return-type "GdauiDataEntry*")
+  (parameters
+    '("GType" "type")
+    '("const-gchar*" "plugin_name")
+  )
+)
+
+
+
+;; From gdaui-enums.h
+
+
+
+;; From gdaui-enum-types.h
+
+(define-function gdaui_data_widget_write_mode_get_type
+  (c-name "gdaui_data_widget_write_mode_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_data_widget_info_flag_get_type
+  (c-name "gdaui_data_widget_info_flag_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_action_mode_get_type
+  (c-name "gdaui_action_mode_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_action_get_type
+  (c-name "gdaui_action_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_login_mode_get_type
+  (c-name "gdaui_login_mode_get_type")
+  (return-type "GType")
+)
+
+
+
+;; From gdaui-form.h
+
+(define-function gdaui_form_get_type
+  (c-name "gdaui_form_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_form_new
+  (c-name "gdaui_form_new")
+  (is-constructor-of "GdauiForm")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdaDataModel*" "model")
+  )
+)
+
+
+
+;; From gdaui-grid.h
+
+(define-function gdaui_grid_get_type
+  (c-name "gdaui_grid_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_grid_new
+  (c-name "gdaui_grid_new")
+  (is-constructor-of "GdauiGrid")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdaDataModel*" "model")
+  )
+)
+
+(define-method get_selection
+  (of-object "GdauiGrid")
+  (c-name "gdaui_grid_get_selection")
+  (return-type "GList*")
+)
+
+(define-method set_sample_size
+  (of-object "GdauiGrid")
+  (c-name "gdaui_grid_set_sample_size")
+  (return-type "none")
+  (parameters
+    '("gint" "sample_size")
+  )
+)
+
+
+
+;; From gdaui-login.h
+
+(define-function gdaui_login_get_type
+  (c-name "gdaui_login_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_login_new
+  (c-name "gdaui_login_new")
+  (is-constructor-of "GdauiLogin")
+  (return-type "GtkWidget*")
+  (parameters
+    '("const-gchar*" "dsn")
+  )
+)
+
+(define-method set_mode
+  (of-object "GdauiLogin")
+  (c-name "gdaui_login_set_mode")
+  (return-type "none")
+  (parameters
+    '("GdauiLoginMode" "mode")
+  )
+)
+
+(define-method get_connection_information
+  (of-object "GdauiLogin")
+  (c-name "gdaui_login_get_connection_information")
+  (return-type "const-GdaDsnInfo*")
+)
+
+(define-method set_dsn
+  (of-object "GdauiLogin")
+  (c-name "gdaui_login_set_dsn")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "dsn")
+  )
+)
+
+(define-method set_connection_information
+  (of-object "GdauiLogin")
+  (c-name "gdaui_login_set_connection_information")
+  (return-type "none")
+  (parameters
+    '("const-GdaDsnInfo*" "cinfo")
+  )
+)
+
+
+
+;; From gdaui-provider-selector.h
+
+(define-function gdaui_provider_selector_get_type
+  (c-name "gdaui_provider_selector_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_provider_selector_new
+  (c-name "gdaui_provider_selector_new")
+  (is-constructor-of "GdauiProviderSelector")
+  (return-type "GtkWidget*")
+)
+
+(define-method get_provider_obj
+  (of-object "GdauiProviderSelector")
+  (c-name "gdaui_provider_selector_get_provider_obj")
+  (return-type "GdaServerProvider*")
+)
+
+(define-method get_provider
+  (of-object "GdauiProviderSelector")
+  (c-name "gdaui_provider_selector_get_provider")
+  (return-type "const-gchar*")
+)
+
+(define-method set_provider
+  (of-object "GdauiProviderSelector")
+  (c-name "gdaui_provider_selector_set_provider")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "provider")
+  )
+)
+
+
+
+;; From gdaui-raw-form.h
+
+(define-function gdaui_raw_form_get_type
+  (c-name "gdaui_raw_form_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_raw_form_new
+  (c-name "gdaui_raw_form_new")
+  (is-constructor-of "GdauiRawForm")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdaDataModel*" "model")
+  )
+)
+
+
+
+;; From gdaui-raw-grid.h
+
+(define-function gdaui_raw_grid_get_type
+  (c-name "gdaui_raw_grid_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_raw_grid_new
+  (c-name "gdaui_raw_grid_new")
+  (is-constructor-of "GdauiRawGrid")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdaDataModel*" "model")
+  )
+)
+
+(define-method set_sample_size
+  (of-object "GdauiRawGrid")
+  (c-name "gdaui_raw_grid_set_sample_size")
+  (return-type "none")
+  (parameters
+    '("gint" "sample_size")
+  )
+)
+
+(define-method set_sample_start
+  (of-object "GdauiRawGrid")
+  (c-name "gdaui_raw_grid_set_sample_start")
+  (return-type "none")
+  (parameters
+    '("gint" "sample_start")
+  )
+)
+
+(define-method get_selection
+  (of-object "GdauiRawGrid")
+  (c-name "gdaui_raw_grid_get_selection")
+  (return-type "GList*")
+)
+
+
+
+;; From gdaui-server-operation.h
+
+(define-function gdaui_server_operation_get_type
+  (c-name "gdaui_server_operation_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_server_operation_new
+  (c-name "gdaui_server_operation_new")
+  (is-constructor-of "GdauiServerOperation")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdaServerOperation*" "op")
+  )
+)
+
+(define-function gdaui_server_operation_new_in_dialog
+  (c-name "gdaui_server_operation_new_in_dialog")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GdaServerOperation*" "op")
+    '("GtkWindow*" "parent")
+    '("const-gchar*" "title")
+    '("const-gchar*" "header")
+  )
+)
+
+
+
+;; From gdaui-set.h
+
+(define-function gdaui_set_get_type
+  (c-name "gdaui_set_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_set_new
+  (c-name "gdaui_set_new")
+  (is-constructor-of "GdauiSet")
+  (return-type "GdauiSet*")
+  (parameters
+    '("GdaSet*" "set")
+  )
+)
+
+
+
+;; From gdaui-tree-store.h
+
+(define-function gdaui_tree_store_get_type
+  (c-name "gdaui_tree_store_get_type")
+  (return-type "GType")
+)
+
+(define-function gdaui_tree_store_new
+  (c-name "gdaui_tree_store_new")
+  (is-constructor-of "GdauiTreeStore")
+  (return-type "GtkTreeModel*")
+  (parameters
+    '("GdaTree*" "tree")
+    '("guint" "n_columns")
+  )
+  (varargs #t)
+)
+
+(define-function gdaui_tree_store_newv
+  (c-name "gdaui_tree_store_newv")
+  (return-type "GtkTreeModel*")
+  (parameters
+    '("GdaTree*" "tree")
+    '("guint" "n_columns")
+    '("GType*" "types")
+    '("const-gchar**" "attribute_names")
+  )
+)
+
+
+
+;; From libgda-ui.h
+
+(define-function gdaui_init
+  (c-name "gdaui_init")
+  (return-type "none")
+)
+
+
+;; -*- scheme -*-
+; object definitions ...
+;; Enumerations and flags ...
+
+
+;; From libgda-xslt.h
+
+(define-function gda_xslt_register
+  (c-name "gda_xslt_register")
+  (return-type "none")
+)
+
+(define-function gda_xslt_set_execution_context
+  (c-name "gda_xslt_set_execution_context")
+  (return-type "none")
+  (parameters
+    '("xsltTransformContextPtr" "tcxt")
+    '("GdaXsltExCont*" "exec")
+  )
+)
+
+(define-function gda_xslt_create_context_simple
+  (c-name "gda_xslt_create_context_simple")
+  (return-type "GdaXsltExCont*")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("GError**" "error")
+  )
+)
+
+(define-function gda_xslt_finalize_context
+  (c-name "gda_xslt_finalize_context")
+  (return-type "int")
+  (parameters
+    '("GdaXsltExCont*" "ctx")
   )
 )
 

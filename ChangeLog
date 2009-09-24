@@ -1,3 +1,13 @@
+2009-09-24  Johannes Schmid <jschmid@openismus.com>
+
+	* libgda/src/libgda_enums.defs:
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/libgda_signals.defs:
+	Regenerated .defs files from libgda master (4.1.x version)
+
+	* tools/extra_defs_gen/generate_defs_gda.cc:
+	Added GdaSqlBuilder to the known objects
+
 3.99.18:
 
 2009-09-14  Daniel Elstner  <danielk@openismus.com>
