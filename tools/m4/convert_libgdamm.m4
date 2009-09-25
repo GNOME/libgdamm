@@ -147,6 +147,7 @@ _CONVERSION(`const Glib::ArrayHandle<int>&',`const gint*', `$3.data()')
 _CONVERSION(`const Value&', `GValue*', `const_cast<GValue*>(($3).gobj())')
 _CONVERSION(`const Value&', `const GValue*', `($3).gobj()')
 _CONVERSION(`Value', `GValue*', `($3).gobj()')
+_CONVERSION(`Value&', `GValue*', `($3).gobj()')
 _CONVERSION(`GValue*', `Value', `$2($3)')
 _CONVERSION(`const GValue*', `Value', `$2($3)')
 

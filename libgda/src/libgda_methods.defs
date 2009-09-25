@@ -5051,6 +5051,17 @@
   (varargs #t)
 )
 
+(define-method expr_value
+  (of-object "GdaSqlBuilder")
+  (c-name "gda_sql_builder_expr_value")
+  (return-type "guint")
+  (parameters
+    '("guint" "id")
+    '("GdaDataHandler*" "dh")
+    '("GValue*" "value")
+  )
+)
+
 (define-method param
   (of-object "GdaSqlBuilder")
   (c-name "gda_sql_builder_param")
@@ -5083,7 +5094,7 @@
   (parameters
     '("guint" "id")
     '("GdaSqlOperatorType" "op")
-    '("guint*" "op_ids")
+    '("const-guint*" "op_ids")
     '("gint" "op_ids_size")
   )
 )
@@ -6615,188 +6626,6 @@
 
 ;; -*- scheme -*-
 ; object definitions ...
-(define-object ReportDocument
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaReportDocument")
-  (gtype-id "GDA_TYPE_REPORT_DOCUMENT")
-)
-
-(define-object ReportDocbookDocument
-  (in-module "Gda")
-  (parent "GdaReportDocument")
-  (c-name "GdaReportDocbookDocument")
-  (gtype-id "GDA_TYPE_REPORT_DOCBOOK_DOCUMENT")
-)
-
-(define-object ReportEngine
-  (in-module "Gda")
-  (parent "GObject")
-  (c-name "GdaReportEngine")
-  (gtype-id "GDA_TYPE_REPORT_ENGINE")
-)
-
-(define-object ReportRmlDocument
-  (in-module "Gda")
-  (parent "GdaReportDocument")
-  (c-name "GdaReportRmlDocument")
-  (gtype-id "GDA_TYPE_REPORT_RML_DOCUMENT")
-)
-
-;; Enumerations and flags ...
-
-
-;; From gda-report-docbook-document.h
-
-(define-function gda_report_docbook_document_get_type
-  (c-name "gda_report_docbook_document_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_report_docbook_document_new
-  (c-name "gda_report_docbook_document_new")
-  (is-constructor-of "GdaReportDocbookDocument")
-  (return-type "GdaReportDocument*")
-  (parameters
-    '("GdaReportEngine*" "engine")
-  )
-)
-
-
-
-;; From gda-report-document.h
-
-(define-function gda_report_document_get_type
-  (c-name "gda_report_document_get_type")
-  (return-type "GType")
-)
-
-(define-method set_template
-  (of-object "GdaReportDocument")
-  (c-name "gda_report_document_set_template")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "file")
-  )
-)
-
-(define-method run_as_html
-  (of-object "GdaReportDocument")
-  (c-name "gda_report_document_run_as_html")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "filename")
-    '("GError**" "error")
-  )
-)
-
-(define-method run_as_pdf
-  (of-object "GdaReportDocument")
-  (c-name "gda_report_document_run_as_pdf")
-  (return-type "gboolean")
-  (parameters
-    '("const-gchar*" "filename")
-    '("GError**" "error")
-  )
-)
-
-
-
-;; From gda-report-engine.h
-
-(define-function gda_report_engine_get_type
-  (c-name "gda_report_engine_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_report_engine_new
-  (c-name "gda_report_engine_new")
-  (is-constructor-of "GdaReportEngine")
-  (return-type "GdaReportEngine*")
-  (parameters
-    '("xmlNodePtr" "spec_node")
-  )
-)
-
-(define-function gda_report_engine_new_from_string
-  (c-name "gda_report_engine_new_from_string")
-  (return-type "GdaReportEngine*")
-  (parameters
-    '("const-gchar*" "spec_string")
-  )
-)
-
-(define-function gda_report_engine_new_from_file
-  (c-name "gda_report_engine_new_from_file")
-  (return-type "GdaReportEngine*")
-  (parameters
-    '("const-gchar*" "spec_file_name")
-  )
-)
-
-(define-method declare_object
-  (of-object "GdaReportEngine")
-  (c-name "gda_report_engine_declare_object")
-  (return-type "none")
-  (parameters
-    '("GObject*" "object")
-    '("const-gchar*" "obj_name")
-  )
-)
-
-(define-method find_declared_object
-  (of-object "GdaReportEngine")
-  (c-name "gda_report_engine_find_declared_object")
-  (return-type "GObject*")
-  (parameters
-    '("GType" "obj_type")
-    '("const-gchar*" "obj_name")
-  )
-)
-
-(define-method run_as_node
-  (of-object "GdaReportEngine")
-  (c-name "gda_report_engine_run_as_node")
-  (return-type "xmlNodePtr")
-  (parameters
-    '("GError**" "error")
-  )
-)
-
-(define-method run_as_doc
-  (of-object "GdaReportEngine")
-  (c-name "gda_report_engine_run_as_doc")
-  (return-type "xmlDocPtr")
-  (parameters
-    '("GError**" "error")
-  )
-)
-
-
-
-;; From gda-report-rml-document.h
-
-(define-function gda_report_rml_document_get_type
-  (c-name "gda_report_rml_document_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_report_rml_document_new
-  (c-name "gda_report_rml_document_new")
-  (is-constructor-of "GdaReportRmlDocument")
-  (return-type "GdaReportDocument*")
-  (parameters
-    '("GdaReportEngine*" "engine")
-  )
-)
-
-
-
-;; From libgda-report.h
-
-
-;; -*- scheme -*-
-; object definitions ...
 (define-object SqlParser
   (in-module "Gda")
   (parent "GObject")
@@ -8006,6 +7835,188 @@
     '("const-GValue*" "value")
   )
 )
+
+
+;; -*- scheme -*-
+; object definitions ...
+(define-object ReportDocument
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaReportDocument")
+  (gtype-id "GDA_TYPE_REPORT_DOCUMENT")
+)
+
+(define-object ReportDocbookDocument
+  (in-module "Gda")
+  (parent "GdaReportDocument")
+  (c-name "GdaReportDocbookDocument")
+  (gtype-id "GDA_TYPE_REPORT_DOCBOOK_DOCUMENT")
+)
+
+(define-object ReportEngine
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaReportEngine")
+  (gtype-id "GDA_TYPE_REPORT_ENGINE")
+)
+
+(define-object ReportRmlDocument
+  (in-module "Gda")
+  (parent "GdaReportDocument")
+  (c-name "GdaReportRmlDocument")
+  (gtype-id "GDA_TYPE_REPORT_RML_DOCUMENT")
+)
+
+;; Enumerations and flags ...
+
+
+;; From gda-report-docbook-document.h
+
+(define-function gda_report_docbook_document_get_type
+  (c-name "gda_report_docbook_document_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_report_docbook_document_new
+  (c-name "gda_report_docbook_document_new")
+  (is-constructor-of "GdaReportDocbookDocument")
+  (return-type "GdaReportDocument*")
+  (parameters
+    '("GdaReportEngine*" "engine")
+  )
+)
+
+
+
+;; From gda-report-document.h
+
+(define-function gda_report_document_get_type
+  (c-name "gda_report_document_get_type")
+  (return-type "GType")
+)
+
+(define-method set_template
+  (of-object "GdaReportDocument")
+  (c-name "gda_report_document_set_template")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "file")
+  )
+)
+
+(define-method run_as_html
+  (of-object "GdaReportDocument")
+  (c-name "gda_report_document_run_as_html")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "filename")
+    '("GError**" "error")
+  )
+)
+
+(define-method run_as_pdf
+  (of-object "GdaReportDocument")
+  (c-name "gda_report_document_run_as_pdf")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "filename")
+    '("GError**" "error")
+  )
+)
+
+
+
+;; From gda-report-engine.h
+
+(define-function gda_report_engine_get_type
+  (c-name "gda_report_engine_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_report_engine_new
+  (c-name "gda_report_engine_new")
+  (is-constructor-of "GdaReportEngine")
+  (return-type "GdaReportEngine*")
+  (parameters
+    '("xmlNodePtr" "spec_node")
+  )
+)
+
+(define-function gda_report_engine_new_from_string
+  (c-name "gda_report_engine_new_from_string")
+  (return-type "GdaReportEngine*")
+  (parameters
+    '("const-gchar*" "spec_string")
+  )
+)
+
+(define-function gda_report_engine_new_from_file
+  (c-name "gda_report_engine_new_from_file")
+  (return-type "GdaReportEngine*")
+  (parameters
+    '("const-gchar*" "spec_file_name")
+  )
+)
+
+(define-method declare_object
+  (of-object "GdaReportEngine")
+  (c-name "gda_report_engine_declare_object")
+  (return-type "none")
+  (parameters
+    '("GObject*" "object")
+    '("const-gchar*" "obj_name")
+  )
+)
+
+(define-method find_declared_object
+  (of-object "GdaReportEngine")
+  (c-name "gda_report_engine_find_declared_object")
+  (return-type "GObject*")
+  (parameters
+    '("GType" "obj_type")
+    '("const-gchar*" "obj_name")
+  )
+)
+
+(define-method run_as_node
+  (of-object "GdaReportEngine")
+  (c-name "gda_report_engine_run_as_node")
+  (return-type "xmlNodePtr")
+  (parameters
+    '("GError**" "error")
+  )
+)
+
+(define-method run_as_doc
+  (of-object "GdaReportEngine")
+  (c-name "gda_report_engine_run_as_doc")
+  (return-type "xmlDocPtr")
+  (parameters
+    '("GError**" "error")
+  )
+)
+
+
+
+;; From gda-report-rml-document.h
+
+(define-function gda_report_rml_document_get_type
+  (c-name "gda_report_rml_document_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_report_rml_document_new
+  (c-name "gda_report_rml_document_new")
+  (is-constructor-of "GdaReportRmlDocument")
+  (return-type "GdaReportDocument*")
+  (parameters
+    '("GdaReportEngine*" "engine")
+  )
+)
+
+
+
+;; From libgda-report.h
 
 
 ;; -*- scheme -*-

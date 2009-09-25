@@ -1,14 +1,27 @@
+2009-09-25  Johannes Schmid <jschmid@openismus.com>
+
+	* libgda/src/sqlbuilder.hg:
+	* libgda/src/sqlbuilder.ccg:
+	Wrapped gda_sql_builder_expr(_value) after it was fixed in libgda
+	
+	* libgda/src/libgda_methods.defs:
+	Regenerated to have the new method
+	
+	* tools/m4/convert_libgdamm.m4:
+	Added Value conversion (can hopefully be removed once libgda fixes the
+	constness of the argument)
+
 2009-09-24  Johannes Schmid <jschmid@openismus.com>
 
-  * libgda/src/filelist.am: 
-  Added sqlbuilder.hg/ccg
-  
-  * libgda/src/sqlbuilder.hg:
-  * libgda/src/sqlbuilder.ccg:
-  Wrapped GdaSqlBuilder class
-  
-  * tools/m4/convert_libgdamm.m4:
-  Added two new enums for GdaSqlBuilder
+	* libgda/src/filelist.am: 
+	Added sqlbuilder.hg/ccg
+
+	* libgda/src/sqlbuilder.hg:
+	* libgda/src/sqlbuilder.ccg:
+	Wrapped GdaSqlBuilder class
+
+	* tools/m4/convert_libgdamm.m4:
+	Added two new enums for GdaSqlBuilder
 
 2009-09-24  Johannes Schmid <jschmid@openismus.com>
 
