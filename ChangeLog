@@ -1,4 +1,10 @@
-2009-09-25  Johannes Schmid <jschmid@openismus.com>
+2009-09-28  Johannes Schmid  <jschmid@openismus.com>
+
+  * libgda/src/sqlbuilder.hg: Use Value instead of Value& to make the 
+  SqlBuilder::param() much more convenient to use.
+  * libgda/libgdamm.h: Add sqlbuilder.h
+
+2009-09-25  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/sqlbuilder.hg:
 	* libgda/src/sqlbuilder.ccg:
@@ -11,7 +17,7 @@
 	Added Value conversion (can hopefully be removed once libgda fixes the
 	constness of the argument)
 
-2009-09-24  Johannes Schmid <jschmid@openismus.com>
+2009-09-24  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/filelist.am: 
 	Added sqlbuilder.hg/ccg
@@ -23,7 +29,7 @@
 	* tools/m4/convert_libgdamm.m4:
 	Added two new enums for GdaSqlBuilder
 
-2009-09-24  Johannes Schmid <jschmid@openismus.com>
+2009-09-24  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/libgda_enums.defs:
 	* libgda/src/libgda_methods.defs:

@@ -52,7 +52,7 @@ public:
   // Expression API
   _WRAP_METHOD(guint ident(guint id, const Glib::ustring& string), gda_sql_builder_ident)
   _IGNORE(gda_sql_builder_expr)
-  _WRAP_METHOD(guint expr(guint id, const Glib::RefPtr<DataHandler>& dh, Value& value), gda_sql_builder_expr_value)
+  _WRAP_METHOD(guint expr(guint id, const Glib::RefPtr<DataHandler>& dh, Value value), gda_sql_builder_expr_value)
    /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param id: the requested ID, or 0 if to be determined automatically
    * @param value: value to set the expression to
@@ -61,7 +61,7 @@ public:
    *
    * @return the ID of the new expression, or 0 if there was an error
    */
-  guint expr(guint id, Value& value);
+  guint expr(guint id, Value value);
   _WRAP_METHOD(guint param(guint id, const Glib::ustring& param_name, GType type, bool nullok), gda_sql_builder_param)
   _WRAP_METHOD(guint cond(guint id, SqlOperatorType op, guint op1, guint op2, guint op3), gda_sql_builder_cond)
   _WRAP_METHOD_DOCS_ONLY(gda_sql_builder_cond_v)

@@ -57,6 +57,7 @@ extern const int libgdamm_micro_version;
 #include <libgdamm/serverprovider.h>
 #include <libgdamm/set.h>
 #include <libgdamm/sqlparser.h>
+#include <libgdamm/sqlbuilder.h>
 #include <libgdamm/statement.h>
 #include <libgdamm/transactionstatus.h>
 #include <libgdamm/xatransaction.h>
