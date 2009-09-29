@@ -439,6 +439,7 @@ void Value::set(const Glib::ustring& val)
 
 void Value::set(const char* val)
 {
+  value_reinit(gobj(), G_TYPE_STRING);
   g_value_set_string(gobj(), val);
 }
 

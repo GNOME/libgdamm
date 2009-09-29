@@ -19,7 +19,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 dist_noinst_DATA = README.txt
 
-check_PROGRAMS = config/example simple/example
+check_PROGRAMS = config/example simple/example sqlbuilder/example
 
 libgdamm_includes = -I$(top_builddir)/libgda $(if $(srcdir:.=),-I$(top_srcdir)/libgda)
 
@@ -30,3 +30,4 @@ LDADD = $(LIBGDAMM_LIBS) $(top_builddir)/libgda/libgdamm/libgdamm-$(LIBGDAMM_API
 
 config_example_SOURCES = config/main.cc
 simple_example_SOURCES = simple/main.cc
+sqlbuilder_example_SOURCES = sqlbuilder/main.cc

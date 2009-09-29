@@ -69,6 +69,13 @@ public:
 
   // Statement API
   _WRAP_METHOD(guint select_add_target(guint id, guint table_id, const Glib::ustring& alias), gda_sql_builder_select_add_target)
+  /** select_add_target with no alias given
+    * @param id: the requested ID, or 0 if to be determined automatically
+    * @param table_id: the ID of the expression holding a table reference
+    *
+    * @return the ID of the new target, or 0 if there was an error
+    */
+  guint select_add_target(guint id, guint table_id);
   _WRAP_METHOD(guint select_join_targets(guint id, guint left_target_id, guint right_target_id, SqlSelectJoinType join_type, guint join_expr), gda_sql_builder_select_join_targets)
   _WRAP_METHOD(void join_add_field(guint join_id, const Glib::ustring& field_name), gda_sql_builder_join_add_field)
   _WRAP_METHOD(void select_order_by(guint expr_id, bool asc, const Glib::ustring& collation_name), gda_sql_builder_select_order_by)

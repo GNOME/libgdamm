@@ -1,8 +1,19 @@
+2009-09-29  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/libgdamm/value.cc: Fix set(const gchar*) to call
+	g_value_reinit()
+	* libgda/src/sqlbuilder.hg/ccg: Add overload for select_add_target() to
+	be able to skip the alias (NULL in C)
+	
+	* examples/sqlbuilder/main.cc:
+	* examples/Makefile.am:
+	Add example for the SqlBuilder usage based on the libgda example
+
 2009-09-28  Johannes Schmid  <jschmid@openismus.com>
 
-  * libgda/src/sqlbuilder.hg: Use Value instead of Value& to make the 
-  SqlBuilder::param() much more convenient to use.
-  * libgda/libgdamm.h: Add sqlbuilder.h
+	* libgda/src/sqlbuilder.hg: Use Value instead of Value& to make the 
+	SqlBuilder::param() much more convenient to use.
+	* libgda/libgdamm.h: Add sqlbuilder.h
 
 2009-09-25  Johannes Schmid  <jschmid@openismus.com>
 
