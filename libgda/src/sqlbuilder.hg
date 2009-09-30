@@ -67,6 +67,16 @@ public:
   _WRAP_METHOD_DOCS_ONLY(gda_sql_builder_cond_v)
   guint cond_v(guint id, SqlOperatorType op, Glib::ArrayHandle<guint> op_ids);
 
+  _IGNORE(gda_sql_builder_add_function, gda_sql_builder_add_function_v)
+  /** add_function
+    * @param id: the requested ID, or 0 if to be determined automatically
+    * @param function_name: the name of the function to embed (e.g. MAX, MIN, ...)
+    * @param args: list of ids of the arguments to the function
+    *
+    * @return the ID of the new target, or 0 if there was an error
+    */
+  guint add_function(guint id, const Glib::ustring& function_name, Glib::ArrayHandle<guint> args);
+
   // Statement API
   _WRAP_METHOD(guint select_add_target(guint id, guint table_id, const Glib::ustring& alias), gda_sql_builder_select_add_target)
   /** select_add_target with no alias given
