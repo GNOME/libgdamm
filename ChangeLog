@@ -3,7 +3,7 @@
 	* libgda/src/row.hg: 
 	* libgda/src/statement.hg:
 	Added _IGNORES for provider-only methods
-	* examples/sqlbuilder: 
+	* examples/sqlbuilder/main.cc: 
 	Added example for new function API
 
 2009-09-30  Johannes Schmid  <jschmid@openismus.com>
