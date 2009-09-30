@@ -51,6 +51,9 @@ protected:
   _WRAP_CTOR(Row(int count), gda_row_new)
 
 public:
+  // Docs say this is mainly for providers
+  _IGNORE(gda_row_invalidate_value, gda_row_value_is_valid)
+  
   _WRAP_CREATE(int count)
 
   _WRAP_METHOD(Value get_value(int num), gda_row_get_value)

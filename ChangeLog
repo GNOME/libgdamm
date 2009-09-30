@@ -1,6 +1,14 @@
+2009-09-30  Johannes Schmid  <jschmid@openismis.com>
+  
+	* libgda/src/row.hg: 
+	* libgda/src/statement.hg:
+	Added _IGNORES for provider-only methods
+	* examples/sqlbuilder: 
+	Added example for new function API
+
 2009-09-30  Johannes Schmid  <jschmid@openismus.com>
 
-  * libgda/src/libgda_methods.defs:
+	* libgda/src/libgda_methods.defs:
 	* libgda/src/sqlbuilder.hg/ccg:
 	Added wrapper for new function API (allow things like MAX() in sql statements)
 	* configure.ac: Require libgda-4.0 >= 3.1.3 (this is master)

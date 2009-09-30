@@ -95,7 +95,7 @@ public:
   #else
   Glib::ustring to_sql(const Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error) const;
   #endif //GLIBMM_EXCEPTIONS_ENABLED
-  _IGNORE(gda_statement_to_sql)
+  _IGNORE(gda_statement_to_sql, gda_statement_to_sql_real)
 
   typedef Glib::ListHandle< const Glib::RefPtr<Holder> > HolderSList;
 

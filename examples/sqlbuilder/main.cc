@@ -65,6 +65,35 @@ int main()
   sel_builder->join_add_field (5, "id");
   render_as_sql(sel_builder);
 
+  // SELECT myfunc (a, 5, 'Joe') FROM mytable
+  Glib::RefPtr<Gnome::Gda::SqlBuilder> func_builder = 
+    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SQL_STATEMENT_SELECT);
+  
+  func_builder->select_add_target(0, func_builder->ident(0, "mytable"));
+
+  std::vector<guint> args;
+  args.push_back(func_builder->ident(0, "a"));
+  args.push_back(func_builder->expr(0, Gnome::Gda::Value(5)));
+  args.push_back(func_builder->expr(0, Gnome::Gda::Value("Joe")));
+  func_builder->add_function(1, "myfunc",
+                             args);
+	func_builder->add_field (1, 0);
+	render_as_sql (func_builder);
+  
+  /* reuse the same GdaSqlBuilder object to have:
+   * SELECT myfunc (a, 5, 'Joe'), MAX (myfunc (a, 5, 'Joe'), b, 10) FROM mytable */
+  std::vector<guint> args2;
+  args2.push_back(1);
+  args2.push_back(3);
+  args2.push_back(4);
+	func_builder->ident(3, "b");
+	func_builder->expr (4, Gnome::Gda::Value(10));
+
+	func_builder->add_function (5, "MAX", args2);
+	func_builder->add_field (5, 0);
+
+	render_as_sql (func_builder);
+  
   return 0;
 }
 
