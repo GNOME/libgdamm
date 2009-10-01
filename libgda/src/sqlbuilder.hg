@@ -95,7 +95,7 @@ public:
    *
    * @return the ID of the new expression, or 0 if there was an error
    */
-  guint add_cond(SqlOperatorType op, guint op1, guint op2, guint op3);
+  guint add_cond(SqlOperatorType op, guint op1, guint op2 = 0, guint op3 = 0);
 
   /** Builds a new expression which reprenents a condition (or operation).
    * @param op: type of condition

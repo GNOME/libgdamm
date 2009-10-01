@@ -1,5 +1,12 @@
 2009-10-01  Johannes Schmid  <jschmid@openismus.com>
 
+	* libgda/src/sqlbuilder.hg: Use default arguments for potentially unused 
+	arguments of add_cond()
+	
+	* examples/sqlbuilder/main.cc: Make use of new default argument
+
+2009-10-01  Johannes Schmid  <jschmid@openismus.com>
+
 	* libgda/src/sqlbuilder.hg/ccg:
 	* libgda/src/libgda_methods.defs:
 	Updated GdaSqlBuilder bindings to use new method names from libgda

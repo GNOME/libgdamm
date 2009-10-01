@@ -31,7 +31,7 @@ int main()
                         up_builder->add_expr(Gnome::Gda::Value("A0E'FESP")));
   guint id = up_builder->add_id("id");
   guint value = up_builder->add_expr(Gnome::Gda::Value(14));
-  guint cond = up_builder->add_cond(Gnome::Gda::SQL_OPERATOR_TYPE_EQ, id, value, 0);
+  guint cond = up_builder->add_cond(Gnome::Gda::SQL_OPERATOR_TYPE_EQ, id, value);
   up_builder->set_where(cond);
 
   render_as_sql (up_builder);
