@@ -1,3 +1,15 @@
+2009-10-01  Johannes Schmid  <jschmid@openismus.com>
+
+	* libgda/src/sqlbuilder.hg/ccg:
+	* libgda/src/libgda_methods.defs:
+	Updated GdaSqlBuilder bindings to use new method names from libgda
+	
+	All methods now return an automatically generated id which should be stored
+	somewhere when it needs to reused. Manual id definition like in the C
+	API has been removed.
+	
+	* examples/sqlbuilder/main.cc: Updated example to new API
+
 2009-09-30  Johannes Schmid  <jschmid@openismis.com>
   
 	* libgda/src/row.hg: 

@@ -5029,9 +5029,9 @@
   )
 )
 
-(define-method ident
+(define-method add_id
   (of-object "GdaSqlBuilder")
-  (c-name "gda_sql_builder_ident")
+  (c-name "gda_sql_builder_add_id")
   (return-type "guint")
   (parameters
     '("guint" "id")
@@ -5039,9 +5039,9 @@
   )
 )
 
-(define-method expr
+(define-method add_expr
   (of-object "GdaSqlBuilder")
-  (c-name "gda_sql_builder_expr")
+  (c-name "gda_sql_builder_add_expr")
   (return-type "guint")
   (parameters
     '("guint" "id")
@@ -5051,9 +5051,9 @@
   (varargs #t)
 )
 
-(define-method expr_value
+(define-method add_expr_value
   (of-object "GdaSqlBuilder")
-  (c-name "gda_sql_builder_expr_value")
+  (c-name "gda_sql_builder_add_expr_value")
   (return-type "guint")
   (parameters
     '("guint" "id")
@@ -5062,9 +5062,9 @@
   )
 )
 
-(define-method param
+(define-method add_param
   (of-object "GdaSqlBuilder")
-  (c-name "gda_sql_builder_param")
+  (c-name "gda_sql_builder_add_param")
   (return-type "guint")
   (parameters
     '("guint" "id")
@@ -5074,9 +5074,9 @@
   )
 )
 
-(define-method cond
+(define-method add_cond
   (of-object "GdaSqlBuilder")
-  (c-name "gda_sql_builder_cond")
+  (c-name "gda_sql_builder_add_cond")
   (return-type "guint")
   (parameters
     '("guint" "id")
@@ -5087,9 +5087,9 @@
   )
 )
 
-(define-method cond_v
+(define-method add_cond_v
   (of-object "GdaSqlBuilder")
-  (c-name "gda_sql_builder_cond_v")
+  (c-name "gda_sql_builder_add_cond_v")
   (return-type "guint")
   (parameters
     '("guint" "id")

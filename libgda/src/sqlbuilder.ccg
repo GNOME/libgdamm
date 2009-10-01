@@ -35,25 +35,55 @@ SqlBuilder::SqlBuilder(SqlStatementType type)
 {
   
 }
-  
-guint SqlBuilder::cond_v(uint id, SqlOperatorType op, Glib::ArrayHandle<uint> op_ids)
+
+guint SqlBuilder::add_id(const Glib::ustring& string)
 {
-  return gda_sql_builder_cond_v(gobj(), id, (GdaSqlOperatorType) op, op_ids.data(), op_ids.size());
+  return gda_sql_builder_add_id(gobj(), 0, string.c_str());
 }
 
-guint SqlBuilder::add_function(guint id, const Glib::ustring& function_name, Glib::ArrayHandle<guint> args)
+guint SqlBuilder::add_expr(const Glib::RefPtr<DataHandler>& dh, Value value)
 {
-  return gda_sql_builder_add_function_v(gobj(), id, function_name.c_str(), args.data(), args.size());
+  return gda_sql_builder_add_expr_value(gobj(), 0, NULL, value.gobj());
 }
 
-guint SqlBuilder::expr(guint id, Value value)
+guint SqlBuilder::add_expr(Value value)
 {
-  return gda_sql_builder_expr_value(gobj(), id, NULL, value.gobj());
+  return gda_sql_builder_add_expr_value(gobj(), 0, NULL, value.gobj());
 }
 
-guint SqlBuilder::select_add_target(guint id, guint table_id)
+guint SqlBuilder::add_param(const Glib::ustring& param_name, GType type, bool nullok)
 {
-  return gda_sql_builder_select_add_target(gobj(), id, table_id, NULL);
+  return gda_sql_builder_add_param(gobj(), 0, param_name.c_str(), type, nullok);
+}
+
+guint SqlBuilder::add_cond(SqlOperatorType op, guint op1, guint op2, guint op3)
+{
+  return gda_sql_builder_add_cond(gobj(), 0, (GdaSqlOperatorType) op, op1, op2, op3);
+}
+
+guint SqlBuilder::add_cond_v(SqlOperatorType op, Glib::ArrayHandle<uint> op_ids)
+{
+  return gda_sql_builder_add_cond_v(gobj(), 0, (GdaSqlOperatorType) op, op_ids.data(), op_ids.size());
+}
+
+guint SqlBuilder::add_function(const Glib::ustring& function_name, Glib::ArrayHandle<guint> args)
+{
+  return gda_sql_builder_add_function_v(gobj(), 0, function_name.c_str(), args.data(), args.size());
+}
+
+guint SqlBuilder::select_add_target(guint table_id, const Glib::ustring& alias)
+{
+  return gda_sql_builder_select_add_target(gobj(), 0, table_id, alias.c_str());
+}
+
+guint SqlBuilder::select_add_target(guint table_id)
+{
+  return gda_sql_builder_select_add_target(gobj(), 0, table_id, NULL);
+}
+
+guint SqlBuilder::select_join_targets(guint left_target_id, guint right_target_id, SqlSelectJoinType join_type, guint join_expr)
+{
+  return gda_sql_builder_select_join_targets(gobj(), 0, left_target_id, right_target_id, (GdaSqlSelectJoinType) join_type, join_expr);
 }
 
 } /* namespace Gda */
