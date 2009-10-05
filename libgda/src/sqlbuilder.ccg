@@ -43,7 +43,7 @@ guint SqlBuilder::add_id(const Glib::ustring& string)
 
 guint SqlBuilder::add_expr(const Glib::RefPtr<DataHandler>& dh, Value value)
 {
-  return gda_sql_builder_add_expr_value(gobj(), 0, NULL, value.gobj());
+  return gda_sql_builder_add_expr_value(gobj(), 0, dh->gobj(), value.gobj());
 }
 
 guint SqlBuilder::add_expr(Value value)
