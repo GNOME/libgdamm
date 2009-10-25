@@ -1,3 +1,14 @@
+2009-10-25  Murray Cumming  <murrayc@murrayc.com>
+
+  SqlBuilder: Small const and other improvements.
+  
+	* libgda/src/sqlbuilder.[hg|ccg]: add_expr(): Use const ref for the Value 
+	parameter. Don't use NULL in C++ code.
+	add_function(): Use const ref for the ArrayHandle parameter.  
+	get_statement(): Make this const.
+	add_cond_v(): Rename to add_cond().
+	select_order_by(): Add default parameter values.
+
 2009-10-05  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/sqlbuilder.ccg: add_expr() should use the DataHandler

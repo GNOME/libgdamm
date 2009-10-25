@@ -45,7 +45,7 @@ protected:
 public:
   _WRAP_CREATE(SqlStatementType type)
 
-  _WRAP_METHOD(Glib::RefPtr<Statement> get_statement(), gda_sql_builder_get_statement, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<Statement> get_statement() const, gda_sql_builder_get_statement, errthrow)
   // TODO: Wrap SqlStatement
   //_WRAP_METHOD(Glib::RefPtr<SqlStatement> get_sql_statement(bool copy_it), gda_sql_builder_get_sql_statement, errthrow)
 
@@ -68,7 +68,7 @@ public:
    *
    * @return the ID of the new expression, or 0 if there was an error
    */
-  guint add_expr(const Glib::RefPtr<DataHandler>& dh, Value value);
+  guint add_expr(const Glib::RefPtr<DataHandler>& dh, const Value& value);
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param value: value to set the expression to
    * 
@@ -76,7 +76,7 @@ public:
    *
    * @return the ID of the new expression, or 0 if there was an error
    */
-  guint add_expr(Value value);
+  guint add_expr(const Value& value);
 
   /** Defines a parameter which may be reused to build other parts of a statement.
    * @param: param_name: name of the parameter
@@ -85,7 +85,7 @@ public:
    *
    * @return the ID of the new expression, or 0 if there was an error
    */
-  guint add_param(const Glib::ustring& param_name, GType type, bool nullok);
+  guint add_param(const Glib::ustring& param_name, GType type, bool nullok = false);
 
   /** Builds a new expression which reprenents a condition (or operation).
    * @param op: type of condition
@@ -103,17 +103,19 @@ public:
    *
    * @return the ID of the new expression, or 0 if there was an error
    */
-  guint add_cond_v(SqlOperatorType op, Glib::ArrayHandle<guint> op_ids);
+  guint add_cond(SqlOperatorType op, const Glib::ArrayHandle<guint>& op_ids);
 
   _IGNORE(gda_sql_builder_add_function, gda_sql_builder_add_function_v)
   _IGNORE(gda_sql_builder_select_add_target, gda_sql_builder_select_join_targets)
-  /** add_function
+  
+  /** Builds a new expression which represents a function applied to some arguments.
+    *
     * @param function_name: the name of the function to embed (e.g. MAX, MIN, ...)
     * @param args: list of ids of the arguments to the function
     *
     * @return the ID of the new target, or 0 if there was an error
     */
-  guint add_function(const Glib::ustring& function_name, Glib::ArrayHandle<guint> args);
+  guint add_function(const Glib::ustring& function_name, const Glib::ArrayHandle<guint>& args);
 
   // Statement API
   /** Adds a new target to a SELECT statement
@@ -142,7 +144,7 @@ public:
    */
   guint select_join_targets(guint left_target_id, guint right_target_id, SqlSelectJoinType join_type, guint join_expr = 0);
   _WRAP_METHOD(void join_add_field(guint join_id, const Glib::ustring& field_name), gda_sql_builder_join_add_field)
-  _WRAP_METHOD(void select_order_by(guint expr_id, bool asc, const Glib::ustring& collation_name), gda_sql_builder_select_order_by)
+  _WRAP_METHOD(void select_order_by(guint expr_id, bool asc = true, const Glib::ustring& collation_name = Glib::ustring()), gda_sql_builder_select_order_by)
   
   // General Statement API
   _WRAP_METHOD(void set_table(const Glib::ustring& table_name), gda_sql_builder_set_table)
