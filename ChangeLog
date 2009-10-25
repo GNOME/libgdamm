@@ -1,5 +1,13 @@
 2009-10-25  Murray Cumming  <murrayc@murrayc.com>
 
+  Statement::to_sql(), Connection::statement*(): const corrections.
+  
+	* libgda/src/statement.[hg|ccg|: to_sql(): Make the params parameter const.
+  * libgda/src/connection.[hg|ccg|: statement_execute*(), statement_to_sql():
+  Make the statement and params parameters const.
+
+2009-10-25  Murray Cumming  <murrayc@murrayc.com>
+
   SqlBuilder: Small const and other improvements.
   
 	* libgda/src/sqlbuilder.[hg|ccg]: add_expr(): Use const ref for the Value 

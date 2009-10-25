@@ -116,16 +116,16 @@ public:
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_execute)
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage, Glib::RefPtr<Set>& last_insert_row);
+  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, Glib::RefPtr<const Set>& last_insert_row);
 #else
-  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage, Glib::RefPtr<Set>& last_insert_row, std::auto_ptr<Glib::Error>& error);
+  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, Glib::RefPtr<const Set>& last_insert_row, std::auto_ptr<Glib::Error>& error);
 #endif // GLIBMM_EXCEPTIONS_ENABLED
 
 //TODO: Documentation:
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage = STATEMENT_MODEL_RANDOM_ACCESS);
+  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<const Statement>& stmt, StatementModelUsage model_usage = STATEMENT_MODEL_RANDOM_ACCESS);
 #else
-  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
+  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<const Statement>& stmt, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
 #endif // GLIBMM_EXCEPTIONS_ENABLED
 
 
@@ -135,19 +135,19 @@ public:
   Glib::RefPtr<Glib::Object> statement_execute(const Glib::ustring& sql, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
 #endif // GLIBMM_EXCEPTIONS_ENABLED
   
-  _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params), gda_connection_statement_execute_select, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params), gda_connection_statement_execute_select, errthrow)
 
 //TODO: Documentation:
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage = STATEMENT_MODEL_RANDOM_ACCESS);
+  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, StatementModelUsage model_usage = STATEMENT_MODEL_RANDOM_ACCESS);
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, StatementModelUsage model_usage = STATEMENT_MODEL_RANDOM_ACCESS);
 #else
-  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
+  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
 #endif
 
   #m4 _CONVERSION(`const Glib::ArrayHandle<GType>&', `GType*', `const_cast<GType*>(($3).data())')
-  _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage, const Glib::ArrayHandle<GType>& col_types), gda_connection_statement_execute_select_full, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, const Glib::ArrayHandle<GType>& col_types), gda_connection_statement_execute_select_full, errthrow)
   _IGNORE(gda_connection_statement_execute_select_fullv)
   
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_execute_non_select)
@@ -156,23 +156,23 @@ public:
 //TODO: Documentation:
 //TODO: It's not nice that these two method overloads differ only by the constness of the set.
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, Glib::RefPtr<Set>& last_insert_row);
+  int statement_execute_non_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, Glib::RefPtr<const Set>& last_insert_row);
 #else
-  int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, Glib::RefPtr<Set>& last_insert_row, std::auto_ptr<Glib::Error>& error);
+  int statement_execute_non_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, Glib::RefPtr<const Set>& last_insert_row, std::auto_ptr<Glib::Error>& error);
 #endif //GLIBMM_EXCEPTIONS_ENABLED  
 
 //TODO: Documentation:
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params);
+  int statement_execute_non_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params);
 #else
-  int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt,  const Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error);
+  int statement_execute_non_select(const Glib::RefPtr<const Statement>& stmt,  const Glib::RefPtr<const Set>& params, std::auto_ptr<Glib::Error>& error);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 
 //TODO: Documentation:
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt);
+  int statement_execute_non_select(const Glib::RefPtr<const Statement>& stmt);
 #else
-  int statement_execute_non_select(const Glib::RefPtr<Statement>& stmt, std::auto_ptr<Glib::Error>& error);
+  int statement_execute_non_select(const Glib::RefPtr<const Statement>& stmt, std::auto_ptr<Glib::Error>& error);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
   
   _WRAP_METHOD(int statement_execute_non_select(const Glib::ustring& sql), gda_execute_non_select_command, errthrow)
@@ -283,7 +283,7 @@ public:
   bool update_meta_store_data_types(std::auto_ptr<Glib::Error>& err);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
   
-  _WRAP_METHOD(bool statement_prepare(const Glib::RefPtr<Statement>& stmt), gda_connection_statement_prepare, errthrow)
+  _WRAP_METHOD(bool statement_prepare(const Glib::RefPtr<const Statement>& stmt), gda_connection_statement_prepare, errthrow)
 
 
   #m4 _CONVERSION(`const Glib::ListHandle< Glib::RefPtr<Holder> >&',`GList*',`$3.data()')
@@ -300,8 +300,8 @@ public:
   _WRAP_METHOD(Glib::RefPtr<const MetaStore> get_meta_store() const, gda_connection_get_meta_store, constversion)
 
   #m4 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<Glib::Object> >',`$2((GSList*)$3, Glib::OWNERSHIP_SHALLOW)')
-  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<Glib::Object> > batch_execute(const Glib::RefPtr<Batch>& batch, const Glib::RefPtr<Set>& params, StatementModelUsage model_usage), gda_connection_batch_execute, errthrow)
-  _WRAP_METHOD(Glib::RefPtr<ServerOperation> create_operation(ServerOperationType type, const Glib::RefPtr<Set>& options), gda_connection_create_operation, errthrow)
+  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<Glib::Object> > batch_execute(const Glib::RefPtr<Batch>& batch, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage), gda_connection_batch_execute, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<ServerOperation> create_operation(ServerOperationType type, const Glib::RefPtr<const Set>& options), gda_connection_create_operation, errthrow)
   _WRAP_METHOD(bool perform_operation(const Glib::RefPtr<ServerOperation>& op), gda_connection_perform_operation, errthrow)
 
   _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider(), gda_connection_get_provider, refreturn)
@@ -311,9 +311,9 @@ public:
 
   //TODO: Add an overload without the params_used.
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  Glib::ustring statement_to_sql(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used);
+  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used);
   #else
-  Glib::ustring statement_to_sql(const Glib::RefPtr<Statement>& stmt, const Glib::RefPtr<Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used, std::auto_ptr<Glib::Error>& error);
+  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used, std::auto_ptr<Glib::Error>& error);
   #endif //GLIBMM_EXCEPTIONS_ENABLED
     
   #m4 _CONVERSION(`GdaConnectionEvent*',`const Glib::RefPtr<ConnectionEvent>&',Glib::wrap($3, true))

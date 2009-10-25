@@ -80,15 +80,15 @@ Glib::ustring Statement::to_sql(std::auto_ptr<Glib::Error>& error) const
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-Glib::ustring Statement::to_sql(const Glib::RefPtr<Set>& params) const
+Glib::ustring Statement::to_sql(const Glib::RefPtr<const Set>& params) const
 #else
-Glib::ustring Statement::to_sql(const Glib::RefPtr<Set>& params, std::auto_ptr<Glib::Error>& error) const
+Glib::ustring Statement::to_sql(const Glib::RefPtr<const Set>& params, std::auto_ptr<Glib::Error>& error) const
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
   const Glib::ustring retval = 
     Glib::convert_return_gchar_ptr_to_ustring(
-      gda_statement_to_sql(const_cast<GdaStatement*>(gobj()), Glib::unwrap(params), &gerror));
+      gda_statement_to_sql(const_cast<GdaStatement*>(gobj()), const_cast<GdaSet*>(Glib::unwrap(params)), &gerror));
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
@@ -100,10 +100,10 @@ Glib::ustring Statement::to_sql(const Glib::RefPtr<Set>& params, std::auto_ptr<G
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-Glib::ustring Statement::to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
+Glib::ustring Statement::to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<const Set>& params, 
                               StatementSqlFlag flags, const HolderSList&) const
 #else
-Glib::ustring Statement::to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<Set>& params, 
+Glib::ustring Statement::to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<const Set>& params, 
                               StatementSqlFlag flags, const HolderSList&,
                               std::auto_ptr<Glib::Error>& error) const
 #endif //GLIBMM_EXCEPTIONS_ENABLED
@@ -112,7 +112,7 @@ Glib::ustring Statement::to_sql(const Glib::RefPtr<Connection>& cnc, const Glib:
   GSList* list = 0;
   const Glib::ustring retval = 
     Glib::convert_return_gchar_ptr_to_ustring(
-      gda_statement_to_sql_extended(const_cast<GdaStatement*>(gobj()), Glib::unwrap(cnc), Glib::unwrap(params), (GdaStatementSqlFlag) flags, &list, &gerror));
+      gda_statement_to_sql_extended(const_cast<GdaStatement*>(gobj()), Glib::unwrap(cnc), const_cast<GdaSet*>(Glib::unwrap(params)), (GdaStatementSqlFlag) flags, &list, &gerror));
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);

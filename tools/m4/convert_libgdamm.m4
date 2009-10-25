@@ -53,6 +53,7 @@ _CONVERSION(`const Glib::RefPtr<ServerOperation>&', `GdaServerOperation*', __CON
 _CONVERSION(`const Glib::RefPtr<TransactionStatus>&', `GdaTransactionStatus*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Connection>&', `GdaConnection*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Statement>&', `GdaStatement*', __CONVERT_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<const Statement>&', `GdaStatement*', __CONVERT_CONST_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Set>&', `GdaSet*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<Holder>&', `GdaHolder*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<const Set>&', `const GdaSet*', __CONVERT_REFPTR_TO_P)
