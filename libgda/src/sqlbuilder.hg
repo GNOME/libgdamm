@@ -52,21 +52,23 @@ public:
   _IGNORE(gda_sql_builder_add_expr, gda_sql_builder_add_param, gda_sql_builder_add_cond)
   _IGNORE(gda_sql_builder_add_cond_v, gda_sql_builder_add_id)
   _IGNORE(gda_sql_builder_add_expr_value)
-  // Expression API
+  
+  // Expression API:
+  
   /** Defines an expression which may be reused to build other parts of a statement.
-   * @param string: string to use in the SQL
+   * @param string String to use in the SQL
    *
-   * @returns: Returns: the ID of the new expression, or 0 if there was an error
+   * @return The ID of the new expression, or 0 if there was an error.
    */
   guint add_id(const Glib::ustring& string);
 
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
-   * @param dh: the datahandler to use
+   * @param dh The datahandler to use
    * @param value: value to set the expression to
    * 
    * See expr() except that no custom datahandler is given 
    *
-   * @return the ID of the new expression, or 0 if there was an error
+   * @return The ID of the new expression, or 0 if there was an error.
    */
   guint add_expr(const Glib::RefPtr<DataHandler>& dh, const Value& value);
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
@@ -74,34 +76,34 @@ public:
    * 
    * See expr() except that no custom datahandler is given 
    *
-   * @return the ID of the new expression, or 0 if there was an error
+   * @return The ID of the new expression, or 0 if there was an error.
    */
   guint add_expr(const Value& value);
 
   /** Defines a parameter which may be reused to build other parts of a statement.
    * @param: param_name: name of the parameter
    * @type: GType of the parameter
-   * @nullok: true if the parameter can be set to %NULL
+   * @nullok True if the parameter can be set to %NULL
    *
-   * @return the ID of the new expression, or 0 if there was an error
+   * @return The ID of the new expression, or 0 if there was an error.
    */
   guint add_param(const Glib::ustring& param_name, GType type, bool nullok = false);
 
   /** Builds a new expression which reprenents a condition (or operation).
-   * @param op: type of condition
-   * @param op1: the ID of the 1st argument (not 0)
-   * @param op2: the ID of the 2st argument (maybe 0 if op only requires one argument)
-   * @param op3: the ID of the 3st argument (maybe 0 if op only requires one or two arguments)
+   * @param op Type of condition
+   * @param op1 The ID of the 1st argument (not 0)
+   * @param op2 The ID of the 2st argument (maybe 0 if op only requires one argument)
+   * @param op3 The ID of the 3st argument (maybe 0 if op only requires one or two arguments)
    *
-   * @return the ID of the new expression, or 0 if there was an error
+   * @return The ID of the new expression, or 0 if there was an error.
    */
   guint add_cond(SqlOperatorType op, guint op1, guint op2 = 0, guint op3 = 0);
 
   /** Builds a new expression which reprenents a condition (or operation).
-   * @param op: type of condition
+   * @param op Type of condition
    * @param op_ids: list of IDs of the operands of the condition
    *
-   * @return the ID of the new expression, or 0 if there was an error
+   * @return The ID of the new expression, or 0 if there was an error.
    */
   guint add_cond(SqlOperatorType op, const Glib::ArrayHandle<guint>& op_ids);
 
@@ -110,39 +112,40 @@ public:
   
   /** Builds a new expression which represents a function applied to some arguments.
     *
-    * @param function_name: the name of the function to embed (e.g. MAX, MIN, ...)
+    * @param function_name The name of the function to embed (e.g. MAX, MIN, ...)
     * @param args: list of ids of the arguments to the function
     *
-    * @return the ID of the new target, or 0 if there was an error
+    * @return The ID of the new target, or 0 if there was an error.
     */
   guint add_function(const Glib::ustring& function_name, const Glib::ArrayHandle<guint>& args);
 
   // Statement API
   /** Adds a new target to a SELECT statement
-   * @param table_id: the ID of the expression holding a table reference
-   * @param alias: the alias to give to the target
+   * @param table_id The ID of the expression holding a table reference.
+   * @param alias The alias to give to the target.
    *
-   * @return the ID of the new target, or 0 if there was an error
+   * @return The ID of the new target, or 0 if there was an error.
    */
   guint select_add_target(guint table_id, const Glib::ustring& alias);
 
   /** select_add_target with no alias given
-   * @param id: the requested ID, or 0 if to be determined automatically
-   * @param table_id: the ID of the expression holding a table reference
+   * @param id The requested ID, or 0 if to be determined automatically
+   * @param table_id The ID of the expression holding a table reference
    *
-   * @return the ID of the new target, or 0 if there was an error
+   * @return The ID of the new target, or 0 if there was an error.
    */
   guint select_add_target(guint table_id);
 
   /** Joins two targets in a SELECT statement
-   * @param left_target_id: the ID of the left target to use (not %0)
-   * @param right_target_id: the ID of the right target to use (not %0)
-   * @param join_type: the type of join
-   * @param join_expr: joining expression's ID, or %0
+   * @param left_target_id The ID of the left target to use (not %0)
+   * @param right_target_id The ID of the right target to use (not %0)
+   * @param join_type The type of join
+   * @param join_expr Joining expression's ID, or %0
    *
-   * @return the ID of the new join, or 0 if there was an error
+   * @return The ID of the new join, or 0 if there was an error.
    */
   guint select_join_targets(guint left_target_id, guint right_target_id, SqlSelectJoinType join_type, guint join_expr = 0);
+  
   _WRAP_METHOD(void join_add_field(guint join_id, const Glib::ustring& field_name), gda_sql_builder_join_add_field)
   _WRAP_METHOD(void select_order_by(guint expr_id, bool asc = true, const Glib::ustring& collation_name = Glib::ustring()), gda_sql_builder_select_order_by)
   
