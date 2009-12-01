@@ -71,6 +71,7 @@ public:
    * @return The ID of the new expression, or 0 if there was an error.
    */
   guint add_expr(const Glib::RefPtr<DataHandler>& dh, const Value& value);
+
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param value: value to set the expression to
    * 
@@ -119,6 +120,8 @@ public:
     */
   guint add_function(const Glib::ustring& function_name, const Glib::ArrayHandle<guint>& args);
 
+  _WRAP_METHOD(void select_add_field(const Glib::ustring& field_name, const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring()), gda_sql_builder_select_add_field)
+
   // Statement API
   /** Adds a new target to a SELECT statement
    * @param table_id The ID of the expression holding a table reference.
@@ -152,7 +155,17 @@ public:
   // General Statement API
   _WRAP_METHOD(void set_table(const Glib::ustring& table_name), gda_sql_builder_set_table)
   _WRAP_METHOD(void set_where(guint cond_id), gda_sql_builder_set_where)
+
   _WRAP_METHOD(void add_field_id(guint field_id, guint value_id = 0), gda_sql_builder_add_field_id)
+
+  //TODO: Add templated version:
+  _WRAP_METHOD(void add_field_value(const Glib::ustring& field_name, const Value& value), gda_sql_builder_add_field_value)
+  _IGNORE(gda_sql_builder_add_field)
+
+
+/* COMPOUND SELECT Statement API */
+  //TODO: Wrap the enum when we wrap GdaSqlStatementCompound _WRAP_METHOD(void compound_set_type(SqlStatementCompoundType compound_type), gda_sql_builder_compound_set_type)
+  //The steal parameter suggests that this is an internal function: _WRAP_METHOD(void compound_add_sub_select(const Glib::RefPtr<SqlStatement>& sqlst, bool steal), gda_sql_builder_compound_add_sub_select)
   
 };
 

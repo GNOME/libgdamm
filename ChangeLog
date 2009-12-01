@@ -1,5 +1,12 @@
 2009-12-01  Murray Cumming  <murrayc@murrayc.com>
 
+	SqlBuilder: Added 2 more methods.
+
+	* libgda/src/sqlbuilder.hg: Added add_field_value() and 
+	select_add_field().
+
+2009-12-01  Murray Cumming  <murrayc@murrayc.com>
+
 	Fix the build with the latest libgdamm.
 
 	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py
