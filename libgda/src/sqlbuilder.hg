@@ -152,7 +152,7 @@ public:
   // General Statement API
   _WRAP_METHOD(void set_table(const Glib::ustring& table_name), gda_sql_builder_set_table)
   _WRAP_METHOD(void set_where(guint cond_id), gda_sql_builder_set_where)
-  _WRAP_METHOD(void add_field(guint field_id, guint value_id = 0), gda_sql_builder_add_field)
+  _WRAP_METHOD(void add_field_id(guint field_id, guint value_id = 0), gda_sql_builder_add_field_id)
   
 };
 

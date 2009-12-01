@@ -1,3 +1,11 @@
+2009-12-01  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build with the latest libgdamm.
+
+	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py
+	* libgda/src/sqlbuilder.hg: gda_sql_builder_add_field() was renamed to 
+	gda_sql_builder_add_field_id().
+
 2009-10-25  Murray Cumming  <murrayc@murrayc.com>
 
   Statement::to_sql(), Connection::statement*(): const corrections.
