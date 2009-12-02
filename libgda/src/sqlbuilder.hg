@@ -70,7 +70,18 @@ public:
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
-  guint add_expr(const Glib::RefPtr<DataHandler>& dh, const Value& value);
+  template <class ValueType>
+  guint add_expr(const Glib::RefPtr<DataHandler>& dh, const ValueType& value);
+
+  /** Defines an expression in Builder which may be reused to build other parts of a statement.
+   * @param dh The datahandler to use
+   * @param value: value to set the expression to
+   * 
+   * See expr() except that no custom datahandler is given 
+   *
+   * @return The ID of the new expression, or 0 if there was an error.
+   */
+  guint add_expr_as_value(const Glib::RefPtr<DataHandler>& dh, const Value& value);
 
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param value: value to set the expression to
@@ -79,7 +90,17 @@ public:
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
-  guint add_expr(const Value& value);
+  template <class ValueType>
+  guint add_expr(const ValueType& value);
+
+  /** Defines an expression in Builder which may be reused to build other parts of a statement.
+   * @param value: value to set the expression to
+   * 
+   * See expr() except that no custom datahandler is given 
+   *
+   * @return The ID of the new expression, or 0 if there was an error.
+   */
+  guint add_expr_as_value(const Value& value);
 
   /** Defines a parameter which may be reused to build other parts of a statement.
    * @param: param_name: name of the parameter
@@ -158,8 +179,11 @@ public:
 
   _WRAP_METHOD(void add_field_id(guint field_id, guint value_id = 0), gda_sql_builder_add_field_id)
 
-  //TODO: Add templated version:
-  _WRAP_METHOD(void add_field_value(const Glib::ustring& field_name, const Value& value), gda_sql_builder_add_field_value)
+  //TODO: Documentation:
+  template <class ValueType>
+  void add_field_value(const Glib::ustring& field_name, const ValueType& value);
+
+  _WRAP_METHOD(void add_field_value_as_value(const Glib::ustring& field_name, const Value& value), gda_sql_builder_add_field_value)
   _IGNORE(gda_sql_builder_add_field)
 
 
@@ -168,6 +192,31 @@ public:
   //The steal parameter suggests that this is an internal function: _WRAP_METHOD(void compound_add_sub_select(const Glib::RefPtr<SqlStatement>& sqlst, bool steal), gda_sql_builder_compound_add_sub_select)
   
 };
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+
+template <class ValueType> inline
+void SqlBuilder::add_field_value(const Glib::ustring& field_name, const ValueType& value)
+{
+  Gnome::Gda::Value gdavalue(value);
+  this->add_field_value_as_value(field_name, gdavalue);
+}
+
+template <class ValueType> inline
+guint SqlBuilder::add_expr(const Glib::RefPtr<DataHandler>& dh, const ValueType& value)
+{
+  Gnome::Gda::Value gdavalue(value);
+  return this->add_expr_as_value(dh, gdavalue);
+}
+
+template <class ValueType> inline
+guint SqlBuilder::add_expr(const ValueType& value)
+{
+  Gnome::Gda::Value gdavalue(value);
+  return this->add_expr_as_value(gdavalue);
+}
+
+#endif //DOXYGEN_SHOULD_SKIP_THIS
 
 } // namespace Gda
 } // namespace Gnome

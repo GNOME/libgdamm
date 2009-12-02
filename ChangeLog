@@ -1,3 +1,12 @@
+2009-12-02  Murray Cumming  <murrayc@murrayc-desktop>
+
+	SqlBuilder: Make set_field_value() and add_expr() templated.
+
+	* libgda/src/sqlbuilder.[hg|ccg]: set_field_value(): Rename to 
+	set_field_value_as_value. Rename add_expr() to add_expr_as_value().
+	Add templated set_field_value() and add_expr() methods so people 
+	do not need to manually construct a Value object.
+
 2009-12-01  Murray Cumming  <murrayc@murrayc.com>
 
 	SqlBuilder: Added 2 more methods.
