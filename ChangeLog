@@ -1,3 +1,12 @@
+2009-12-04  Murray Cumming  <murrayc@murrayc.com>
+
+	SqlBuilder: select_add_target() now takes a name instead of an ID.
+
+	* libgda/src/libgda_methods.defs: Regenerated
+	* libgda/src/sqlbuilder.[hg|ccg]: select_add_target(): Take the 
+	table name as a string, using the new C function, and give the alias 
+	a default parameter instead of overloading.
+
 2009-12-02  Murray Cumming  <murrayc@murrayc-desktop>
 
 	SqlBuilder: Make set_field_value() and add_expr() templated.

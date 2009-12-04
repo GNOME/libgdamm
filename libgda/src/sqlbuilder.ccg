@@ -71,15 +71,11 @@ guint SqlBuilder::add_function(const Glib::ustring& function_name, const Glib::A
   return gda_sql_builder_add_function_v(gobj(), 0, function_name.c_str(), args.data(), args.size());
 }
 
-guint SqlBuilder::select_add_target(guint table_id, const Glib::ustring& alias)
+guint SqlBuilder::select_add_target(const Glib::ustring& table_name, const Glib::ustring& alias)
 {
-  return gda_sql_builder_select_add_target(gobj(), 0, table_id, alias.c_str());
+  return gda_sql_builder_select_add_target(gobj(), table_name.c_str(), alias.c_str());
 }
 
-guint SqlBuilder::select_add_target(guint table_id)
-{
-  return gda_sql_builder_select_add_target(gobj(), 0, table_id, 0);
-}
 
 guint SqlBuilder::select_join_targets(guint left_target_id, guint right_target_id, SqlSelectJoinType join_type, guint join_expr)
 {

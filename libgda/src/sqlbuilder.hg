@@ -130,7 +130,7 @@ public:
   guint add_cond(SqlOperatorType op, const Glib::ArrayHandle<guint>& op_ids);
 
   _IGNORE(gda_sql_builder_add_function, gda_sql_builder_add_function_v)
-  _IGNORE(gda_sql_builder_select_add_target, gda_sql_builder_select_join_targets)
+   _IGNORE(gda_sql_builder_select_join_targets)
   
   /** Builds a new expression which represents a function applied to some arguments.
     *
@@ -150,15 +150,9 @@ public:
    *
    * @return The ID of the new target, or 0 if there was an error.
    */
-  guint select_add_target(guint table_id, const Glib::ustring& alias);
+  guint select_add_target(const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring());
 
-  /** select_add_target with no alias given
-   * @param id The requested ID, or 0 if to be determined automatically
-   * @param table_id The ID of the expression holding a table reference
-   *
-   * @return The ID of the new target, or 0 if there was an error.
-   */
-  guint select_add_target(guint table_id);
+  _IGNORE(gda_sql_builder_select_add_target_id)
 
   /** Joins two targets in a SELECT statement
    * @param left_target_id The ID of the left target to use (not %0)
