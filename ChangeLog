@@ -1,26 +1,32 @@
+3.99.19:
+
+2010-02-25  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/sqlbuilder/main.cc: Updated for the latest API, hopefully.
+
 2009-12-04  Murray Cumming  <murrayc@murrayc.com>
 
 	SqlBuilder: select_add_target() now takes a name instead of an ID.
 
 	* libgda/src/libgda_methods.defs: Regenerated
-	* libgda/src/sqlbuilder.[hg|ccg]: select_add_target(): Take the 
-	table name as a string, using the new C function, and give the alias 
+	* libgda/src/sqlbuilder.[hg|ccg]: select_add_target(): Take the
+	table name as a string, using the new C function, and give the alias
 	a default parameter instead of overloading.
 
 2009-12-02  Murray Cumming  <murrayc@murrayc-desktop>
 
 	SqlBuilder: Make set_field_value() and add_expr() templated.
 
-	* libgda/src/sqlbuilder.[hg|ccg]: set_field_value(): Rename to 
+	* libgda/src/sqlbuilder.[hg|ccg]: set_field_value(): Rename to
 	set_field_value_as_value. Rename add_expr() to add_expr_as_value().
-	Add templated set_field_value() and add_expr() methods so people 
+	Add templated set_field_value() and add_expr() methods so people
 	do not need to manually construct a Value object.
 
 2009-12-01  Murray Cumming  <murrayc@murrayc.com>
 
 	SqlBuilder: Added 2 more methods.
 
-	* libgda/src/sqlbuilder.hg: Added add_field_value() and 
+	* libgda/src/sqlbuilder.hg: Added add_field_value() and
 	select_add_field().
 
 2009-12-01  Murray Cumming  <murrayc@murrayc.com>
@@ -28,13 +34,13 @@
 	Fix the build with the latest libgdamm.
 
 	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py
-	* libgda/src/sqlbuilder.hg: gda_sql_builder_add_field() was renamed to 
+	* libgda/src/sqlbuilder.hg: gda_sql_builder_add_field() was renamed to
 	gda_sql_builder_add_field_id().
 
 2009-10-25  Murray Cumming  <murrayc@murrayc.com>
 
   Statement::to_sql(), Connection::statement*(): const corrections.
-  
+
 	* libgda/src/statement.[hg|ccg|: to_sql(): Make the params parameter const.
   * libgda/src/connection.[hg|ccg|: statement_execute*(), statement_to_sql():
   Make the statement and params parameters const.
@@ -42,10 +48,10 @@
 2009-10-25  Murray Cumming  <murrayc@murrayc.com>
 
   SqlBuilder: Small const and other improvements.
-  
-	* libgda/src/sqlbuilder.[hg|ccg]: add_expr(): Use const ref for the Value 
+
+	* libgda/src/sqlbuilder.[hg|ccg]: add_expr(): Use const ref for the Value
 	parameter. Don't use NULL in C++ code.
-	add_function(): Use const ref for the ArrayHandle parameter.  
+	add_function(): Use const ref for the ArrayHandle parameter.
 	get_statement(): Make this const.
 	add_cond_v(): Rename to add_cond().
 	select_order_by(): Add default parameter values.
@@ -53,13 +59,13 @@
 2009-10-05  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/sqlbuilder.ccg: add_expr() should use the DataHandler
-	argument when requested 
+	argument when requested
 
 2009-10-01  Johannes Schmid  <jschmid@openismus.com>
 
-	* libgda/src/sqlbuilder.hg: Use default arguments for potentially unused 
+	* libgda/src/sqlbuilder.hg: Use default arguments for potentially unused
 	arguments of add_cond()
-	
+
 	* examples/sqlbuilder/main.cc: Make use of new default argument
 
 2009-10-01  Johannes Schmid  <jschmid@openismus.com>
@@ -67,19 +73,19 @@
 	* libgda/src/sqlbuilder.hg/ccg:
 	* libgda/src/libgda_methods.defs:
 	Updated GdaSqlBuilder bindings to use new method names from libgda
-	
+
 	All methods now return an automatically generated id which should be stored
 	somewhere when it needs to reused. Manual id definition like in the C
 	API has been removed.
-	
+
 	* examples/sqlbuilder/main.cc: Updated example to new API
 
 2009-09-30  Johannes Schmid  <jschmid@openismis.com>
-  
-	* libgda/src/row.hg: 
+
+	* libgda/src/row.hg:
 	* libgda/src/statement.hg:
 	Added _IGNORES for provider-only methods
-	* examples/sqlbuilder/main.cc: 
+	* examples/sqlbuilder/main.cc:
 	Added example for new function API
 
 2009-09-30  Johannes Schmid  <jschmid@openismus.com>
@@ -95,14 +101,14 @@
 	g_value_reinit()
 	* libgda/src/sqlbuilder.hg/ccg: Add overload for select_add_target() to
 	be able to skip the alias (NULL in C)
-	
+
 	* examples/sqlbuilder/main.cc:
 	* examples/Makefile.am:
 	Add example for the SqlBuilder usage based on the libgda example
 
 2009-09-28  Johannes Schmid  <jschmid@openismus.com>
 
-	* libgda/src/sqlbuilder.hg: Use Value instead of Value& to make the 
+	* libgda/src/sqlbuilder.hg: Use Value instead of Value& to make the
 	SqlBuilder::param() much more convenient to use.
 	* libgda/libgdamm.h: Add sqlbuilder.h
 
@@ -111,17 +117,17 @@
 	* libgda/src/sqlbuilder.hg:
 	* libgda/src/sqlbuilder.ccg:
 	Wrapped gda_sql_builder_expr(_value) after it was fixed in libgda
-	
+
 	* libgda/src/libgda_methods.defs:
 	Regenerated to have the new method
-	
+
 	* tools/m4/convert_libgdamm.m4:
 	Added Value conversion (can hopefully be removed once libgda fixes the
 	constness of the argument)
 
 2009-09-24  Johannes Schmid  <jschmid@openismus.com>
 
-	* libgda/src/filelist.am: 
+	* libgda/src/filelist.am:
 	Added sqlbuilder.hg/ccg
 
 	* libgda/src/sqlbuilder.hg:
@@ -205,7 +211,7 @@
 
 2009-08-27  Murray Cumming  <murrayc@murrayc-desktop>
 
-	* docs/reference/Doxyfile.in: Set COLLABORATION_GRAPH back to YES, 
+	* docs/reference/Doxyfile.in: Set COLLABORATION_GRAPH back to YES,
 	so we get hierarchy diagrams again.
 
 2009-08-27  Murray Cumming  <murrayc@murrayc.com>
@@ -356,7 +362,7 @@
 
 2009-07-30  Johannes Schmid <jschmid@openismus.com>
 
-	* libgda/src/set.hg: Fix add_holder() template to work with 
+	* libgda/src/set.hg: Fix add_holder() template to work with
 	disabled exceptions
 
 2009-07-25  Murray Cumming  <murrayc@murrayc.com>
@@ -367,22 +373,22 @@
 
 2009-07-24  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgda/src/connection.ccg: update_meta_store_table(): Comment out the 
-	use of gda_sql_identifier_quote() because we now have the 
-	CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE connection option 
+	* libgda/src/connection.ccg: update_meta_store_table(): Comment out the
+	use of gda_sql_identifier_quote() because we now have the
+	CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE connection option
 	instead.
 
 2009-07-23  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgda/src/libgda_enums.defs: Regenerated with h2defs.py, against 
+	* libgda/src/libgda_enums.defs: Regenerated with h2defs.py, against
 	libgda 4.0.
 
 2009-07-20  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgda/src/connection.ccg: update_meta_store_table(): Use the 
-	(even more horrible) gda_sql_identifier_quote() function instead of 
-	gda_sql_identifier_add_quotes(), because that is now what the documentation 
-	says we should use. 
+	* libgda/src/connection.ccg: update_meta_store_table(): Use the
+	(even more horrible) gda_sql_identifier_quote() function instead of
+	gda_sql_identifier_add_quotes(), because that is now what the documentation
+	says we should use.
 
 2009-07-07  Murray Cumming  <murrayc@murrayc.com>
 
@@ -393,14 +399,14 @@
 	Added MetaStoreError.
 
 	* libgda/src/libgda_enums.defs: Regenerated with enums.pl
-	* libgda/src/metastore.[hg|ccg]: Wrapper GdaMetaStoreError which is 
+	* libgda/src/metastore.[hg|ccg]: Wrapper GdaMetaStoreError which is
 	now thrown by something - not sure what yet.
 
 2009-06-30  Murray Cumming  <murrayc@murrayc.com>
 
 	Fix per-table meta-store retrieval for table names with capital letters.
 
-	* libgda/src/connection.ccg: update_meta_store_table(): 
+	* libgda/src/connection.ccg: update_meta_store_table():
 	Quote the table name so it works with capital letters, spaces, etc.
 	Vivien Malerba stated on the mailing list that this is necessary.
 	I am not convinced that this function works at all anyway though.
@@ -421,7 +427,7 @@
 	Fixed build without exceptions
 
 2009-06-22  Johannes Schmid  <jschmid@openismus.com>
-	
+
 	* libgda/src/connection.ccg:
 	* libgda/src/connection.hg:
 	* libgda/src/holder.hg:
@@ -446,14 +452,14 @@
 
 2009-05-18  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgda/src/dataproxy.ccg: get_values(): Actually return the result, 
+	* libgda/src/dataproxy.ccg: get_values(): Actually return the result,
 	fixing a compiler warning. Bug #582997 (Vincent Untz).
 
 3.99.14:
 
 2009-03-13  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgda/src/connection.[hg|ccg]: Added update_meta_store_data_types() and 
+	* libgda/src/connection.[hg|ccg]: Added update_meta_store_data_types() and
 	update_meta_store_table_names().
 
 2009-03-13  Murray Cumming  <murrayc@murrayc.com>
@@ -464,11 +470,11 @@
 
 	* libgda/src/Makefile_list_of_hg.am_fragment:
 	* libgda/src/error.ccg:
-	* libgda/src/error.hg: Removed these because the corresponding C header is 
+	* libgda/src/error.hg: Removed these because the corresponding C header is
 	now not installed by libgda. This is better anyway.
-	* libgda/src/libgda_signals.defs: Hand-corrected mentions of GdaError to 
+	* libgda/src/libgda_signals.defs: Hand-corrected mentions of GdaError to
 	GError.
-	* tools/m4/convert_libgdamm.m4: Move signal-specific Value and Error 
+	* tools/m4/convert_libgdamm.m4: Move signal-specific Value and Error
 	conversions out of here.
 
 	* libgda/src/dataproxy.hg:
@@ -484,9 +490,9 @@
 	* libgda/src/metastruct.hg:
 	* libgda/src/serveroperation.hg:
 	* libgda/src/set.hg:
-	* libgda/src/statement.hg: Added TODO comments about bugs that I filed 
+	* libgda/src/statement.hg: Added TODO comments about bugs that I filed
 	about unclear libgda API.
-	
+
 2009-03-02  Armin Burgmeier  <armin@openismus.com>
 
 	* libgda/src/xatransaction.hg: Changed type of "format-id" property
@@ -513,25 +519,25 @@
 2009-02-06  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/datahandler.hg:
-	* libgda/src/datamodel.hg: DataHandlerClass and DataModelClass were 
-	renamed to DataHandlerIface and DataModelIface in libgda. Adapted to 
+	* libgda/src/datamodel.hg: DataHandlerClass and DataModelClass were
+	renamed to DataHandlerIface and DataModelIface in libgda. Adapted to
 	fix the build.
 
 2009-01-30  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/libgda_methods.defs: Regenerated.
-	* libgda/src/datahandler.hg: Removed get_nb_g_types() and 
+	* libgda/src/datahandler.hg: Removed get_nb_g_types() and
 	get_g_type_index() because the C functions were removed from libgda.
 
 2009-01-27  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgda/src/set.[hg|ccg]: Rename add_holder(string, value) to 
-	add_holder_as_value(). Added a templated add_holder(string, T), to 
+	* libgda/src/set.[hg|ccg]: Rename add_holder(string, value) to
+	add_holder_as_value(). Added a templated add_holder(string, T), to
 	make application code less annoying.
 
 2009-01-27  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgda/src/serverprovider.[hg|ccg]: Add a create_operation() overload 
+	* libgda/src/serverprovider.[hg|ccg]: Add a create_operation() overload
 	that takes no parameters.
 
 2009-01-27  Johannes Schmid  <jschmid@openismus.com>
@@ -565,7 +571,7 @@
 
 	* libgda/src/statement.ccg:
 	* libgda/src/statement.hg: Rename to_sql_extended() to to_sql().
-	Use Glib::convert_return_gchar_ptr_to_ustring() instead of leaking the 
+	Use Glib::convert_return_gchar_ptr_to_ustring() instead of leaking the
 	string. Added an overload with no arguments. Made them all const.
 
 2009-01-22  Johannes Schmid <jschmid@openismus.com>
@@ -579,7 +585,7 @@
 	* libgda/src/connection.ccg:
 	* libgda/src/connection.hg:
 	Created version with last_inserted_row of statement_execute_non_select()
-	
+
 	* libgda/src/statement.ccg:
 	Take a copy of the GdaSet in get_parameters() because we get a reference
 	problem otherwise
@@ -589,7 +595,7 @@
 	* libgda/src/holder.ccg:
 	* libgda/src/holder.hg:
 	* libgda/src/statement.hg:
-	
+
 	Wrapped GdaHolderError and GdaStatementError
 
 2009-01-20  Johannes Schmid  <jschmid@openismus.com>
@@ -598,7 +604,7 @@
 	* libgda/src/libgda_methods.defs:
 	* libgda/src/libgda_signals.defs:
 	Regenerated
-	
+
 	* libgda/src/sqlparser.hg:
 	* tools/m4/convert_libgdamm.m4:
 	Wrap GdaSqlParserError
@@ -610,7 +616,7 @@
 	* libgda/libgdamm.h:
 	* libgda/src/Makefile_list_of_hg.am_fragment:
 	* tools/extra_defs_gen/generate_defs_gda.cc:
-	* libgda/src/threader.[hg|ccg]: Removed Threader because GdaThreader 
+	* libgda/src/threader.[hg|ccg]: Removed Threader because GdaThreader
 	was removed from libgda.
 
 2009-01-14  Armin Burgmeier  <armin@openismus.com>
@@ -649,8 +655,8 @@
 
 2009-01-03  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgda/src/connection.hg: open_from_string(): Make the auth_string 
-	parameter optional because it is not always needed, for instance with 
+	* libgda/src/connection.hg: open_from_string(): Make the auth_string
+	parameter optional because it is not always needed, for instance with
 	sqlite.
 
 	* libgda/src/datamodelarray.ccg:
@@ -658,8 +664,8 @@
 
 	* libgda/src/column.ccg:
 	* libgda/src/column.hg:
-	* libgda/src/holder.ccg: set_attribute():  Specify a callback to 
-	destroy the provided string, because libgda has stupid memory management 
+	* libgda/src/holder.ccg: set_attribute():  Specify a callback to
+	destroy the provided string, because libgda has stupid memory management
 	for that.
 
 2008-12-27  Johannes Schmid <jschmid@openismus.com>
@@ -671,10 +677,10 @@
 
 	* docs/reference/Doxyfile.in:
 	Fixed some doxygen warnings
-	
+
 	* libgda/src/libgda_docs.xml:
 	Updated documentation
-	
+
 	* libgda/src/metastore.ccg:
 	* libgda/src/quarklist.hg:
 	Fixed build
@@ -684,7 +690,7 @@
 	* examples/simple/main.cc:
 	Added some meta store example though I am not quite sure yet what information
 	would be a good example here
-	
+
 	* libgda/src/connection.ccg:
 	* libgda/src/connection.hg:
 	* libgda/src/metastore.ccg:
@@ -708,22 +714,22 @@
 	* libgda/src/connection.hg:
 	Added some more detailed update_meta_store() methods that speed up the update
 	when only a part of the information is needed.
-	
+
 	* libgda/src/datamodel.hg:
 	* libgda/src/datamodeliter.hg:
 	Fixed build with latest libgda
 
 2008-12-18  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgda/src/connection.hg: Include serverprovider.h, because 
-	the *execute* methods may throw ServerProviderError, though that is not 
+	* libgda/src/connection.hg: Include serverprovider.h, because
+	the *execute* methods may throw ServerProviderError, though that is not
 	documented. See bug #565019.
-	* libgda/src/serverprovider.[hg|ccg]: Do not include connection.h, 
+	* libgda/src/serverprovider.[hg|ccg]: Do not include connection.h,
 	because that would be circular.
 
 2008-12-18  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgda/src/serverprovider.hg: Wrap the GdaServerProviderError 
+	* libgda/src/serverprovider.hg: Wrap the GdaServerProviderError
 	GError/Exception.
 
 2008-12-17  Yaakov Selkowitz  <yselkowitz@users.sourceforge.net>
@@ -745,7 +751,7 @@
 
 	* libgda/src/column.hg:
 	* libgda/src/holder.ccg: Use *set_attribute_static() for now jus t
-	to fix the build with latest libgda, though the true fix is not yet 
+	to fix the build with latest libgda, though the true fix is not yet
 	clear.
 
 2008-12-17  Murray Cumming  <murrayc@murrayc.com>
@@ -753,17 +759,17 @@
 	* libgda/src/datamodel.hg:
 	* libgda/src/datamodeliter.hg:
 	* libgda/src/libgda_docs.xml:
-	* libgda/src/libgda_methods.defs: Change move_at to move_to 
+	* libgda/src/libgda_methods.defs: Change move_at to move_to
 	as in libgda.
 
 2008-12-15  Murray Cumming  <murrayc@murrayc.com>
 
-	Re-committed this, calling the C function directly to avoid a non-NULL 
+	Re-committed this, calling the C function directly to avoid a non-NULL
 	col_types parameter:
 
 	* libgda/src/connection.ccg:
-	* libgda/src/connection.hg: statement_execute_select(): Add a 
-	StatementModelUsage parameter, with a default value, so we can 
+	* libgda/src/connection.hg: statement_execute_select(): Add a
+	StatementModelUsage parameter, with a default value, so we can
 	specify a cursor model.
 	statement_execute_select_full(): Rename to statement_execute_select().
 
@@ -774,7 +780,7 @@
 	* examples/config/Makefile.am:
 	* examples/config/main.cc:
 	Added a tiny example to list the available providers
-	
+
 	* libgda/src/connection.ccg:
 	Some leftover from previous changes...
 
@@ -783,7 +789,7 @@
 	* libgda/src/connection.ccg:
 	* libgda/src/connection.hg:
 	Use gda_execute_non_select_command() instead of hardcoding
-	
+
 	* libgda/src/serveroperation.ccg:
 	* libgda/src/serveroperation.hg:
 	Add gda_perform_create/drop_database and gda_prepare_create/drop_database from
@@ -792,14 +798,14 @@
 2008-12-15  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/connection.ccg:
-	* libgda/src/connection.hg: Reverted my last change because it is 
-	causing weird column-index warnings in Glom. I will try again. 
+	* libgda/src/connection.hg: Reverted my last change because it is
+	causing weird column-index warnings in Glom. I will try again.
 
 2008-12-14  Murray Cumming  <murrayc@murrayc.com>
 
 	* libgda/src/connection.ccg:
-	* libgda/src/connection.hg: statement_execute_select(): Add a 
-	StatementModelUsage parameter, with a default value, so we can 
+	* libgda/src/connection.hg: statement_execute_select(): Add a
+	StatementModelUsage parameter, with a default value, so we can
 	specify a cursor model.
 	statement_execute_select_full(): Rename to statement_execute_select().
 
@@ -808,23 +814,23 @@
 	* libgda/libgdamm/value.h: commented out an unused parameter to
 	silence	a warning.  Patch by Norbert Kiesel <nkiesel@tbdnetworks.com>.
 	bug #554484.
- 
+
 2008-12-12  Murray Cumming  <murrayc@murrayc.com>
 
-	* libgda/src/datamodeliter.hg: Use refreturn on get_holder_for_field(), 
-	as we should for most get_*() that return a RefPtr. Add a const 
+	* libgda/src/datamodeliter.hg: Use refreturn on get_holder_for_field(),
+	as we should for most get_*() that return a RefPtr. Add a const
 	overload too.
-	* libgda/src/holder.hg: set_attribute(): Hand-code this so we can 
-	leak the string, because the (awful, stupid) 
-	gda_holder_set_attribute() function expects it to be a static string, 
-	instead of copying it. You haven't heard the last of this, 
+	* libgda/src/holder.hg: set_attribute(): Hand-code this so we can
+	leak the string, because the (awful, stupid)
+	gda_holder_set_attribute() function expects it to be a static string,
+	instead of copying it. You haven't heard the last of this,
 	gda_holder_set_attribute().
 
 2008-12-12  Murray Cumming  <murrayc@murrayc.com>
 
 	* tools/m4/convert_libgdamm.m4:
-	* libgda/src/connection.[hg|ccg]: Added a get_meta_store_data() 
-	method overload with no filters parameter. 
+	* libgda/src/connection.[hg|ccg]: Added a get_meta_store_data()
+	method overload with no filters parameter.
 
 2008-12-07  Johannes Schmid  <jschmid@openismus.com>
 
@@ -874,7 +880,7 @@
 
 	* examples/simple/main.cc:
 	Use more simplified API
-	
+
 	* libgda/src/connection.hg:
 	Added default arguments
 	* libgda/src/datamodeliter.hg:
@@ -905,8 +911,8 @@
 	* libgda/src/serveroperation.ccg:
 	* libgda/src/serveroperation.hg:
 	* libgda/src/serverprovider.ccg:
-	* libgda/src/serverprovider.hg: Use Gnome::Gda::Value instead of 
-	Glib::ValueBase, as it was in libgdamm-3.0. ValueBase particularly 
+	* libgda/src/serverprovider.hg: Use Gnome::Gda::Value instead of
+	Glib::ValueBase, as it was in libgdamm-3.0. ValueBase particularly
 	cannot be used as a return type.
 
 2008-11-17  Murray Cumming  <murrayc@murrayc.com>
@@ -997,7 +1003,7 @@
 
 	* examples/simple/main.cc:
 	Remove debugging code
-	
+
 	* libgda/src/batch.hg:
 	* libgda/src/blobop.hg:
 	* libgda/src/dataaccesswrapper.hg:
@@ -1025,8 +1031,8 @@
 	* libgda/src/datacomparator.hg:
 	* libgda/src/datamodelarray.hg:
 	* libgda/src/datamodelimport.hg:
-	* libgda/src/dataselect.hg: Derive from DataModel and 
-	use _IMPLEMENTS_INTERFACE() so that dynamic_cast<> works 
+	* libgda/src/dataselect.hg: Derive from DataModel and
+	use _IMPLEMENTS_INTERFACE() so that dynamic_cast<> works
 	when using wrap() on one of these C types.
 
 2008-11-04  Johannes Schmid  <jschmid@openismus.com>
@@ -1039,7 +1045,7 @@
 	* libgda/libgdamm/Makefile.am:
 	* libgda/libgdamm/value_tools.h (deleted):
 	* libgda/libgdamm/value.h (added):
-	* libgda/libgdamm/value.cc (added):	
+	* libgda/libgdamm/value.cc (added):
 	* libgda/src/Makefile_list_of_hg.am_fragment:
 	* libgda/src/connection.hg:
 	* libgda/src/datahandler.ccg:
@@ -1057,7 +1063,7 @@
 	* libgda/src/xatransaction.hg:
 	* tools/extra_defs_gen/generate_defs_gda.cc:
 	* tools/m4/convert_libgdamm.m4:
-	
+
 	Readded GdaValue and converted classes to use it
 
 2008-10-30  Johannes Schmid  <jschmid@openismus.com>
@@ -1080,7 +1086,7 @@
 
 	* libgda/src/error.hg:
 	Don't put typedef in generated file but in hg instead...
-	
+
 	* libgda/src/libgda_signals.defs:
 	* tools/extra_defs_gen/generate_defs_gda.cc:
 	Regenerated signals/properties
@@ -1090,7 +1096,7 @@
 	* libgda/src/Makefile_list_of_hg.am_fragment:
 	* libgda/src/dataaccesswrapper.ccg:
 	* libgda/src/dataaccesswrapper.hg:
-	
+
 	Wrapped GdaDataAccessWrapper
 
 2008-10-30  Johannes Schmid  <jschmid@openismus.com>
@@ -1108,7 +1114,7 @@
 	* libgda/src/datacomparator.ccg:
 	* libgda/src/datacomparator.hg:
 	* tools/m4/convert_libgdamm.m4:
-	
+
 	Wrapped GdaDataComparator
 
 2008-10-16  Johannes Schmid  <jschmid@openismus.com>
@@ -1116,8 +1122,8 @@
 	* libgda/libgdamm/Makefile.am:
 	* libgda/libgdamm/value_tools.h:
 	Added some inline methods for GValue conversions
-	
-	* libgda/src/Makefile_list_of_hg.am_fragment:	
+
+	* libgda/src/Makefile_list_of_hg.am_fragment:
 	* libgda/src/error.*
 	Wrapped GdaError boxed type
 
@@ -1128,7 +1134,7 @@
 
 	* libgda/src/libgda_signals.defs:
 	Edited by hand to fix some wrongly detected signals
-	
+
 	* tools/m4/convert_libgdamm.m4:
 	Added some new conversions for GError and GdaError
 
@@ -1138,7 +1144,7 @@
 	* libgda/src/column.ccg:
 	* libgda/src/column.hg:
 	Wrapped set/get_attribte()
-	
+
 	* libgda/src/connection.ccg:
 	* libgda/src/connection.hg:
 	Wrapped statement_to_sql() and get_meta_store_data()
@@ -1152,7 +1158,7 @@
 	* libgda/src/quarklist.ccg:
 	* libgda/src/quarklist.hg:
 	Wrapped foreach()
-	
+
 	* libgda/src/libgda_enums.defs:
 	* libgda/src/libgda_methods.defs:
 	* libgda/src/libgda_others.defs:
@@ -1171,7 +1177,7 @@
 	* tools/extra_defs_gen/generate_defs_gda.cc:
 	Fix build when libgda-bdb-4.0 is not installed
 
-2008-10-07  Johannes Schmid  <jschmid@openismus.com> 
+2008-10-07  Johannes Schmid  <jschmid@openismus.com>
 
 	* libgda/src/column.ccg:
 	* libgda/src/column.hg:
@@ -1184,7 +1190,7 @@
 
 2008-10-07  Murray Cumming  <murrayc@murrayc.com>
 
-	* configure.in: Added [] around LIBGDAMM_VERSION with AC_SUBST 
+	* configure.in: Added [] around LIBGDAMM_VERSION with AC_SUBST
 	to avoid an odd error.
 
 2008-10-01  Johannes Schmid  <johannes.schmid@openismus.com>

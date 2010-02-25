@@ -1,3 +1,13 @@
+3.99.19: (unstable):
+
+* Added SqlBuilder, for building SQL statements.
+  (Johannes Schmid, Murray Cumming)
+* Connection::statement*(): const correction.
+* Statement::to_sql(): Const correction.
+  (Murray Cumming)
+* Value: Fix set(const gchar*) to call g_value_reinit().
+  (Johannes Schmid)
+
 3.99.18: (unstable)
 
 * MetaStruct: Add the MetaStructError exception, thrown by some methods.
@@ -13,10 +23,10 @@
 3.99.17: (unstable)
 
 * Connection:
-  * Added the CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE which avoids 
+  * Added the CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE which avoids
   exposing backend-specific case and quoting weirdness to applications.
   * update_meta_store_table():
-  Use gda_meta_store_sql_identifier_quote() as mentioned in bug #589607, 
+  Use gda_meta_store_sql_identifier_quote() as mentioned in bug #589607,
   to make this work even with uppercase characters.
 * MetaStore: Can now thow a MetaStoreError exception.
   (Murray Cumming)
@@ -33,16 +43,16 @@
 3.99.15: (unstable)
 
 * Connection: update_meta_store_table_names() and update_meta_store_table().
-  Added an optional schema_name parameter, allowing Glom to use this hack to 
+  Added an optional schema_name parameter, allowing Glom to use this hack to
   increase performance.
   (Armin Burgmeier)
-* DataProxy::get_values(): Actually return the result, fixing a compiler 
+* DataProxy::get_values(): Actually return the result, fixing a compiler
   warning. Bug #582997 (Vincent Untz).
   (Murray Cumming)
-	
+
 3.99.14: (unstable)
 
-* Connection: Added update_meta_store_data_types() and 
+* Connection: Added update_meta_store_data_types() and
   update_meta_store_table_names().
 * Fixed the build with the latest libgda (4.0.0) release.
   (Murray Cumming)
@@ -61,7 +71,7 @@
 3.99.11: (unstable)
 
 * Builds with the latest libgda-4.0 (3.99.11).
-* Connection: statement_execute_non_select(): Added overload with 
+* Connection: statement_execute_non_select(): Added overload with
   last_inserted_row parameter.
   (Johannes Schmid)
 * DataHandler: Removed get_nb_g_types() and get_g_type_index().
@@ -107,7 +117,7 @@ a big API and ABI change. See the libgda 4.0 manual for porting details
 3.0.0: (stable)
 
 * DictConstraint: Removed fkey_set_fields().
-* DictDatabase: update_progress(): 
+* DictDatabase: update_progress():
   Corrected int to guint for parameters.
 * DictField:
   - Added table and entry-plugin properties.
@@ -132,21 +142,21 @@ a big API and ABI change. See the libgda 4.0 manual for porting details
 
 2.9.81
 
-* DataModel: describe_column(): Use refreturn to avoid 
+* DataModel: describe_column(): Use refreturn to avoid
   a reference-counting problem.
-* Connection: Added execute_select_command() and execute_non_select_command() that 
+* Connection: Added execute_select_command() and execute_non_select_command() that
   take the command as a string and that take a parameter list, for convenience.
-* ParameterList: Remove add_param_*() methods, because we already have add_parameter() 
+* ParameterList: Remove add_param_*() methods, because we already have add_parameter()
   methods that wrap the same C functions. Ref the return, to avoid a crash.
   None of these could have worked before.
-* ConnectionEvent: Put the enums inside the Gnome::Gda namespace 
+* ConnectionEvent: Put the enums inside the Gnome::Gda namespace
   instead of inside Gnome::.
 * Value:
   Added get_ulong() and set_ulong() and a constructor.
   (Murray Cumming)
 * Build: Fix build when exceptions are disabled in glibmm.
   (Armin Burgmeier)
-* Documentation: Added simple_iter example to show the use 
+* Documentation: Added simple_iter example to show the use
   of ITER_MODEL_ONLY models.
   (Murray Cumming)
 
@@ -158,27 +168,27 @@ a big API and ABI change. See the libgda 4.0 manual for porting details
 
 2.9.7:
 
-* DictConstraint: pkey_set_fields(), pkey_get_fields(), 
-  fkey_set_fields(), fkey_set_actions(), fkey_get_actions(), 
-  unique_set_fields(), unique_get_fields(): Use SListHandle, so the 
+* DictConstraint: pkey_set_fields(), pkey_get_fields(),
+  fkey_set_fields(), fkey_set_actions(), fkey_get_actions(),
+  unique_set_fields(), unique_get_fields(): Use SListHandle, so the
   application coder can use standard C++ containers.
 
 2.9.6:
 
-* Config: get_provider_by_name(), get_providers(), get_value_string(): 
+* Config: get_provider_by_name(), get_providers(), get_value_string():
   Fix memory problems, fixing crashes.
   (Murray Cumming)
 
 2.9.5:
 
 * ServerProvider: Added get_value_at() and set_value_at().
-  (Armin Burgmeier, Openismus) 
+  (Armin Burgmeier, Openismus)
 * Removed Gnome::Gda::value_compare(), Gnome::Gda::value_compare_ext()
-  and Gnome::Gda::value_equal(). There is Gnome::Gda::Value::operator== 
+  and Gnome::Gda::value_equal(). There is Gnome::Gda::Value::operator==
   to test for equality.  (Armin Burgmeier, Openismus)
 * Parameter: Added set_entry_plugin(). (Armin Burgmeier, Openismus)
 * Build: Cope with newer versions of m4. (Yselkowitz)
- 
+
 2.9.4:
 
 * Added DictFunction and QueryFieldFunc.
@@ -209,7 +219,7 @@ Skipped, I think.
 2.9.2:
 
 * Correct constructors, after fixing the underlying libgda source code:
-  ParameterList, 
+  ParameterList,
 * Query: Renamed is_modif_query() to is_modify_query().
 * Added Query, QueryFieldField, QueryFieldAll, QueryFieldValue, QueryCondition,
   GdaQueryTarget and explained them in the tutorial.
@@ -219,10 +229,10 @@ Skipped, I think.
   (Murray Cumming)
 * Added DataModelArray. (Armin Burgmeier)
 * Added DataProxy. (Armin Burgmeier)
-* Value: Added set(const char*) overload, otherwise the Value(const char*) 
+* Value: Added set(const char*) overload, otherwise the Value(const char*)
   constructor calls set(bool). (Armin Burgmeier)
 * Many new methods wrapped.
-* Lots of reference-counting corrections, const corrections, hierarchy corrections, 
+* Lots of reference-counting corrections, const corrections, hierarchy corrections,
   etc. And updated for latest libgda API, which should really be quite stable now.
   (Armin Burgmeier, Johannes Schmid, Murray Cumming)
 * Added lots of documentation (tutorial and API reference)
@@ -234,7 +244,7 @@ Skipped, I think.
 * First version that wraps libgda-3.0.
 * NOTE TO PACKAGERS:
   This installs in parallel with libgdamm 1.3.x.
-  You should NOT take this opportunity to remove libgdamm 1.3.x 
+  You should NOT take this opportunity to remove libgdamm 1.3.x
   from your distribution because that would break applications such as Glom.
 
 1.3.5:
@@ -245,7 +255,7 @@ Skipped, I think.
 
 * Value:
   - Added operator==() and operator!=().
-  - Added C++ typedefs for Date, Time, Timestamp, and GeometricPoint, 
+  - Added C++ typedefs for Date, Time, Timestamp, and GeometricPoint,
   and used them by value/reference.
   (Murray Cumming)
 
@@ -259,7 +269,7 @@ Skipped, I think.
 * DataModel: get_value_at() memory management fixed.
 * Transaction: constructor fixed.
 * Value:
-  - Implemented the constuctors. 
+  - Implemented the constuctors.
   - Added type_to_string() and type_from_string().
 (Murray Cumming)
 
