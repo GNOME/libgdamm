@@ -30,6 +30,15 @@ namespace Gnome
 namespace Gda
 {
 
+//TODO: Put this in glibmm and use it generally:
+static const char* string_or_null(const Glib::ustring& str)
+{
+  if(str.empty())
+    return 0; //Avoid returning "", because not all C functions check for it properly.
+  else
+    return str.c_str();
+}
+
 SqlBuilder::SqlBuilder(SqlStatementType type)
   : _CONSTRUCT("stmt-type", type)
 {
@@ -73,7 +82,7 @@ guint SqlBuilder::add_function(const Glib::ustring& function_name, const Glib::A
 
 guint SqlBuilder::select_add_target(const Glib::ustring& table_name, const Glib::ustring& alias)
 {
-  return gda_sql_builder_select_add_target(gobj(), table_name.c_str(), alias.c_str());
+  return gda_sql_builder_select_add_target(gobj(), table_name.c_str(), string_or_null(alias.c_str()));
 }
 
 

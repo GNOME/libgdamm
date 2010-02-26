@@ -33,6 +33,7 @@ namespace Gda
 _WRAP_ENUM(SqlOperatorType, GdaSqlOperatorType)
 _WRAP_ENUM(SqlSelectJoinType, GdaSqlSelectJoinType)
 _WRAP_GERROR(SqlBuilderError, GdaSqlBuilderError, GDA_SQL_BUILDER_ERROR)
+_WRAP_GERROR(SqlError, GdaSqlErrorType, GDA_SQL_ERROR)
 
 /*
  * @ingroup Connection
@@ -152,7 +153,7 @@ public:
    */
   guint select_add_target(const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring());
 
-  _IGNORE(gda_sql_builder_select_add_target_id)
+  _IGNORE(gda_sql_builder_select_add_target_id, gda_sql_builder_select_add_target)
 
   /** Joins two targets in a SELECT statement
    * @param left_target_id The ID of the left target to use (not %0)

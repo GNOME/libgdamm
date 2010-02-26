@@ -1,3 +1,12 @@
+2010-02-27  Murray Cumming  <murrayc@murrayc.com>
+
+  SqlBuilder: Add SqlError and fix select_add_target() with no alias.
+  
+	* libgda/src/sqlbuilder.[hg|ccg]: Add SqlError to wrap the GdaSqlError 
+	error domain thrown (but not documented) by SqlBuilder.
+	select_add_target(): Avoid passing a "" alias. I have fixed the C 
+	function in libgda but this makes it safe even when that is not deployed.
+
 3.99.19:
 
 2010-02-25  Murray Cumming  <murrayc@murrayc.com>
