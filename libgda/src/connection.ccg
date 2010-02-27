@@ -223,6 +223,56 @@ int Connection::statement_execute_non_select(const Glib::RefPtr<const Statement>
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
+int Connection::statement_execute_non_select_builder(const Glib::RefPtr<const SqlBuilder>& builder)
+#else
+int Connection::statement_execute_non_select_builder(const Glib::RefPtr<const SqlBuilder>& builder, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  Glib::RefPtr<Gnome::Gda::Statement> stmt;
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  stmt = builder->get_statement(); //Allow any exceptions to be thrown up to the caller.
+#else
+  stmt = builder->get_statement(error);
+  if(error.get())
+    return 0;
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  if(!stmt)
+     return 0;
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  return statement_execute_non_select(stmt);
+#else
+  return statement_execute_non_select(stmt, error);
+#endif
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+int Connection::statement_execute_non_select_builder(const Glib::RefPtr<const SqlBuilder>& builder, const Glib::RefPtr<const Set>& params)
+#else
+int Connection::statement_execute_non_select_builder(const Glib::RefPtr<const SqlBuilder>& builder, const Glib::RefPtr<const Set>& params, std::auto_ptr<Glib::Error>& error)
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+{
+  Glib::RefPtr<Gnome::Gda::Statement> stmt;
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  stmt = builder->get_statement(); //Allow any exceptions to be thrown up to the caller.
+#else
+  stmt = builder->get_statement(error);
+  if(error.get())
+    return 0;
+#endif //GLIBMM_EXCEPTIONS_ENABLED
+
+  if(!stmt)
+     return 0;
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  return statement_execute_non_select(stmt, params);
+#else
+  return statement_execute_non_select(stmt, params, error);
+#endif
+}
+
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used) const
 #else
 Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used, std::auto_ptr<Glib::Error>& error) const

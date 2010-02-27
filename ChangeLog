@@ -1,6 +1,14 @@
+2010-02-27  Murray Cumming  <murrayc@murrayc-x61>
+
+  Connection: Add statement_execute_non_select_builder(SqlBuilder)
+  
+  * libgda/src/connection.[hg|ccg]: Added statement_execute_non_select_builder()
+  overloads that take SqlBuilder, to avoid the need to generate a statement 
+  from a builder.
+
 2010-02-27  Murray Cumming  <murrayc@murrayc.com>
 
-  Connection, SqlBuilder: Addd some convenient method overloads.
+  Connection, SqlBuilder: Add some convenient method overloads.
   
 	* libgda/src/connection.[hg|ccg]: statement_execute_select(statement, params):
 	Add an optional model_usage parameter, as already exists on other method 
