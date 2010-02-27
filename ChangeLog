@@ -1,5 +1,17 @@
 2010-02-27  Murray Cumming  <murrayc@murrayc.com>
 
+  Connection, SqlBuilder: Addd some convenient method overloads.
+  
+	* libgda/src/connection.[hg|ccg]: statement_execute_select(statement, params):
+	Add an optional model_usage parameter, as already exists on other method 
+	overloads.
+	Added statement_execute_select_builder() to avoid the need to generate a 
+	statement from a builder.
+	* libgda/src/sqlbuilder.[hg|ccg]: Added an add_function() overload that 
+	takes only one parameter.
+
+2010-02-27  Murray Cumming  <murrayc@murrayc.com>
+
   SqlBuilder: Add SqlError and fix select_add_target() with no alias.
   
 	* libgda/src/sqlbuilder.[hg|ccg]: Add SqlError to wrap the GdaSqlError 

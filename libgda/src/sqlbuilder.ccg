@@ -80,6 +80,11 @@ guint SqlBuilder::add_function(const Glib::ustring& function_name, const Glib::A
   return gda_sql_builder_add_function_v(gobj(), 0, function_name.c_str(), args.data(), args.size());
 }
 
+guint SqlBuilder::add_function(const Glib::ustring& function_name, guint arg)
+{
+  return gda_sql_builder_add_function(gobj(), 0, function_name.c_str(), arg, 0, 0);
+}
+
 guint SqlBuilder::select_add_target(const Glib::ustring& table_name, const Glib::ustring& alias)
 {
   return gda_sql_builder_select_add_target(gobj(), table_name.c_str(), string_or_null(alias.c_str()));
