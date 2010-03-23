@@ -33,7 +33,7 @@ namespace Gda
 _WRAP_ENUM(SqlOperatorType, GdaSqlOperatorType)
 _WRAP_ENUM(SqlSelectJoinType, GdaSqlSelectJoinType)
 _WRAP_GERROR(SqlBuilderError, GdaSqlBuilderError, GDA_SQL_BUILDER_ERROR)
-_WRAP_GERROR(SqlError, GdaSqlErrorType, GDA_SQL_ERROR)
+_WRAP_GERROR(SqlError, GdaSqlError, GDA_SQL_ERROR)
 
 /*
  * @ingroup Connection

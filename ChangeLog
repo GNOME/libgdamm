@@ -1,3 +1,11 @@
+2010-03-23  Murray Cumming  <murrayc@murrayc.com>
+
+  Fix the build with the latest libgdamm, which slightly broke API and ABI.
+  
+	* libgda/src/libgda_enums.defs: Regenerated.
+	* libgda/src/sqlbuilder.hg: Adapt the SqlError exception wrapper to mention
+	GdaSqlError instead of GdaSqlErrorType.
+
 2010-02-27  Murray Cumming  <murrayc@murrayc-x61>
 
   Connection: Add statement_execute_non_select_builder(SqlBuilder)
