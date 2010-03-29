@@ -96,6 +96,22 @@ guint SqlBuilder::select_join_targets(guint left_target_id, guint right_target_i
   return gda_sql_builder_select_join_targets(gobj(), 0, left_target_id, right_target_id, (GdaSqlSelectJoinType) join_type, join_expr);
 }
 
+void SqlBuilder::select_set_distinct(bool distinct)
+{
+  gda_sql_builder_select_set_distinct(gobj(), distinct, 0);
+}
+
+void SqlBuilder::select_set_limit(guint limit_count, guint offset)
+{
+  const guint id_limit = add_expr(limit_count);
+ 
+  guint id_offset = 0;
+  if(offset != 0)
+    id_offset = add_expr(offset);
+
+  gda_sql_builder_select_set_limit(gobj(), id_limit, id_offset);
+}
+
 } /* namespace Gda */
 
 } /* namespace Gnome */

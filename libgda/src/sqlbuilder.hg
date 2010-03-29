@@ -176,6 +176,23 @@ public:
   
   _WRAP_METHOD(void join_add_field(guint join_id, const Glib::ustring& field_name), gda_sql_builder_join_add_field)
   _WRAP_METHOD(void select_order_by(guint expr_id, bool asc = true, const Glib::ustring& collation_name = Glib::ustring()), gda_sql_builder_select_order_by)
+
+  /** Adds or removes a DISTINCT clause for a SELECT statement.
+   * @param distinct Whether a DISTINCT clause should be in the SELECT statement.
+   * @newin4p2
+   */
+  void select_set_distinct(bool distinct = true);
+
+  _WRAP_METHOD(void select_set_distinct(bool distinct, guint expr_id), gda_sql_builder_select_set_distinct)
+
+  /** Defines the maximum number of rows in the DataModel resulting from the execution of the built statement. 
+   * @param limit_count The number of rows that should be returned.
+   * @param The offset of the first row that should appear in the result. (note that
+   * this feature may not be supported by all the database providers.)
+  */
+  void select_set_limit(guint limit_count, guint offset = 0);
+
+  _WRAP_METHOD(void select_set_limit_id(guint limit_count_expr_id, guint limit_offest_expr_id = 0), gda_sql_builder_select_set_limit)
   
   // General Statement API
   _WRAP_METHOD(void set_table(const Glib::ustring& table_name), gda_sql_builder_set_table)

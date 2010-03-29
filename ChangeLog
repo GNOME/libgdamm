@@ -1,3 +1,11 @@
+2010-03-29  Murray Cumming  <murrayc@murrayc.com>
+
+    SqlBuilder: Added select_set_dictinct() and select_sect_limit().
+
+	* libgda/src/libgda_methods.defs: Regenerated
+	* libgda/src/sqlbuilder.[hg|ccg]: Added select_set_distinct(), 
+    select_set_limit(), set_limit_id(), and select_set_distinct().
+
 2010-03-23  Murray Cumming  <murrayc@murrayc.com>
 
   Fix the build with the latest libgdamm, which slightly broke API and ABI.

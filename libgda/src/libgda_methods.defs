@@ -279,6 +279,15 @@
 
 ;; Enumerations and flags ...
 
+(define-enum BatchError
+  (in-module "Gda")
+  (c-name "GdaBatchError")
+  (gtype-id "GDA_TYPE_BATCH_ERROR")
+  (values
+    '("error" "GDA_BATCH_CONFLICTING_PARAMETER_ERROR")
+  )
+)
+
 (define-enum ConfigError
   (in-module "Gda")
   (c-name "GdaConfigError")
@@ -420,6 +429,7 @@
     '("tables" "GDA_CONNECTION_META_TABLES")
     '("views" "GDA_CONNECTION_META_VIEWS")
     '("fields" "GDA_CONNECTION_META_FIELDS")
+    '("indexes" "GDA_CONNECTION_META_INDEXES")
   )
 )
 
@@ -542,6 +552,20 @@
     '("upd-query" "UPD_QUERY")
     '("del-query" "DEL_QUERY")
     '("nb-queries" "NB_QUERIES")
+  )
+)
+
+(define-enum DataSelectError
+  (in-module "Gda")
+  (c-name "GdaDataSelectError")
+  (gtype-id "GDA_TYPE_DATA_SELECT_ERROR")
+  (values
+    '("modification-statement-error" "GDA_DATA_SELECT_MODIFICATION_STATEMENT_ERROR")
+    '("missing-modification-statement-error" "GDA_DATA_SELECT_MISSING_MODIFICATION_STATEMENT_ERROR")
+    '("connection-error" "GDA_DATA_SELECT_CONNECTION_ERROR")
+    '("access-error" "GDA_DATA_SELECT_ACCESS_ERROR")
+    '("sql-error" "GDA_DATA_SELECT_SQL_ERROR")
+    '("safety-locked-error" "GDA_DATA_SELECT_SAFETY_LOCKED_ERROR")
   )
 )
 
@@ -3367,6 +3391,11 @@
 
 ;; From gda-enum-types.h
 
+(define-function gda_batch_error_get_type
+  (c-name "gda_batch_error_get_type")
+  (return-type "GType")
+)
+
 (define-function gda_config_error_get_type
   (c-name "gda_config_error_get_type")
   (return-type "GType")
@@ -3444,6 +3473,11 @@
 
 (define-function gda_data_proxy_error_get_type
   (c-name "gda_data_proxy_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_select_error_get_type
+  (c-name "gda_data_select_error_get_type")
   (return-type "GType")
 )
 
@@ -5356,6 +5390,26 @@
     '("guint" "expr_id")
     '("gboolean" "asc")
     '("const-gchar*" "collation_name")
+  )
+)
+
+(define-method select_set_distinct
+  (of-object "GdaSqlBuilder")
+  (c-name "gda_sql_builder_select_set_distinct")
+  (return-type "none")
+  (parameters
+    '("gboolean" "distinct")
+    '("guint" "expr_id")
+  )
+)
+
+(define-method select_set_limit
+  (of-object "GdaSqlBuilder")
+  (c-name "gda_sql_builder_select_set_limit")
+  (return-type "none")
+  (parameters
+    '("guint" "limit_count_expr_id")
+    '("guint" "limit_offest_expr_id")
   )
 )
 
