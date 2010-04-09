@@ -1,3 +1,11 @@
+2010-04-09  Armin Burgmeier  <armin@arbur.net>
+
+	SqlBuilder: Make definition and declaration of  add_cond() match
+
+	* libgda/src/sqlbuilder.ccg (add_cond): Fix function header signature
+	to match the declaration in the header (uint->guint), fixing the
+	Windows build.
+
 2010-03-29  Murray Cumming  <murrayc@murrayc.com>
 
     SqlBuilder: Added select_set_dictinct() and select_sect_limit().
