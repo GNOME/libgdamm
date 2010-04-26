@@ -1,3 +1,10 @@
+2010-04-26  Murray Cumming  <murrayc@murrayc.com>
+
+    SqlBuilder: Added select_set_having() and select_group_by().
+
+	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py
+	* libgda/src/sqlbuilder.hg: Added select_set_having(), select_group_by().
+
 2010-04-09  Armin Burgmeier  <armin@arbur.net>
 
 	SqlBuilder: Make definition and declaration of  add_cond() match
@@ -11,13 +18,13 @@
     SqlBuilder: Added select_set_dictinct() and select_sect_limit().
 
 	* libgda/src/libgda_methods.defs: Regenerated
-	* libgda/src/sqlbuilder.[hg|ccg]: Added select_set_distinct(), 
+	* libgda/src/sqlbuilder.[hg|ccg]: Added select_set_distinct(),
     select_set_limit(), set_limit_id(), and select_set_distinct().
 
 2010-03-23  Murray Cumming  <murrayc@murrayc.com>
 
   Fix the build with the latest libgdamm, which slightly broke API and ABI.
-  
+
 	* libgda/src/libgda_enums.defs: Regenerated.
 	* libgda/src/sqlbuilder.hg: Adapt the SqlError exception wrapper to mention
 	GdaSqlError instead of GdaSqlErrorType.
@@ -25,30 +32,30 @@
 2010-02-27  Murray Cumming  <murrayc@murrayc-x61>
 
   Connection: Add statement_execute_non_select_builder(SqlBuilder)
-  
+
   * libgda/src/connection.[hg|ccg]: Added statement_execute_non_select_builder()
-  overloads that take SqlBuilder, to avoid the need to generate a statement 
+  overloads that take SqlBuilder, to avoid the need to generate a statement
   from a builder.
 
 2010-02-27  Murray Cumming  <murrayc@murrayc.com>
 
   Connection, SqlBuilder: Add some convenient method overloads.
-  
+
 	* libgda/src/connection.[hg|ccg]: statement_execute_select(statement, params):
-	Add an optional model_usage parameter, as already exists on other method 
+	Add an optional model_usage parameter, as already exists on other method
 	overloads.
-	Added statement_execute_select_builder() to avoid the need to generate a 
+	Added statement_execute_select_builder() to avoid the need to generate a
 	statement from a builder.
-	* libgda/src/sqlbuilder.[hg|ccg]: Added an add_function() overload that 
+	* libgda/src/sqlbuilder.[hg|ccg]: Added an add_function() overload that
 	takes only one parameter.
 
 2010-02-27  Murray Cumming  <murrayc@murrayc.com>
 
   SqlBuilder: Add SqlError and fix select_add_target() with no alias.
-  
-	* libgda/src/sqlbuilder.[hg|ccg]: Add SqlError to wrap the GdaSqlError 
+
+	* libgda/src/sqlbuilder.[hg|ccg]: Add SqlError to wrap the GdaSqlError
 	error domain thrown (but not documented) by SqlBuilder.
-	select_add_target(): Avoid passing a "" alias. I have fixed the C 
+	select_add_target(): Avoid passing a "" alias. I have fixed the C
 	function in libgda but this makes it safe even when that is not deployed.
 
 3.99.19:

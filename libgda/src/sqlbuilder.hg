@@ -53,9 +53,9 @@ public:
   _IGNORE(gda_sql_builder_add_expr, gda_sql_builder_add_param, gda_sql_builder_add_cond)
   _IGNORE(gda_sql_builder_add_cond_v, gda_sql_builder_add_id)
   _IGNORE(gda_sql_builder_add_expr_value)
-  
+
   // Expression API:
-  
+
   /** Defines an expression which may be reused to build other parts of a statement.
    * @param string String to use in the SQL
    *
@@ -66,8 +66,8 @@ public:
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param dh The datahandler to use
    * @param value: value to set the expression to
-   * 
-   * See expr() except that no custom datahandler is given 
+   *
+   * See expr() except that no custom datahandler is given
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
@@ -77,8 +77,8 @@ public:
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param dh The datahandler to use
    * @param value: value to set the expression to
-   * 
-   * See expr() except that no custom datahandler is given 
+   *
+   * See expr() except that no custom datahandler is given
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
@@ -86,8 +86,8 @@ public:
 
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param value: value to set the expression to
-   * 
-   * See expr() except that no custom datahandler is given 
+   *
+   * See expr() except that no custom datahandler is given
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
@@ -96,8 +96,8 @@ public:
 
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param value: value to set the expression to
-   * 
-   * See expr() except that no custom datahandler is given 
+   *
+   * See expr() except that no custom datahandler is given
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
@@ -132,7 +132,7 @@ public:
 
   _IGNORE(gda_sql_builder_add_function, gda_sql_builder_add_function_v)
    _IGNORE(gda_sql_builder_select_join_targets)
-  
+
   /** Builds a new expression which represents a function applied to some arguments.
     *
     * @param function_name The name of the function to embed (e.g. MAX, MIN, ...)
@@ -141,7 +141,7 @@ public:
     * @return The ID of the new target, or 0 if there was an error.
     */
   guint add_function(const Glib::ustring& function_name, const Glib::ArrayHandle<guint>& args);
-  
+
     /** Builds a new expression which represents a function applied to an argument.
     *
     * @param function_name The name of the function to embed (e.g. MAX, MIN, ...)
@@ -173,7 +173,7 @@ public:
    * @return The ID of the new join, or 0 if there was an error.
    */
   guint select_join_targets(guint left_target_id, guint right_target_id, SqlSelectJoinType join_type, guint join_expr = 0);
-  
+
   _WRAP_METHOD(void join_add_field(guint join_id, const Glib::ustring& field_name), gda_sql_builder_join_add_field)
   _WRAP_METHOD(void select_order_by(guint expr_id, bool asc = true, const Glib::ustring& collation_name = Glib::ustring()), gda_sql_builder_select_order_by)
 
@@ -185,7 +185,7 @@ public:
 
   _WRAP_METHOD(void select_set_distinct(bool distinct, guint expr_id), gda_sql_builder_select_set_distinct)
 
-  /** Defines the maximum number of rows in the DataModel resulting from the execution of the built statement. 
+  /** Defines the maximum number of rows in the DataModel resulting from the execution of the built statement.
    * @param limit_count The number of rows that should be returned.
    * @param The offset of the first row that should appear in the result. (note that
    * this feature may not be supported by all the database providers.)
@@ -193,7 +193,12 @@ public:
   void select_set_limit(guint limit_count, guint offset = 0);
 
   _WRAP_METHOD(void select_set_limit_id(guint limit_count_expr_id, guint limit_offest_expr_id = 0), gda_sql_builder_select_set_limit)
-  
+
+  _WRAP_METHOD(void select_set_having(guint cond_id), gda_sql_builder_select_set_having)
+
+  _WRAP_METHOD(void select_group_by(guint expr_id), gda_sql_builder_select_group_by)
+  //TODO: Add select_group_by_field()?
+
   // General Statement API
   _WRAP_METHOD(void set_table(const Glib::ustring& table_name), gda_sql_builder_set_table)
   _WRAP_METHOD(void set_where(guint cond_id), gda_sql_builder_set_where)
@@ -211,7 +216,7 @@ public:
 /* COMPOUND SELECT Statement API */
   //TODO: Wrap the enum when we wrap GdaSqlStatementCompound _WRAP_METHOD(void compound_set_type(SqlStatementCompoundType compound_type), gda_sql_builder_compound_set_type)
   //The steal parameter suggests that this is an internal function: _WRAP_METHOD(void compound_add_sub_select(const Glib::RefPtr<SqlStatement>& sqlst, bool steal), gda_sql_builder_compound_add_sub_select)
-  
+
 };
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -241,4 +246,3 @@ guint SqlBuilder::add_expr(const ValueType& value)
 
 } // namespace Gda
 } // namespace Gnome
-

@@ -5413,6 +5413,24 @@
   )
 )
 
+(define-method select_set_having
+  (of-object "GdaSqlBuilder")
+  (c-name "gda_sql_builder_select_set_having")
+  (return-type "none")
+  (parameters
+    '("guint" "cond_id")
+  )
+)
+
+(define-method select_group_by
+  (of-object "GdaSqlBuilder")
+  (c-name "gda_sql_builder_select_group_by")
+  (return-type "none")
+  (parameters
+    '("guint" "expr_id")
+  )
+)
+
 (define-method compound_set_type
   (of-object "GdaSqlBuilder")
   (c-name "gda_sql_builder_compound_set_type")
