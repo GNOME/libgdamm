@@ -1,4 +1,3 @@
-/* $Id$ */
 /* libgdamm - a C++ wrapper for libgda
  *
  * Copyright 1999-2001 Free Software Foundation
@@ -21,9 +20,39 @@
 #ifndef LIBGDAMM_H
 #define LIBGDAMM_H
 
-//extern "C" {
-//#include <gtk/gtk.h>
-//}
+/** @mainpage libgdamm Reference Manual
+ *
+ * @section description Description
+ *
+ * libgdamm is a C++ wrapper for libgda.
+ *
+ * See also the <a href="http://www.gnome-db.org/">libgda website</a>.
+ *
+ * @section basics Basic Usage
+ *
+ * Include the libgdamm header:
+ * @code
+ * #include <libgdamm.h>
+ * @endcode
+ * (You may include individual headers, such as @c libgdamm/connection.h
+ * instead.)
+ *
+ * If your source file is @c program.cc, you can compile it with:
+ * @code
+ * g++ program.cc -o program `pkg-config --cflags --libs libgdamm-4.0`
+ * @endcode
+ *
+ * Alternatively, if using autoconf, use the following in @c configure.ac:
+ * @code
+ * PKG_CHECK_MODULES([LIBGDAMM], [libgdamm-4.0])
+ * @endcode
+ * Then use the generated @c LIBGDAMM_CFLAGS and @c LIBGDAMM_LIBS variables in
+ * the project @c Makefile.am files. For example:
+ * @code
+ * program_CPPFLAGS = $(LIBGDAMM_CFLAGS)
+ * program_LDADD = $(LIBGDAMM_LIBS)
+ * @endcode
+ */
 
 /* libgdamm version.  */
 extern const int libgdamm_major_version;

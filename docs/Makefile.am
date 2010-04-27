@@ -21,6 +21,7 @@ include $(top_srcdir)/libgda/libgdamm/filelist.am
 libgdamm_files_h = $(files_built_h) $(filter-out wrap_init.h,$(files_extra_h))
 
 book_name = $(LIBGDAMM_MODULE_NAME)
-doc_input = $(addprefix $(top_srcdir)/libgda/libgdamm/,$(libgdamm_files_h))
+doc_input = $(addprefix $(top_srcdir)/libgda/libgdamm/,$(libgdamm_files_h)) \
+            $(top_srcdir)/libgda/libgdamm.h
 
 include $(top_srcdir)/build/doc-reference.am

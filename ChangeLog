@@ -1,3 +1,10 @@
+2010-04-27  David King  <davidk@openismus.com>
+
+	Add main page to Doxygen documentation
+
+	* docs/Makefile.am: Parse libgda/libgdamm.h for Doxygen documentation.
+	* libgda/libgdamm.h: Add main page to generated documentation.
+
 2010-04-27  David King  <davidk@Openismus.com>
 
 	Remove Debian packaging
