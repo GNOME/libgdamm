@@ -1,3 +1,9 @@
+2010-04-27  David King  <davidk@Openismus.com>
+
+	Remove Debian packaging
+
+	* debian/*: Remove hopelessly out-of-date Debian packaging.
+
 2010-04-26  Murray Cumming  <murrayc@murrayc.com>
 
     SqlBuilder: Added select_set_having() and select_group_by().
