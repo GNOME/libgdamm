@@ -416,6 +416,16 @@ void Value::set(gushort val)
   gda_value_set_ushort(gobj(), val); 
 }
 
+glong Value::get_long() const
+{
+  return g_value_get_long(const_cast<GValue*>(gobj()));
+}
+
+void Value::set(glong val)
+{
+  g_value_set_long(gobj(), val); 
+}
+
 gulong Value::get_ulong() const
 {
   return g_value_get_ulong(const_cast<GValue*>(gobj()));

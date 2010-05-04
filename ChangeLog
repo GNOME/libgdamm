@@ -1,3 +1,9 @@
+2010-05-04  Murray Cumming  <murrayc@murrayc.com>
+
+	Value: Added get/set_long().
+
+	* libgda/libgdamm/value.[h|cc]: Added get/set_long().
+
 2010-04-27  David King  <davidk@openismus.com>
 
 	Add main page to Doxygen documentation
@@ -20,7 +26,7 @@
 
 2010-04-09  Armin Burgmeier  <armin@arbur.net>
 
-	SqlBuilder: Make definition and declaration of  add_cond() match
+	SqlBuilder: Make definition and declaration of add_cond() match
 
 	* libgda/src/sqlbuilder.ccg (add_cond): Fix function header signature
 	to match the declaration in the header (uint->guint), fixing the

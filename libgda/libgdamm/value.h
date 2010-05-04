@@ -198,6 +198,10 @@ public:
   
   void set(gushort val);
 
+  glong get_long() const;
+  
+  void set(glong val);
+  
   gulong get_ulong() const;
   
   void set(gulong val);
