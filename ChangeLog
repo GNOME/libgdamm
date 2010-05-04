@@ -1,5 +1,9 @@
 2010-05-04  Murray Cumming  <murrayc@murrayc.com>
 
+	* libgda/libgdamm.h: Minor main text improvement.
+
+2010-05-04  Murray Cumming  <murrayc@murrayc.com>
+
 	Value: Added get/set_long().
 
 	* libgda/libgdamm/value.[h|cc]: Added get/set_long().

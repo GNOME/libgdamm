@@ -24,9 +24,8 @@
  *
  * @section description Description
  *
- * libgdamm is a C++ wrapper for libgda.
- *
- * See also the <a href="http://www.gnome-db.org/">libgda website</a>.
+ * libgdamm is a C++ wrapper for the <a href="http://www.gnome-db.org/">libgda</a> 
+ * generic database access API.
  *
  * @section basics Basic Usage
  *
