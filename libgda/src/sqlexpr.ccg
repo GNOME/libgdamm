@@ -33,6 +33,11 @@ SqlExpr::SqlExpr(GdaSqlAnyPart *parent)
 {
 }
 
+bool SqlExpr::empty() const
+{
+  return !gobject_;
+}
+
 } // namespace Gda
 
 } // namesoace Gnome

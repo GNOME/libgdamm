@@ -41,6 +41,8 @@ public:
   explicit SqlExpr(GdaSqlAnyPart *parent);
   _IGNORE(gda_sql_expr_new)
 
+  bool empty() const;
+
   _WRAP_METHOD(Glib::ustring serialize() const, gda_sql_expr_serialize)
 
   //TODO: _WRAP_METHOD(void take_select(GdaSqlStatement *stmt), gda_sql_expr_take_select)

@@ -1,5 +1,12 @@
 2010-05-06  Murray Cumming  <murrayc@murrayc.com>
 
+   SqlExpr: Add empty().
+
+	* libgda/src/sqlexpr.[hg|ccg]: Added empty() so we can check if it is a
+    default empty instance. This makes it more useful.
+
+2010-05-06  Murray Cumming  <murrayc@murrayc.com>
+
     Added new SqlBuilder methods.
 
 	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py
