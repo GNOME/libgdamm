@@ -40,6 +40,7 @@ files_hg =			\
 	serveroperation.hg	\
 	serverprovider.hg	\
 	set.hg			\
+	sqlexpr.hg   \
 	sqlparser.hg		\
 	sqlbuilder.hg   \
 	statement.hg		\

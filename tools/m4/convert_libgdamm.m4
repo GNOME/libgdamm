@@ -153,3 +153,5 @@ _CONVERSION(`GValue*', `Value', `$2($3)')
 _CONVERSION(`const GValue*', `Value', `$2($3)')
 
 
+_CONVERSION(`const SqlExpr&', `GdaSqlExpr*', `const_cast<GdaSqlExpr*>(($3).gobj())')
+_CONVERSION(`GdaSqlExpr*', `SqlExpr', `Glib::wrap($3)')

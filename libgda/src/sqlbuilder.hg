@@ -20,6 +20,7 @@
  */
 
 #include <libgdamm/statement.h>
+#include <libgdamm/sqlexpr.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -151,7 +152,7 @@ public:
     */
   guint add_function(const Glib::ustring& function_name, guint arg);
 
-  _WRAP_METHOD(void select_add_field(const Glib::ustring& field_name, const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring()), gda_sql_builder_select_add_field)
+  _WRAP_METHOD(guint select_add_field(const Glib::ustring& field_name, const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring()), gda_sql_builder_select_add_field)
 
   // Statement API
   /** Adds a new target to a SELECT statement
@@ -217,6 +218,8 @@ public:
   //TODO: Wrap the enum when we wrap GdaSqlStatementCompound _WRAP_METHOD(void compound_set_type(SqlStatementCompoundType compound_type), gda_sql_builder_compound_set_type)
   //The steal parameter suggests that this is an internal function: _WRAP_METHOD(void compound_add_sub_select(const Glib::RefPtr<SqlStatement>& sqlst, bool steal), gda_sql_builder_compound_add_sub_select)
 
+  _WRAP_METHOD(SqlExpr export_expression(guint id), gda_sql_builder_export_expression)
+  _WRAP_METHOD(guint import_expressio(guint id, const SqlExpr& expr), gda_sql_builder_import_expression )
 };
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
