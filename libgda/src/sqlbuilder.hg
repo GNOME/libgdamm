@@ -219,7 +219,7 @@ public:
   //The steal parameter suggests that this is an internal function: _WRAP_METHOD(void compound_add_sub_select(const Glib::RefPtr<SqlStatement>& sqlst, bool steal), gda_sql_builder_compound_add_sub_select)
 
   _WRAP_METHOD(SqlExpr export_expression(guint id), gda_sql_builder_export_expression)
-  _WRAP_METHOD(guint import_expressio(guint id, const SqlExpr& expr), gda_sql_builder_import_expression )
+  _WRAP_METHOD(guint import_expression(guint id, const SqlExpr& expr), gda_sql_builder_import_expression )
 };
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS

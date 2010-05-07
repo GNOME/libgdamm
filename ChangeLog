@@ -1,3 +1,9 @@
+2010-05-07  Murray Cumming  <murrayc@murrayc.com>
+
+    SqlBuilder: Fix typo in import_expression() name.
+
+	* libgda/src/sqlbuilder.hg: Change import_expressio() to import_expression().
+
 2010-05-06  Murray Cumming  <murrayc@murrayc.com>
 
    SqlExpr: Add empty().
