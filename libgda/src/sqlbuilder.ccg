@@ -112,6 +112,13 @@ void SqlBuilder::select_set_limit(guint limit_count, guint offset)
   gda_sql_builder_select_set_limit(gobj(), id_limit, id_offset);
 }
 
+
+guint SqlBuilder::import_expression(const SqlExpr& expr)
+{
+  return gda_sql_builder_import_expression(gobj(), 0, const_cast<GdaSqlExpr*>((expr).gobj()));
+}
+  
+
 } /* namespace Gda */
 
 } /* namespace Gnome */

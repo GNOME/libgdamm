@@ -1,6 +1,15 @@
+2010-05-07  Murray Cumming  <murrayc@murrayc-x61>
+
+	SqlBuilder: import_expression(): Remove the id parameter.
+
+	* libgda/src/sqlbuilder.hg: import_expression(): Remove the id parameter.
+	We generally don't let the caller specify an ID, though the C API does, 
+	for no good reason.
+	export_expression(): Make this const.
+
 2010-05-07  Murray Cumming  <murrayc@murrayc.com>
 
-    SqlBuilder: Fix typo in import_expression() name.
+	SqlBuilder: Fix typo in import_expression() name.
 
 	* libgda/src/sqlbuilder.hg: Change import_expressio() to import_expression().
 
