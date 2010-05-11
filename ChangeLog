@@ -1,9 +1,17 @@
-2010-05-07  Murray Cumming  <murrayc@murrayc-x61>
+2010-05-11  Murray Cumming  <murrayc@murrayc.com>
+
+    Wrap SqlBuilder::get_sql_statement().
+
+	* libgda/src/sqlstatement.[hg|ccg]: Added SqlStatement, wrapping
+    GdaSqlStatement.
+    * libgda/src/sqlbuilder.hg: Wrap get_sql_statement().
+
+2010-05-07  Murray Cumming  <murrayc@murrayc.com>
 
 	SqlBuilder: import_expression(): Remove the id parameter.
 
 	* libgda/src/sqlbuilder.hg: import_expression(): Remove the id parameter.
-	We generally don't let the caller specify an ID, though the C API does, 
+	We generally don't let the caller specify an ID, though the C API does,
 	for no good reason.
 	export_expression(): Make this const.
 

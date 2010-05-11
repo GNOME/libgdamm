@@ -21,6 +21,7 @@
 
 #include <libgdamm/statement.h>
 #include <libgdamm/sqlexpr.h>
+#include <libgdamm/sqlstatement.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -48,8 +49,9 @@ public:
   _WRAP_CREATE(SqlStatementType type)
 
   _WRAP_METHOD(Glib::RefPtr<Statement> get_statement() const, gda_sql_builder_get_statement, errthrow)
-  // TODO: Wrap SqlStatement
-  //_WRAP_METHOD(Glib::RefPtr<SqlStatement> get_sql_statement(bool copy_it), gda_sql_builder_get_sql_statement, errthrow)
+
+  //TODO: Remove the stupid copy_it parameter from the C API.
+  _WRAP_METHOD(SqlStatement get_sql_statement(bool copy_it), gda_sql_builder_get_sql_statement, errthrow)
 
   _IGNORE(gda_sql_builder_add_expr, gda_sql_builder_add_param, gda_sql_builder_add_cond)
   _IGNORE(gda_sql_builder_add_cond_v, gda_sql_builder_add_id)

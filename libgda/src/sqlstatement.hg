@@ -1,0 +1,66 @@
+// -*- C++ -*- //
+
+/* Copyright 2010 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+_DEFS(libgdamm,libgda)
+
+//#include <libgdamm/connection.h>
+#include <libgda/sql-parser/gda-statement-struct.h>
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+_WRAP_ENUM(SqlStatementType, GdaSqlStatementType)
+
+class Connection;
+
+/** TODO
+ */
+class SqlStatement
+{
+  _CLASS_BOXEDTYPE(SqlStatement, GdaSqlStatement, NONE, gda_sql_statement_copy, gda_sql_statement_free)
+  _IGNORE(gda_sql_statement_get_type, gda_sql_statement_copy, gda_sql_statement_free)
+
+public:
+
+  explicit SqlStatement(SqlStatementType type = SQL_STATEMENT_SELECT);
+  _IGNORE(gda_sql_statement_new)
+
+  bool empty() const;
+
+  _WRAP_METHOD(Glib::ustring serialize() const, gda_sql_statement_serialize)
+
+  //_WRAP_METHOD(static Glib::ustring type_to_string(SqlStatementType type), gda_sql_statement_type_to_string)
+  //_WRAP_METHOD(static SqlStatementType string_to_type (const Glib::ustring& type), gda_sql_statement_string_to_type)
+
+  _WRAP_METHOD(bool check_structure() const, gda_sql_statement_check_structure, errthrow)
+  _WRAP_METHOD(bool check_validity(const Glib::RefPtr<Connection>& cnc), gda_sql_statement_check_validity, errthrow)
+  _WRAP_METHOD(void check_clean(), gda_sql_statement_check_clean)
+  _WRAP_METHOD(bool normalize(const Glib::RefPtr<Connection>& cnc), gda_sql_statement_normalize, errthrow)
+
+  //_WRAP_METHOD(static GdaSqlStatementContentsInfo* get_contents_infos(SqlStatementType type), gda_sql_statement_get_contents_infos)
+
+
+};
+
+} // namespace Gda
+
+} // namespace Gnome

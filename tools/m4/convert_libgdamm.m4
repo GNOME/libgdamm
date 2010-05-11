@@ -129,6 +129,7 @@ _CONV_ENUM(Gda,StatementSqlFlag)
 _CONV_ENUM(Gda,SqlParserError)
 _CONV_ENUM(Gda,SqlOperatorType)
 _CONV_ENUM(Gda,SqlSelectJoinType)
+_CONV_ENUM(Gda,SqlStatementType)
 
 # structs
 _CONVERSION(`Blob&',`GdaBlob*',__FR2P)
@@ -155,3 +156,6 @@ _CONVERSION(`const GValue*', `Value', `$2($3)')
 
 _CONVERSION(`const SqlExpr&', `GdaSqlExpr*', `const_cast<GdaSqlExpr*>(($3).gobj())')
 _CONVERSION(`GdaSqlExpr*', `SqlExpr', `Glib::wrap($3)')
+
+_CONVERSION(`const SqlStatement&', `GdaSqlStatement*', `const_cast<GdaSqlStatement*>(($3).gobj())')
+_CONVERSION(`GdaSqlStatement*', `SqlStatement', `Glib::wrap($3)')

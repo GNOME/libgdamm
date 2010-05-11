@@ -43,6 +43,7 @@ files_hg =			\
 	sqlexpr.hg   \
 	sqlparser.hg		\
 	sqlbuilder.hg   \
+	sqlstatement.hg   \
 	statement.hg		\
 	transactionstatus.hg	\
 	xatransaction.hg
