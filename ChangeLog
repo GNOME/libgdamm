@@ -1,5 +1,11 @@
 2010-05-11  Murray Cumming  <murrayc@murrayc.com>
 
+    SqlBuilder: Add add_sub_select().
+
+	* libgda/src/sqlbuilder.[hg|ccg]:  Wrap gda_sql_builder_add_sub_select().
+
+2010-05-11  Murray Cumming  <murrayc@murrayc.com>
+
 	SqlBuilder: Add compound_add_sub_select().
 
 	* libgda/src/sqlbuilder.hg: Wrap gda_sql_builder_compound_add_sub_select().

@@ -154,6 +154,14 @@ public:
     */
   guint add_function(const Glib::ustring& function_name, guint arg);
 
+
+  //TODO: Remove the stupid steal parameter.
+  guint add_sub_select(const SqlStatement& sqlst);
+  _IGNORE(gda_sql_builder_add_sub_select)
+
+//TODO:  _WRAP_METHOD(guint gda_sql_builder_add_case (GdaSqlBuilder *builder, guint id,  guint test_expr, guint else_expr, ...);
+//TODO:  _WRAP_METHOD(guint gda_sql_builder_add_case_v (GdaSqlBuilder *builder, guint id,  guint test_expr, guint else_expr,  const guint *when_array, const guint *then_array, gint args_size);
+
   _WRAP_METHOD(guint select_add_field(const Glib::ustring& field_name, const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring()), gda_sql_builder_select_add_field)
 
   // Statement API

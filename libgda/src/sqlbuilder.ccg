@@ -1,7 +1,7 @@
 // -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
 /* sqlparser.cc
- * 
+ *
  * Copyright 2003 libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
@@ -42,7 +42,12 @@ static const char* string_or_null(const Glib::ustring& str)
 SqlBuilder::SqlBuilder(SqlStatementType type)
   : _CONSTRUCT("stmt-type", type)
 {
-  
+
+}
+
+guint SqlBuilder::add_sub_select(const SqlStatement& sqlst)
+{
+  return gda_sql_builder_add_sub_select(gobj(), 0, const_cast<GdaSqlStatement*>(sqlst.gobj()), false /* steal */);
 }
 
 guint SqlBuilder::add_id(const Glib::ustring& string)
@@ -104,7 +109,7 @@ void SqlBuilder::select_set_distinct(bool distinct)
 void SqlBuilder::select_set_limit(guint limit_count, guint offset)
 {
   const guint id_limit = add_expr(limit_count);
- 
+
   guint id_offset = 0;
   if(offset != 0)
     id_offset = add_expr(offset);
@@ -117,9 +122,8 @@ guint SqlBuilder::import_expression(const SqlExpr& expr)
 {
   return gda_sql_builder_import_expression(gobj(), 0, const_cast<GdaSqlExpr*>((expr).gobj()));
 }
-  
+
 
 } /* namespace Gda */
 
 } /* namespace Gnome */
-
