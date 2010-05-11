@@ -1,10 +1,16 @@
 2010-05-11  Murray Cumming  <murrayc@murrayc.com>
 
-    Wrap SqlBuilder::get_sql_statement().
+	SqlBuilder: Add compound_add_sub_select().
+
+	* libgda/src/sqlbuilder.hg: Wrap gda_sql_builder_compound_add_sub_select().
+
+2010-05-11  Murray Cumming  <murrayc@murrayc.com>
+
+    SqlBuilder: Add get_sql_statement().
 
 	* libgda/src/sqlstatement.[hg|ccg]: Added SqlStatement, wrapping
     GdaSqlStatement.
-    * libgda/src/sqlbuilder.hg: Wrap get_sql_statement().
+    * libgda/src/sqlbuilder.hg:  Wrap gda_sql_builder_get_sql_statement().
 
 2010-05-07  Murray Cumming  <murrayc@murrayc.com>
 
