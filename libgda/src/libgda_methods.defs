@@ -5210,9 +5210,6 @@
   (of-object "GdaSqlBuilder")
   (c-name "gda_sql_builder_get_sql_statement")
   (return-type "GdaSqlStatement*")
-  (parameters
-    '("gboolean" "copy_it")
-  )
 )
 
 (define-method add_id
@@ -7970,5 +7967,3 @@
     '("const-GValue*" "value")
   )
 )
-
-

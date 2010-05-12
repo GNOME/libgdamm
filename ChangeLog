@@ -1,3 +1,10 @@
+2010-05-12  Murray Cumming  <murrayc@murrayc.com>>
+
+	SqlBuilder: get_sql_statement(): Remove stupid copy_it parameter.
+
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/sqlbuilder.hg: Adapt to my change in libgda, fixing the build.
+
 2010-05-12  Murray Cumming  <murrayc@murrayc.com>
 
 	SqlBuilder: Add select_add_target_id().
