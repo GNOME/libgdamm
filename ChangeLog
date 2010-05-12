@@ -1,3 +1,11 @@
+2010-05-12  Murray Cumming  <murrayc@murrayc-desktop>
+
+    SqlBuilder: add_sub_select(), compound_add_sub_select(): Remove steal param.
+
+	* libgda/src/libgda_methods.defs:
+	* libgda/src/sqlbuilder.[hg|ccg]: Adapt to my change in libgda, fixing the
+    build.
+
 2010-05-12  Murray Cumming  <murrayc@murrayc.com>>
 
 	SqlBuilder: get_sql_statement(): Remove stupid copy_it parameter.

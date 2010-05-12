@@ -154,7 +154,6 @@ public:
   guint add_function(const Glib::ustring& function_name, guint arg);
 
 
-  //TODO: Remove the stupid steal parameter.
   guint add_sub_select(const SqlStatement& sqlst);
   _IGNORE(gda_sql_builder_add_sub_select)
 
@@ -228,8 +227,7 @@ public:
 
 /* COMPOUND SELECT Statement API */
   //TODO: Wrap the enum when we wrap GdaSqlStatementCompound _WRAP_METHOD(void compound_set_type(SqlStatementCompoundType compound_type), gda_sql_builder_compound_set_type)
-  //TODO: Remove the stupid steal parameter from the C API:
-  _WRAP_METHOD(void compound_add_sub_select(const SqlStatement& sqlst, bool steal = false), gda_sql_builder_compound_add_sub_select)
+  _WRAP_METHOD(void compound_add_sub_select(const SqlStatement& sqlst), gda_sql_builder_compound_add_sub_select)
 
   _WRAP_METHOD(SqlExpr export_expression(guint id) const, gda_sql_builder_export_expression)
 

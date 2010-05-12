@@ -47,7 +47,7 @@ SqlBuilder::SqlBuilder(SqlStatementType type)
 
 guint SqlBuilder::add_sub_select(const SqlStatement& sqlst)
 {
-  return gda_sql_builder_add_sub_select(gobj(), 0, const_cast<GdaSqlStatement*>(sqlst.gobj()), false /* steal */);
+  return gda_sql_builder_add_sub_select(gobj(), 0, const_cast<GdaSqlStatement*>(sqlst.gobj()));
 }
 
 guint SqlBuilder::add_id(const Glib::ustring& string)
