@@ -172,8 +172,11 @@ public:
    * @return The ID of the new target, or 0 if there was an error.
    */
   guint select_add_target(const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring());
+  _IGNORE(gda_sql_builder_select_add_target)
 
-  _IGNORE(gda_sql_builder_select_add_target_id, gda_sql_builder_select_add_target)
+  //For instance, to add a sub-query?
+  guint select_add_target_id(guint table_id, const Glib::ustring& alias = Glib::ustring());
+  _IGNORE(gda_sql_builder_select_add_target_id)
 
   /** Joins two targets in a SELECT statement
    * @param left_target_id The ID of the left target to use (not %0)

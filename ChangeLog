@@ -1,3 +1,11 @@
+2010-05-12  Murray Cumming  <murrayc@murrayc.com>
+
+	SqlBuilder: Add select_add_target_id().
+
+	* libgda/src/sqlbuilder.[hg|ccg]: Added select_add_target_id(),
+    which _might_ be useful for adding sub-queries as targets, though I
+    am checking.
+
 2010-05-11  Murray Cumming  <murrayc@murrayc.com>
 
     SqlBuilder: Add add_sub_select().
