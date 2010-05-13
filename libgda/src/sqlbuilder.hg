@@ -50,6 +50,7 @@ public:
 
   _WRAP_METHOD(Glib::RefPtr<Statement> get_statement() const, gda_sql_builder_get_statement, errthrow)
 
+#m4 _CONVERSION(`GdaSqlStatement*', `SqlStatement', `Glib::wrap($3, true /* take_copy */)')
   _WRAP_METHOD(SqlStatement get_sql_statement() const, gda_sql_builder_get_sql_statement, errthrow)
 
   _IGNORE(gda_sql_builder_add_expr, gda_sql_builder_add_param, gda_sql_builder_add_cond)

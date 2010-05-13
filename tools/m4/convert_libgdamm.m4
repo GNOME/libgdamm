@@ -158,4 +158,4 @@ _CONVERSION(`const SqlExpr&', `GdaSqlExpr*', `const_cast<GdaSqlExpr*>(($3).gobj(
 _CONVERSION(`GdaSqlExpr*', `SqlExpr', `Glib::wrap($3)')
 
 _CONVERSION(`const SqlStatement&', `GdaSqlStatement*', `const_cast<GdaSqlStatement*>(($3).gobj())')
-_CONVERSION(`GdaSqlStatement*', `SqlStatement', `Glib::wrap($3)')
+

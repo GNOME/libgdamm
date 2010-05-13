@@ -1,4 +1,11 @@
-2010-05-12  Murray Cumming  <murrayc@murrayc-desktop>
+2010-05-13  Murray Cumming  <murrayc@murrayc.com>
+
+	SqlBuilder: get_sql_statement(): Fix memory management.
+	
+	* libgda/src/sqlbuilder.hg: get_sql_statement(): Take a copy of the C object, 
+	to avoid a double-free.
+
+2010-05-12  Murray Cumming  <murrayc@murrayc.com>
 
     SqlBuilder: add_sub_select(), compound_add_sub_select(): Remove steal param.
 
