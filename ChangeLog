@@ -1,8 +1,16 @@
+2010-05-17  Murray Cumming  <murrayc@murrayc.com>
+
+    SqlBuilder: Don't pass empty strings to the C functions.
+
+	* libgda/src/sqlbuilder.hg: Make sure that generated methods pass NULL
+    for empty strings, because libgda does not always check that strings are
+    not empty, though I try to fix that in libgda when I see it.
+
 2010-05-13  Murray Cumming  <murrayc@murrayc.com>
 
 	SqlBuilder: get_sql_statement(): Fix memory management.
-	
-	* libgda/src/sqlbuilder.hg: get_sql_statement(): Take a copy of the C object, 
+
+	* libgda/src/sqlbuilder.hg: get_sql_statement(): Take a copy of the C object,
 	to avoid a double-free.
 
 2010-05-12  Murray Cumming  <murrayc@murrayc.com>

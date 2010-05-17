@@ -48,6 +48,8 @@ protected:
 public:
   _WRAP_CREATE(SqlStatementType type)
 
+#m4 _CONVERSION(`const Glib::ustring& ', `const gchar*', `string_or_null($3)')
+
   _WRAP_METHOD(Glib::RefPtr<Statement> get_statement() const, gda_sql_builder_get_statement, errthrow)
 
 #m4 _CONVERSION(`GdaSqlStatement*', `SqlStatement', `Glib::wrap($3, true /* take_copy */)')
