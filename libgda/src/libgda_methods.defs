@@ -5217,7 +5217,6 @@
   (c-name "gda_sql_builder_add_id")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("const-gchar*" "string")
   )
 )
@@ -5227,7 +5226,6 @@
   (c-name "gda_sql_builder_add_expr")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("GdaDataHandler*" "dh")
     '("GType" "type")
   )
@@ -5239,7 +5237,6 @@
   (c-name "gda_sql_builder_add_expr_value")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("GdaDataHandler*" "dh")
     '("const-GValue*" "value")
   )
@@ -5250,7 +5247,6 @@
   (c-name "gda_sql_builder_add_param")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("const-gchar*" "param_name")
     '("GType" "type")
     '("gboolean" "nullok")
@@ -5262,7 +5258,6 @@
   (c-name "gda_sql_builder_add_cond")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("GdaSqlOperatorType" "op")
     '("guint" "op1")
     '("guint" "op2")
@@ -5275,7 +5270,6 @@
   (c-name "gda_sql_builder_add_cond_v")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("GdaSqlOperatorType" "op")
     '("const-guint*" "op_ids")
     '("gint" "op_ids_size")
@@ -5287,7 +5281,6 @@
   (c-name "gda_sql_builder_add_function")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("const-gchar*" "func_name")
   )
   (varargs #t)
@@ -5298,7 +5291,6 @@
   (c-name "gda_sql_builder_add_function_v")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("const-gchar*" "func_name")
     '("const-guint*" "args")
     '("gint" "args_size")
@@ -5310,7 +5302,6 @@
   (c-name "gda_sql_builder_add_sub_select")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("GdaSqlStatement*" "sqlst")
   )
 )
@@ -5320,7 +5311,6 @@
   (c-name "gda_sql_builder_add_case")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("guint" "test_expr")
     '("guint" "else_expr")
   )
@@ -5332,7 +5322,6 @@
   (c-name "gda_sql_builder_add_case_v")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("guint" "test_expr")
     '("guint" "else_expr")
     '("const-guint*" "when_array")
@@ -5416,7 +5405,6 @@
   (c-name "gda_sql_builder_select_add_target_id")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("guint" "table_id")
     '("const-gchar*" "alias")
   )
@@ -5427,7 +5415,6 @@
   (c-name "gda_sql_builder_select_join_targets")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("guint" "left_target_id")
     '("guint" "right_target_id")
     '("GdaSqlSelectJoinType" "join_type")
@@ -5526,7 +5513,6 @@
   (c-name "gda_sql_builder_import_expression")
   (return-type "guint")
   (parameters
-    '("guint" "id")
     '("GdaSqlExpr*" "expr")
   )
 )
@@ -6220,6 +6206,18 @@
   (c-name "gda_compute_unique_table_row_condition")
   (return-type "GdaSqlExpr*")
   (parameters
+    '("GdaSqlStatementSelect*" "stsel")
+    '("GdaMetaTable*" "mtable")
+    '("gboolean" "require_pk")
+    '("GError**" "error")
+  )
+)
+
+(define-function gda_compute_unique_table_row_condition_with_cnc
+  (c-name "gda_compute_unique_table_row_condition_with_cnc")
+  (return-type "GdaSqlExpr*")
+  (parameters
+    '("GdaConnection*" "cnc")
     '("GdaSqlStatementSelect*" "stsel")
     '("GdaMetaTable*" "mtable")
     '("gboolean" "require_pk")
@@ -7112,6 +7110,11 @@
 
 ;; From gda-statement-struct.h
 
+(define-function gda_sql_statement_get_type
+  (c-name "gda_sql_statement_get_type")
+  (return-type "GType")
+)
+
 (define-function gda_sql_statement_new
   (c-name "gda_sql_statement_new")
   (is-constructor-of "GdaSqlStatement")
@@ -7257,6 +7260,11 @@
 
 
 ;; From gda-statement-struct-parts.h
+
+(define-function gda_sql_expr_get_type
+  (c-name "gda_sql_expr_get_type")
+  (return-type "GType")
+)
 
 (define-function gda_sql_expr_new
   (c-name "gda_sql_expr_new")
@@ -7965,3 +7973,5 @@
     '("const-GValue*" "value")
   )
 )
+
+

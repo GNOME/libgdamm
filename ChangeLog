@@ -1,3 +1,11 @@
+2010-05-20  Murray Cumming  <murrayc@murrayc.com>
+
+	Fixed the build with latest libgda.
+	
+	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py
+	* libgda/src/sqlbuilder.ccg: Adapted now that I have removed the id 
+	parameters from the C API.
+
 2010-05-17  Murray Cumming  <murrayc@murrayc.com>
 
     SqlBuilder: Don't pass empty strings to the C functions.
