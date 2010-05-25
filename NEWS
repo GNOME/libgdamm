@@ -1,3 +1,13 @@
+3.99.20: (unstable):
+
+* Connection: Add statement_execute_non_select_builder(SqlBuilder).
+* SqlBuilder:
+  - Many API changes, mostly to match improvements in the C API.
+  - Declared the SqlError exception.
+  (Murray Cumming)
+* Documentation: Added doxygen main text.
+  (David King)
+
 3.99.19: (unstable):
 
 * Added SqlBuilder, for building SQL statements.
