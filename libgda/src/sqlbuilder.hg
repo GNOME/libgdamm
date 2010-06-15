@@ -59,6 +59,10 @@ public:
   _IGNORE(gda_sql_builder_add_cond_v, gda_sql_builder_add_id)
   _IGNORE(gda_sql_builder_add_expr_value)
 
+  #m4 _EQUAL(GdaSqlBuilderId, Id)
+  //A duplicate of the GdsSqlBuilderId typedef in libgda's header, to avoid including the header here.
+  typedef guint Id;
+  
   // Expression API:
 
   /** Defines an expression which may be reused to build other parts of a statement.
@@ -66,7 +70,7 @@ public:
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
-  guint add_id(const Glib::ustring& string);
+  Id add_id(const Glib::ustring& string);
 
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param dh The datahandler to use
@@ -77,7 +81,7 @@ public:
    * @return The ID of the new expression, or 0 if there was an error.
    */
   template <class ValueType>
-  guint add_expr(const Glib::RefPtr<DataHandler>& dh, const ValueType& value);
+  Id add_expr(const Glib::RefPtr<DataHandler>& dh, const ValueType& value);
 
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param dh The datahandler to use
@@ -87,7 +91,7 @@ public:
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
-  guint add_expr_as_value(const Glib::RefPtr<DataHandler>& dh, const Value& value);
+  Id add_expr_as_value(const Glib::RefPtr<DataHandler>& dh, const Value& value);
 
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param value: value to set the expression to
@@ -97,7 +101,7 @@ public:
    * @return The ID of the new expression, or 0 if there was an error.
    */
   template <class ValueType>
-  guint add_expr(const ValueType& value);
+  Id add_expr(const ValueType& value);
 
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param value: value to set the expression to
@@ -106,7 +110,7 @@ public:
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
-  guint add_expr_as_value(const Value& value);
+  Id add_expr_as_value(const Value& value);
 
   /** Defines a parameter which may be reused to build other parts of a statement.
    * @param: param_name: name of the parameter
@@ -115,7 +119,7 @@ public:
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
-  guint add_param(const Glib::ustring& param_name, GType type, bool nullok = false);
+  Id add_param(const Glib::ustring& param_name, GType type, bool nullok = false);
 
   /** Builds a new expression which reprenents a condition (or operation).
    * @param op Type of condition
@@ -125,7 +129,7 @@ public:
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
-  guint add_cond(SqlOperatorType op, guint op1, guint op2 = 0, guint op3 = 0);
+  Id add_cond(SqlOperatorType op, Id op1, Id op2 = 0, Id op3 = 0);
 
   /** Builds a new expression which reprenents a condition (or operation).
    * @param op Type of condition
@@ -133,7 +137,7 @@ public:
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
-  guint add_cond(SqlOperatorType op, const Glib::ArrayHandle<guint>& op_ids);
+  Id add_cond(SqlOperatorType op, const Glib::ArrayHandle<Id>& op_ids);
 
   _IGNORE(gda_sql_builder_add_function, gda_sql_builder_add_function_v)
    _IGNORE(gda_sql_builder_select_join_targets)
@@ -145,7 +149,7 @@ public:
     *
     * @return The ID of the new target, or 0 if there was an error.
     */
-  guint add_function(const Glib::ustring& function_name, const Glib::ArrayHandle<guint>& args);
+  Id add_function(const Glib::ustring& function_name, const Glib::ArrayHandle<Id>& args);
 
     /** Builds a new expression which represents a function applied to an argument.
     *
@@ -154,16 +158,16 @@ public:
     *
     * @return The ID of the new target, or 0 if there was an error.
     */
-  guint add_function(const Glib::ustring& function_name, guint arg);
+  Id add_function(const Glib::ustring& function_name, Id arg);
 
 
-  guint add_sub_select(const SqlStatement& sqlst);
+  Id add_sub_select(const SqlStatement& sqlst);
   _IGNORE(gda_sql_builder_add_sub_select)
 
-//TODO:  _WRAP_METHOD(guint gda_sql_builder_add_case (GdaSqlBuilder *builder, guint id,  guint test_expr, guint else_expr, ...);
-//TODO:  _WRAP_METHOD(guint gda_sql_builder_add_case_v (GdaSqlBuilder *builder, guint id,  guint test_expr, guint else_expr,  const guint *when_array, const guint *then_array, gint args_size);
+//TODO:  _WRAP_METHOD(Id gda_sql_builder_add_case (GdaSqlBuilder *builder, Id id,  Id test_expr, Id else_expr, ...);
+//TODO:  _WRAP_METHOD(Id gda_sql_builder_add_case_v (GdaSqlBuilder *builder, Id id,  Id test_expr, Id else_expr,  const Id *when_array, const Id *then_array, gint args_size);
 
-  _WRAP_METHOD(guint select_add_field(const Glib::ustring& field_name, const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring()), gda_sql_builder_select_add_field)
+  _WRAP_METHOD(Id select_add_field(const Glib::ustring& field_name, const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring()), gda_sql_builder_select_add_field)
 
   // Statement API
   /** Adds a new target to a SELECT statement
@@ -172,11 +176,11 @@ public:
    *
    * @return The ID of the new target, or 0 if there was an error.
    */
-  guint select_add_target(const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring());
+  Id select_add_target(const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring());
   _IGNORE(gda_sql_builder_select_add_target)
 
   //For instance, to add a sub-query?
-  guint select_add_target_id(guint table_id, const Glib::ustring& alias = Glib::ustring());
+  Id select_add_target_id(Id table_id, const Glib::ustring& alias = Glib::ustring());
   _IGNORE(gda_sql_builder_select_add_target_id)
 
   /** Joins two targets in a SELECT statement
@@ -187,10 +191,10 @@ public:
    *
    * @return The ID of the new join, or 0 if there was an error.
    */
-  guint select_join_targets(guint left_target_id, guint right_target_id, SqlSelectJoinType join_type, guint join_expr = 0);
+  Id select_join_targets(Id left_target_id, Id right_target_id, SqlSelectJoinType join_type, Id join_expr = 0);
 
-  _WRAP_METHOD(void join_add_field(guint join_id, const Glib::ustring& field_name), gda_sql_builder_join_add_field)
-  _WRAP_METHOD(void select_order_by(guint expr_id, bool asc = true, const Glib::ustring& collation_name = Glib::ustring()), gda_sql_builder_select_order_by)
+  _WRAP_METHOD(void join_add_field(Id join_id, const Glib::ustring& field_name), gda_sql_builder_join_add_field)
+  _WRAP_METHOD(void select_order_by(Id expr_id, bool asc = true, const Glib::ustring& collation_name = Glib::ustring()), gda_sql_builder_select_order_by)
 
   /** Adds or removes a DISTINCT clause for a SELECT statement.
    * @param distinct Whether a DISTINCT clause should be in the SELECT statement.
@@ -198,43 +202,43 @@ public:
    */
   void select_set_distinct(bool distinct = true);
 
-  _WRAP_METHOD(void select_set_distinct(bool distinct, guint expr_id), gda_sql_builder_select_set_distinct)
+  _WRAP_METHOD(void select_set_distinct(bool distinct, Id expr_id), gda_sql_builder_select_set_distinct)
 
   /** Defines the maximum number of rows in the DataModel resulting from the execution of the built statement.
    * @param limit_count The number of rows that should be returned.
    * @param The offset of the first row that should appear in the result. (note that
    * this feature may not be supported by all the database providers.)
   */
-  void select_set_limit(guint limit_count, guint offset = 0);
+  void select_set_limit(Id limit_count, Id offset = 0);
 
-  _WRAP_METHOD(void select_set_limit_id(guint limit_count_expr_id, guint limit_offest_expr_id = 0), gda_sql_builder_select_set_limit)
+  _WRAP_METHOD(void select_set_limit_id(Id limit_count_expr_id, Id limit_offest_expr_id = 0), gda_sql_builder_select_set_limit)
 
-  _WRAP_METHOD(void select_set_having(guint cond_id), gda_sql_builder_select_set_having)
+  _WRAP_METHOD(void select_set_having(Id cond_id), gda_sql_builder_select_set_having)
 
-  _WRAP_METHOD(void select_group_by(guint expr_id), gda_sql_builder_select_group_by)
+  _WRAP_METHOD(void select_group_by(Id expr_id), gda_sql_builder_select_group_by)
   //TODO: Add select_group_by_field()?
 
   // General Statement API
   _WRAP_METHOD(void set_table(const Glib::ustring& table_name), gda_sql_builder_set_table)
-  _WRAP_METHOD(void set_where(guint cond_id), gda_sql_builder_set_where)
+  _WRAP_METHOD(void set_where(Id cond_id), gda_sql_builder_set_where)
 
-  _WRAP_METHOD(void add_field_id(guint field_id, guint value_id = 0), gda_sql_builder_add_field_id)
+  _WRAP_METHOD(void add_field_value_id(Id field_id, Id value_id = 0), gda_sql_builder_add_field_value_id)
 
   //TODO: Documentation:
   template <class ValueType>
   void add_field_value(const Glib::ustring& field_name, const ValueType& value);
 
-  _WRAP_METHOD(void add_field_value_as_value(const Glib::ustring& field_name, const Value& value), gda_sql_builder_add_field_value)
-  _IGNORE(gda_sql_builder_add_field)
+  _WRAP_METHOD(void add_field_value_as_value(const Glib::ustring& field_name, const Value& value), gda_sql_builder_add_field_value_as_gvalue)
+  _IGNORE(gda_sql_builder_add_field_value)
 
 
 /* COMPOUND SELECT Statement API */
   //TODO: Wrap the enum when we wrap GdaSqlStatementCompound _WRAP_METHOD(void compound_set_type(SqlStatementCompoundType compound_type), gda_sql_builder_compound_set_type)
   _WRAP_METHOD(void compound_add_sub_select(const SqlStatement& sqlst), gda_sql_builder_compound_add_sub_select)
 
-  _WRAP_METHOD(SqlExpr export_expression(guint id) const, gda_sql_builder_export_expression)
+  _WRAP_METHOD(SqlExpr export_expression(Id id) const, gda_sql_builder_export_expression)
 
-  guint import_expression(const SqlExpr& expr);
+  Id import_expression(const SqlExpr& expr);
   _IGNORE(gda_sql_builder_import_expression)
 };
 
@@ -248,14 +252,14 @@ void SqlBuilder::add_field_value(const Glib::ustring& field_name, const ValueTyp
 }
 
 template <class ValueType> inline
-guint SqlBuilder::add_expr(const Glib::RefPtr<DataHandler>& dh, const ValueType& value)
+SqlBuilder::Id SqlBuilder::add_expr(const Glib::RefPtr<DataHandler>& dh, const ValueType& value)
 {
   Gnome::Gda::Value gdavalue(value);
   return this->add_expr_as_value(dh, gdavalue);
 }
 
 template <class ValueType> inline
-guint SqlBuilder::add_expr(const ValueType& value)
+SqlBuilder::Id SqlBuilder::add_expr(const ValueType& value)
 {
   Gnome::Gda::Value gdavalue(value);
   return this->add_expr_as_value(gdavalue);

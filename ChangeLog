@@ -1,3 +1,13 @@
+2010-06-15  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build with libgda git master.
+
+	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py.
+	* libgda/src/sqlbuilder.[hg|ccg]: Use Id instead of guint for the IDs.
+	It is just a typedef but it makes things clearer. libgda does this now too.
+	Rename add_field_id() to add_field_value_id() and change the implementation 
+	of similar methods because the C functions were renamed (by me).
+
 3.99.20:
 
 2010-05-20  Murray Cumming  <murrayc@murrayc.com>
