@@ -1,5 +1,11 @@
 2010-06-15  Murray Cumming  <murrayc@murrayc.com>
 
+	SqlBuilder: Added add_field_id().
+	
+	* libgda/src/sqlbuilder.[hg|ccg]: Added add_field_id().
+
+2010-06-15  Murray Cumming  <murrayc@murrayc.com>
+
 	Fix the build with libgda git master.
 
 	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py.

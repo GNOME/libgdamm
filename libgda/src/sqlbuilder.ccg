@@ -48,14 +48,10 @@ SqlBuilder::SqlBuilder(SqlStatementType type)
 
 }
 
+//TODO: Use _WRAP_METHOD() for these instead now that they are simple.
 SqlBuilder::Id SqlBuilder::add_sub_select(const SqlStatement& sqlst)
 {
   return gda_sql_builder_add_sub_select(gobj(), const_cast<GdaSqlStatement*>(sqlst.gobj()));
-}
-
-SqlBuilder::Id SqlBuilder::add_id(const Glib::ustring& string)
-{
-  return gda_sql_builder_add_id(gobj(), string.c_str());
 }
 
 SqlBuilder::Id SqlBuilder::add_expr_as_value(const Glib::RefPtr<DataHandler>& dh, const Value& value)

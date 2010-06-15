@@ -65,12 +65,9 @@ public:
   
   // Expression API:
 
-  /** Defines an expression which may be reused to build other parts of a statement.
-   * @param string String to use in the SQL
-   *
-   * @return The ID of the new expression, or 0 if there was an error.
-   */
-  Id add_id(const Glib::ustring& string);
+  _WRAP_METHOD(Id add_id(const Glib::ustring& string), gda_sql_builder_add_id)
+  
+  _WRAP_METHOD(Id add_field_id(const Glib::ustring& field_name, const Glib::ustring& table_name = Glib::ustring()), gda_sql_builder_add_field_id)
 
   /** Defines an expression in Builder which may be reused to build other parts of a statement.
    * @param dh The datahandler to use
