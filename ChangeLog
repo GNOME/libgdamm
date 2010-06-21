@@ -1,5 +1,12 @@
 2010-06-21  Murray Cumming  <murrayc@murrayc.com>
 
+	DataModel: Added the DataModelError exceptions.
+
+	* libgda/src/datamodel.hg: Add this exception that can be thrown by these 
+	methods.
+
+2010-06-21  Murray Cumming  <murrayc@murrayc.com>
+
 	Fix the examples (check) build.
 
 	* examples/sqlbuilder/main.cc: Adapt to the 

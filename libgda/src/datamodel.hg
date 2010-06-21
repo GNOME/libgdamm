@@ -38,6 +38,10 @@ namespace Gda
 class Row;
 class ServerProvider;
 
+/** Exception class for Gda connection errors.
+ */
+_WRAP_GERROR(DataModelError, GdaDataModelError, GDA_DATA_MODEL_ERROR)
+
 _WRAP_ENUM(DataModelAccessFlags, GdaDataModelAccessFlags)
 _WRAP_ENUM(DataModelHint, GdaDataModelHint)
 _WRAP_ENUM(DataModelIOFormat, GdaDataModelIOFormat)
