@@ -13,6 +13,35 @@
   )
 )
 
+;; From gda-binreloc.h
+
+;; Original typedef:
+;; typedef enum {
+;; 	GDA_NO_DIR,
+;; 	GDA_BIN_DIR,
+;; 	GDA_SBIN_DIR,
+;; 	GDA_DATA_DIR,
+;; 	GDA_LOCALE_DIR,
+;; 	GDA_LIB_DIR,
+;; 	GDA_LIBEXEC_DIR,
+;; 	GDA_ETC_DIR
+;; } GdaPrefixDir;
+
+(define-enum-extended PrefixDir
+  (in-module "Gda")
+  (c-name "GdaPrefixDir")
+  (values
+    '("no-dir" "GDA_NO_DIR" "0")
+    '("bin-dir" "GDA_BIN_DIR" "1")
+    '("sbin-dir" "GDA_SBIN_DIR" "2")
+    '("data-dir" "GDA_DATA_DIR" "3")
+    '("locale-dir" "GDA_LOCALE_DIR" "4")
+    '("lib-dir" "GDA_LIB_DIR" "5")
+    '("libexec-dir" "GDA_LIBEXEC_DIR" "6")
+    '("etc-dir" "GDA_ETC_DIR" "7")
+  )
+)
+
 ;; From gda-config.h
 
 ;; Original typedef:
@@ -143,10 +172,11 @@
 
 ;; Original typedef:
 ;; typedef enum {
-;;         GDA_CONNECTION_OPTIONS_NONE = 0,
+;; 	GDA_CONNECTION_OPTIONS_NONE = 0,
 ;; 	GDA_CONNECTION_OPTIONS_READ_ONLY = 1 << 0,
 ;; 	GDA_CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE = 1 << 1,
-;; 	GDA_CONNECTION_OPTIONS_THREAD_SAFE = 1 << 2
+;; 	GDA_CONNECTION_OPTIONS_THREAD_SAFE = 1 << 2,
+;; 	GDA_CONNECTION_OPTIONS_THREAD_ISOLATED = 1 << 3
 ;; } GdaConnectionOptions;
 
 (define-flags-extended ConnectionOptions
@@ -157,6 +187,7 @@
     '("read-only" "GDA_CONNECTION_OPTIONS_READ_ONLY" "1 << 0")
     '("sql-identifiers-case-sensitive" "GDA_CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE" "1 << 1")
     '("thread-safe" "GDA_CONNECTION_OPTIONS_THREAD_SAFE" "1 << 2")
+    '("thread-isolated" "GDA_CONNECTION_OPTIONS_THREAD_ISOLATED" "1 << 3")
   )
 )
 
@@ -178,6 +209,8 @@
 ;; 	GDA_CONNECTION_FEATURE_USERS,
 ;; 	GDA_CONNECTION_FEATURE_VIEWS,
 ;; 	GDA_CONNECTION_FEATURE_XA_TRANSACTIONS,
+;; 	
+;; 	GDA_CONNECTION_FEATURE_MULTI_THREADING,
 ;; 
 ;; 	GDA_CONNECTION_FEATURE_LAST
 ;; } GdaConnectionFeature;
@@ -202,7 +235,8 @@
     '("users" "GDA_CONNECTION_FEATURE_USERS" "13")
     '("views" "GDA_CONNECTION_FEATURE_VIEWS" "14")
     '("xa-transactions" "GDA_CONNECTION_FEATURE_XA_TRANSACTIONS" "15")
-    '("last" "GDA_CONNECTION_FEATURE_LAST" "16")
+    '("multi-threading" "GDA_CONNECTION_FEATURE_MULTI_THREADING" "16")
+    '("last" "GDA_CONNECTION_FEATURE_LAST" "17")
   )
 )
 
@@ -307,23 +341,6 @@
     '("add-row" "GDA_DIFF_ADD_ROW" "0")
     '("remove-row" "GDA_DIFF_REMOVE_ROW" "1")
     '("modify-row" "GDA_DIFF_MODIFY_ROW" "2")
-  )
-)
-
-;; From gda-data-meta-wrapper.h
-
-;; Original typedef:
-;; typedef enum {
-;; 	GDA_DATA_META_WRAPPER_MODE_LC, /* quote identifier if there are some non lower case chars */
-;; 	GDA_DATA_META_WRAPPER_MODE_UC  /* quote identifier if there are some non upper case chars */
-;; } GdaDataMetaWrapperMode;
-
-(define-enum-extended DataMetaWrapperMode
-  (in-module "Gda")
-  (c-name "GdaDataMetaWrapperMode")
-  (values
-    '("lc" "GDA_DATA_META_WRAPPER_MODE_LC" "0")
-    '("uc" "GDA_DATA_META_WRAPPER_MODE_UC" "1")
   )
 )
 
@@ -454,30 +471,6 @@
     '("read-only-value" "GDA_DATA_PROXY_READ_ONLY_VALUE" "2")
     '("read-only-row" "GDA_DATA_PROXY_READ_ONLY_ROW" "3")
     '("filter-error" "GDA_DATA_PROXY_FILTER_ERROR" "4")
-  )
-)
-
-;; From gda-data-select-extra.h
-
-;; Original typedef:
-;; typedef enum
-;; {
-;; 	FIRST_QUERY = 0,
-;;         INS_QUERY  = 0,
-;;         UPD_QUERY  = 1,
-;;         DEL_QUERY  = 2,
-;; 	NB_QUERIES = 3
-;; } ModType;
-
-(define-enum-extended ModType
-  (in-module "Gda")
-  (c-name "ModType")
-  (values
-    '("first-query" "FIRST_QUERY" "0")
-    '("ins-query" "INS_QUERY" "0")
-    '("upd-query" "UPD_QUERY" "1")
-    '("del-query" "DEL_QUERY" "2")
-    '("nb-queries" "NB_QUERIES" "3")
   )
 )
 
@@ -804,6 +797,10 @@
 ;; 	GDA_SERVER_OPERATION_COMMENT_TABLE,
 ;; 	GDA_SERVER_OPERATION_COMMENT_COLUMN,
 ;; 
+;; 	GDA_SERVER_OPERATION_CREATE_USER,
+;; 	GDA_SERVER_OPERATION_ALTER_USER,
+;; 	GDA_SERVER_OPERATION_DROP_USER,
+;; 
 ;; 	GDA_SERVER_OPERATION_LAST
 ;; } GdaServerOperationType;
 
@@ -824,7 +821,10 @@
     '("drop-view" "GDA_SERVER_OPERATION_DROP_VIEW" "10")
     '("comment-table" "GDA_SERVER_OPERATION_COMMENT_TABLE" "11")
     '("comment-column" "GDA_SERVER_OPERATION_COMMENT_COLUMN" "12")
-    '("last" "GDA_SERVER_OPERATION_LAST" "13")
+    '("create-user" "GDA_SERVER_OPERATION_CREATE_USER" "13")
+    '("alter-user" "GDA_SERVER_OPERATION_ALTER_USER" "14")
+    '("drop-user" "GDA_SERVER_OPERATION_DROP_USER" "15")
+    '("last" "GDA_SERVER_OPERATION_LAST" "16")
   )
 )
 
@@ -1326,8 +1326,8 @@
 ;; 	GDA_SQL_OPERATOR_TYPE_AND,
 ;; 	GDA_SQL_OPERATOR_TYPE_OR,
 ;; 
-;; 	GDA_SQL_OPERATOR_TYPE_EQ, 
-;; 	GDA_SQL_OPERATOR_TYPE_IS, 
+;; 	GDA_SQL_OPERATOR_TYPE_EQ,
+;; 	GDA_SQL_OPERATOR_TYPE_IS,
 ;; 	GDA_SQL_OPERATOR_TYPE_LIKE,
 ;; 	GDA_SQL_OPERATOR_TYPE_BETWEEN,
 ;; 	GDA_SQL_OPERATOR_TYPE_GT,

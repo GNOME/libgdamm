@@ -731,6 +731,9 @@
     '("drop-view" "GDA_SERVER_OPERATION_DROP_VIEW")
     '("comment-table" "GDA_SERVER_OPERATION_COMMENT_TABLE")
     '("comment-column" "GDA_SERVER_OPERATION_COMMENT_COLUMN")
+    '("create-user" "GDA_SERVER_OPERATION_CREATE_USER")
+    '("alter-user" "GDA_SERVER_OPERATION_ALTER_USER")
+    '("drop-user" "GDA_SERVER_OPERATION_DROP_USER")
     '("last" "GDA_SERVER_OPERATION_LAST")
   )
 )
@@ -3325,8 +3328,8 @@
   )
 )
 
-(define-function gda_parse_string
-  (c-name "gda_parse_string")
+(define-function gda_parse_sql_string
+  (c-name "gda_parse_sql_string")
   (return-type "GdaStatement*")
   (parameters
     '("GdaConnection*" "cnc")

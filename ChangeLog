@@ -1,3 +1,12 @@
+2010-06-21  Murray Cumming  <murrayc@murrayc.com>
+
+	Add CREATE_USER, ALTER USER and DROP USER server operations.
+
+	* libgda/src/libgda_methods.defs: Regenerate with h2defs.py though the enums 
+	here are not actually used.
+	* libgda/src/libgda_enums.defs: Regenerate with enums.pl, to add the enums 
+	for the new server operations.
+
 2010-06-15  Murray Cumming  <murrayc@murrayc.com>
 
 	SqlBuilder: Added add_field_id().
