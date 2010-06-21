@@ -13,7 +13,7 @@ int main()
     Gnome::Gda::SqlBuilder::create(Gnome::Gda::SQL_STATEMENT_INSERT);
 
   ins_builder->set_table("customer");
-  ins_builder->add_field_id(ins_builder->add_id("e"),
+  ins_builder->add_field_value_id(ins_builder->add_id("e"),
                          ins_builder->add_param("p1", G_TYPE_STRING, false));
   ins_builder->add_field_value("f", 15);
   ins_builder->add_field_value("g", "joe");
@@ -53,7 +53,7 @@ int main()
   guint target_orders = sel_builder->select_add_target("orders");
   guint join = sel_builder->select_join_targets(target_c, target_orders, Gnome::Gda::SQL_SELECT_JOIN_INNER);
   sel_builder->select_add_target("c.date"); //Not sure about this. It was add add_field().
-  sel_builder->add_field_id(sel_builder->add_id("name"),
+  sel_builder->add_field_value_id(sel_builder->add_id("name"),
                          sel_builder->add_id("person"));
   render_as_sql(sel_builder);
 
@@ -72,7 +72,7 @@ int main()
   args.push_back(func_builder->add_expr(Gnome::Gda::Value(5)));
   args.push_back(func_builder->add_expr(Gnome::Gda::Value("Joe")));
   guint func = func_builder->add_function("myfunc", args);
-  func_builder->add_field_id(func);
+  func_builder->add_field_value_id(func);
   render_as_sql(func_builder);
 
   /* reuse the same GdaSqlBuilder object to have:
@@ -85,7 +85,7 @@ int main()
   args2.push_back(expr_ten);
 
   guint func_max = func_builder->add_function("MAX", args2);
-  func_builder->add_field_id(func_max);
+  func_builder->add_field_value_id(func_max);
 
   render_as_sql(func_builder);
 

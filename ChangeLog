@@ -1,5 +1,12 @@
 2010-06-21  Murray Cumming  <murrayc@murrayc.com>
 
+	Fix the examples (check) build.
+
+	* examples/sqlbuilder/main.cc: Adapt to the 
+	add_field_id()->add_field_value_id() API change.
+
+2010-06-21  Murray Cumming  <murrayc@murrayc.com>
+
 	ServerOperation: set_value_at(): Make this templated.
 
 	* libgda/src/serveroperation.[hg|ccg]: Add set_value_at_as_value() and make 
