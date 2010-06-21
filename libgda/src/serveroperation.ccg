@@ -124,13 +124,15 @@ Value ServerOperation::get_value_at(const Glib::ustring& path) const
 }  
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-void ServerOperation::set_value_at(const Glib::ustring& path, const Glib::ustring& value)
+void ServerOperation::set_value_at_as_value(const Glib::ustring& path, const Glib::ValueBase& value)
 #else
-void ServerOperation::set_value_at(const Glib::ustring& path, const Glib::ustring& value, std::auto_ptr<Glib::Error>& error)
+void ServerOperation::set_value_at_as_value(const Glib::ustring& path, const Glib::ValueBase& value, std::auto_ptr<Glib::Error>& error)
 #endif // GLIBMM_EXCEPTIONS_ENABLED
 {
+  gchar* strvalue = gda_value_stringify(value.gobj());
   GError* gerror = 0;
-  gda_server_operation_set_value_at(gobj(), value.c_str(), &gerror, "%s", path.c_str());
+  gda_server_operation_set_value_at(gobj(), strvalue, &gerror, "%s", path.c_str());
+  g_free(strvalue);
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror) ::Glib::Error::throw_exception(gerror);
