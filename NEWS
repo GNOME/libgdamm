@@ -1,3 +1,12 @@
+3.99.21: (unstable):
+
+* DataModel: Declare DataModelError exceptions.
+* ServerOperation: set_value_at(): Make this templated.
+* Add CREATE_USER, ALTER USER and DROP USER server operations.
+* SqlBuilder: Added add_field_id().
+* Build: Fix the build with the latest libgda API.
+  (Murray Cumming)
+
 3.99.20: (unstable):
 
 * Connection: Add statement_execute_non_select_builder(SqlBuilder).

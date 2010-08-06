@@ -1,37 +1,39 @@
+3.99.21:
+
 2010-06-21  Murray Cumming  <murrayc@murrayc.com>
 
 	DataModel: Added the DataModelError exceptions.
 
-	* libgda/src/datamodel.hg: Add this exception that can be thrown by these 
+	* libgda/src/datamodel.hg: Add this exception that can be thrown by these
 	methods.
 
 2010-06-21  Murray Cumming  <murrayc@murrayc.com>
 
 	Fix the examples (check) build.
 
-	* examples/sqlbuilder/main.cc: Adapt to the 
+	* examples/sqlbuilder/main.cc: Adapt to the
 	add_field_id()->add_field_value_id() API change.
 
 2010-06-21  Murray Cumming  <murrayc@murrayc.com>
 
 	ServerOperation: set_value_at(): Make this templated.
 
-	* libgda/src/serveroperation.[hg|ccg]: Add set_value_at_as_value() and make 
+	* libgda/src/serveroperation.[hg|ccg]: Add set_value_at_as_value() and make
 	set_value_at() a templated method, instead of just taking a string.
 
 2010-06-21  Murray Cumming  <murrayc@murrayc.com>
 
 	Add CREATE_USER, ALTER USER and DROP USER server operations.
 
-	* libgda/src/libgda_methods.defs: Regenerate with h2defs.py though the enums 
+	* libgda/src/libgda_methods.defs: Regenerate with h2defs.py though the enums
 	here are not actually used.
-	* libgda/src/libgda_enums.defs: Regenerate with enums.pl, to add the enums 
+	* libgda/src/libgda_enums.defs: Regenerate with enums.pl, to add the enums
 	for the new server operations.
 
 2010-06-15  Murray Cumming  <murrayc@murrayc.com>
 
 	SqlBuilder: Added add_field_id().
-	
+
 	* libgda/src/sqlbuilder.[hg|ccg]: Added add_field_id().
 
 2010-06-15  Murray Cumming  <murrayc@murrayc.com>
@@ -41,7 +43,7 @@
 	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py.
 	* libgda/src/sqlbuilder.[hg|ccg]: Use Id instead of guint for the IDs.
 	It is just a typedef but it makes things clearer. libgda does this now too.
-	Rename add_field_id() to add_field_value_id() and change the implementation 
+	Rename add_field_id() to add_field_value_id() and change the implementation
 	of similar methods because the C functions were renamed (by me).
 
 3.99.20:
@@ -49,9 +51,9 @@
 2010-05-20  Murray Cumming  <murrayc@murrayc.com>
 
 	Fixed the build with latest libgda.
-	
+
 	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py
-	* libgda/src/sqlbuilder.ccg: Adapted now that I have removed the id 
+	* libgda/src/sqlbuilder.ccg: Adapted now that I have removed the id
 	parameters from the C API.
 
 2010-05-17  Murray Cumming  <murrayc@murrayc.com>
