@@ -1,3 +1,12 @@
+2010-08-31  Murray Cumming  <murrayc@murrayc.com>
+
+	Added ConfigError and Config::get_provider().
+
+	* libgda/src/config.[hg|ccg]: Add the ConfigError exception, which is
+  also thrown by some Connection methods.
+  Add get_provider() and use _WRAP_METHOD() for the existing methods instead
+  of hand-coding them.
+
 3.99.21:
 
 2010-06-21  Murray Cumming  <murrayc@murrayc.com>

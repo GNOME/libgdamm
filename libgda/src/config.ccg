@@ -1,7 +1,7 @@
 // -*- C++ -*- // this is for the .ccg, I realize gensig puts one in
 
 /* config.cc
- * 
+ *
  * Copyright 2003 libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
@@ -21,6 +21,7 @@
 
 #include <libgdamm/config.h>
 #include <libgda/gda-config.h>
+#include <libgda/gda-enum-types.h>
 
 namespace Gnome
 {
@@ -28,38 +29,6 @@ namespace Gnome
 namespace Gda
 {
 
-GdaDsnInfo* Config::get_dsn_info (const Glib::ustring& dsn_name)
-{
-  return gda_config_get_dsn_info (dsn_name.c_str()); 
-}
-
-  
-bool Config::dsn_needs_authentication(const Glib::ustring& dsn_name)
-{
-  return gda_config_dsn_needs_authentication(dsn_name.c_str());
-}
-
-Glib::RefPtr<DataModel> Config::list_dsn()
-{
-  return Glib::wrap(gda_config_list_dsn());
-}
-
-Glib::RefPtr<DataModel> Config::list_providers()
-{
-  return Glib::wrap(gda_config_list_providers());
-}
-
-int Config::get_nb_dsn()
-{
-  return gda_config_get_nb_dsn();
-}
-
-bool Config::can_modify_system_config()
-{
-  return gda_config_can_modify_system_config();
-}
-
 } // namespace Gda
 
 } /* namespace Gnome */
-

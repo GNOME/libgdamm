@@ -32,7 +32,10 @@ namespace Gnome
 
 namespace Gda
 {
-  
+
+_WRAP_GERROR(ConfigError, GdaConfigError, GDA_CONFIG_ERROR)
+
+
 /** Configuration — Access/Management of libgda configuration.
  *
  * @ingroup Configuration
@@ -44,25 +47,20 @@ protected:
   _CTOR_DEFAULT;
 public:
   _WRAP_METHOD(static Glib::RefPtr<Config> get(), gda_config_get, refreturn)
-  
-  _WRAP_METHOD_DOCS_ONLY(gda_config_get_dsn_info)
-  static GdaDsnInfo* get_dsn_info(const Glib::ustring& dsn_name);
-    
-  _WRAP_METHOD_DOCS_ONLY(gda_config_dsn_needs_authentication)
-  static bool dsn_needs_authentication(const Glib::ustring& dsn_name);
 
-  _WRAP_METHOD_DOCS_ONLY(gda_config_list_dsn)
-  static Glib::RefPtr<DataModel> list_dsn();
+  _WRAP_METHOD(static GdaDsnInfo* get_dsn_info(const Glib::ustring& dsn_name), gda_config_get_dsn_info)
+  _WRAP_METHOD(static bool dsn_needs_authentication(const Glib::ustring& dsn_name), gda_config_dsn_needs_authentication)
 
-  _WRAP_METHOD_DOCS_ONLY(gda_config_list_providers)
-  static Glib::RefPtr<DataModel> list_providers();
+  _WRAP_METHOD(static Glib::RefPtr<DataModel> list_dsn(), gda_config_list_dsn)
 
-  _WRAP_METHOD_DOCS_ONLY(gda_config_get_nb_dsn)
-  static int get_nb_dsn();
+  _WRAP_METHOD(static Glib::RefPtr<ServerProvider> get_provider(const Glib::ustring& provider_name), gda_config_get_provider, errthrow)
 
-  _WRAP_METHOD_DOCS_ONLY(gda_config_can_modify_system_config)
-  static bool can_modify_system_config();
-  
+  _WRAP_METHOD(static Glib::RefPtr<DataModel> list_providers(), gda_config_list_providers)
+
+  _WRAP_METHOD(static int get_nb_dsn(), gda_config_get_nb_dsn)
+
+  _WRAP_METHOD(static bool can_modify_system_config(), gda_config_can_modify_system_config)
+
   #m4 _CONVERSION(`gpointer',`GdaDsnInfo*',`(GdaDsnInfo*)($3)')
   _WRAP_SIGNAL(void dsn_added(GdaDsnInfo* info), "dsn-added", no_default_handler)
   _WRAP_SIGNAL(void dsn_changed(GdaDsnInfo* info), "dsn-changed", no_default_handler)
@@ -75,4 +73,3 @@ public:
 
 } // namespace Gda
 } // namespace Gnome
-
