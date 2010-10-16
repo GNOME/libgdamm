@@ -130,6 +130,7 @@ _CONV_ENUM(Gda,SqlParserError)
 _CONV_ENUM(Gda,SqlOperatorType)
 _CONV_ENUM(Gda,SqlSelectJoinType)
 _CONV_ENUM(Gda,SqlStatementType)
+_CONV_ENUM(Gda,SqlIdentifierStyle)
 
 # structs
 _CONVERSION(`Blob&',`GdaBlob*',__FR2P)

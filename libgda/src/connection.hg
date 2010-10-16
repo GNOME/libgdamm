@@ -351,6 +351,8 @@ public:
   _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider(), gda_connection_get_provider, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const ServerProvider> get_provider() const, gda_connection_get_provider, refreturn)
    
+  _WRAP_METHOD(Glib::ustring quote_sql_identifier(const Glib::ustring& id) const, gda_connection_quote_sql_identifier)
+   
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_to_sql)
 
   //TODO: Add an overload without the params_used.
@@ -359,6 +361,8 @@ public:
   #else
   Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used, std::auto_ptr<Glib::Error>& error) const;
   #endif //GLIBMM_EXCEPTIONS_ENABLED
+  
+  _IGNORE(gda_connection_internal_reset_transaction_status)
     
   #m4 _CONVERSION(`GdaConnectionEvent*',`const Glib::RefPtr<ConnectionEvent>&',Glib::wrap($3, true))
   _WRAP_SIGNAL(void error(const Glib::RefPtr<ConnectionEvent>& error), "error")

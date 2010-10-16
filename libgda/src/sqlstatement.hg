@@ -49,7 +49,7 @@ public:
   _WRAP_METHOD(Glib::ustring serialize() const, gda_sql_statement_serialize)
 
   //_WRAP_METHOD(static Glib::ustring type_to_string(SqlStatementType type), gda_sql_statement_type_to_string)
-  //_WRAP_METHOD(static SqlStatementType string_to_type (const Glib::ustring& type), gda_sql_statement_string_to_type)
+  _WRAP_METHOD(static SqlStatementType string_to_type(const Glib::ustring& type), gda_sql_statement_string_to_type)
 
   _WRAP_METHOD(bool check_structure() const, gda_sql_statement_check_structure, errthrow)
   _WRAP_METHOD(bool check_validity(const Glib::RefPtr<Connection>& cnc), gda_sql_statement_check_validity, errthrow)

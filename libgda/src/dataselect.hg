@@ -74,6 +74,8 @@ public:
 
   _WRAP_METHOD(Glib::RefPtr<Connection> get_connection(), gda_data_select_get_connection)
 
+  _WRAP_METHOD(void rerun(), gda_data_select_rerun, errthrow)
+
   _WRAP_PROPERTY("auto-reset", bool)
   _WRAP_PROPERTY("store-all-rows", bool)
   _WRAP_PROPERTY("connection", Glib::RefPtr<Connection>)

@@ -37,8 +37,37 @@ _WRAP_ENUM(SqlSelectJoinType, GdaSqlSelectJoinType)
 _WRAP_GERROR(SqlBuilderError, GdaSqlBuilderError, GDA_SQL_BUILDER_ERROR)
 _WRAP_GERROR(SqlError, GdaSqlError, GDA_SQL_ERROR)
 
-/*
- * @ingroup Connection
+/** SqlBuilder can be used to build a Statement from its structural description, 
+ * much in the same way a SqlParser can be used to build a Statement from a SQL string.
+ *
+ * You may, for instance, pass the SqlBuilder directly to 
+ * Connection::statement_execute_select_builder() or 
+ * statement_execute_non_select_builder(). Or you may instead call 
+ * get_statement() and use the resulting SqlStatement.
+ *
+ * During the building process, some pieces of the statement are constructed 
+ * and assembled into the final statement. Each of these pieces can be reused 
+ * anytime in the same SqlBuilder object, and each is identified using a 
+ * single ID. That ID is dynamically allocated by the object.
+ * 
+ * This simple example builds the equivalent of this SQL query:
+ * "SELECT employees.name_first, employees.name_last FROM employees WHERE employees.employee_id = 123".
+ *
+ * @code
+ * Glib::RefPtr<Gnome::Gda::SqlBuilder> builder =
+ *   Gnome::Gda::SqlBuilder::create(Gnome::Gda::SQL_STATEMENT_SELECT);
+ * builder->select_add_field("name_fist", "employees");
+ * builder->select_add_field("name_last", "employees");
+ * builder->select_add_target("employees");
+ * builder->set_where(
+ *   builder->add_cond(Gnome::Gda::SQL_OPERATOR_TYPE_EQ,
+ *     builder->add_field_id("employee_id", "employees"),
+ *     builder->add_expr(123)));
+ * @endcode
+ *
+ * Note that, in this simple example, it's not necessary to specify the extra 
+ * "employees" table name parameter to select_add_field() and add_field_id(),
+ * though it's often a good idea to avoid ambiguity in larger queries. 
  */
 class SqlBuilder : public Glib::Object
 {
@@ -148,26 +177,37 @@ public:
     */
   Id add_function(const Glib::ustring& function_name, const Glib::ArrayHandle<Id>& args);
 
-    /** Builds a new expression which represents a function applied to an argument.
-    *
-    * @param function_name The name of the function to embed (e.g. MAX, MIN, ...)
-    * @param arg: The ids of the argument to the function
-    *
-    * @return The ID of the new target, or 0 if there was an error.
-    */
+  /** Builds a new expression which represents a function applied to an argument.
+   *
+   * @param function_name The name of the function to embed (e.g. MAX, MIN, ...)
+   * @param arg: The ids of the argument to the function
+   *
+   * @return The ID of the new target, or 0 if there was an error.
+   */
   Id add_function(const Glib::ustring& function_name, Id arg);
 
 
+  /** Adds an expression which is a subselect.
+   *
+   * @param sqlst A SqlStatement, which must be a SELECT or compound SELECT.
+   * @return The ID of the new expression, or 0 if there was an error.
+   */
   Id add_sub_select(const SqlStatement& sqlst);
   _IGNORE(gda_sql_builder_add_sub_select)
 
 //TODO:  _WRAP_METHOD(Id gda_sql_builder_add_case (GdaSqlBuilder *builder, Id id,  Id test_expr, Id else_expr, ...);
 //TODO:  _WRAP_METHOD(Id gda_sql_builder_add_case_v (GdaSqlBuilder *builder, Id id,  Id test_expr, Id else_expr,  const Id *when_array, const Id *then_array, gint args_size);
 
+  //TODO: Id add_case(Id id, Id test_expr, Id else_expr, const type_case_pairs& case_pairs);
+  //_IGNORE(gda_sql_builder_add_case)
+
+   
+
   _WRAP_METHOD(Id select_add_field(const Glib::ustring& field_name, const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring()), gda_sql_builder_select_add_field)
 
   // Statement API
-  /** Adds a new target to a SELECT statement
+  /** Adds a new target to a SELECT statement.
+   *
    * @param table_id The ID of the expression holding a table reference.
    * @param alias The alias to give to the target.
    *
@@ -180,7 +220,8 @@ public:
   Id select_add_target_id(Id table_id, const Glib::ustring& alias = Glib::ustring());
   _IGNORE(gda_sql_builder_select_add_target_id)
 
-  /** Joins two targets in a SELECT statement
+  /** Joins two targets in a SELECT statement.
+   *
    * @param left_target_id The ID of the left target to use (not %0)
    * @param right_target_id The ID of the right target to use (not %0)
    * @param join_type The type of join
@@ -202,10 +243,11 @@ public:
   _WRAP_METHOD(void select_set_distinct(bool distinct, Id expr_id), gda_sql_builder_select_set_distinct)
 
   /** Defines the maximum number of rows in the DataModel resulting from the execution of the built statement.
+   *
    * @param limit_count The number of rows that should be returned.
    * @param The offset of the first row that should appear in the result. (note that
    * this feature may not be supported by all the database providers.)
-  */
+   */
   void select_set_limit(Id limit_count, Id offset = 0);
 
   _WRAP_METHOD(void select_set_limit_id(Id limit_count_expr_id, Id limit_offest_expr_id = 0), gda_sql_builder_select_set_limit)
@@ -221,7 +263,13 @@ public:
 
   _WRAP_METHOD(void add_field_value_id(Id field_id, Id value_id = 0), gda_sql_builder_add_field_value_id)
 
-  //TODO: Documentation:
+  /** Specifies that the field represented by @a field_name will be set to the @a value.
+   * See gadd_expr() for more information.
+   * This is valid only for INSERT and UPDATE statements.
+   *
+   * @parm field_name A field name.
+   * @param value The value to set the field to.
+   */
   template <class ValueType>
   void add_field_value(const Glib::ustring& field_name, const ValueType& value);
 
@@ -235,6 +283,12 @@ public:
 
   _WRAP_METHOD(SqlExpr export_expression(Id id) const, gda_sql_builder_export_expression)
 
+  //TODO: This is a crappy description.
+  /** Imports the expression.
+   *
+   * @param expr A SqlExpr obtained using export_expression().
+   * @return The ID of the new expression, or 0 if there was an error.
+   */
   Id import_expression(const SqlExpr& expr);
   _IGNORE(gda_sql_builder_import_expression)
 };

@@ -32,6 +32,7 @@ namespace Gda
 {
 
 _WRAP_GERROR(MetaStoreError, GdaMetaStoreError, GDA_META_STORE_ERROR)
+_WRAP_ENUM(SqlIdentifierStyle, GdaSqlIdentifierStyle)
 
 /** Dictionary object.
  *
@@ -80,6 +81,7 @@ public:
   _WRAP_METHOD(bool modify_with_context (MetaContext* context, const Glib::RefPtr<DataModel>& new_data), gda_meta_store_modify_with_context, errthrow)
 
   _WRAP_METHOD(Glib::RefPtr<DataModel> create_modify_data_model(const Glib::ustring& table_name), gda_meta_store_create_modify_data_model)
+  _WRAP_METHOD(void set_identifiers_style(SqlIdentifierStyle style), gda_meta_store_set_identifiers_style)
   _WRAP_METHOD(Glib::RefPtr<MetaStruct> schema_get_structure(), gda_meta_store_schema_get_structure, errthrow)
   _WRAP_METHOD(Glib::SListHandle<Glib::ustring> schema_get_all_tables(), gda_meta_store_schema_get_all_tables)
   _WRAP_METHOD(Glib::SListHandle<Glib::ustring> schema_get_depend_tables(const Glib::ustring& table_name), gda_meta_store_schema_get_depend_tables)  
@@ -98,7 +100,9 @@ public:
   _WRAP_METHOD(Glib::RefPtr<Connection> get_internal_connection(), gda_meta_store_get_internal_connection)
   _WRAP_METHOD(Glib::RefPtr<const Connection> get_internal_connection() const, gda_meta_store_get_internal_connection)
 
-  // The rest of the properties is Write / Construct Only
+  _IGNORE(gda_meta_store_set_reserved_keywords_func)
+  
+  // The rest of the properties are Write / Construct-only
   _WRAP_PROPERTY("cnc", Glib::RefPtr<Connection>)  
 
   _WRAP_SIGNAL(void meta_reset(), "meta-reset")

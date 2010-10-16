@@ -1,3 +1,15 @@
+2010-10-16  Murray Cumming  <murrayc@murrayc.com>
+
+	Added some methods.
+
+	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py.
+	* libgda/src/connection.hg: Added quote_sql_identifier().
+	* libgda/src/dataselect.hg: Added rerun().
+	* libgda/src/metastore.hg: Added set_identifiers_style().
+	* libgda/src/sqlstatement.hg: Added string_to_type().
+	* libgda/src/sqlbuilder.hg: Added some documentation.
+	* tools/m4/convert_libgdamm.m4: Mention a new enum.
+
 2010-08-31  Murray Cumming  <murrayc@murrayc.com>
 
 	Added ConfigError and Config::get_provider().
