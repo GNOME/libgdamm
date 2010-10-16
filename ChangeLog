@@ -1,5 +1,11 @@
 2010-10-16  Murray Cumming  <murrayc@murrayc.com>
 
+	Doxyfile.in: Make more like the gtkmm one.
+
+	* docs/reference/Doxyfile.in: Minor unimportant changes, to match gtkmm.
+
+2010-10-16  Murray Cumming  <murrayc@murrayc.com>
+
 	Work around a doxygen crash.
 
 	* libgda/src/sqlparser.hg: Class overview documentation: Instead of 

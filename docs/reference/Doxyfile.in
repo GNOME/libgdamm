@@ -12,17 +12,7 @@ CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
 REPEAT_BRIEF           = YES
-ABBREVIATE_BRIEF       = "The $name class" \
-                         "The $name widget" \
-                         "The $name file" \
-                         is \
-                         provides \
-                         specifies \
-                         contains \
-                         represents \
-                         a \
-                         an \
-                         the
+ABBREVIATE_BRIEF       =
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
@@ -244,6 +234,9 @@ INCLUDE_FILE_PATTERNS  = *.h
 PREDEFINED             = __cplusplus \
                          DOXYGEN_SHOULD_SKIP_THIS \
                          "G_GNUC_CONST=" \
+                         "G_GNUC_NORETURN=" \
+                         "G_GNUC_NULL_TERMINATED=" \
+                         "G_GNUC_PURE=" \
                          GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED \
                          GLIBMM_EXCEPTIONS_ENABLED \
                          GLIBMM_HAVE_WIDE_STREAM \
