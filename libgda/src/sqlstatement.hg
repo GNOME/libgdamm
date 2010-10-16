@@ -32,7 +32,8 @@ _WRAP_ENUM(SqlStatementType, GdaSqlStatementType)
 
 class Connection;
 
-/** TODO
+/** Every SQL statement can be decomposed in the SqlStatement tree structure.
+ * See the documentation for the underlying <a href="http://library.gnome.org/devel/libgda/unstable/libgda-4.0-GdaSqlStatement.html#libgda-4.0-GdaSqlStatement.description">GdaSqlStatement</a>.
  */
 class SqlStatement
 {

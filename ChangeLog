@@ -1,5 +1,15 @@
 2010-10-16  Murray Cumming  <murrayc@murrayc.com>
 
+	Small documentation improvements.
+
+	* libgda/src/libgda_docs.xml: Fix a typo that I fixed in libgda too.
+	* libgda/src/sqlbuilder.[hg|ccg]: Small docs improvements. 
+	select_add_target_id(): Use _WRAP_METHOD() for this.
+	* libgda/src/sqlexpr.hg: Added some overview documentation.
+	* libgda/src/sqlstatement.hg: Added some overview documentation.
+
+2010-10-16  Murray Cumming  <murrayc@murrayc.com>
+
 	Doxyfile.in: Make more like the gtkmm one.
 
 	* docs/reference/Doxyfile.in: Minor unimportant changes, to match gtkmm.

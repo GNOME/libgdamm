@@ -29,7 +29,10 @@ namespace Gnome
 namespace Gda
 {
 
-/** TODO
+//TODO: The C API seems to expect direct struct access as public API, 
+//but do apps ever need to use that API?
+/** This contains any expression, either as a value, a variable, or as other 
+ * types of expressions. 
  */
 class SqlExpr
 {

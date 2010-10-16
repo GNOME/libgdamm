@@ -1408,7 +1408,7 @@ to it using gda_holder_set_value() or gda_holder_take_value().
 
 <function name="gda_sql_builder_add_cond_v">
 <description>
-Builds a new expression which reprenents a condition (or operation).
+Builds a new expression which represents a condition (or operation).
 
 As a side case, if @ops_ids_size is 1,
 then @op is ignored, and the returned ID represents @op_ids[0] (this avoids any problem for example
@@ -6083,7 +6083,7 @@ supported).
 
 <function name="gda_sql_builder_add_cond">
 <description>
-Builds a new expression which reprenents a condition (or operation).
+Builds a new expression which represents a condition (or operation).
 
 Since: 4.2
 
@@ -8426,7 +8426,7 @@ Get the number of rows in the proxied data model
 
 <function name="gda_sql_builder_add_function">
 <description>
-Builds a new expression which reprenents a function applied to some arguments
+Builds a new expression which represents a function applied to some arguments
 
 Since: 4.2
 

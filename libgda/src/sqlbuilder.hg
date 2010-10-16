@@ -42,7 +42,7 @@ _WRAP_GERROR(SqlError, GdaSqlError, GDA_SQL_ERROR)
  *
  * You may, for instance, pass the SqlBuilder directly to 
  * Connection::statement_execute_select_builder() or 
- * statement_execute_non_select_builder(). Or you may instead call 
+ * Connection::statement_execute_non_select_builder(). Or you may instead call 
  * get_statement() and use the resulting SqlStatement.
  *
  * During the building process, some pieces of the statement are constructed 
@@ -216,9 +216,7 @@ public:
   Id select_add_target(const Glib::ustring& table_name, const Glib::ustring& alias = Glib::ustring());
   _IGNORE(gda_sql_builder_select_add_target)
 
-  //For instance, to add a sub-query?
-  Id select_add_target_id(Id table_id, const Glib::ustring& alias = Glib::ustring());
-  _IGNORE(gda_sql_builder_select_add_target_id)
+  _WRAP_METHOD(Id select_add_target_id(Id table_id, const Glib::ustring& alias = Glib::ustring()), gda_sql_builder_select_add_target_id)
 
   /** Joins two targets in a SELECT statement.
    *
@@ -261,6 +259,24 @@ public:
   _WRAP_METHOD(void set_table(const Glib::ustring& table_name), gda_sql_builder_set_table)
   _WRAP_METHOD(void set_where(Id cond_id), gda_sql_builder_set_where)
 
+  //The documentation is hand-written to use doxygen's list/item syntax.
+  /** Valid only for: INSERT, UPDATE, SELECT statements.
+   * - For UPDATE: specifies that the field represented by @a field_id will be set to the value identified
+   * by @a value_id.
+   * - For SELECT: add a selected item to the statement, and if @a value_id is not %0, then use it as an
+   * alias
+   * - For INSERT: if @a field_id represents an SQL identifier (obtained using add_id()): then if
+   *  @a value_id is not %0 then specifies that the field represented by @a field_id will be set to the
+   * value identified by @a value_id, otherwise just specifies a named field to be given a value.
+   * If @a field_id represents a sub SELECT (obtained using add_sub_select()), then
+   * this method call defines the sub SELECT from which values to insert are taken.
+   * 
+   * See also add_field_value() and add_field_value_as_gvalue().
+   * 
+   * @newin{4,2}
+   * @param field_id The ID of the field's name or definition.
+   * @param value_id The ID of the value to set the field to, or %0.
+   */
   _WRAP_METHOD(void add_field_value_id(Id field_id, Id value_id = 0), gda_sql_builder_add_field_value_id)
 
   /** Specifies that the field represented by @a field_name will be set to the @a value.

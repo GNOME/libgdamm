@@ -94,11 +94,6 @@ SqlBuilder::Id SqlBuilder::select_add_target(const Glib::ustring& table_name, co
   return gda_sql_builder_select_add_target(gobj(), table_name.c_str(), string_or_null(alias.c_str()));
 }
 
-SqlBuilder::Id SqlBuilder::select_add_target_id(Id table_id, const Glib::ustring& alias)
-{
-  return gda_sql_builder_select_add_target_id(gobj(), table_id, string_or_null(alias.c_str()));
-}
-
 SqlBuilder::Id SqlBuilder::select_join_targets(Id left_target_id, Id right_target_id, SqlSelectJoinType join_type, Id join_expr)
 {
   return gda_sql_builder_select_join_targets(gobj(), left_target_id, right_target_id, (GdaSqlSelectJoinType) join_type, join_expr);
