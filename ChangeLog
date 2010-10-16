@@ -1,5 +1,11 @@
 2010-10-16  Murray Cumming  <murrayc@murrayc.com>
 
+	Regenerated C documentation.
+
+	* libgda/src/libgda_docs.xml: Regenerated with docextract_to_xml.py.
+
+2010-10-16  Murray Cumming  <murrayc@murrayc.com>
+
 	Added some methods.
 
 	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py.
