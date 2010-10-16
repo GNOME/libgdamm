@@ -1,5 +1,16 @@
 2010-10-16  Murray Cumming  <murrayc@murrayc.com>
 
+	Work around a doxygen crash.
+
+	* libgda/src/sqlparser.hg: Class overview documentation: Instead of 
+	describing the placeholder syntax, just link to the GdaSqlParser 
+	documentation. This is unavoidable as there seems to be now way to mention 
+	/* in a comment. The attempt to use @verbatim@endverbatim to do this does 
+	not seem to have worked in the past and crashes current versions of doxygen.  
+	( Doxygen bug https://bugzilla.gnome.org/show_bug.cgi?id=632311 )
+
+2010-10-16  Murray Cumming  <murrayc@murrayc.com>
+
 	Regenerated C documentation.
 
 	* libgda/src/libgda_docs.xml: Regenerated with docextract_to_xml.py.

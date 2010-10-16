@@ -34,6 +34,7 @@ namespace Gda
 _WRAP_ENUM(SqlParserMode, GdaSqlParserMode)
 _WRAP_GERROR(SqlParserError, GdaSqlParserError, GDA_SQL_PARSER_ERROR)
 		
+//TODO: Find out how to escape /* so we can actually show the full syntax at the end of this text.
 /** SQL parser.
  *
  * The Gda::SqlParser is an object dedicated to creating Gda::Statement and 
@@ -69,21 +70,8 @@ _WRAP_GERROR(SqlParserError, GdaSqlParserError, GDA_SQL_PARSER_ERROR)
  * should be reported as a bug.
  *
  * The Gda::SqlParser object recognizes place holders (variables), which can later
- * be queried and valued using Gda::Statement::get_parameters(). The folllowing syntax 
- * are recognized (other syntaxes might be recognized for specific database 
- * providers if the Gda::SqlParser is created using Gda::ServerProvider::create_parser() 
- * but for portability reasons it's better to avoid them):
- *
- * - ##NAME[::TYPE[::NULL]]: for a variable named NAME with the optional type TYPE 
- * (which can be a GType name or a custom database type name), and with the 
- * optional "::NULL" to instruct that the variable can be NULL.
- * - ## //@verbatim@endverbatim* name:NAME [type:TYPE] [nullok:[TRUE|FALSE]] [descr:DESCR] *@verbatim@endverbatim/
- * for a variable named NAME with the optional type TYPE (which can be a GType 
- * name or a custom database type name), with the optional "nullok" attribute 
- * and an optional description DESCR. Note that the NAME, TYPE and DESCR literals here 
- * must be quoted (simple or double quotes) if they include non alphanumeric 
- * characters, and that there must always be at least a space between the 
- * ## and the //@verbatim@endverbatim* ... *@verbatim@endverbatim/.
+ * be queried and valued using Gda::Statement::get_parameters(). 
+ * See the syntax description for the underlying <a href="http://library.gnome.org/devel/libgda/stable/GdaSqlParser.html#GdaSqlParser.description">GdaSqlParser</a>.
  *
  * @ingroup Connection
  */
