@@ -1,3 +1,13 @@
+4.1.1: (unstable):
+
+* Config: Added get_provider() and ConfigError.
+* Connection: Added quote_sql_identifier().
+* DataSelect: Added rerun().
+* MetaStore: Added set_identifiers_style().
+* SqlStatement: Added string_to_type().
+* Some documentation improvements.
+  (Murray Cumming)
+  
 3.99.21: (unstable):
 
 * DataModel: Declare DataModelError exceptions.

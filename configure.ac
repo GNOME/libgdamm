@@ -15,7 +15,7 @@
 ## You should have received a copy of the GNU Lesser General Public License
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-AC_INIT([libgdamm], [3.99.21], [http://bugzilla.gnome.org/enter_bug.cgi?product=libgdamm],
+AC_INIT([libgdamm], [4.1.1], [http://bugzilla.gnome.org/enter_bug.cgi?product=libgdamm],
         [libgdamm], [http://www.gtkmm.org/])
 AC_PREREQ([2.59])
 
