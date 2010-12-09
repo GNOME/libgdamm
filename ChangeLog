@@ -1,3 +1,11 @@
+2010-12-09  Murray Cumming  <murrayc@murrayc.com>
+
+	Adapt to gmmproc m4 changes in glibmm.
+
+	* tools/m4/convert.m4: Include convert_glibmm.m4 instead of convert_gtkmm.m4.
+	* tools/m4/convert_libgdamm.m4: Avoid use of the __FR2P macro, which does 
+	not seem to be defined for some reason.
+
 4.1.1:
 
 2010-10-16  Murray Cumming  <murrayc@murrayc.com>

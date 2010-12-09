@@ -133,9 +133,9 @@ _CONV_ENUM(Gda,SqlStatementType)
 _CONV_ENUM(Gda,SqlIdentifierStyle)
 
 # structs
-_CONVERSION(`Blob&',`GdaBlob*',__FR2P)
+_CONVERSION(`Blob&',`GdaBlob*',($3).gobj())
 _CONVERSION(`GdaBlob*',`Blob', Glib::wrap($3))
-_CONVERSION(`QuarkList&',`GdaQuarkList*',__FR2P)
+_CONVERSION(`QuarkList&',`GdaQuarkList*',($3).gobj())
 _CONVERSION(`GdaQuarkList*',`QuarkList', Glib::wrap($3))
 
 # Lists
