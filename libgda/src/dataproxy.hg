@@ -69,7 +69,7 @@ public:
   _WRAP_METHOD(bool is_read_only() const, gda_data_proxy_is_read_only)
 
   _WRAP_METHOD_DOCS_ONLY(gda_data_proxy_get_values)
-  ValueSList get_values(int proxy_row, const Glib::ArrayHandle<int>& cols_index) const;
+  ValueVector get_values(int proxy_row, const std::vector<int>& cols_index) const;
 
   _WRAP_METHOD(ValueAttribute get_value_attributes(int proxy_row, int col) const, gda_data_proxy_get_value_attributes)
   _WRAP_METHOD(void alter_value_attributes(int proxy_row, int col, ValueAttribute alter_flags), gda_data_proxy_alter_value_attributes)

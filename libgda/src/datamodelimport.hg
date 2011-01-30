@@ -78,7 +78,7 @@ public:
   _WRAP_CREATE(xmlNodePtr node)
 
 
-  //TODO: Use ListHandle or similar:
+  //TODO: Use std::vector:
   _WRAP_METHOD(GSList* get_errors(), gda_data_model_import_get_errors)
 
   _WRAP_METHOD(void clean_errors(), gda_data_model_import_clean_errors)

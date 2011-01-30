@@ -139,8 +139,8 @@ public:
   //_WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params), gda_connection_statement_execute_select, errthrow)
   _IGNORE(gda_connection_statement_execute_select) //We instead create a version that can take an optional usage parameter too.
 
-  #m4 _CONVERSION(`const Glib::ArrayHandle<GType>&', `GType*', `const_cast<GType*>(($3).data())')
-  _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, const Glib::ArrayHandle<GType>& col_types), gda_connection_statement_execute_select_full, errthrow)
+#m4 _CONVERSION(`const std::vector<GType>&', `GType*', `const_cast<GType*>(Glib::ArrayHandler<GType>::vector_to_array($3).data())')
+  _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, const std::vector<GType>& col_types), gda_connection_statement_execute_select_full, errthrow)
   _IGNORE(gda_connection_statement_execute_select_fullv)
   
 //TODO: Documentation:
@@ -236,11 +236,11 @@ public:
    //Use a special conversion here, because we should not own any part of the returned GList, 
    //according to the documentation for gda_connection_get_events(), 
    //and because we need to unconst the GList.:
-   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >',`$2((GList*)$3, Glib::OWNERSHIP_NONE)')
-   #m4 _CONVERSION(`const GList*',`Glib::ListHandle< Glib::RefPtr<const ConnectionEvent> >',`$2((GList*)$3, Glib::OWNERSHIP_NONE)')
+   #m4 _CONVERSION(`const GList*',`std::vector< Glib::RefPtr<ConnectionEvent> >',`$2(Glib::ListHandler< Glib::RefPtr<ConnectionEvent> >::list_to_vector(const_cast<GList*>($3), Glib::OWNERSHIP_NONE))')
+   #m4 _CONVERSION(`const GList*',`std::vector< Glib::RefPtr<const ConnectionEvent> >',`$2(Glib::ListHandler< Glib::RefPtr<const ConnectionEvent> >::list_to_vector(const_cast<GList*>($3), Glib::OWNERSHIP_NONE))')
 
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<ConnectionEvent> > get_events(), gda_connection_get_events)
-  _WRAP_METHOD(Glib::ListHandle< Glib::RefPtr<const ConnectionEvent> > get_events() const, gda_connection_get_events)
+  _WRAP_METHOD(std::vector< Glib::RefPtr<ConnectionEvent> > get_events(), gda_connection_get_events)
+  _WRAP_METHOD(std::vector< Glib::RefPtr<const ConnectionEvent> > get_events() const, gda_connection_get_events)
 
 
   _WRAP_METHOD(Glib::ustring value_to_sql_string(const Value& from) const, gda_connection_value_to_sql_string)
@@ -330,8 +330,8 @@ public:
   _WRAP_METHOD(bool statement_prepare(const Glib::RefPtr<const Statement>& stmt), gda_connection_statement_prepare, errthrow)
 
 
-  #m4 _CONVERSION(`const Glib::ListHandle< Glib::RefPtr<Holder> >&',`GList*',`$3.data()')
-  _WRAP_METHOD(Glib::RefPtr<DataModel> get_meta_store_data(ConnectionMetaType meta_type, const Glib::ListHandle< Glib::RefPtr<Holder> >& filters), gda_connection_get_meta_store_data_v, errthrow)
+  #m4 _CONVERSION(`const std::vector< Glib::RefPtr<Holder> >&',`GList*',`Glib::ListHandler< Glib::RefPtr<Holder> >::vector_to_list($3).data()')
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_meta_store_data(ConnectionMetaType meta_type, const std::vector< Glib::RefPtr<Holder> >& filters), gda_connection_get_meta_store_data_v, errthrow)
   _IGNORE(gda_connection_get_meta_store_data)
 
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
@@ -343,8 +343,9 @@ public:
   _WRAP_METHOD(Glib::RefPtr<MetaStore> get_meta_store(), gda_connection_get_meta_store, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const MetaStore> get_meta_store() const, gda_connection_get_meta_store, constversion)
 
-  #m4 _CONVERSION(`GSList*',`Glib::SListHandle< Glib::RefPtr<Glib::Object> >',`$2((GSList*)$3, Glib::OWNERSHIP_SHALLOW)')
-  _WRAP_METHOD(Glib::SListHandle< Glib::RefPtr<Glib::Object> > batch_execute(const Glib::RefPtr<Batch>& batch, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage), gda_connection_batch_execute, errthrow)
+  #m4 _CONVERSION(`GSList*',`std::vector< Glib::RefPtr<Glib::Object> >',`$2(Glib::SListHandler< Glib::RefPtr<Glib::Object > >::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW))')
+  _WRAP_METHOD(std::vector< Glib::RefPtr<Glib::Object> > batch_execute(const Glib::RefPtr<Batch>& batch, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage), gda_connection_batch_execute, errthrow)
+
   _WRAP_METHOD(Glib::RefPtr<ServerOperation> create_operation(ServerOperationType type, const Glib::RefPtr<const Set>& options), gda_connection_create_operation, errthrow)
   _WRAP_METHOD(bool perform_operation(const Glib::RefPtr<ServerOperation>& op), gda_connection_perform_operation, errthrow)
 
@@ -357,9 +358,9 @@ public:
 
   //TODO: Add an overload without the params_used.
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used) const;
+  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::vector< Glib::RefPtr<Holder> >& params_used) const;
   #else
-  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used, std::auto_ptr<Glib::Error>& error) const;
+  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::vector< Glib::RefPtr<Holder> >& params_used, std::auto_ptr<Glib::Error>& error) const;
   #endif //GLIBMM_EXCEPTIONS_ENABLED
   
   _IGNORE(gda_connection_internal_reset_transaction_status)

@@ -27,17 +27,17 @@ namespace Gnome
 namespace Gda
 {
 
-typedef Glib::SListHandle< Glib::RefPtr<Connection> > ConnectionSList;
+typedef std::vector< Glib::RefPtr<Connection> > ConnectionVector;
   
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-bool XaTransaction::commit(ConnectionList& cncs_to_recover)
+bool XaTransaction::commit(ConnectionVector& cncs_to_recover)
 #else
-bool XaTransaction::commit(ConnectionList& cncs_to_recover, std::auto_ptr<Glib::Error>& error)
+bool XaTransaction::commit(ConnectionVector& cncs_to_recover, std::auto_ptr<Glib::Error>& error)
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
   GSList* cncs = NULL;
-  bool retvalue = gda_xa_transaction_commit (gobj(), &cncs, &gerror);
+  const bool retvalue = gda_xa_transaction_commit (gobj(), &cncs, &gerror);
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
@@ -46,20 +46,15 @@ bool XaTransaction::commit(ConnectionList& cncs_to_recover, std::auto_ptr<Glib::
     error = ::Glib::Error::throw_exception(gerror);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 
-  ConnectionSList cncs_cpp(cncs, Glib::OWNERSHIP_SHALLOW);
-  for (ConnectionSList::const_iterator i = cncs_cpp.begin();
-       i != cncs_cpp.end(); i++)
-  {
-    cncs_to_recover.push_back(*i);
-  }
+  cncs_to_recover = Glib::SListHandler< Glib::RefPtr<const Connection> >::slist_to_vector(cncs, Glib::OWNERSHIP_SHALLOW);
   
   return retvalue;
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-bool XaTransaction::commit_recovered(ConnectionList& cncs_to_recover)
+bool XaTransaction::commit_recovered(ConnectionVector& cncs_to_recover)
 #else
-bool XaTransaction::commit_recovered(ConnectionList& cncs_to_recover, std::auto_ptr<Glib::Error>& error)
+bool XaTransaction::commit_recovered(ConnectionVector& cncs_to_recover, std::auto_ptr<Glib::Error>& error)
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
@@ -73,12 +68,7 @@ bool XaTransaction::commit_recovered(ConnectionList& cncs_to_recover, std::auto_
     error = ::Glib::Error::throw_exception(gerror);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 
-  ConnectionSList cncs_cpp(cncs, Glib::OWNERSHIP_SHALLOW);
-  for (ConnectionSList::const_iterator i = cncs_cpp.begin();
-       i != cncs_cpp.end(); i++)
-  {
-    cncs_to_recover.push_back(*i);
-  }
+   cncs_to_recover = Glib::SListHandler< Glib::RefPtr<const Connection> >::slist_to_vector(cncs, Glib::OWNERSHIP_SHALLOW);
   
   return retvalue;
 }

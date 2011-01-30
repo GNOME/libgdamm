@@ -163,7 +163,7 @@ public:
    *
    * @return The ID of the new expression, or 0 if there was an error.
    */
-  Id add_cond(SqlOperatorType op, const Glib::ArrayHandle<Id>& op_ids);
+  Id add_cond(SqlOperatorType op, const std::vector<Id>& op_ids);
 
   _IGNORE(gda_sql_builder_add_function, gda_sql_builder_add_function_v)
    _IGNORE(gda_sql_builder_select_join_targets)
@@ -175,7 +175,7 @@ public:
     *
     * @return The ID of the new target, or 0 if there was an error.
     */
-  Id add_function(const Glib::ustring& function_name, const Glib::ArrayHandle<Id>& args);
+  Id add_function(const Glib::ustring& function_name, const std::vector<Id>& args);
 
   /** Builds a new expression which represents a function applied to an argument.
    *

@@ -28,10 +28,10 @@ namespace Gnome
 namespace Gda
 {
 
-ValueSList DataProxy::get_values(int proxy_row, const Glib::ArrayHandle<int>& cols_index) const
+DataProxy::ValueVector DataProxy::get_values(int proxy_row, const std::vector<int>& cols_index) const
 {
   GSList* values = gda_data_proxy_get_values(const_cast<GdaDataProxy*>(gobj()), proxy_row, const_cast<gint*>(cols_index.data()), cols_index.size());
-  return ValueSList(values, Glib::OWNERSHIP_SHALLOW);
+  return Glib::SListHandler<Value, ValueTraits>::slist_to_vector(values, Glib::OWNERSHIP_SHALLOW);
 }
 
 } /* namespace Gda */

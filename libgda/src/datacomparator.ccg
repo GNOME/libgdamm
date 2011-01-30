@@ -27,6 +27,13 @@ namespace Gnome
 namespace Gda
 {
 
+void DataComparator::set_key_for_columns(const std::vector<int>& col_numbers)
+{
+  gda_data_comparator_set_key_columns(gobj(),
+    Glib::ArrayHandler<int>::vector_to_array(col_numbers).data(),
+    col_numbers.size());
+}
+
 } /* namespace Gda */
 
 } /* namespace Gnome */

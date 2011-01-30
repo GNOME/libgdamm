@@ -30,7 +30,7 @@ namespace Gda
 {
 
 //Fix compilation of our generated code:
-typedef Batch::StatementSList StatementSList;
+typedef Batch::StatementVector StatementVector;
 
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED

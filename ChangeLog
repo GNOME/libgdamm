@@ -1,3 +1,23 @@
+2011-01-30  Murray Cumming  <murrayc@murrayc.com>
+
+	Use std::vector<> instead of *Handle<> or std::list<>. 
+
+	* libgda/src/batch.[hg|ccg]:
+	* libgda/src/connection.[hg|ccg]:
+	* libgda/src/datacomparator.[hg|ccg]:
+	* libgda/src/datamodel.[hg|ccg]:
+	* libgda/src/datamodelimport.hg:
+	* libgda/src/dataproxy.[hg|ccg]:
+	* libgda/src/metastore.hg:
+	* libgda/src/serveroperation.hg:
+	* libgda/src/set.hg:
+	* libgda/src/sqlbuilder.[hg|ccg]:
+	* libgda/src/statement.[hg|ccg]:
+	* libgda/src/xatransaction.[hg|ccg]:
+	* tools/m4/convert_libgdamm.m4: Use the new convention that we have just 
+	started using in gtkmm 3. libgdamm is API/ABI unstable, so we can still make 
+	big changes like this.
+
 2010-12-09  Murray Cumming  <murrayc@murrayc.com>
 
 	Adapt to gmmproc m4 changes in glibmm.

@@ -52,11 +52,11 @@ public:
   _WRAP_METHOD(void remove_statement(const Glib::RefPtr<Statement>& stmt), gda_batch_remove_statement)
   _WRAP_METHOD(Glib::ustring serialize() const, gda_batch_serialize)
 
-  typedef Glib::SListHandle<Glib::RefPtr<const Statement> > StatementSList;
+  typedef std::vector<Glib::RefPtr<const Statement> > StatementVector;
 
   //There is no non-const override for this, because the C function returns const items.
-  #m4 _CONVERSION(`const GSList*',`StatementSList',`$2((GSList*)$3, Glib::OWNERSHIP_NONE)')
-  _WRAP_METHOD(StatementSList get_statements() const, gda_batch_get_statements)
+  #m4 _CONVERSION(`const GSList*',`StatementVector',`$2(Glib::SListHandler<Glib::RefPtr<const Statement> >::slist_to_vector((GSList*)$3, Glib::OWNERSHIP_NONE))')
+  _WRAP_METHOD(StatementVector get_statements() const, gda_batch_get_statements)
 
   _WRAP_METHOD_DOCS_ONLY(gda_statement_get_parameters)
   #ifdef GLIBMM_EXCEPTIONS_ENABLED

@@ -74,12 +74,12 @@ SqlBuilder::Id SqlBuilder::add_cond(SqlOperatorType op, Id op1, Id op2, Id op3)
   return gda_sql_builder_add_cond(gobj(), (GdaSqlOperatorType) op, op1, op2, op3);
 }
 
-SqlBuilder::Id SqlBuilder::add_cond(SqlOperatorType op, const Glib::ArrayHandle<Id>& op_ids)
+SqlBuilder::Id SqlBuilder::add_cond(SqlOperatorType op, const std::vector<Id>& op_ids)
 {
   return gda_sql_builder_add_cond_v(gobj(), (GdaSqlOperatorType) op, op_ids.data(), op_ids.size());
 }
 
-SqlBuilder::Id SqlBuilder::add_function(const Glib::ustring& function_name, const Glib::ArrayHandle<Id>& args)
+SqlBuilder::Id SqlBuilder::add_function(const Glib::ustring& function_name, const std::vector<Id>& args)
 {
   return gda_sql_builder_add_function_v(gobj(), function_name.c_str(), args.data(), args.size());
 }

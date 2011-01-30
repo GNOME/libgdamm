@@ -101,10 +101,10 @@ Glib::ustring Statement::to_sql(const Glib::RefPtr<const Set>& params, std::auto
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::ustring Statement::to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<const Set>& params, 
-                              StatementSqlFlag flags, const HolderSList&) const
+                              StatementSqlFlag flags, const HolderVector&) const
 #else
 Glib::ustring Statement::to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<const Set>& params, 
-                              StatementSqlFlag flags, const HolderSList&,
+                              StatementSqlFlag flags, const HolderVector&,
                               std::auto_ptr<Glib::Error>& error) const
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 {

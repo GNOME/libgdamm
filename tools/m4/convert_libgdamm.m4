@@ -138,14 +138,6 @@ _CONVERSION(`GdaBlob*',`Blob', Glib::wrap($3))
 _CONVERSION(`QuarkList&',`GdaQuarkList*',($3).gobj())
 _CONVERSION(`GdaQuarkList*',`QuarkList', Glib::wrap($3))
 
-# Lists
-_CONVERSION(`GSList*',`Glib::SListHandle<Glib::ustring>',__FL2H_SHALLOW)
-_CONVERSION(`const Glib::ListHandle< Glib::RefPtr<ConnectionEvent> >&',`GList*',`$3.data()')
-
-# Arrays
-_CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3)')
-_CONVERSION(`const Glib::ArrayHandle<int>&',`const gint*', `$3.data()')
-
 # Value
 _CONVERSION(`const Value&', `GValue*', `const_cast<GValue*>(($3).gobj())')
 _CONVERSION(`const Value&', `const GValue*', `($3).gobj()')

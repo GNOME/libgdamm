@@ -111,15 +111,14 @@ public:
 
   _WRAP_METHOD(bool set_value_at(int col, int row, const Value& value), gda_data_model_set_value_at, errthrow)
 
-  typedef Glib::ListHandle<Value, ValueTraits> ValueList;
-  typedef Glib::SListHandle<Value, ValueTraits> ValueSList;
+  typedef std::vector<Value> ValueVector;
 
-  #m4 _CONVERSION(`const ValueList&',`const GList*',`$3.data()')
-  #m4 _CONVERSION(`const ValueList&',`GList*',`$3.data()')
+  #m4 _CONVERSION(`const ValueList&',`GList*',`Glib::ListHandler<Value, ValueTraits>::vector_to_list($3).data()')
   _WRAP_METHOD(bool set_values(int row, const ValueList& values), gda_data_model_set_values, errthrow)
 
   _WRAP_METHOD(DataModelAccessFlags get_access_flags() const, gda_data_model_get_access_flags)
 
+  #m4 _CONVERSION(`const ValueList&',`const GList*',`Glib::ListHandler<Value, ValueTraits>::vector_to_list($3).data()')
   _WRAP_METHOD(int append_values(const ValueList& values), gda_data_model_append_values, errthrow)
 
   _WRAP_METHOD(bool append_row(), gda_data_model_append_row, errthrow)
@@ -127,9 +126,9 @@ public:
 
   //TODO: Maybe wrap the two input parameters (list of values, and list of their column indexes) as a map,
   //but it's not urgent. murrayc.
-  #m4 _CONVERSION(`const Glib::ArrayHandle<int>&', `gint*', `const_cast<gint*>(($3).data())')
-  #m4 _CONVERSION(`const ValueSList&', `GSList*', `$3.data()')
-  _WRAP_METHOD(int get_row_from_values(const ValueSList& values, const Glib::ArrayHandle<int>& cols_index), gda_data_model_get_row_from_values)
+  #m4 _CONVERSION(`const std::vector<int>&', `gint*', `const_cast<gint*>(Glib::ArrayHandler<int>::vector_to_array($3).data())')
+  #m4 _CONVERSION(`const ValueVector&', `GSList*', `Glib::SListHandler<Value, ValueTraits>::vector_to_slist($3).data()')
+  _WRAP_METHOD(int get_row_from_values(const ValueVector& values, const std::vector<int>& cols_index), gda_data_model_get_row_from_values)
 
   _WRAP_METHOD(void send_hint(DataModelHint hint, const Value& hint_value), gda_data_model_send_hint)
 
@@ -147,7 +146,7 @@ public:
    * @param options List of options for the export.
    * @result The string.
    */
-  Glib::ustring export_to_string(DataModelIOFormat format, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<Set>& options);
+  Glib::ustring export_to_string(DataModelIOFormat format, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options);
   _IGNORE(gda_data_model_export_to_string)
     
   /** Exports data contained in @a model to the @a file; the format is specified using the @a format argument.
@@ -165,9 +164,9 @@ public:
    * @result true if no error occurred.
    */
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  bool export_to_file(DataModelIOFormat format, const std::string& file, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<Set>& options);
+  bool export_to_file(DataModelIOFormat format, const std::string& file, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options);
 #else
-  bool export_to_file(DataModelIOFormat format, const std::string& file, const Glib::ArrayHandle<int>& cols, const Glib::ArrayHandle<int>& rows, const Glib::RefPtr<Set>& options, std::auto_ptr<Glib::Error>& error);
+  bool export_to_file(DataModelIOFormat format, const std::string& file, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options, std::auto_ptr<Glib::Error>& error);
 #endif
   _IGNORE(gda_data_model_export_to_file)
 

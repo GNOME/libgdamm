@@ -108,7 +108,10 @@ public:
   _WRAP_METHOD(guint get_sequence_size(const Glib::ustring& path) const, gda_server_operation_get_sequence_size)
   _WRAP_METHOD(guint get_sequence_max_size(const Glib::ustring& path) const, gda_server_operation_get_sequence_max_size)
   _WRAP_METHOD(guint get_sequence_min_size(const Glib::ustring& path) const, gda_server_operation_get_sequence_min_size)
-  _WRAP_METHOD(Glib::StringArrayHandle get_sequence_item_names(const Glib::ustring& path) const, gda_server_operation_get_sequence_item_names)
+
+#m4 _CONVERSION(`gchar**',`std::vector<Glib::ustring>', `Glib::ArrayHandler<Glib::ustring>::array_to_vector($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(std::vector<Glib::ustring> get_sequence_item_names(const Glib::ustring& path) const, gda_server_operation_get_sequence_item_names)
+
   _WRAP_METHOD(Glib::ustring get_sequence_name(const std::string& path) const, gda_server_operation_get_sequence_name)
 
   //TODO: Is this XML stuff really public API? murrayc.
@@ -123,7 +126,7 @@ public:
   
   _WRAP_METHOD(bool del_item_from_sequence(const std::string& item_path), gda_server_operation_del_item_from_sequence)
   _WRAP_METHOD(guint add_item_to_sequence(const std::string& item_path), gda_server_operation_add_item_to_sequence)
-  _WRAP_METHOD(Glib::StringArrayHandle get_root_nodes() const, gda_server_operation_get_root_nodes)
+  _WRAP_METHOD(std::vector<Glib::ustring> get_root_nodes() const, gda_server_operation_get_root_nodes)
 
   _WRAP_SIGNAL(void signal_sequence_item_added(Glib::ustring arg1, int arg2), "sequence-item-added", no_default_handler)
   _WRAP_SIGNAL(void signal_sequence_item_remove(Glib::ustring arg1, int arg2), "sequence-item-remove", no_default_handler)

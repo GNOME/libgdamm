@@ -83,8 +83,10 @@ public:
   _WRAP_METHOD(Glib::RefPtr<DataModel> create_modify_data_model(const Glib::ustring& table_name), gda_meta_store_create_modify_data_model)
   _WRAP_METHOD(void set_identifiers_style(SqlIdentifierStyle style), gda_meta_store_set_identifiers_style)
   _WRAP_METHOD(Glib::RefPtr<MetaStruct> schema_get_structure(), gda_meta_store_schema_get_structure, errthrow)
-  _WRAP_METHOD(Glib::SListHandle<Glib::ustring> schema_get_all_tables(), gda_meta_store_schema_get_all_tables)
-  _WRAP_METHOD(Glib::SListHandle<Glib::ustring> schema_get_depend_tables(const Glib::ustring& table_name), gda_meta_store_schema_get_depend_tables)  
+  
+#m4 _CONVERSION(`GSList*',`std::vector<Glib::ustring>', `Glib::SListHandler<Glib::ustring>::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')
+  _WRAP_METHOD(std::vector<Glib::ustring> schema_get_all_tables(), gda_meta_store_schema_get_all_tables)
+  _WRAP_METHOD(std::vector<Glib::ustring> schema_get_depend_tables(const Glib::ustring& table_name), gda_meta_store_schema_get_depend_tables)  
 
   _WRAP_METHOD_DOCS_ONLY(gda_meta_store_get_attribute_value)
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
@@ -111,7 +113,7 @@ public:
   //#m4 _CONVERSION(`gpointer',`MetaContext*',`(MetaContext*)($3)')
   //_WRAP_SIGNAL(gpointer suggest_update(MetaContext*  suggest), "suggest-update", no_default_handler)
   // Listhandle...
-  // _WRAP_SIGNAL(void meta_changed(Glib::SListHandle<>))
+  // _WRAP_SIGNAL(void meta_changed(std::vector<>))
 };
 
 } // namespace Gda

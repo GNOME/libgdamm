@@ -47,13 +47,13 @@ class Set : public Glib::Object
 {
   _CLASS_GOBJECT(Set, GdaSet, GDA_SET, Glib::Object, GObject)
 protected:
-  typedef Glib::SListHandle< Glib::RefPtr<Holder> > HolderSList;
+  typedef std::vector< Glib::RefPtr<Holder> > HolderVector;
 
-  #m4 _CONVERSION(`const HolderSList&', `GSList*', `$3.data()')
-  _WRAP_CTOR(Set(const HolderSList& holders), gda_set_new)
+  #m4 _CONVERSION(`const HolderVector&', `GSList*', `Glib::SListHandler<  Glib::RefPtr<Holder> >::vector_to_slist($3).data()')
+  _WRAP_CTOR(Set(const HolderVector& holders), gda_set_new)
 
 public:
-  _WRAP_CREATE(const HolderSList& holders = std::list< Glib::RefPtr<Holder> >())
+  _WRAP_CREATE(const HolderVector& holders = HolderVector())
   
   _WRAP_METHOD(Glib::RefPtr<Set> copy(), gda_set_copy)
 

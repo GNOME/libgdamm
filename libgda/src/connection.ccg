@@ -273,9 +273,9 @@ int Connection::statement_execute_non_select_builder(const Glib::RefPtr<const Sq
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
-Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used) const
+Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::vector< Glib::RefPtr<Holder> >& params_used) const
 #else
-Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::list< Glib::RefPtr<Holder> >& params_used, std::auto_ptr<Glib::Error>& error) const
+Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::vector< Glib::RefPtr<Holder> >& params_used, std::auto_ptr<Glib::Error>& error) const
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
@@ -290,15 +290,15 @@ Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& 
     error = ::Glib::Error::throw_exception(gerror);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 
-  Glib::SListHandle< Glib::RefPtr<Holder> > params_usedcpp(params_usedc, Glib::OWNERSHIP_SHALLOW);
-  for (Glib::SListHandle< Glib::RefPtr<Holder> >::const_iterator i = params_usedcpp.begin();
+  std::vector< Glib::RefPtr<Holder> > params_usedcpp
+    = Glib::SListHandler< Glib::RefPtr<Holder> >::slist_to_vector(params_usedc, Glib::OWNERSHIP_SHALLOW);
+  for(std::vector< Glib::RefPtr<Holder> >::const_iterator i = params_usedcpp.begin();
        i != params_usedcpp.end(); i++)
   {
     params_used.push_back(*i);
   }
   
   return retvalue;
-
 }
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED

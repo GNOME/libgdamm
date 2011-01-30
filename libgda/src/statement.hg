@@ -97,16 +97,16 @@ public:
   #endif //GLIBMM_EXCEPTIONS_ENABLED
   _IGNORE(gda_statement_to_sql, gda_statement_to_sql_real)
 
-  typedef Glib::ListHandle< const Glib::RefPtr<Holder> > HolderSList;
+  typedef std::vector< const Glib::RefPtr<Holder> > HolderVector;
 
   //TODO: Add an overload without the params?
   _WRAP_METHOD_DOCS_ONLY(gda_statement_to_sql_extended)
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::ustring to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<const Set>& params,
-                                StatementSqlFlag flags, const HolderSList& params_used) const;
+                                StatementSqlFlag flags, const HolderVector& params_used) const;
   #else
   Glib::ustring to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<const Set>& params,
-                                StatementSqlFlag flags, const HolderSList& params_used,
+                                StatementSqlFlag flags, const HolderVector& params_used,
                                 std::auto_ptr<Glib::Error>& error) const;
   #endif //GLIBMM_EXCEPTIONS_ENABLED
 
