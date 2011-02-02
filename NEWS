@@ -1,3 +1,9 @@
+4.1.2: (unstable):
+
+* Use std::vector<> instead of *Handle<> or std::list<> for method paramteters
+  and return types.
+  This matches the new convention in gtkmm 3.
+
 4.1.1: (unstable):
 
 * Config: Added get_provider() and ConfigError.
