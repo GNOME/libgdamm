@@ -202,7 +202,7 @@ public:
   int statement_execute_non_select(const Glib::RefPtr<const Statement>& stmt, std::auto_ptr<Glib::Error>& error);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 
-  _WRAP_METHOD(int statement_execute_non_select(const Glib::ustring& sql), gda_execute_non_select_command, errthrow)
+  _WRAP_METHOD(int statement_execute_non_select(const Glib::ustring& sql), gda_connection_execute_non_select_command, errthrow)
 
 
 //TODO: Documentation:

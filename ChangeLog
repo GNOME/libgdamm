@@ -1,5 +1,12 @@
 2011-03-29  Murray Cumming  <murrayc@murrayc.com>
 
+	Connection: statement_execute_non_select(): Restore this method.
+
+	* libgda/src/connection.hg: Correct the function name used by
+	statement_execute_non_select().
+
+2011-03-29  Murray Cumming  <murrayc@murrayc.com>
+
 	Use libgda-5.0.
 
 	* configure.ac: Use libgda-5.0 instead of libgda-4.0.
