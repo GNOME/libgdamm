@@ -40,7 +40,7 @@ typedef GdaGeometricPoint GeometricPoint;
 typedef GdaTime Time;
 typedef GdaTimestamp Timestamp;
 
-/** 
+/**
  *
  * Use value_type() to identify the value type at runtime.
  */
@@ -55,7 +55,7 @@ public:
   Value& operator=(const Value& src);
 
   ~Value();
-  
+
 
 //We can't have this constructor because gint64 and int are the same on 64-bit systems:
 //explicit Value(gint64 val);
@@ -65,179 +65,173 @@ public:
 //explicit Value(gint64 val);
 // explicit Value(guint64 val);
   static Value create_as_uint64(guint64 val);
-  
-  explicit Value(const guchar* val, long size); 
+
+  explicit Value(const guchar* val, long size);
 
   explicit Value(const GdaBlob* val);
 
   explicit Value(bool val);
-  
+
   explicit Value(const Glib::Date& val);
-  
+
   explicit Value(double val);
-  
+
   explicit Value(const GeometricPoint& val);
-  
+
   explicit Value(int val);
-  
-  explicit Value(const GdaValueList* val);
-  
+
   explicit Value(const GdaNumeric* val);
-  
+
   explicit Value(float val);
-  
+
   explicit Value(gshort val);
-  
+
   explicit Value(gushort val);
 
   explicit Value(gulong val);
-  
+
   explicit Value(const Glib::ustring& val);
-  
+
 
   //If this constructor does not exists, then Value("something") uses Value(bool) instead of Value(ustring).
   explicit Value(const char* val);
 
   explicit Value(const Time& val);
-  
+
   explicit Value(const Timestamp& val);
-  
-  
+
+
   //This causes ambiguity with another constructor on 64-bit systems:
   //explicit Value(time_t val);
-  
+
   static Value create_as_time_t(time_t val);
 
   explicit Value(gchar val);
-  
+
   explicit Value(guchar val);
-  
+
   explicit Value(guint val);
-  
+
   explicit Value(const Glib::ustring& as_string, GType type);
-  
+
   //TODO: explicit Value(const xmlNodePtr node);
   //__IGNORE(gda_value_new_from_xml)
 
   bool operator==(const Value& src) const;
   bool operator!=(const Value& src) const;
 
-  
+
   GType get_value_type() const;
-  
+
   bool is_null() const;
-  
+
   bool is_number() const;
 
-  
+
   gint64 get_int64() const;
-  
+
   // We can't have this as a regular set() overload because it has the same
   // type as GType on 64bit systems.
   void set_int64(gint64 val);
-  
+
   guint64 get_uint64() const;
-  
+
   // We can't have this as a regular set() overload because it has the same
   // type as GType on 64bit systems.
   void set_uint64(guint64 val);
 
   //TODO: The const here is quite meaningless:
-  
+
   const guchar* get_binary(long& size) const;
-  
+
   void set(const guchar* val, long size);
 
   //TODO: The const here is quite meaningless:
-  
+
   const GdaBlob* get_blob() const;
-  
+
   void set(const GdaBlob* val);
-  
+
   bool get_boolean() const;
-  
+
   void set(bool val);
-  
+
   Glib::Date get_date() const;
-  
+
   void set(const Glib::Date& val);
-  
+
   double get_double() const;
-  
+
   void set(double val);
-  
+
   GeometricPoint get_geometric_point() const;
-  
+
   void set(const GeometricPoint& val);
-  
+
   Glib::RefPtr<const Glib::Object> get_gobject();
-  
+
   void set(const Glib::RefPtr<Glib::Object>& val);
-  
+
   int get_int() const;
-  
+
   void set(int val);
-  
-  const GdaValueList* get_list();
-  
-  void set(const GdaValueList *val);
-  
+
   const GdaNumeric* get_numeric() const;
-  
+
   void set(const GdaNumeric *val);
-  
+
   float get_float() const;
-  
+
   void set(float val);
-  
+
   gshort get_short() const;
-  
+
   void set(gshort val);
-  
+
   gushort get_ushort() const;
-  
+
   void set(gushort val);
 
   glong get_long() const;
-  
+
   void set(glong val);
-  
+
   gulong get_ulong() const;
-  
+
   void set(gulong val);
-  
+
   Glib::ustring get_string() const;
-  
+
   void set(const Glib::ustring& val);
 
   //If this method does not exists, then set("something") uses set(bool) instead of set(ustring).
   void set(const char* val);
-  
+
   Time get_time() const;
-  
+
   void set(const Time& val);
-  
+
   Timestamp get_timestamp() const;
-  
+
   void set(const Timestamp& val);
-  
+
   void set(gchar val);
-  
+
   void set(guchar val);
-  
+
   guint get_uint() const;
-  
+
   void set(guint val);
-  
+
   GType get_g_type() const;
-  
+
   void set_g_type(GType val);
-  
+
   //Use the copy constructor instead: _WRAP_METHOD(bool set_from_value(const Value& from), gda_value_set_from_value)
-  
+
 
   //TODO: Wrap this as some stream operator thing?
-  
+
   Glib::ustring to_string() const;
 };
 
@@ -263,7 +257,6 @@ GType value_get_type_null();
 GType value_get_type_binary();
 GType value_get_type_blob();
 GType value_get_type_geometric_point();
-GType value_get_type_list();
 GType value_get_type_numeric();
 GType value_get_type_short();
 GType value_get_type_ushort();
@@ -349,4 +342,3 @@ GType                             gda_ushort_get_type (void) G_GNUC_CONST;
 
 
 #endif /* _LIBGDAMM_VALUE_H */
-

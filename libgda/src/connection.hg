@@ -1,8 +1,8 @@
 /* $Id: connection.hg,v 1.35 2006/11/30 06:58:55 murrayc Exp $ */
-// -*- C++ -*- // 
+// -*- C++ -*- //
 
 /* connection.h
- * 
+ *
  * Copyright 2003 libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
@@ -47,15 +47,14 @@ typedef GdaServerProviderInfo ServerProviderInfo;
  */
 _WRAP_GERROR(ConnectionError, GdaConnectionError, GDA_CONNECTION_ERROR)
 
-_WRAP_ENUM(ConnectionSchema, GdaConnectionSchema)
 _WRAP_ENUM(ConnectionOptions, GdaConnectionOptions)
 _WRAP_ENUM(ConnectionMetaType, GdaConnectionMetaType)
 
 /** Manages a connection to a data source.
- * This class offers access to all operations involving an opened connection to a database. 
+ * This class offers access to all operations involving an opened connection to a database.
  * Connection objects are obtained via the Client class.
- * 
- * Once obtained, applications can use a Connection to execute commands, run transactions, and get information about all 
+ *
+ * Once obtained, applications can use a Connection to execute commands, run transactions, and get information about all
  * objects stored in the underlying database.
  *
  * @ingroup Connections
@@ -135,14 +134,14 @@ public:
 #else
   Glib::RefPtr<Glib::Object> statement_execute(const Glib::ustring& sql, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
 #endif // GLIBMM_EXCEPTIONS_ENABLED
-  
+
   //_WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params), gda_connection_statement_execute_select, errthrow)
   _IGNORE(gda_connection_statement_execute_select) //We instead create a version that can take an optional usage parameter too.
 
 #m4 _CONVERSION(`const std::vector<GType>&', `GType*', `const_cast<GType*>(Glib::ArrayHandler<GType>::vector_to_array($3).data())')
   _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, const std::vector<GType>& col_types), gda_connection_statement_execute_select_full, errthrow)
   _IGNORE(gda_connection_statement_execute_select_fullv)
-  
+
 //TODO: Documentation:
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, StatementModelUsage model_usage = STATEMENT_MODEL_RANDOM_ACCESS);
@@ -152,7 +151,7 @@ public:
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
 #endif
 
-  
+
 //TODO: Documentation:
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage = STATEMENT_MODEL_RANDOM_ACCESS);
@@ -179,7 +178,7 @@ public:
   Glib::RefPtr<DataModel> statement_execute_select_builder(const Glib::RefPtr<const SqlBuilder>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
 #endif
 
-  
+
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_execute_non_select)
 //TODO: Documentation:
 //TODO: It's not nice that these two method overloads differ only by the constness of the set.
@@ -187,7 +186,7 @@ public:
   int statement_execute_non_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, Glib::RefPtr<const Set>& last_insert_row);
 #else
   int statement_execute_non_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, Glib::RefPtr<const Set>& last_insert_row, std::auto_ptr<Glib::Error>& error);
-#endif //GLIBMM_EXCEPTIONS_ENABLED  
+#endif //GLIBMM_EXCEPTIONS_ENABLED
 
 //TODO: Documentation:
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
@@ -204,7 +203,7 @@ public:
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   _WRAP_METHOD(int statement_execute_non_select(const Glib::ustring& sql), gda_execute_non_select_command, errthrow)
-  
+
 
 //TODO: Documentation:
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
@@ -233,8 +232,8 @@ public:
   _WRAP_METHOD(bool delete_savepoint(const Glib::ustring& name), gda_connection_delete_savepoint, errthrow)
 
 
-   //Use a special conversion here, because we should not own any part of the returned GList, 
-   //according to the documentation for gda_connection_get_events(), 
+   //Use a special conversion here, because we should not own any part of the returned GList,
+   //according to the documentation for gda_connection_get_events(),
    //and because we need to unconst the GList.:
    #m4 _CONVERSION(`const GList*',`std::vector< Glib::RefPtr<ConnectionEvent> >',`$2(Glib::ListHandler< Glib::RefPtr<ConnectionEvent> >::list_to_vector(const_cast<GList*>($3), Glib::OWNERSHIP_NONE))')
    #m4 _CONVERSION(`const GList*',`std::vector< Glib::RefPtr<const ConnectionEvent> >',`$2(Glib::ListHandler< Glib::RefPtr<const ConnectionEvent> >::list_to_vector(const_cast<GList*>($3), Glib::OWNERSHIP_NONE))')
@@ -246,7 +245,7 @@ public:
   _WRAP_METHOD(Glib::ustring value_to_sql_string(const Value& from) const, gda_connection_value_to_sql_string)
 
   _WRAP_METHOD(bool supports_feature(ConnectionFeature feature) const, gda_connection_supports_feature)
-      
+
   _WRAP_METHOD(Glib::ustring get_authentication() const, gda_connection_get_authentication)
   _WRAP_METHOD(Glib::RefPtr<SqlParser> create_parser(), gda_connection_create_parser)
 
@@ -255,7 +254,7 @@ public:
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   /** Update the full meta store information.
-   * 
+   *
    * Note that this may take some time for big databases
    * @return <tt>true</tt> if no error occurred.
    */
@@ -266,8 +265,8 @@ public:
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   /** Update the meta store information @a id
-   * 
-   * This can speed up the update of the meta store if you only need a 
+   *
+   * This can speed up the update of the meta store if you only need a
    * specific information
    * @param id An id for the information to update (see http://library.gnome.org/devel/libgda/unstable/information_schema.html)
    * @return <tt>true</tt> if no error occurred.
@@ -280,7 +279,7 @@ public:
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   /** Update the meta store information for the table named @a table_name
-   * 
+   *
    * This can speed up the update of the meta store if you only need the information
    * for a specific table
    * @param table_name Name of the table where the information is needed
@@ -298,7 +297,7 @@ public:
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   /** Update the meta store information for the table names.
-   * 
+   *
    * This can speed up the update of the meta store if you only need the list of table names.
    *
    * @param schema_name Name of the schema whose tables to update, or "" to
@@ -317,7 +316,7 @@ public:
 
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   /** Update the meta store information for the data types.
-   * 
+   *
    * This can speed up the update of the meta store if you only need the data types.
    *
    * @return <tt>true</tt> if no error occurred.
@@ -326,7 +325,7 @@ public:
 #else
   bool update_meta_store_data_types(std::auto_ptr<Glib::Error>& err);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
-  
+
   _WRAP_METHOD(bool statement_prepare(const Glib::RefPtr<const Statement>& stmt), gda_connection_statement_prepare, errthrow)
 
 
@@ -351,9 +350,9 @@ public:
 
   _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider(), gda_connection_get_provider, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const ServerProvider> get_provider() const, gda_connection_get_provider, refreturn)
-   
+
   _WRAP_METHOD(Glib::ustring quote_sql_identifier(const Glib::ustring& id) const, gda_connection_quote_sql_identifier)
-   
+
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_to_sql)
 
   //TODO: Add an overload without the params_used.
@@ -362,9 +361,9 @@ public:
   #else
   Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::vector< Glib::RefPtr<Holder> >& params_used, std::auto_ptr<Glib::Error>& error) const;
   #endif //GLIBMM_EXCEPTIONS_ENABLED
-  
+
   _IGNORE(gda_connection_internal_reset_transaction_status)
-    
+
   #m4 _CONVERSION(`GdaConnectionEvent*',`const Glib::RefPtr<ConnectionEvent>&',Glib::wrap($3, true))
   _WRAP_SIGNAL(void error(const Glib::RefPtr<ConnectionEvent>& error), "error")
 
@@ -383,4 +382,3 @@ public:
 
 } // namespace Gda
 } // namespace Gnome
-

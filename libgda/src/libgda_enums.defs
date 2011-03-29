@@ -176,7 +176,8 @@
 ;; 	GDA_CONNECTION_OPTIONS_READ_ONLY = 1 << 0,
 ;; 	GDA_CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE = 1 << 1,
 ;; 	GDA_CONNECTION_OPTIONS_THREAD_SAFE = 1 << 2,
-;; 	GDA_CONNECTION_OPTIONS_THREAD_ISOLATED = 1 << 3
+;; 	GDA_CONNECTION_OPTIONS_THREAD_ISOLATED = 1 << 3,
+;; 	GDA_CONNECTION_OPTIONS_AUTO_META_DATA = 1 << 4
 ;; } GdaConnectionOptions;
 
 (define-flags-extended ConnectionOptions
@@ -188,6 +189,7 @@
     '("sql-identifiers-case-sensitive" "GDA_CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE" "1 << 1")
     '("thread-safe" "GDA_CONNECTION_OPTIONS_THREAD_SAFE" "1 << 2")
     '("thread-isolated" "GDA_CONNECTION_OPTIONS_THREAD_ISOLATED" "1 << 3")
+    '("auto-meta-data" "GDA_CONNECTION_OPTIONS_AUTO_META_DATA" "1 << 4")
   )
 )
 
@@ -237,49 +239,6 @@
     '("xa-transactions" "GDA_CONNECTION_FEATURE_XA_TRANSACTIONS" "15")
     '("multi-threading" "GDA_CONNECTION_FEATURE_MULTI_THREADING" "16")
     '("last" "GDA_CONNECTION_FEATURE_LAST" "17")
-  )
-)
-
-;; Original typedef:
-;; typedef enum {
-;; 	GDA_CONNECTION_SCHEMA_AGGREGATES,
-;; 	GDA_CONNECTION_SCHEMA_DATABASES,
-;; 	GDA_CONNECTION_SCHEMA_FIELDS,
-;; 	GDA_CONNECTION_SCHEMA_INDEXES,
-;; 	GDA_CONNECTION_SCHEMA_LANGUAGES,
-;; 	GDA_CONNECTION_SCHEMA_NAMESPACES,
-;; 	GDA_CONNECTION_SCHEMA_PARENT_TABLES,
-;; 	GDA_CONNECTION_SCHEMA_PROCEDURES,
-;; 	GDA_CONNECTION_SCHEMA_SEQUENCES,
-;; 	GDA_CONNECTION_SCHEMA_TABLES,
-;; 	GDA_CONNECTION_SCHEMA_TRIGGERS,
-;; 	GDA_CONNECTION_SCHEMA_TYPES,
-;; 	GDA_CONNECTION_SCHEMA_USERS,
-;; 	GDA_CONNECTION_SCHEMA_VIEWS,
-;; 	GDA_CONNECTION_SCHEMA_CONSTRAINTS,
-;; 	GDA_CONNECTION_SCHEMA_TABLE_CONTENTS
-;; } GdaConnectionSchema;
-
-(define-enum-extended ConnectionSchema
-  (in-module "Gda")
-  (c-name "GdaConnectionSchema")
-  (values
-    '("aggregates" "GDA_CONNECTION_SCHEMA_AGGREGATES" "0")
-    '("databases" "GDA_CONNECTION_SCHEMA_DATABASES" "1")
-    '("fields" "GDA_CONNECTION_SCHEMA_FIELDS" "2")
-    '("indexes" "GDA_CONNECTION_SCHEMA_INDEXES" "3")
-    '("languages" "GDA_CONNECTION_SCHEMA_LANGUAGES" "4")
-    '("namespaces" "GDA_CONNECTION_SCHEMA_NAMESPACES" "5")
-    '("parent-tables" "GDA_CONNECTION_SCHEMA_PARENT_TABLES" "6")
-    '("procedures" "GDA_CONNECTION_SCHEMA_PROCEDURES" "7")
-    '("sequences" "GDA_CONNECTION_SCHEMA_SEQUENCES" "8")
-    '("tables" "GDA_CONNECTION_SCHEMA_TABLES" "9")
-    '("triggers" "GDA_CONNECTION_SCHEMA_TRIGGERS" "10")
-    '("types" "GDA_CONNECTION_SCHEMA_TYPES" "11")
-    '("users" "GDA_CONNECTION_SCHEMA_USERS" "12")
-    '("views" "GDA_CONNECTION_SCHEMA_VIEWS" "13")
-    '("constraints" "GDA_CONNECTION_SCHEMA_CONSTRAINTS" "14")
-    '("table-contents" "GDA_CONNECTION_SCHEMA_TABLE_CONTENTS" "15")
   )
 )
 
@@ -496,52 +455,6 @@
     '("access-error" "GDA_DATA_SELECT_ACCESS_ERROR" "3")
     '("sql-error" "GDA_DATA_SELECT_SQL_ERROR" "4")
     '("safety-locked-error" "GDA_DATA_SELECT_SAFETY_LOCKED_ERROR" "5")
-  )
-)
-
-;; From gda-easy.h
-
-;; Original typedef:
-;; typedef enum  {
-;;     GDA_EASY_OBJECT_NAME_ERROR,
-;;     GDA_EASY_INCORRECT_VALUE_ERROR,
-;;     GDA_EASY_OPERATION_ERROR
-;; } GdaEasyError;
-
-(define-enum-extended EasyError
-  (in-module "Gda")
-  (c-name "GdaEasyError")
-  (values
-    '("object-name-error" "GDA_EASY_OBJECT_NAME_ERROR" "0")
-    '("incorrect-value-error" "GDA_EASY_INCORRECT_VALUE_ERROR" "1")
-    '("operation-error" "GDA_EASY_OPERATION_ERROR" "2")
-  )
-)
-
-;; Original typedef:
-;; typedef enum
-;; {
-;; 	GDA_EASY_CREATE_TABLE_NOTHING_FLAG   = 1 << 0,
-;; 	GDA_EASY_CREATE_TABLE_PKEY_FLAG      = 1 << 1,
-;; 	GDA_EASY_CREATE_TABLE_NOT_NULL_FLAG  = 1 << 2,
-;; 	GDA_EASY_CREATE_TABLE_UNIQUE_FLAG    = 1 << 3,
-;; 	GDA_EASY_CREATE_TABLE_AUTOINC_FLAG   = 1 << 4,
-;; 	GDA_EASY_CREATE_TABLE_FKEY_FLAG      = 1 << 5,
-;; 	/* Flags combinations */
-;; 	GDA_EASY_CREATE_TABLE_PKEY_AUTOINC_FLAG = GDA_EASY_CREATE_TABLE_PKEY_FLAG | GDA_EASY_CREATE_TABLE_AUTOINC_FLAG
-;; } GdaEasyCreateTableFlag;
-
-(define-flags-extended EasyCreateTableFlag
-  (in-module "Gda")
-  (c-name "GdaEasyCreateTableFlag")
-  (values
-    '("nothing-flag" "GDA_EASY_CREATE_TABLE_NOTHING_FLAG" "1 << 0")
-    '("pkey-flag" "GDA_EASY_CREATE_TABLE_PKEY_FLAG" "1 << 1")
-    '("not-null-flag" "GDA_EASY_CREATE_TABLE_NOT_NULL_FLAG" "1 << 2")
-    '("unique-flag" "GDA_EASY_CREATE_TABLE_UNIQUE_FLAG" "1 << 3")
-    '("autoinc-flag" "GDA_EASY_CREATE_TABLE_AUTOINC_FLAG" "1 << 4")
-    '("fkey-flag" "GDA_EASY_CREATE_TABLE_FKEY_FLAG" "1 << 5")
-    '("pkey-autoinc-flag" "GDA_EASY_CREATE_TABLE_PKEY_AUTOINC_FLAG" "0x12")
   )
 )
 
@@ -763,6 +676,31 @@
 
 ;; Original typedef:
 ;; typedef enum {
+;; 	GDA_META_FOREIGN_KEY_UNKNOWN,
+;; 	GDA_META_FOREIGN_KEY_NONE,
+;; 	GDA_META_FOREIGN_KEY_NO_ACTION,
+;; 	GDA_META_FOREIGN_KEY_RESTRICT,
+;; 	GDA_META_FOREIGN_KEY_CASCADE,
+;; 	GDA_META_FOREIGN_KEY_SET_NULL,
+;; 	GDA_META_FOREIGN_KEY_SET_DEFAULT
+;; } GdaMetaForeignKeyPolicy;
+
+(define-enum-extended MetaForeignKeyPolicy
+  (in-module "Gda")
+  (c-name "GdaMetaForeignKeyPolicy")
+  (values
+    '("unknown" "GDA_META_FOREIGN_KEY_UNKNOWN" "0")
+    '("none" "GDA_META_FOREIGN_KEY_NONE" "1")
+    '("no-action" "GDA_META_FOREIGN_KEY_NO_ACTION" "2")
+    '("restrict" "GDA_META_FOREIGN_KEY_RESTRICT" "3")
+    '("cascade" "GDA_META_FOREIGN_KEY_CASCADE" "4")
+    '("set-null" "GDA_META_FOREIGN_KEY_SET_NULL" "5")
+    '("set-default" "GDA_META_FOREIGN_KEY_SET_DEFAULT" "6")
+  )
+)
+
+;; Original typedef:
+;; typedef enum {
 ;; 	GDA_META_GRAPH_COLUMNS = 1 << 0
 ;; } GdaMetaGraphInfo;
 
@@ -830,6 +768,48 @@
 
 ;; Original typedef:
 ;; typedef enum {
+;; 	GDA_SERVER_OPERATION_OBJECT_NAME_ERROR,
+;; 	GDA_SERVER_OPERATION_INCORRECT_VALUE_ERROR
+;; } GdaServerOperationError;
+
+(define-enum-extended ServerOperationError
+  (in-module "Gda")
+  (c-name "GdaServerOperationError")
+  (values
+    '("object-name-error" "GDA_SERVER_OPERATION_OBJECT_NAME_ERROR" "0")
+    '("incorrect-value-error" "GDA_SERVER_OPERATION_INCORRECT_VALUE_ERROR" "1")
+  )
+)
+
+;; Original typedef:
+;; typedef enum
+;; {
+;; 	GDA_SERVER_OPERATION_CREATE_TABLE_NOTHING_FLAG   = 1 << 0,
+;; 	GDA_SERVER_OPERATION_CREATE_TABLE_PKEY_FLAG      = 1 << 1,
+;; 	GDA_SERVER_OPERATION_CREATE_TABLE_NOT_NULL_FLAG  = 1 << 2,
+;; 	GDA_SERVER_OPERATION_CREATE_TABLE_UNIQUE_FLAG    = 1 << 3,
+;; 	GDA_SERVER_OPERATION_CREATE_TABLE_AUTOINC_FLAG   = 1 << 4,
+;; 	GDA_SERVER_OPERATION_CREATE_TABLE_FKEY_FLAG      = 1 << 5,
+;; 	/* Flags combinations */
+;; 	GDA_SERVER_OPERATION_CREATE_TABLE_PKEY_AUTOINC_FLAG = GDA_SERVER_OPERATION_CREATE_TABLE_PKEY_FLAG | GDA_SERVER_OPERATION_CREATE_TABLE_AUTOINC_FLAG
+;; } GdaServerOperationCreateTableFlag;
+
+(define-flags-extended ServerOperationCreateTableFlag
+  (in-module "Gda")
+  (c-name "GdaServerOperationCreateTableFlag")
+  (values
+    '("nothing-flag" "GDA_SERVER_OPERATION_CREATE_TABLE_NOTHING_FLAG" "1 << 0")
+    '("pkey-flag" "GDA_SERVER_OPERATION_CREATE_TABLE_PKEY_FLAG" "1 << 1")
+    '("not-null-flag" "GDA_SERVER_OPERATION_CREATE_TABLE_NOT_NULL_FLAG" "1 << 2")
+    '("unique-flag" "GDA_SERVER_OPERATION_CREATE_TABLE_UNIQUE_FLAG" "1 << 3")
+    '("autoinc-flag" "GDA_SERVER_OPERATION_CREATE_TABLE_AUTOINC_FLAG" "1 << 4")
+    '("fkey-flag" "GDA_SERVER_OPERATION_CREATE_TABLE_FKEY_FLAG" "1 << 5")
+    '("pkey-autoinc-flag" "GDA_SERVER_OPERATION_CREATE_TABLE_PKEY_AUTOINC_FLAG" "0x12")
+  )
+)
+
+;; Original typedef:
+;; typedef enum {
 ;; 	GDA_SERVER_OPERATION_NODE_PARAMLIST,
 ;; 	GDA_SERVER_OPERATION_NODE_DATA_MODEL,
 ;; 	GDA_SERVER_OPERATION_NODE_PARAM,
@@ -886,7 +866,8 @@
 ;; 	GDA_SERVER_PROVIDER_BUSY_ERROR,
 ;; 	GDA_SERVER_PROVIDER_NON_SUPPORTED_ERROR,
 ;; 	GDA_SERVER_PROVIDER_SERVER_VERSION_ERROR,
-;; 	GDA_SERVER_PROVIDER_DATA_ERROR
+;; 	GDA_SERVER_PROVIDER_DATA_ERROR,
+;; 	GDA_SERVER_PROVIDER_DEFAULT_VALUE_HANDLING_ERROR
 ;; } GdaServerProviderError;
 
 (define-enum-extended ServerProviderError
@@ -904,6 +885,7 @@
     '("non-supported-error" "GDA_SERVER_PROVIDER_NON_SUPPORTED_ERROR" "8")
     '("server-version-error" "GDA_SERVER_PROVIDER_SERVER_VERSION_ERROR" "9")
     '("data-error" "GDA_SERVER_PROVIDER_DATA_ERROR" "10")
+    '("default-value-handling-error" "GDA_SERVER_PROVIDER_DEFAULT_VALUE_HANDLING_ERROR" "11")
   )
 )
 
@@ -914,7 +896,8 @@
 ;; {
 ;; 	GDA_SET_XML_SPEC_ERROR,
 ;; 	GDA_SET_HOLDER_NOT_FOUND_ERROR,
-;; 	GDA_SET_INVALID_ERROR
+;; 	GDA_SET_INVALID_ERROR,
+;; 	GDA_SET_READ_ONLY_ERROR
 ;; } GdaSetError;
 
 (define-enum-extended SetError
@@ -924,6 +907,7 @@
     '("xml-spec-error" "GDA_SET_XML_SPEC_ERROR" "0")
     '("holder-not-found-error" "GDA_SET_HOLDER_NOT_FOUND_ERROR" "1")
     '("invalid-error" "GDA_SET_INVALID_ERROR" "2")
+    '("read-only-error" "GDA_SET_READ_ONLY_ERROR" "3")
   )
 )
 
@@ -1105,7 +1089,8 @@
 ;; typedef enum
 ;; {
 ;;         GDA_XA_TRANSACTION_ALREADY_REGISTERED_ERROR,
-;; 	GDA_XA_TRANSACTION_DTP_NOT_SUPPORTED_ERROR
+;; 	GDA_XA_TRANSACTION_DTP_NOT_SUPPORTED_ERROR,
+;; 	GDA_XA_TRANSACTION_CONNECTION_BRANCH_LENGTH_ERROR
 ;; } GdaXaTransactionError;
 
 (define-enum-extended XaTransactionError
@@ -1114,6 +1099,7 @@
   (values
     '("already-registered-error" "GDA_XA_TRANSACTION_ALREADY_REGISTERED_ERROR" "0")
     '("dtp-not-supported-error" "GDA_XA_TRANSACTION_DTP_NOT_SUPPORTED_ERROR" "1")
+    '("connection-branch-length-error" "GDA_XA_TRANSACTION_CONNECTION_BRANCH_LENGTH_ERROR" "2")
   )
 )
 

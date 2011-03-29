@@ -2,7 +2,7 @@
 // -*- C++ -*- //
 
 /* value.cc
- * 
+ *
  * Copyright 2006 libgdamm Development Team
  *
  * This library is free software; you can redistribute it and/or
@@ -40,7 +40,7 @@ namespace
 
 namespace Gnome
 {
-  
+
 namespace Gda
 {
 
@@ -93,11 +93,6 @@ Value::Value(const GeometricPoint& val)
 }
 
 Value::Value(int val)
-{
-  set(val);
-}
-
-Value::Value(const GdaValueList* val)
 {
   set(val);
 }
@@ -185,7 +180,7 @@ bool Value::operator==(const Value& src) const
 
   if(get_value_type() != src.get_value_type()) //gda_value_compare() can only compare GValues of the same type.
     return false;
-    
+
   gint test = gda_value_compare(const_cast<GValue*>(gobj()), const_cast<GValue*>(src.gobj()));   //returns 0 if both contain
   return test == 0;
 }
@@ -271,7 +266,7 @@ guint64 Value::get_uint64() const
 void Value::set_uint64(guint64 val)
 {
   value_reinit(gobj(), G_TYPE_UINT64);
-  g_value_set_uint64(gobj(), val); 
+  g_value_set_uint64(gobj(), val);
 }
 
 const guchar* Value::get_binary(long& size) const
@@ -292,7 +287,7 @@ void Value::set(const guchar* val, long size)
   GdaBinary gdabinary;
   gdabinary.data = const_cast<guchar*>(val);
   gdabinary.binary_length = size;
-  gda_value_set_binary(gobj(), &gdabinary); 
+  gda_value_set_binary(gobj(), &gdabinary);
 }
 
 const GdaBlob* Value::get_blob() const
@@ -302,7 +297,7 @@ const GdaBlob* Value::get_blob() const
 
 void Value::set(const GdaBlob* val)
 {
-  gda_value_set_blob(gobj(), val); 
+  gda_value_set_blob(gobj(), val);
 }
 
 bool Value::get_boolean() const
@@ -313,7 +308,7 @@ bool Value::get_boolean() const
 void Value::set(bool val)
 {
   value_reinit(gobj(), Glib::Value<bool>::value_type());
-  g_value_set_boolean(gobj(), static_cast<int>(val)); 
+  g_value_set_boolean(gobj(), static_cast<int>(val));
 }
 
 Glib::Date Value::get_date() const
@@ -341,7 +336,7 @@ double Value::get_double() const
 void Value::set(double val)
 {
   value_reinit(gobj(), Glib::Value<double>::value_type());
-  g_value_set_double(gobj(), val); 
+  g_value_set_double(gobj(), val);
 }
 
 GeometricPoint Value::get_geometric_point() const
@@ -351,7 +346,7 @@ GeometricPoint Value::get_geometric_point() const
 
 void Value::set(const GeometricPoint& val)
 {
-  gda_value_set_geometric_point(gobj(), &(val)); 
+  gda_value_set_geometric_point(gobj(), &(val));
 }
 
 int Value::get_int() const
@@ -362,17 +357,7 @@ int Value::get_int() const
 void Value::set(int val)
 {
   value_reinit(gobj(), Glib::Value<int>::value_type());
-  g_value_set_int(gobj(), val); 
-}
-
-const GdaValueList* Value::get_list()
-{
-  return gda_value_get_list(gobj());
-}
-
-void Value::set(const GdaValueList * val)
-{
-  gda_value_set_list(gobj(), val); 
+  g_value_set_int(gobj(), val);
 }
 
 const GdaNumeric* Value::get_numeric() const
@@ -393,7 +378,7 @@ float Value::get_float() const
 void Value::set(float val)
 {
   value_reinit(gobj(), Glib::Value<float>::value_type());
-  g_value_set_float(gobj(), val); 
+  g_value_set_float(gobj(), val);
 }
 
 gshort Value::get_short() const
@@ -403,7 +388,7 @@ gshort Value::get_short() const
 
 void Value::set(gshort val)
 {
-  gda_value_set_short(gobj(), val); 
+  gda_value_set_short(gobj(), val);
 }
 
 gushort Value::get_ushort() const
@@ -413,7 +398,7 @@ gushort Value::get_ushort() const
 
 void Value::set(gushort val)
 {
-  gda_value_set_ushort(gobj(), val); 
+  gda_value_set_ushort(gobj(), val);
 }
 
 glong Value::get_long() const
@@ -423,7 +408,7 @@ glong Value::get_long() const
 
 void Value::set(glong val)
 {
-  g_value_set_long(gobj(), val); 
+  g_value_set_long(gobj(), val);
 }
 
 gulong Value::get_ulong() const
@@ -433,7 +418,7 @@ gulong Value::get_ulong() const
 
 void Value::set(gulong val)
 {
-  g_value_set_ulong(gobj(), val); 
+  g_value_set_ulong(gobj(), val);
 }
 
 Glib::ustring Value::get_string() const
@@ -444,7 +429,7 @@ Glib::ustring Value::get_string() const
 void Value::set(const Glib::ustring& val)
 {
   value_reinit(gobj(), G_TYPE_STRING);
-  g_value_set_string(gobj(), val.c_str()); 
+  g_value_set_string(gobj(), val.c_str());
 }
 
 void Value::set(const char* val)
@@ -460,7 +445,7 @@ Time Value::get_time() const
 
 void Value::set(const Time& val)
 {
-  gda_value_set_time(gobj(), &(val)); 
+  gda_value_set_time(gobj(), &(val));
 }
 
 Timestamp Value::get_timestamp() const
@@ -470,7 +455,7 @@ Timestamp Value::get_timestamp() const
 
 void Value::set(const Timestamp& val)
 {
-  gda_value_set_timestamp(gobj(), &(val)); 
+  gda_value_set_timestamp(gobj(), &(val));
 }
 
 guint Value::get_uint() const
@@ -481,7 +466,7 @@ guint Value::get_uint() const
 void Value::set(guint val)
 {
   value_reinit(gobj(), Glib::Value<unsigned int>::value_type());
-  g_value_set_uint(gobj(), val); 
+  g_value_set_uint(gobj(), val);
 }
 
 GType Value::get_g_type() const
@@ -528,11 +513,6 @@ GType value_get_type_blob()
 GType value_get_type_geometric_point()
 {
   return GDA_TYPE_GEOMETRIC_POINT;
-}
-
-GType value_get_type_list()
-{
-  return GDA_TYPE_LIST;
 }
 
 GType value_get_type_numeric()
@@ -593,7 +573,7 @@ bool value_equal(const Glib::ValueBase& value1, const Glib::ValueBase& value2)
 
   if(G_VALUE_TYPE(value1.gobj()) != G_VALUE_TYPE(value2.gobj())) //gda_value_compare() can only compare GValues of the same type.
     return false;
-    
+
   int test = gda_value_compare(value1.gobj(), value2.gobj());
   return test == 0;
 }
@@ -609,5 +589,3 @@ bool value_equal(const Glib::ValueBase& value1, const Glib::ValueBase& value2)
 } // namespace Gda
 
 } // namespace Gnome
-
-

@@ -1,8 +1,22 @@
+2011-03-29  Murray Cumming  <murrayc@murrayc.com>
+
+	Use libgda-5.0.
+
+	* configure.ac: Use libgda-5.0 instead of libgda-4.0.
+	* libgda/src/libgda_enums.defs: Regenerated.
+	* libgda/src/libgda_methods.defs: Regenerated.
+	* libgda/libgdamm/value.[h|cc]: Remove API that uses the list type. It was
+	apparently removed from the libgda API.
+	* libgda/src/connection.hg: Remove an unused enum.
+	* libgda/src/serveroperation.ccg: Adapt to renamed functions.
+
+This is the master branch. See the libgdamm-4-2 branch too.
+
 4.1.2:
 
 2011-01-30  Murray Cumming  <murrayc@murrayc.com>
 
-	Use std::vector<> instead of *Handle<> or std::list<>. 
+	Use std::vector<> instead of *Handle<> or std::list<>.
 
 	* libgda/src/batch.[hg|ccg]:
 	* libgda/src/connection.[hg|ccg]:
@@ -16,8 +30,8 @@
 	* libgda/src/sqlbuilder.[hg|ccg]:
 	* libgda/src/statement.[hg|ccg]:
 	* libgda/src/xatransaction.[hg|ccg]:
-	* tools/m4/convert_libgdamm.m4: Use the new convention that we have just 
-	started using in gtkmm 3. libgdamm is API/ABI unstable, so we can still make 
+	* tools/m4/convert_libgdamm.m4: Use the new convention that we have just
+	started using in gtkmm 3. libgdamm is API/ABI unstable, so we can still make
 	big changes like this.
 
 2010-12-09  Murray Cumming  <murrayc@murrayc.com>
@@ -25,7 +39,7 @@
 	Adapt to gmmproc m4 changes in glibmm.
 
 	* tools/m4/convert.m4: Include convert_glibmm.m4 instead of convert_gtkmm.m4.
-	* tools/m4/convert_libgdamm.m4: Avoid use of the __FR2P macro, which does 
+	* tools/m4/convert_libgdamm.m4: Avoid use of the __FR2P macro, which does
 	not seem to be defined for some reason.
 
 4.1.1:
@@ -35,7 +49,7 @@
 	Small documentation improvements.
 
 	* libgda/src/libgda_docs.xml: Fix a typo that I fixed in libgda too.
-	* libgda/src/sqlbuilder.[hg|ccg]: Small docs improvements. 
+	* libgda/src/sqlbuilder.[hg|ccg]: Small docs improvements.
 	select_add_target_id(): Use _WRAP_METHOD() for this.
 	* libgda/src/sqlexpr.hg: Added some overview documentation.
 	* libgda/src/sqlstatement.hg: Added some overview documentation.
@@ -50,11 +64,11 @@
 
 	Work around a doxygen crash.
 
-	* libgda/src/sqlparser.hg: Class overview documentation: Instead of 
-	describing the placeholder syntax, just link to the GdaSqlParser 
-	documentation. This is unavoidable as there seems to be now way to mention 
-	/* in a comment. The attempt to use @verbatim@endverbatim to do this does 
-	not seem to have worked in the past and crashes current versions of doxygen.  
+	* libgda/src/sqlparser.hg: Class overview documentation: Instead of
+	describing the placeholder syntax, just link to the GdaSqlParser
+	documentation. This is unavoidable as there seems to be now way to mention
+	/* in a comment. The attempt to use @verbatim@endverbatim to do this does
+	not seem to have worked in the past and crashes current versions of doxygen.
 	( Doxygen bug https://bugzilla.gnome.org/show_bug.cgi?id=632311 )
 
 2010-10-16  Murray Cumming  <murrayc@murrayc.com>
