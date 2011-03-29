@@ -1,3 +1,8 @@
+4.99.0 (unstable):
+
+* Use libgda-5.0 instead of libgda-4.0.
+* This (libgdamm-5.0) installs in parallel with libgdamm-4.0.
+
 4.1.2: (unstable):
 
 * Use std::vector<> instead of *Handle<> or std::list<> for method paramteters
@@ -13,7 +18,7 @@
 * SqlStatement: Added string_to_type().
 * Some documentation improvements.
   (Murray Cumming)
-  
+
 3.99.21: (unstable):
 
 * DataModel: Declare DataModelError exceptions.
