@@ -1,3 +1,12 @@
+=======
+2011-03-30  Murray Cumming  <murrayc@murrayc.com>
+
+	Avoid a tarball dependency on mm-common.
+
+	* configure.ac: Require the latest version of mm-common.
+	Call MM_CONFIG_DOCTOOL_DIR() to createe, use, and dist a local copy of the
+	mm-common scripts.
+
 2011-09-21  Murray Cumming  <murrayc@murrayc.com>
 
 	Adjust the compiler warning flags used with --enable-warnings=fatal.
