@@ -34,21 +34,14 @@ namespace Gnome
 namespace Gda
 {
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
+
 bool DataModel::export_to_file(DataModelIOFormat format, const std::string& file, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options)
-#else
-bool DataModel::export_to_file(DataModelIOFormat format, const std::string& file, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options, std::auto_ptr<Glib::Error>& error)
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
   bool retvalue = gda_data_model_export_to_file(gobj(), static_cast<GdaDataModelIOFormat>(format), file.c_str(), cols.data(), cols.size(), rows.data(), rows.size(), options->gobj(), &gerror);
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
+
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror)
-    error = ::Glib::Error::throw_exception(gerror);
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 
   return retvalue;
 }

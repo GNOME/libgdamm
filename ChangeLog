@@ -1,3 +1,10 @@
+2011-03-30  Murray Cumming  <murrayc@murrayc.com>
+
+	Remove GLIBMM_EXCEPTIONS_ENABLED ifdefs.
+
+	* libgda/src/*.[hg|ccg]: These ifdefs are no longer useful. They were already
+	removed from other projects a while ago.
+
 4.99.0.1:
 
 2011-03-30  Murray Cumming  <murrayc@murrayc.com>

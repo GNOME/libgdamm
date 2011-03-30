@@ -33,23 +33,16 @@ namespace Gda
 typedef Batch::StatementVector StatementVector;
 
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool Batch::get_parameters(Glib::RefPtr<Set>& out_params)
-#else
-bool Batch::get_parameters(Glib::RefPtr<Set>& out_params, std::auto_ptr<Glib::Error>& error)
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
   GdaSet* set = 0;
-  bool retval = gda_batch_get_parameters(gobj(), &set, &gerror);
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  const bool retval = gda_batch_get_parameters(gobj(), &set, &gerror);
+
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror)
-    error = ::Glib::Error::throw_exception(gerror);
-#endif //GLIBMM_EXCEPTIONS_ENABLED
-  if (set)
+
+  if(set)
   {
     out_params = Glib::wrap(set);
   }

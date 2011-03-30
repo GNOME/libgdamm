@@ -75,40 +75,22 @@ public:
 
   //TODO: Should this be const? Probably not, because the caller could change Set. murrayc.
   _WRAP_METHOD_DOCS_ONLY(gda_statement_get_parameters)
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   bool get_parameters(Glib::RefPtr<Set>& out_params);
-  #else
-  bool get_parameters(Glib::RefPtr<Set>& out_params, std::auto_ptr<Glib::Error>& error);
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
   _IGNORE(gda_statement_get_parameters)
 
   //TODO: Documentation:
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::ustring to_sql() const;
-  #else
-  Glib::ustring to_sql(std::auto_ptr<Glib::Error>& error) const;
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   //TODO: Documentation:
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::ustring to_sql(const Glib::RefPtr<const Set>& params) const;
-  #else
-  Glib::ustring to_sql(const Glib::RefPtr<const Set>& params, std::auto_ptr<Glib::Error>& error) const;
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
   _IGNORE(gda_statement_to_sql, gda_statement_to_sql_real)
 
   typedef std::vector< const Glib::RefPtr<Holder> > HolderVector;
 
   //TODO: Add an overload without the params?
   _WRAP_METHOD_DOCS_ONLY(gda_statement_to_sql_extended)
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::ustring to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<const Set>& params,
                                 StatementSqlFlag flags, const HolderVector& params_used) const;
-  #else
-  Glib::ustring to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<const Set>& params,
-                                StatementSqlFlag flags, const HolderVector& params_used,
-                                std::auto_ptr<Glib::Error>& error) const;
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   _WRAP_METHOD(SqlStatementType get_statement_type() const, gda_statement_get_statement_type)
   _WRAP_METHOD(bool is_useless() const, gda_statement_is_useless)

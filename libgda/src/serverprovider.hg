@@ -78,11 +78,7 @@ public:
    * @return A new Gda::ServerOperation object, or <tt>0</tt> in the provider does not support the @a type type
    * of operation or if an error occurred.
    */
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::RefPtr<ServerOperation> create_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type);
-#else
-  Glib::RefPtr<ServerOperation> create_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type, std::auto_ptr<Glib::Error>& error);
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 
 
   _WRAP_METHOD(Glib::ustring render_operation(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<ServerOperation>& op), gda_server_provider_render_operation, errthrow)

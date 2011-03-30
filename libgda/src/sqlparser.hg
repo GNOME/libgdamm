@@ -85,28 +85,14 @@ public:
   
   //TODO: Should these be const?
   _WRAP_METHOD_DOCS_ONLY(gda_sql_parser_parse_string)
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::RefPtr<Statement> parse_string(const Glib::ustring& sql, Glib::ustring& remain);
-  #else
-  Glib::RefPtr<Statement> parse_string(const Glib::ustring& sql, Glib::ustring& remain, std::auto_ptr<Glib::Error>& error);
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+
   Glib::RefPtr<Statement> parse_string(const Glib::ustring& sql);
-  #else
-  Glib::RefPtr<Statement> parse_string(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& error);
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
     
   _WRAP_METHOD_DOCS_ONLY(gda_sql_parser_parse_string_as_batch)
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::RefPtr<Batch> parse_string_as_batch(const Glib::ustring& sql, Glib::ustring& remain);
-  #else
-  Glib::RefPtr<Batch> parse_string_as_batch(const Glib::ustring& sql, Glib::ustring& remain, std::auto_ptr<Glib::Error>& error);
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+
   Glib::RefPtr<Batch> parse_string_as_batch(const Glib::ustring& sql);
-  #else
-  Glib::RefPtr<Batch> parse_string_as_batch(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& error);
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
   
   _WRAP_METHOD(Glib::RefPtr<Batch> parse_file_as_batch(const std::string& filename), gda_sql_parser_parse_file_as_batch, errthrow)
 

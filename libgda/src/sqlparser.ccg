@@ -29,22 +29,13 @@ namespace Gnome
 namespace Gda
 {
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::RefPtr<Statement> SqlParser::parse_string(const Glib::ustring& sql, Glib::ustring& remain)
-#else
-Glib::RefPtr<Statement> SqlParser::parse_string(const Glib::ustring& sql, Glib::ustring& remain, std::auto_ptr<Glib::Error>& error)
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
   const gchar* c_remain = 0;
   Glib::RefPtr<Statement> retvalue = Glib::wrap(gda_sql_parser_parse_string(gobj(), sql.c_str(), &c_remain, &(gerror)));
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror)
-    error = ::Glib::Error::throw_exception(gerror);
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 
   if (c_remain)
   {
@@ -54,41 +45,22 @@ Glib::RefPtr<Statement> SqlParser::parse_string(const Glib::ustring& sql, Glib::
   return retvalue;
 }
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::RefPtr<Statement> SqlParser::parse_string(const Glib::ustring& sql)
-#else
-Glib::RefPtr<Statement> SqlParser::parse_string(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& error)
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
   Glib::RefPtr<Statement> retvalue = Glib::wrap(gda_sql_parser_parse_string(gobj(), sql.c_str(), 0, &(gerror)));
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror)
-    error = ::Glib::Error::throw_exception(gerror);
-#endif //GLIBMM_EXCEPTIONS_ENABLED
-
   return retvalue;
 }
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::RefPtr<Batch> SqlParser::parse_string_as_batch(const Glib::ustring& sql, Glib::ustring& remain)
-#else
-Glib::RefPtr<Batch> SqlParser::parse_string_as_batch(const Glib::ustring& sql, Glib::ustring& remain, std::auto_ptr<Glib::Error>& error)
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
   const gchar* c_remain = 0;
   Glib::RefPtr<Batch> retvalue = Glib::wrap(gda_sql_parser_parse_string_as_batch(gobj(), sql.c_str(), &c_remain, &(gerror)));
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror)
-    error = ::Glib::Error::throw_exception(gerror);
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 
   if (c_remain)
   {
@@ -98,21 +70,12 @@ Glib::RefPtr<Batch> SqlParser::parse_string_as_batch(const Glib::ustring& sql, G
   return retvalue;
 }
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::RefPtr<Batch> SqlParser::parse_string_as_batch(const Glib::ustring& sql)
-#else
-Glib::RefPtr<Batch> SqlParser::parse_string_as_batch(const Glib::ustring& sql, std::auto_ptr<Glib::Error>& error)
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
   Glib::RefPtr<Batch> retvalue = Glib::wrap(gda_sql_parser_parse_string_as_batch(gobj(), sql.c_str(), 0, &(gerror)));
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror)
-    error = ::Glib::Error::throw_exception(gerror);
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 
   return retvalue;
 }

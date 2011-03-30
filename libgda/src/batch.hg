@@ -59,11 +59,7 @@ public:
   _WRAP_METHOD(StatementVector get_statements() const, gda_batch_get_statements)
 
   _WRAP_METHOD_DOCS_ONLY(gda_statement_get_parameters)
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   bool get_parameters(Glib::RefPtr<Set>& out_params);
-  #else
-  bool get_parameters(Glib::RefPtr<Set>& out_params, std::auto_ptr<Glib::Error>& error);
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
     
   // FIXME: Use better marshaller in libgda. TODO: Bug number?
   #m4 _CONVERSION(`GObject*',`Glib::RefPtr<Statement>',`Glib::wrap(GDA_STATEMENT($3))')

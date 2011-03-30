@@ -29,44 +29,26 @@ namespace Gda
 
 typedef std::vector< Glib::RefPtr<Connection> > ConnectionVector;
   
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool XaTransaction::commit(ConnectionVector& cncs_to_recover)
-#else
-bool XaTransaction::commit(ConnectionVector& cncs_to_recover, std::auto_ptr<Glib::Error>& error)
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
   GSList* cncs = NULL;
   const bool retvalue = gda_xa_transaction_commit (gobj(), &cncs, &gerror);
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror)
-    error = ::Glib::Error::throw_exception(gerror);
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 
   cncs_to_recover = Glib::SListHandler< Glib::RefPtr<const Connection> >::slist_to_vector(cncs, Glib::OWNERSHIP_SHALLOW);
   
   return retvalue;
 }
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool XaTransaction::commit_recovered(ConnectionVector& cncs_to_recover)
-#else
-bool XaTransaction::commit_recovered(ConnectionVector& cncs_to_recover, std::auto_ptr<Glib::Error>& error)
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 {
   GError* gerror = 0;
   GSList* cncs = NULL;
   bool retvalue = gda_xa_transaction_commit_recovered (gobj(), &cncs, &gerror);
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror)
-    error = ::Glib::Error::throw_exception(gerror);
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 
    cncs_to_recover = Glib::SListHandler< Glib::RefPtr<const Connection> >::slist_to_vector(cncs, Glib::OWNERSHIP_SHALLOW);
   

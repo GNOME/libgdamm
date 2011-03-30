@@ -30,86 +30,51 @@ namespace Gnome
 namespace Gda
 {
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::RefPtr<ServerOperation> ServerOperation::prepare_create_database(const Glib::ustring& provider,
                                                                        const Glib::ustring& db_name)
-#else
-Glib::RefPtr<ServerOperation> ServerOperation::prepare_create_database(const Glib::ustring& provider,
-                                                                       const Glib::ustring& db_name,
-                                                                       std::auto_ptr<Glib::Error>& error)
-#endif
 {
   GError* gerror = 0;
   Glib::RefPtr<ServerOperation> op =
     Glib::wrap(gda_server_operation_prepare_create_database(provider.c_str(), db_name.c_str(), &gerror));
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
   if(gerror) ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror) error = ::Glib::Error::throw_exception(gerror);
-#endif // GLIBMM_EXCEPTIONS_ENABLED
 
   return op;
 }
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 Glib::RefPtr<ServerOperation> ServerOperation::prepare_drop_database(const Glib::ustring& provider,
                                                                      const Glib::ustring& db_name)
-#else
-Glib::RefPtr<ServerOperation> ServerOperation::prepare_drop_database(const Glib::ustring& provider,
-                                                                     const Glib::ustring& db_name,
-                                                                     std::auto_ptr<Glib::Error>& error)
-#endif
 {
   GError* gerror = 0;
   Glib::RefPtr<ServerOperation> op =
     Glib::wrap(gda_server_operation_prepare_drop_database(provider.c_str(), db_name.c_str(), &gerror));
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
-  if(gerror) ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror) error = ::Glib::Error::throw_exception(gerror);
-#endif // GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
 
   return op;
 }
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool ServerOperation::perform_drop_database(const Glib::ustring& provider)
-#else
-bool ServerOperation::perform_drop_database(const Glib::ustring& provider,
-                                            std::auto_ptr<Glib::Error>& error)
-#endif
 {
   GError* gerror = 0;
   bool retval =
     static_cast<bool>(gda_server_operation_perform_drop_database(gobj(), provider.c_str(), &gerror));
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
-  if(gerror) ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror) error = ::Glib::Error::throw_exception(gerror);
-#endif // GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
 
   return retval;
 }
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 bool ServerOperation::perform_create_database(const Glib::ustring& provider)
-#else
-bool ServerOperation::perform_create_database(const Glib::ustring& provider,
-                                              std::auto_ptr<Glib::Error>& error)
-#endif
 {
   GError* gerror = 0;
   bool retval =
     static_cast<bool>(gda_server_operation_perform_create_database(gobj(), provider.c_str(), &gerror));
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
-  if(gerror) ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror) error = ::Glib::Error::throw_exception(gerror);
-#endif // GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
 
   return retval;
 }
@@ -122,22 +87,15 @@ Value ServerOperation::get_value_at(const Glib::ustring& path) const
   return retval;
 }
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 void ServerOperation::set_value_at_as_value(const Glib::ustring& path, const Glib::ValueBase& value)
-#else
-void ServerOperation::set_value_at_as_value(const Glib::ustring& path, const Glib::ValueBase& value, std::auto_ptr<Glib::Error>& error)
-#endif // GLIBMM_EXCEPTIONS_ENABLED
 {
   gchar* strvalue = gda_value_stringify(value.gobj());
   GError* gerror = 0;
   gda_server_operation_set_value_at(gobj(), strvalue, &gerror, "%s", path.c_str());
   g_free(strvalue);
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
-  if(gerror) ::Glib::Error::throw_exception(gerror);
-#else
-  if(gerror) error = ::Glib::Error::throw_exception(gerror);
-#endif // GLIBMM_EXCEPTIONS_ENABLED
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
 }
 
 } /* namespace Gda */

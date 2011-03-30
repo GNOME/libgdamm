@@ -52,18 +52,10 @@ public:
   typedef std::vector<Glib::RefPtr<const Connection> > ConnectionVector;
 
   _WRAP_METHOD_DOCS_ONLY(gda_xa_transaction_commit)  
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   bool commit(ConnectionVector& cnc_to_recover);
-  #else
-  bool commit(ConnectionVector& cnc_to_recover, std::auto_ptr<Glib::Error>& error);
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   _WRAP_METHOD_DOCS_ONLY (gda_xa_transaction_commit_recovered)  
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   bool commit_recovered(ConnectionVector& cnc_to_recover);
-  #else
-  bool commit_recovered(ConnectionVector& cnc_to_recover, std::auto_ptr<Glib::Error>& error);
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
   
   _WRAP_PROPERTY("transaction-id", Glib::ustring)
   _WRAP_PROPERTY("format-id", guint)
