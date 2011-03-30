@@ -24,8 +24,13 @@ AC_CONFIG_AUX_DIR([build])
 AC_CONFIG_MACRO_DIR([build])
 AC_CONFIG_HEADERS([build/config.h libgda/libgdammconfig.h])
 
-MM_PREREQ([0.7.1])
+MM_PREREQ([0.9.5])
 MM_INIT_MODULE([libgdamm-5.0])
+
+# Copy the mm-common .pl scripts into docs/,
+# and use them from there,
+# then dist them to avoid a tarball-build dependency.
+MM_CONFIG_DOCTOOL_DIR([docs])
 
 # http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
 AC_SUBST([LIBGDAMM_SO_VERSION], [13:0:0])
