@@ -51,8 +51,8 @@ MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.4])
 AC_LANG([C++])
 MM_ARG_ENABLE_WARNINGS([LIBGDAMM_WXXFLAGS],
                        [-Wall],
-                       [-pedantic -Wall -Wextra -Wno-missing-field-initializers],
-                       [G GDA])
+                       [-pedantic -Wall -Wextra -Wno-long-long -Wno-missing-field-initializers -DGSEAL_ENABLE],
+                       [G GDA GLIBMM])
 
 MM_ARG_ENABLE_DOCUMENTATION
 MM_ARG_WITH_TAGFILE_DOC([libstdc++.tag], [mm-common-libstdc++])
