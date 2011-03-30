@@ -398,11 +398,16 @@ public:
   _WRAP_SIGNAL(void dsn_changed(), "dsn_changed")
   _WRAP_SIGNAL(void transaction_status_changed(), "transaction_status_changed")
 
+  _WRAP_PROPERTY("provider", Glib::RefPtr<ServerProvider>)
   _WRAP_PROPERTY("auth-string", Glib::ustring)
   _WRAP_PROPERTY("cnc-string", Glib::ustring)
   _WRAP_PROPERTY("dsn", Glib::ustring)
   _WRAP_PROPERTY("meta-store", Glib::RefPtr<MetaStore>)
   _WRAP_PROPERTY("options", ConnectionOptions)
+  _WRAP_PROPERTY("is-wrapper", bool)
+  _WRAP_PROPERTY("monitor-wrapped-in-mainloop", bool)
+  //We ignore the thread-owner property because it is strange and should only be used (well, modified) by provider implementations.
+  _WRAP_PROPERTY("events-history-size", int)
 };
 
 } // namespace Gda

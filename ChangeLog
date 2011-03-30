@@ -1,5 +1,13 @@
 2011-03-30  Murray Cumming  <murrayc@murrayc.com>
 
+	Connection: Add new properties.
+
+	* libgda/src/libgda_signals.defs: Regenerated.
+	* libgda/src/connection.hg: Added provider, is_wrapper,
+	monitor_wrapped_in_mainloop, and events_history_size properties.
+
+2011-03-30  Murray Cumming  <murrayc@murrayc.com>
+
 	Connection: Ignore private functions.
 
 	* libgda/src/connection.hg: These functions are in gda-connection-private.h

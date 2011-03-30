@@ -77,19 +77,19 @@
   )
 )
 
-(define-property user-filename
+(define-property system-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
-  (docs "File to use for per-user DSN list")
+  (docs "File to use for system-wide DSN list")
   (readable #t)
   (writable #t)
   (construct-only #f)
 )
 
-(define-property system-filename
+(define-property user-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
-  (docs "File to use for system-wide DSN list")
+  (docs "File to use for per-user DSN list")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -175,7 +175,7 @@
 (define-property options
   (of-object "GdaConnection")
   (prop-type "GParamFlags")
-  (docs "Options (connection sharing)")
+  (docs "Options")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -212,6 +212,15 @@
   (of-object "GdaConnection")
   (prop-type "GParamBoolean")
   (docs "Make the connection set up a monitoring function in the mainloop to monitor the wrapped connection")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property events-history-size
+  (of-object "GdaConnection")
+  (prop-type "GParamInt")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -288,26 +297,6 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
-)
-
-;; From GdaDataModelBdb
-
-(define-property filename
-  (of-object "GdaDataModelBdb")
-  (prop-type "GParamString")
-  (docs "DB file")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property db-name
-  (of-object "GdaDataModelBdb")
-  (prop-type "GParamString")
-  (docs "Name of the database")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
 )
 
 ;; From GdaDataModelDir
@@ -407,6 +396,15 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+)
+
+(define-property strict
+  (of-object "GdaDataModelImport")
+  (prop-type "GParamBoolean")
+  (docs "Consider missing or too much values an error")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
 ;; From GdaDataModelIter
@@ -677,7 +675,7 @@
 (define-property auto-reset
   (of-object "GdaDataSelect")
   (prop-type "GParamBoolean")
-  (docs "Automatically re-run the SELECT statement if any parameter has chanegd since it was first executed")
+  (docs "Automatically re-run the SELECT statement if any parameter has changed since it was first executed")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -994,6 +992,24 @@
   (when "first")
 )
 
+(define-signal holder-type-set
+  (of-object "GdaSet")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("GdaHolder*" "p0")
+  )
+)
+
+(define-signal source-model-changed
+  (of-object "GdaSet")
+  (return-type "void")
+  (when "first")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
 (define-property id
   (of-object "GdaSet")
   (prop-type "GParamString")
@@ -1118,4 +1134,13 @@
 )
 
 ;; From GdaSqlBuilder
+
+(define-property stmt-type
+  (of-object "GdaSqlBuilder")
+  (prop-type "GParamEnum")
+  (docs "Statement Type")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+)
 
