@@ -142,6 +142,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, const std::vector<GType>& col_types), gda_connection_statement_execute_select_full, errthrow)
   _IGNORE(gda_connection_statement_execute_select_fullv)
 
+//This custom-written method has more optional methods than gda_connection_execute_select_command().
 //TODO: Documentation:
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, StatementModelUsage model_usage = STATEMENT_MODEL_RANDOM_ACCESS);
@@ -151,7 +152,7 @@ public:
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
 #endif
 
-
+//This custom-written method has more optional methods than gda_connection_execute_select_command().
 //TODO: Documentation:
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage = STATEMENT_MODEL_RANDOM_ACCESS);
@@ -160,6 +161,7 @@ public:
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
   Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, std::auto_ptr<Glib::Error>& error);
 #endif
+  _IGNORE(gda_connection_execute_select_command)
 
 
 //TODO: Documentation:
@@ -203,7 +205,6 @@ public:
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   _WRAP_METHOD(int statement_execute_non_select(const Glib::ustring& sql), gda_connection_execute_non_select_command, errthrow)
-
 
 //TODO: Documentation:
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
@@ -261,6 +262,7 @@ public:
 
   //TODO: Documentation:
   Glib::RefPtr<Statement> parse_sql_string(const Glib::ustring& sql);
+  _IGNORE(gda_connection_parse_sql_string)
 
   _WRAP_METHOD(Glib::RefPtr<SqlParser> create_parser(), gda_connection_create_parser)
 
