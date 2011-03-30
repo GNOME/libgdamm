@@ -108,8 +108,7 @@ public:
   _WRAP_METHOD(Glib::ustring get_dsn() const, gda_connection_get_dsn)
   _WRAP_METHOD(Glib::ustring get_cnc_string() const, gda_connection_get_cnc_string)
 
-  _WRAP_METHOD(void add_event(const Glib::RefPtr<ConnectionEvent>& event), gda_connection_add_event)
-  _WRAP_METHOD(Glib::RefPtr<ConnectionEvent> add_event_string(const Glib::ustring& str), gda_connection_add_event_string)
+  _IGNORE(gda_connection_point_available_event, gda_connection_add_event, gda_connection_add_event_string, gda_connection_clear_events_list)
 
   _WRAP_METHOD(void clear_events_list(), gda_connection_clear_events_list)
 

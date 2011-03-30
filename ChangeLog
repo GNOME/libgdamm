@@ -1,5 +1,12 @@
 2011-03-30  Murray Cumming  <murrayc@murrayc.com>
 
+	Connection: Ignore private functions.
+
+	* libgda/src/connection.hg: These functions are in gda-connection-private.h
+	so they are not public API.
+
+2011-03-30  Murray Cumming  <murrayc@murrayc.com>
+
 	Connection: Added *_row_into_table() methods.
 
 	* libgda/src/connection.hg: Added insert_row_into_table(),
