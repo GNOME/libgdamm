@@ -250,6 +250,15 @@ public:
   _WRAP_METHOD(std::vector< Glib::RefPtr<ConnectionEvent> > get_events(), gda_connection_get_events)
   _WRAP_METHOD(std::vector< Glib::RefPtr<const ConnectionEvent> > get_events() const, gda_connection_get_events)
 
+#m4 _CONVERSION(`const std::vector<Glib::ustring>&', `GSList*',`Glib::SListHandler<Glib::ustring>::vector_to_slist($3).data()')
+#m4 _CONVERSION(`const std::vector<Value>&', `GSList*',`Glib::SListHandler<Value, ValueTraits>::vector_to_slist($3).data()')
+  _WRAP_METHOD(bool insert_row_into_table(const Glib::ustring& table, const std::vector<Glib::ustring>& col_names, const std::vector<Value>& values), gda_connection_insert_row_into_table_v, errthrow)
+  _IGNORE(gda_connection_insert_row_into_table)
+
+  _WRAP_METHOD(bool update_row_in_table(const Glib::ustring& table, const Glib::ustring& condition_column_name, const Value& condition_value, const std::vector<Glib::ustring>& col_names, const std::vector<Value>& values), gda_connection_update_row_in_table_v, errthrow)
+
+  _WRAP_METHOD(bool delete_row_from_table(const Glib::ustring& table, const Glib::ustring& condition_column_name, const Value& condition_value), gda_connection_delete_row_from_table, errthrow)
+  _IGNORE(gda_connection_update_row_in_table)
 
   _WRAP_METHOD(Glib::ustring value_to_sql_string(const Value& from) const, gda_connection_value_to_sql_string)
 

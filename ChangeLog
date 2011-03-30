@@ -1,5 +1,12 @@
 2011-03-30  Murray Cumming  <murrayc@murrayc.com>
 
+	Connection: Added *_row_into_table() methods.
+
+	* libgda/src/connection.hg: Added insert_row_into_table(),
+	update_row_in_table(), and delete_row_in_table().
+
+2011-03-30  Murray Cumming  <murrayc@murrayc.com>
+
 	Replace a remaining use of ListHandle.
 
 	* libgda/libgdamm/value.h: Remove the ListHandle and SListHandle typedefs.
