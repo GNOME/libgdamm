@@ -53,24 +53,24 @@ typedef GdaValueAttribute ValueAttribute;
 
 /** Abstract DataModel (Base class for all DataModels).
  *
- * A DataModel represents an array of values organized in rows and columns. 
- * All the data in the same column have the same type, and all the data in each row have the same semantic meaning. 
- * The DataModel is actually an interface implemented by other objects to support various kinds of data storage and 
+ * A DataModel represents an array of values organized in rows and columns.
+ * All the data in the same column have the same type, and all the data in each row have the same semantic meaning.
+ * The DataModel is actually an interface implemented by other objects to support various kinds of data storage and
  * operations.
  *
- * Depending on the real implementation, the contents of data models may be modified by the user by using functions 
- * provided by the model. The actual operations that a data model permits can be discovered using the 
+ * Depending on the real implementation, the contents of data models may be modified by the user by using functions
+ * provided by the model. The actual operations that a data model permits can be discovered using the
  * get_access_flags() method.
  *
- * Again, depending on the real implementation, data retreival can be done either by accessing direct random values 
- * located by their row and column, or by using a DataModelIter cursor, or both. Use the get_access_flags() method to 
- * discover how the data model can be accessed. Note that a Datamodel which can be accessed in a random way can also 
- * be accessed using cursors (and several cusrors may be used at the same time), whereas a data model which can only 
+ * Again, depending on the real implementation, data retreival can be done either by accessing direct random values
+ * located by their row and column, or by using a DataModelIter cursor, or both. Use the get_access_flags() method to
+ * discover how the data model can be accessed. Note that a Datamodel which can be accessed in a random way can also
+ * be accessed using cursors (and several cusrors may be used at the same time), whereas a data model which can only
  * be accessed using cursors can only have one cursor for iterating.
  *
- * Random access data models are easier to use since picking a value is very simple by using the get_value_at(), 
- * but they consume more memory since all the accessible values must generally be present in memory even if they 
- * are not used. Thus, if a data model must handle large quantities of data, it is generally wiser to use a data 
+ * Random access data models are easier to use since picking a value is very simple by using the get_value_at(),
+ * but they consume more memory since all the accessible values must generally be present in memory even if they
+ * are not used. Thus, if a data model must handle large quantities of data, it is generally wiser to use a data
  * model which can be only accessed using a cursor.
  *
  * As a side note there are also data models which wrap other data models such as:
@@ -86,14 +86,14 @@ public:
   // This does not belong into this class
   _IGNORE(gda_data_model_create_iter, gda_data_model_array_copy_model)
 
-  _WRAP_METHOD(void freeze(), gda_data_model_freeze)  
+  _WRAP_METHOD(void freeze(), gda_data_model_freeze)
   _WRAP_METHOD(void thaw(), gda_data_model_thaw)
 
   _WRAP_METHOD(int get_n_rows() const, gda_data_model_get_n_rows)
   _WRAP_METHOD(int get_n_columns() const, gda_data_model_get_n_columns)
 
   _WRAP_METHOD(int get_column_index(const Glib::ustring& name), gda_data_model_get_column_index)
-    
+
   _WRAP_METHOD(Glib::RefPtr<Column> describe_column(int col), gda_data_model_describe_column, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Column> describe_column(int col) const, gda_data_model_describe_column, refreturn, constversion)
 
@@ -105,7 +105,7 @@ public:
   _WRAP_METHOD(ValueAttribute get_attributes_at(int col, int row), gda_data_model_get_attributes_at)
 
   _WRAP_METHOD(Glib::RefPtr<DataModelIter> create_iter(), gda_data_model_create_iter)
-   
+
   //Ignore private functions:
   _IGNORE(gda_data_model_move_iter_at_row, gda_data_model_move_iter_next, gda_data_model_move_iter_prev)
 
@@ -113,13 +113,13 @@ public:
 
   typedef std::vector<Value> ValueVector;
 
-  #m4 _CONVERSION(`const ValueList&',`GList*',`Glib::ListHandler<Value, ValueTraits>::vector_to_list($3).data()')
-  _WRAP_METHOD(bool set_values(int row, const ValueList& values), gda_data_model_set_values, errthrow)
+  #m4 _CONVERSION(`const std::vector<Value>&',`GList*',`Glib::ListHandler<Value, ValueTraits>::vector_to_list($3).data()')
+  _WRAP_METHOD(bool set_values(int row, const std::vector<Value>& values), gda_data_model_set_values, errthrow)
 
   _WRAP_METHOD(DataModelAccessFlags get_access_flags() const, gda_data_model_get_access_flags)
 
-  #m4 _CONVERSION(`const ValueList&',`const GList*',`Glib::ListHandler<Value, ValueTraits>::vector_to_list($3).data()')
-  _WRAP_METHOD(int append_values(const ValueList& values), gda_data_model_append_values, errthrow)
+  #m4 _CONVERSION(`const std::vector<Value>&',`const GList*',`Glib::ListHandler<Value, ValueTraits>::vector_to_list($3).data()')
+  _WRAP_METHOD(int append_values(const std::vector<Value>& values), gda_data_model_append_values, errthrow)
 
   _WRAP_METHOD(bool append_row(), gda_data_model_append_row, errthrow)
   _WRAP_METHOD(bool remove_row(int row), gda_data_model_remove_row, errthrow)
@@ -138,7 +138,7 @@ public:
    * Specifically, the parameters in the @options list can be:
    * - SEPARATOR: a string value of which the first character is used as a separator in case of CSV export.
    * -"NAME: a string value used to name the exported data if the export format is XML.
-   * - OVERWRITE: a boolean value which tells if the file must be over-written if it already exists.  
+   * - OVERWRITE: a boolean value which tells if the file must be over-written if it already exists.
    *
    * @param format The format in which to export data.
    * @param cols An array containing which columns of @model will be exported.
@@ -148,13 +148,13 @@ public:
    */
   Glib::ustring export_to_string(DataModelIOFormat format, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options);
   _IGNORE(gda_data_model_export_to_string)
-    
+
   /** Exports data contained in @a model to the @a file; the format is specified using the @a format argument.
    *
    * Specifically, the parameters in the @options list can be:
    * - SEPARATOR: a string value of which the first character is used as a separator in case of CSV export.
    * -"NAME: a string value used to name the exported data if the export format is XML.
-   * - OVERWRITE: a boolean value which tells if the file must be over-written if it already exists.  
+   * - OVERWRITE: a boolean value which tells if the file must be over-written if it already exists.
    *
    * @param format The format in which to export data.
    * @param file The filename to export to.
@@ -170,7 +170,7 @@ public:
 #endif
   _IGNORE(gda_data_model_export_to_file)
 
-  //TODO: Avoid use of C GHashTable? 
+  //TODO: Avoid use of C GHashTable?
   _WRAP_METHOD(bool import_from_model(const Glib::RefPtr<DataModel>& from,  bool overwrite, GHashTable *cols_trans), gda_data_model_import_from_model, errthrow)
   _WRAP_METHOD(bool import_from_string(const Glib::ustring& string, GHashTable *cols_trans, const Glib::RefPtr<const Set>& options), gda_data_model_import_from_string, errthrow)
   _WRAP_METHOD(bool import_from_file(const std::string& file, GHashTable *cols_trans, const Glib::RefPtr<const Set>& options), gda_data_model_import_from_file, errthrow)
@@ -194,16 +194,16 @@ public:
   */
 
   _WRAP_METHOD(void set_column_name(int col, const Glib::ustring& name), gda_data_model_set_column_name)
-  _WRAP_METHOD(Glib::ustring get_column_name(int col) const, gda_data_model_get_column_name)      
-  
+  _WRAP_METHOD(Glib::ustring get_column_name(int col) const, gda_data_model_get_column_name)
+
   // It is a bit strange that those are int GdaDataModel and not in GdaDataModelIter
   _WRAP_METHOD(bool iter_move_next_default(const Glib::RefPtr<DataModelIter>& iter), gda_data_model_iter_move_next_default)
-  _WRAP_METHOD(bool iter_move_prev_default(const Glib::RefPtr<DataModelIter>& iter), gda_data_model_iter_move_prev_default)    
-  _WRAP_METHOD(bool iter_move_to_row_default(const Glib::RefPtr<DataModelIter>& iter, int row), gda_data_model_iter_move_to_row_default)    
-    
+  _WRAP_METHOD(bool iter_move_prev_default(const Glib::RefPtr<DataModelIter>& iter), gda_data_model_iter_move_prev_default)
+  _WRAP_METHOD(bool iter_move_to_row_default(const Glib::RefPtr<DataModelIter>& iter, int row), gda_data_model_iter_move_to_row_default)
+
   //These are in a private header. Ignore them:
-  _IGNORE(gda_data_model_changed, gda_data_model_row_inserted, gda_data_model_row_updated, gda_data_model_row_removed, 
-          gda_data_model_get_command_text, gda_data_model_set_command_text, gda_data_model_get_command_type, 
+  _IGNORE(gda_data_model_changed, gda_data_model_row_inserted, gda_data_model_row_updated, gda_data_model_row_removed,
+          gda_data_model_get_command_text, gda_data_model_set_command_text, gda_data_model_get_command_type,
           gda_data_model_set_command_type, gda_data_model_to_xml_node, gda_data_model_add_data_from_xml_node, gda_data_model_reset)
 
   _WRAP_SIGNAL(void row_inserted(int row), row_inserted)
@@ -220,4 +220,3 @@ protected:
 
 } // namespace Gda
 } // namespace Gnome
-

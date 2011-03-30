@@ -1,5 +1,13 @@
 2011-03-30  Murray Cumming  <murrayc@murrayc.com>
 
+	Replace a remaining use of ListHandle.
+
+	* libgda/libgdamm/value.h: Remove the ListHandle and SListHandle typedefs.
+	* libgda/src/datamodel.hg: get_row_from_values(): Use std::vector
+	instead of ListHandle, as already done for other API.
+
+2011-03-30  Murray Cumming  <murrayc@murrayc.com>
+
 	Connection: Add some methods.
 
 	* libgda/src/connection.[hg|ccg]: parse_sql_string(),

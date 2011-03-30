@@ -250,9 +250,6 @@ struct ValueTraits
 };
 #endif
 
-typedef Glib::ListHandle<Value, ValueTraits> ValueList;
-typedef Glib::SListHandle<Value, ValueTraits> ValueSList;
-
 GType value_get_type_null();
 GType value_get_type_binary();
 GType value_get_type_blob();
