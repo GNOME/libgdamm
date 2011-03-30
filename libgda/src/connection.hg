@@ -219,6 +219,14 @@ public:
   int statement_execute_non_select_builder(const Glib::RefPtr<const SqlBuilder>& builder, const Glib::RefPtr<const Set>& params, std::auto_ptr<Glib::Error>& error);
 #endif //GLIBMM_EXCEPTIONS_ENABLED
 
+  _WRAP_METHOD(guint async_statement_execute(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, const std::vector<GType>& col_types, bool need_last_insert_row = false), gda_connection_async_statement_execute, errthrow)
+
+  //TODO: Wrap the last_insert_row parameter properly and add an overload without it:
+  _WRAP_METHOD(Glib::RefPtr<Glib::Object> async_fetch_result(guint task_id, GdaSet **last_insert_row), gda_connection_async_fetch_result, errthrow)
+  _WRAP_METHOD(bool async_cancel(guint task_id), gda_connection_async_cancel, errthrow)
+
+//TODO: #m4 _CONVERSION(`GSList*',`std::vector<Glib::Object>',`$2(Glib::SListHandler<Glib::RefPtr<const Statement> >::slist_to_vector((GSList*)$3, Glib::OWNERSHIP_DEEP))')
+//  _WRAP_METHOD(std::vector<Glib::Object> repetitive_statement_execute(GdaRepetitiveStatement *rstmt, StatementModelUsage model_usage, const std::vector<GType>& col_types, gboolean stop_on_error = true), gda_connection_repetitive_statement_execute, errthrow)
 
   //Note that we do not add a non-const version of this because the documentation says that it should not be modified:
   _WRAP_METHOD(Glib::RefPtr<const TransactionStatus> get_transaction_status() const, gda_connection_get_transaction_status, errthrow, refreturn)
@@ -247,6 +255,13 @@ public:
   _WRAP_METHOD(bool supports_feature(ConnectionFeature feature) const, gda_connection_supports_feature)
 
   _WRAP_METHOD(Glib::ustring get_authentication() const, gda_connection_get_authentication)
+
+  //TODO: Wrap the GdaSet** output parameter:
+  //_WRAP_METHOD(Glib::RefPtr<Statement> parse_sql_string(const Glib::ustring& sql, GdaSet** params), gda_connection_parse_sql_string, errthrow)
+
+  //TODO: Documentation:
+  Glib::RefPtr<Statement> parse_sql_string(const Glib::ustring& sql);
+
   _WRAP_METHOD(Glib::RefPtr<SqlParser> create_parser(), gda_connection_create_parser)
 
   _WRAP_METHOD(Glib::ustring get_provider_name() const, gda_connection_get_provider_name)
