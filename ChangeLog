@@ -1,3 +1,5 @@
+4.99.0.1:
+
 2011-03-30  Murray Cumming  <murrayc@murrayc.com>
 
 	Connection: Add new properties.
@@ -32,7 +34,7 @@
 
 	Connection: Add some methods.
 
-	* libgda/src/connection.[hg|ccg]: parse_sql_string(),
+	* libgda/src/connection.[hg|ccg]: Added parse_sql_string(),
 	async_statement_execute(), async_fetch_result() and async_cancel().
 
 2011-03-30  Murray Cumming  <murrayc@murrayc.com>
