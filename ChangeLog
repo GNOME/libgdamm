@@ -1,5 +1,12 @@
 2011-03-30  Murray Cumming  <murrayc@murrayc.com>
 
+	Adjust the compiler warning flags used with --enable-warnings=fatal.
+
+	* configure.ac: Ignore warnings about long long, to fix the build with 
+	g++ 4.5.2. Avoid use of glibmm deprecated API too.
+
+2011-03-30  Murray Cumming  <murrayc@murrayc.com>
+
 	Remove GLIBMM_EXCEPTIONS_ENABLED ifdefs.
 
 	* libgda/src/*.[hg|ccg]: These ifdefs are no longer useful. They were already
