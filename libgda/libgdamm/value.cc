@@ -195,7 +195,7 @@ Value::Value()
 :
   Glib::ValueBase()
 {
-  //Creates a null. TODO: Is this really equivalent to gda_value_new_null()?
+  init(gda_value_new_null());
 }
 
 Value::Value(const Value& src)
@@ -240,6 +240,11 @@ GType Value::get_value_type() const
 bool Value::is_null() const
 {
   return gda_value_is_null(const_cast<GValue*>(gobj()));
+}
+
+void Value::set_null()
+{
+  gda_value_set_null( gobj() );
 }
 
 bool Value::is_number() const

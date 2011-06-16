@@ -75,6 +75,13 @@
   (gtype-id "GDA_TYPE_DATA_MODEL_ARRAY")
 )
 
+(define-object DataModelBdb
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaDataModelBdb")
+  (gtype-id "GDA_TYPE_DATA_MODEL_BDB")
+)
+
 (define-object DataModelDir
   (in-module "Gda")
   (parent "GObject")
@@ -87,6 +94,13 @@
   (parent "GObject")
   (c-name "GdaDataModelImport")
   (gtype-id "GDA_TYPE_DATA_MODEL_IMPORT")
+)
+
+(define-object DataModelLdap
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaDataModelLdap")
+  (gtype-id "GDA_TYPE_DATA_MODEL_LDAP")
 )
 
 (define-object DataProxy
@@ -254,6 +268,13 @@
   (parent "GdaTreeManager")
   (c-name "GdaTreeMgrLabel")
   (gtype-id "GDA_TYPE_TREE_MGR_LABEL")
+)
+
+(define-object TreeMgrLdap
+  (in-module "Gda")
+  (parent "GdaTreeManager")
+  (c-name "GdaTreeMgrLdap")
+  (gtype-id "GDA_TYPE_TREE_MGR_LDAP")
 )
 
 (define-object TreeMgrSchemas
@@ -516,6 +537,8 @@
     '("feature-non-supported-error" "GDA_DATA_MODEL_FEATURE_NON_SUPPORTED_ERROR")
     '("file-exist-error" "GDA_DATA_MODEL_FILE_EXIST_ERROR")
     '("xml-format-error" "GDA_DATA_MODEL_XML_FORMAT_ERROR")
+    '("truncated-error" "GDA_DATA_MODEL_TRUNCATED_ERROR")
+    '("other-error" "GDA_DATA_MODEL_OTHER_ERROR")
   )
 )
 
@@ -525,6 +548,17 @@
   (gtype-id "GDA_TYPE_DATA_MODEL_ITER_ERROR")
   (values
     '("error" "GDA_DATA_MODEL_ITER_COLUMN_OUT_OF_RANGE_ERROR")
+  )
+)
+
+(define-enum LdapSearchScope
+  (in-module "Gda")
+  (c-name "GdaLdapSearchScope")
+  (gtype-id "GDA_TYPE_LDAP_SEARCH_SCOPE")
+  (values
+    '("base" "GDA_LDAP_SEARCH_BASE")
+    '("onelevel" "GDA_LDAP_SEARCH_ONELEVEL")
+    '("subtree" "GDA_LDAP_SEARCH_SUBTREE")
   )
 )
 
@@ -2512,6 +2546,15 @@
   (varargs #t)
 )
 
+(define-function gda_data_model_array_new_with_g_types_v
+  (c-name "gda_data_model_array_new_with_g_types_v")
+  (return-type "GdaDataModel*")
+  (parameters
+    '("gint" "cols")
+    '("GType*" "types")
+  )
+)
+
 (define-function gda_data_model_array_new
   (c-name "gda_data_model_array_new")
   (is-constructor-of "GdaDataModelArray")
@@ -2552,6 +2595,37 @@
 (define-method clear
   (of-object "GdaDataModelArray")
   (c-name "gda_data_model_array_clear")
+  (return-type "none")
+)
+
+
+
+;; From gda-data-model-bdb.h
+
+(define-function gda_data_model_bdb_get_type
+  (c-name "gda_data_model_bdb_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_model_bdb_new
+  (c-name "gda_data_model_bdb_new")
+  (is-constructor-of "GdaDataModelBdb")
+  (return-type "GdaDataModel*")
+  (parameters
+    '("const-gchar*" "filename")
+    '("const-gchar*" "db_name")
+  )
+)
+
+(define-method get_errors
+  (of-object "GdaDataModelBdb")
+  (c-name "gda_data_model_bdb_get_errors")
+  (return-type "const-GSList*")
+)
+
+(define-method clean_errors
+  (of-object "GdaDataModelBdb")
+  (c-name "gda_data_model_bdb_clean_errors")
   (return-type "none")
 )
 
@@ -2829,6 +2903,12 @@
   )
 )
 
+(define-method get_exceptions
+  (of-object "GdaDataModel")
+  (c-name "gda_data_model_get_exceptions")
+  (return-type "GError**")
+)
+
 (define-method export_to_string
   (of-object "GdaDataModel")
   (c-name "gda_data_model_export_to_string")
@@ -3074,6 +3154,37 @@
   (return-type "GdaHolder*")
   (parameters
     '("gint" "col")
+  )
+)
+
+
+
+;; From gda-data-model-ldap.h
+
+(define-function gda_data_model_ldap_get_type
+  (c-name "gda_data_model_ldap_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_model_ldap_new
+  (c-name "gda_data_model_ldap_new")
+  (is-constructor-of "GdaDataModelLdap")
+  (return-type "GdaDataModel*")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "base_dn")
+    '("const-gchar*" "filter")
+    '("const-gchar*" "attributes")
+    '("GdaLdapSearchScope" "scope")
+  )
+)
+
+(define-function gda_data_model_ldap_compute_columns
+  (c-name "gda_data_model_ldap_compute_columns")
+  (return-type "GList*")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "attributes")
   )
 )
 
@@ -3514,6 +3625,11 @@
 
 (define-function gda_data_model_error_get_type
   (c-name "gda_data_model_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_ldap_search_scope_get_type
+  (c-name "gda_ldap_search_scope_get_type")
   (return-type "GType")
 )
 
@@ -4016,6 +4132,17 @@
   (varargs #t)
 )
 
+(define-method extract_v
+  (of-object "GdaMetaStore")
+  (c-name "gda_meta_store_extract_v")
+  (return-type "GdaDataModel*")
+  (parameters
+    '("const-gchar*" "select_sql")
+    '("GHashTable*" "vars")
+    '("GError**" "error")
+  )
+)
+
 (define-method modify
   (of-object "GdaMetaStore")
   (c-name "gda_meta_store_modify")
@@ -4027,6 +4154,21 @@
     '("GError**" "error")
   )
   (varargs #t)
+)
+
+(define-method modify_v
+  (of-object "GdaMetaStore")
+  (c-name "gda_meta_store_modify_v")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "table_name")
+    '("GdaDataModel*" "new_data")
+    '("const-gchar*" "condition")
+    '("gint" "nvalues")
+    '("const-gchar**" "value_names")
+    '("const-GValue**" "values")
+    '("GError**" "error")
+  )
 )
 
 (define-method modify_with_context
@@ -4605,6 +4747,15 @@
   (varargs #t)
 )
 
+(define-method get_value_at_path
+  (of-object "GdaServerOperation")
+  (c-name "gda_server_operation_get_value_at_path")
+  (return-type "const-GValue*")
+  (parameters
+    '("const-gchar*" "path")
+  )
+)
+
 (define-method get_sql_identifier_at
   (of-object "GdaServerOperation")
   (c-name "gda_server_operation_get_sql_identifier_at")
@@ -4617,6 +4768,17 @@
   (varargs #t)
 )
 
+(define-method get_sql_identifier_at_path
+  (of-object "GdaServerOperation")
+  (c-name "gda_server_operation_get_sql_identifier_at_path")
+  (return-type "gchar*")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("GdaServerProvider*" "prov")
+    '("const-gchar*" "path")
+  )
+)
+
 (define-method set_value_at
   (of-object "GdaServerOperation")
   (c-name "gda_server_operation_set_value_at")
@@ -4627,6 +4789,17 @@
     '("const-gchar*" "path_format")
   )
   (varargs #t)
+)
+
+(define-method set_value_at_path
+  (of-object "GdaServerOperation")
+  (c-name "gda_server_operation_set_value_at_path")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "value")
+    '("const-gchar*" "path")
+    '("GError**" "error")
+  )
 )
 
 (define-method save_data_to_xml
@@ -5858,6 +6031,16 @@
   )
 )
 
+(define-method update_children
+  (of-object "GdaTree")
+  (c-name "gda_tree_update_children")
+  (return-type "gboolean")
+  (parameters
+    '("GdaTreeNode*" "node")
+    '("GError**" "error")
+  )
+)
+
 (define-method get_nodes_in_path
   (of-object "GdaTree")
   (c-name "gda_tree_get_nodes_in_path")
@@ -6019,6 +6202,25 @@
   (return-type "GdaTreeManager*")
   (parameters
     '("const-gchar*" "label")
+  )
+)
+
+
+
+;; From gda-tree-mgr-ldap.h
+
+(define-function gda_tree_mgr_ldap_get_type
+  (c-name "gda_tree_mgr_ldap_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_tree_mgr_ldap_new
+  (c-name "gda_tree_mgr_ldap_new")
+  (is-constructor-of "GdaTreeMgrLdap")
+  (return-type "GdaTreeManager*")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "dn")
   )
 )
 
@@ -6250,6 +6452,16 @@
   (varargs #t)
 )
 
+(define-function gda_utility_check_data_model_v
+  (c-name "gda_utility_check_data_model_v")
+  (return-type "gboolean")
+  (parameters
+    '("GdaDataModel*" "model")
+    '("gint" "nbcols")
+    '("GType*" "types")
+  )
+)
+
 (define-function gda_utility_data_model_dump_data_to_xml
   (c-name "gda_utility_data_model_dump_data_to_xml")
   (return-type "gboolean")
@@ -6434,6 +6646,11 @@
   (parameters
     '("GType" "type")
   )
+)
+
+(define-function gda_value_new_null
+  (c-name "gda_value_new_null")
+  (return-type "GValue*")
 )
 
 (define-function gda_value_new_binary
@@ -6775,6 +6992,11 @@
   (parameters
     '("const-gchar*" "str")
   )
+)
+
+(define-function gda_null_get_type
+  (c-name "gda_null_get_type")
+  (return-type "GType")
 )
 
 (define-function gda_numeric_get_type

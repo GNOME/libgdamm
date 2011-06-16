@@ -1,3 +1,12 @@
+2011-06-16  Murray Cumming  <murrayc@murrayc.com>
+
+	Adapt to null value changes in libgda.
+
+	* libgda/src/libgda_methods.defs: Regenerated.
+	* libgda/libgdamm/value.[h|cc]: Value() constructor: Call the new 
+	gda_value_new_null() because libgda no longer uses gtype=0 (invalid) to mean 
+  NULL. Addded set_null(), wrapping the new gda_value_set_null() function.
+
 2011-03-30  Murray Cumming  <murrayc@murrayc.com>
 
 	Adjust the compiler warning flags used with --enable-warnings=fatal.

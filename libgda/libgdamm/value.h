@@ -124,6 +124,7 @@ public:
   GType get_value_type() const;
 
   bool is_null() const;
+  void set_null();
 
   bool is_number() const;
 
