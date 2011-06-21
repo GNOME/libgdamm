@@ -1,3 +1,13 @@
+4.99.3 (unstable):
+
+* Value:
+  - Adapt to null value changes in libgda.
+  - This means that you should not have static Gda::Value instances,
+    because the constructor needs the GType system.
+* Build:
+  - Ignore warnings about long long, with --enable-warnings=fatal.
+  - Remove now-unused GLIBMM_EXCEPTIONS_ENABLED ifdefs.
+	
 4.99.0.1 (unstable):
 
 * Connection:
