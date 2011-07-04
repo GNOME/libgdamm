@@ -1341,6 +1341,7 @@
 ;; 	GDA_SQL_OPERATOR_TYPE_BITAND,
 ;; 	GDA_SQL_OPERATOR_TYPE_BITOR,
 ;; 	GDA_SQL_OPERATOR_TYPE_BITNOT
+;; 	GDA_SQL_OPERATOR_TYPE_ILIKE,
 ;; } GdaSqlOperatorType;
 
 (define-enum-extended SqlOperatorType
@@ -1377,6 +1378,7 @@
     '("bitand" "GDA_SQL_OPERATOR_TYPE_BITAND" "27")
     '("bitor" "GDA_SQL_OPERATOR_TYPE_BITOR" "28")
     '("bitnot" "GDA_SQL_OPERATOR_TYPE_BITNOT" "29")
+    '("ilike" "GDA_SQL_OPERATOR_TYPE_ILIKE" "30")    
   )
 )
 
