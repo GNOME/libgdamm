@@ -1,3 +1,7 @@
+4.99.3.1 (unstable):
+
+* Added SQL_OPERATOR_TYPE_ILIKE.
+
 4.99.3 (unstable):
 
 * Value:
