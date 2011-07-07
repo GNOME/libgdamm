@@ -1,3 +1,9 @@
+2011-07-04  Murray Cumming  <murrayc@murrayc.com>
+
+  Add SQL_OPERATOR_TYPE_ILIKE.
+    
+	* libgda/src/libgda_enums.defs: This requires libgda from git master.
+    
 4.99.3:
 
 2011-06-16  Murray Cumming  <murrayc@murrayc.com>
