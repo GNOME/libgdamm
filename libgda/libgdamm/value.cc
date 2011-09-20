@@ -216,10 +216,17 @@ Value::Value(const GValue* castitem)
 
 Value& Value::operator=(const Value& src)
 {
+  //Avoid doing anything if no change is necessary:
+  if(gobj() == src.gobj())
+    return *this;
+
   // Unset current value, if any
-  if(G_IS_VALUE(gobj())) g_value_unset(gobj());
+  if(G_IS_VALUE(gobj()))
+    g_value_unset(gobj());
+
   // Set new value, if any
-  if(G_IS_VALUE(src.gobj())) init(src.gobj());
+  if(G_IS_VALUE(src.gobj()))
+    init(src.gobj());
 
   return *this;
 }
