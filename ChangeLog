@@ -1,11 +1,16 @@
-4.99.4:
-
 2011-09-21  Murray Cumming  <murrayc@murrayc.com>
 
-	Value: operator=(): Check for identical instance.
+  ServerProvider: Added supports_operation() method overloads.
 
-	* libgda/libgdamm/value.cc: This is generally a good idea in operator=()
-	implementations.
+	* libgda/src/serverprovider.[hg|ccg]: Because some parameters may be NULL.
+
+2011-09-21  Murray Cumming  <murrayc@murrayc.com>
+ 
+  Connection: Add statement_to_sql() method overloads.
+    
+  * libgda/src/connection.[hg|ccg]: Because some parameters can be NULL.
+
+4.99.4:
 
 2011-09-21  Murray Cumming  <murrayc@murrayc.com>
 
@@ -15,6 +20,13 @@
 	* libgda/src/quarklist.hg:
 	* libgda/src/statement.hg: Minor documentation improvements and TODO
 	comments.	
+
+2011-09-21  Murray Cumming  <murrayc@murrayc.com>
+
+	Value: operator=(): Check for identical instance.
+
+	* libgda/libgdamm/value.cc: This is generally a good idea in operator=()
+	implementations.
 
 2011-09-20  Murray Cumming  <murrayc@murrayc.com>
 
