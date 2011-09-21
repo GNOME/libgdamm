@@ -68,7 +68,10 @@ Glib::RefPtr<ServerOperation> ServerProvider::create_operation(const Glib::RefPt
   return retvalue;
 }
 
-
+bool ServerProvider::supports_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type) const
+{
+  return gda_server_provider_supports_operation(const_cast<GdaServerProvider*>(gobj()), Glib::unwrap(cnc), ((GdaServerOperationType)(type)), 0);
+}
 
 } // namespace Gda
 
