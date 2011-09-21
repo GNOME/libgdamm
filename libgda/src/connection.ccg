@@ -190,6 +190,31 @@ Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& 
   return retvalue;
 }
 
+
+Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags) const
+{
+  GError* gerror = 0;
+  const Glib::ustring retvalue = Glib::convert_return_gchar_ptr_to_ustring(gda_connection_statement_to_sql(const_cast<GdaConnection*>(gobj()), const_cast<GdaStatement*>(Glib::unwrap(statement)), const_cast<GdaSet*>(Glib::unwrap(params)), ((GdaStatementSqlFlag)(flags)), 0, &(gerror)));
+
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+
+  return retvalue;
+}
+  
+
+Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, StatementSqlFlag flags) const
+{
+  GError* gerror = 0;
+  const Glib::ustring retvalue = Glib::convert_return_gchar_ptr_to_ustring(gda_connection_statement_to_sql(const_cast<GdaConnection*>(gobj()), const_cast<GdaStatement*>(Glib::unwrap(statement)), 0, ((GdaStatementSqlFlag)(flags)), 0, &(gerror)));
+
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
+
+  return retvalue;
+}
+  
+
 Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<const Statement>& stmt, StatementModelUsage model_usage)
 {
   GError* gerror = 0;

@@ -105,7 +105,6 @@ public:
   _WRAP_METHOD(void clear_events_list(), gda_connection_clear_events_list)
 
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_execute)
-
   Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, Glib::RefPtr<const Set>& last_insert_row);
 
 //TODO: Documentation:
@@ -210,7 +209,11 @@ public:
   //TODO: Wrap the GdaSet** output parameter:
   //_WRAP_METHOD(Glib::RefPtr<Statement> parse_sql_string(const Glib::ustring& sql, GdaSet** params), gda_connection_parse_sql_string, errthrow)
 
-  //TODO: Documentation:
+  /** This helps to parse a SQL string.
+   *
+   * @param sql An SQL command to parse.
+   * @result A Statement representing the SQL command or an empty RefPtr if an error occurred.
+   */
   Glib::RefPtr<Statement> parse_sql_string(const Glib::ustring& sql);
   _IGNORE(gda_connection_parse_sql_string)
 
@@ -297,8 +300,35 @@ public:
 
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_to_sql)
 
+  //TODO: What errors does this really throw? Document that in libgda.
   //TODO: Add an overload without the params_used.
+  /** Renders a Statement as a SQL statement string, adapted to the SQL dialect used by the connection.
+   *
+   * @param stmt A Statement object.
+   * @param A Set object (which can be obtained using Statement::get_parameters()).
+   * @param flags SQL rendering flags, as StatementSqlFlag OR'ed values
+   * @param params_used A place to store the list of individual Holder objects within @a params which have been used.
+   * @throws ConnectionError
+   */
   Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::vector< Glib::RefPtr<Holder> >& params_used) const;
+
+  /** Renders a Statement as a SQL statement string, adapted to the SQL dialect used by the connection.
+   *
+   * @param stmt A Statement object.
+   * @param A Set object (which can be obtained using Statement::get_parameters()).
+   * @param flags SQL rendering flags, as StatementSqlFlag OR'ed values
+   * @throws ConnectionError
+   */
+  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags = STATEMENT_SQL_PARAMS_AS_VALUES) const;
+  
+  /** Renders a Statement as a SQL statement string, adapted to the SQL dialect used by the connection.
+   *
+   * @param stmt A Statement object..
+   * @param flags SQL rendering flags, as StatementSqlFlag OR'ed values
+   * @throws ConnectionError
+   */
+  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, StatementSqlFlag flags = STATEMENT_SQL_PARAMS_AS_VALUES) const;
+
 
   _IGNORE(gda_connection_internal_reset_transaction_status)
 
