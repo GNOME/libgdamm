@@ -221,6 +221,9 @@ Value::Value(const GValue* castitem)
 
 Value& Value::operator=(const Value& src)
 {
+  if(this == &src)
+    return *this;
+
   //Avoid doing anything if no change is necessary:
   if(gobj() == src.gobj())
     return *this;
