@@ -1,5 +1,14 @@
 2011-09-21  Murray Cumming  <murrayc@murrayc.com>
 
+	Minor documentation improvements.
+
+	* libgda/src/metastore.hg:
+	* libgda/src/quarklist.hg:
+	* libgda/src/statement.hg: Minor documentation improvements and TODO
+	comments.
+	
+2011-09-21  Murray Cumming  <murrayc@murrayc.com>
+
 	Value: operator=(): Check for identical instance.
 
 	* libgda/libgdamm/value.cc: This is generally a good idea in operator=()
