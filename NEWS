@@ -1,3 +1,11 @@
+4.99.4 (unstable):
+
+* Value: operator=()
+  - Check for identical instance.
+  - Check for the identical underlying GValue.
+  - set_binary(): reinit the type.
+  (Murray Cumming)
+	
 4.99.3.1 (unstable):
 
 * Added SQL_OPERATOR_TYPE_ILIKE.
