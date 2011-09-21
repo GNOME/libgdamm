@@ -1,4 +1,12 @@
-=======
+2011-03-30  Murray Cumming  <murrayc@murrayc.com>
+
+	Minor documentation improvements.
+
+	* libgda/src/metastore.hg:
+	* libgda/src/quarklist.hg:
+	* libgda/src/statement.hg: Minor documentation improvements and TODO
+	comments.
+	
 2011-03-30  Murray Cumming  <murrayc@murrayc.com>
 
 	Avoid a tarball dependency on mm-common.

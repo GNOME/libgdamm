@@ -108,12 +108,10 @@ public:
   _WRAP_PROPERTY("cnc", Glib::RefPtr<Connection>)  
 
   _WRAP_SIGNAL(void meta_reset(), "meta-reset")
-  // TODO: do we need this?
-  // See http://bugzilla.gnome.org/show_bug.cgi?id=574736
-  //#m4 _CONVERSION(`gpointer',`MetaContext*',`(MetaContext*)($3)')
-  //_WRAP_SIGNAL(gpointer suggest_update(MetaContext*  suggest), "suggest-update", no_default_handler)
-  // Listhandle...
-  // _WRAP_SIGNAL(void meta_changed(std::vector<>))
+
+  // TODO: do we need these?
+  //_WRAP_SIGNAL(GError* suggest_update(MetaContext*  suggest), "suggest-update", no_default_handler)
+  //_WRAP_SIGNAL(void meta_changed(std::vector<>))
 };
 
 } // namespace Gda

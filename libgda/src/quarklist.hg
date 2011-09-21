@@ -30,10 +30,9 @@ namespace Gnome
 namespace Gda
 {
 
-//TODO: Documentation: See http://bugzilla.gnome.org/show_bug.cgi?id=561173
-/** Quark lists (lists of KEY=VALUE's).
- *
- * Parameter lists are used primarily in the parsing and creation of connection strings.
+/** Manages lists of KEY=VALUE pairs.
+ * This is used mainly by database providers' implementations to parse connection strings 
+ * into lists of KEY=VALUE pairs.
  *
  * @ingroup DataHandlers
  */
