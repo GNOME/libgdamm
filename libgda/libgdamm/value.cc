@@ -296,6 +296,8 @@ const guchar* Value::get_binary(long& size) const
 
 void Value::set(const guchar* val, long size)
 {
+  value_reinit(gobj(), GDA_TYPE_BINARY);
+  
   GdaBinary gdabinary;
   gdabinary.data = const_cast<guchar*>(val);
   gdabinary.binary_length = size;
