@@ -1,3 +1,14 @@
+4.1.3: (unstable):
+
+* Value: operator=()
+  - Check for identical instance.
+  - Check for the identical underlying GValue.
+  - set_binary(): reinit the type.
+  (Murray Cumming)
+* Build:
+  - Avoid a tarball dependency on mm-common.
+  - Ignore warnings about long long, with --enable-warnings=fatal.
+  
 4.1.2: (unstable):
 
 * Use std::vector<> instead of *Handle<> or std::list<> for method paramteters
