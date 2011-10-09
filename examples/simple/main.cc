@@ -76,6 +76,7 @@ run_sql_non_select (const Glib::RefPtr<Gda::Connection>& cnc, const Glib::RefPtr
   }
 #endif
 
+  std::cout << "rows selected: " << nrows << std::endl;
 }
 
 /*

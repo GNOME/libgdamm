@@ -1,14 +1,16 @@
+4.99.4.1:
+
 2011-09-21  Murray Cumming  <murrayc@murrayc.com>
 
-  ServerProvider: Added supports_operation() method overloads.
+	ServerProvider: Added supports_operation() method overloads.
 
 	* libgda/src/serverprovider.[hg|ccg]: Because some parameters may be NULL.
 
 2011-09-21  Murray Cumming  <murrayc@murrayc.com>
  
-  Connection: Add statement_to_sql() method overloads.
+	Connection: Add statement_to_sql() method overloads.
     
-  * libgda/src/connection.[hg|ccg]: Because some parameters can be NULL.
+	* libgda/src/connection.[hg|ccg]: Because some parameters can be NULL.
 
 4.99.4:
 
