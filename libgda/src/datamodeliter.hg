@@ -83,7 +83,9 @@ public:
   _WRAP_METHOD(Glib::RefPtr<Holder> get_holder_for_field(int col), gda_data_model_iter_get_holder_for_field, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Holder> get_holder_for_field(int col) const, gda_data_model_iter_get_holder_for_field, refreturn)
 
-  _WRAP_METHOD(Value get_value_at(int col) const, gda_data_model_iter_get_value_at)
+  _WRAP_METHOD(Value get_value_at(int col) const, gda_data_model_iter_get_value_at_e, errthrow)
+  _IGNORE(gda_data_model_iter_get_value_at)
+
   _WRAP_METHOD(Value get_value_for_field(const Glib::ustring& field_name) const, gda_data_model_iter_get_value_for_field)
   _WRAP_METHOD(bool set_value_at(int col, const Value& value), gda_data_model_iter_set_value_at, errthrow)
     

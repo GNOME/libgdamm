@@ -1,3 +1,15 @@
+2011-10-10  Murray Cumming  <murrayc@murrayc.com>
+
+	DataModelIter::get_value_at(): Throw an exception sometimes.
+
+	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py.
+	* libgda/src/datamodeliter.hg: Use the new 
+	gda_data_model_iter_get_value_at_e() instead of 
+	gda_data_model_iter_get_value_at(). Presumably this lets us catch more 
+	problems.
+	* libgda/src/holder.hg:
+	* libgda/src/row.hg: Ignore some other new methods, with comments.
+
 4.99.4.1:
 
 2011-09-21  Murray Cumming  <murrayc@murrayc.com>

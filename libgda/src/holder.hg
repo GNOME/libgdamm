@@ -81,7 +81,14 @@ public:
   _WRAP_METHOD(bool value_is_default() const, gda_holder_value_is_default)
 
   _WRAP_METHOD(void force_invalid(), gda_holder_force_invalid)
+  _IGNORE(gda_holder_force_invalid_e)
+  //TODO: gda_holder_force_invalid_e() is a way to _set_ an error, not throw an error.
+  //The error is later returned by gda_holder_is_valid_e(). We can probably ignore it.
+
   _WRAP_METHOD(bool is_valid() const, gda_holder_is_valid)
+  _IGNORE(gda_holder_is_valid_e)
+  //Ignore gda_holder_is_valid_e() because throwing an exception would be odd for an is_*() method.
+
   _WRAP_METHOD(void set_not_null(bool not_null = true), gda_holder_set_not_null)
   _WRAP_METHOD(bool get_not_null() const, gda_holder_get_not_null)
 

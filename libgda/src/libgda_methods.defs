@@ -103,6 +103,13 @@
   (gtype-id "GDA_TYPE_DATA_MODEL_LDAP")
 )
 
+(define-object DataPivot
+  (in-module "Gda")
+  (parent "GObject")
+  (c-name "GdaDataPivot")
+  (gtype-id "GDA_TYPE_DATA_PIVOT")
+)
+
 (define-object DataProxy
   (in-module "Gda")
   (parent "GObject")
@@ -406,6 +413,7 @@
     '("task-not-found-error" "GDA_CONNECTION_TASK_NOT_FOUND_ERROR")
     '("unsupported-threads-error" "GDA_CONNECTION_UNSUPPORTED_THREADS_ERROR")
     '("closed-error" "GDA_CONNECTION_CLOSED_ERROR")
+    '("meta-data-context-error" "GDA_CONNECTION_META_DATA_CONTEXT_ERROR")
   )
 )
 
@@ -562,6 +570,42 @@
   )
 )
 
+(define-enum DataPivotError
+  (in-module "Gda")
+  (c-name "GdaDataPivotError")
+  (gtype-id "GDA_TYPE_DATA_PIVOT_ERROR")
+  (values
+    '("internal-error" "GDA_DATA_PIVOT_INTERNAL_ERROR")
+    '("source-model-error" "GDA_DATA_PIVOT_SOURCE_MODEL_ERROR")
+    '("field-format-error" "GDA_DATA_PIVOT_FIELD_FORMAT_ERROR")
+    '("usage-error" "GDA_DATA_PIVOT_USAGE_ERROR")
+    '("overflow-error" "GDA_DATA_PIVOT_OVERFLOW_ERROR")
+  )
+)
+
+(define-enum DataPivotAggregate
+  (in-module "Gda")
+  (c-name "GdaDataPivotAggregate")
+  (gtype-id "GDA_TYPE_DATA_PIVOT_AGGREGATE")
+  (values
+    '("avg" "GDA_DATA_PIVOT_AVG")
+    '("count" "GDA_DATA_PIVOT_COUNT")
+    '("max" "GDA_DATA_PIVOT_MAX")
+    '("min" "GDA_DATA_PIVOT_MIN")
+    '("sum" "GDA_DATA_PIVOT_SUM")
+  )
+)
+
+(define-enum DataPivotFieldType
+  (in-module "Gda")
+  (c-name "GdaDataPivotFieldType")
+  (gtype-id "GDA_TYPE_DATA_PIVOT_FIELD_TYPE")
+  (values
+    '("row" "GDA_DATA_PIVOT_FIELD_ROW")
+    '("column" "GDA_DATA_PIVOT_FIELD_COLUMN")
+  )
+)
+
 (define-enum DataProxyError
   (in-module "Gda")
   (c-name "GdaDataProxyError")
@@ -586,6 +630,16 @@
     '("access-error" "GDA_DATA_SELECT_ACCESS_ERROR")
     '("sql-error" "GDA_DATA_SELECT_SQL_ERROR")
     '("safety-locked-error" "GDA_DATA_SELECT_SAFETY_LOCKED_ERROR")
+  )
+)
+
+(define-enum DataSelectConditionType
+  (in-module "Gda")
+  (c-name "GdaDataSelectConditionType")
+  (gtype-id "GDA_TYPE_DATA_SELECT_CONDITION_TYPE")
+  (values
+    '("pk" "GDA_DATA_SELECT_COND_PK")
+    '("all-columns" "GDA_DATA_SELECT_COND_ALL_COLUMNS")
   )
 )
 
@@ -681,6 +735,7 @@
     '("unknown-object-error" "GDA_META_STRUCT_UNKNOWN_OBJECT_ERROR")
     '("duplicate-object-error" "GDA_META_STRUCT_DUPLICATE_OBJECT_ERROR")
     '("incoherence-error" "GDA_META_STRUCT_INCOHERENCE_ERROR")
+    '("xml-error" "GDA_META_STRUCT_XML_ERROR")
   )
 )
 
@@ -773,6 +828,7 @@
   (values
     '("object-name-error" "GDA_SERVER_OPERATION_OBJECT_NAME_ERROR")
     '("incorrect-value-error" "GDA_SERVER_OPERATION_INCORRECT_VALUE_ERROR")
+    '("xml-error" "GDA_SERVER_OPERATION_XML_ERROR")
   )
 )
 
@@ -834,6 +890,8 @@
     '("server-version-error" "GDA_SERVER_PROVIDER_SERVER_VERSION_ERROR")
     '("data-error" "GDA_SERVER_PROVIDER_DATA_ERROR")
     '("default-value-handling-error" "GDA_SERVER_PROVIDER_DEFAULT_VALUE_HANDLING_ERROR")
+    '("misuse-error" "GDA_SERVER_PROVIDER_MISUSE_ERROR")
+    '("file-not-found-error" "GDA_SERVER_PROVIDER_FILE_NOT_FOUND_ERROR")
   )
 )
 
@@ -846,6 +904,7 @@
     '("holder-not-found-error" "GDA_SET_HOLDER_NOT_FOUND_ERROR")
     '("invalid-error" "GDA_SET_INVALID_ERROR")
     '("read-only-error" "GDA_SET_READ_ONLY_ERROR")
+    '("implementation-error" "GDA_SET_IMPLEMENTATION_ERROR")
   )
 )
 
@@ -1109,6 +1168,7 @@
     '("bitand" "GDA_SQL_OPERATOR_TYPE_BITAND")
     '("bitor" "GDA_SQL_OPERATOR_TYPE_BITOR")
     '("bitnot" "GDA_SQL_OPERATOR_TYPE_BITNOT")
+    '("ilike" "GDA_SQL_OPERATOR_TYPE_ILIKE")
   )
 )
 
@@ -3089,6 +3149,16 @@
   )
 )
 
+(define-method get_value_at_e
+  (of-object "GdaDataModelIter")
+  (c-name "gda_data_model_iter_get_value_at_e")
+  (return-type "const-GValue*")
+  (parameters
+    '("gint" "col")
+    '("GError**" "error")
+  )
+)
+
 (define-method get_value_for_field
   (of-object "GdaDataModelIter")
   (c-name "gda_data_model_iter_get_value_for_field")
@@ -3198,6 +3268,57 @@
   (return-type "gboolean")
   (parameters
     '("xmlNodePtr" "node")
+    '("GError**" "error")
+  )
+)
+
+
+
+;; From gda-data-pivot.h
+
+(define-function gda_data_pivot_get_type
+  (c-name "gda_data_pivot_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_pivot_new
+  (c-name "gda_data_pivot_new")
+  (is-constructor-of "GdaDataPivot")
+  (return-type "GdaDataModel*")
+  (parameters
+    '("GdaDataModel*" "model")
+  )
+)
+
+(define-method add_field
+  (of-object "GdaDataPivot")
+  (c-name "gda_data_pivot_add_field")
+  (return-type "gboolean")
+  (parameters
+    '("GdaDataPivotFieldType" "field_type")
+    '("const-gchar*" "field")
+    '("const-gchar*" "alias")
+    '("GError**" "error")
+  )
+)
+
+(define-method add_data
+  (of-object "GdaDataPivot")
+  (c-name "gda_data_pivot_add_data")
+  (return-type "gboolean")
+  (parameters
+    '("GdaDataPivotAggregate" "aggregate_type")
+    '("const-gchar*" "field")
+    '("const-gchar*" "alias")
+    '("GError**" "error")
+  )
+)
+
+(define-method populate
+  (of-object "GdaDataPivot")
+  (c-name "gda_data_pivot_populate")
+  (return-type "gboolean")
+  (parameters
     '("GError**" "error")
   )
 )
@@ -3518,6 +3639,16 @@
   )
 )
 
+(define-method compute_modification_statements_ext
+  (of-object "GdaDataSelect")
+  (c-name "gda_data_select_compute_modification_statements_ext")
+  (return-type "gboolean")
+  (parameters
+    '("GdaDataSelectConditionType" "cond_type")
+    '("GError**" "error")
+  )
+)
+
 (define-method compute_columns_attributes
   (of-object "GdaDataSelect")
   (c-name "gda_data_select_compute_columns_attributes")
@@ -3645,6 +3776,11 @@
 
 (define-function gda_data_select_error_get_type
   (c-name "gda_data_select_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_select_condition_type_get_type
+  (c-name "gda_data_select_condition_type_get_type")
   (return-type "GType")
 )
 
@@ -3793,6 +3929,21 @@
   (return-type "GType")
 )
 
+(define-function gda_data_pivot_error_get_type
+  (c-name "gda_data_pivot_error_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_pivot_aggregate_get_type
+  (c-name "gda_data_pivot_aggregate_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_data_pivot_field_type_get_type
+  (c-name "gda_data_pivot_field_type_get_type")
+  (return-type "GType")
+)
+
 
 
 ;; From gda-holder.h
@@ -3929,10 +4080,28 @@
   (return-type "none")
 )
 
+(define-method force_invalid_e
+  (of-object "GdaHolder")
+  (c-name "gda_holder_force_invalid_e")
+  (return-type "none")
+  (parameters
+    '("GError*" "error")
+  )
+)
+
 (define-method is_valid
   (of-object "GdaHolder")
   (c-name "gda_holder_is_valid")
   (return-type "gboolean")
+)
+
+(define-method is_valid_e
+  (of-object "GdaHolder")
+  (c-name "gda_holder_is_valid_e")
+  (return-type "gboolean")
+  (parameters
+    '("GError**" "error")
+  )
 )
 
 (define-method set_not_null
@@ -4677,12 +4846,32 @@
   )
 )
 
+(define-method invalidate_value_e
+  (of-object "GdaRow")
+  (c-name "gda_row_invalidate_value_e")
+  (return-type "none")
+  (parameters
+    '("GValue*" "value")
+    '("GError*" "error")
+  )
+)
+
 (define-method value_is_valid
   (of-object "GdaRow")
   (c-name "gda_row_value_is_valid")
   (return-type "gboolean")
   (parameters
     '("GValue*" "value")
+  )
+)
+
+(define-method value_is_valid_e
+  (of-object "GdaRow")
+  (c-name "gda_row_value_is_valid_e")
+  (return-type "gboolean")
+  (parameters
+    '("GValue*" "value")
+    '("GError**" "error")
   )
 )
 
@@ -6569,6 +6758,28 @@
   )
 )
 
+(define-function gda_rewrite_sql_statement_for_null_parameters
+  (c-name "gda_rewrite_sql_statement_for_null_parameters")
+  (return-type "GdaSqlStatement*")
+  (parameters
+    '("GdaSqlStatement*" "sqlst")
+    '("GdaSet*" "params")
+    '("gboolean*" "out_modified")
+    '("GError**" "error")
+  )
+)
+
+(define-function gda_rewrite_statement_for_null_parameters
+  (c-name "gda_rewrite_statement_for_null_parameters")
+  (return-type "gboolean")
+  (parameters
+    '("GdaStatement*" "stmt")
+    '("GdaSet*" "params")
+    '("GdaStatement**" "out_stmt")
+    '("GError**" "error")
+  )
+)
+
 (define-function gda_rfc1738_encode
   (c-name "gda_rfc1738_encode")
   (return-type "gchar*")
@@ -6651,6 +6862,14 @@
 (define-function gda_value_new_null
   (c-name "gda_value_new_null")
   (return-type "GValue*")
+)
+
+(define-function gda_value_new_default
+  (c-name "gda_value_new_default")
+  (return-type "GValue*")
+  (parameters
+    '("const-gchar*" "default_val")
+  )
 )
 
 (define-function gda_value_new_binary
@@ -6996,6 +7215,11 @@
 
 (define-function gda_null_get_type
   (c-name "gda_null_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_default_get_type
+  (c-name "gda_default_get_type")
   (return-type "GType")
 )
 

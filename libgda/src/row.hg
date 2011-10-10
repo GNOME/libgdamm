@@ -52,7 +52,7 @@ protected:
 
 public:
   // Docs say this is mainly for providers
-  _IGNORE(gda_row_invalidate_value, gda_row_value_is_valid)
+  _IGNORE(gda_row_invalidate_value, gda_row_invalidate_value_e, gda_row_value_is_valid)
   
   _WRAP_CREATE(int count)
 
