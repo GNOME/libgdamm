@@ -1,5 +1,12 @@
 2011-10-10  Murray Cumming  <murrayc@murrayc.com>
 
+	Regenerated enums.
+
+	* libgda/src/libgda_enums.defs: Regenerated with enums.pl. There are 
+	some new error codes.
+
+2011-10-10  Murray Cumming  <murrayc@murrayc.com>
+
 	DataModelIter::get_value_at(): Throw an exception sometimes.
 
 	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py.

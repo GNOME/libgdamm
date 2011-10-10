@@ -149,7 +149,8 @@
 ;; 	GDA_CONNECTION_CANT_LOCK_ERROR,
 ;; 	GDA_CONNECTION_TASK_NOT_FOUND_ERROR,
 ;; 	GDA_CONNECTION_UNSUPPORTED_THREADS_ERROR,
-;; 	GDA_CONNECTION_CLOSED_ERROR
+;; 	GDA_CONNECTION_CLOSED_ERROR,
+;; 	GDA_CONNECTION_META_DATA_CONTEXT_ERROR
 ;; } GdaConnectionError;
 
 (define-enum-extended ConnectionError
@@ -167,6 +168,7 @@
     '("task-not-found-error" "GDA_CONNECTION_TASK_NOT_FOUND_ERROR" "8")
     '("unsupported-threads-error" "GDA_CONNECTION_UNSUPPORTED_THREADS_ERROR" "9")
     '("closed-error" "GDA_CONNECTION_CLOSED_ERROR" "10")
+    '("meta-data-context-error" "GDA_CONNECTION_META_DATA_CONTEXT_ERROR" "11")
   )
 )
 
@@ -375,7 +377,10 @@
 ;; 	GDA_DATA_MODEL_ACCESS_ERROR,
 ;; 	GDA_DATA_MODEL_FEATURE_NON_SUPPORTED_ERROR,
 ;; 	GDA_DATA_MODEL_FILE_EXIST_ERROR,
-;; 	GDA_DATA_MODEL_XML_FORMAT_ERROR
+;; 	GDA_DATA_MODEL_XML_FORMAT_ERROR,
+;; 
+;; 	GDA_DATA_MODEL_TRUNCATED_ERROR,
+;; 	GDA_DATA_MODEL_OTHER_ERROR
 ;; } GdaDataModelError;
 
 (define-enum-extended DataModelError
@@ -391,6 +396,8 @@
     '("feature-non-supported-error" "GDA_DATA_MODEL_FEATURE_NON_SUPPORTED_ERROR" "6")
     '("file-exist-error" "GDA_DATA_MODEL_FILE_EXIST_ERROR" "7")
     '("xml-format-error" "GDA_DATA_MODEL_XML_FORMAT_ERROR" "8")
+    '("truncated-error" "GDA_DATA_MODEL_TRUNCATED_ERROR" "9")
+    '("other-error" "GDA_DATA_MODEL_OTHER_ERROR" "10")
   )
 )
 
@@ -407,6 +414,84 @@
   (c-name "GdaDataModelIterError")
   (values
     '("column-out-of-range-error" "GDA_DATA_MODEL_ITER_COLUMN_OUT_OF_RANGE_ERROR" "0")
+  )
+)
+
+;; From gda-data-model-ldap.h
+
+;; Original typedef:
+;; typedef enum {	
+;; 	GDA_LDAP_SEARCH_BASE     = 1,
+;; 	GDA_LDAP_SEARCH_ONELEVEL = 2,
+;; 	GDA_LDAP_SEARCH_SUBTREE  = 3
+;; } GdaLdapSearchScope;
+
+(define-enum-extended LdapSearchScope
+  (in-module "Gda")
+  (c-name "GdaLdapSearchScope")
+  (values
+    '("base" "GDA_LDAP_SEARCH_BASE" "1")
+    '("onelevel" "GDA_LDAP_SEARCH_ONELEVEL" "2")
+    '("subtree" "GDA_LDAP_SEARCH_SUBTREE" "3")
+  )
+)
+
+;; From gda-data-pivot.h
+
+;; Original typedef:
+;; typedef enum {
+;; 	GDA_DATA_PIVOT_INTERNAL_ERROR,
+;; 	GDA_DATA_PIVOT_SOURCE_MODEL_ERROR,
+;;         GDA_DATA_PIVOT_FIELD_FORMAT_ERROR,
+;; 	GDA_DATA_PIVOT_USAGE_ERROR,
+;; 	GDA_DATA_PIVOT_OVERFLOW_ERROR
+;; } GdaDataPivotError;
+
+(define-enum-extended DataPivotError
+  (in-module "Gda")
+  (c-name "GdaDataPivotError")
+  (values
+    '("internal-error" "GDA_DATA_PIVOT_INTERNAL_ERROR" "0")
+    '("source-model-error" "GDA_DATA_PIVOT_SOURCE_MODEL_ERROR" "1")
+    '("field-format-error" "GDA_DATA_PIVOT_FIELD_FORMAT_ERROR" "2")
+    '("usage-error" "GDA_DATA_PIVOT_USAGE_ERROR" "3")
+    '("overflow-error" "GDA_DATA_PIVOT_OVERFLOW_ERROR" "4")
+  )
+)
+
+;; Original typedef:
+;; typedef enum {
+;; 	GDA_DATA_PIVOT_AVG,
+;; 	GDA_DATA_PIVOT_COUNT,
+;; 	GDA_DATA_PIVOT_MAX,
+;; 	GDA_DATA_PIVOT_MIN,
+;; 	GDA_DATA_PIVOT_SUM
+;; } GdaDataPivotAggregate;
+
+(define-enum-extended DataPivotAggregate
+  (in-module "Gda")
+  (c-name "GdaDataPivotAggregate")
+  (values
+    '("avg" "GDA_DATA_PIVOT_AVG" "0")
+    '("count" "GDA_DATA_PIVOT_COUNT" "1")
+    '("max" "GDA_DATA_PIVOT_MAX" "2")
+    '("min" "GDA_DATA_PIVOT_MIN" "3")
+    '("sum" "GDA_DATA_PIVOT_SUM" "4")
+  )
+)
+
+;; Original typedef:
+;; typedef enum {
+;; 	GDA_DATA_PIVOT_FIELD_ROW,
+;; 	GDA_DATA_PIVOT_FIELD_COLUMN
+;; } GdaDataPivotFieldType;
+
+(define-enum-extended DataPivotFieldType
+  (in-module "Gda")
+  (c-name "GdaDataPivotFieldType")
+  (values
+    '("row" "GDA_DATA_PIVOT_FIELD_ROW" "0")
+    '("column" "GDA_DATA_PIVOT_FIELD_COLUMN" "1")
   )
 )
 
@@ -455,6 +540,21 @@
     '("access-error" "GDA_DATA_SELECT_ACCESS_ERROR" "3")
     '("sql-error" "GDA_DATA_SELECT_SQL_ERROR" "4")
     '("safety-locked-error" "GDA_DATA_SELECT_SAFETY_LOCKED_ERROR" "5")
+  )
+)
+
+;; Original typedef:
+;; typedef enum {
+;; 	GDA_DATA_SELECT_COND_PK,
+;; 	GDA_DATA_SELECT_COND_ALL_COLUMNS
+;; } GdaDataSelectConditionType;
+
+(define-enum-extended DataSelectConditionType
+  (in-module "Gda")
+  (c-name "GdaDataSelectConditionType")
+  (values
+    '("pk" "GDA_DATA_SELECT_COND_PK" "0")
+    '("all-columns" "GDA_DATA_SELECT_COND_ALL_COLUMNS" "1")
   )
 )
 
@@ -608,7 +708,8 @@
 ;; typedef enum {
 ;; 	GDA_META_STRUCT_UNKNOWN_OBJECT_ERROR,
 ;;         GDA_META_STRUCT_DUPLICATE_OBJECT_ERROR,
-;;         GDA_META_STRUCT_INCOHERENCE_ERROR
+;;         GDA_META_STRUCT_INCOHERENCE_ERROR,
+;; 	GDA_META_STRUCT_XML_ERROR
 ;; } GdaMetaStructError;
 
 (define-enum-extended MetaStructError
@@ -618,6 +719,7 @@
     '("unknown-object-error" "GDA_META_STRUCT_UNKNOWN_OBJECT_ERROR" "0")
     '("duplicate-object-error" "GDA_META_STRUCT_DUPLICATE_OBJECT_ERROR" "1")
     '("incoherence-error" "GDA_META_STRUCT_INCOHERENCE_ERROR" "2")
+    '("xml-error" "GDA_META_STRUCT_XML_ERROR" "3")
   )
 )
 
@@ -769,7 +871,8 @@
 ;; Original typedef:
 ;; typedef enum {
 ;; 	GDA_SERVER_OPERATION_OBJECT_NAME_ERROR,
-;; 	GDA_SERVER_OPERATION_INCORRECT_VALUE_ERROR
+;; 	GDA_SERVER_OPERATION_INCORRECT_VALUE_ERROR,
+;; 	GDA_SERVER_OPERATION_XML_ERROR
 ;; } GdaServerOperationError;
 
 (define-enum-extended ServerOperationError
@@ -778,6 +881,7 @@
   (values
     '("object-name-error" "GDA_SERVER_OPERATION_OBJECT_NAME_ERROR" "0")
     '("incorrect-value-error" "GDA_SERVER_OPERATION_INCORRECT_VALUE_ERROR" "1")
+    '("xml-error" "GDA_SERVER_OPERATION_XML_ERROR" "2")
   )
 )
 
@@ -867,7 +971,9 @@
 ;; 	GDA_SERVER_PROVIDER_NON_SUPPORTED_ERROR,
 ;; 	GDA_SERVER_PROVIDER_SERVER_VERSION_ERROR,
 ;; 	GDA_SERVER_PROVIDER_DATA_ERROR,
-;; 	GDA_SERVER_PROVIDER_DEFAULT_VALUE_HANDLING_ERROR
+;; 	GDA_SERVER_PROVIDER_DEFAULT_VALUE_HANDLING_ERROR,
+;; 	GDA_SERVER_PROVIDER_MISUSE_ERROR,
+;; 	GDA_SERVER_PROVIDER_FILE_NOT_FOUND_ERROR
 ;; } GdaServerProviderError;
 
 (define-enum-extended ServerProviderError
@@ -886,6 +992,8 @@
     '("server-version-error" "GDA_SERVER_PROVIDER_SERVER_VERSION_ERROR" "9")
     '("data-error" "GDA_SERVER_PROVIDER_DATA_ERROR" "10")
     '("default-value-handling-error" "GDA_SERVER_PROVIDER_DEFAULT_VALUE_HANDLING_ERROR" "11")
+    '("misuse-error" "GDA_SERVER_PROVIDER_MISUSE_ERROR" "12")
+    '("file-not-found-error" "GDA_SERVER_PROVIDER_FILE_NOT_FOUND_ERROR" "13")
   )
 )
 
@@ -897,7 +1005,8 @@
 ;; 	GDA_SET_XML_SPEC_ERROR,
 ;; 	GDA_SET_HOLDER_NOT_FOUND_ERROR,
 ;; 	GDA_SET_INVALID_ERROR,
-;; 	GDA_SET_READ_ONLY_ERROR
+;; 	GDA_SET_READ_ONLY_ERROR,
+;; 	GDA_SET_IMPLEMENTATION_ERROR
 ;; } GdaSetError;
 
 (define-enum-extended SetError
@@ -908,6 +1017,7 @@
     '("holder-not-found-error" "GDA_SET_HOLDER_NOT_FOUND_ERROR" "1")
     '("invalid-error" "GDA_SET_INVALID_ERROR" "2")
     '("read-only-error" "GDA_SET_READ_ONLY_ERROR" "3")
+    '("implementation-error" "GDA_SET_IMPLEMENTATION_ERROR" "4")
   )
 )
 
@@ -1340,8 +1450,8 @@
 ;; 	GDA_SQL_OPERATOR_TYPE_REM,
 ;; 	GDA_SQL_OPERATOR_TYPE_BITAND,
 ;; 	GDA_SQL_OPERATOR_TYPE_BITOR,
-;; 	GDA_SQL_OPERATOR_TYPE_BITNOT
-;; 	GDA_SQL_OPERATOR_TYPE_ILIKE,
+;; 	GDA_SQL_OPERATOR_TYPE_BITNOT,
+;; 	GDA_SQL_OPERATOR_TYPE_ILIKE
 ;; } GdaSqlOperatorType;
 
 (define-enum-extended SqlOperatorType
@@ -1378,7 +1488,7 @@
     '("bitand" "GDA_SQL_OPERATOR_TYPE_BITAND" "27")
     '("bitor" "GDA_SQL_OPERATOR_TYPE_BITOR" "28")
     '("bitnot" "GDA_SQL_OPERATOR_TYPE_BITNOT" "29")
-    '("ilike" "GDA_SQL_OPERATOR_TYPE_ILIKE" "30")    
+    '("ilike" "GDA_SQL_OPERATOR_TYPE_ILIKE" "30")
   )
 )
 
