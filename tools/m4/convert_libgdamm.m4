@@ -87,7 +87,7 @@ _CONVERSION(`const Glib::RefPtr<Glib::Object>&', `const GObject*', `($3)->gobj()
 _CONVERSION(`GdaRow*', `const Glib::RefPtr<Row>',  `Glib::wrap($3)')
 _CONVERSION(`GdaRow*', `const Glib::RefPtr<const Row>',  `Glib::wrap($3)')
 
-_CONVERSION(`const int*','const-gint*',`$3')
+_CONVERSION(`const int*',`const-gint*',`$3')
 
 _CONVERSION(`long&',`glong*',`&($3)')
 
