@@ -1,3 +1,9 @@
+2011-10-19  Murray Cumming  <murrayc@murrayc.com>
+
+	m4 conversions: Fixed an incorrect quote, found by José Alburquerque.
+
+	* tools/m4/convert_libgdamm.m4: See bug #661401
+
 2011-10-10  Murray Cumming  <murrayc@murrayc.com>
 
 	Regenerated enums.
