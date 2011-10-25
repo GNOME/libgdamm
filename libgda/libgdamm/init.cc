@@ -25,7 +25,7 @@
 #include <libgdammconfig.h> //For LIBGDAMM_VERSION
 #include <libgdamm/wrap_init.h>
 #include <libgda/libgda.h>
-
+#include <glibmm.h>
 
 namespace Gnome
 {
