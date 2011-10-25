@@ -1,3 +1,18 @@
+2011-10-25  Murray Cumming  <murrayc@murrayc.com>
+
+	Add #includes needed with the latest glibmm.
+
+	* libgda/libgdamm/value.cc:
+	* libgda/libgdamm/value.h:
+	* libgda/src/blobop.hg:
+	* libgda/src/holder.hg:
+	* libgda/src/metastruct.hg:
+	* libgda/src/quarklist.hg:
+	* libgda/src/serveroperation.hg:
+	* libgda/src/sqlexpr.hg:
+	* libgda/src/sqlstatement.hg: Add individual includes now that gmmproc does not 
+	add #include glibmm.h at the top of every generated header.
+
 2011-10-19  Murray Cumming  <murrayc@murrayc.com>
 
 	m4 conversions: Fixed an incorrect quote, found by José Alburquerque.

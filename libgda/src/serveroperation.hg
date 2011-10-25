@@ -21,6 +21,8 @@
  */
 
 #include <libgdamm/value.h>
+#include <glibmm/object.h>
+#include <glibmm/error.h>
 #include <libgda/gda-server-provider.h>
 
 _DEFS(libgdamm,libgda)

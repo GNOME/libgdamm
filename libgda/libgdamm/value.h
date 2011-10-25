@@ -25,8 +25,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <glibmm.h>
 #include <glibmm/value.h>
+#include <glibmm/date.h>
 #include <libgda/gda-value.h> //TODO: Patch libgda to use the struct _ technique.
 
 

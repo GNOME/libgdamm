@@ -20,6 +20,7 @@
 _DEFS(libgdamm,libgda)
 
 //#include <libgdamm/connection.h>
+#include <glibmm/value.h>
 #include <libgda/sql-parser/gda-statement-struct.h>
 
 namespace Gnome
