@@ -21,6 +21,7 @@
  */
 
 #include <libgdamm/value.h>
+#include <glibmm/utility.h>
 #include <libgda/gda-value.h>
 #include <libgda/gda-enum-types.h>
 #include <libgda/gda-util.h>

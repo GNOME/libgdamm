@@ -21,6 +21,7 @@
 
 _DEFS(libgdamm,libgda)
 
+#include <glibmm/object.h>
 #include <libgda/sql-parser/gda-statement-struct-parts.h>
 
 namespace Gnome

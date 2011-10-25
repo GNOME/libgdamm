@@ -21,6 +21,8 @@
 
 #include <libgdamm/datahandler.h>
 #include <libgdamm/value.h>
+#include <glibmm/object.h>
+#include <glibmm/error.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)

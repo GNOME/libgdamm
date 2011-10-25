@@ -22,6 +22,8 @@
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
 
+#include <glibmm/object.h>
+
 namespace Gnome
 {
 
