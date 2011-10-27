@@ -27,6 +27,8 @@
 
 #include <glibmm/value.h>
 #include <glibmm/date.h>
+#include <glibmm/listhandle.h>
+#include <glibmm/slisthandle.h>
 #include <libgda/gda-value.h> //TODO: Patch libgda to use the struct _ technique.
 
 
