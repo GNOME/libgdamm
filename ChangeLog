@@ -1,3 +1,5 @@
+4.99.5:
+
 2011-10-26  Murray Cumming  <murrayc@murrayc.com>
 
 	Fix the --enable-warnings=fatal build.
