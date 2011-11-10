@@ -70,6 +70,8 @@ protected:
 public:
   _WRAP_CREATE()
 
+  _WRAP_METHOD(static Glib::RefPtr<Connection> create_from_string(const Glib::ustring& provider_name, const Glib::ustring& cnc_string, const Glib::ustring& auth_string = Glib::ustring(), ConnectionOptions options = CONNECTION_OPTIONS_NONE), gda_connection_new_from_string, errthrow)
+
   /* This throws an error which we don't want to do in a constructor */
   _WRAP_METHOD_DOCS_ONLY(gda_connection_open_from_string)
   static Glib::RefPtr<Connection> open_from_string(const Glib::ustring& provider_name,

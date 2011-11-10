@@ -1,3 +1,11 @@
+2011-11-10  Murray Cumming  <murrayc@murrayc.com>
+
+	Add Connection::create_from_string().
+
+	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py.
+	* libgda/src/connection.hg: Added create_from_string() which allows 
+	us to create a Connection which is not yet opened.
+
 4.99.5:
 
 2011-10-26  Murray Cumming  <murrayc@murrayc.com>

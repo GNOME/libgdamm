@@ -1796,6 +1796,29 @@
   )
 )
 
+(define-function gda_connection_new_from_dsn
+  (c-name "gda_connection_new_from_dsn")
+  (return-type "GdaConnection*")
+  (parameters
+    '("const-gchar*" "dsn")
+    '("const-gchar*" "auth_string")
+    '("GdaConnectionOptions" "options")
+    '("GError**" "error")
+  )
+)
+
+(define-function gda_connection_new_from_string
+  (c-name "gda_connection_new_from_string")
+  (return-type "GdaConnection*")
+  (parameters
+    '("const-gchar*" "provider_name")
+    '("const-gchar*" "cnc_string")
+    '("const-gchar*" "auth_string")
+    '("GdaConnectionOptions" "options")
+    '("GError**" "error")
+  )
+)
+
 (define-method open
   (of-object "GdaConnection")
   (c-name "gda_connection_open")
@@ -5667,7 +5690,7 @@
   (c-name "gda_sql_builder_add_id")
   (return-type "GdaSqlBuilderId")
   (parameters
-    '("const-gchar*" "string")
+    '("const-gchar*" "str")
   )
 )
 
@@ -5959,6 +5982,15 @@
   )
 )
 
+(define-method compound_add_sub_select_from_builder
+  (of-object "GdaSqlBuilder")
+  (c-name "gda_sql_builder_compound_add_sub_select_from_builder")
+  (return-type "none")
+  (parameters
+    '("GdaSqlBuilder*" "subselect")
+  )
+)
+
 (define-method export_expression
   (of-object "GdaSqlBuilder")
   (c-name "gda_sql_builder_export_expression")
@@ -5974,6 +6006,16 @@
   (return-type "GdaSqlBuilderId")
   (parameters
     '("GdaSqlExpr*" "expr")
+  )
+)
+
+(define-method import_expression_from_builder
+  (of-object "GdaSqlBuilder")
+  (c-name "gda_sql_builder_import_expression_from_builder")
+  (return-type "GdaSqlBuilderId")
+  (parameters
+    '("GdaSqlBuilder*" "query")
+    '("GdaSqlBuilderId" "expr_id")
   )
 )
 
