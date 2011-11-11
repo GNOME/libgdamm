@@ -25,6 +25,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <libgdamm/numeric.h>
 #include <glibmm/value.h>
 #include <glibmm/date.h>
 #include <libgda/gda-value.h> //TODO: Patch libgda to use the struct _ technique.
@@ -80,7 +81,7 @@ public:
 
   explicit Value(int val);
 
-  explicit Value(const GdaNumeric* val);
+  explicit Value(const Numeric& val);
 
   explicit Value(float val);
 
@@ -177,9 +178,9 @@ public:
 
   void set(int val);
 
-  const GdaNumeric* get_numeric() const;
+  Numeric get_numeric() const;
 
-  void set(const GdaNumeric *val);
+  void set(const Numeric& val);
 
   float get_float() const;
 
@@ -283,11 +284,6 @@ typedef struct {
 	double amount;
 } GdaMoney;
 
-typedef struct {
-	gchar *number;
-	long precision;
-	long width;
-} GdaNumeric;
 */
 
 

@@ -98,7 +98,7 @@ Value::Value(int val)
   set(val);
 }
 
-Value::Value(const GdaNumeric* val)
+Value::Value(const Numeric& val)
 {
   set(val);
 }
@@ -378,14 +378,15 @@ void Value::set(int val)
   g_value_set_int(gobj(), val);
 }
 
-const GdaNumeric* Value::get_numeric() const
+Numeric Value::get_numeric() const
 {
-  return gda_value_get_numeric(const_cast<GValue*>(gobj()));
+  const GdaNumeric* cobj = gda_value_get_numeric(const_cast<GValue*>(gobj()));
+  return Glib::wrap(const_cast<GdaNumeric*>(cobj), true /* take_copy */);
 }
 
-void Value::set(const GdaNumeric * val)
+void Value::set(const Numeric& val)
 {
-  gda_value_set_numeric(gobj(), val);
+  gda_value_set_numeric(gobj(), val.gobj());
 }
 
 float Value::get_float() const

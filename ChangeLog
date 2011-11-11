@@ -1,3 +1,13 @@
+2011-11-11  Murray Cumming  <murrayc@murrayc.com>
+
+	Wrap GdaNumeric as Gnome::Gda::Numeric.
+
+	* libgda/src/libgda_methods.defs: Regenerated with h2defs.py.
+	* libgda/src/numeric.[hg|cc]: Wrap GdaNumeric, now that it is a proper
+	boxed type with an API.
+	* libgda/libgdamm/value.[h|cc]: Use Numeric instead of GdaNumeric in 
+	the API.
+
 2011-11-10  Murray Cumming  <murrayc@murrayc.com>
 
 	Add Connection::create_from_string().

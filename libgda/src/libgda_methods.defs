@@ -7270,19 +7270,85 @@
   (return-type "GType")
 )
 
+(define-function gda_numeric_new
+  (c-name "gda_numeric_new")
+  (is-constructor-of "GdaNumeric")
+  (return-type "GdaNumeric*")
+)
+
 (define-function gda_numeric_copy
   (c-name "gda_numeric_copy")
-  (return-type "gpointer")
+  (return-type "GdaNumeric*")
   (parameters
-    '("gpointer" "boxed")
+    '("GdaNumeric*" "src")
   )
+)
+
+(define-method set_from_string
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_set_from_string")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "str")
+  )
+)
+
+(define-method set_double
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_set_double")
+  (return-type "none")
+  (parameters
+    '("gdouble" "number")
+  )
+)
+
+(define-method get_double
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_get_double")
+  (return-type "gdouble")
+)
+
+(define-method set_precision
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_set_precision")
+  (return-type "none")
+  (parameters
+    '("glong" "precision")
+  )
+)
+
+(define-method get_precision
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_get_precision")
+  (return-type "glong")
+)
+
+(define-method set_width
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_set_width")
+  (return-type "none")
+  (parameters
+    '("glong" "width")
+  )
+)
+
+(define-method get_width
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_get_width")
+  (return-type "glong")
+)
+
+(define-method get_string
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_get_string")
+  (return-type "gchar*")
 )
 
 (define-function gda_numeric_free
   (c-name "gda_numeric_free")
   (return-type "none")
   (parameters
-    '("gpointer" "boxed")
+    '("GdaNumeric*" "numeric")
   )
 )
 
@@ -8708,5 +8774,9 @@
     '("GdaReportEngine*" "engine")
   )
 )
+
+
+
+;; From libgda-report.h
 
 

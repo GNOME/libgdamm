@@ -35,6 +35,7 @@ files_hg =			\
 	holder.hg		\
 	metastore.hg		\
 	metastruct.hg		\
+	numeric.hg		\
 	quarklist.hg		\
 	row.hg			\
 	serveroperation.hg	\
