@@ -1,3 +1,10 @@
+4.99.6 (unstable):
+
+* Wrap GdaNumeric as Gnome::Gda::Numeric.
+* Value: Use Numeric instead of GdaNumeric.
+* Connection: Add create_from_string().
+  (Murray Cumming)
+
 4.99.5 (unstable):
 
 * DataModelIter::get_value_at(): Throw an exception sometimes.

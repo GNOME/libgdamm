@@ -1,3 +1,5 @@
+4.99.6:
+
 2011-11-11  Murray Cumming  <murrayc@murrayc.com>
 
 	Wrap GdaNumeric as Gnome::Gda::Numeric.
