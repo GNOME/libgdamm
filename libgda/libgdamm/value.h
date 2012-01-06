@@ -276,8 +276,6 @@ extern const GType VALUE_TYPE_TIME;
 extern const GType VALUE_TYPE_TIMESTAMP;
 */
 
-typedef GdaGeometricPoint GeometricPoint;
-
 /*  TODO:
 typedef struct {
 	gchar *currency;
