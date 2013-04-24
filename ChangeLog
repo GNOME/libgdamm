@@ -1,3 +1,5 @@
+4.99.7:
+
 2012-01-06  Murray Cumming  <murrayc@murrayc.com>
 
 	value.h: Remove a duplicate C typedef. 

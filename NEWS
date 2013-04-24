@@ -1,3 +1,8 @@
+4.99.7 (unstable):
+
+* Minor build fix.
+  (Murray Cumming)
+  
 4.99.6 (unstable):
 
 * Wrap GdaNumeric as Gnome::Gda::Numeric.
