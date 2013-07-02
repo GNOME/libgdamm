@@ -40,3 +40,6 @@ nodist_pkgconfig_DATA = libgda/$(LIBGDAMM_MODULE_NAME).pc
 
 dist_noinst_DATA = COPYING.examples
 dist_noinst_SCRIPTS = autogen.sh
+
+# Optional: auto-generate the ChangeLog file from the git log on make dist
+include $(top_srcdir)/build/dist-changelog.am
