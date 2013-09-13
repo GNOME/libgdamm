@@ -37,7 +37,10 @@ int main(int, char**)
     << get_defs(GDA_TYPE_DATA_HANDLER) 
     << get_defs(GDA_TYPE_DATA_MODEL_ARRAY)
 #ifdef HAVE_LIBGDA_BDB
-    << get_defs(GDA_TYPE_DATA_MODEL_BDB)
+// We don't actually seem to use this,
+// so there's no point in breaking the build for it.
+// TODO: Actually fix the HAVE_LIBGDA_DBD test to fix the build break properly?
+//    << get_defs(GDA_TYPE_DATA_MODEL_BDB)
 #endif
     << get_defs(GDA_TYPE_DATA_MODEL_DIR)
     << get_defs(GDA_TYPE_DATA_MODEL) 
