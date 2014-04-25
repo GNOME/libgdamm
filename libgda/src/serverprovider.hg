@@ -34,7 +34,7 @@ namespace Gnome
 namespace Gda
 {
 
-_WRAP_GERROR(ServerProviderError, GdaServerProviderError, GDA_SERVER_PROVIDER_ERROR)
+_WRAP_GERROR(ServerProviderError, GdaServerProviderError, GDA_SERVER_PROVIDER_ERROR, NO_GTYPE)
 
 _WRAP_ENUM(ConnectionFeature, GdaConnectionFeature)
 

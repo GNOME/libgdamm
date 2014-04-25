@@ -34,7 +34,7 @@ namespace Gda
 
 _WRAP_ENUM(SqlOperatorType, GdaSqlOperatorType)
 _WRAP_ENUM(SqlSelectJoinType, GdaSqlSelectJoinType)
-_WRAP_GERROR(SqlBuilderError, GdaSqlBuilderError, GDA_SQL_BUILDER_ERROR)
+_WRAP_GERROR(SqlBuilderError, GdaSqlBuilderError, GDA_SQL_BUILDER_ERROR, NO_GTYPE)
 _WRAP_GERROR(SqlError, GdaSqlError, GDA_SQL_ERROR)
 
 /** SqlBuilder can be used to build a Statement from its structural description, 

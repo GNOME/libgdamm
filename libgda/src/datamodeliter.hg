@@ -32,7 +32,7 @@ namespace Gnome
 namespace Gda
 {
 
-_WRAP_GERROR(DataModelIterError, GdaDataModelIterError, GDA_DATA_MODEL_ITER_ERROR)
+_WRAP_GERROR(DataModelIterError, GdaDataModelIterError, GDA_DATA_MODEL_ITER_ERROR, NO_GTYPE)
 
 /** Data model iterator.
  *

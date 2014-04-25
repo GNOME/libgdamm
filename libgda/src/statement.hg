@@ -35,10 +35,10 @@ namespace Gda
 
 class Connection;
 
-_WRAP_ENUM(StatementModelUsage, GdaStatementModelUsage)
-_WRAP_ENUM(StatementSqlFlag, GdaStatementSqlFlag)
+_WRAP_ENUM(StatementModelUsage, GdaStatementModelUsage, NO_GTYPE)
+_WRAP_ENUM(StatementSqlFlag, GdaStatementSqlFlag, NO_GTYPE)
 
-_WRAP_GERROR(StatementError, GdaStatementError, GDA_STATEMENT_ERROR)
+_WRAP_GERROR(StatementError, GdaStatementError, GDA_STATEMENT_ERROR, NO_GTYPE)
 
 /** Single SQL statement.
  *

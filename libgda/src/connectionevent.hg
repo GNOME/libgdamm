@@ -32,8 +32,8 @@ namespace Gnome
 namespace Gda
 {
 
-_WRAP_ENUM(ConnectionEventCode, GdaConnectionEventCode)
-_WRAP_ENUM(ConnectionEventType, GdaConnectionEventType)
+_WRAP_ENUM(ConnectionEventCode, GdaConnectionEventCode, NO_GTYPE)
+_WRAP_ENUM(ConnectionEventType, GdaConnectionEventType, NO_GTYPE)
 
 /** Any event which has occurred on a Gda::Connection.
  * Events occuring on a connection are each represented as a ConnectionEvent object. 

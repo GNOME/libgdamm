@@ -35,12 +35,12 @@ namespace Gda
 
 /** Exception class for Gda MetaStruct errors.
  */
-_WRAP_GERROR(MetaStructError, GdaMetaStructError, GDA_META_STRUCT_ERROR)
+_WRAP_GERROR(MetaStructError, GdaMetaStructError, GDA_META_STRUCT_ERROR, NO_GTYPE)
 
-_WRAP_ENUM(MetaStructFeature, GdaMetaStructFeature)
-_WRAP_ENUM(MetaDbObjectType, GdaMetaDbObjectType)
-_WRAP_ENUM(MetaSortType, GdaMetaSortType)
-_WRAP_ENUM(MetaGraphInfo, GdaMetaGraphInfo) 
+_WRAP_ENUM(MetaStructFeature, GdaMetaStructFeature, NO_GTYPE)
+_WRAP_ENUM(MetaDbObjectType, GdaMetaDbObjectType, NO_GTYPE)
+_WRAP_ENUM(MetaSortType, GdaMetaSortType, NO_GTYPE)
+_WRAP_ENUM(MetaGraphInfo, GdaMetaGraphInfo, NO_GTYPE) 
 
 class MetaStore;
 

@@ -33,7 +33,7 @@ namespace Gnome
 namespace Gda
 {
 
-_WRAP_GERROR(ConfigError, GdaConfigError, GDA_CONFIG_ERROR)
+_WRAP_GERROR(ConfigError, GdaConfigError, GDA_CONFIG_ERROR, NO_GTYPE)
 
 
 /** Configuration — Access/Management of libgda configuration.

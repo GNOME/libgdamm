@@ -31,7 +31,7 @@ namespace Gnome
 namespace Gda
 {
 
-_WRAP_GERROR(MetaStoreError, GdaMetaStoreError, GDA_META_STORE_ERROR)
+_WRAP_GERROR(MetaStoreError, GdaMetaStoreError, GDA_META_STORE_ERROR, NO_GTYPE)
 _WRAP_ENUM(SqlIdentifierStyle, GdaSqlIdentifierStyle)
 
 /** Dictionary object.

@@ -35,7 +35,7 @@ namespace Gda
 
 class DataModel;
 
-_WRAP_GERROR(HolderError, GdaHolderError, GDA_HOLDER_ERROR) 
+_WRAP_GERROR(HolderError, GdaHolderError, GDA_HOLDER_ERROR, NO_GTYPE) 
 
 /** Container for a single Gda::Value.
  *
