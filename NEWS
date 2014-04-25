@@ -1,3 +1,14 @@
+4.99.8 (unstable):
+
+* Value:
+  - Add missing create_as_int64/uint64() implementations.
+  - Add create_as_float/double() and set_float/double(),
+    deprecating the ambiguous constructors and set() methods.
+  (Murray Cumming)
+* Build: Do not bother breaking the build if libgda was not built
+  with GdaDataModelDBD.
+  (Murray Cumming)
+
 4.99.7 (unstable):
 
 * Minor build fix.
