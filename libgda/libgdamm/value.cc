@@ -45,23 +45,19 @@ namespace Gnome
 namespace Gda
 {
 
-
-
-//static:
-/*
 Value Value::create_as_int64(gint64 val)
 {
-  return Value( gda_value_new_int64(val) );
+  Value result;
+  result.set_int64(val);
+  return result;
 }
 
-
-//static:
 Value Value::create_as_uint64(guint64 val)
 {
-  return Value( gda_value_new_uint64(val) );
+  Value result;
+  result.set_uint64(val);
+  return result;
 }
-*/
-
 
 Value::Value(const guchar* val, long size)
 {
