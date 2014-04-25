@@ -83,9 +83,18 @@ Value::Value(const Glib::Date& val)
   set(val);
 }
 
+#ifndef LIBGDAMM_DISABLE_DEPRECATED
 Value::Value(double val)
 {
   set(val);
+}
+#endif //LIBGDAMM_DISABLE_DEPRECATED
+
+Value Value::create_as_double(double val)
+{
+  Value result;
+  result.set_double(val);
+  return result;
 }
 
 Value::Value(const GeometricPoint& val)
@@ -103,9 +112,18 @@ Value::Value(const Numeric& val)
   set(val);
 }
 
+#ifndef LIBGDAMM_DISABLE_DEPRECATED
 Value::Value(float val)
 {
   set(val);
+}
+#endif //LIBGDAMM_DISABLE_DEPRECATED
+
+Value Value::create_as_float(float val)
+{
+  Value result;
+  result.set_float(val);
+  return result;
 }
 
 Value::Value(gshort val)
@@ -351,7 +369,14 @@ double Value::get_double() const
   return g_value_get_double(const_cast<GValue*>(gobj()));
 }
 
+#ifndef LIBGDAMM_DISABLE_DEPRECATED
 void Value::set(double val)
+{
+  set_double(val);
+}
+#endif //LIBGDAMM_DISABLE_DEPRECATED
+
+void Value::set_double(double val)
 {
   value_reinit(gobj(), Glib::Value<double>::value_type());
   g_value_set_double(gobj(), val);
@@ -394,7 +419,14 @@ float Value::get_float() const
   return g_value_get_float(const_cast<GValue*>(gobj()));
 }
 
+#ifndef LIBGDAMM_DISABLE_DEPRECATED
 void Value::set(float val)
+{
+  set_float(val);
+}
+#endif //LIBGDAMM_DISABLE_DEPRECATED
+
+void Value::set_float(float val)
 {
   value_reinit(gobj(), Glib::Value<float>::value_type());
   g_value_set_float(gobj(), val);

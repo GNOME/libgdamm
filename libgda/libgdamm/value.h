@@ -75,15 +75,31 @@ public:
 
   explicit Value(const Glib::Date& val);
 
-  explicit Value(double val);
-
   explicit Value(const GeometricPoint& val);
 
   explicit Value(int val);
 
   explicit Value(const Numeric& val);
 
+#ifndef LIBGDAMM_DISABLE_DEPRECATED
+  //We shouldn't have this constructor because the double and float constructors are ambiguous.
+  /**
+   * @deprecated Use create_as_double() instead.
+   */
+  explicit Value(double val);
+#endif //LIBGDAMM_DISABLE_DEPRECATED
+
+  static Value create_as_double(double val);
+
+#ifndef LIBGDAMM_DISABLE_DEPRECATED
+  //We shouldn't have this constructor because the double and float constructors are ambiguous.
+  /**
+   * @deprecated Use create_as_double() instead.
+   */
   explicit Value(float val);
+#endif //LIBGDAMM_DISABLE_DEPRECATED
+
+  static Value create_as_float(float val);
 
   explicit Value(gshort val);
 
@@ -164,7 +180,15 @@ public:
 
   double get_double() const;
 
+#ifndef LIBGDAMM_DISABLE_DEPRECATED
+  //set(double) and set(float) are ambiguous.
+  /**
+   * @deprecate Use set_double().
+   */
   void set(double val);
+#endif //LIBGDAMM_DISABLE_DEPRECATED
+
+  void set_double(double val);
 
   GeometricPoint get_geometric_point() const;
 
@@ -184,7 +208,15 @@ public:
 
   float get_float() const;
 
+#ifndef LIBGDAMM_DISABLE_DEPRECATED
+  //set(double) and set(float) are ambiguous.
+  /**
+   * @deprecate Use set_float().
+   */
   void set(float val);
+#endif //LIBGDAMM_DISABLE_DEPRECATED
+
+  void set_float(float val);
 
   gshort get_short() const;
 
