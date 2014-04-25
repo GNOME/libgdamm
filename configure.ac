@@ -15,7 +15,7 @@
 ## You should have received a copy of the GNU Lesser General Public License
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-AC_INIT([libgdamm], [4.99.8], [http://bugzilla.gnome.org/enter_bug.cgi?product=libgdamm],
+AC_INIT([libgdamm], [5.99.1], [http://bugzilla.gnome.org/enter_bug.cgi?product=libgdamm],
         [libgdamm], [http://www.gtkmm.org/])
 AC_PREREQ([2.59])
 
@@ -25,7 +25,7 @@ AC_CONFIG_MACRO_DIR([build])
 AC_CONFIG_HEADERS([build/config.h libgda/libgdammconfig.h])
 
 MM_PREREQ([0.9.5])
-MM_INIT_MODULE([libgdamm-5.0])
+MM_INIT_MODULE([libgdamm-6.0])
 
 # Copy the mm-common .pl scripts into docs/,
 # and use them from there,
@@ -44,10 +44,10 @@ AC_DISABLE_STATIC
 AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
 
-AC_SUBST([LIBGDAMM_MODULES], ['glibmm-2.4 >= 2.27.93 libgda-5.0 >= 5.0.2'])
+AC_SUBST([LIBGDAMM_MODULES], ['glibmm-2.4 >= 2.27.93 libgda-6.0 >= 5.0.2'])
 PKG_CHECK_MODULES([LIBGDAMM], [$LIBGDAMM_MODULES])
 
-PKG_CHECK_EXISTS([libgda-bdb-5.0], [libgdamm_have_bdb=yes], [libgdamm_have_bdb=no])
+PKG_CHECK_EXISTS([libgda-bdb-6.0], [libgdamm_have_bdb=yes], [libgdamm_have_bdb=no])
 AS_IF([test "x$libgdamm_have_bdb" = xyes],
       [AC_DEFINE([HAVE_LIBGDA_BDB], [1], [Define if the libgda-bdb plugin is available.])])
 
