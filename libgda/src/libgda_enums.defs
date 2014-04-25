@@ -13,35 +13,6 @@
   )
 )
 
-;; From gda-binreloc.h
-
-;; Original typedef:
-;; typedef enum {
-;; 	GDA_NO_DIR,
-;; 	GDA_BIN_DIR,
-;; 	GDA_SBIN_DIR,
-;; 	GDA_DATA_DIR,
-;; 	GDA_LOCALE_DIR,
-;; 	GDA_LIB_DIR,
-;; 	GDA_LIBEXEC_DIR,
-;; 	GDA_ETC_DIR
-;; } GdaPrefixDir;
-
-(define-enum-extended PrefixDir
-  (in-module "Gda")
-  (c-name "GdaPrefixDir")
-  (values
-    '("no-dir" "GDA_NO_DIR" "0")
-    '("bin-dir" "GDA_BIN_DIR" "1")
-    '("sbin-dir" "GDA_SBIN_DIR" "2")
-    '("data-dir" "GDA_DATA_DIR" "3")
-    '("locale-dir" "GDA_LOCALE_DIR" "4")
-    '("lib-dir" "GDA_LIB_DIR" "5")
-    '("libexec-dir" "GDA_LIBEXEC_DIR" "6")
-    '("etc-dir" "GDA_ETC_DIR" "7")
-  )
-)
-
 ;; From gda-config.h
 
 ;; Original typedef:
@@ -145,12 +116,14 @@
 ;; 	GDA_CONNECTION_NO_CNC_SPEC_ERROR,
 ;; 	GDA_CONNECTION_NO_PROVIDER_SPEC_ERROR,
 ;; 	GDA_CONNECTION_OPEN_ERROR,
+;; 	GDA_CONNECTION_ALREADY_OPENED_ERROR,
 ;; 	GDA_CONNECTION_STATEMENT_TYPE_ERROR,
 ;; 	GDA_CONNECTION_CANT_LOCK_ERROR,
 ;; 	GDA_CONNECTION_TASK_NOT_FOUND_ERROR,
-;; 	GDA_CONNECTION_UNSUPPORTED_THREADS_ERROR,
 ;; 	GDA_CONNECTION_CLOSED_ERROR,
-;; 	GDA_CONNECTION_META_DATA_CONTEXT_ERROR
+;; 	GDA_CONNECTION_META_DATA_CONTEXT_ERROR,
+;; 	GDA_CONNECTION_UNSUPPORTED_ASYNC_EXEC_ERROR,
+;; 	GDA_CONNECTION_NO_MAIN_CONTEXT_ERROR
 ;; } GdaConnectionError;
 
 (define-enum-extended ConnectionError
@@ -163,12 +136,33 @@
     '("no-cnc-spec-error" "GDA_CONNECTION_NO_CNC_SPEC_ERROR" "3")
     '("no-provider-spec-error" "GDA_CONNECTION_NO_PROVIDER_SPEC_ERROR" "4")
     '("open-error" "GDA_CONNECTION_OPEN_ERROR" "5")
-    '("statement-type-error" "GDA_CONNECTION_STATEMENT_TYPE_ERROR" "6")
-    '("cant-lock-error" "GDA_CONNECTION_CANT_LOCK_ERROR" "7")
-    '("task-not-found-error" "GDA_CONNECTION_TASK_NOT_FOUND_ERROR" "8")
-    '("unsupported-threads-error" "GDA_CONNECTION_UNSUPPORTED_THREADS_ERROR" "9")
+    '("already-opened-error" "GDA_CONNECTION_ALREADY_OPENED_ERROR" "6")
+    '("statement-type-error" "GDA_CONNECTION_STATEMENT_TYPE_ERROR" "7")
+    '("cant-lock-error" "GDA_CONNECTION_CANT_LOCK_ERROR" "8")
+    '("task-not-found-error" "GDA_CONNECTION_TASK_NOT_FOUND_ERROR" "9")
     '("closed-error" "GDA_CONNECTION_CLOSED_ERROR" "10")
     '("meta-data-context-error" "GDA_CONNECTION_META_DATA_CONTEXT_ERROR" "11")
+    '("unsupported-async-exec-error" "GDA_CONNECTION_UNSUPPORTED_ASYNC_EXEC_ERROR" "12")
+    '("no-main-context-error" "GDA_CONNECTION_NO_MAIN_CONTEXT_ERROR" "13")
+  )
+)
+
+;; Original typedef:
+;; typedef enum {
+;; 	GDA_CONNECTION_STATUS_CLOSED,
+;; 	GDA_CONNECTION_STATUS_OPENING,
+;; 	GDA_CONNECTION_STATUS_IDLE,
+;; 	GDA_CONNECTION_STATUS_BUSY
+;; } GdaConnectionStatus;
+
+(define-enum-extended ConnectionStatus
+  (in-module "Gda")
+  (c-name "GdaConnectionStatus")
+  (values
+    '("closed" "GDA_CONNECTION_STATUS_CLOSED" "0")
+    '("opening" "GDA_CONNECTION_STATUS_OPENING" "1")
+    '("idle" "GDA_CONNECTION_STATUS_IDLE" "2")
+    '("busy" "GDA_CONNECTION_STATUS_BUSY" "3")
   )
 )
 
@@ -177,8 +171,6 @@
 ;; 	GDA_CONNECTION_OPTIONS_NONE = 0,
 ;; 	GDA_CONNECTION_OPTIONS_READ_ONLY = 1 << 0,
 ;; 	GDA_CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE = 1 << 1,
-;; 	GDA_CONNECTION_OPTIONS_THREAD_SAFE = 1 << 2,
-;; 	GDA_CONNECTION_OPTIONS_THREAD_ISOLATED = 1 << 3,
 ;; 	GDA_CONNECTION_OPTIONS_AUTO_META_DATA = 1 << 4
 ;; } GdaConnectionOptions;
 
@@ -189,8 +181,6 @@
     '("none" "GDA_CONNECTION_OPTIONS_NONE" "0x0")
     '("read-only" "GDA_CONNECTION_OPTIONS_READ_ONLY" "1 << 0")
     '("sql-identifiers-case-sensitive" "GDA_CONNECTION_OPTIONS_SQL_IDENTIFIERS_CASE_SENSITIVE" "1 << 1")
-    '("thread-safe" "GDA_CONNECTION_OPTIONS_THREAD_SAFE" "1 << 2")
-    '("thread-isolated" "GDA_CONNECTION_OPTIONS_THREAD_ISOLATED" "1 << 3")
     '("auto-meta-data" "GDA_CONNECTION_OPTIONS_AUTO_META_DATA" "1 << 4")
   )
 )
@@ -212,10 +202,12 @@
 ;; 	GDA_CONNECTION_FEATURE_UPDATABLE_CURSOR,
 ;; 	GDA_CONNECTION_FEATURE_USERS,
 ;; 	GDA_CONNECTION_FEATURE_VIEWS,
+;; 	GDA_CONNECTION_FEATURE_TRANSACTION_ISOLATION_READ_COMMITTED,
+;; 	GDA_CONNECTION_FEATURE_TRANSACTION_ISOLATION_READ_UNCOMMITTED,
+;; 	GDA_CONNECTION_FEATURE_TRANSACTION_ISOLATION_REPEATABLE_READ,
+;; 	GDA_CONNECTION_FEATURE_TRANSACTION_ISOLATION_SERIALIZABLE,
 ;; 	GDA_CONNECTION_FEATURE_XA_TRANSACTIONS,
 ;; 	
-;; 	GDA_CONNECTION_FEATURE_MULTI_THREADING,
-;; 
 ;; 	GDA_CONNECTION_FEATURE_LAST
 ;; } GdaConnectionFeature;
 
@@ -238,9 +230,12 @@
     '("updatable-cursor" "GDA_CONNECTION_FEATURE_UPDATABLE_CURSOR" "12")
     '("users" "GDA_CONNECTION_FEATURE_USERS" "13")
     '("views" "GDA_CONNECTION_FEATURE_VIEWS" "14")
-    '("xa-transactions" "GDA_CONNECTION_FEATURE_XA_TRANSACTIONS" "15")
-    '("multi-threading" "GDA_CONNECTION_FEATURE_MULTI_THREADING" "16")
-    '("last" "GDA_CONNECTION_FEATURE_LAST" "17")
+    '("transaction-isolation-read-committed" "GDA_CONNECTION_FEATURE_TRANSACTION_ISOLATION_READ_COMMITTED" "15")
+    '("transaction-isolation-read-uncommitted" "GDA_CONNECTION_FEATURE_TRANSACTION_ISOLATION_READ_UNCOMMITTED" "16")
+    '("transaction-isolation-repeatable-read" "GDA_CONNECTION_FEATURE_TRANSACTION_ISOLATION_REPEATABLE_READ" "17")
+    '("transaction-isolation-serializable" "GDA_CONNECTION_FEATURE_TRANSACTION_ISOLATION_SERIALIZABLE" "18")
+    '("xa-transactions" "GDA_CONNECTION_FEATURE_XA_TRANSACTIONS" "19")
+    '("last" "GDA_CONNECTION_FEATURE_LAST" "20")
   )
 )
 
@@ -305,6 +300,23 @@
   )
 )
 
+;; From gda-data-meta-wrapper.h
+
+;; Original typedef:
+;; typedef enum {
+;; 	GDA_DATA_META_WRAPPER_MODE_LC, /* quote identifier if there are some non lower case chars */
+;; 	GDA_DATA_META_WRAPPER_MODE_UC  /* quote identifier if there are some non upper case chars */
+;; } GdaDataMetaWrapperMode;
+
+(define-enum-extended DataMetaWrapperMode
+  (in-module "Gda")
+  (c-name "GdaDataMetaWrapperMode")
+  (values
+    '("lc" "GDA_DATA_META_WRAPPER_MODE_LC" "0")
+    '("uc" "GDA_DATA_META_WRAPPER_MODE_UC" "1")
+  )
+)
+
 ;; From gda-data-model.h
 
 ;; Original typedef:
@@ -355,7 +367,8 @@
 ;; Original typedef:
 ;; typedef enum {
 ;; 	GDA_DATA_MODEL_IO_DATA_ARRAY_XML,
-;; 	GDA_DATA_MODEL_IO_TEXT_SEPARATED
+;; 	GDA_DATA_MODEL_IO_TEXT_SEPARATED,
+;; 	GDA_DATA_MODEL_IO_TEXT_TABLE
 ;; } GdaDataModelIOFormat;
 
 (define-enum-extended DataModelIOFormat
@@ -364,6 +377,7 @@
   (values
     '("data-array-xml" "GDA_DATA_MODEL_IO_DATA_ARRAY_XML" "0")
     '("text-separated" "GDA_DATA_MODEL_IO_TEXT_SEPARATED" "1")
+    '("text-table" "GDA_DATA_MODEL_IO_TEXT_TABLE" "2")
   )
 )
 
@@ -518,6 +532,30 @@
   )
 )
 
+;; From gda-data-select-extra.h
+
+;; Original typedef:
+;; typedef enum
+;; {
+;; 	FIRST_QUERY = 0,
+;;         INS_QUERY  = 0,
+;;         UPD_QUERY  = 1,
+;;         DEL_QUERY  = 2,
+;; 	NB_QUERIES = 3
+;; } ModType;
+
+(define-enum-extended ModType
+  (in-module "Gda")
+  (c-name "ModType")
+  (values
+    '("first-query" "FIRST_QUERY" "0")
+    '("ins-query" "INS_QUERY" "0")
+    '("upd-query" "UPD_QUERY" "1")
+    '("del-query" "DEL_QUERY" "2")
+    '("nb-queries" "NB_QUERIES" "3")
+  )
+)
+
 ;; From gda-data-select.h
 
 ;; Original typedef:
@@ -562,7 +600,7 @@
 
 ;; Original typedef:
 ;; typedef enum {
-;; 	GDA_TRANSACTION_ISOLATION_UNKNOWN,
+;; 	GDA_TRANSACTION_ISOLATION_SERVER_DEFAULT,
 ;; 	GDA_TRANSACTION_ISOLATION_READ_COMMITTED,
 ;; 	GDA_TRANSACTION_ISOLATION_READ_UNCOMMITTED,
 ;; 	GDA_TRANSACTION_ISOLATION_REPEATABLE_READ,
@@ -573,7 +611,7 @@
   (in-module "Gda")
   (c-name "GdaTransactionIsolation")
   (values
-    '("unknown" "GDA_TRANSACTION_ISOLATION_UNKNOWN" "0")
+    '("server-default" "GDA_TRANSACTION_ISOLATION_SERVER_DEFAULT" "0")
     '("read-committed" "GDA_TRANSACTION_ISOLATION_READ_COMMITTED" "1")
     '("read-uncommitted" "GDA_TRANSACTION_ISOLATION_READ_UNCOMMITTED" "2")
     '("repeatable-read" "GDA_TRANSACTION_ISOLATION_REPEATABLE_READ" "3")
@@ -997,6 +1035,203 @@
   )
 )
 
+;; From gda-server-provider-impl.h
+
+;; Original typedef:
+;; typedef enum {
+;; 	GDA_SERVER_PROVIDER_FUNCTIONS_BASE,
+;; 	GDA_SERVER_PROVIDER_FUNCTIONS_META,
+;; 	GDA_SERVER_PROVIDER_FUNCTIONS_XA,
+;; 
+;; 	GDA_SERVER_PROVIDER_FUNCTIONS_MAX
+;; } GdaServerProviderFunctionsType;
+
+(define-enum-extended ServerProviderFunctionsType
+  (in-module "Gda")
+  (c-name "GdaServerProviderFunctionsType")
+  (values
+    '("base" "GDA_SERVER_PROVIDER_FUNCTIONS_BASE" "0")
+    '("meta" "GDA_SERVER_PROVIDER_FUNCTIONS_META" "1")
+    '("xa" "GDA_SERVER_PROVIDER_FUNCTIONS_XA" "2")
+    '("max" "GDA_SERVER_PROVIDER_FUNCTIONS_MAX" "3")
+  )
+)
+
+;; Original typedef:
+;; typedef enum {
+;; 	/* _information_schema_catalog_name */
+;; 	GDA_SERVER_META__INFO = 0,
+;; 
+;; 	/* _builtin_data_types */
+;; 	GDA_SERVER_META__BTYPES = 1,
+;; 
+;; 	/* _udt */
+;; 	GDA_SERVER_META__UDT = 2,
+;; 	GDA_SERVER_META_UDT = 3,
+;; 
+;; 	/* _udt_columns */
+;; 	GDA_SERVER_META__UDT_COLS = 4,
+;; 	GDA_SERVER_META_UDT_COLS = 5,
+;; 
+;; 	/* _enums */
+;; 	GDA_SERVER_META__ENUMS = 6,
+;; 	GDA_SERVER_META_ENUMS = 7,
+;; 
+;; 	/* _domains */
+;; 	GDA_SERVER_META__DOMAINS = 8,
+;; 	GDA_SERVER_META_DOMAINS = 9,
+;; 
+;; 	/* _domain_constraints */
+;; 	GDA_SERVER_META__CONSTRAINTS_DOM = 10,
+;; 	GDA_SERVER_META_CONSTRAINTS_DOM = 11,
+;; 
+;; 	/* _element_types */
+;; 	GDA_SERVER_META__EL_TYPES = 12,
+;; 	GDA_SERVER_META_EL_TYPES = 13,
+;; 
+;; 	/* _collations */
+;; 	GDA_SERVER_META__COLLATIONS = 14,
+;; 	GDA_SERVER_META_COLLATIONS = 15,
+;; 
+;; 	/* _character_sets */
+;; 	GDA_SERVER_META__CHARACTER_SETS = 16,
+;; 	GDA_SERVER_META_CHARACTER_SETS = 17,
+;; 
+;; 	/* _schemata */
+;; 	GDA_SERVER_META__SCHEMATA = 18,
+;; 	GDA_SERVER_META_SCHEMATA = 19,
+;; 
+;; 	/* _tables or _views */
+;; 	GDA_SERVER_META__TABLES_VIEWS = 20,
+;; 	GDA_SERVER_META_TABLES_VIEWS = 21,
+;; 
+;; 	/* _columns */
+;; 	GDA_SERVER_META__COLUMNS = 22,
+;; 	GDA_SERVER_META_COLUMNS = 23,
+;; 
+;; 	/* _view_column_usage */
+;; 	GDA_SERVER_META__VIEW_COLS = 24,
+;; 	GDA_SERVER_META_VIEW_COLS = 25,
+;; 
+;; 	/* _table_constraints */
+;; 	GDA_SERVER_META__CONSTRAINTS_TAB = 26,
+;; 	GDA_SERVER_META_CONSTRAINTS_TAB = 27,
+;; 
+;; 	/* _referential_constraints */
+;; 	GDA_SERVER_META__CONSTRAINTS_REF = 28,
+;; 	GDA_SERVER_META_CONSTRAINTS_REF = 29,
+;; 
+;; 	/* _key_column_usage */
+;; 	GDA_SERVER_META__KEY_COLUMNS = 30,
+;; 	GDA_SERVER_META_KEY_COLUMNS = 31,
+;; 
+;; 	/* _check_column_usage */
+;; 	GDA_SERVER_META__CHECK_COLUMNS = 32,
+;; 	GDA_SERVER_META_CHECK_COLUMNS = 33,
+;; 
+;; 	/* _triggers */
+;; 	GDA_SERVER_META__TRIGGERS = 34,
+;; 	GDA_SERVER_META_TRIGGERS = 35,
+;; 
+;; 	/* _routines */
+;; 	GDA_SERVER_META__ROUTINES = 36,
+;; 	GDA_SERVER_META_ROUTINES = 37,
+;; 
+;; 	/* _routine_columns */
+;; 	GDA_SERVER_META__ROUTINE_COL = 38,
+;; 	GDA_SERVER_META_ROUTINE_COL = 39,
+;; 
+;; 	/* _parameters */
+;; 	GDA_SERVER_META__ROUTINE_PAR = 40,
+;; 	GDA_SERVER_META_ROUTINE_PAR = 41,
+;; 
+;; 	/* _table_indexes */
+;; 	GDA_SERVER_META__INDEXES_TAB = 42,
+;; 	GDA_SERVER_META_INDEXES_TAB = 43,
+;; 
+;; 	/* _index_column_usage */
+;; 	GDA_SERVER_META__INDEX_COLS = 44,
+;; 	GDA_SERVER_META_INDEX_COLS = 45,
+;; } GdaServerProviderMetaType;
+
+(define-enum-extended ServerProviderMetaType
+  (in-module "Gda")
+  (c-name "GdaServerProviderMetaType")
+  (values
+    '("-info" "GDA_SERVER_META__INFO" "0")
+    '("-btypes" "GDA_SERVER_META__BTYPES" "1")
+    '("-udt" "GDA_SERVER_META__UDT" "2")
+    '("udt" "GDA_SERVER_META_UDT" "3")
+    '("-udt-cols" "GDA_SERVER_META__UDT_COLS" "4")
+    '("udt-cols" "GDA_SERVER_META_UDT_COLS" "5")
+    '("-enums" "GDA_SERVER_META__ENUMS" "6")
+    '("enums" "GDA_SERVER_META_ENUMS" "7")
+    '("-domains" "GDA_SERVER_META__DOMAINS" "8")
+    '("domains" "GDA_SERVER_META_DOMAINS" "9")
+    '("-constraints-dom" "GDA_SERVER_META__CONSTRAINTS_DOM" "10")
+    '("constraints-dom" "GDA_SERVER_META_CONSTRAINTS_DOM" "11")
+    '("-el-types" "GDA_SERVER_META__EL_TYPES" "12")
+    '("el-types" "GDA_SERVER_META_EL_TYPES" "13")
+    '("-collations" "GDA_SERVER_META__COLLATIONS" "14")
+    '("collations" "GDA_SERVER_META_COLLATIONS" "15")
+    '("-character-sets" "GDA_SERVER_META__CHARACTER_SETS" "16")
+    '("character-sets" "GDA_SERVER_META_CHARACTER_SETS" "17")
+    '("-schemata" "GDA_SERVER_META__SCHEMATA" "18")
+    '("schemata" "GDA_SERVER_META_SCHEMATA" "19")
+    '("-tables-views" "GDA_SERVER_META__TABLES_VIEWS" "20")
+    '("tables-views" "GDA_SERVER_META_TABLES_VIEWS" "21")
+    '("-columns" "GDA_SERVER_META__COLUMNS" "22")
+    '("columns" "GDA_SERVER_META_COLUMNS" "23")
+    '("-view-cols" "GDA_SERVER_META__VIEW_COLS" "24")
+    '("view-cols" "GDA_SERVER_META_VIEW_COLS" "25")
+    '("-constraints-tab" "GDA_SERVER_META__CONSTRAINTS_TAB" "26")
+    '("constraints-tab" "GDA_SERVER_META_CONSTRAINTS_TAB" "27")
+    '("-constraints-ref" "GDA_SERVER_META__CONSTRAINTS_REF" "28")
+    '("constraints-ref" "GDA_SERVER_META_CONSTRAINTS_REF" "29")
+    '("-key-columns" "GDA_SERVER_META__KEY_COLUMNS" "30")
+    '("key-columns" "GDA_SERVER_META_KEY_COLUMNS" "31")
+    '("-check-columns" "GDA_SERVER_META__CHECK_COLUMNS" "32")
+    '("check-columns" "GDA_SERVER_META_CHECK_COLUMNS" "33")
+    '("-triggers" "GDA_SERVER_META__TRIGGERS" "34")
+    '("triggers" "GDA_SERVER_META_TRIGGERS" "35")
+    '("-routines" "GDA_SERVER_META__ROUTINES" "36")
+    '("routines" "GDA_SERVER_META_ROUTINES" "37")
+    '("-routine-col" "GDA_SERVER_META__ROUTINE_COL" "38")
+    '("routine-col" "GDA_SERVER_META_ROUTINE_COL" "39")
+    '("-routine-par" "GDA_SERVER_META__ROUTINE_PAR" "40")
+    '("routine-par" "GDA_SERVER_META_ROUTINE_PAR" "41")
+    '("-indexes-tab" "GDA_SERVER_META__INDEXES_TAB" "42")
+    '("indexes-tab" "GDA_SERVER_META_INDEXES_TAB" "43")
+    '("-index-cols" "GDA_SERVER_META__INDEX_COLS" "44")
+    '("index-cols" "GDA_SERVER_META_INDEX_COLS" "45")
+  )
+)
+
+;; From gda-server-provider-private.h
+
+;; Original typedef:
+;; typedef enum {
+;; 	GDA_XA_START,
+;; 	GDA_XA_END,
+;; 	GDA_XA_PREPARE,
+;; 	GDA_XA_COMMIT,
+;; 	GDA_XA_ROLLBACK,
+;; 	GDA_XA_RECOVER
+;; } GdaXaType;
+
+(define-enum-extended XaType
+  (in-module "Gda")
+  (c-name "GdaXaType")
+  (values
+    '("start" "GDA_XA_START" "0")
+    '("end" "GDA_XA_END" "1")
+    '("prepare" "GDA_XA_PREPARE" "2")
+    '("commit" "GDA_XA_COMMIT" "3")
+    '("rollback" "GDA_XA_ROLLBACK" "4")
+    '("recover" "GDA_XA_RECOVER" "5")
+  )
+)
+
 ;; From gda-set.h
 
 ;; Original typedef:
@@ -1072,7 +1307,8 @@
 ;; 	GDA_STATEMENT_MODEL_CURSOR_FORWARD  = 1 << 1,
 ;; 	GDA_STATEMENT_MODEL_CURSOR_BACKWARD = 1 << 2,
 ;; 	GDA_STATEMENT_MODEL_CURSOR          = GDA_STATEMENT_MODEL_CURSOR_FORWARD | GDA_STATEMENT_MODEL_CURSOR_BACKWARD,
-;; 	GDA_STATEMENT_MODEL_ALLOW_NOPARAM   = 1 << 3
+;; 	GDA_STATEMENT_MODEL_ALLOW_NOPARAM   = 1 << 3,
+;; 	GDA_STATEMENT_MODEL_OFFLINE         = 1 << 4
 ;; } GdaStatementModelUsage;
 
 (define-flags-extended StatementModelUsage
@@ -1084,6 +1320,7 @@
     '("cursor-backward" "GDA_STATEMENT_MODEL_CURSOR_BACKWARD" "1 << 2")
     '("cursor" "GDA_STATEMENT_MODEL_CURSOR" "0x6")
     '("allow-noparam" "GDA_STATEMENT_MODEL_ALLOW_NOPARAM" "1 << 3")
+    '("offline" "GDA_STATEMENT_MODEL_OFFLINE" "1 << 4")
   )
 )
 
@@ -1096,7 +1333,8 @@
 ;;         GDA_STATEMENT_SQL_PARAMS_AS_COLON    = 1 << 3,
 ;;         GDA_STATEMENT_SQL_PARAMS_AS_DOLLAR   = 1 << 4,
 ;;         GDA_STATEMENT_SQL_PARAMS_AS_QMARK    = 1 << 5,
-;;         GDA_STATEMENT_SQL_PARAMS_AS_UQMARK   = 1 << 6
+;;         GDA_STATEMENT_SQL_PARAMS_AS_UQMARK   = 1 << 6,
+;;         GDA_STATEMENT_SQL_TIMEZONE_TO_GMT    = 1 << 7
 ;; } GdaStatementSqlFlag;
 
 (define-flags-extended StatementSqlFlag
@@ -1111,6 +1349,7 @@
     '("params-as-dollar" "GDA_STATEMENT_SQL_PARAMS_AS_DOLLAR" "1 << 4")
     '("params-as-qmark" "GDA_STATEMENT_SQL_PARAMS_AS_QMARK" "1 << 5")
     '("params-as-uqmark" "GDA_STATEMENT_SQL_PARAMS_AS_UQMARK" "1 << 6")
+    '("timezone-to-gmt" "GDA_STATEMENT_SQL_TIMEZONE_TO_GMT" "1 << 7")
   )
 )
 
@@ -1451,7 +1690,10 @@
 ;; 	GDA_SQL_OPERATOR_TYPE_BITAND,
 ;; 	GDA_SQL_OPERATOR_TYPE_BITOR,
 ;; 	GDA_SQL_OPERATOR_TYPE_BITNOT,
-;; 	GDA_SQL_OPERATOR_TYPE_ILIKE
+;; 	GDA_SQL_OPERATOR_TYPE_ILIKE,
+;; 
+;; 	GDA_SQL_OPERATOR_TYPE_NOTLIKE,
+;; 	GDA_SQL_OPERATOR_TYPE_NOTILIKE
 ;; } GdaSqlOperatorType;
 
 (define-enum-extended SqlOperatorType
@@ -1489,6 +1731,8 @@
     '("bitor" "GDA_SQL_OPERATOR_TYPE_BITOR" "28")
     '("bitnot" "GDA_SQL_OPERATOR_TYPE_BITNOT" "29")
     '("ilike" "GDA_SQL_OPERATOR_TYPE_ILIKE" "30")
+    '("notlike" "GDA_SQL_OPERATOR_TYPE_NOTLIKE" "31")
+    '("notilike" "GDA_SQL_OPERATOR_TYPE_NOTILIKE" "32")
   )
 )
 
