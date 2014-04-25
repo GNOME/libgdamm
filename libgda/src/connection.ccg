@@ -65,7 +65,11 @@ void Connection::close()
 {
   //gda_connection_close() does an unref, but we don't want that:
   reference();
-  gda_connection_close(gobj());
+
+  GError* gerror = 0;
+  gda_connection_close(gobj(), &gerror);
+  if(gerror)
+    ::Glib::Error::throw_exception(gerror);
 }
 
 Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<const Statement>& cmd, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, Glib::RefPtr<const Set>& last_inserted_row)

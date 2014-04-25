@@ -104,8 +104,6 @@ public:
 
   _IGNORE(gda_connection_point_available_event, gda_connection_add_event, gda_connection_add_event_string, gda_connection_clear_events_list)
 
-  _WRAP_METHOD(void clear_events_list(), gda_connection_clear_events_list)
-
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_execute)
   Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, Glib::RefPtr<const Set>& last_insert_row);
 
