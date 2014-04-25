@@ -77,19 +77,19 @@
   )
 )
 
-(define-property system-filename
+(define-property user-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
-  (docs "File to use for system-wide DSN list")
+  (docs "File to use for per-user DSN list")
   (readable #t)
   (writable #t)
   (construct-only #f)
 )
 
-(define-property user-filename
+(define-property system-filename
   (of-object "GdaConfig")
   (prop-type "GParamString")
-  (docs "File to use for per-user DSN list")
+  (docs "File to use for system-wide DSN list")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -106,19 +106,13 @@
   )
 )
 
-(define-signal conn-opened
+(define-signal opened
   (of-object "GdaConnection")
   (return-type "void")
   (when "first")
 )
 
-(define-signal conn-to-close
-  (of-object "GdaConnection")
-  (return-type "void")
-  (when "first")
-)
-
-(define-signal conn-closed
+(define-signal closed
   (of-object "GdaConnection")
   (return-type "void")
   (when "last")
@@ -134,6 +128,15 @@
   (of-object "GdaConnection")
   (return-type "void")
   (when "last")
+)
+
+(define-signal status-changed
+  (of-object "GdaConnection")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GdaConnectionStatus" "p0")
+  )
 )
 
 (define-property dsn
@@ -190,37 +193,28 @@
   (construct-only #f)
 )
 
-(define-property thread-owner
-  (of-object "GdaConnection")
-  (prop-type "GParamPointer")
-  (docs "Unique GThread from which the connection will be available.This should only be modified by the database providers' implementation")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property is-wrapper
-  (of-object "GdaConnection")
-  (prop-type "GParamBoolean")
-  (docs "Tells if the connection acts as a thread wrapper around another connection, making it completely thread safe")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property monitor-wrapped-in-mainloop
-  (of-object "GdaConnection")
-  (prop-type "GParamBoolean")
-  (docs "Make the connection set up a monitoring function in the mainloop to monitor the wrapped connection")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
 (define-property events-history-size
   (of-object "GdaConnection")
   (prop-type "GParamInt")
-  (docs "")
+  (docs "Number of history events to keep in memory")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property execution-timer
+  (of-object "GdaConnection")
+  (prop-type "GParamBoolean")
+  (docs "Computes execution delay for each executed statement")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property execution-slowdown
+  (of-object "GdaConnection")
+  (prop-type "GParamUInt")
+  (docs "Artificially slows down the execution of queries")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -351,6 +345,12 @@
   )
 )
 
+(define-signal access-changed
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (when "last")
+)
+
 ;; From GdaDataModelImport
 
 (define-property random-access
@@ -424,49 +424,13 @@
   (when "first")
 )
 
-(define-property id
-  (of-object "GdaDataModelIter")
-  (prop-type "GParamString")
-  (docs "Id")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property name
-  (of-object "GdaDataModelIter")
-  (prop-type "GParamString")
-  (docs "Name")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property description
-  (of-object "GdaDataModelIter")
-  (prop-type "GParamString")
-  (docs "Description")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property holders
-  (of-object "GdaDataModelIter")
-  (prop-type "GParamPointer")
-  (docs "GdaHolder objects the set should contain")
-  (readable #f)
-  (writable #t)
-  (construct-only #t)
-)
-
 (define-property data-model
   (of-object "GdaDataModelIter")
   (prop-type "GParamObject")
   (docs "Data model for which the iter is for")
   (readable #t)
   (writable #t)
-  (construct-only #t)
+  (construct-only #f)
 )
 
 (define-property current-row
@@ -589,6 +553,15 @@
   (construct-only #f)
 )
 
+(define-property cache-changes
+  (of-object "GdaDataProxy")
+  (prop-type "GParamBoolean")
+  (docs "set to TRUE to keep track of changes even when the proxied data model is changed")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GdaDataSelect
 
 (define-property connection
@@ -676,6 +649,15 @@
   (of-object "GdaDataSelect")
   (prop-type "GParamBoolean")
   (docs "Automatically re-run the SELECT statement if any parameter has changed since it was first executed")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property execution-delay
+  (of-object "GdaDataSelect")
+  (prop-type "GParamDouble")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -795,6 +777,15 @@
   (construct-only #f)
 )
 
+(define-property validate-changes
+  (of-object "GdaHolder")
+  (prop-type "GParamBoolean")
+  (docs "Defines if the validate-change signal is emitted on value change")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GdaMetaStore
 
 (define-signal suggest-update
@@ -802,7 +793,7 @@
   (return-type "GError*")
   (when "last")
   (parameters
-    '("GdaMetaContext" "p0")
+    '("gpointer" "p0")
   )
 )
 
@@ -811,7 +802,7 @@
   (return-type "void")
   (when "first")
   (parameters
-    '("GdaSList" "p0")
+    '("gpointer" "p0")
   )
 )
 
@@ -1044,6 +1035,15 @@
   (readable #f)
   (writable #t)
   (construct-only #t)
+)
+
+(define-property validate-changes
+  (of-object "GdaSet")
+  (prop-type "GParamBoolean")
+  (docs "Defines if the validate-set signal is emitted")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
 ;; From GdaStatement
