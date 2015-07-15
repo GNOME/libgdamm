@@ -46,7 +46,7 @@ AC_DISABLE_STATIC
 AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
 
-AC_SUBST([LIBGDAMM_MODULES], ['glibmm-2.4 >= 2.27.93 libgda-5.0 >= 5.0.2'])
+AC_SUBST([LIBGDAMM_MODULES], ['glibmm-2.4 >= 2.45.31 libgda-5.0 >= 5.0.2'])
 PKG_CHECK_MODULES([LIBGDAMM], [$LIBGDAMM_MODULES])
 
 PKG_CHECK_EXISTS([libgda-bdb-5.0], [libgdamm_have_bdb=yes], [libgdamm_have_bdb=no])
