@@ -1,3 +1,7 @@
+4.99.10 (unstable):
+
+* Regenerate with the latest glibmm.
+
 4.99.9 (unstable):
 
 * Use (and require) C++11.
