@@ -38,8 +38,8 @@ namespace Gda
  */
 class Blob
 {
-  _CLASS_BOXEDTYPE_STATIC(Blob, GdaBlob)
-  _IGNORE(gda_blob_copy, gda_blob_free, gda_blob_get_type)
+  _CLASS_BOXEDTYPE(Blob, GdaBlob, gda_blob_new, gda_blob_copy, gda_blob_free)
+  _IGNORE(gda_blob_get_type)
   
   public:
     _WRAP_METHOD(void set_op(const Glib::RefPtr<BlobOp>& op), gda_blob_set_op)
