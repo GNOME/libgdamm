@@ -50,7 +50,7 @@ class QuarkList
   _WRAP_METHOD(Glib::ustring find(const Glib::ustring& name) const, gda_quark_list_find)
   _WRAP_METHOD(void remove(const Glib::ustring& name), gda_quark_list_remove)
       
-  typedef sigc::slot<void, Glib::ustring, Glib::ustring> ForeachSlot;
+  typedef sigc::slot<void(Glib::ustring, Glib::ustring)> ForeachSlot;
   _WRAP_METHOD_DOCS_ONLY(gda_quark_list_foreach)
   void foreach(const ForeachSlot& func);
       
