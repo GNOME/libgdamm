@@ -308,18 +308,18 @@ const guchar* Value::get_binary(long& size) const
   if(!gdabinary)
     return 0;
 
-  size = gdabinary->binary_length;
-  return gdabinary->data;
+  size = gda_binary_get_size(const_cast<GdaBinary*>(gdabinary));
+  //TODO: gda_binary_get_data() returns gpointer. Should we too?
+  return (guchar*)gda_binary_get_data(const_cast<GdaBinary*>(gdabinary));
 }
 
 void Value::set(const guchar* val, long size)
 {
   value_reinit(gobj(), GDA_TYPE_BINARY);
-  
-  GdaBinary gdabinary;
-  gdabinary.data = const_cast<guchar*>(val);
-  gdabinary.binary_length = size;
-  gda_value_set_binary(gobj(), &gdabinary);
+
+  GdaBinary* gdabinary = gda_binary_new();
+  gda_binary_set_data(gdabinary, const_cast<guchar*>(val), size);
+  gda_value_take_binary(gobj(), gdabinary);
 }
 
 const GdaBlob* Value::get_blob() const
