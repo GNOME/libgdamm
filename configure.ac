@@ -46,14 +46,14 @@ AC_DISABLE_STATIC
 AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
 
-AC_SUBST([LIBGDAMM_MODULES], ['glibmm-2.4 >= 2.45.31 libgda-6.0 >= 5.0.2'])
+AC_SUBST([LIBGDAMM_MODULES], ['glibmm-2.52 >= 2.45.31 libgda-6.0 >= 5.0.2'])
 PKG_CHECK_MODULES([LIBGDAMM], [$LIBGDAMM_MODULES])
 
 PKG_CHECK_EXISTS([libgda-bdb-6.0], [libgdamm_have_bdb=yes], [libgdamm_have_bdb=no])
 AS_IF([test "x$libgdamm_have_bdb" = xyes],
       [AC_DEFINE([HAVE_LIBGDA_BDB], [1], [Define if the libgda-bdb plugin is available.])])
 
-MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.4])
+MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.52])
 
 AC_LANG([C++])
 MM_ARG_ENABLE_WARNINGS([LIBGDAMM_WXXFLAGS],
@@ -63,8 +63,8 @@ MM_ARG_ENABLE_WARNINGS([LIBGDAMM_WXXFLAGS],
 
 MM_ARG_ENABLE_DOCUMENTATION
 MM_ARG_WITH_TAGFILE_DOC([libstdc++.tag], [mm-common-libstdc++])
-MM_ARG_WITH_TAGFILE_DOC([libsigc++-2.0.tag], [sigc++-2.0])
-MM_ARG_WITH_TAGFILE_DOC([glibmm-2.4.tag], [glibmm-2.4])
+MM_ARG_WITH_TAGFILE_DOC([libsigc++-3.0.tag], [sigc++-3.0])
+MM_ARG_WITH_TAGFILE_DOC([glibmm-2.52.tag], [glibmm-2.52])
 
 AC_CONFIG_FILES([Makefile
                  tools/Makefile
