@@ -71,7 +71,7 @@ protected:
   _WRAP_CTOR(MetaStruct(const Glib::RefPtr<MetaStore>& meta_store, MetaStructFeature features), gda_meta_struct_new)
 
 public:
-  _WRAP_CREATE(const Glib::RefPtr<MetaStore>& store, MetaStructFeature features = META_STRUCT_FEATURE_ALL)
+  _WRAP_CREATE(const Glib::RefPtr<MetaStore>& store, MetaStructFeature features = MetaStructFeature::ALL)
   
   //TODO: Wrap GdaMetaDbObject?
   _WRAP_METHOD(GdaMetaDbObject* complement(MetaDbObjectType type, const Value& catalog, const Value& schema, const Value& name), gda_meta_struct_complement, errthrow)

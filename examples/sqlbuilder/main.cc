@@ -10,7 +10,7 @@ int main()
 
   // INSERT INTO customers (e, f, g) VALUES (##p1::string, 15, 'joe')
   Glib::RefPtr<Gnome::Gda::SqlBuilder> ins_builder =
-    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SQL_STATEMENT_INSERT);
+    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SqlStatementType::INSERT);
 
   ins_builder->set_table("customer");
   ins_builder->add_field_value_id(ins_builder->add_id("e"),
@@ -22,19 +22,19 @@ int main()
 
   // UPDATE products set ref='A0E''FESP' WHERE id = 14
   Glib::RefPtr<Gnome::Gda::SqlBuilder> up_builder =
-    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SQL_STATEMENT_UPDATE);
+    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SqlStatementType::UPDATE);
 
   up_builder->set_table("customer");
   up_builder->add_field_value("ref", "A0E'FESP");
   guint id = up_builder->add_id("id");
   guint value = up_builder->add_expr(Gnome::Gda::Value(14));
-  guint cond = up_builder->add_cond(Gnome::Gda::SQL_OPERATOR_TYPE_EQ, id, value);
+  guint cond = up_builder->add_cond(Gnome::Gda::SqlOperatorType::EQ, id, value);
   up_builder->set_where(cond);
 
   render_as_sql(up_builder);
 
   // reuse the same GdaSqlBuilder object to change the WHERE condition to: WHERE id = ##theid::int
-  up_builder->set_where(up_builder->add_cond(Gnome::Gda::SQL_OPERATOR_TYPE_EQ,
+  up_builder->set_where(up_builder->add_cond(Gnome::Gda::SqlOperatorType::EQ,
                                          id,
                                          up_builder->add_param ("theid", G_TYPE_INT, false),
                                          0));
@@ -46,12 +46,12 @@ int main()
    * SELECT c."date", name, date AS person FROM "select" as c, orders
    */
   Glib::RefPtr<Gnome::Gda::SqlBuilder> sel_builder =
-    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SQL_STATEMENT_SELECT);
+    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SqlStatementType::SELECT);
 
   // SELECT is an sql keyword
   guint target_c = sel_builder->select_add_target("select", "c");
   guint target_orders = sel_builder->select_add_target("orders");
-  guint join = sel_builder->select_join_targets(target_c, target_orders, Gnome::Gda::SQL_SELECT_JOIN_INNER);
+  guint join = sel_builder->select_join_targets(target_c, target_orders, Gnome::Gda::SqlSelectJoinType::INNER);
   sel_builder->select_add_target("c.date"); //Not sure about this. It was add add_field().
   sel_builder->add_field_value_id(sel_builder->add_id("name"),
                          sel_builder->add_id("person"));
@@ -63,7 +63,7 @@ int main()
 
   // SELECT myfunc (a, 5, 'Joe') FROM mytable
   Glib::RefPtr<Gnome::Gda::SqlBuilder> func_builder =
-    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SQL_STATEMENT_SELECT);
+    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SqlStatementType::SELECT);
 
   func_builder->select_add_target("mytable");
 

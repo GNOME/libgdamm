@@ -179,7 +179,7 @@ int main (int, char**)
   try
   {
     cnc = Gda::Connection::open_from_string ("SQLite", "DB_DIR=.;DB_NAME=example_db", "",
-                                                                           Gda::CONNECTION_OPTIONS_NONE);
+                                                                           Gda::ConnectionOptions::NONE);
   }
   catch(const Glib::Error& err)
   {

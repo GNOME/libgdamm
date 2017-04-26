@@ -43,7 +43,7 @@ class SqlStatement
 
 public:
 
-  explicit SqlStatement(SqlStatementType type = SQL_STATEMENT_SELECT);
+  explicit SqlStatement(SqlStatementType type = SqlStatementType::SELECT);
   _IGNORE(gda_sql_statement_new)
 
   bool empty() const;
