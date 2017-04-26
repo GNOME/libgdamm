@@ -10,7 +10,7 @@ int main()
 
   // INSERT INTO customers (e, f, g) VALUES (##p1::string, 15, 'joe')
   Glib::RefPtr<Gnome::Gda::SqlBuilder> ins_builder =
-    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SqlStatementType::INSERT);
+    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SqlStatement::Type::INSERT);
 
   ins_builder->set_table("customer");
   ins_builder->add_field_value_id(ins_builder->add_id("e"),
@@ -22,7 +22,7 @@ int main()
 
   // UPDATE products set ref='A0E''FESP' WHERE id = 14
   Glib::RefPtr<Gnome::Gda::SqlBuilder> up_builder =
-    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SqlStatementType::UPDATE);
+    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SqlStatement::Type::UPDATE);
 
   up_builder->set_table("customer");
   up_builder->add_field_value("ref", "A0E'FESP");
@@ -46,7 +46,7 @@ int main()
    * SELECT c."date", name, date AS person FROM "select" as c, orders
    */
   Glib::RefPtr<Gnome::Gda::SqlBuilder> sel_builder =
-    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SqlStatementType::SELECT);
+    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SqlStatement::Type::SELECT);
 
   // SELECT is an sql keyword
   guint target_c = sel_builder->select_add_target("select", "c");
@@ -63,7 +63,7 @@ int main()
 
   // SELECT myfunc (a, 5, 'Joe') FROM mytable
   Glib::RefPtr<Gnome::Gda::SqlBuilder> func_builder =
-    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SqlStatementType::SELECT);
+    Gnome::Gda::SqlBuilder::create(Gnome::Gda::SqlStatement::Type::SELECT);
 
   func_builder->select_add_target("mytable");
 

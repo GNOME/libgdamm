@@ -73,9 +73,9 @@ class SqlBuilder : public Glib::Object
 {
   _CLASS_GOBJECT(SqlBuilder, GdaSqlBuilder, GDA_SQL_BUILDER, Glib::Object, GObject)
 protected:
-  SqlBuilder(SqlStatementType type);
+  SqlBuilder(SqlStatement::Type type);
 public:
-  _WRAP_CREATE(SqlStatementType type)
+  _WRAP_CREATE(SqlStatement::Type type)
 
 #m4 _CONVERSION(`const Glib::ustring& ', `const gchar*', `string_or_null($3)')
 

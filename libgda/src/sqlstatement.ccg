@@ -23,13 +23,15 @@
 #include <libgda/sql-parser/gda-statement-struct.h>
 #include <sql-parser/gda-sql-parser-enum-types.h>
 
+using Type = Gnome::Gda::SqlStatement::Type;
+
 namespace Gnome
 {
 
 namespace Gda
 {
 
-SqlStatement::SqlStatement(SqlStatementType type)
+SqlStatement::SqlStatement(Type type)
 : gobject_(gda_sql_statement_new((GdaSqlStatementType)type))
 {
 }

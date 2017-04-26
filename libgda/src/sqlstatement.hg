@@ -29,8 +29,6 @@ namespace Gnome
 namespace Gda
 {
 
-_WRAP_ENUM(SqlStatementType, GdaSqlStatementType)
-
 class Connection;
 
 /** Every SQL statement can be decomposed in the SqlStatement tree structure.
@@ -43,22 +41,24 @@ class SqlStatement
 
 public:
 
-  explicit SqlStatement(SqlStatementType type = SqlStatementType::SELECT);
+  _WRAP_ENUM(Type, GdaSqlStatementType)
+
+  explicit SqlStatement(Type type = Type::SELECT);
   _IGNORE(gda_sql_statement_new)
 
   bool empty() const;
 
   _WRAP_METHOD(Glib::ustring serialize() const, gda_sql_statement_serialize)
 
-  //_WRAP_METHOD(static Glib::ustring type_to_string(SqlStatementType type), gda_sql_statement_type_to_string)
-  _WRAP_METHOD(static SqlStatementType string_to_type(const Glib::ustring& type), gda_sql_statement_string_to_type)
+  //_WRAP_METHOD(static Glib::ustring type_to_string(Type type), gda_sql_statement_type_to_string)
+  _WRAP_METHOD(static Type string_to_type(const Glib::ustring& type), gda_sql_statement_string_to_type)
 
   _WRAP_METHOD(bool check_structure() const, gda_sql_statement_check_structure, errthrow)
   _WRAP_METHOD(bool check_validity(const Glib::RefPtr<Connection>& cnc), gda_sql_statement_check_validity, errthrow)
   _WRAP_METHOD(void check_clean(), gda_sql_statement_check_clean)
   _WRAP_METHOD(bool normalize(const Glib::RefPtr<Connection>& cnc), gda_sql_statement_normalize, errthrow)
 
-  //_WRAP_METHOD(static GdaSqlStatementContentsInfo* get_contents_infos(SqlStatementType type), gda_sql_statement_get_contents_infos)
+  //_WRAP_METHOD(static GdaSqlStatementContentsInfo* get_contents_infos(Type type), gda_sql_statement_get_contents_infos)
 
 
 };

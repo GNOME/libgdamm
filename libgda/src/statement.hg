@@ -92,7 +92,7 @@ public:
   Glib::ustring to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<const Set>& params,
                                 StatementSqlFlag flags, const HolderVector& params_used) const;
 
-  _WRAP_METHOD(SqlStatementType get_statement_type() const, gda_statement_get_statement_type)
+  _WRAP_METHOD(SqlStatement::Type get_statement_type() const, gda_statement_get_statement_type)
   _WRAP_METHOD(bool is_useless() const, gda_statement_is_useless)
   _WRAP_METHOD(bool check_structure() const, gda_statement_check_structure, errthrow)
   _WRAP_METHOD(bool check_validity(const Glib::RefPtr<Connection>& cnc) const, gda_statement_check_validity, errthrow)

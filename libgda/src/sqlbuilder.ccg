@@ -42,7 +42,7 @@ static const char* string_or_null(const Glib::ustring& str)
 //For the return types of gmmproc-generated code:
 typedef SqlBuilder::Id Id;
 
-SqlBuilder::SqlBuilder(SqlStatementType type)
+SqlBuilder::SqlBuilder(SqlStatement::Type type)
   : _CONSTRUCT("stmt-type", type)
 {
 
