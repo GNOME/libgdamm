@@ -63,12 +63,12 @@ public:
   _WRAP_METHOD(Glib::ustring get_server_version(const Glib::RefPtr<Connection>& cnc) const, gda_server_provider_get_server_version)
 
   //TODO: options may be NULL: Add a method overload.
-  _WRAP_METHOD(bool supports_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type, const Glib::RefPtr<Set>& options) const, gda_server_provider_supports_operation)
+  _WRAP_METHOD(bool supports_operation(const Glib::RefPtr<Connection>& cnc, ServerOperation::Type type, const Glib::RefPtr<Set>& options) const, gda_server_provider_supports_operation)
 
-  bool supports_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type) const;
+  bool supports_operation(const Glib::RefPtr<Connection>& cnc, ServerOperation::Type type) const;
 
 
-  _WRAP_METHOD(Glib::RefPtr<ServerOperation> create_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type, const Glib::RefPtr<Set>& options), gda_server_provider_create_operation, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<ServerOperation> create_operation(const Glib::RefPtr<Connection>& cnc, ServerOperation::Type type, const Glib::RefPtr<Set>& options), gda_server_provider_create_operation, errthrow)
   
   /** Creates a new Gda::ServerOperation object which can be modified in order to perform the @a type type of
    * action. The @a options can contain:
@@ -81,7 +81,7 @@ public:
    * @return A new Gda::ServerOperation object, or <tt>0</tt> in the provider does not support the @a type type
    * of operation or if an error occurred.
    */
-  Glib::RefPtr<ServerOperation> create_operation(const Glib::RefPtr<Connection>& cnc, ServerOperationType type);
+  Glib::RefPtr<ServerOperation> create_operation(const Glib::RefPtr<Connection>& cnc, ServerOperation::Type type);
 
 
   _WRAP_METHOD(Glib::ustring render_operation(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<ServerOperation>& op), gda_server_provider_render_operation, errthrow)

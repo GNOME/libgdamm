@@ -24,6 +24,9 @@
 #include <libgda/gda-enum-types.h>
 #include <libgdamm/connection.h>
 
+using Type = Gnome::Gda::ServerOperation::Type;
+using NodeType = Gnome::Gda::ServerOperation::NodeType;
+
 namespace Gnome
 {
 

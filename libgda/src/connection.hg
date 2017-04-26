@@ -290,7 +290,7 @@ public:
   #m4 _CONVERSION(`GSList*',`std::vector< Glib::RefPtr<Glib::Object> >',`$2(Glib::SListHandler< Glib::RefPtr<Glib::Object > >::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW))')
   _WRAP_METHOD(std::vector< Glib::RefPtr<Glib::Object> > batch_execute(const Glib::RefPtr<Batch>& batch, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage), gda_connection_batch_execute, errthrow)
 
-  _WRAP_METHOD(Glib::RefPtr<ServerOperation> create_operation(ServerOperationType type, const Glib::RefPtr<const Set>& options), gda_connection_create_operation, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<ServerOperation> create_operation(ServerOperation::Type type, const Glib::RefPtr<const Set>& options), gda_connection_create_operation, errthrow)
   _WRAP_METHOD(bool perform_operation(const Glib::RefPtr<ServerOperation>& op), gda_connection_perform_operation, errthrow)
 
   _WRAP_METHOD(Glib::RefPtr<ServerProvider> get_provider(), gda_connection_get_provider, refreturn)
