@@ -37,7 +37,6 @@ namespace Gda
  */
 _WRAP_GERROR(MetaStructError, GdaMetaStructError, GDA_META_STRUCT_ERROR, NO_GTYPE)
 
-_WRAP_ENUM(MetaStructFeature, GdaMetaStructFeature, NO_GTYPE)
 _WRAP_ENUM(MetaDbObjectType, GdaMetaDbObjectType, NO_GTYPE)
 _WRAP_ENUM(MetaSortType, GdaMetaSortType, NO_GTYPE)
 _WRAP_ENUM(MetaGraphInfo, GdaMetaGraphInfo, NO_GTYPE) 
@@ -67,12 +66,15 @@ class MetaStore;
 class MetaStruct : public Glib::Object
 {
   _CLASS_GOBJECT(MetaStruct, GdaMetaStruct, GDA_META_STRUCT, Glib::Object, GObject)
+public:
+  _WRAP_ENUM(Feature, GdaMetaStructFeature, NO_GTYPE)
+
 protected:
-  _WRAP_CTOR(MetaStruct(const Glib::RefPtr<MetaStore>& meta_store, MetaStructFeature features), gda_meta_struct_new)
+  _WRAP_CTOR(MetaStruct(const Glib::RefPtr<MetaStore>& meta_store, Feature features), gda_meta_struct_new)
 
 public:
-  _WRAP_CREATE(const Glib::RefPtr<MetaStore>& store, MetaStructFeature features = MetaStructFeature::ALL)
-  
+  _WRAP_CREATE(const Glib::RefPtr<MetaStore>& store, Feature features = Feature::ALL)
+
   //TODO: Wrap GdaMetaDbObject?
   _WRAP_METHOD(GdaMetaDbObject* complement(MetaDbObjectType type, const Value& catalog, const Value& schema, const Value& name), gda_meta_struct_complement, errthrow)
   _WRAP_METHOD(bool complement_schema(const Value& catalog, const Value& schema), gda_meta_struct_complement_schema, errthrow)
