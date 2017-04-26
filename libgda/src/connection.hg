@@ -47,9 +47,6 @@ typedef GdaServerProviderInfo ServerProviderInfo;
  */
 _WRAP_GERROR(ConnectionError, GdaConnectionError, GDA_CONNECTION_ERROR)
 
-_WRAP_ENUM(ConnectionOptions, GdaConnectionOptions)
-_WRAP_ENUM(ConnectionMetaType, GdaConnectionMetaType)
-
 /** Manages a connection to a data source.
  * This class offers access to all operations involving an opened connection to a database.
  * Connection objects are obtained via the Client class.
@@ -70,14 +67,17 @@ protected:
 public:
   _WRAP_CREATE()
 
-  _WRAP_METHOD(static Glib::RefPtr<Connection> create_from_string(const Glib::ustring& provider_name, const Glib::ustring& cnc_string, const Glib::ustring& auth_string = Glib::ustring(), ConnectionOptions options = ConnectionOptions::NONE), gda_connection_new_from_string, errthrow)
+  _WRAP_ENUM(Options, GdaConnectionOptions)
+  _WRAP_ENUM(MetaType, GdaConnectionMetaType)
+
+  _WRAP_METHOD(static Glib::RefPtr<Connection> create_from_string(const Glib::ustring& provider_name, const Glib::ustring& cnc_string, const Glib::ustring& auth_string = Glib::ustring(), Options options = Options::NONE), gda_connection_new_from_string, errthrow)
 
   /* This throws an error which we don't want to do in a constructor */
   _WRAP_METHOD_DOCS_ONLY(gda_connection_open_from_string)
   static Glib::RefPtr<Connection> open_from_string(const Glib::ustring& provider_name,
                                                     const Glib::ustring& cnc_string,
                                                     const Glib::ustring& auth_string = Glib::ustring(),
-                                                    ConnectionOptions options = ConnectionOptions::NONE);
+                                                    Options options = Options::NONE);
 
   _WRAP_METHOD(bool open(), gda_connection_open, errthrow)
 
@@ -97,7 +97,7 @@ public:
 
   _WRAP_METHOD(bool is_opened() const, gda_connection_is_opened)
 
-  _WRAP_METHOD(ConnectionOptions get_options() const, gda_connection_get_options)
+  _WRAP_METHOD(Options get_options() const, gda_connection_get_options)
 
   _WRAP_METHOD(Glib::ustring get_dsn() const, gda_connection_get_dsn)
   _WRAP_METHOD(Glib::ustring get_cnc_string() const, gda_connection_get_cnc_string)
@@ -279,10 +279,10 @@ public:
 
 
   #m4 _CONVERSION(`const std::vector< Glib::RefPtr<Holder> >&',`GList*',`Glib::ListHandler< Glib::RefPtr<Holder> >::vector_to_list($3).data()')
-  _WRAP_METHOD(Glib::RefPtr<DataModel> get_meta_store_data(ConnectionMetaType meta_type, const std::vector< Glib::RefPtr<Holder> >& filters), gda_connection_get_meta_store_data_v, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> get_meta_store_data(MetaType meta_type, const std::vector< Glib::RefPtr<Holder> >& filters), gda_connection_get_meta_store_data_v, errthrow)
   _IGNORE(gda_connection_get_meta_store_data)
 
-  Glib::RefPtr<DataModel> get_meta_store_data(ConnectionMetaType meta_type);
+  Glib::RefPtr<DataModel> get_meta_store_data(MetaType meta_type);
 
   _WRAP_METHOD(Glib::RefPtr<MetaStore> get_meta_store(), gda_connection_get_meta_store, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const MetaStore> get_meta_store() const, gda_connection_get_meta_store, constversion)
@@ -346,7 +346,7 @@ public:
   _WRAP_PROPERTY("cnc-string", Glib::ustring)
   _WRAP_PROPERTY("dsn", Glib::ustring)
   _WRAP_PROPERTY("meta-store", Glib::RefPtr<MetaStore>)
-  _WRAP_PROPERTY("options", ConnectionOptions)
+  _WRAP_PROPERTY("options", Options)
   _WRAP_PROPERTY("is-wrapper", bool)
   _WRAP_PROPERTY("monitor-wrapped-in-mainloop", bool)
   //We ignore the thread-owner property because it is strange and should only be used (well, modified) by provider implementations.

@@ -179,7 +179,7 @@ int main (int, char**)
   try
   {
     cnc = Gda::Connection::open_from_string ("SQLite", "DB_DIR=.;DB_NAME=example_db", "",
-                                                                           Gda::ConnectionOptions::NONE);
+                                                                           Gda::Connection::Options::NONE);
   }
   catch(const Glib::Error& err)
   {
@@ -189,7 +189,7 @@ int main (int, char**)
 #else
   std::auto_ptr<Glib::Error> error;
   cnc = Gda::Connection::open_from_string ("SQLite", "DB_DIR=.;DB_NAME=example_db", "",
-                                           Gda::CONNECTION_OPTIONS_NONE, error);
+                                           Gda::Connection::Options::NONE, error);
   if (error.get())
   {
     std::cerr << error->what() << std::endl;
