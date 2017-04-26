@@ -28,6 +28,8 @@
 #include <libgda/gda-enum-types.h>
 
 
+using AccessFlags = Gnome::Gda::DataModel::AccessFlags;
+
 namespace Gnome
 {
 
@@ -35,7 +37,7 @@ namespace Gda
 {
 
 
-bool DataModel::export_to_file(DataModelIOFormat format, const std::string& file, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options)
+bool DataModel::export_to_file(IOFormat format, const std::string& file, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options)
 {
   GError* gerror = 0;
   bool retvalue = gda_data_model_export_to_file(gobj(), static_cast<GdaDataModelIOFormat>(format), file.c_str(), cols.data(), cols.size(), rows.data(), rows.size(), options->gobj(), &gerror);
@@ -46,7 +48,7 @@ bool DataModel::export_to_file(DataModelIOFormat format, const std::string& file
   return retvalue;
 }
 
-Glib::ustring DataModel::export_to_string(DataModelIOFormat format, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options)
+Glib::ustring DataModel::export_to_string(IOFormat format, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options)
 {
   gchar* retvalue = gda_data_model_export_to_string(gobj(), static_cast<GdaDataModelIOFormat>(format), cols.data(), cols.size(), rows.data(), rows.size(), options->gobj());
   Glib::ustring cppretvalue(retvalue);

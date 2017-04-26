@@ -42,10 +42,6 @@ class ServerProvider;
  */
 _WRAP_GERROR(DataModelError, GdaDataModelError, GDA_DATA_MODEL_ERROR, NO_GTYPE)
 
-_WRAP_ENUM(DataModelAccessFlags, GdaDataModelAccessFlags, NO_GTYPE)
-_WRAP_ENUM(DataModelHint, GdaDataModelHint, NO_GTYPE)
-_WRAP_ENUM(DataModelIOFormat, GdaDataModelIOFormat, NO_GTYPE)
-
 typedef GdaValueAttribute ValueAttribute;
 
 /** @defgroup DataModels Data Models
@@ -86,6 +82,10 @@ public:
   // This does not belong into this class
   _IGNORE(gda_data_model_create_iter, gda_data_model_array_copy_model)
 
+  _WRAP_ENUM(AccessFlags, GdaDataModelAccessFlags, NO_GTYPE)
+  _WRAP_ENUM(Hint, GdaDataModelHint, NO_GTYPE)
+  _WRAP_ENUM(IOFormat, GdaDataModelIOFormat, NO_GTYPE)
+
   _WRAP_METHOD(void freeze(), gda_data_model_freeze)
   _WRAP_METHOD(void thaw(), gda_data_model_thaw)
 
@@ -116,7 +116,7 @@ public:
   #m4 _CONVERSION(`const std::vector<Value>&',`GList*',`Glib::ListHandler<Value, ValueTraits>::vector_to_list($3).data()')
   _WRAP_METHOD(bool set_values(int row, const std::vector<Value>& values), gda_data_model_set_values, errthrow)
 
-  _WRAP_METHOD(DataModelAccessFlags get_access_flags() const, gda_data_model_get_access_flags)
+  _WRAP_METHOD(AccessFlags get_access_flags() const, gda_data_model_get_access_flags)
 
   #m4 _CONVERSION(`const std::vector<Value>&',`const GList*',`Glib::ListHandler<Value, ValueTraits>::vector_to_list($3).data()')
   _WRAP_METHOD(int append_values(const std::vector<Value>& values), gda_data_model_append_values, errthrow)
@@ -130,7 +130,7 @@ public:
   #m4 _CONVERSION(`const ValueVector&', `GSList*', `Glib::SListHandler<Value, ValueTraits>::vector_to_slist($3).data()')
   _WRAP_METHOD(int get_row_from_values(const ValueVector& values, const std::vector<int>& cols_index), gda_data_model_get_row_from_values)
 
-  _WRAP_METHOD(void send_hint(DataModelHint hint, const Value& hint_value), gda_data_model_send_hint)
+  _WRAP_METHOD(void send_hint(Hint hint, const Value& hint_value), gda_data_model_send_hint)
 
 
   /** Exports data contained in @a model to the a string; the format is specified using the @a format argument.
@@ -146,7 +146,7 @@ public:
    * @param options List of options for the export.
    * @result The string.
    */
-  Glib::ustring export_to_string(DataModelIOFormat format, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options);
+  Glib::ustring export_to_string(IOFormat format, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options);
   _IGNORE(gda_data_model_export_to_string)
 
   /** Exports data contained in @a model to the @a file; the format is specified using the @a format argument.
@@ -163,7 +163,7 @@ public:
    * @param options List of options for the export.
    * @result true if no error occurred.
    */
-  bool export_to_file(DataModelIOFormat format, const std::string& file, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options);
+  bool export_to_file(IOFormat format, const std::string& file, const std::vector<int>& cols, const std::vector<int>& rows, const Glib::RefPtr<Set>& options);
 
   //TODO: Avoid use of C GHashTable?
   _WRAP_METHOD(bool import_from_model(const Glib::RefPtr<DataModel>& from,  bool overwrite, GHashTable *cols_trans), gda_data_model_import_from_model, errthrow)
