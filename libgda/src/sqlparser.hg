@@ -31,9 +31,8 @@ namespace Gnome
 namespace Gda
 {
 
-_WRAP_ENUM(SqlParserMode, GdaSqlParserMode)
 _WRAP_GERROR(SqlParserError, GdaSqlParserError, GDA_SQL_PARSER_ERROR)
-		
+
 //TODO: Find out how to escape /* so we can actually show the full syntax at the end of this text.
 /** SQL parser.
  *
@@ -81,6 +80,8 @@ class SqlParser : public Glib::Object
 protected:
   _CTOR_DEFAULT()
 public:
+  _WRAP_ENUM(Mode, GdaSqlParserMode)
+
   _WRAP_CREATE()
   
   //TODO: Should these be const?
