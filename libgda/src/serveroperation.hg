@@ -64,13 +64,13 @@ public:
   // These are from gda-easy but they fit in here best
   static Glib::RefPtr<ServerOperation> prepare_create_database(const Glib::ustring& provider,
                                                                const Glib::ustring& db_name);
-   
+ 
   static Glib::RefPtr<ServerOperation> prepare_drop_database(const Glib::ustring& provider,
                                                              const Glib::ustring& db_name);
 
-  bool perform_create_table();
-  bool perform_drop_database(const Glib::ustring& provider);
-  bool perform_create_database(const Glib::ustring& provider);
+  _WRAP_METHOD(void perform_create_table(), gda_server_operation_perform_create_table, errthrow)
+  _WRAP_METHOD(void perform_drop_database(const Glib::ustring& provider), gda_server_operation_perform_drop_database, errthrow)
+  _WRAP_METHOD(void perform_create_database(const Glib::ustring& provider), gda_server_operation_perform_create_database, errthrow)
 
   // The C version of these take varargs for some reason.
   _WRAP_METHOD_DOCS_ONLY(gda_server_operation_get_value_at)

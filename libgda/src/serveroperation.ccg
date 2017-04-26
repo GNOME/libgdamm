@@ -55,30 +55,6 @@ Glib::RefPtr<ServerOperation> ServerOperation::prepare_drop_database(const Glib:
   return op;
 }
 
-bool ServerOperation::perform_drop_database(const Glib::ustring& provider)
-{
-  GError* gerror = 0;
-  bool retval =
-    static_cast<bool>(gda_server_operation_perform_drop_database(gobj(), provider.c_str(), &gerror));
-
-  if(gerror)
-    ::Glib::Error::throw_exception(gerror);
-
-  return retval;
-}
-
-bool ServerOperation::perform_create_database(const Glib::ustring& provider)
-{
-  GError* gerror = 0;
-  bool retval =
-    static_cast<bool>(gda_server_operation_perform_create_database(gobj(), provider.c_str(), &gerror));
-
-  if(gerror)
-    ::Glib::Error::throw_exception(gerror);
-
-  return retval;
-}
-
 Value ServerOperation::get_value_at(const Glib::ustring& path) const
 {
   Value retval;
@@ -97,17 +73,6 @@ void ServerOperation::set_value_at_as_value(const Glib::ustring& path, const Gli
   if(gerror)
     ::Glib::Error::throw_exception(gerror);
 }
-
-bool ServerOperation::perform_create_table()
-{
-    GError *error = 0;
-    bool res;
-    res = gda_server_operation_perform_create_table(gobj(),&error);
-    if(error) ::Glib::Error::throw_exception(error);
-
-    return res;
-}
-
 
 } /* namespace Gda */
 
