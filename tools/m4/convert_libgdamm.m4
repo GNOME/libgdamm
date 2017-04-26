@@ -1,3 +1,15 @@
+# _CONV_GNOME_GDA_ENUM(enum_name[, C_enum_name])
+# Specify C_enum_name, if it's not the concatenation of GDBus+enum_name.
+define(`_CONV_GNOME_GDA_ENUM',`dnl
+_CONV_ENUM(`Gnome::Gda',`$1',`m4_ifelse(`$2',,`Gda$1',`$2')')
+')dnl
+
+# _CONV_GNOME_GDA_INCLASS_ENUM(class_name, enum_name[, C_enum_name])
+# Specify C_enum_name, if it's not the concatenation of GDBus+class_name+enum_name.
+define(`_CONV_GNOME_GDA_INCLASS_ENUM',`dnl
+_CONV_INCLASS_ENUM(`Gnome::Gda',`$1',`$2',`m4_ifelse(`$3',,`Gda$1$2',`$3')')
+')dnl
+
 _EQUAL(glong,long)
 _EQUAL(GdaMetaContext*, MetaContext*)
 _EQUAL(GdaMetaDbObject*, MetaDbObject*)
@@ -110,8 +122,8 @@ _CONV_ENUM(Gda,ConnectionOptions)
 _CONV_ENUM(Gda,ValueType)
 _CONV_ENUM(Gda,TransactionIsolation)
 _CONV_ENUM(Gda,Sorting)
-_CONV_ENUM(Gda,ConnectionEventCode)
-_CONV_ENUM(Gda,ConnectionEventType)
+_CONV_GNOME_GDA_INCLASS_ENUM(ConnectionEvent,Code)
+_CONV_GNOME_GDA_INCLASS_ENUM(ConnectionEvent,Type)
 _CONV_ENUM(Gda,ConnectionMetaType)
 _CONV_ENUM(Gda,ServerOperationType)
 _CONV_ENUM(Gda,ServerOperationNodeType)

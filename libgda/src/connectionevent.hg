@@ -32,9 +32,6 @@ namespace Gnome
 namespace Gda
 {
 
-_WRAP_ENUM(ConnectionEventCode, GdaConnectionEventCode, NO_GTYPE)
-_WRAP_ENUM(ConnectionEventType, GdaConnectionEventType, NO_GTYPE)
-
 /** Any event which has occurred on a Gda::Connection.
  * Events occuring on a connection are each represented as a ConnectionEvent object. 
  * Each Connection is responsible for keeping a list of past events; that list can be consulted using the Connection::get_events() function.
@@ -52,20 +49,23 @@ protected:
 public:
   _WRAP_CREATE()
 
-  _WRAP_METHOD(void set_event_type(ConnectionEventType type), gda_connection_event_set_event_type)
-  _WRAP_METHOD(ConnectionEventType get_event_type() const, gda_connection_event_get_event_type)
+  _WRAP_ENUM(Code, GdaConnectionEventCode, NO_GTYPE)
+  _WRAP_ENUM(Type, GdaConnectionEventType, NO_GTYPE)
+
+  _WRAP_METHOD(void set_event_type(Type type), gda_connection_event_set_event_type)
+  _WRAP_METHOD(Type get_event_type() const, gda_connection_event_get_event_type)
   _WRAP_METHOD(Glib::ustring get_description() const, gda_connection_event_get_description)
   _WRAP_METHOD(void set_description(const Glib::ustring& description), gda_connection_event_set_description)
   _WRAP_METHOD(glong get_code() const, gda_connection_event_get_code)
   _WRAP_METHOD(void set_code(glong code), gda_connection_event_set_code)
-  _WRAP_METHOD(ConnectionEventCode get_gda_code() const, gda_connection_event_get_gda_code)
-  _WRAP_METHOD(void set_gda_code(ConnectionEventCode code), gda_connection_event_set_gda_code)
+  _WRAP_METHOD(Code get_gda_code() const, gda_connection_event_get_gda_code)
+  _WRAP_METHOD(void set_gda_code(Code code), gda_connection_event_set_gda_code)
   _WRAP_METHOD(Glib::ustring get_source() const, gda_connection_event_get_source)
   _WRAP_METHOD(void set_source(const Glib::ustring& source), gda_connection_event_set_source)
   _WRAP_METHOD(Glib::ustring get_sqlstate() const, gda_connection_event_get_sqlstate)
   _WRAP_METHOD(void set_sqlstate(const Glib::ustring& sqlstate), gda_connection_event_set_sqlstate)
 
-  _WRAP_PROPERTY("type", ConnectionEventType)
+  _WRAP_PROPERTY("type", Type)
 };
 
 } // namespace Gda

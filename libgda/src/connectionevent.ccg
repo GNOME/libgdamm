@@ -22,9 +22,6 @@
 
 #include <libgda/gda-enum-types.h>
 
-namespace Gnome
-{
-
-
-} /* namespace Gnome */
+using Type = Gnome::Gda::ConnectionEvent::Type;
+using Code = Gnome::Gda::ConnectionEvent::Code;
 
