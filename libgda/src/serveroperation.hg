@@ -68,6 +68,7 @@ public:
   static Glib::RefPtr<ServerOperation> prepare_drop_database(const Glib::ustring& provider,
                                                              const Glib::ustring& db_name);
 
+  bool perform_create_table();
   bool perform_drop_database(const Glib::ustring& provider);
   bool perform_create_database(const Glib::ustring& provider);
 

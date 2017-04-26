@@ -98,6 +98,17 @@ void ServerOperation::set_value_at_as_value(const Glib::ustring& path, const Gli
     ::Glib::Error::throw_exception(gerror);
 }
 
+bool ServerOperation::perform_create_table()
+{
+    GError *error = 0;
+    bool res;
+    res = gda_server_operation_perform_create_table(gobj(),&error);
+    if(error) ::Glib::Error::throw_exception(error);
+
+    return res;
+}
+
+
 } /* namespace Gda */
 
 } /* namespace Gnome */
