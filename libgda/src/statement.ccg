@@ -74,7 +74,7 @@ Glib::ustring Statement::to_sql(const Glib::RefPtr<const Set>& params) const
 }
 
 Glib::ustring Statement::to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<const Set>& params, 
-                              StatementSqlFlag flags, const HolderVector&) const
+                              SqlFlag flags, const HolderVector&) const
 {
   GError* gerror = 0;
   GSList* list = 0;

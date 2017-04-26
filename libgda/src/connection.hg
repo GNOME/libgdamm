@@ -105,40 +105,40 @@ public:
   _IGNORE(gda_connection_point_available_event, gda_connection_add_event, gda_connection_add_event_string, gda_connection_clear_events_list)
 
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_execute)
-  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, Glib::RefPtr<const Set>& last_insert_row);
+  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, Statement::ModelUsage model_usage, Glib::RefPtr<const Set>& last_insert_row);
 
 //TODO: Documentation:
-  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<const Statement>& stmt, StatementModelUsage model_usage = StatementModelUsage::RANDOM_ACCESS);
+  Glib::RefPtr<Glib::Object> statement_execute(const Glib::RefPtr<const Statement>& stmt, Statement::ModelUsage model_usage = Statement::ModelUsage::RANDOM_ACCESS);
 
 
-  Glib::RefPtr<Glib::Object> statement_execute(const Glib::ustring& sql, StatementModelUsage model_usage = StatementModelUsage::RANDOM_ACCESS);
+  Glib::RefPtr<Glib::Object> statement_execute(const Glib::ustring& sql, Statement::ModelUsage model_usage = Statement::ModelUsage::RANDOM_ACCESS);
 
   //_WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params), gda_connection_statement_execute_select, errthrow)
   _IGNORE(gda_connection_statement_execute_select) //We instead create a version that can take an optional usage parameter too.
 
 #m4 _CONVERSION(`const std::vector<GType>&', `GType*', `const_cast<GType*>(Glib::ArrayHandler<GType>::vector_to_array($3).data())')
-  _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, const std::vector<GType>& col_types), gda_connection_statement_execute_select_full, errthrow)
+  _WRAP_METHOD(Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, Statement::ModelUsage model_usage, const std::vector<GType>& col_types), gda_connection_statement_execute_select_full, errthrow)
   _IGNORE(gda_connection_statement_execute_select_fullv)
 
 //This custom-written method has more optional methods than gda_connection_execute_select_command().
 //TODO: Documentation:
-  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, StatementModelUsage model_usage = StatementModelUsage::RANDOM_ACCESS);
-  Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, StatementModelUsage model_usage = StatementModelUsage::RANDOM_ACCESS);
+  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, Statement::ModelUsage model_usage = Statement::ModelUsage::RANDOM_ACCESS);
+  Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, Statement::ModelUsage model_usage = Statement::ModelUsage::RANDOM_ACCESS);
 
 //This custom-written method has more optional methods than gda_connection_execute_select_command().
 //TODO: Documentation:
-  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage = StatementModelUsage::RANDOM_ACCESS);
-  Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage = StatementModelUsage::RANDOM_ACCESS);
+  Glib::RefPtr<DataModel> statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, Statement::ModelUsage model_usage = Statement::ModelUsage::RANDOM_ACCESS);
+  Glib::RefPtr<DataModel> statement_execute_select(const Glib::ustring& sql, const Glib::RefPtr<const Set>& params, Statement::ModelUsage model_usage = Statement::ModelUsage::RANDOM_ACCESS);
   _IGNORE(gda_connection_execute_select_command)
 
 
 //TODO: Documentation:
 //Note that we add the prefix _builder() because overloading on different RefPtr<> types seems to be ambiguous.
-  Glib::RefPtr<DataModel> statement_execute_select_builder(const Glib::RefPtr<const SqlBuilder>& stmt, StatementModelUsage model_usage = StatementModelUsage::RANDOM_ACCESS);
+  Glib::RefPtr<DataModel> statement_execute_select_builder(const Glib::RefPtr<const SqlBuilder>& stmt, Statement::ModelUsage model_usage = Statement::ModelUsage::RANDOM_ACCESS);
 
 //TODO: Documentation:
 //Note that we add the prefix _builder() because overloading on different RefPtr<> types seems to be ambiguous.
-  Glib::RefPtr<DataModel> statement_execute_select_builder(const Glib::RefPtr<const SqlBuilder>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage = StatementModelUsage::RANDOM_ACCESS);
+  Glib::RefPtr<DataModel> statement_execute_select_builder(const Glib::RefPtr<const SqlBuilder>& stmt, const Glib::RefPtr<const Set>& params, Statement::ModelUsage model_usage = Statement::ModelUsage::RANDOM_ACCESS);
 
 
   _WRAP_METHOD_DOCS_ONLY(gda_connection_statement_execute_non_select)
@@ -160,14 +160,14 @@ public:
 //TODO: Documentation:
   int statement_execute_non_select_builder(const Glib::RefPtr<const SqlBuilder>& builder, const Glib::RefPtr<const Set>& params);
 
-  _WRAP_METHOD(guint async_statement_execute(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, const std::vector<GType>& col_types, bool need_last_insert_row = false), gda_connection_async_statement_execute, errthrow)
+  _WRAP_METHOD(guint async_statement_execute(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, Statement::ModelUsage model_usage, const std::vector<GType>& col_types, bool need_last_insert_row = false), gda_connection_async_statement_execute, errthrow)
 
   //TODO: Wrap the last_insert_row parameter properly and add an overload without it:
   _WRAP_METHOD(Glib::RefPtr<Glib::Object> async_fetch_result(guint task_id, GdaSet **last_insert_row), gda_connection_async_fetch_result, errthrow)
   _WRAP_METHOD(bool async_cancel(guint task_id), gda_connection_async_cancel, errthrow)
 
 //TODO: #m4 _CONVERSION(`GSList*',`std::vector<Glib::Object>',`$2(Glib::SListHandler<Glib::RefPtr<const Statement> >::slist_to_vector((GSList*)$3, Glib::OWNERSHIP_DEEP))')
-//  _WRAP_METHOD(std::vector<Glib::Object> repetitive_statement_execute(GdaRepetitiveStatement *rstmt, StatementModelUsage model_usage, const std::vector<GType>& col_types, gboolean stop_on_error = true), gda_connection_repetitive_statement_execute, errthrow)
+//  _WRAP_METHOD(std::vector<Glib::Object> repetitive_statement_execute(GdaRepetitiveStatement *rstmt, Statement::ModelUsage model_usage, const std::vector<GType>& col_types, gboolean stop_on_error = true), gda_connection_repetitive_statement_execute, errthrow)
 
   //Note that we do not add a non-const version of this because the documentation says that it should not be modified:
   _WRAP_METHOD(Glib::RefPtr<const TransactionStatus> get_transaction_status() const, gda_connection_get_transaction_status, errthrow, refreturn)
@@ -288,7 +288,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<const MetaStore> get_meta_store() const, gda_connection_get_meta_store, constversion)
 
   #m4 _CONVERSION(`GSList*',`std::vector< Glib::RefPtr<Glib::Object> >',`$2(Glib::SListHandler< Glib::RefPtr<Glib::Object > >::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW))')
-  _WRAP_METHOD(std::vector< Glib::RefPtr<Glib::Object> > batch_execute(const Glib::RefPtr<Batch>& batch, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage), gda_connection_batch_execute, errthrow)
+  _WRAP_METHOD(std::vector< Glib::RefPtr<Glib::Object> > batch_execute(const Glib::RefPtr<Batch>& batch, const Glib::RefPtr<const Set>& params, Statement::ModelUsage model_usage), gda_connection_batch_execute, errthrow)
 
   _WRAP_METHOD(Glib::RefPtr<ServerOperation> create_operation(ServerOperation::Type type, const Glib::RefPtr<const Set>& options), gda_connection_create_operation, errthrow)
   _WRAP_METHOD(bool perform_operation(const Glib::RefPtr<ServerOperation>& op), gda_connection_perform_operation, errthrow)
@@ -306,28 +306,28 @@ public:
    *
    * @param stmt A Statement object.
    * @param A Set object (which can be obtained using Statement::get_parameters()).
-   * @param flags SQL rendering flags, as StatementSqlFlag OR'ed values
+   * @param flags SQL rendering flags, as Statement::SqlFlag OR'ed values
    * @param params_used A place to store the list of individual Holder objects within @a params which have been used.
    * @throws ConnectionError
    */
-  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::vector< Glib::RefPtr<Holder> >& params_used) const;
+  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, Statement::SqlFlag flags, std::vector< Glib::RefPtr<Holder> >& params_used) const;
 
   /** Renders a Statement as a SQL statement string, adapted to the SQL dialect used by the connection.
    *
    * @param stmt A Statement object.
    * @param A Set object (which can be obtained using Statement::get_parameters()).
-   * @param flags SQL rendering flags, as StatementSqlFlag OR'ed values
+   * @param flags SQL rendering flags, as Statement::SqlFlag OR'ed values
    * @throws ConnectionError
    */
-  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags = StatementSqlFlag::PARAMS_AS_VALUES) const;
+  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, Statement::SqlFlag flags = Statement::SqlFlag::PARAMS_AS_VALUES) const;
   
   /** Renders a Statement as a SQL statement string, adapted to the SQL dialect used by the connection.
    *
    * @param stmt A Statement object..
-   * @param flags SQL rendering flags, as StatementSqlFlag OR'ed values
+   * @param flags SQL rendering flags, as Statement::SqlFlag OR'ed values
    * @throws ConnectionError
    */
-  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, StatementSqlFlag flags = StatementSqlFlag::PARAMS_AS_VALUES) const;
+  Glib::ustring statement_to_sql(const Glib::RefPtr<const Statement>& stmt, Statement::SqlFlag flags = Statement::SqlFlag::PARAMS_AS_VALUES) const;
 
 
   _IGNORE(gda_connection_internal_reset_transaction_status)

@@ -35,9 +35,6 @@ namespace Gda
 
 class Connection;
 
-_WRAP_ENUM(StatementModelUsage, GdaStatementModelUsage, NO_GTYPE)
-_WRAP_ENUM(StatementSqlFlag, GdaStatementSqlFlag, NO_GTYPE)
-
 _WRAP_GERROR(StatementError, GdaStatementError, GDA_STATEMENT_ERROR, NO_GTYPE)
 
 /** Single SQL statement.
@@ -68,6 +65,9 @@ protected:
   _CTOR_DEFAULT()
 
 public:
+  _WRAP_ENUM(ModelUsage, GdaStatementModelUsage, NO_GTYPE)
+  _WRAP_ENUM(SqlFlag, GdaStatementSqlFlag, NO_GTYPE)
+
   _WRAP_CREATE()
   _WRAP_METHOD(Glib::RefPtr<Statement> copy() const, gda_statement_copy)
 
@@ -90,7 +90,7 @@ public:
   //TODO: Add an overload without the params?
   _WRAP_METHOD_DOCS_ONLY(gda_statement_to_sql_extended)
   Glib::ustring to_sql(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<const Set>& params,
-                                StatementSqlFlag flags, const HolderVector& params_used) const;
+                                SqlFlag flags, const HolderVector& params_used) const;
 
   _WRAP_METHOD(SqlStatement::Type get_statement_type() const, gda_statement_get_statement_type)
   _WRAP_METHOD(bool is_useless() const, gda_statement_is_useless)

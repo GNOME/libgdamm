@@ -75,7 +75,7 @@ void Connection::close()
     ::Glib::Error::throw_exception(gerror);
 }
 
-Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<const Statement>& cmd, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage, Glib::RefPtr<const Set>& last_inserted_row)
+Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<const Statement>& cmd, const Glib::RefPtr<const Set>& params, Statement::ModelUsage model_usage, Glib::RefPtr<const Set>& last_inserted_row)
 {
   GError* gerror = 0;
   GdaSet* lir = 0;
@@ -91,7 +91,7 @@ Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<cons
   return retval;
 }
 
-Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<const Statement>& stmt, StatementModelUsage model_usage)
+Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<const Statement>& stmt, Statement::ModelUsage model_usage)
 {
   GError* gerror = 0;
   Glib::RefPtr<Glib::Object> retval = Glib::wrap(
@@ -103,7 +103,7 @@ Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::RefPtr<cons
   return retval;
 }
 
-Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::ustring& sql, StatementModelUsage model_usage)
+Glib::RefPtr<Glib::Object> Connection::statement_execute(const Glib::ustring& sql, Statement::ModelUsage model_usage)
 {
   Glib::RefPtr<const Statement> stmt;
   Glib::RefPtr<SqlParser> parser = create_parser();
@@ -177,7 +177,7 @@ int Connection::statement_execute_non_select_builder(const Glib::RefPtr<const Sq
   return statement_execute_non_select(stmt, params);
 }
 
-Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags, std::vector< Glib::RefPtr<Holder> >& params_used) const
+Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, const Glib::RefPtr<const Set>& params, Statement::SqlFlag flags, std::vector< Glib::RefPtr<Holder> >& params_used) const
 {
   GError* gerror = 0;
   GSList* params_usedc = 0;
@@ -198,7 +198,7 @@ Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& 
 }
 
 
-Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, const Glib::RefPtr<const Set>& params, StatementSqlFlag flags) const
+Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, const Glib::RefPtr<const Set>& params, Statement::SqlFlag flags) const
 {
   GError* gerror = 0;
   const Glib::ustring retvalue = Glib::convert_return_gchar_ptr_to_ustring(gda_connection_statement_to_sql(const_cast<GdaConnection*>(gobj()), const_cast<GdaStatement*>(Glib::unwrap(statement)), const_cast<GdaSet*>(Glib::unwrap(params)), ((GdaStatementSqlFlag)(flags)), 0, &(gerror)));
@@ -210,7 +210,7 @@ Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& 
 }
   
 
-Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, StatementSqlFlag flags) const
+Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& statement, Statement::SqlFlag flags) const
 {
   GError* gerror = 0;
   const Glib::ustring retvalue = Glib::convert_return_gchar_ptr_to_ustring(gda_connection_statement_to_sql(const_cast<GdaConnection*>(gobj()), const_cast<GdaStatement*>(Glib::unwrap(statement)), 0, ((GdaStatementSqlFlag)(flags)), 0, &(gerror)));
@@ -222,7 +222,7 @@ Glib::ustring Connection::statement_to_sql(const Glib::RefPtr<const Statement>& 
 }
   
 
-Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<const Statement>& stmt, StatementModelUsage model_usage)
+Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<const Statement>& stmt, Statement::ModelUsage model_usage)
 {
   GError* gerror = 0;
   Glib::RefPtr<DataModel> retvalue = Glib::wrap(gda_connection_statement_execute_select_full(gobj(), const_cast<GdaStatement*>(Glib::unwrap(stmt)), 0 /* params */, ((GdaStatementModelUsage)(model_usage)), 0 /* col_types */, &(gerror)));
@@ -233,7 +233,7 @@ Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<
   return retvalue;
 }
 
-Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage)
+Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<const Statement>& stmt, const Glib::RefPtr<const Set>& params, Statement::ModelUsage model_usage)
 {
   GError* gerror = 0;
   Glib::RefPtr<DataModel> retvalue = Glib::wrap(gda_connection_statement_execute_select_full(gobj(), const_cast<GdaStatement*>(Glib::unwrap(stmt)), const_cast<GdaSet*>(Glib::unwrap(params)), ((GdaStatementModelUsage)(model_usage)), 0 /* col_types */, &(gerror)));
@@ -245,7 +245,7 @@ Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::RefPtr<
 }
 
 
-Glib::RefPtr<DataModel> Connection::statement_execute_select_builder(const Glib::RefPtr<const SqlBuilder>& builder, StatementModelUsage model_usage)
+Glib::RefPtr<DataModel> Connection::statement_execute_select_builder(const Glib::RefPtr<const SqlBuilder>& builder, Statement::ModelUsage model_usage)
 {
   Glib::RefPtr<Gnome::Gda::Statement> stmt = builder->get_statement(); //Allow any exceptions to be thrown up to the caller.
 
@@ -256,7 +256,7 @@ Glib::RefPtr<DataModel> Connection::statement_execute_select_builder(const Glib:
 }
 
 
-Glib::RefPtr<DataModel> Connection::statement_execute_select_builder(const Glib::RefPtr<const SqlBuilder>& builder, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage)
+Glib::RefPtr<DataModel> Connection::statement_execute_select_builder(const Glib::RefPtr<const SqlBuilder>& builder, const Glib::RefPtr<const Set>& params, Statement::ModelUsage model_usage)
 {
   Glib::RefPtr<Gnome::Gda::Statement> stmt = builder->get_statement(); //Allow any exceptions to be thrown up to the caller.
 
@@ -266,7 +266,7 @@ Glib::RefPtr<DataModel> Connection::statement_execute_select_builder(const Glib:
   return statement_execute_select(stmt, params, model_usage);
 }
 
-Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring& sql, StatementModelUsage model_usage)
+Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring& sql, Statement::ModelUsage model_usage)
 {
   Glib::RefPtr<const Statement> stmt;
   Glib::RefPtr<SqlParser> parser = create_parser();
@@ -287,7 +287,7 @@ Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring
   return retvalue;
 }
 
-Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring& sql, const Glib::RefPtr<const Set>& params, StatementModelUsage model_usage)
+Glib::RefPtr<DataModel> Connection::statement_execute_select(const Glib::ustring& sql, const Glib::RefPtr<const Set>& params, Statement::ModelUsage model_usage)
 {
   Glib::RefPtr<const Statement> stmt;
   Glib::RefPtr<SqlParser> parser = create_parser();
