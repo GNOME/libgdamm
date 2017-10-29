@@ -398,7 +398,6 @@
     '("task-not-found-error" "GDA_CONNECTION_TASK_NOT_FOUND_ERROR")
     '("closed-error" "GDA_CONNECTION_CLOSED_ERROR")
     '("meta-data-context-error" "GDA_CONNECTION_META_DATA_CONTEXT_ERROR")
-    '("unsupported-async-exec-error" "GDA_CONNECTION_UNSUPPORTED_ASYNC_EXEC_ERROR")
     '("no-main-context-error" "GDA_CONNECTION_NO_MAIN_CONTEXT_ERROR")
   )
 )
@@ -690,11 +689,10 @@
     '("is-default" "GDA_VALUE_ATTR_IS_DEFAULT")
     '("can-be-default" "GDA_VALUE_ATTR_CAN_BE_DEFAULT")
     '("is-unchanged" "GDA_VALUE_ATTR_IS_UNCHANGED")
-    '("actions-shown" "GDA_VALUE_ATTR_ACTIONS_SHOWN")
     '("data-non-valid" "GDA_VALUE_ATTR_DATA_NON_VALID")
     '("has-value-orig" "GDA_VALUE_ATTR_HAS_VALUE_ORIG")
     '("no-modif" "GDA_VALUE_ATTR_NO_MODIF")
-    '("unused" "GDA_VALUE_ATTR_UNUSED")
+    '("read-only" "GDA_VALUE_ATTR_READ_ONLY")
   )
 )
 
@@ -1294,6 +1292,128 @@
 )
 
 
+;; From csv.h
+
+(define-function csv_init
+  (c-name "csv_init")
+  (return-type "int")
+  (parameters
+    '("struct-csv_parser**" "p")
+    '("unsigned-char" "options")
+  )
+)
+
+(define-function csv_free
+  (c-name "csv_free")
+  (return-type "none")
+  (parameters
+    '("struct-csv_parser*" "p")
+  )
+)
+
+(define-function csv_error
+  (c-name "csv_error")
+  (return-type "int")
+  (parameters
+    '("struct-csv_parser*" "p")
+  )
+)
+
+(define-function csv_strerror
+  (c-name "csv_strerror")
+  (return-type "char*")
+  (parameters
+    '("int" "error")
+  )
+)
+
+(define-function csv_write
+  (c-name "csv_write")
+  (return-type "size_t")
+  (parameters
+    '("char*" "dest")
+    '("size_t" "dest_size")
+    '("const-char*" "src")
+    '("size_t" "src_size")
+  )
+)
+
+(define-function csv_fwrite
+  (c-name "csv_fwrite")
+  (return-type "int")
+  (parameters
+    '("FILE*" "fp")
+    '("const-char*" "src")
+    '("size_t" "src_size")
+  )
+)
+
+(define-function csv_write2
+  (c-name "csv_write2")
+  (return-type "size_t")
+  (parameters
+    '("char*" "dest")
+    '("size_t" "dest_size")
+    '("const-char*" "src")
+    '("size_t" "src_size")
+    '("char" "quote")
+  )
+)
+
+(define-function csv_fwrite2
+  (c-name "csv_fwrite2")
+  (return-type "int")
+  (parameters
+    '("FILE*" "fp")
+    '("const-char*" "src")
+    '("size_t" "src_size")
+    '("char" "quote")
+  )
+)
+
+(define-function csv_opts
+  (c-name "csv_opts")
+  (return-type "int")
+  (parameters
+    '("struct-csv_parser*" "p")
+    '("unsigned-char" "options")
+  )
+)
+
+(define-function csv_set_delim
+  (c-name "csv_set_delim")
+  (return-type "none")
+  (parameters
+    '("struct-csv_parser*" "p")
+    '("char" "c")
+  )
+)
+
+(define-function csv_set_quote
+  (c-name "csv_set_quote")
+  (return-type "none")
+  (parameters
+    '("struct-csv_parser*" "p")
+    '("char" "c")
+  )
+)
+
+(define-function csv_get_delim
+  (c-name "csv_get_delim")
+  (return-type "char")
+  (parameters
+    '("struct-csv_parser*" "p")
+  )
+)
+
+(define-function csv_get_quote
+  (c-name "csv_get_quote")
+  (return-type "char")
+  (parameters
+    '("struct-csv_parser*" "p")
+  )
+)
+
 
 ;; From dir-blob-op.h
 
@@ -1687,6 +1807,15 @@
   (of-object "GdaDsnInfo")
   (c-name "gda_dsn_info_free")
   (return-type "none")
+)
+
+(define-method equal
+  (of-object "GdaDsnInfo")
+  (c-name "gda_dsn_info_equal")
+  (return-type "gboolean")
+  (parameters
+    '("const-GdaDsnInfo*" "dsn2")
+  )
 )
 
 (define-function gda_config_get_type
@@ -2422,6 +2551,18 @@
 
 ;; From gda-connection-internal.h
 
+(define-method increase_usage
+  (of-object "GdaConnection")
+  (c-name "gda_connection_increase_usage")
+  (return-type "none")
+)
+
+(define-method decrease_usage
+  (of-object "GdaConnection")
+  (c-name "gda_connection_decrease_usage")
+  (return-type "none")
+)
+
 
 
 ;; From gda-connection-private.h
@@ -2442,6 +2583,14 @@
   (return-type "GdaServerProviderConnectionData*")
   (parameters
     '("GError**" "error")
+  )
+)
+
+(define-function gda_connection_internal_get_worker
+  (c-name "gda_connection_internal_get_worker")
+  (return-type "GdaWorker*")
+  (parameters
+    '("GdaServerProviderConnectionData*" "data")
   )
 )
 
@@ -4338,6 +4487,82 @@
 
 ;; From gda-meta-store.h
 
+(define-function gda_meta_store_change_get_type
+  (c-name "gda_meta_store_change_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_meta_store_change_new
+  (c-name "gda_meta_store_change_new")
+  (is-constructor-of "GdaMetaStoreChange")
+  (return-type "GdaMetaStoreChange*")
+)
+
+(define-method set_change_type
+  (of-object "GdaMetaStoreChange")
+  (c-name "gda_meta_store_change_set_change_type")
+  (return-type "none")
+  (parameters
+    '("GdaMetaStoreChangeType" "ctype")
+  )
+)
+
+(define-method get_change_type
+  (of-object "GdaMetaStoreChange")
+  (c-name "gda_meta_store_change_get_change_type")
+  (return-type "GdaMetaStoreChangeType")
+)
+
+(define-method set_table_name
+  (of-object "GdaMetaStoreChange")
+  (c-name "gda_meta_store_change_set_table_name")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "table_name")
+  )
+)
+
+(define-method get_table_name
+  (of-object "GdaMetaStoreChange")
+  (c-name "gda_meta_store_change_get_table_name")
+  (return-type "gchar*")
+)
+
+(define-method get_keys
+  (of-object "GdaMetaStoreChange")
+  (c-name "gda_meta_store_change_get_keys")
+  (return-type "GHashTable*")
+)
+
+(define-method copy
+  (of-object "GdaMetaStoreChange")
+  (c-name "gda_meta_store_change_copy")
+  (return-type "GdaMetaStoreChange*")
+)
+
+(define-method free
+  (of-object "GdaMetaStoreChange")
+  (c-name "gda_meta_store_change_free")
+  (return-type "none")
+)
+
+(define-function gda_value_set_meta_store_change
+  (c-name "gda_value_set_meta_store_change")
+  (return-type "none")
+  (parameters
+    '("GValue*" "value")
+    '("GdaMetaStoreChange*" "change")
+  )
+)
+
+(define-function gda_value_get_meta_store_change
+  (c-name "gda_value_get_meta_store_change")
+  (return-type "GdaMetaStoreChange*")
+  (parameters
+    '("GValue*" "value")
+  )
+)
+
 (define-function gda_meta_store_get_type
   (c-name "gda_meta_store_get_type")
   (return-type "GType")
@@ -4797,58 +5022,6 @@
 
 
 
-;; From gda-mutex.h
-
-(define-function gda_mutex_new
-  (c-name "gda_mutex_new")
-  (is-constructor-of "GdaMutex")
-  (return-type "GdaMutex*")
-)
-
-(define-method lock
-  (of-object "GdaMutex")
-  (c-name "gda_mutex_lock")
-  (return-type "none")
-)
-
-(define-method trylock
-  (of-object "GdaMutex")
-  (c-name "gda_mutex_trylock")
-  (return-type "gboolean")
-)
-
-(define-method unlock
-  (of-object "GdaMutex")
-  (c-name "gda_mutex_unlock")
-  (return-type "none")
-)
-
-(define-method free
-  (of-object "GdaMutex")
-  (c-name "gda_mutex_free")
-  (return-type "none")
-)
-
-(define-method debug
-  (of-object "GdaMutex")
-  (c-name "gda_mutex_debug")
-  (return-type "none")
-  (parameters
-    '("gboolean" "debug")
-  )
-)
-
-(define-method dump_usage
-  (of-object "GdaMutex")
-  (c-name "gda_mutex_dump_usage")
-  (return-type "none")
-  (parameters
-    '("FILE*" "stream")
-  )
-)
-
-
-
 ;; From gda-quark-list.h
 
 (define-function gda_quark_list_get_type
@@ -5291,6 +5464,16 @@
   )
 )
 
+(define-method is_valid_from_resource
+  (of-object "GdaServerOperation")
+  (c-name "gda_server_operation_is_valid_from_resource")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "resource")
+    '("GError**" "error")
+  )
+)
+
 (define-function gda_server_operation_prepare_create_database
   (c-name "gda_server_operation_prepare_create_database")
   (return-type "GdaServerOperation*")
@@ -5331,8 +5514,189 @@
   )
 )
 
-(define-function gda_server_operation_prepare_create_table
-  (c-name "gda_server_operation_prepare_create_table")
+(define-function gda_server_operation_create_table_arg_get_type
+  (c-name "gda_server_operation_create_table_arg_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_server_operation_create_table_arg_new
+  (c-name "gda_server_operation_create_table_arg_new")
+  (is-constructor-of "GdaServerOperationCreateTableArg")
+  (return-type "GdaServerOperationCreateTableArg*")
+)
+
+(define-method copy
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_copy")
+  (return-type "GdaServerOperationCreateTableArg*")
+)
+
+(define-method free
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_free")
+  (return-type "none")
+)
+
+(define-method set_column_name
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_set_column_name")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+(define-method get_column_name
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_get_column_name")
+  (return-type "gchar*")
+)
+
+(define-method set_column_type
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_set_column_type")
+  (return-type "none")
+  (parameters
+    '("GType" "ctype")
+  )
+)
+
+(define-method get_column_type
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_get_column_type")
+  (return-type "GType")
+)
+
+(define-method set_flags
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_set_flags")
+  (return-type "none")
+  (parameters
+    '("GdaServerOperationCreateTableFlag" "flags")
+  )
+)
+
+(define-method get_flags
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_get_flags")
+  (return-type "GdaServerOperationCreateTableFlag")
+)
+
+(define-method set_fkey_table
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_set_fkey_table")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+(define-method get_fkey_table
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_get_fkey_table")
+  (return-type "gchar*")
+)
+
+(define-method set_fkey_ondelete
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_set_fkey_ondelete")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "action")
+  )
+)
+
+(define-method get_fkey_ondelete
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_get_fkey_ondelete")
+  (return-type "gchar*")
+)
+
+(define-method set_fkey_ondupdate
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_set_fkey_ondupdate")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "action")
+  )
+)
+
+(define-method get_fkey_onupdate
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_get_fkey_onupdate")
+  (return-type "gchar*")
+)
+
+(define-method set_fkey_refs
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_set_fkey_refs")
+  (return-type "none")
+  (parameters
+    '("GList*" "refs")
+  )
+)
+
+(define-method get_fkey_refs
+  (of-object "GdaServerOperationCreateTableArg")
+  (c-name "gda_server_operation_create_table_arg_get_fkey_refs")
+  (return-type "GList*")
+)
+
+(define-function gda_server_operation_create_table_arg_get_fkey_ref_field_get_type
+  (c-name "gda_server_operation_create_table_arg_get_fkey_ref_field_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_server_operation_create_table_arg_fkey_ref_field_new
+  (c-name "gda_server_operation_create_table_arg_fkey_ref_field_new")
+  (is-constructor-of "GdaServerOperationCreateTableArgFkeyRefField")
+  (return-type "GdaServerOperationCreateTableArgFKeyRefField*")
+)
+
+(define-method copy
+  (of-object "GdaServerOperationCreateTableArgFKeyRefField")
+  (c-name "gda_server_operation_create_table_arg_fkey_ref_field_copy")
+  (return-type "GdaServerOperationCreateTableArgFKeyRefField*")
+)
+
+(define-method free
+  (of-object "GdaServerOperationCreateTableArgFKeyRefField")
+  (c-name "gda_server_operation_create_table_arg_fkey_ref_field_free")
+  (return-type "none")
+)
+
+(define-method set_local_field
+  (of-object "GdaServerOperationCreateTableArgFKeyRefField")
+  (c-name "gda_server_operation_create_table_arg_fkey_ref_field_set_local_field")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+(define-method get_local_field
+  (of-object "GdaServerOperationCreateTableArgFKeyRefField")
+  (c-name "gda_server_operation_create_table_arg_fkey_ref_field_get_local_field")
+  (return-type "gchar*")
+)
+
+(define-method set_referenced_field
+  (of-object "GdaServerOperationCreateTableArgFKeyRefField")
+  (c-name "gda_server_operation_create_table_arg_fkey_ref_field_set_referenced_field")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+(define-method get_referenced_field
+  (of-object "GdaServerOperationCreateTableArgFKeyRefField")
+  (c-name "gda_server_operation_create_table_arg_fkey_ref_field_get_referenced_field")
+  (return-type "gchar*")
+)
+
+(define-function gda_server_operation_prepare_create_table_v
+  (c-name "gda_server_operation_prepare_create_table_v")
   (return-type "GdaServerOperation*")
   (parameters
     '("GdaConnection*" "cnc")
@@ -5340,6 +5704,17 @@
     '("GError**" "error")
   )
   (varargs #t)
+)
+
+(define-function gda_server_operation_prepare_create_table
+  (c-name "gda_server_operation_prepare_create_table")
+  (return-type "GdaServerOperation*")
+  (parameters
+    '("GdaConnection*" "cnc")
+    '("const-gchar*" "table_name")
+    '("GList*" "arguments")
+    '("GError**" "error")
+  )
 )
 
 (define-method perform_create_table
@@ -5464,6 +5839,15 @@
     '("const-gchar*" "inst_dir")
     '("const-gchar*" "data_dir")
     '("const-gchar*" "filename")
+  )
+)
+
+(define-function gda_server_provider_load_resource_contents
+  (c-name "gda_server_provider_load_resource_contents")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "prov_name")
+    '("const-gchar*" "resource")
   )
 )
 
@@ -5659,6 +6043,14 @@
 
 
 ;; From gda-server-provider-private.h
+
+(define-function gda_server_provider_get_real_main_context
+  (c-name "gda_server_provider_get_real_main_context")
+  (return-type "GMainContext*")
+  (parameters
+    '("GdaConnection*" "cnc")
+  )
+)
 
 
 
@@ -7324,6 +7716,354 @@
 
 ;; From gda-value.h
 
+(define-function gda_numeric_get_type
+  (c-name "gda_numeric_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_numeric_new
+  (c-name "gda_numeric_new")
+  (is-constructor-of "GdaNumeric")
+  (return-type "GdaNumeric*")
+)
+
+(define-method copy
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_copy")
+  (return-type "GdaNumeric*")
+)
+
+(define-method set_from_string
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_set_from_string")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "str")
+  )
+)
+
+(define-method set_double
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_set_double")
+  (return-type "none")
+  (parameters
+    '("gdouble" "number")
+  )
+)
+
+(define-method get_double
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_get_double")
+  (return-type "gdouble")
+)
+
+(define-method set_precision
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_set_precision")
+  (return-type "none")
+  (parameters
+    '("glong" "precision")
+  )
+)
+
+(define-method get_precision
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_get_precision")
+  (return-type "glong")
+)
+
+(define-method set_width
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_set_width")
+  (return-type "none")
+  (parameters
+    '("glong" "width")
+  )
+)
+
+(define-method get_width
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_get_width")
+  (return-type "glong")
+)
+
+(define-method get_string
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_get_string")
+  (return-type "gchar*")
+)
+
+(define-method free
+  (of-object "GdaNumeric")
+  (c-name "gda_numeric_free")
+  (return-type "none")
+)
+
+(define-function gda_time_get_type
+  (c-name "gda_time_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_time_new
+  (c-name "gda_time_new")
+  (is-constructor-of "GdaTime")
+  (return-type "GdaTime*")
+)
+
+(define-function gda_time_new_from_values
+  (c-name "gda_time_new_from_values")
+  (return-type "GdaTime*")
+  (parameters
+    '("gushort" "hour")
+    '("gushort" "minute")
+    '("gushort" "second")
+    '("gulong" "fraction")
+    '("glong" "timezone")
+  )
+)
+
+(define-method copy
+  (of-object "GdaTime")
+  (c-name "gda_time_copy")
+  (return-type "GdaTime*")
+)
+
+(define-method free
+  (of-object "GdaTime")
+  (c-name "gda_time_free")
+  (return-type "none")
+)
+
+(define-method get_hour
+  (of-object "GdaTime")
+  (c-name "gda_time_get_hour")
+  (return-type "gushort")
+)
+
+(define-method set_hour
+  (of-object "GdaTime")
+  (c-name "gda_time_set_hour")
+  (return-type "none")
+  (parameters
+    '("gushort" "hour")
+  )
+)
+
+(define-method get_minute
+  (of-object "GdaTime")
+  (c-name "gda_time_get_minute")
+  (return-type "gushort")
+)
+
+(define-method set_minute
+  (of-object "GdaTime")
+  (c-name "gda_time_set_minute")
+  (return-type "none")
+  (parameters
+    '("gushort" "minute")
+  )
+)
+
+(define-method get_second
+  (of-object "GdaTime")
+  (c-name "gda_time_get_second")
+  (return-type "gushort")
+)
+
+(define-method set_second
+  (of-object "GdaTime")
+  (c-name "gda_time_set_second")
+  (return-type "none")
+  (parameters
+    '("gushort" "second")
+  )
+)
+
+(define-method get_fraction
+  (of-object "GdaTime")
+  (c-name "gda_time_get_fraction")
+  (return-type "gulong")
+)
+
+(define-method set_fraction
+  (of-object "GdaTime")
+  (c-name "gda_time_set_fraction")
+  (return-type "none")
+  (parameters
+    '("gulong" "fraction")
+  )
+)
+
+(define-method get_timezone
+  (of-object "GdaTime")
+  (c-name "gda_time_get_timezone")
+  (return-type "glong")
+)
+
+(define-method set_timezone
+  (of-object "GdaTime")
+  (c-name "gda_time_set_timezone")
+  (return-type "none")
+  (parameters
+    '("glong" "timezone")
+  )
+)
+
+(define-method valid
+  (of-object "GdaTime")
+  (c-name "gda_time_valid")
+  (return-type "gboolean")
+)
+
+(define-method change_timezone
+  (of-object "GdaTime")
+  (c-name "gda_time_change_timezone")
+  (return-type "none")
+  (parameters
+    '("glong" "ntz")
+  )
+)
+
+(define-function gda_value_new_binary
+  (c-name "gda_value_new_binary")
+  (return-type "GValue*")
+  (parameters
+    '("const-guchar*" "val")
+    '("glong" "size")
+  )
+)
+
+(define-function gda_value_get_binary
+  (c-name "gda_value_get_binary")
+  (return-type "GdaBinary*")
+  (parameters
+    '("const-GValue*" "value")
+  )
+)
+
+(define-function gda_value_set_binary
+  (c-name "gda_value_set_binary")
+  (return-type "none")
+  (parameters
+    '("GValue*" "value")
+    '("GdaBinary*" "binary")
+  )
+)
+
+(define-function gda_value_take_binary
+  (c-name "gda_value_take_binary")
+  (return-type "none")
+  (parameters
+    '("GValue*" "value")
+    '("GdaBinary*" "binary")
+  )
+)
+
+(define-function gda_binary_get_type
+  (c-name "gda_binary_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_binary_new
+  (c-name "gda_binary_new")
+  (is-constructor-of "GdaBinary")
+  (return-type "GdaBinary*")
+)
+
+(define-method get_size
+  (of-object "GdaBinary")
+  (c-name "gda_binary_get_size")
+  (return-type "glong")
+)
+
+(define-method get_data
+  (of-object "GdaBinary")
+  (c-name "gda_binary_get_data")
+  (return-type "gpointer")
+)
+
+(define-method reset_data
+  (of-object "GdaBinary")
+  (c-name "gda_binary_reset_data")
+  (return-type "none")
+)
+
+(define-method set_data
+  (of-object "GdaBinary")
+  (c-name "gda_binary_set_data")
+  (return-type "none")
+  (parameters
+    '("const-guchar*" "val")
+    '("glong" "size")
+  )
+)
+
+(define-method take_data
+  (of-object "GdaBinary")
+  (c-name "gda_binary_take_data")
+  (return-type "none")
+  (parameters
+    '("guchar*" "val")
+    '("glong" "size")
+  )
+)
+
+(define-method copy
+  (of-object "GdaBinary")
+  (c-name "gda_binary_copy")
+  (return-type "GdaBinary*")
+)
+
+(define-method free
+  (of-object "GdaBinary")
+  (c-name "gda_binary_free")
+  (return-type "none")
+)
+
+(define-function gda_blob_get_type
+  (c-name "gda_blob_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_blob_new
+  (c-name "gda_blob_new")
+  (is-constructor-of "GdaBlob")
+  (return-type "GdaBlob*")
+)
+
+(define-method get_binary
+  (of-object "GdaBlob")
+  (c-name "gda_blob_get_binary")
+  (return-type "GdaBinary*")
+)
+
+(define-method get_op
+  (of-object "GdaBlob")
+  (c-name "gda_blob_get_op")
+  (return-type "GdaBlobOp*")
+)
+
+(define-method copy
+  (of-object "GdaBlob")
+  (c-name "gda_blob_copy")
+  (return-type "GdaBlob*")
+)
+
+(define-method free
+  (of-object "GdaBlob")
+  (c-name "gda_blob_free")
+  (return-type "none")
+)
+
+(define-method set_op
+  (of-object "GdaBlob")
+  (c-name "gda_blob_set_op")
+  (return-type "none")
+  (parameters
+    '("GdaBlobOp*" "op")
+  )
+)
+
 (define-function gda_value_new
   (c-name "gda_value_new")
   (is-constructor-of "GdaValue")
@@ -7346,15 +8086,6 @@
   )
 )
 
-(define-function gda_value_new_binary
-  (c-name "gda_value_new_binary")
-  (return-type "GValue*")
-  (parameters
-    '("const-guchar*" "val")
-    '("glong" "size")
-  )
-)
-
 (define-function gda_value_new_blob
   (c-name "gda_value_new_blob")
   (return-type "GValue*")
@@ -7369,6 +8100,14 @@
   (return-type "GValue*")
   (parameters
     '("const-gchar*" "filename")
+  )
+)
+
+(define-function gda_value_new_time_from_timet
+  (c-name "gda_value_new_time_from_timet")
+  (return-type "GValue*")
+  (parameters
+    '("time_t" "val")
   )
 )
 
@@ -7438,32 +8177,6 @@
   )
 )
 
-(define-function gda_value_get_binary
-  (c-name "gda_value_get_binary")
-  (return-type "const-GdaBinary*")
-  (parameters
-    '("const-GValue*" "value")
-  )
-)
-
-(define-function gda_value_set_binary
-  (c-name "gda_value_set_binary")
-  (return-type "none")
-  (parameters
-    '("GValue*" "value")
-    '("const-GdaBinary*" "binary")
-  )
-)
-
-(define-function gda_value_take_binary
-  (c-name "gda_value_take_binary")
-  (return-type "none")
-  (parameters
-    '("GValue*" "value")
-    '("GdaBinary*" "binary")
-  )
-)
-
 (define-function gda_value_get_blob
   (c-name "gda_value_get_blob")
   (return-type "const-GdaBlob*")
@@ -7488,6 +8201,59 @@
     '("GValue*" "value")
     '("GdaBlob*" "blob")
   )
+)
+
+(define-function gda_geometric_point_get_type
+  (c-name "gda_geometric_point_get_type")
+  (return-type "GType")
+)
+
+(define-function gda_geometric_point_new
+  (c-name "gda_geometric_point_new")
+  (is-constructor-of "GdaGeometricPoint")
+  (return-type "GdaGeometricPoint*")
+)
+
+(define-method get_x
+  (of-object "GdaGeometricPoint")
+  (c-name "gda_geometric_point_get_x")
+  (return-type "gdouble")
+)
+
+(define-method set_x
+  (of-object "GdaGeometricPoint")
+  (c-name "gda_geometric_point_set_x")
+  (return-type "none")
+  (parameters
+    '("double" "x")
+  )
+)
+
+(define-method get_y
+  (of-object "GdaGeometricPoint")
+  (c-name "gda_geometric_point_get_y")
+  (return-type "gdouble")
+)
+
+(define-method set_y
+  (of-object "GdaGeometricPoint")
+  (c-name "gda_geometric_point_set_y")
+  (return-type "none")
+  (parameters
+    '("double" "y")
+  )
+)
+
+(define-method copy
+  (of-object "GdaGeometricPoint")
+  (c-name "gda_geometric_point_copy")
+  (return-type "GdaGeometricPoint*")
+)
+
+(define-method free
+  (of-object "GdaGeometricPoint")
+  (c-name "gda_geometric_point_free")
+  (return-type "none")
 )
 
 (define-function gda_value_get_geometric_point
@@ -7580,23 +8346,6 @@
   (parameters
     '("GValue*" "value")
     '("const-GdaTime*" "val")
-  )
-)
-
-(define-function gda_value_get_timestamp
-  (c-name "gda_value_get_timestamp")
-  (return-type "const-GdaTimestamp*")
-  (parameters
-    '("const-GValue*" "value")
-  )
-)
-
-(define-function gda_value_set_timestamp
-  (c-name "gda_value_set_timestamp")
-  (return-type "none")
-  (parameters
-    '("GValue*" "value")
-    '("const-GdaTimestamp*" "val")
   )
 )
 
@@ -7697,144 +8446,162 @@
   (return-type "GType")
 )
 
-(define-function gda_numeric_get_type
-  (c-name "gda_numeric_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_numeric_new
-  (c-name "gda_numeric_new")
-  (is-constructor-of "GdaNumeric")
-  (return-type "GdaNumeric*")
-)
-
-(define-method copy
-  (of-object "GdaNumeric")
-  (c-name "gda_numeric_copy")
-  (return-type "GdaNumeric*")
-)
-
-(define-method set_from_string
-  (of-object "GdaNumeric")
-  (c-name "gda_numeric_set_from_string")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "str")
-  )
-)
-
-(define-method set_double
-  (of-object "GdaNumeric")
-  (c-name "gda_numeric_set_double")
-  (return-type "none")
-  (parameters
-    '("gdouble" "number")
-  )
-)
-
-(define-method get_double
-  (of-object "GdaNumeric")
-  (c-name "gda_numeric_get_double")
-  (return-type "gdouble")
-)
-
-(define-method set_precision
-  (of-object "GdaNumeric")
-  (c-name "gda_numeric_set_precision")
-  (return-type "none")
-  (parameters
-    '("glong" "precision")
-  )
-)
-
-(define-method get_precision
-  (of-object "GdaNumeric")
-  (c-name "gda_numeric_get_precision")
-  (return-type "glong")
-)
-
-(define-method set_width
-  (of-object "GdaNumeric")
-  (c-name "gda_numeric_set_width")
-  (return-type "none")
-  (parameters
-    '("glong" "width")
-  )
-)
-
-(define-method get_width
-  (of-object "GdaNumeric")
-  (c-name "gda_numeric_get_width")
-  (return-type "glong")
-)
-
-(define-method get_string
-  (of-object "GdaNumeric")
-  (c-name "gda_numeric_get_string")
-  (return-type "gchar*")
-)
-
-(define-method free
-  (of-object "GdaNumeric")
-  (c-name "gda_numeric_free")
-  (return-type "none")
-)
-
-(define-function gda_time_get_type
-  (c-name "gda_time_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_time_copy
-  (c-name "gda_time_copy")
-  (return-type "gpointer")
-  (parameters
-    '("gpointer" "boxed")
-  )
-)
-
-(define-function gda_time_free
-  (c-name "gda_time_free")
-  (return-type "none")
-  (parameters
-    '("gpointer" "boxed")
-  )
-)
-
-(define-method valid
-  (of-object "GdaTime")
-  (c-name "gda_time_valid")
-  (return-type "gboolean")
-)
-
-(define-method change_timezone
-  (of-object "GdaTime")
-  (c-name "gda_time_change_timezone")
-  (return-type "none")
-  (parameters
-    '("glong" "ntz")
-  )
-)
-
 (define-function gda_timestamp_get_type
   (c-name "gda_timestamp_get_type")
   (return-type "GType")
 )
 
-(define-function gda_timestamp_copy
-  (c-name "gda_timestamp_copy")
-  (return-type "gpointer")
+(define-function gda_timestamp_new
+  (c-name "gda_timestamp_new")
+  (is-constructor-of "GdaTimestamp")
+  (return-type "GdaTimestamp*")
+)
+
+(define-function gda_timestamp_new_from_values
+  (c-name "gda_timestamp_new_from_values")
+  (return-type "GdaTimestamp*")
   (parameters
-    '("gpointer" "boxed")
+    '("gushort" "year")
+    '("gushort" "month")
+    '("gushort" "day")
+    '("gushort" "hour")
+    '("gushort" "minute")
+    '("gushort" "second")
+    '("gulong" "fraction")
+    '("glong" "timezone")
   )
 )
 
-(define-function gda_timestamp_free
-  (c-name "gda_timestamp_free")
+(define-method get_year
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_get_year")
+  (return-type "gshort")
+)
+
+(define-method set_year
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_set_year")
   (return-type "none")
   (parameters
-    '("gpointer" "boxed")
+    '("gshort" "year")
   )
+)
+
+(define-method get_month
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_get_month")
+  (return-type "gushort")
+)
+
+(define-method set_month
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_set_month")
+  (return-type "none")
+  (parameters
+    '("gushort" "month")
+  )
+)
+
+(define-method get_day
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_get_day")
+  (return-type "gushort")
+)
+
+(define-method set_day
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_set_day")
+  (return-type "none")
+  (parameters
+    '("gushort" "day")
+  )
+)
+
+(define-method get_hour
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_get_hour")
+  (return-type "gushort")
+)
+
+(define-method set_hour
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_set_hour")
+  (return-type "none")
+  (parameters
+    '("gushort" "hour")
+  )
+)
+
+(define-method get_minute
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_get_minute")
+  (return-type "gushort")
+)
+
+(define-method set_minute
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_set_minute")
+  (return-type "none")
+  (parameters
+    '("gushort" "minute")
+  )
+)
+
+(define-method get_second
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_get_second")
+  (return-type "gushort")
+)
+
+(define-method set_second
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_set_second")
+  (return-type "none")
+  (parameters
+    '("gushort" "second")
+  )
+)
+
+(define-method get_fraction
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_get_fraction")
+  (return-type "gulong")
+)
+
+(define-method set_fraction
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_set_fraction")
+  (return-type "none")
+  (parameters
+    '("gulong" "fraction")
+  )
+)
+
+(define-method get_timezone
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_get_timezone")
+  (return-type "glong")
+)
+
+(define-method set_timezone
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_set_timezone")
+  (return-type "none")
+  (parameters
+    '("glong" "timezone")
+  )
+)
+
+(define-method copy
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_copy")
+  (return-type "GdaTimestamp*")
+)
+
+(define-method free
+  (of-object "GdaTimestamp")
+  (c-name "gda_timestamp_free")
+  (return-type "none")
 )
 
 (define-method valid
@@ -7852,75 +8619,20 @@
   )
 )
 
-(define-function gda_geometricpoint_get_type
-  (c-name "gda_geometricpoint_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_geometricpoint_copy
-  (c-name "gda_geometricpoint_copy")
-  (return-type "gpointer")
+(define-function gda_value_get_timestamp
+  (c-name "gda_value_get_timestamp")
+  (return-type "const-GdaTimestamp*")
   (parameters
-    '("gpointer" "boxed")
+    '("const-GValue*" "value")
   )
 )
 
-(define-function gda_geometricpoint_free
-  (c-name "gda_geometricpoint_free")
+(define-function gda_value_set_timestamp
+  (c-name "gda_value_set_timestamp")
   (return-type "none")
   (parameters
-    '("gpointer" "boxed")
-  )
-)
-
-(define-function gda_binary_get_type
-  (c-name "gda_binary_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_binary_copy
-  (c-name "gda_binary_copy")
-  (return-type "gpointer")
-  (parameters
-    '("gpointer" "boxed")
-  )
-)
-
-(define-function gda_binary_free
-  (c-name "gda_binary_free")
-  (return-type "none")
-  (parameters
-    '("gpointer" "boxed")
-  )
-)
-
-(define-function gda_blob_get_type
-  (c-name "gda_blob_get_type")
-  (return-type "GType")
-)
-
-(define-function gda_blob_copy
-  (c-name "gda_blob_copy")
-  (return-type "gpointer")
-  (parameters
-    '("gpointer" "boxed")
-  )
-)
-
-(define-function gda_blob_free
-  (c-name "gda_blob_free")
-  (return-type "none")
-  (parameters
-    '("gpointer" "boxed")
-  )
-)
-
-(define-method set_op
-  (of-object "GdaBlob")
-  (c-name "gda_blob_set_op")
-  (return-type "none")
-  (parameters
-    '("GdaBlobOp*" "op")
+    '("GValue*" "value")
+    '("const-GdaTimestamp*" "val")
   )
 )
 
