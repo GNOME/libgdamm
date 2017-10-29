@@ -26,6 +26,7 @@
  */
 
 #include <libgdamm/numeric.h>
+#include <libgdamm/geometricpoint.h>
 #include <glibmm/value.h>
 #include <glibmm/date.h>
 #include <libgda/gda-value.h> //TODO: Patch libgda to use the struct _ technique.
@@ -37,7 +38,6 @@ namespace Gnome
 namespace Gda
 {
 
-typedef GdaGeometricPoint GeometricPoint;
 typedef GdaTime Time;
 typedef GdaTimestamp Timestamp;
 

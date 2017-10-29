@@ -380,12 +380,13 @@ void Value::set_double(double val)
 
 GeometricPoint Value::get_geometric_point() const
 {
-  return *(gda_value_get_geometric_point(const_cast<GValue*>(gobj())));
+  const GdaGeometricPoint* cobj = gda_value_get_geometric_point(const_cast<GValue*>(gobj()));
+  return Glib::wrap(const_cast<GdaGeometricPoint*>(cobj), true /* take_copy */);
 }
 
 void Value::set(const GeometricPoint& val)
 {
-  gda_value_set_geometric_point(gobj(), &(val));
+  gda_value_set_geometric_point(gobj(), val.gobj());
 }
 
 int Value::get_int() const

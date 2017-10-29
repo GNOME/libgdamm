@@ -26,6 +26,7 @@ files_hg =			\
 	datamodeliter.hg	\
 	dataproxy.hg		\
 	dataselect.hg		\
+        geometricpoint.hg \
 	handlerbin.hg		\
 	handlerboolean.hg	\
 	handlernumerical.hg	\
