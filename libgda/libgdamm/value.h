@@ -27,6 +27,7 @@
 
 #include <libgdamm/numeric.h>
 #include <libgdamm/geometricpoint.h>
+#include <libgdamm/time.h>
 #include <libgdamm/timestamp.h>
 #include <glibmm/value.h>
 #include <glibmm/date.h>
@@ -38,8 +39,6 @@ namespace Gnome
 
 namespace Gda
 {
-
-typedef GdaTime Time;
 
 /**
  *

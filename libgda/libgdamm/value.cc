@@ -488,12 +488,13 @@ void Value::set(const char* val)
 
 Time Value::get_time() const
 {
-  return *(gda_value_get_time(const_cast<GValue*>(gobj())));
+  const GdaTime* cobj = gda_value_get_time(const_cast<GValue*>(gobj()));
+  return Glib::wrap(const_cast<GdaTime*>(cobj), true /* take_copy */);
 }
 
 void Value::set(const Time& val)
 {
-  gda_value_set_time(gobj(), &(val));
+  gda_value_set_time(gobj(), val.gobj());
 }
 
 Timestamp Value::get_timestamp() const
