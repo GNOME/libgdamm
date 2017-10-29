@@ -47,5 +47,6 @@ files_hg =			\
 	sqlbuilder.hg   \
 	sqlstatement.hg   \
 	statement.hg		\
+        timestamp.hg \
 	transactionstatus.hg	\
 	xatransaction.hg

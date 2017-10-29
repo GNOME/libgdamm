@@ -27,6 +27,7 @@
 
 #include <libgdamm/numeric.h>
 #include <libgdamm/geometricpoint.h>
+#include <libgdamm/timestamp.h>
 #include <glibmm/value.h>
 #include <glibmm/date.h>
 #include <libgda/gda-value.h> //TODO: Patch libgda to use the struct _ technique.
@@ -39,7 +40,6 @@ namespace Gda
 {
 
 typedef GdaTime Time;
-typedef GdaTimestamp Timestamp;
 
 /**
  *
