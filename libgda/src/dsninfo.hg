@@ -1,0 +1,59 @@
+/* Copyright 2018 libgdamm Development Team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+_DEFS(libgdamm,libgda)
+
+#include <libgda/gda-value.h>
+#include <libgda/gda-config.h>
+
+namespace Gnome
+{
+
+namespace Gda
+{
+
+/**
+ */
+class DsnInfo
+{
+  _CLASS_BOXEDTYPE(DsnInfo, GdaDsnInfo, gda_dsn_info_new, gda_dsn_info_copy, gda_dsn_info_free)
+//  _IGNORE(gda_dsn_info_get_type)
+
+  public:
+#m4 _CONVERSION(gchar*, Glib::ustring, Glib::ustring($3))
+  _MEMBER_SET_STR(name, name, Glib::ustring, const gchar*)
+  _MEMBER_GET(name, name, Glib::ustring, gchar*)
+
+  _MEMBER_SET_STR(provider, provider, Glib::ustring, const gchar*)
+  _MEMBER_GET(provider, provider, Glib::ustring, gchar*)
+
+  _MEMBER_SET_STR(description, description, Glib::ustring, const gchar*)
+  _MEMBER_GET(description, description, Glib::ustring, gchar*)
+
+  _MEMBER_SET_STR(cnc_string, cnc_string, Glib::ustring, const gchar*)
+  _MEMBER_GET(cnc_string, cnc_string, Glib::ustring, gchar*)
+
+  _MEMBER_SET_STR(auth_string, auth_string, Glib::ustring, const gchar*)
+  _MEMBER_GET(auth_string, auth_string, Glib::ustring, gchar*)
+
+  _MEMBER_SET_PTR(is_system, is_system, bool, gboolean) // parameter will be passed by value
+  _MEMBER_GET(is_system, is_system, bool, gboolean)
+};
+
+} // namespace Gda
+
+} // namespace Gnome

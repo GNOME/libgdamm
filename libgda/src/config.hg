@@ -22,7 +22,7 @@
 #include <glibmm/object.h>
 #include <libgdamm/serverprovider.h>
 #include <libgdamm/datamodel.h>
-#include <libgda/gda-config.h>
+#include <libgdamm/dsninfo.h>
 
 _DEFS(libgdamm,libgda)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -46,9 +46,10 @@ class Config : public Glib::Object
 protected:
   _CTOR_DEFAULT;
 public:
-  _WRAP_METHOD(static Glib::RefPtr<Config> get(), gda_config_get, refreturn)
+#m4 _CONVERSION(`GdaDsnInfo*',`DsnInfo',`Glib::wrap($3,true)')
+  _WRAP_METHOD(static Glib::RefPtr<Config> get(), gda_config_get,refreturn)
 
-  _WRAP_METHOD(static GdaDsnInfo* get_dsn_info(const Glib::ustring& dsn_name), gda_config_get_dsn_info)
+  _WRAP_METHOD(static DsnInfo get_dsn_info(const Glib::ustring& dsn_name), gda_config_get_dsn_info)
   _WRAP_METHOD(static bool dsn_needs_authentication(const Glib::ustring& dsn_name), gda_config_dsn_needs_authentication)
 
   _WRAP_METHOD(static Glib::RefPtr<DataModel> list_dsn(), gda_config_list_dsn)
@@ -61,11 +62,14 @@ public:
 
   _WRAP_METHOD(static bool can_modify_system_config(), gda_config_can_modify_system_config)
 
-  #m4 _CONVERSION(`gpointer',`GdaDsnInfo*',`(GdaDsnInfo*)($3)')
-  _WRAP_SIGNAL(void dsn_added(GdaDsnInfo* info), "dsn-added", no_default_handler)
-  _WRAP_SIGNAL(void dsn_changed(GdaDsnInfo* info), "dsn-changed", no_default_handler)
-  _WRAP_SIGNAL(void dsn_removed(GdaDsnInfo* info), "dsn-removed", no_default_handler)
-  _WRAP_SIGNAL(void dsn_to_be_removed(GdaDsnInfo* info), "dsn-to-be-removed", no_default_handler)
+#m4 _CONVERSION(`const DsnInfo&',`const GdaDsnInfo*',__FCR2P)
+  _WRAP_METHOD(static void define_dsn(const DsnInfo &dsn),gda_config_define_dsn, errthrow)
+
+  #m4 _CONVERSION(`gpointer',`const DsnInfo&',`Glib::wrap((GdaDsnInfo*)($3))')
+  _WRAP_SIGNAL(void dsn_added(const DsnInfo& info), "dsn-added", no_default_handler)
+  _WRAP_SIGNAL(void dsn_changed(const DsnInfo& info), "dsn-changed", no_default_handler)
+  _WRAP_SIGNAL(void dsn_removed(const DsnInfo& info), "dsn-removed", no_default_handler)
+  _WRAP_SIGNAL(void dsn_to_be_removed(const DsnInfo& info), "dsn-to-be-removed", no_default_handler)
 
   _WRAP_PROPERTY("system-filename", Glib::ustring)
   _WRAP_PROPERTY("user-filename", Glib::ustring)

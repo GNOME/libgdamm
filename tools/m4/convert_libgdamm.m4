@@ -55,6 +55,8 @@ _CONVERSION(`GdaMetaStruct*',`Glib::RefPtr<const MetaStruct>',`Glib::wrap($3)')
 _CONVERSION(`GdaMetaStore*',`Glib::RefPtr<MetaStore>',`Glib::wrap($3)')
 _CONVERSION(`GdaMetaStore*',`Glib::RefPtr<const MetaStore>',`Glib::wrap($3)')
 _CONVERSION(`GdaConfig*',`Glib::RefPtr<Config>',`Glib::wrap($3)')
+_CONVERSION(`GdaDsnInfo*',`Glib::RefPtr<DsnInfo>',`Glib::wrap($3)')
+_CONVERSION(`GdaDsnInfo*',`Glib::RefPtr<const DsnInfo>',`Glib::wrap($3)')
 
 _CONVERSION(`const Glib::RefPtr<BlobOp>&', `GdaBlobOp*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`const Glib::RefPtr<DataModel>&', `GdaDataModel*', __CONVERT_REFPTR_TO_P)
