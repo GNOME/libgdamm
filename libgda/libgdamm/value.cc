@@ -152,10 +152,6 @@ Value::Value(const Time& val)
   set(val);
 }
 
-Value::Value(const Timestamp& val)
-{
-  set(val);
-}
 
 /*
 Value::Value(time_t val)
@@ -497,17 +493,6 @@ void Value::set(const Time& val)
   gda_value_set_time(gobj(), val.gobj());
 }
 
-Timestamp Value::get_timestamp() const
-{
-  const GdaTimestamp* cobj = gda_value_get_timestamp(const_cast<GValue*>(gobj()));
-  return Glib::wrap(const_cast<GdaTimestamp*>(cobj), true /* take_copy */);
-}
-
-void Value::set(const Timestamp& val)
-{
-  gda_value_set_timestamp(gobj(), val.gobj());
-}
-
 guint Value::get_uint() const
 {
   return g_value_get_uint(const_cast<GValue*>(gobj()));
@@ -583,11 +568,6 @@ GType value_get_type_ushort()
 GType value_get_type_time()
 {
   return GDA_TYPE_TIME;
-}
-
-GType value_get_type_timestamp()
-{
-  return GDA_TYPE_TIMESTAMP;
 }
 
 /*

@@ -49,6 +49,5 @@ files_hg =			\
 	sqlstatement.hg   \
 	statement.hg		\
         time.hg \
-        timestamp.hg \
 	transactionstatus.hg	\
 	xatransaction.hg

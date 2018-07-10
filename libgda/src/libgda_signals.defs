@@ -3,7 +3,7 @@
 (define-signal changed
   (of-object "GdaBatch")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("GObject*" "p0")
   )
@@ -14,7 +14,7 @@
 (define-signal name-changed
   (of-object "GdaColumn")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("const-gchar*" "p0")
   )
@@ -23,7 +23,7 @@
 (define-signal g-type-changed
   (of-object "GdaColumn")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GType" "p0")
     '("GType" "p1")
@@ -37,23 +37,15 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 ;; From GdaConfig
 
-(define-signal dsn-changed
-  (of-object "GdaConfig")
-  (return-type "void")
-  (when "first")
-  (parameters
-    '("gpointer" "p0")
-  )
-)
-
 (define-signal dsn-added
   (of-object "GdaConfig")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("gpointer" "p0")
   )
@@ -62,7 +54,7 @@
 (define-signal dsn-to-be-removed
   (of-object "GdaConfig")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("gpointer" "p0")
   )
@@ -71,7 +63,16 @@
 (define-signal dsn-removed
   (of-object "GdaConfig")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal dsn-changed
+  (of-object "GdaConfig")
+  (return-type "void")
+  (flags "Run First")
   (parameters
     '("gpointer" "p0")
   )
@@ -84,6 +85,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property system-filename
@@ -93,14 +95,21 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 ;; From GdaConnection
 
+(define-signal dsn-changed
+  (of-object "GdaConnection")
+  (return-type "void")
+  (flags "Run Last")
+)
+
 (define-signal error
   (of-object "GdaConnection")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GdaConnectionEvent*" "p0")
   )
@@ -109,31 +118,25 @@
 (define-signal opened
   (of-object "GdaConnection")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
 )
 
 (define-signal closed
   (of-object "GdaConnection")
   (return-type "void")
-  (when "last")
-)
-
-(define-signal dsn-changed
-  (of-object "GdaConnection")
-  (return-type "void")
-  (when "last")
+  (flags "Run Last")
 )
 
 (define-signal transaction-status-changed
   (of-object "GdaConnection")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
 )
 
 (define-signal status-changed
   (of-object "GdaConnection")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GdaConnectionStatus" "p0")
   )
@@ -146,6 +149,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property cnc-string
@@ -155,6 +159,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property provider
@@ -173,6 +178,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property options
@@ -182,6 +188,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "GDA_CONNECTION_OPTIONS_NONE")
 )
 
 (define-property meta-store
@@ -200,6 +207,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "5")
 )
 
 (define-property execution-timer
@@ -209,6 +217,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property execution-slowdown
@@ -218,6 +227,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "0")
 )
 
 ;; From GdaConnectionEvent
@@ -229,6 +239,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "2")
 )
 
 ;; From GdaDataAccessWrapper
@@ -247,7 +258,7 @@
 (define-signal diff-computed
   (of-object "GdaDataComparator")
   (return-type "gboolean")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("gpointer" "p0")
   )
@@ -282,6 +293,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property n-columns
@@ -291,6 +303,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "0")
 )
 
 ;; From GdaDataModelDir
@@ -302,26 +315,21 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 ;; From GdaDataModel
 
-(define-signal reset
-  (of-object "GdaDataModel")
-  (return-type "void")
-  (when "last")
-)
-
 (define-signal changed
   (of-object "GdaDataModel")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
 )
 
 (define-signal row-inserted
   (of-object "GdaDataModel")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("gint" "p0")
   )
@@ -330,7 +338,7 @@
 (define-signal row-updated
   (of-object "GdaDataModel")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("gint" "p0")
   )
@@ -339,16 +347,22 @@
 (define-signal row-removed
   (of-object "GdaDataModel")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("gint" "p0")
   )
 )
 
+(define-signal reset
+  (of-object "GdaDataModel")
+  (return-type "void")
+  (flags "Run Last")
+)
+
 (define-signal access-changed
   (of-object "GdaDataModel")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
 )
 
 ;; From GdaDataModelImport
@@ -360,6 +374,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "FALSE")
 )
 
 (define-property filename
@@ -369,6 +384,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 (define-property data-string
@@ -378,6 +394,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 (define-property xml-node
@@ -405,6 +422,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 ;; From GdaDataModelIter
@@ -412,7 +430,7 @@
 (define-signal row-changed
   (of-object "GdaDataModelIter")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("gint" "p0")
   )
@@ -421,7 +439,7 @@
 (define-signal end-of-data
   (of-object "GdaDataModelIter")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
 )
 
 (define-property data-model
@@ -440,6 +458,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "-1")
 )
 
 (define-property forced-model
@@ -458,6 +477,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 ;; From GdaDataProxy
@@ -465,7 +485,7 @@
 (define-signal row-delete-changed
   (of-object "GdaDataProxy")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("gint" "p0")
     '("gboolean" "p1")
@@ -475,7 +495,7 @@
 (define-signal sample-size-changed
   (of-object "GdaDataProxy")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("gint" "p0")
   )
@@ -484,7 +504,7 @@
 (define-signal sample-changed
   (of-object "GdaDataProxy")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("gint" "p0")
     '("gint" "p1")
@@ -494,7 +514,7 @@
 (define-signal validate-row-changes
   (of-object "GdaDataProxy")
   (return-type "GError*")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("gint" "p0")
     '("gint" "p1")
@@ -504,7 +524,7 @@
 (define-signal row-changes-applied
   (of-object "GdaDataProxy")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("gint" "p0")
     '("gint" "p1")
@@ -514,7 +534,7 @@
 (define-signal filter-changed
   (of-object "GdaDataProxy")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
 )
 
 (define-property model
@@ -533,6 +553,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property defer-sync
@@ -542,6 +563,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 (define-property sample-size
@@ -551,6 +573,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "300")
 )
 
 (define-property cache-changes
@@ -560,6 +583,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 ;; From GdaDataSelect
@@ -589,6 +613,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "1")
 )
 
 (define-property store-all-rows
@@ -598,6 +623,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property exec-params
@@ -652,6 +678,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property execution-delay
@@ -661,26 +688,27 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "0")
 )
 
 ;; From GdaHolder
 
-(define-signal source-changed
-  (of-object "GdaHolder")
-  (return-type "void")
-  (when "first")
-)
-
 (define-signal changed
   (of-object "GdaHolder")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
+)
+
+(define-signal source-changed
+  (of-object "GdaHolder")
+  (return-type "void")
+  (flags "Run First")
 )
 
 (define-signal attribute-changed
   (of-object "GdaHolder")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("const-gchar*" "p0")
     '("GValue*" "p1")
@@ -690,7 +718,7 @@
 (define-signal validate-change
   (of-object "GdaHolder")
   (return-type "GError*")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GValue*" "p0")
   )
@@ -703,6 +731,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property name
@@ -712,6 +741,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property description
@@ -721,6 +751,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property simple-bind
@@ -757,6 +788,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "0")
 )
 
 (define-property g-type
@@ -775,6 +807,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property validate-changes
@@ -784,6 +817,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 ;; From GdaMetaStore
@@ -791,7 +825,7 @@
 (define-signal suggest-update
   (of-object "GdaMetaStore")
   (return-type "GError*")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("gpointer" "p0")
   )
@@ -800,7 +834,7 @@
 (define-signal meta-changed
   (of-object "GdaMetaStore")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("gpointer" "p0")
   )
@@ -809,7 +843,7 @@
 (define-signal meta-reset
   (of-object "GdaMetaStore")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
 )
 
 (define-property cnc-string
@@ -819,6 +853,7 @@
   (readable #f)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 (define-property cnc
@@ -837,6 +872,7 @@
   (readable #f)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 (define-property schema
@@ -846,6 +882,7 @@
   (readable #f)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 ;; From GdaMetaStruct
@@ -866,6 +903,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "3")
 )
 
 ;; From GdaRow
@@ -877,6 +915,7 @@
   (readable #f)
   (writable #t)
   (construct-only #f)
+  (default-value "1")
 )
 
 ;; From GdaServerOperation
@@ -884,7 +923,7 @@
 (define-signal sequence-item-added
   (of-object "GdaServerOperation")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("const-gchar*" "p0")
     '("gint" "p1")
@@ -894,7 +933,7 @@
 (define-signal sequence-item-remove
   (of-object "GdaServerOperation")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("const-gchar*" "p0")
     '("gint" "p1")
@@ -926,6 +965,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "0")
 )
 
 (define-property spec-filename
@@ -935,6 +975,17 @@
   (readable #f)
   (writable #t)
   (construct-only #t)
+  (default-value "")
+)
+
+(define-property spec-resource
+  (of-object "GdaServerOperation")
+  (prop-type "GParamString")
+  (docs "Name of the resource which contains the XML data representing the object's data structure")
+  (readable #f)
+  (writable #t)
+  (construct-only #t)
+  (default-value "")
 )
 
 ;; From GdaServerProvider
@@ -944,7 +995,7 @@
 (define-signal holder-changed
   (of-object "GdaSet")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("GdaHolder*" "p0")
   )
@@ -953,7 +1004,7 @@
 (define-signal validate-holder-change
   (of-object "GdaSet")
   (return-type "GError*")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GdaHolder*" "p0")
     '("GValue*" "p1")
@@ -963,13 +1014,13 @@
 (define-signal validate-set
   (of-object "GdaSet")
   (return-type "GError*")
-  (when "last")
+  (flags "Run Last")
 )
 
 (define-signal holder-attr-changed
   (of-object "GdaSet")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("GdaHolder*" "p0")
     '("const-gchar*" "p1")
@@ -980,13 +1031,13 @@
 (define-signal public-data-changed
   (of-object "GdaSet")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
 )
 
 (define-signal holder-type-set
   (of-object "GdaSet")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("GdaHolder*" "p0")
   )
@@ -995,7 +1046,7 @@
 (define-signal source-model-changed
   (of-object "GdaSet")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("gpointer" "p0")
   )
@@ -1008,6 +1059,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property name
@@ -1017,6 +1069,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property description
@@ -1026,6 +1079,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property holders
@@ -1044,6 +1098,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 ;; From GdaStatement
@@ -1051,13 +1106,13 @@
 (define-signal reset
   (of-object "GdaStatement")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
 )
 
 (define-signal checked
   (of-object "GdaStatement")
   (return-type "void")
-  (when "first")
+  (flags "Run First")
   (parameters
     '("GdaConnection*" "p0")
     '("gboolean" "p1")
@@ -1084,6 +1139,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "1")
 )
 
 (define-property transaction-id
@@ -1093,6 +1149,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 ;; From GdaSqlParser
@@ -1104,6 +1161,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "0")
 )
 
 (define-property mode
@@ -1113,6 +1171,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "0")
 )
 
 (define-property line-error
@@ -1122,6 +1181,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "0")
 )
 
 (define-property column-error
@@ -1131,6 +1191,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "0")
 )
 
 ;; From GdaSqlBuilder
@@ -1142,5 +1203,6 @@
   (readable #f)
   (writable #t)
   (construct-only #t)
+  (default-value "GDA_SQL_STATEMENT_UNKNOWN")
 )
 
