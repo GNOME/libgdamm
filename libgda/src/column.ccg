@@ -46,21 +46,6 @@ bool Column::equal(const Glib::RefPtr<const Column>& src) const
   return result;
 }
 
-
-static void on_set_attribute_destroy(gpointer data)
-{
-  g_free((char*)data);
-}
-
-void Column::set_attribute(const Glib::ustring& attribute, const Value& value)
-{
-  //gda_column_set_attribute() has stupid memory management.
-  //See http://bugzilla.gnome.org/show_bug.cgi?id=564402
-  gchar* dup = g_strdup(attribute.c_str());
-  gda_column_set_attribute(gobj(), dup, (value).gobj(), &on_set_attribute_destroy); 
-}
-
-
 } // namespace Gda
 
 } // namespace Gnome
