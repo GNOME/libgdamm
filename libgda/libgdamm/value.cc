@@ -147,7 +147,7 @@ Value::Value(const char* val)
   set(val);
 }
 
-Value::Value(const Time& val)
+Value::Value(const Glib::DateTime& val)
 {
   set(val);
 }
@@ -486,7 +486,7 @@ void Value::set(const char* val)
   g_value_set_string(gobj(), val);
 }
 
-Time Value::get_time() const
+Glib::DateTime Value::get_time() const
 {
   const GdaTime* cobj = gda_value_get_time(const_cast<GValue*>(gobj()));
   return Glib::wrap(const_cast<GdaTime*>(cobj), true /* take_copy */);

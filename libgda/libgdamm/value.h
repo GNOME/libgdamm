@@ -27,10 +27,10 @@
 
 #include <libgdamm/numeric.h>
 #include <libgdamm/geometricpoint.h>
-#include <libgdamm/time.h>
 #include <libgdamm/timestamp.h>
 #include <glibmm/value.h>
 #include <glibmm/date.h>
+#include <glibmm/datetime.h>
 #include <libgda/gda-value.h> //TODO: Patch libgda to use the struct _ technique.
 
 
@@ -112,7 +112,7 @@ public:
   //If this constructor does not exists, then Value("something") uses Value(bool) instead of Value(ustring).
   explicit Value(const char* val);
 
-  explicit Value(const Time& val);
+  explicit Value(const Glib::DateTime& val);
 
   explicit Value(const Timestamp& val);
 
@@ -240,9 +240,9 @@ public:
   //If this method does not exists, then set("something") uses set(bool) instead of set(ustring).
   void set(const char* val);
 
-  Time get_time() const;
+  Glib::DateTime get_time() const;
 
-  void set(const Time& val);
+  void set(const Glib::DateTime& val);
 
   Timestamp get_timestamp() const;
 
