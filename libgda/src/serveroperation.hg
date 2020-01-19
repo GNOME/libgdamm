@@ -68,7 +68,6 @@ public:
   static Glib::RefPtr<ServerOperation> prepare_drop_database(const Glib::ustring& provider,
                                                              const Glib::ustring& db_name);
 
-  _WRAP_METHOD(void perform_create_table(), gda_server_operation_perform_create_table, errthrow)
   _WRAP_METHOD(void perform_drop_database(const Glib::ustring& provider), gda_server_operation_perform_drop_database, errthrow)
   _WRAP_METHOD(void perform_create_database(const Glib::ustring& provider), gda_server_operation_perform_create_database, errthrow)
 
