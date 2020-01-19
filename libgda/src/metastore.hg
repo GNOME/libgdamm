@@ -32,7 +32,7 @@ namespace Gda
 {
 
 _WRAP_GERROR(MetaStoreError, GdaMetaStoreError, GDA_META_STORE_ERROR, NO_GTYPE)
-_WRAP_ENUM(SqlIdentifierStyle, GdaSqlIdentifierStyle)
+_WRAP_ENUM(SqlIdentifierStyle, GdaSqlIdentifierStyle, NO_GTYPE)
 
 /** Dictionary object.
  *
