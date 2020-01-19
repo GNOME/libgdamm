@@ -20,6 +20,7 @@
  */
 
 #include <libgda/gda-data-select.h>
+#include <libgda/providers-support/gda-data-select-priv.h>
 #include <libgdamm/connection.h>
 
 namespace Gnome
