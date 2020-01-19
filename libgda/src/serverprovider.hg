@@ -41,10 +41,6 @@ _WRAP_ENUM(ConnectionFeature, GdaConnectionFeature)
 class Connection;
 class SqlParser;
 
-/* TODO: Is this appropriate. Investigate how it is used. */
-typedef GdaServerProviderInfo ServerProviderInfo;
-
-
 /** Base class for all the DBMS providers.
   *
   * The ServerProvider class is an abstract class which all the DBMS providers

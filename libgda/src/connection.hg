@@ -41,7 +41,6 @@ namespace Gda
 
 class ServerProvider;
 class MetaStore;
-typedef GdaServerProviderInfo ServerProviderInfo;
 
 /** Exception class for Gda connection errors.
  */
