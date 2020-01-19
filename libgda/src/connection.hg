@@ -44,7 +44,7 @@ class MetaStore;
 
 /** Exception class for Gda connection errors.
  */
-_WRAP_GERROR(ConnectionError, GdaConnectionError, GDA_CONNECTION_ERROR)
+// TODO: Newer libgda seems to have no gda_connection_error_get_type(): _WRAP_GERROR(ConnectionError, GdaConnectionError, GDA_CONNECTION_ERROR)
 
 /** Manages a connection to a data source.
  * This class offers access to all operations involving an opened connection to a database.
@@ -66,8 +66,8 @@ protected:
 public:
   _WRAP_CREATE()
 
-  _WRAP_ENUM(Options, GdaConnectionOptions)
-  _WRAP_ENUM(MetaType, GdaConnectionMetaType)
+  _WRAP_ENUM(Options, GdaConnectionOptions, NO_GTYPE)
+  _WRAP_ENUM(MetaType, GdaConnectionMetaType, NO_GTYPE)
 
   _WRAP_METHOD(static Glib::RefPtr<Connection> create_from_string(const Glib::ustring& provider_name, const Glib::ustring& cnc_string, const Glib::ustring& auth_string = Glib::ustring(), Options options = Options::NONE), gda_connection_new_from_string, errthrow)
 
@@ -345,7 +345,9 @@ public:
   _WRAP_PROPERTY("cnc-string", Glib::ustring)
   _WRAP_PROPERTY("dsn", Glib::ustring)
   _WRAP_PROPERTY("meta-store", Glib::RefPtr<MetaStore>)
-  _WRAP_PROPERTY("options", Options)
+
+  // TODO: The enum needs to have a gtype, instead of using NO_GTYPE: _WRAP_PROPERTY("options", Options)
+
   _WRAP_PROPERTY("is-wrapper", bool)
   _WRAP_PROPERTY("monitor-wrapped-in-mainloop", bool)
   //We ignore the thread-owner property because it is strange and should only be used (well, modified) by provider implementations.

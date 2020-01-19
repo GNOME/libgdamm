@@ -65,7 +65,7 @@ public:
   _WRAP_METHOD(Glib::ustring get_sqlstate() const, gda_connection_event_get_sqlstate)
   _WRAP_METHOD(void set_sqlstate(const Glib::ustring& sqlstate), gda_connection_event_set_sqlstate)
 
-  _WRAP_PROPERTY("type", Type)
+  // The enum needs to have a gtype, instead of using NO_GTYPE: _WRAP_PROPERTY("type", Type)
 };
 
 } // namespace Gda
