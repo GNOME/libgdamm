@@ -77,7 +77,7 @@ typedef GdaValueAttribute ValueAttribute;
  */
 class DataModel : public Glib::Interface
 {
-  _CLASS_INTERFACE(DataModel, GdaDataModel, GDA_DATA_MODEL, GdaDataModelIface)
+  _CLASS_INTERFACE(DataModel, GdaDataModel, GDA_DATA_MODEL, GdaDataModelInterface)
 public:
   // This does not belong into this class
   _IGNORE(gda_data_model_create_iter, gda_data_model_array_copy_model)
