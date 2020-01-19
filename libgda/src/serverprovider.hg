@@ -36,7 +36,7 @@ namespace Gda
 
 _WRAP_GERROR(ServerProviderError, GdaServerProviderError, GDA_SERVER_PROVIDER_ERROR, NO_GTYPE)
 
-_WRAP_ENUM(ConnectionFeature, GdaConnectionFeature)
+_WRAP_ENUM(ConnectionFeature, GdaConnectionFeature, NO_GTYPE)
 
 class Connection;
 class SqlParser;
