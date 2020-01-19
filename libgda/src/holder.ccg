@@ -35,19 +35,6 @@ Holder::Holder (GType g_type, const Glib::ustring& id)
 {
 
 }
-
-static void on_set_attribute_destroy(gpointer data)
-{
-  g_free((char*)data);
-}
-
-void Holder::set_attribute(const Glib::ustring& attribute, const Value& value)
-{
-  //gda_holder_set_attribute() has stupid memory management.
-  //See http://bugzilla.gnome.org/show_bug.cgi?id=564402
-  gchar* dup = g_strdup(attribute.c_str());
-  gda_holder_set_attribute(gobj(), dup, (value).gobj(), &on_set_attribute_destroy); 
-}
   
 } /* namespace Gda */
 

@@ -71,12 +71,6 @@ public:
   _WRAP_METHOD(bool take_value(const Value& value), gda_holder_take_value, errthrow)
   _WRAP_METHOD(Value take_static_value (const Value& value, bool& value_changed), gda_holder_take_static_value, errthrow)
 
-  void set_attribute(const Glib::ustring& attribute, const Value& value);
-  _IGNORE(gda_holder_set_attribute)
-  //TODO: gda_holder_set_attribute() has stupid memory management: _WRAP_METHOD(void set_attribute(const Glib::ustring& attribute, const Value& value), gda_holder_set_attribute)
-
-  _WRAP_METHOD(Value get_attribute(const Glib::ustring& attribute) const, gda_holder_get_attribute) 
-  
   _WRAP_METHOD(Value get_default_value() const, gda_holder_get_default_value)
   _WRAP_METHOD(void set_default_value(const Value& value), gda_holder_set_default_value)
   _WRAP_METHOD(bool set_value_to_default(), gda_holder_set_value_to_default)
@@ -123,7 +117,6 @@ public:
   
 #m4 _CONVERSION(`const char*',`const Glib::ustring&',__GCHARP_TO_USTRING)
   _WRAP_SIGNAL(void attribute_changed(const Glib::ustring& attr_name, const Value& value), "attribute-changed", no_default_handler)
-
 };
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
