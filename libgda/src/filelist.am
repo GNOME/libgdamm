@@ -28,12 +28,6 @@ files_hg =			\
 	dataselect.hg		\
 	dsninfo.hg          \
         geometricpoint.hg \
-	handlerbin.hg		\
-	handlerboolean.hg	\
-	handlernumerical.hg	\
-	handlerstring.hg	\
-	handlertime.hg		\
-	handlertype.hg		\
 	holder.hg		\
 	metastore.hg		\
 	metastruct.hg		\
