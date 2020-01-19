@@ -21,7 +21,7 @@
  */
 
 #include <libgda/gda-transaction-status.h>
-#include <libgda/gda-enum-types.h>
+#include <libgda/gda-enums.h>
 
 namespace Gnome
 {

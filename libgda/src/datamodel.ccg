@@ -25,7 +25,7 @@
 #include <libgda/gda-data-model-extra.h>
 #include <libgda/gda-data-model-iter-extra.h>
 #include <libgda/gda-data-model-array.h>
-#include <libgda/gda-enum-types.h>
+#include <libgda/gda-enums.h>
 
 
 using AccessFlags = Gnome::Gda::DataModel::AccessFlags;

@@ -21,7 +21,7 @@
 
 #include <libgdamm/statement.h>
 #include <libgdamm/connection.h>
-#include <libgda/gda-enum-types.h>
+#include <libgda/gda-enums.h>
 #include <libgda/gda-holder.h>
 #include <sql-parser/gda-sql-parser-enum-types.h>
 
