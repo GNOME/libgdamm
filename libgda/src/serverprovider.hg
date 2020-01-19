@@ -107,11 +107,6 @@ public:
   //TODO: ValueBase can't be used as a return type.
   Value string_to_value(const Glib::RefPtr<Connection>& cnc, const Glib::ustring& string, GType prefered_type, Glib::ustring& dbms_type) const;
 
-  _WRAP_METHOD(Glib::RefPtr<DataHandler> get_data_handler_default(const Glib::RefPtr<Connection>& cnc, GType type, const Glib::ustring& dbms_type), gda_server_provider_get_data_handler_default)
-
-  //TODO: Should this be const?
-  _WRAP_METHOD(std::string find_file(const std::string& inst_dir, const std::string& filename), gda_server_provider_find_file)
-
   _WRAP_METHOD(bool perform_operation_default(const Glib::RefPtr<Connection>& cnc, const Glib::RefPtr<ServerOperation>& op), gda_server_provider_perform_operation_default, errthrow)
     
   // These are in a private header, so ignore them
